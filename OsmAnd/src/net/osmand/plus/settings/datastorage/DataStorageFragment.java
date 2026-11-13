@@ -87,6 +87,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	private FilesCollectTask collectTask;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
+	@Nullable
+	private String writeError;
+	@Nullable
+	private AlertDialog writeErrorDialog;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		activity = requireActionBarActivity();
@@ -101,6 +106,25 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 			refreshDataInfo();
 		}
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		if (writeError != null) {
+			showWriteError();
+		}
+	}
+
+	@Override
+	public void onDestroyView() {
+		if (writeErrorDialog != null) {
+			// The fragment is retained: keep the error and show it again with the new view after a rotation
+			writeErrorDialog.setOnDismissListener(null);
+			writeErrorDialog.dismiss();
+			writeErrorDialog = null;
+		}
+		super.onDestroyView();
 	}
 
 	@Override
@@ -451,17 +475,25 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 	private boolean checkWritable(@NonNull File dir, boolean testWrite) {
 		String error = FileUtils.getWriteError(dir, testWrite);
 		if (error != null) {
-			Context ctx = getContext();
-			if (ctx != null) {
-				new AlertDialog.Builder(ctx)
-						.setMessage(getString(R.string.specified_directiory_not_writeable) + "\n\n" + dir + "\n" + error)
-						.setPositiveButton(R.string.shared_string_ok, null)
-						.show();
+			if (getContext() != null) {
+				writeError = getString(R.string.specified_directiory_not_writeable) + "\n\n" + dir + "\n" + error;
+				showWriteError();
 			} else {
 				app.showToastMessage(R.string.specified_directiory_not_writeable);
 			}
 		}
 		return error == null;
+	}
+
+	private void showWriteError() {
+		writeErrorDialog = new AlertDialog.Builder(requireContext())
+				.setMessage(writeError)
+				.setPositiveButton(R.string.shared_string_ok, null)
+				.setOnDismissListener(dialog -> {
+					writeError = null;
+					writeErrorDialog = null;
+				})
+				.show();
 	}
 
 	private void refreshDataInfo() {

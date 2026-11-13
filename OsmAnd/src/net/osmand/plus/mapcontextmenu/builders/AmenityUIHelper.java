@@ -9,7 +9,11 @@ import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.View;
@@ -194,8 +198,8 @@ public class AmenityUIHelper extends MenuBuilder {
 				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
 		if (resolvedType.getAdditionalType() != null) {
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.getAdditionalType(),
-					key, value, subtype);
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, additionalInfo,
+					resolvedType.getAdditionalType(), key, value, subtype);
 		} else {
 			boolean useGenericFallback = genericRowKeys.contains(key);
 			String displayKey = useGenericFallback ? getGenericFallbackDisplayKey(key) : key;
@@ -203,8 +207,8 @@ public class AmenityUIHelper extends MenuBuilder {
 			fallbackType.setText(true);
 			// A custom GPX value is user data: show it as stored, do not translate it as a POI key.
 			String displayValue = useGenericFallback ? value : poiTypes.getPoiTranslation(value);
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, fallbackType, key,
-					displayValue, subtype);
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, additionalInfo,
+					fallbackType, key, displayValue, subtype);
 			if (useGenericFallback) {
 				entryBuilder.setIconId(R.drawable.ic_action_info_dark);
 			}
@@ -295,11 +299,35 @@ public class AmenityUIHelper extends MenuBuilder {
 				return getDistanceCollapsableView(texts);
 			}
 			case OPENING_HOURS:
-				return getCollapsableTextView(app, true, data.collapsableEntries.get(0).text);
+				return getOpeningHoursCollapsableView(context, data.collapsableEntries);
 			case NONE:
 			default:
 				return null;
 		}
+	}
+
+	@NonNull
+	private CollapsableView getOpeningHoursCollapsableView(@NonNull Context context, @NonNull List<AmenityTagEntry> entries) {
+		CollapsableView collapsableView = getCollapsableTextView(context, true, entries.get(0).text);
+		String checkDate = null;
+		for (AmenityTagEntry entry : entries) {
+			if (CHECK_DATE_OPENING_HOURS.equals(entry.key)) {
+				checkDate = entry.text;
+			}
+		}
+		if (!Algorithms.isEmpty(checkDate)) {
+			TextView textView = (TextView) collapsableView.getContentView();
+			SpannableStringBuilder text = new SpannableStringBuilder(textView.getText()).append('\n');
+			int start = text.length();
+			text.append(checkDate);
+			int end = text.length();
+			int color = ColorUtilities.getSecondaryTextColor(app, !isLightContent());
+			int size = app.getResources().getDimensionPixelSize(R.dimen.default_desc_text_size);
+			text.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			text.setSpan(new AbsoluteSizeSpan(size), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			textView.setText(text);
+		}
+		return collapsableView;
 	}
 
 	@NonNull

@@ -732,7 +732,7 @@
     <string name="poi_trees_pomegranate">Granadondoa</string>
     <string name="poi_min_age">Gutxieneko adina</string>
     <string name="poi_organic_yes">Produktu organikoak: bai</string>
-    <string name="poi_organic_no">Ez</string>
+    <string name="poi_organic_no">Produktu organikoak: ez</string>
     <string name="poi_organic_only">Produktu organikoak: bakarrik</string>
     <string name="poi_traffic_mirror">Trafikorako ispilua</string>
     <string name="poi_diplomatic_consulate">Kontsulatua</string>
@@ -1298,7 +1298,7 @@
     <string name="poi_automated_yes">Automatizatua: bai</string>
     <string name="poi_brushless_yes">Eskuila gabekoa: bai</string>
     <string name="poi_fee_no">Ordain-saria: ez</string>
-    <string name="poi_drinking_water_no">Ez</string>
+    <string name="poi_drinking_water_no">Ur edangarria: ez</string>
     <string name="poi_traffic_signals_sound_no">Soinua: ez</string>
     <string name="poi_piste_grooming_no">Ez</string>
     <string name="poi_washing_machine_yes">Garbigailua: bai</string>
@@ -2248,7 +2248,7 @@
     <string name="poi_openfire_yes">Sua egitea baimenduta</string>
     <string name="poi_openfire_no">Ez da sua egitea baimentzen</string>
     <string name="poi_backcountry_yes">Pistatik at: bai</string>
-    <string name="poi_backcountry_no">Ez</string>
+    <string name="poi_backcountry_no">Pistatik at: ez</string>
     <string name="poi_scout_yes">Eskaut kanpina: bai</string>
     <string name="poi_group_only_yes">Taldeak besterik ez: bai</string>
     <string name="poi_group_only_no">Taldeak besterik ez: ez</string>

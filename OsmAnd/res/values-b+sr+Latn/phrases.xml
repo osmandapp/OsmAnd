@@ -3461,8 +3461,8 @@
     <string name="poi_charging_station_output">Izlaz stanice punjenja</string>
     <string name="poi_amperage">Amperaža</string>
     <string name="poi_parking_fee">Cena parkiranja</string>
-    <string name="poi_parking_fee_no">Ne</string>
-    <string name="poi_parking_fee_yes">Da</string>
+    <string name="poi_parking_fee_no">Slobodano parkiranje: ne</string>
+    <string name="poi_parking_fee_yes">Slobodano parkiranje: da</string>
     <string name="poi_truck_no">Kamion: ne</string>
     <string name="poi_scooter_no">Skuter: ne</string>
     <string name="poi_scooter_yes">Skuter: da</string>
@@ -4594,8 +4594,8 @@
     <string name="poi_flow_rate">Brzina protoka</string>
     <string name="poi_short_name">Kratko ime</string>
     <string name="poi_climbing_bolt_anchor">Sidro</string>
-    <string name="poi_climbing_bolts_yes">Da</string>
-    <string name="poi_climbing_bolts_no">Ne</string>
+    <string name="poi_climbing_bolts_yes">Boltovi za penjanje: da</string>
+    <string name="poi_climbing_bolts_no">Boltovi za penjanje: ne</string>
     <string name="poi_recycling_pet">PET</string>
     <string name="poi_recycling_electronics">Elektronika</string>
     <string name="poi_recycling_food">Hrana</string>

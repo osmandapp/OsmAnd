@@ -270,7 +270,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataDistance(float totalDistance) {
-		GPXDataSetType secondType = analysis.hasSpeedData() ? GPXDataSetType.SPEED : null;
+		GPXDataSetType secondType = analysis.isSpeedSpecified() ? GPXDataSetType.SPEED : null;
 		prepareData(app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
 				R.drawable.ic_action_track_16, GPXDataSetType.ALTITUDE, secondType, ItemType.ITEM_DISTANCE);
 	}
@@ -379,7 +379,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_TIME_SPAN: {
-				if (analysis.hasSpeedData()) {
+				if (analysis.isSpeedSpecified()) {
 					items.add(statBlock);
 				}
 				break;
@@ -469,8 +469,10 @@ public class GpxBlockStatisticsBuilder {
 			letterSpacing = Math.max(holder.valueText.getLetterSpacing(), holder.titleText.getLetterSpacing());
 			holder.titleText.setMinWidth(calculateWidthWithin(letterSpacing, item.title, item.value));
 			holder.itemView.setOnClickListener(v -> {
-				GpxTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
-				if (blocksClickable && analysis != null && actionsListener != null) {
+				if (blocksClickable && displayItem != null && displayItem.analysis != null && actionsListener != null) {
+					// a summary read from the GPX database has no data flags, so the chart types follow the point data
+					GpxDisplayItem gpxItem = getChartDisplayItem(displayItem);
+					GpxTrackAnalysis analysis = gpxItem.analysis;
 					ArrayList<GPXDataSetType> list = new ArrayList<>();
 					if (analysis.hasElevationData() || analysis.isSpeedSpecified() || analysis.hasSpeedData()) {
 						if (item.firstType != null) {
@@ -481,7 +483,6 @@ public class GpxBlockStatisticsBuilder {
 						}
 					}
 					if (!list.isEmpty()) {
-						GpxDisplayItem gpxItem = getChartDisplayItem(displayItem);
 						gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 						gpxItem.locationOnMap = gpxItem.locationStart;
 						actionsListener.openAnalyzeOnMap(gpxItem);
