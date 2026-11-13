@@ -47,12 +47,14 @@ android {
 			jniLibs.srcDirs = ["libs"]
 			aidl.srcDirs = ["src"]
 			java.srcDirs = ["src"]
+			kotlin.srcDirs = ["src"]
 			resources.srcDirs = ["src"]
 			res.srcDirs = ["res", layout.buildDirectory.dir("generated/osmand/res")]
 			assets.srcDirs = ["assets", layout.buildDirectory.dir("generated/osmand/assets")]
 		}
 		androidTest {
 			java.srcDirs = ["test/java"]
+			kotlin.srcDirs = ["test/java"]
 			res.srcDirs = ["test/res"]
 			assets.srcDirs = ["test/assets"]
 		}
@@ -140,7 +142,7 @@ tasks.register('validateTranslations') {
 	def pattern = /%(\d+\$)?[sSdD]/
 	def files = ["strings.xml", "phrases.xml"]
 	def defaultPlaceholders = [:]
-	def parser = new XmlParser()
+	def parser = new groovy.xml.XmlParser()
 
 	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
 
