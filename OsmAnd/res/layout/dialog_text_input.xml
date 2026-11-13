@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Body of TextInputDialog. The title, the buttons, the corner radius and the outer paddings come
+	from the Material 3 dialog style.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:paddingStart="@dimen/ui_dialog_padding"
+	android:paddingEnd="@dimen/ui_dialog_padding">
+
+	<com.google.android.material.textfield.TextInputLayout
+		android:id="@+id/text_input"
+		style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:endIconDrawable="@drawable/ic_action_clear_field"
+		app:endIconMode="clear_text">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:id="@+id/text_input_edit"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:importantForAutofill="no"
+			android:inputType="text"
+			android:maxLines="1" />
+	</com.google.android.material.textfield.TextInputLayout>
+</FrameLayout>
