@@ -23,6 +23,7 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin
 import net.osmand.plus.settings.mediastorage.MediaStorageHelper
 import net.osmand.plus.settings.mediastorage.MediaStorageLocation
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.FileUtils
 import net.osmand.plus.widgets.alert.TextInputDialog
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
@@ -104,7 +105,13 @@ object MediaItemMenu {
 		else entry.title.substringBeforeLast('.')
 		TextInputDialog(activity, nightMode, R.string.shared_string_rename, R.string.shared_string_name).apply {
 			initialText = currentName
-			validator = { if (it.isBlank()) activity.getString(R.string.empty_name) else null }
+			validator = {
+				when {
+					it.isBlank() -> activity.getString(R.string.empty_name)
+					!FileUtils.isValidFileName(it) -> activity.getString(R.string.file_name_containes_illegal_char, FileUtils.ILLEGAL_FILE_NAME_CHARS)
+					else -> null
+				}
+			}
 		}.show { name ->
 			AttachedMediaDataHelper(app).renameMedia(entry.recording, entry.href, name.trim(),
 				entry.attachments.groupBy({ it.target }, { it.link })) { newHref ->
