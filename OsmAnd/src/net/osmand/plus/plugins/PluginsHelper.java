@@ -129,7 +129,8 @@ public class PluginsHelper {
 
 		loadCustomPlugins(app);
 		registerAppInitializingDependedProperties(app);
-		enablePluginsByDefault(app, enabledPlugins);
+		Set<String> configuredPlugins = app.getSettings().getPlugins();
+		enabledPlugins.addAll(getDefaultEnabledPluginIds(configuredPlugins));
 		activatePlugins(app, enabledPlugins);
 	}
 
@@ -194,15 +195,15 @@ public class PluginsHelper {
 		}
 	}
 
-	private static void enablePluginsByDefault(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins) {
+	@NonNull
+	public static Set<String> getDefaultEnabledPluginIds(@NonNull Set<String> configuredPlugins) {
+		Set<String> defaultPluginIds = new LinkedHashSet<>();
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			if (plugin.isEnableByDefault()
-					&& !enabledPlugins.contains(plugin.getId())
-					&& !isPluginDisabledManually(app, plugin)) {
-				enabledPlugins.add(plugin.getId());
-				app.getSettings().enablePlugin(plugin.getId(), true);
+			if (plugin.isEnableByDefault() && !isPluginDisabledManually(configuredPlugins, plugin)) {
+				defaultPluginIds.add(plugin.getId());
 			}
 		}
+		return defaultPluginIds;
 	}
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
@@ -499,8 +500,9 @@ public class PluginsHelper {
 		return getActivePlugin(clz) != null;
 	}
 
-	public static boolean isPluginDisabledManually(OsmandApplication app, OsmandPlugin plugin) {
-		return app.getSettings().getPlugins().contains("-" + plugin.getId());
+	private static boolean isPluginDisabledManually(@NonNull Set<String> configuredPlugins,
+	                                                @NonNull OsmandPlugin plugin) {
+		return configuredPlugins.contains("-" + plugin.getId());
 	}
 
 	public static List<WorldRegion> getCustomDownloadRegions() {
