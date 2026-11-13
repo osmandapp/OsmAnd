@@ -69,7 +69,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 	public final boolean nightMode;
 
 	public SearchResultViewHolder(@NonNull View view,
-			@NonNull UpdateLocationViewCache locationViewCache, boolean nightMode) {
+	                              @NonNull UpdateLocationViewCache locationViewCache, boolean nightMode) {
 		super(view);
 
 		this.app = AndroidUtils.getApp(view.getContext());
@@ -136,6 +136,11 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			}
 		}
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.dot_divider), hasDesc && !groupIconVisible);
+
+		SearchScopeChip scopeChip = view.findViewById(R.id.search_scope_chip);
+		if (scopeChip != null) {
+			scopeChip.setScopeName(null, false);
+		}
 
 		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
 		if (timeLayout != null) {
