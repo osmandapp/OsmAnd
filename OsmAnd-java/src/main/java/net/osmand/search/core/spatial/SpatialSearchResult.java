@@ -13,6 +13,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
+import net.osmand.osm.PoiAdditionalLabels;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
@@ -234,7 +235,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		for (String name : category.names) {
 			if (objs.get(0).tokens.stream().allMatch(t -> t.getMainCollator().matches(name))) {
-				return category.getOriginalName(name);
+				String matchedName = category.getOriginalName(name);
+				return category.singleType == null ? matchedName
+						: PoiAdditionalLabels.getSearchName(category.singleType, matchedName);
 			}
 		}
 		return null;

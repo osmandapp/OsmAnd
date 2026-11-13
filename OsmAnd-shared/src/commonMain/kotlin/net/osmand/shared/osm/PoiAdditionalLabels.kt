@@ -85,12 +85,14 @@ object PoiAdditionalLabels {
 		return translation
 	}
 
-	fun getSearchName(poiType: AbstractPoiType): String {
+	fun getSearchName(poiType: AbstractPoiType): String = getSearchName(poiType, poiType.getTranslation())
+
+	fun getSearchName(poiType: AbstractPoiType, translation: String): String {
 		if (!poiType.isAdditional()) {
-			return poiType.getTranslation()
+			return translation
 		}
 		return getSearchName(
-			poiType.getTranslation(), poiType.getEnTranslation(), poiType.getSynonyms(),
+			translation, poiType.getEnTranslation(), poiType.getSynonyms(),
 			poiType.getPoiAdditionalCategoryTranslation()
 		)
 	}

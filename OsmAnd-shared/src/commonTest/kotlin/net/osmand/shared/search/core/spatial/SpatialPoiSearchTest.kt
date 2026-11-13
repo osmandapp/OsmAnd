@@ -30,20 +30,23 @@ class SpatialPoiSearchTest {
 
 	@Test
 	fun testMatchedNameKeepsDiacritics() {
-		val poiTypes = MapPoiTypes(RoutingTestFixtures.resource("poi_types.xml"))
-		poiTypes.init()
-		poiTypes.setPoiTranslator(
-			PhrasesTranslator(
-				mapOf(
-					"sports_centre" to "Sports center;Спортивний центр;спорткомплекс",
-					"shelter" to "Shelter;Unterstand;Schutzhütte"
-				)
+		val poiSearch = createPoiSearch(
+			mapOf(
+				"sports_centre" to "Sports center;Спортивний центр;спорткомплекс",
+				"shelter" to "Shelter;Unterstand;Schutzhütte"
 			)
 		)
-		val poiSearch = SpatialPoiSearch(poiTypes)
 
 		assertEquals("Спортивний центр", getMatchedName(poiSearch, "спорт", "sports_centre"))
 		assertEquals("Schutzhütte", getMatchedName(poiSearch, "schutz", "shelter"))
+	}
+
+	@Test
+	fun testMatchedNameOfValueIsCutBeforeColon() {
+		val poiSearch = createPoiSearch(mapOf("smoking_yes" to "Куріння: дозволено;Rauchen: erlaubt"))
+
+		assertEquals("Куріння", getMatchedName(poiSearch, "куріння", "smoking_yes"))
+		assertEquals("Rauchen", getMatchedName(poiSearch, "rauchen", "smoking_yes"))
 	}
 
 	@Test
@@ -67,6 +70,13 @@ class SpatialPoiSearchTest {
 			assertEquals(value, result.localeName)
 			assertEquals(value, (result.`object` as TopIndexFilter).getValue())
 		}
+	}
+
+	private fun createPoiSearch(phrases: Map<String, String>): SpatialPoiSearch {
+		val poiTypes = MapPoiTypes(RoutingTestFixtures.resource("poi_types.xml"))
+		poiTypes.init()
+		poiTypes.setPoiTranslator(PhrasesTranslator(phrases))
+		return SpatialPoiSearch(poiTypes)
 	}
 
 	private fun getMatchedName(poiSearch: SpatialPoiSearch, query: String, categoryKey: String): String? {
