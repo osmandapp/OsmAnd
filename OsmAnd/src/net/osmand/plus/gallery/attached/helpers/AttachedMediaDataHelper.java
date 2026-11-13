@@ -183,6 +183,28 @@ public class AttachedMediaDataHelper {
 		}
 	}
 
+	/**
+	 * Returns true when renaming the internal media at {@code href} to {@code name} would hit
+	 * another existing file. The rename dialog shows it under the field; {@link #renameMedia} refuses it.
+	 */
+	public boolean isMediaNameTaken(@Nullable Recording recording, @NonNull String href, @NonNull String name) {
+		String path = LinkMediaFactory.getInternalPath(href);
+		if (path == null) {
+			return false;
+		}
+		File source = MediaProvider.resolveInternalMediaFile(app.getAppPath().getAbsolutePath(), path);
+		File destination = getRenamedFile(recording, source, name);
+		return !source.equals(destination) && destination.exists();
+	}
+
+	@NonNull
+	private static File getRenamedFile(@Nullable Recording recording, @NonNull File source, @NonNull String name) {
+		String extension = Algorithms.getFileNameExtension(source.getName());
+		String newName = recording != null ? name + " " + recording.getOtherName(source.getName())
+				: name + (extension.isEmpty() ? "" : "." + extension);
+		return new File(source.getParentFile(), newName);
+	}
+
 	public void renameMedia(@Nullable Recording recording, @NonNull String href, @NonNull String name,
 	                        @NonNull Map<Linkable, List<Link>> linksByTarget,
 	                        @NonNull CallbackWithObject<String> onRenamed) {
@@ -193,16 +215,14 @@ public class AttachedMediaDataHelper {
 			return;
 		}
 		File source = MediaProvider.resolveInternalMediaFile(app.getAppPath().getAbsolutePath(), path);
-		String extension = Algorithms.getFileNameExtension(source.getName());
-		String newName = recording != null ? name + " " + recording.getOtherName(source.getName())
-				: name + (extension.isEmpty() ? "" : "." + extension);
-		File destination = new File(source.getParentFile(), newName);
+		File destination = getRenamedFile(recording, source, name);
+		String newName = destination.getName();
 		String newHref = mediaStorageHelper.createMediaFileHref(destination);
 		if (source.equals(destination)) {
 			onRenamed.processResult(newHref);
 			return;
 		}
-		if (!source.isFile() || destination.exists()) {
+		if (!source.isFile() || isMediaNameTaken(recording, href, name)) {
 			onRenamed.processResult(null);
 			return;
 		}

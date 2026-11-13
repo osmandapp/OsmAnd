@@ -103,6 +103,7 @@ object MediaItemMenu {
 		val recording = entry.recording
 		val currentName = if (recording != null) recording.getDescriptionName(recording.fileName).orEmpty()
 		else entry.title.substringBeforeLast('.')
+		val helper = AttachedMediaDataHelper(app)
 		TextInputDialog(activity, nightMode, R.string.shared_string_rename, R.string.shared_string_name).apply {
 			initialText = currentName
 			positiveButtonId = R.string.shared_string_rename
@@ -110,11 +111,12 @@ object MediaItemMenu {
 				when {
 					it.isBlank() -> activity.getString(R.string.empty_name)
 					!FileUtils.isValidFileName(it) -> activity.getString(R.string.file_name_containes_illegal_char, FileUtils.ILLEGAL_FILE_NAME_CHARS)
+					helper.isMediaNameTaken(recording, entry.href, it.trim()) -> activity.getString(R.string.file_with_name_already_exist)
 					else -> null
 				}
 			}
 		}.show { name ->
-			AttachedMediaDataHelper(app).renameMedia(entry.recording, entry.href, name.trim(),
+			helper.renameMedia(entry.recording, entry.href, name.trim(),
 				entry.attachments.groupBy({ it.target }, { it.link })) { newHref ->
 				app.runInUIThread {
 					if (newHref == null) {
