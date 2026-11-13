@@ -5185,4 +5185,5 @@
     <string name="poi_theme_filter">Tema</string>
     <string name="poi_disaster_help_point">Hjælpepunkt ved katastrofer</string>
     <string name="poi_couplings">Koblinger</string>
+    <string name="poi_check_date">Tjekdato</string>
 </resources>
