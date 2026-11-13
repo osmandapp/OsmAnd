@@ -381,7 +381,7 @@ open class SpatialTextSearchAPI(
 			localeName = PoiAdditionalLabels.getSearchName(poiType)
 		} else if (poiSubType != null) {
 			obj = TopIndexFilter(poiSubType, poiTypes, spatialPoiType.poiAdditional!!)
-			localeName = spatialPoiType.names[0]
+			localeName = spatialPoiType.poiAdditional!!
 		} else {
 			return null
 		}
