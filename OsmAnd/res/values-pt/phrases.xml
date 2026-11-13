@@ -3303,8 +3303,8 @@
     <string name="poi_scooter_yes">Lambreta: sim</string>
     <string name="poi_scooter_no">Lambreta: não</string>
     <string name="poi_truck_no">Camião: não</string>
-    <string name="poi_parking_fee_yes">Sim</string>
-    <string name="poi_parking_fee_no">Não</string>
+    <string name="poi_parking_fee_yes">Estacionamento pago: sim</string>
+    <string name="poi_parking_fee_no">Estacionamento pago: não</string>
     <string name="poi_parking_fee">Estacionamento pago</string>
     <string name="poi_amperage">Amperagem</string>
     <string name="poi_charging_station_output">Saída do posto elétrico</string>
@@ -4388,8 +4388,8 @@
     <string name="poi_climbing_grade_aliens">Extraterrestre</string>
     <string name="poi_climbing_bolt_abseil">Rapel</string>
     <string name="poi_climbing_bolt_anchor">Âncora</string>
-    <string name="poi_climbing_bolts_yes">Sim</string>
-    <string name="poi_climbing_bolts_no">Não</string>
+    <string name="poi_climbing_bolts_yes">Parafusos de escalada: sim</string>
+    <string name="poi_climbing_bolts_no">Parafusos de escalada: não</string>
     <string name="poi_climbing_bolts">Parafusos de escalada</string>
     <string name="poi_climbing_quality_medium">Média</string>
     <string name="poi_climbing_grade_filter">Nível de escalada</string>
@@ -4931,7 +4931,7 @@
     <string name="poi_climbing_area">Zona de escalada</string>
     <string name="poi_climbing_route">Percurso de escalada</string>
     <string name="poi_climbing_route_bottom">Fundo do percurso de escalada</string>
-    <string name="poi_cafe_yes">Sim</string>
+    <string name="poi_cafe_yes">Café: sim</string>
     <string name="poi_route_activity_type_cross_country_skiing">Esqui de fundo (cross-country)</string>
     <string name="poi_route_activity_type_snowshoeing">Raquetes de neve</string>
     <string name="poi_route_activity_type_e_biking">Bicicleta elétrica</string>

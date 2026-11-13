@@ -25,7 +25,6 @@
 			android:imeOptions="actionDone"
 			android:inputType="textVisiblePassword"
 			android:maxLines="1"
-			android:saveEnabled="false"
 			tools:text="123456" />
 
 	</net.osmand.plus.widgets.OsmandTextFieldBoxes>

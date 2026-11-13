@@ -32,6 +32,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import net.osmand.plus.R
 import net.osmand.plus.widgets.popup.colorAttr
 import net.osmand.util.Algorithms
@@ -45,14 +49,35 @@ class SearchScopeChip @JvmOverloads constructor(
 	private var scopeName by mutableStateOf<String?>(null)
 	private var nightMode by mutableStateOf(false)
 
+	private var ownerLifecycle: Lifecycle? = null
+
+	// ListView drops rows from its scrap heap without detaching them from the window
+	// (AbsListView.RecycleBin.pruneScrapViews), and only onDetachedFromWindow takes the inner
+	// AndroidComposeView out of AccessibilityManager and AndroidComposeView.composeViews.
+	// Removing the inner view detaches it, so a dropped row no longer holds the window.
+	private val releaseOnDestroy = object : DefaultLifecycleObserver {
+		override fun onDestroy(owner: LifecycleOwner) {
+			disposeComposition()
+			removeAllViews()
+		}
+	}
+
 	init {
 		isClickable = false
 		isFocusable = false
 	}
 
+	override fun onAttachedToWindow() {
+		super.onAttachedToWindow()
+		ownerLifecycle = findViewTreeLifecycleOwner()?.lifecycle
+		ownerLifecycle?.addObserver(releaseOnDestroy)
+	}
+
 	override fun onDetachedFromWindow() {
 		disposeComposition()
 		super.onDetachedFromWindow()
+		ownerLifecycle?.removeObserver(releaseOnDestroy)
+		ownerLifecycle = null
 	}
 
 	fun setScopeName(scopeName: CharSequence?, nightMode: Boolean) {

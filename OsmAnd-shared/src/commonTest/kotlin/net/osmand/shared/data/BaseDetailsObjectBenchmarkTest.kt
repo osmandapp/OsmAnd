@@ -22,6 +22,42 @@ import kotlin.time.TimeSource
 class BaseDetailsObjectBenchmarkTest {
 
 	@Test
+	fun benchmarkImportedDetails() {
+		if (testEnvironment("OSMAND_DETAILS_OBJECTS_BENCHMARK") == null) {
+			return
+		}
+		SearchPhraseTest.setUp
+		val objects = (1..3).map { id ->
+			Amenity().apply {
+				setId(id.toLong() shl 1)
+				setName("Place $id")
+				setLocation(52.0, 13.0)
+				setType(MapPoiTypes.getDefault().getPoiCategoryByName("sustenance"))
+				setSubType("cafe")
+				setAdditionalInfo(Amenity.WIKIDATA, "Q123")
+			}
+		}
+		val amenity = BaseDetailsObject(objects, "en").getSyntheticAmenity()
+		val samples = Array(2) { mutableListOf<Double>() }
+		var consumed = 0
+		repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
+			for (kind in if (round % 2 == 0) listOf(0, 1) else listOf(1, 0)) {
+				val mark = TimeSource.Monotonic.markNow()
+				repeat(10_000) {
+					val result = if (kind == 0) BaseDetailsObject(objects, "en")
+					else BaseDetailsObject(objects, amenity, "en", BaseDetailsObject.ObjectCompleteness.FULL)
+					consumed += result.getObjects().size
+				}
+				val milliseconds = mark.elapsedNow().inWholeNanoseconds / 1e6
+				if (round >= WARMUP_ROUNDS) samples[kind].add(milliseconds)
+			}
+		}
+		println("BaseDetailsObject import on ${testPlatformName()}, 10,000 results of 3 components, median of $MEASURED_ROUNDS: " +
+			"recombine=${samples[0].sorted()[MEASURED_ROUNDS / 2]} ms, " +
+			"import=${samples[1].sorted()[MEASURED_ROUNDS / 2]} ms ($consumed objects)")
+	}
+
+	@Test
 	fun benchmarkDetailsObjects() {
 		if (testEnvironment("OSMAND_DETAILS_OBJECTS_BENCHMARK") == null) {
 			println("BaseDetailsObjectBenchmarkTest: set OSMAND_DETAILS_OBJECTS_BENCHMARK to run")

@@ -2818,8 +2818,8 @@
     <string name="poi_post_flats">Plat</string>
     <string name="poi_payment_centre">Centre de paiement</string>
     <string name="poi_health_facility_type_office">Bureau médical</string>
-    <string name="poi_parking_fee_yes">Oui</string>
-    <string name="poi_parking_fee_no">Non</string>
+    <string name="poi_parking_fee_yes">Frais de stationnement : oui</string>
+    <string name="poi_parking_fee_no">Frais de stationnement : non</string>
     <string name="poi_zoo_birds">Oiseaux</string>
     <string name="poi_motorcycle_rental_yes">Location;Location de motos</string>
     <string name="poi_motorcycle_rental_no">Location : non</string>
@@ -4376,8 +4376,8 @@
     <string name="poi_climbing_grade_elite">Élite</string>
     <string name="poi_climbing_grade_super_elite">Super élite</string>
     <string name="poi_climbing_grade_aliens">Extra-terrestre</string>
-    <string name="poi_climbing_bolts_yes">Oui</string>
-    <string name="poi_climbing_bolts_no">Non</string>
+    <string name="poi_climbing_bolts_yes">Points d\'ancrage : oui</string>
+    <string name="poi_climbing_bolts_no">Points d\'ancrage : non</string>
     <string name="poi_climbing_quality_medium">Intermédiaire</string>
     <string name="poi_hiking_filter">Adapté à la randonnée</string>
     <string name="poi_climbing_quality">Qualité de l\'escalade</string>

@@ -981,7 +981,7 @@
     <string name="poi_toll_no">žadyn mawt</string>
     <string name="poi_tactile_paving_yes">haj</string>
     <string name="poi_traffic_signals_sound_yes">Zwuk: haj</string>
-    <string name="poi_traffic_signals_sound_no">ně</string>
+    <string name="poi_traffic_signals_sound_no">Zwuk: ně</string>
     <string name="poi_railway_crossing">železniski přechod</string>
     <string name="poi_garden">zahroda</string>
     <string name="poi_heath">hola</string>
@@ -1192,7 +1192,7 @@
     <string name="poi_openfire_yes">woheń dowoleny</string>
     <string name="poi_openfire_no">woheń njeje dowoleny</string>
     <string name="poi_backcountry_yes">Zadni kraj: haj</string>
-    <string name="poi_backcountry_no">ně</string>
+    <string name="poi_backcountry_no">Zadni kraj: ně</string>
     <string name="poi_scout_yes">Skawtske lěhwo: haj</string>
     <string name="poi_washing_machine_yes">Płokawa: haj</string>
     <string name="poi_washing_machine_no">płokawa: ně</string>
@@ -1318,7 +1318,7 @@
     <string name="poi_thermometer_no">termometer: ně</string>
     <string name="poi_min_age">minimalna staroba</string>
     <string name="poi_organic_yes">Biowobchod: haj</string>
-    <string name="poi_organic_no">ně</string>
+    <string name="poi_organic_no">Biowobchod: ně</string>
     <string name="poi_organic_only">Biowobchod: jenož</string>
     <string name="poi_diplomatic_consulate">konsulat</string>
     <string name="poi_diplomatic_consulate_general">generalny konsulat</string>

@@ -25,7 +25,6 @@ import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripUtils
 import net.osmand.plus.search.history.SearchHistoryHelper
-import net.osmand.plus.search.history.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo
@@ -138,14 +137,14 @@ class HistoryScreen(
 		val listBuilder = ItemList.Builder()
 		val location = app.mapViewTrackingUtilities.defaultLocation
 		for (item in searchItems) {
-			if (item.searchResult?.`object` is HistoryEntry) {
-				val result = item.searchResult?.`object` as HistoryEntry
-				val pointDescription = result.name
-				var title = item.name
+			val historyEntry = item.historyEntry
+			if (historyEntry != null) {
+				val pointDescription = historyEntry.name
+				var title = pointDescription.getSimpleName(app, false)
 				val icon = CarIcon.Builder(
 					IconCompat.createWithResource(app, pointDescription.itemIcon)).build()
 				if (Algorithms.isEmpty(title)) {
-					title = item.searchResult?.location?.toString()
+					title = item.searchResult?.location?.toString() ?: ""
 				}
 				val rowBuilder = Row.Builder()
 					.setTitle(title)
@@ -187,7 +186,7 @@ class HistoryScreen(
 			    historyItem.searchResult.location.longitude)
 	    }
         result.objectType = ObjectType.RECENT_OBJ
-        result.`object` = historyItem.searchResult.`object`
+        result.`object` = historyItem.historyEntry
         openRoutePreview(settingsAction, result)
     }
 

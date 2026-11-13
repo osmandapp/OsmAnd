@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
+import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -174,10 +175,13 @@ public class Renderable {
 
         protected abstract void startCuller(double newZoom);
 
-        protected void drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        // Returns the drawn dashed paths when the direction arrows have to be placed on their dashes
+        @Nullable
+        protected DashedPaths drawSingleSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (points.size() < 2) {
-                return;
+                return null;
             }
+            DashedPaths pathsForArrows = null;
 
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -187,18 +191,27 @@ public class Renderable {
                 }
                 drawGradient(zoom, points, paint, canvas, tileBox);
             } else {
-                drawSolid(getPointsForDrawing(), paint, canvas, tileBox);
+                List<Path> paths = createSolidPaths(getPointsForDrawing(), tileBox);
+                drawPaths(canvas, paths, paint);
+                float[] dashIntervals = OsmandDashPathEffect.getIntervals(paint.getPathEffect());
+                if (drawArrows && dashIntervals != null) {
+                    pathsForArrows = new DashedPaths(paths, dashIntervals);
+                }
             }
             canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+            return pathsForArrows;
         }
 
-        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        // Returns the drawn dashed paths when the direction arrows have to be placed on their dashes
+        @Nullable
+        public DashedPaths drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (KQuadRect.Companion.trivialOverlap(SharedUtil.kQuadRect(tileBox.getLatLonBounds()), trackBounds)) { // is visible?
                 if (coloringType.isTrackSolid()) {
                     startCuller(zoom);
                 }
-                drawSingleSegment(zoom, p, canvas, tileBox);
+                return drawSingleSegment(zoom, p, canvas, tileBox);
             }
+            return null;
         }
 
         public void setRDP(List<WptPt> cull) {
@@ -249,6 +262,18 @@ public class Renderable {
 
         protected void drawSolid(@NonNull List<WptPt> pts, @NonNull Paint p,
                                  @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
+            drawPaths(canvas, createSolidPaths(pts, tileBox), p);
+        }
+
+        private void drawPaths(@NonNull Canvas canvas, @NonNull List<Path> paths, @NonNull Paint p) {
+            for (Path path : paths) {
+                canvas.drawPath(path, p);
+            }
+        }
+
+        @NonNull
+        private List<Path> createSolidPaths(@NonNull List<WptPt> pts, @NonNull RotatedTileBox tileBox) {
+            List<Path> paths = new ArrayList<>();
             QuadRect tileBounds = tileBox.getLatLonBounds();
             WptPt lastPt = pts.get(0);
             boolean recalculateLastXY = true;
@@ -262,9 +287,9 @@ public class Renderable {
                         float lastX = tileBox.getPixXFromLatLon(lastPt.getLat(), lastPt.getLon());
                         float lastY = tileBox.getPixYFromLatLon(lastPt.getLat(), lastPt.getLon());
                         if (!path.isEmpty()) {
-                            canvas.drawPath(path, p);
+                            paths.add(path);
                         }
-                        path.reset();
+                        path = new Path();
                         path.moveTo(lastX, lastY);
                     }
                     if (Math.abs(pt.getLon() - lastPt.getLon()) >= 180) {
@@ -288,8 +313,39 @@ public class Renderable {
                 }
             }
             if (!path.isEmpty()) {
-                canvas.drawPath(path, p);
+                paths.add(path);
             }
+            return paths;
+        }
+
+        public void drawDirectionArrows(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+                                        @NonNull QuadRect quadRect, int trackColor, float trackWidth,
+                                        boolean recreateSegments, @Nullable DashedPaths dashedPaths) {
+            if (dashedPaths != null) {
+                drawArrowsOnDashes(canvas, tileBox, dashedPaths, trackColor, trackWidth, recreateSegments);
+            } else {
+                drawArrowsAlongTrack(canvas, tileBox, quadRect, trackColor, trackWidth, recreateSegments);
+            }
+        }
+
+        private void drawArrowsOnDashes(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+                                        @NonNull DashedPaths dashedPaths, int trackColor, float trackWidth,
+                                        boolean recreateSegments) {
+            if (geometryWay != null) {
+                geometryWay.setTrackStyleParams(trackColor, trackWidth, null, true, null,
+                        coloringType, routeInfoAttribute, gradientColorPalette);
+                // The arrows along the track use the way once the line is no longer dashed, so it is kept up to date
+                geometryWay.updateSegment(tileBox, getPointsForDrawing(), routeSegments, recreateSegments);
+                geometryWay.getDrawer().drawArrowsOnDashes(canvas, tileBox, dashedPaths.paths, dashedPaths.intervals,
+                        geometryWay.getDefaultWayStyle());
+            }
+        }
+
+        // Without a map renderer the geometry way gets the default style, which has no path line: it draws only the arrows
+        private void drawArrowsAlongTrack(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+                                          @NonNull QuadRect quadRect, int trackColor, float trackWidth,
+                                          boolean recreateSegments) {
+            drawGeometry(canvas, tileBox, quadRect, trackColor, trackWidth, null, true, null, recreateSegments);
         }
 
         protected void drawGradient(double zoom, @NonNull List<WptPt> pts, @NonNull Paint p,
@@ -430,6 +486,18 @@ public class Renderable {
         }
     }
 
+    // A line drawn with a dash pattern, as the paths it was stroked along
+    public static class DashedPaths {
+
+        private final List<Path> paths;
+        private final float[] intervals;
+
+        private DashedPaths(@NonNull List<Path> paths, @NonNull float[] intervals) {
+            this.paths = paths;
+            this.intervals = intervals;
+        }
+    }
+
     public static class StandardTrack extends RenderableSegment {
 
         public StandardTrack(List<WptPt> pt, double base) {
@@ -468,9 +536,10 @@ public class Renderable {
         }
 
         @Override
-        public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
+        @Nullable
+        public DashedPaths drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             updateBounds();
-            drawSingleSegment(zoom, p, canvas, tileBox);
+            return drawSingleSegment(zoom, p, canvas, tileBox);
         }
 
         @Override protected void startCuller(double newZoom) {}

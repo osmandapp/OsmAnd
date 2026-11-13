@@ -257,6 +257,9 @@ public class SpatialSearchContext {
 			}
 			long bytes = 0;
 			for (int fileInd = 0; fileInd < files.size(); fileInd++) {
+				if (isCancelled()) {
+					return;
+				}
 				for (NameIndexReader indx : internalFile.get(fileInd).indexReaders) {
 					List<PrefixNameValue> prefixes = indx.getMatchedPrefixes(t.word);
 					if (prefixes == null) {
@@ -288,6 +291,10 @@ public class SpatialSearchContext {
 			SpatialSearchFileCache iCache = internalFile.get(fileInd);
 			BinaryMapIndexReader b = files.get(fileInd);
 			for (NameIndexReader indx : iCache.indexReaders) {
+				// a newer search was started (the next typed letter): the atoms of this one are not needed
+				if (isCancelled()) {
+					return;
+				}
 				readAtoms(tokens, b, indx, indxInd, iCache.locale);
 				indxInd++;
 				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
@@ -544,6 +551,9 @@ public class SpatialSearchContext {
 			}
 		});
 		for (SpatialSearchToken t : tokens) {
+			if (isCancelled()) {
+				return;
+			}
 			if (settings.SEARCH_POI_BY_CATEGORY_ONLY && indx.poiRegion == null) {
 				continue;
 			} else if (!settings.SEARCH_POI && indx.poiRegion != null) {

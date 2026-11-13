@@ -3304,8 +3304,8 @@
     <string name="poi_bicycle_no">Bitzicleta: nono</string>
     <string name="poi_scooter_no">Motorinu: nono</string>
     <string name="poi_truck_no">Càmion: nono</string>
-    <string name="poi_parking_fee_yes">Eja</string>
-    <string name="poi_parking_fee_no">Nono</string>
+    <string name="poi_parking_fee_yes">Tarifa de parchègiu: eja</string>
+    <string name="poi_parking_fee_no">Tarifa de parchègiu: nono</string>
     <string name="poi_parking_fee">Tarifa de parchègiu</string>
     <string name="poi_amperage">Amperàgiu</string>
     <string name="poi_charging_station_output">Essida de s\'istatzione de càrriga</string>
@@ -4386,8 +4386,8 @@
     <string name="poi_climbing_grade_aliens">Alienos</string>
     <string name="poi_climbing_bolt_abseil">Achirrada in corda dòpia</string>
     <string name="poi_climbing_bolt_anchor">Ancoràgiu</string>
-    <string name="poi_climbing_bolts_yes">Eja</string>
-    <string name="poi_climbing_bolts_no">Nono</string>
+    <string name="poi_climbing_bolts_yes">Bullones de iscalada: eja</string>
+    <string name="poi_climbing_bolts_no">Bullones de iscalada: nono</string>
     <string name="poi_climbing_bolts">Bullones de iscalada</string>
     <string name="poi_climbing_quality_medium">Mesana</string>
     <string name="poi_climbing_grade_filter">Livellu de iscalada</string>

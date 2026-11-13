@@ -2,12 +2,14 @@ package net.osmand.plus.track;
 
 import static android.view.View.MeasureSpec.EXACTLY;
 import static android.view.View.MeasureSpec.makeMeasureSpec;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,13 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import net.osmand.plus.R;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.ResourcesImporter;
 
@@ -29,12 +35,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class GpxBlockStatisticsBuilderTest extends AndroidTest {
 
 	private static final String GPX_NAME = "gpx_recalc_test.gpx";
+	private static final int BLOCKS_WIDTH = 5000;
 
 	/**
 	 * The track Overview shows the blocks from a summary analysis without point data, but a tapped block opens
@@ -48,20 +57,93 @@ public class GpxBlockStatisticsBuilderTest extends AndroidTest {
 		assertFalse("The Overview blocks are expected to show an analysis without point data",
 				summary.getCollectPointData());
 
+		GpxDisplayItem openedItem = tapDistanceBlock(selectedGpxFile, summary, new ArrayList<>());
+		assertNotNull("Tapping the Distance block did not open Analyze on map", openedItem);
+		assertTrue("Analyze on map was opened without the point data of its chart",
+				openedItem.analysis.getCollectPointData() && !openedItem.analysis.getPointAttributes().isEmpty());
+	}
+
+	/**
+	 * After a restart the blocks show the summary read from the GPX database, which has no data flags: the Duration
+	 * block and the Speed chart of the Distance block have to follow its average speed.
+	 */
+	@Test
+	public void testDatabaseSummaryShowsDurationAndSpeedChart() {
+		SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
+		selectedGpxFile.setGpxFile(createTrack(true), app);
+		GpxTrackAnalysis summary = getDatabaseSummary(selectedGpxFile);
+
+		List<String> blockTitles = new ArrayList<>();
+		GpxDisplayItem openedItem = tapDistanceBlock(selectedGpxFile, summary, blockTitles);
+		assertTrue("No Duration block among " + blockTitles, blockTitles.contains(app.getString(R.string.duration)));
+		assertNotNull("Tapping the Distance block did not open Analyze on map", openedItem);
+		assertArrayEquals(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED}, openedItem.chartTypes);
+	}
+
+	/**
+	 * The summary read from the GPX database has no elevation flag either, so a track with elevation but without
+	 * time has to take its chart types from the point data.
+	 */
+	@Test
+	public void testBlockOfTrackWithoutTimeOpensAltitudeChart() {
+		SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
+		selectedGpxFile.setGpxFile(createTrack(false), app);
+		GpxTrackAnalysis summary = getDatabaseSummary(selectedGpxFile);
+
+		GpxDisplayItem openedItem = tapDistanceBlock(selectedGpxFile, summary, new ArrayList<>());
+		assertNotNull("Tapping the Distance block did not open Analyze on map", openedItem);
+		assertArrayEquals(new GPXDataSetType[] {GPXDataSetType.ALTITUDE}, openedItem.chartTypes);
+	}
+
+	@NonNull
+	private GpxTrackAnalysis getDatabaseSummary(@NonNull SelectedGpxFile selectedGpxFile) {
+		// GpxDatabase reads the stored values only, without the data flags of the points
+		GpxTrackAnalysis summary = selectedGpxFile.getTrackSummaryAnalysisToDisplay(app);
+		summary.getAvailableAttributes().clear();
+		return summary;
+	}
+
+	@Nullable
+	private GpxDisplayItem tapDistanceBlock(@NonNull SelectedGpxFile selectedGpxFile, @NonNull GpxTrackAnalysis summary,
+	                                        @NonNull List<String> blockTitles) {
 		GpxDisplayItem[] openedItem = new GpxDisplayItem[1];
 		InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
 			RecyclerView blocksView = new RecyclerView(app);
 			GpxBlockStatisticsBuilder builder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, false);
 			builder.setBlocksView(blocksView, false);
 			builder.initStatBlocks(new AnalyzeOnMapListener(openedItem), Color.BLUE, summary);
-			blocksView.measure(makeMeasureSpec(1000, EXACTLY), makeMeasureSpec(200, EXACTLY));
-			blocksView.layout(0, 0, 1000, 200);
+			blocksView.measure(makeMeasureSpec(BLOCKS_WIDTH, EXACTLY), makeMeasureSpec(200, EXACTLY));
+			blocksView.layout(0, 0, BLOCKS_WIDTH, 200);
+			for (int i = 0; i < blocksView.getChildCount(); i++) {
+				TextView title = blocksView.getChildAt(i).findViewById(R.id.title);
+				blockTitles.add(title.getText().toString());
+			}
 			blocksView.getChildAt(0).performClick();
 		});
+		return openedItem[0];
+	}
 
-		assertNotNull("Tapping the Distance block did not open Analyze on map", openedItem[0]);
-		assertTrue("Analyze on map was opened without the point data of its chart",
-				openedItem[0].analysis.getCollectPointData() && !openedItem[0].analysis.getPointAttributes().isEmpty());
+	@NonNull
+	private GpxFile createTrack(boolean withTime) {
+		TrkSegment segment = new TrkSegment();
+		segment.getPoints().add(createPoint(50.0, 30.0, 100.0, withTime ? 1_000L : 0));
+		segment.getPoints().add(createPoint(50.001, 30.001, 120.0, withTime ? 61_000L : 0));
+		segment.getPoints().add(createPoint(50.002, 30.002, 110.0, withTime ? 121_000L : 0));
+		Track track = new Track();
+		track.getSegments().add(segment);
+		GpxFile gpxFile = new GpxFile(null);
+		gpxFile.getTracks().add(track);
+		return gpxFile;
+	}
+
+	@NonNull
+	private WptPt createPoint(double lat, double lon, double elevation, long time) {
+		WptPt point = new WptPt();
+		point.setLat(lat);
+		point.setLon(lon);
+		point.setEle(elevation);
+		point.setTime(time);
+		return point;
 	}
 
 	@NonNull

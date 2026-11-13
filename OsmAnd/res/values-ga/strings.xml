@@ -5348,4 +5348,25 @@
     <string name="release_5_5">• Cuardach Spásúil ar siúl de réir réamhshocraithe: cuardach timpeall áite, rangú níos fearr, comhchiallaigh, clóscríobh fulangach\n\n• Caitheann foirgnimh 3T scáthanna, le treo gréine inchoigeartaithe\n\n• Breiseán Panoramamax: íomhánna leibhéal sráide ar an léarscáil\n\n• Leabharlann meán: gach grianghraf, físeán agus nóta fuaime in aon áit amháin\n\n• Línte riain stróicthe agus poncaithe, breathnú réamhshocraithe in aghaidh an fhillteáin riain\n\n• Socruithe luas taistil le haghaidh ródaireachta agus am teachta\n\n• Android Auto: cinn scríbe le déanaí, turas saor in aisce uathoibríoch, Cúntóir Google agus Gemini\n\n• Gníomh tapa chun rianta a thaispeáint nó a cheilt\n\n• Lipéid líne imlíne os comhair suas an cnoc</string>
     <string name="build_update_size">nuashonrú %1$s</string>
     <string name="build_update_size_estimated">nuashonrú ~%1$s</string>
+    <string name="update_maps_to_use_new_search">Nuashonraigh léarscáileanna chun an cuardach nua (%1$s) a úsáid</string>
+    <string name="free_region_not_chosen_descr">Éiríonn réigiún an chéad léarscáail a íoslódálann tú mar do réigiún saor in aisce.</string>
+    <string name="free_region_banner_descr">Tá gach léarscáil de %1$s saor in aisce.</string>
+    <string name="free_region_other_title">Ní hé %1$s do réigiún saor in aisce</string>
+    <string name="free_region_other_descr">Áirítear léarscáileanna de réigiún amháin sa leagan saor in aisce. Chun %1$s a íoslódáil, scriosfar léarscáileanna de réigiúin eile.</string>
+    <string name="free_region_will_be_deleted">Scriosfar é</string>
+    <string name="free_region_maps_stay">Fanann an léarscáil fhorléargais dhomhanda, na línte comhrian agus léarscáileanna breise ó bhreiseáin.</string>
+    <string name="free_region_delete_and_download">Scrios agus íoslódáil</string>
+    <string name="free_region_replace_used_title">Athsholáthar saor in aisce a úsáideadh cheana féin</string>
+    <string name="free_region_not_eligible_email_descr">Cuir isteach do sheoladh ríomhphoist chun do réigiún saor in aisce a athsholáthar arís, nó faigh íoslódálacha léarscáile gan teorainn.</string>
+    <string name="free_region_email_helper">Seolfaimid nuacht faoi OsmAnd chugat. Is féidir leat díliostáil tráth ar bith.</string>
+    <string name="free_region_email_maps_deleted">Scriosfar léarscáileanna de %1$s (%2$s).</string>
+    <string name="free_region_send_and_replace">Seol agus cuir ina áit</string>
+    <string name="free_region_not_eligible_buy_descr">Is é %1$s do réigiún saor in aisce. Chun %2$s a íoslódáil agus do léarscáail reatha a choinneáil, faigh íoslódálacha léarscáile gan teorainn.</string>
+    <string name="outdated_maps_warning_title">Déan do léarscáileanna a nuashonrú</string>
+    <string name="outdated_maps_warning_descr">Teastaíonn léarscáileanna den leagan seo ón gcuardach nua. Déan do chuid léarscáileanna go léir a nuashonrú – tá sé saor in aisce.</string>
+    <string name="free_region_other_regions_need_maps_plus">Tá Léarscáileanna+ ag teastáil ó réigiúin eile: %1$s</string>
+    <string name="visualization">Amharcléiriú</string>
+    <string name="terrain_shadows">Scáthanna an tírdhreacha</string>
+    <string name="terrain_shadows_description">Scáthú dinimiciúil fíor-ama do thírraon 3D. Leagann sé béim ar gheiméadracht an tírdhreacha, agus tionchar íosta aige ar fheidhmíocht.</string>
+    <string name="terrain_shadows_relief_3d_footer">Cumasaítear faoiseamh 3D go huathoibríoch, ós rud é go bhfuil gá leis chun scáthanna ar an tír-raon a rindreáil.</string>
 </resources>

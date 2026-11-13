@@ -659,7 +659,7 @@
     <string name="index_item_nation_addresses">διευθύνσεις πανεθνικά</string>
     <string name="index_item_world_altitude_correction">Διόρθωση παγκόσμιου υψομέτρου</string>
     <string name="index_item_world_bitcoin_payments">Παγκόσμιες πληρωμές με bitcoin</string>
-    <string name="index_item_world_ski">Παγκόσμιος Χάρτης σκι</string>
+    <string name="index_item_world_ski">Παγκόσμιος χάρτης σκι</string>
     <string name="lang_hr">Κροατικά</string>
     <string name="lang_zh">Κινέζικα</string>
     <string name="lang_pt_br">Πορτογαλικά (Βραζιλίας)</string>
@@ -1248,7 +1248,7 @@
     <string name="no_underlay">Χωρίς υπόστρωμα</string>
     <string name="subscribe_email_error">Σφάλμα</string>
     <string name="subscribe_email_desc">Εγγραφείτε στη λίστα αλληλογραφίας για εκπτώσεις της εφαρμογής και κερδίστε 3 επιπρόσθετες λήψεις χαρτών!</string>
-    <string name="depth_contour_descr">Καμπύλες θαλάσσιων ισοβαθών και σημείων ναυσιπλοΐας.</string>
+    <string name="depth_contour_descr">Καμπύλες θαλάσσιων ισοβαθών και θαλάσσιες σημάνσεις.</string>
     <string name="sea_depth_thanks">Σας ευχαριστούμε για την αγορά των \'Ναυτικών ισοβαθών\'</string>
     <string name="index_item_depth_contours_osmand_ext">Ναυτικές ισοβαθείς καμπύλες</string>
     <string name="index_item_world_wikivoyage">Παγκόσμια άρθρα βικιταξιδιών</string>
@@ -1643,7 +1643,7 @@
     <string name="live_monitoring_stop">Σταμάτημα ιχνογράφησης με διαδίκτυο</string>
     <string name="rendering_attr_buildings15zoom_name">Κτίρια σε εστίαση 15</string>
     <string name="rendering_attr_showCycleRoutes_name">Ποδηλατικές διαδρομές</string>
-    <string name="index_item_world_seamarks">Παγκόσμια σημεία ναυσιπλοΐας</string>
+    <string name="index_item_world_seamarks">Παγκόσμιες θαλάσσιες σημάνσεις</string>
     <string name="index_item_world_basemap">Επισκόπηση παγκόσμιου χάρτη</string>
     <string name="lang_en_gb">Αγγλικά (Ηνωμένο Βασίλειο)</string>
     <string name="lang_be_by">Λευκορώσικα (Λατινικά)</string>
@@ -1665,7 +1665,7 @@
 \n Σημείωση 2: Στη νέα θέση αποθήκευσης δεν θα είναι δυνατός ο διαμοιρασμός αρχείων μεταξύ OsmAnd και OsmAnd+.</string>
     <string name="calculate_osmand_route_gpx">Υπολογισμός διαδρομής OsmAnd χωρίς διαδίκτυο</string>
     <string name="complex_route_calculation_failed">Αποτυχία γρήγορου υπολογισμού διαδρομής (%s), επαναφορά του αργού υπολογισμού.</string>
-    <string name="amenity_type_seamark">Σήμα Ναυσιπλοΐας</string>
+    <string name="amenity_type_seamark">Θαλάσσια σημάνση</string>
     <string name="route_is_too_long_v2">Για μεγάλες αποστάσεις: Παρακαλούμε, προσθέστε ενδιάμεσους προορισμούς, εάν δεν βρεθεί διαδρομή μέσα σε 10 λεπτά.</string>
     <string name="auto_zoom_close">Για κοντινά</string>
     <string name="auto_zoom_farthest">Για μεγάλη ακτίνα</string>
@@ -1878,7 +1878,7 @@
     <string name="maps_you_need">Χάρτες που χρειάζεστε</string>
     <string name="hide_full_description">Απόκρυψη πλήρους περιγραφής</string>
     <string name="show_full_description">Εμφάνιση πλήρους περιγραφής</string>
-    <string name="nautical_render_descr">Για ναυτική πλοήγηση. Περιέχει σημαδούρες, φάρους, πλωτά ποτάμια, θαλάσσιες λωρίδες και σήματα, λιμάνια, υπηρεσίες θαλάσσης και ισοβαθείς καμπύλες.</string>
+    <string name="nautical_render_descr">Για ναυτική πλοήγηση. Περιέχει σημαδούρες, φάρους, πλωτά ποτάμια, θαλάσσιες λωρίδες και σημάνσεις, λιμάνια, υπηρεσίες θαλάσσης και ισοβαθείς καμπύλες.</string>
     <string name="ski_map_render_descr">Για χιονοδρομία. Περιέχει πίστες, αναβατόρια, διαδρομές σκι, κλπ. Υποβαθμίζει τα δευτερεύοντα αντικείμενα στον χάρτη.</string>
     <string name="light_rs_render_descr">Για απλή οδήγηση. Απαλή νυχτερινή λειτουργία, εμφαίνοντας τους πορτοκαλί δρόμους, υποβαθμίζει τα δευτερεύοντα αντικείμενα στον χάρτη, τοπογραφικά χαρακτηριστικά όπως ισοϋψείς καμπύλες.</string>
     <string name="topo_render_descr">Για πεζοπορία, περπάτημα και ποδηλασία στη φύση. Ευανάγνωστο σε εξωτερικό φωτισμό. Με μεγάλη αντίθεση στους δρόμους και τα φυσικά στοιχεία, επιλογές για ανώτερες γραμμές περιγράμματος, επιπλέον λεπτομέρειες. Ρυθμίζοντας την αρτιότητα της επιφάνειας αναδεικνύει την ποιότητα των δρόμων. Δεν υπάρχει λειτουργία νύχτας.</string>
@@ -1995,13 +1995,13 @@
     <string name="rendering_attr_smoothness_very_horrible_name">Πολύ απαίσιο</string>
     <string name="rendering_attr_smoothness_impassable_name">Αδιάβατο</string>
     <string name="rendering_attr_highway_class_motorway_name">Αυτοκινητόδρομος</string>
-    <string name="rendering_attr_highway_class_state_road_name">Εθνικός δρόμος</string>
+    <string name="rendering_attr_highway_class_state_road_name">Εθνική οδός</string>
     <string name="rendering_attr_highway_class_road_name">Δρόμος</string>
     <string name="rendering_attr_highway_class_street_name">Οδός</string>
     <string name="rendering_attr_highway_class_service_name">Εξυπηρέτησης</string>
     <string name="rendering_attr_highway_class_footway_name">Πεζόδρομος</string>
-    <string name="rendering_attr_highway_class_track_name">Αγροτική Οδός</string>
-    <string name="rendering_attr_highway_class_bridleway_name">Δρόμος από ίχνη</string>
+    <string name="rendering_attr_highway_class_track_name">Αγροτικός δρόμος</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Μονοπάτι ιππασίας</string>
     <string name="rendering_attr_highway_class_steps_name">Σκάλες</string>
     <string name="rendering_attr_highway_class_path_name">Μονοπάτι</string>
     <string name="rendering_attr_highway_class_cycleway_name">Ποδηλατόδρομος</string>
@@ -2178,11 +2178,11 @@
     <string name="shared_string_icon">Εικονίδιο</string>
     <string name="press_again_to_change_the_map_orientation">Πατήστε ξανά για να αλλάξετε τον προσανατολισμό του χάρτη</string>
     <string name="last_launch_crashed">Η προηγούμενη εκτέλεση του OsmAnd κράσαρε. Παρακαλούμε, βοηθήστε μας να βελτιώσουμε το OsmAnd γνωστοποιώντας το μήνυμα σφάλματος.</string>
-    <string name="rendering_attr_highway_class_track_grade1_name">Βαθμίδα 1</string>
-    <string name="rendering_attr_highway_class_track_grade2_name">Βαθμίδα 2</string>
-    <string name="rendering_attr_highway_class_track_grade3_name">Βαθμίδα 3</string>
-    <string name="rendering_attr_highway_class_track_grade4_name">Βαθμίδα 4</string>
-    <string name="rendering_attr_highway_class_track_grade5_name">Βαθμίδα 5</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Βαθμός 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Βαθμός 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Βαθμός 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Βαθμός 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Βαθμός 5</string>
     <string name="external_input_device">Εξωτερικές συσκευές εισόδου</string>
     <string name="sett_generic_ext_input">Πληκτρολόγιο</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
@@ -3967,7 +3967,7 @@
     <string name="tracks_empty_folder_description">Αυτός ο φάκελος δεν έχει κανένα ίχνος ακόμη.</string>
     <string name="no_poi_for_category">ΣΕ δεν βρέθηκε</string>
     <string name="rendering_attr_lightDetail_name">Λεπτομέρεια φωτός</string>
-    <string name="rendering_attr_lightDetail_description">Προεπιλογή: ονομασία θαλάσσιου σημαδιού (χαρακτήρας φωτός.ομάδα.περίοδος), επιλογή πρόσθετων πληροφοριών στους τομείς 1 έως 3 ή τους τομείς 1,2,3,4,5 χαρακτήρα φωτός</string>
+    <string name="rendering_attr_lightDetail_description">Προεπιλογή: ονομασία θαλάσσιας σήμανσης (χαρακτήρας φωτός.ομάδα.περίοδος), επιλογή πρόσθετων πληροφοριών στους τομείς 1 έως 3 ή τους τομείς 1,2,3,4,5 χαρακτήρα φωτός</string>
     <string name="help_article_personal_color_palette_schemes_name">Χρωματικά Σχέδια</string>
     <string name="history_preferences_descr">Μπορείτε να απενεργοποιήσετε την καταγραφή ιστορικού ξεχωριστά για κάθε είδος ιστορικού.</string>
     <string name="copy_build_version">Αντιγραφή έκδοσης build</string>
@@ -5312,4 +5312,27 @@
     <string name="route_calculation_method_standard_only_desc">Χρησιμοποιεί πάντα την Τυπική δρομολόγηση. Πιο αργή, αλλά επιτρέπει την πλοήγηση με χάρτες από διαφορετικές ημερομηνίες.</string>
     <string name="route_calculation_method_fast_only_desc">Χρησιμοποιεί πάντα τη Γρήγορη δρομολόγηση. Ο υπολογισμός θα σταματά και θα ρωτά για ενημερώσεις εάν δεν αντιστοιχούν οι ημερομηνίες χαρτών.</string>
     <string name="compass_calibration_needed">Χρειάζεται βαθμονόμηση πυξίδας</string>
+    <string name="update_maps_to_use_new_search">Ενημερώστε τους χάρτες για χρήση της νέας αναζήτησης (%1$s)</string>
+    <string name="free_region_not_chosen_descr">Η περιοχή του πρώτου χάρτη που κατεβάσατε γίνεται η δωρεάν σας περιοχή.</string>
+    <string name="free_region_banner_descr">Όλοι χάρτες της περιοχής %1$s είναι δωρεάν.</string>
+    <string name="free_region_other_title">Η περιοχή %1$s δεν είναι η δωρεάν σας περιοχή</string>
+    <string name="free_region_other_descr">Η δωρεάν έκδοση περιλαμβάνει χάρτες μιας περιοχής. Για να κατεβάσετε την περιοχή %1$s, οι χάρτες των άλλων περιοχών θα διαγραφούν.</string>
+    <string name="free_region_will_be_deleted">Θα διαγραφεί</string>
+    <string name="free_region_maps_stay">Η επισκόπηση παγκόσμιου χάρτη, οι ισοϋψείς καμπύλες και άλλα πρόσθετα χαρτών θα παραμείνουν.</string>
+    <string name="free_region_delete_and_download">Διαγραφή και λήψη</string>
+    <string name="free_region_replace_used_title">Χρησιμοποιήθηκε ήδη η δωρεάν αντικατάσταση</string>
+    <string name="free_region_not_eligible_email_descr">Αφήστε το email σας για να αντιακατασταθεί η δωρεάν περιοχή σας ακόμα μια φορά ή για να λάβετε απεριόριστες λήψεις χαρτών.</string>
+    <string name="free_region_email_helper">Θα στέλνουμε νέα του OsmAnd. Μπορείτε να κάνετε απεγγραφή οποτεδήποτε.</string>
+    <string name="free_region_email_maps_deleted">Χάρτες της περιοχής %1$s (%2$s) θα διαγραφούν.</string>
+    <string name="free_region_send_and_replace">Αποστολή και αντικατάσταση</string>
+    <string name="free_region_not_eligible_buy_descr">Η δωρεάν περιοχή σας είναι %1$s. Για να κατεβάσετε την περιοχή %2$s και να διατηρήσετε τους τρέχοντές χάρτες σας, λάβετε τις απεριόριστες λήψεις χαρτών.</string>
+    <string name="outdated_maps_warning_title">Ενημερώστε τους χάρτες σας</string>
+    <string name="outdated_maps_warning_descr">Η νέα αναζήτηση χρειάζεται χάρτες αυτής της έκδοσης. Ενημερώστε όλους τους χάρτες σας - είναι δωρεάν.</string>
+    <string name="free_region_other_regions_need_maps_plus">Άλλες περιοχές χρειάζονται το Maps+: %1$s</string>
+    <string name="visualization">Οπτικοποίηση</string>
+    <string name="terrain_shadows">Σκιές εδάφους</string>
+    <string name="terrain_shadows_description">Δυναμική σκίαση για το 3D έδαφος σε πραγματικό χρόνο. Επισημαίνει τη γεωμετρία του τοπίου με ελάχιστο αντίκτυπο στην απόδοση.</string>
+    <string name="terrain_shadows_relief_3d_footer">Το 3D Ανάγλυφο έχει ενεργοποιηθεί αυτομάτως, αφού απαιτείται για την απεικόνιση των Σκιών εδάφους.</string>
+    <string name="rendering_attr_hideNoLNAM_name">Θαλάσσιες σημάνσεις OSM (μερικές)</string>
+    <string name="rendering_attr_hideNoLNAM_description">Απόκρυψη θαλάσσιων σημάνσεων OSM (μερικών)</string>
 </resources>

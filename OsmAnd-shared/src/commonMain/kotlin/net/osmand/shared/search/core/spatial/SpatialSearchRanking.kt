@@ -38,6 +38,8 @@ class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	var halfWeightKm = 3.0
+	/** A POI matched with a city whose kind is recorded under another name in the POI's settlement tags. */
+	var wOutsideCity = 1.0
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	var ratingSpan = 1200.0
 
@@ -48,8 +50,50 @@ class SpatialSearchRanking {
 		return score(
 			nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 			r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r)
-		) - (if (head.atom.ruleSpelling) wRuleSpelling else 0.0)
+		) - (if (head.atom.ruleSpelling) wRuleSpelling else 0.0) -
+			(if (outsideMatchedCity(r)) wOutsideCity else 0.0)
 	}
+
+	internal fun outsideMatchedCity(r: SpatialSearchResult): Boolean {
+		val head = r.getFirstRef() ?: return false
+		val amenity = head.atom.`object` as? Amenity ?: return false
+		if (amenity.getTagGroups().isNullOrEmpty()) {
+			return false
+		}
+		for (i in 1 until r.objs.size) {
+			val city = r.objs[i].atom.`object` as? City ?: continue
+			val type = city.getType() ?: continue
+			if (type.storedAsSeparateAdminEntity() && type != CityType.POSTCODE) {
+				return outsideCity(amenity, city)
+			}
+		}
+		return false
+	}
+
+	private fun outsideCity(amenity: Amenity, city: City): Boolean {
+		val kind = city.getType()!!.name.lowercase()
+		var sameKind = false
+		for (group in amenity.getTagGroups()!!.values) {
+			var kindMatches = false
+			var nameMatches = false
+			for (pair in group) {
+				if (pair.tag == "place") {
+					kindMatches = kind == pair.value
+				} else if (pair.tag == "name" || pair.tag?.startsWith("name:") == true) {
+					nameMatches = nameMatches || isNameOf(city, pair.value)
+				}
+			}
+			if (kindMatches && nameMatches) {
+				return false
+			}
+			sameKind = sameKind || kindMatches
+		}
+		return sameKind
+	}
+
+	private fun isNameOf(city: City, name: String?): Boolean =
+		name.equals(city.getName(), ignoreCase = true) ||
+			city.getNamesMap(true).values.any { name.equals(it, ignoreCase = true) }
 
 	/**
 	 * The highest score a pre-result can reach once its objects are read, from its index atoms only: any of the

@@ -208,6 +208,9 @@ class SpatialSearchContext(
 			}
 			var bytes = 0L
 			for (fileInd in files.indices) {
+				if (isCancelled()) {
+					return
+				}
 				for (indx in internalFile[fileInd].indexReaders) {
 					var prefixes = indx.getMatchedPrefixes(t.word)
 					if (prefixes == null) {
@@ -242,6 +245,10 @@ class SpatialSearchContext(
 			val iCache = internalFile[fileInd]
 			val b = files[fileInd]
 			for (indx in iCache.indexReaders) {
+				// a newer search was started (the next typed letter): the atoms of this one are not needed
+				if (isCancelled()) {
+					return
+				}
 				readAtoms(tokens, b, indx, indxInd, iCache.locale)
 				indxInd++
 				// the matched atoms are in the tokens now, the parsed blocks are only a cache for the next search
@@ -475,6 +482,9 @@ class SpatialSearchContext(
 			if (cm != 0) cm else o1.originalOrder.compareTo(o2.originalOrder)
 		}
 		for (t in tokens) {
+			if (isCancelled()) {
+				return
+			}
 			if (settings.SEARCH_POI_BY_CATEGORY_ONLY && indx.poiRegion == null) {
 				continue
 			} else if (!settings.SEARCH_POI && indx.poiRegion != null) {
