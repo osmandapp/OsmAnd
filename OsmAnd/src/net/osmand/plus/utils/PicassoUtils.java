@@ -121,6 +121,7 @@ public class PicassoUtils {
 		if (diskCache != null) {
 			try {
 				diskCache.evictAll();
+				diskCache.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
