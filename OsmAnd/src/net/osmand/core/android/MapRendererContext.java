@@ -28,6 +28,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -62,6 +63,7 @@ import java.util.Map.Entry;
  */
 public class MapRendererContext {
 	private static final String TAG = "MapRendererContext";
+	public static final String MAP_TILE_DISK_CACHE_FILE = "map_tiles.db";
 
 	public static final int OBF_RASTER_LAYER = 0;
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
@@ -77,6 +79,8 @@ public class MapRendererContext {
 
 	// input parameters
 	private MapStylesCollection mapStylesCollection;
+	@Nullable
+	private MapTileDiskCache mapTileDiskCache;
 	private Map<ProviderType, ObfsCollection> obfsCollections;
 	@NonNull
 	private ProviderType providerType;
@@ -432,7 +436,80 @@ public class MapRendererContext {
 				renderingThreadsLimit > 3 || renderingThreadsLimit == 0 ? 2 : 1);
 		mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
 				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
+		MapTileDiskCache diskCache = providerType == ProviderType.MAIN ? getMapTileDiskCache() : null;
+		if (diskCache != null) {
+			mapPrimitivesProvider.setDiskCache(diskCache, getMapTileDiskCacheStyleKey());
+		}
 		return true;
+	}
+
+	@Nullable
+	private MapTileDiskCache getMapTileDiskCache() {
+		long limitBytes = app.getSettings().MAP_TILE_DISK_CACHE_SIZE_MB.get() * 1024L * 1024L;
+		if (limitBytes <= 0) {
+			if (mapTileDiskCache != null) {
+				mapTileDiskCache.clear();
+				mapTileDiskCache = null;
+			}
+			return null;
+		}
+		if (mapTileDiskCache == null) {
+			File file = new File(app.getCacheDir(), MAP_TILE_DISK_CACHE_FILE);
+			mapTileDiskCache = new MapTileDiskCache(file.getAbsolutePath(), limitBytes);
+		} else {
+			mapTileDiskCache.setLimit(limitBytes);
+		}
+		return mapTileDiskCache.isOpen() ? mapTileDiskCache : null;
+	}
+
+	/**
+	 * Applies a changed cache size to the current map: 0 turns the cache off and empties it
+	 */
+	public void updateMapTileDiskCache() {
+		MapPrimitivesProvider provider = mapPrimitivesProvider;
+		if (provider != null && providerType == ProviderType.MAIN) {
+			MapTileDiskCache diskCache = getMapTileDiskCache();
+			provider.setDiskCache(diskCache, diskCache != null ? getMapTileDiskCacheStyleKey() : "");
+		} else if (app.getSettings().MAP_TILE_DISK_CACHE_SIZE_MB.get() <= 0) {
+			getMapTileDiskCache();
+		}
+	}
+
+	/**
+	 * The map object of a symbol drawn from the map tile disk cache keeps only what drawing needs (no points or
+	 * names): this reads it again from its map. Any other object is returned as it is.
+	 */
+	@NonNull
+	public net.osmand.core.jni.MapObject obtainFullMapObject(@NonNull net.osmand.core.jni.MapObject mapObject) {
+		MapPrimitivesProvider provider = mapPrimitivesProvider;
+		net.osmand.core.jni.MapObject fullObject = provider != null ? provider.obtainFullMapObject(mapObject) : null;
+		return fullObject != null ? fullObject : mapObject;
+	}
+
+	/**
+	 * Empties the rendered map tiles cache; the open SQLite file is not deleted under the renderer
+	 */
+	public void clearMapTileDiskCache() {
+		if (mapTileDiskCache != null) {
+			mapTileDiskCache.clear();
+		} else {
+			File file = new File(app.getCacheDir(), MAP_TILE_DISK_CACHE_FILE);
+			Algorithms.removeAllFiles(file);
+		}
+	}
+
+	/**
+	 * What the style settings do not show: the style itself and its version
+	 */
+	@NonNull
+	private String getMapTileDiskCacheStyleKey() {
+		String rendererName = app.getSettings().RENDERER.get();
+		StringBuilder key = new StringBuilder(rendererName).append('|').append(Version.getFullVersion(app));
+		File externalStyle = app.getRendererRegistry().getExternalRenderers().get(rendererName);
+		if (externalStyle != null) {
+			key.append('|').append(externalStyle.lastModified());
+		}
+		return key.toString();
 	}
 
 	public void recreateHeightmapProvider() {

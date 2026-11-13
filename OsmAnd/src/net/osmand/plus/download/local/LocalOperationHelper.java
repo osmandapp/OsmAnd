@@ -21,6 +21,7 @@ import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
 import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.plus.download.local.LocalItemType.CACHE;
 import static net.osmand.plus.download.local.LocalItemType.COLOR_DATA;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
@@ -78,6 +79,12 @@ public class LocalOperationHelper {
 
 	private boolean deleteItem(@NonNull LocalItem item) {
 		File file = item.getFile();
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (item.getType() == CACHE && mapRendererContext != null
+				&& file.getName().equals(MapRendererContext.MAP_TILE_DISK_CACHE_FILE)) {
+			mapRendererContext.clearMapTileDiskCache();
+			return true;
+		}
 		boolean success = Algorithms.removeAllFiles(file);
 
 		if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
