@@ -476,6 +476,17 @@ public class MapRendererContext {
 	}
 
 	/**
+	 * The map object of a symbol drawn from the map tile disk cache keeps only what drawing needs (no points or
+	 * names): this reads it again from its map. Any other object is returned as it is.
+	 */
+	@NonNull
+	public net.osmand.core.jni.MapObject obtainFullMapObject(@NonNull net.osmand.core.jni.MapObject mapObject) {
+		MapPrimitivesProvider provider = mapPrimitivesProvider;
+		net.osmand.core.jni.MapObject fullObject = provider != null ? provider.obtainFullMapObject(mapObject) : null;
+		return fullObject != null ? fullObject : mapObject;
+	}
+
+	/**
 	 * Empties the rendered map tiles cache; the open SQLite file is not deleted under the renderer
 	 */
 	public void clearMapTileDiskCache() {

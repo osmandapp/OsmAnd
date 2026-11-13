@@ -18,6 +18,7 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
 import net.osmand.binary.ObfConstants;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.*;
@@ -42,6 +43,7 @@ import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -526,7 +528,11 @@ public class MapSelectionHelper {
 	@Nullable
 	private MapObject getMapObject(@NonNull MapSymbol mapSymbol) {
 		try {
-			return MapObjectSymbolsGroup.dynamic_cast(mapSymbol.getGroupPtr()).getMapObject();
+			MapObject mapObject = MapObjectSymbolsGroup.dynamic_cast(mapSymbol.getGroupPtr()).getMapObject();
+			// a symbol drawn from the map tile disk cache carries a partial object: read it from the map
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			return mapObject != null && mapRendererContext != null
+					? mapRendererContext.obtainFullMapObject(mapObject) : mapObject;
 		} catch (Exception ignore) {
 		}
 		return null;
