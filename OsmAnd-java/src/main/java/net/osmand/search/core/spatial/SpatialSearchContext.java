@@ -698,16 +698,8 @@ public class SpatialSearchContext {
 		return indInd;
 	}
 
+
 	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache) throws IOException {
-		return readPoiObject(id, cache, null);
-	}
-
-	public static long poiObjectId(long id) {
-		return id & ((1L << SHIFT_ALT_NAME) - 1);
-	}
-
-	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache, TLongHashSet wanted)
-			throws IOException {
 		id &= (1L << SHIFT_ALT_NAME) - 1; // the alternative name variant reads the same object
 		if (cache != null) {
 			MapObject mapObject = cache.get(id);
@@ -735,21 +727,10 @@ public class SpatialSearchContext {
 		stats.sub2ReadObjTime.start();
 		BinaryMapIndexReader bmir = files.get(c.fileInd);
 		long bytesRead = bmir.getBytesRead();
-		List<Amenity> lst = bmir.readAmenityBlock(nameIndex.poiRegion, shift, poiInd);
-		if (cache != null) {
-			long ofirstid = oid - (poiInd << SHIFT_FILE_IND);
-			for (int i = 0; i < lst.size(); i++) {
-				long bid = ofirstid + (i << SHIFT_FILE_IND);
-				if (wanted == null || wanted.contains(bid)) {
-					cache.put(bid, lst.get(i));
-				}
-			}
+		Amenity amenity = bmir.readAmenity(nameIndex.poiRegion, shift, poiInd);
+		if (cache != null && amenity != null) {
+			cache.put(oid, amenity);
 		}
-		if (poiInd >= lst.size()) {
-			System.err.printf("Error reading %d - %d object from %s \n", shift, poiInd, c.file);
-			return null;
-		}
-		MapObject amenity = lst.get(poiInd);
 		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead);
 		stats.sub2ReadObjTime.finish();
 		return amenity;

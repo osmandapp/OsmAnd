@@ -320,7 +320,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 					if (--left == -1) {
 						// index initially could be -1
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
-						return read
+						return am != null
 					}
 				}
 				else -> skipUnknownField(t)
