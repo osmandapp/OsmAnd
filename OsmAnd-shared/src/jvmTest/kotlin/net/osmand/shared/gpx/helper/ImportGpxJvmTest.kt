@@ -58,6 +58,35 @@ class ImportGpxJvmTest {
 		assertEquals(17.97, point.lon)
 	}
 
+	@Test
+	fun testNestedFoldersBecomeFolderPath() {
+		val gpxFile = importKml(
+			"<Folder><name>Group A</name>" +
+					"<Folder><name>Subgroup B</name>" +
+					"<Folder><name>Item C</name>" +
+					"<Placemark><name>Point 1</name><Point><coordinates>0.0,0.0,0</coordinates></Point></Placemark>" +
+					"</Folder>" +
+					"<Placemark><name>Point 2</name><Point><coordinates>1.0,1.0,0</coordinates></Point></Placemark>" +
+					"</Folder></Folder>"
+		)
+
+		assertNull(gpxFile.error)
+		val categories = gpxFile.getPointsList().associate { it.name to it.category }
+		assertEquals("Group A/Subgroup B/Item C", categories["Point 1"])
+		assertEquals("Group A/Subgroup B", categories["Point 2"])
+	}
+
+	@Test
+	fun testSlashInFolderNameDoesNotSplitFolder() {
+		val gpxFile = importKml(
+			"<Folder><name>Trips 2025/26</name><Placemark><name>Stop</name>" +
+					"<Point><coordinates>17.97,42.88,5</coordinates></Point></Placemark></Folder>"
+		)
+
+		assertNull(gpxFile.error)
+		assertEquals("Trips 2025-26", gpxFile.getPointsList().single().category)
+	}
+
 	private fun importKml(body: String): GpxFile =
 		ImportGpx.loadGPXFileFromKml(
 			Buffer().writeUtf8(

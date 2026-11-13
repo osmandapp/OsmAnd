@@ -2,6 +2,7 @@ package net.osmand.shared.gpx.helper
 
 import net.osmand.shared.IndexConstants
 import net.osmand.shared.KException
+import net.osmand.shared.favorites.FavoriteFolderPath
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxUtilities.loadGpxFile
 import net.osmand.shared.xml.XmlPullParser
@@ -159,7 +160,7 @@ object ImportGpx {
 								currentPlacemarkName,
 								currentPlacemarkDesc,
 								currentCoordinates,
-								folderNameStack.lastOrNull() ?: documentName
+								getFolderPath(folderNameStack) ?: documentName
 							)
 							elementCount++
 						}
@@ -311,6 +312,16 @@ object ImportGpx {
 			parts.add(text.substring(start))
 		}
 		return parts
+	}
+
+	// Nested KML folders become a nested favorites path; a "/" inside one folder name must not split it.
+	private fun getFolderPath(folderNames: Collection<String>): String? {
+		val segments = folderNames.map {
+			it.trim()
+				.replace(FavoriteFolderPath.DELIMITER, "-")
+				.replace(FavoriteFolderPath.SUBFOLDER_PLACEHOLDER, "-")
+		}
+		return FavoriteFolderPath.join(segments).ifEmpty { null }
 	}
 
 	private fun isXmlWhitespace(c: Char): Boolean = c == ' ' || c == '\n' || c == '\t' || c == '\r'
