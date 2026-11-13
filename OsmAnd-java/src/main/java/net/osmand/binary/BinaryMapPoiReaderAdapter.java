@@ -845,7 +845,7 @@ public class BinaryMapPoiReaderAdapter {
 					long len = readInt();
 					long oldLim = codedIS.pushLimitLong((long) len);
 					boolean read = readPoiData(left31, right31, top31, bottom31, req, region,  -1, skipTiles,
-							req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER);
+							req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER, null);
 					if (read && skipVal != -1 && skipTiles != null) {
 						skipTiles.add(skipVal);
 					}
@@ -944,8 +944,11 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
+	// positions (may be null): every object of the block in its order, null for an object that is not read
+	// (a forbidden type such as speed_camera), so a position in the block stays the position in the list
 	boolean readPoiData(int left31, int right31, int top31, int bottom31,
-			SearchRequest<Amenity> req, PoiRegion region, int index, TLongHashSet toSkip, int zSkip) throws IOException {
+			SearchRequest<Amenity> req, PoiRegion region, int index, TLongHashSet toSkip, int zSkip,
+			List<Amenity> positions) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
@@ -973,6 +976,9 @@ public class BinaryMapPoiReaderAdapter {
 				long oldLim = codedIS.pushLimitLong((long) len);
 				Amenity am = readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region, true);
 				codedIS.popLimit(oldLim);
+				if (positions != null) {
+					positions.add(am);
+				}
 				if (am != null) {
 					if (toSkip != null) {
 						int xp = (int) MapUtils.getTileNumberX(zSkip, am.getLocation().getLongitude());

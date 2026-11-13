@@ -735,24 +735,24 @@ public class SpatialSearchContext {
 		stats.sub2ReadObjTime.start();
 		BinaryMapIndexReader bmir = files.get(c.fileInd);
 		long bytesRead = bmir.getBytesRead();
+		// the list position is the position in the block, null for an object of a forbidden type (speed_camera)
 		List<Amenity> lst = bmir.readAmenityBlock(nameIndex.poiRegion, shift, poiInd);
 		if (cache != null) {
 			long ofirstid = oid - (poiInd << SHIFT_FILE_IND);
 			for (int i = 0; i < lst.size(); i++) {
 				long bid = ofirstid + (i << SHIFT_FILE_IND);
-				if (wanted == null || wanted.contains(bid)) {
+				if (lst.get(i) != null && (wanted == null || wanted.contains(bid))) {
 					cache.put(bid, lst.get(i));
 				}
 			}
 		}
+		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead);
+		stats.sub2ReadObjTime.finish();
 		if (poiInd >= lst.size()) {
 			System.err.printf("Error reading %d - %d object from %s \n", shift, poiInd, c.file);
 			return null;
 		}
-		MapObject amenity = lst.get(poiInd);
-		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead);
-		stats.sub2ReadObjTime.finish();
-		return amenity;
+		return lst.get(poiInd);
 	}
 
 	public MapObject readAddrObject(long id, long pid, TLongObjectHashMap<MapObject> cache) throws IOException {

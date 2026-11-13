@@ -269,10 +269,14 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 	 * [toSkip] the block only gives up one amenity per tile of [zSkip], which is how a search at a
 	 * low zoom thins out a dense area.
 	 */
+	/**
+	 * [positions]: every object of the block in its order, null for an object that is not read
+	 * (a forbidden type such as speed_camera), so a position in the block stays the position in the list.
+	 */
 	fun readPoiData(
 		left31: Int, right31: Int, top31: Int, bottom31: Int,
 		req: SearchRequest<Amenity>, region: PoiRegion, index: Int,
-		toSkip: KTLongHashSet?, zSkip: Int
+		toSkip: KTLongHashSet?, zSkip: Int, positions: MutableList<Amenity?>? = null
 	): Boolean {
 		var x = 0
 		var y = 0
@@ -294,6 +298,7 @@ class BinaryMapPoiReaderAdapter(private val map: BinaryMapIndexReader) {
 					val oldLim = codedIS.pushLimitLong(len.toLong())
 					val am = readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region, true)
 					codedIS.popLimit(oldLim)
+					positions?.add(am)
 					if (am != null) {
 						if (toSkip != null) {
 							val location = am.getLocation()!!

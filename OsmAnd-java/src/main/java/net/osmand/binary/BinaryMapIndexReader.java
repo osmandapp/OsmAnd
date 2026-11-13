@@ -793,16 +793,19 @@ public class BinaryMapIndexReader {
 		
 		return true;
 	}
+	// the objects of the block up to index: the list position is the position in the block,
+	// null for an object that is not read (a forbidden type such as speed_camera)
 	public List<Amenity> readAmenityBlock(PoiRegion pr, long offset, int index) throws IOException {
 		poiAdapter.initCategories(pr);
 		codedIS.seek(pr.filePointer + offset);
 		long len = readInt(); 
 		long oldLim = codedIS.pushLimitLong((long) len);
 		SearchRequest<Amenity> sr = new SearchRequest<Amenity>();
+		List<Amenity> positions = new ArrayList<>();
 		poiAdapter.readPoiData(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 
-				sr, pr, index, null, 0);
+				sr, pr, index, null, 0, positions);
 		codedIS.popLimit(oldLim);
-		return sr.getSearchResults();
+		return positions;
 	}
 	
 	public City readCityObject(AddressRegion r, long offset) throws IOException {

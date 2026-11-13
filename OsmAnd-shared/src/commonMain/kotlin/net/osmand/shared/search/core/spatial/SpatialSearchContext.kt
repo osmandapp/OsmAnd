@@ -647,24 +647,25 @@ class SpatialSearchContext(
 		stats.sub2ReadObjTime.start()
 		val bmir = files[c!!.fileInd]
 		val bytesRead = bmir.getBytesRead()
+		// the list position is the position in the block, null for an object of a forbidden type (speed_camera)
 		val lst = bmir.readAmenityBlock(nameIndex!!.poiRegion!!, shift, poiInd)
 		if (cache != null) {
 			val ofirstid = oid - (poiInd shl SHIFT_FILE_IND)
 			for (i in lst.indices) {
 				val bid = ofirstid + (i shl SHIFT_FILE_IND)
-				if (wanted == null || wanted.contains(bid)) {
-					cache.put(bid, lst[i])
+				val am = lst[i]
+				if (am != null && (wanted == null || wanted.contains(bid))) {
+					cache.put(bid, am)
 				}
 			}
 		}
+		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead)
+		stats.sub2ReadObjTime.finish()
 		if (poiInd >= lst.size) {
 			LOG.error("Error reading $shift - $poiInd object from ${c.file} ")
 			return null
 		}
-		val amenity = lst[poiInd]
-		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead)
-		stats.sub2ReadObjTime.finish()
-		return amenity
+		return lst[poiInd]
 	}
 
 	fun readAddrObject(objectId: Long, parentId: Long, cache: KTLongObjectMap<MapObject>?): MapObject? {
