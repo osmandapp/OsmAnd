@@ -15,6 +15,7 @@ public class LocalFile {
 	public String fileName;
 	public long uploadTime;
 	public long localModifiedTime;
+	public long rejectedTime;
 
 	private String name;
 	private int sz = -1;
@@ -64,6 +65,10 @@ public class LocalFile {
 			result = fileName = file.getName();
 		}
 		return result;
+	}
+
+	public boolean isRejectedVersion() {
+		return rejectedTime > 0 && localModifiedTime <= rejectedTime;
 	}
 
 	public String getTypeFileName() {
