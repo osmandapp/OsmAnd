@@ -125,20 +125,27 @@ class BackupImporter {
 				String fileName = remoteFile.item != null ? remoteFile.item.getFileName() : null;
 				if (fileName != null && settingsItem.applyFileName(fileName)) {
 					item = settingsItem;
-					remoteFileItems.put(remoteFile, item);
 					break;
 				}
 			}
 			if (item != null) {
 				if (forceReadData) {
 					tasks.add(new ItemFileImportTask(remoteFile, item, true));
-				} else {
+				} else if (item.isAppliedLocally()) {
+					remoteFileItems.put(remoteFile, item);
 					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+				} else {
+					onItemApplyFailed(item);
 				}
 			}
 		}
 		ThreadPoolTaskExecutor<ItemFileImportTask> executor = createExecutor();
 		executor.run(tasks);
+		for (ItemFileImportTask task : tasks) {
+			if (task.succeeded) {
+				remoteFileItems.put(task.remoteFile, task.item);
+			}
+		}
 
 		if (!restoreDeleted) {
 			for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
@@ -152,17 +159,19 @@ class BackupImporter {
 		operationLog.finishOperation();
 	}
 
-	private void importItemFile(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
+	private boolean importItemFile(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
 		OsmandApplication app = backupHelper.getApp();
 		File tempDir = FileUtils.getTempDir(app);
 		FileInputStream is = null;
 		try {
+			boolean applied = true;
+			File importedFile = null;
 			SettingsItemReader<? extends SettingsItem> reader = item.getReader();
 			if (reader != null) {
 				if (BackupUtils.isFileNameTooLong(remoteFile.getName())) {
 					item.getWarnings().add(app.getString(R.string.cloud_file_name_too_long));
 					LOG.error("Cloud file name is too long for the device: " + remoteFile.getName());
-					return;
+					return false;
 				}
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
@@ -173,28 +182,13 @@ class BackupImporter {
 				}
 				if (!error) {
 					is = new FileInputStream(tempFile);
-					File file = reader.readFromStream(is, tempFile, remoteFile.getName());
-					boolean applied = true;
+					importedFile = reader.readFromStream(is, tempFile, remoteFile.getName());
 					if (forceReadData) {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
 						}
 						item.apply();
 						applied = item.isAppliedLocally();
-					}
-					if (applied) {
-						updateFileM5Digest(remoteFile, item, file);
-						updateFileUploadTime(remoteFile, item);
-						FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
-					} else {
-						// Leaving the upload time unrecorded makes the next sync download the file
-						// again, instead of reading the missing local file as a local deletion.
-						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-						LOG.error("Downloaded item was not applied locally: " + item.getName());
-					}
-					if (PluginsHelper.isDevelopment()) {
-						UploadedFileInfo info = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
-						LOG.debug(" importItemFile file info " + info);
 					}
 				}
 				if (tempFile.exists()) {
@@ -205,14 +199,36 @@ class BackupImporter {
 				}
 			}
 			item.applyAdditionalParams(reader);
+			if (reader != null) {
+				if (applied) {
+					updateFileM5Digest(remoteFile, item, importedFile);
+					FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+					updateFileUploadTime(remoteFile, item);
+				} else {
+					// Keep failed imports eligible for download on the next sync.
+					onItemApplyFailed(item);
+				}
+				if (PluginsHelper.isDevelopment()) {
+					UploadedFileInfo info = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+					LOG.debug(" importItemFile file info " + info);
+				}
+			}
+			return applied;
 		} catch (IllegalArgumentException | IOException | UserNotRegisteredException e) {
 			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 			LOG.error("Error reading item data: " + item.getName(), e);
 		} catch (Throwable err) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 			LOG.error("Error reading item: " + item.getName(), err);
 		} finally {
 			Algorithms.closeStream(is);
 		}
+		return false;
+	}
+
+	private void onItemApplyFailed(@NonNull SettingsItem item) {
+		item.getWarnings().add(backupHelper.getApp().getString(R.string.settings_item_read_error, item.getName()));
+		LOG.error("Downloaded item was not applied locally: " + item.getName());
 	}
 
 	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, @Nullable File file) {
@@ -750,6 +766,7 @@ class BackupImporter {
 		private final RemoteFile remoteFile;
 		private final SettingsItem item;
 		private final boolean forceReadData;
+		private boolean succeeded;
 
 		public ItemFileImportTask(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
 			this.remoteFile = remoteFile;
@@ -759,7 +776,7 @@ class BackupImporter {
 
 		@Override
 		public Void call() {
-			importItemFile(remoteFile, item, forceReadData);
+			succeeded = importItemFile(remoteFile, item, forceReadData);
 			return null;
 		}
 	}

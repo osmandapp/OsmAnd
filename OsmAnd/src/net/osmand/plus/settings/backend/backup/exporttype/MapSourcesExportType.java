@@ -42,7 +42,7 @@ public class MapSourcesExportType extends AbstractExportType {
 
 	@NonNull
 	@Override
-	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+	public List<ITileSource> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		List<ITileSource> iTileSources = new ArrayList<>();
 		Map<String, String> entries = app.getSettings().getTileSourceEntries(true);
 		for (String name : entries.keySet()) {
@@ -55,6 +55,8 @@ public class MapSourcesExportType extends AbstractExportType {
 			}
 			if (!shouldSkipMapSource(template)) {
 				iTileSources.add(template);
+			} else if (template instanceof SQLiteTileSource) {
+				((SQLiteTileSource) template).closeConnection();
 			}
 		}
 		return iTileSources;
