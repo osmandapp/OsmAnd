@@ -3488,10 +3488,25 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeProfile().makeShared();
 
+	// Shared user choice. The current device can override it with a local fallback.
 	public final CommonPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render",
 			Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
 
+	// Device-local fallback to V1 after V2 is unavailable or repeatedly fails to initialize.
+	public final OsmandPreference<Boolean> OPENGL_RENDER_AUTO_DISABLED = new BooleanPreference(this, "opengl_render_fallback_to_legacy", false).makeGlobal().cache();
+
 	public final OsmandPreference<Integer> OPENGL_RENDER_FAILED = new IntPreference(this, "opengl_render_failed_count", 0).makeGlobal().cache();
+
+	public boolean isOpenGlRendererEnabled() {
+		return USE_OPENGL_RENDER.get() && !OPENGL_RENDER_AUTO_DISABLED.get();
+	}
+
+	// An explicit user choice clears the local fallback before retrying V2.
+	public void setOpenGlRendererEnabled(boolean enabled) {
+		if (USE_OPENGL_RENDER.set(enabled)) {
+			OPENGL_RENDER_AUTO_DISABLED.set(false);
+		}
+	}
 
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference(this, "CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 
