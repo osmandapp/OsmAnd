@@ -155,7 +155,7 @@ public class SpatialSearchContext {
 	public SpatialSearchContext(SpatialTextSearchSettings settings, List<BinaryMapIndexReader> files,
 			SpatialPoiSearch poiSearch, LatLon location) {
 		this.files = files;
-		this.ranking = settings.SCORE_RANKING ? new SpatialSearchRanking() : null;
+		this.ranking = settings.SCORE_RANKING ? new SpatialSearchRanking(poiSearch) : null;
 		// SpatialPoiSearch will be passed as parameter
 		this.poiSearch = poiSearch;
 		this.location = location;
