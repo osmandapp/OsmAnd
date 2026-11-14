@@ -22,6 +22,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupUseSystemScreenTimeout();
 		setupTurnScreenOnTimePref();
+		setupKeepScreenOnDuringTurnsPref();
 		setupTurnScreenOnSensorPref();
 		setupTurnScreenOnNavigationInstructionsPref();
 		setupTurnScreenOnPowerButtonPref();
@@ -84,6 +85,12 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		turnScreenOnTime.setIcon(getPersistentPrefIcon(R.drawable.ic_action_time_span));
 	}
 
+	private void setupKeepScreenOnDuringTurnsPref() {
+		SwitchPreferenceEx keepScreenOnDuringTurns = findPreference(settings.KEEP_SCREEN_ON_DURING_TURNS.getId());
+		keepScreenOnDuringTurns.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification_navigation));
+		keepScreenOnDuringTurns.setDescription(R.string.keep_screen_on_during_turns_descr);
+	}
+
 	private void setupTurnScreenOnSensorPref() {
 		SwitchPreferenceEx turnScreenOnSensor = findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
 		turnScreenOnSensor.setIcon(getPersistentPrefIcon(R.drawable.ic_action_sensor_interaction));
@@ -97,14 +104,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTurnScreenOnPowerButtonPref() {
-		ApplicationMode appMode = getSelectedAppMode();
-		boolean enabled = settings.TURN_SCREEN_ON_TIME_INT.getModeValue(appMode) == 0 || settings.USE_SYSTEM_SCREEN_TIMEOUT.getModeValue(appMode);
 		SwitchPreferenceEx turnScreenOnPowerButton = findPreference(settings.TURN_SCREEN_ON_POWER_BUTTON.getId());
-		turnScreenOnPowerButton.setEnabled(enabled);
-		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
 		turnScreenOnPowerButton.setIcon(getPersistentPrefIcon(R.drawable.ic_action_power_button));
-		turnScreenOnPowerButton.setChecked(enabled && settings.TURN_SCREEN_ON_POWER_BUTTON.getModeValue(appMode));
-		turnScreenOnPowerButton.setSummaryOff(enabled ? R.string.shared_string_disabled : R.string.turn_screen_on_power_button_disabled);
+		turnScreenOnPowerButton.setDescription(R.string.turn_screen_on_power_button_descr);
 	}
 
 	@Override
