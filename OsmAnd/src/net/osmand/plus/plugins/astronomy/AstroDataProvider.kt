@@ -79,6 +79,9 @@ abstract class AstroDataProvider {
 		return getAstroArticleImpl(ctx, wikidataId, lang)
 	}
 
+	/** Returns the article descriptions of all catalogs (wikidata id -> description) in one read. */
+	abstract fun getCatalogDescriptions(ctx: Context): Map<String, String>
+
 	protected fun getPlanets(
 		objects: MutableList<SkyObject>,
 		ctx: Context
