@@ -4,7 +4,7 @@ package net.osmand.shared.util
  * A name reduced to what a primary-strength collator compares, so that comparing two names is
  * comparing two char arrays.
  *
- * `java.text.Collator` at PRIMARY strength, which is what OsmAnd-java matches names with, ignores
+ * Desktop JVM `java.text.Collator` at PRIMARY strength ignores
  * case, accents and separators. `CollatorStringMatcher` hands it text that is already lowercased
  * and stripped of diacritics, so the only differences left for the collator to fold are:
  * - the separators, which it skips entirely: spaces, control characters, every kind of dash, the
@@ -17,6 +17,10 @@ package net.osmand.shared.util
  * a corpus of real names. Nothing else folds: of the 60167 characters that survive lowercasing and
  * diacritic stripping, no two are primary-equal unless both are separators, and no character
  * expands into three.
+ *
+ * Android uses different collation rules: spaces are significant. CHECK_CONTAINS additionally
+ * normalizes Android-equivalent Unicode spaces and compares their positions; other matcher modes
+ * still use the desktop-derived keys described here. This is not a general Android ICU key.
  *
  * So a name's key is its aligned text with the separators dropped and those three letters expanded,
  * and `collator.equals(a, b)` is `key(a) == key(b)`. The matcher builds one key per name instead of
@@ -36,7 +40,8 @@ class KCollationKey private constructor(
 	private val key: CharArray,
 	private val keyLength: Int,
 	/** Key offset where `text[i]` begins, with `starts[text.length]` the whole key length. */
-	private val starts: IntArray
+	private val starts: IntArray,
+	private val hasUnicodeSpaces: Boolean
 ) {
 
 	val length: Int
@@ -66,6 +71,20 @@ class KCollationKey private constructor(
 			}
 		}
 		return true
+	}
+
+	/** Fold Android-equivalent spaces only for contains matching; keep other modes unchanged. */
+	internal fun withNormalizedSpaces(): KCollationKey {
+		if (!hasUnicodeSpaces) {
+			return this
+		}
+		val chars = text.toCharArray()
+		for (i in chars.indices) {
+			if (isUnicodeSpace(chars[i])) {
+				chars[i] = ' '
+			}
+		}
+		return ofAligned(chars.concatToString())
 	}
 
 	/** Spaces must occupy the same key offsets when matching a substring on Android. */
@@ -131,9 +150,11 @@ class KCollationKey private constructor(
 			val key = CharArray(aligned.length * 2)
 			val starts = IntArray(aligned.length + 1)
 			var at = 0
+			var hasUnicodeSpaces = false
 			for (i in aligned.indices) {
 				starts[i] = at
 				val ch = aligned[i]
+				hasUnicodeSpaces = hasUnicodeSpaces || (ch >= '\u00A0' && isUnicodeSpace(ch))
 				when {
 					isSeparator(ch) -> {}
 					ch == 'æ' -> {
@@ -152,8 +173,14 @@ class KCollationKey private constructor(
 				}
 			}
 			starts[aligned.length] = at
-			return KCollationKey(aligned, key, at, starts)
+			return KCollationKey(aligned, key, at, starts, hasUnicodeSpaces)
 		}
+
+		// Verified with java.text.Collator at PRIMARY strength on Android API 37 (en/de/ru).
+		// Tabs, newlines and zero-width characters are not equivalent to a space.
+		private fun isUnicodeSpace(ch: Char): Boolean =
+			ch == '\u00A0' || ch == '\u1680' || ch in '\u2000'..'\u200A' ||
+					ch == '\u202F' || ch == '\u205F' || ch == '\u3000'
 
 		fun lowercaseAndAlignChars(fullText: String): String =
 			KSearchAlgorithms.alignChars(lowercase(fullText))

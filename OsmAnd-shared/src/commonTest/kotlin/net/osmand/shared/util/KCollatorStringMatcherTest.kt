@@ -14,6 +14,55 @@ import kotlin.test.assertEquals
  */
 class KCollatorStringMatcherTest {
 
+	@Test
+	fun containsPreservesSpaces() {
+		val cases = listOf(
+			Triple("Four", "Grifo Uris Bell", false),
+			Triple("Four", "Shower at \"Grifo Uris Bell\"", false),
+			Triple("Grifo Uris Bell", "Shower at \"Grifo Uris Bell\"", true),
+			Triple("newyork", "New York", false),
+			Triple("fo ur", "four", false),
+			Triple("four ", "four square", true),
+			Triple("four ", "fourteen", false),
+			Triple("four  ", "four  square", true),
+			Triple("st john", "St  John", false),
+			Triple(" ", "Auhofstraße", false),
+			Triple(" ", " ", true),
+			Triple("", "New York", true)
+		)
+		for ((query, name, expected) in cases) {
+			assertContains(expected, query, name)
+		}
+	}
+
+	@Test
+	fun containsFoldsAndroidUnicodeSpaces() {
+		// Observed with Android API 37 java.text.Collator PRIMARY in en-US/de-DE/ru-RU.
+		val spaces = " \u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000"
+		for (space in spaces) {
+			assertContains(true, "new york", "New${space}York")
+			assertContains(true, "new york", "Café New${space}York Deli")
+			assertContains(true, "new${space}york", "New York")
+			assertContains(false, "Four", "Grifo${space}Uris Bell")
+			assertContains(false, "newyork", "New${space}York")
+			assertContains(true, "four$space", "four square")
+			assertContains(false, "four$space", "fourteen")
+		}
+		for (control in "\t\n\u200B\uFEFF") {
+			assertContains(false, "new york", "New${control}York")
+		}
+	}
+
+	private fun assertContains(expected: Boolean, query: String, name: String) {
+		val mode = KStringMatcherMode.CHECK_CONTAINS
+		val matcher = KCollatorStringMatcher(query, mode)
+		val label = "'$query' in '$name'"
+		assertEquals(expected, matcher.matches(name), label)
+		assertEquals(expected, KCollatorStringMatcher.cmatches(name, query, mode), label)
+		assertEquals(expected, KCollatorStringMatcher.cmatchesPrepared(
+			KCollatorStringMatcher.PreparedName(name), matcher.part, mode), label)
+	}
+
 	private val names = listOf(
 		"", "a", "b", "ab", "a-b", "a b", "-", "--", "-1", "1-", "12-3", "st.", "st", "St. Pölten",
 		"Sankt Pölten", "Auhofstraße", "auhofstrasse", "Straße", "strasse", "Ærø", "aero", "œuvre", "oeuvre",

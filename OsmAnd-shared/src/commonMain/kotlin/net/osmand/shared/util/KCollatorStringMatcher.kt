@@ -5,9 +5,11 @@ import kotlin.jvm.JvmStatic
 
 /**
  * Copy of `net.osmand.CollatorStringMatcher` in OsmAnd-java: does a name start with, contain or
- * equal what was typed, ignoring case, accents and separators.
+ * equal what was typed, folding case and accents with desktop-derived collation keys.
  *
- * Same modes and the same answers, reached differently. Java asks a collator whether two stretches
+ * Same modes, with a deliberate Android space rule for CHECK_CONTAINS: ordinary and equivalent
+ * Unicode spaces are significant. Other modes retain the desktop JVM separator rules.
+ * Java asks a collator whether two stretches
  * of text are equal, once per starting position and once per length, which for a name of 30
  * characters and a query of 5 is a few hundred collator calls and as many substrings - the java
  * source calls it "not effective code, it runs on each comparison". Here each string is reduced
@@ -15,13 +17,14 @@ import kotlin.jvm.JvmStatic
  * out. On iOS that is also the difference between one crossing into Foundation per name and
  * several hundred.
  *
- * One deliberate difference. Java lowercases the query in the constructor but not in the static
+ * Another deliberate difference. Java lowercases the query in the constructor but not in the static
  * [cmatches], and `java.text.Collator` only folds case for the scripts its locale rules name - for
  * everything else it compares by code point, so `cmatches` treats `Ш` and `ш` as different letters
  * while `matches` does not. Here the query is lowercased on both paths, which is what the instance
  * path and the iOS matcher already do; see also the notes on `KSearchAlgorithms`.
  *
- * `CollatorCompatTest` holds the two side by side over the names of the test maps.
+ * `CollatorCompatTest` compares the test-map corpus with a JVM reference whose contains-space
+ * rule is explicitly tailored to the Android observations; it is not a complete ICU oracle.
  */
 class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMatcher {
 
@@ -121,11 +124,13 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 
 		/** Whether [part] is contained in [base]. */
 		fun ccontains(base: KCollationKey, part: KCollationKey): Boolean {
-			if (base.length <= part.length) {
-				return base.keyEquals(part) && base.regionSpacesEqual(0, base.length, part)
+			val baseKey = base.withNormalizedSpaces()
+			val partKey = part.withNormalizedSpaces()
+			if (baseKey.length <= partKey.length) {
+				return baseKey.keyEquals(partKey) && baseKey.regionSpacesEqual(0, baseKey.length, partKey)
 			}
 			// java reaches part.length() * 2 characters from each starting position, no further
-			return base.containsKeyOf(part, part.length * 2)
+			return baseKey.containsKeyOf(partKey, partKey.length * 2)
 		}
 
 		/**

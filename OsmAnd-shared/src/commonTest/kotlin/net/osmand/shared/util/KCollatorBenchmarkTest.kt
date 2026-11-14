@@ -120,7 +120,10 @@ class KCollatorBenchmarkTest {
 			"cafepanta" to "Café Panta",
 			"newyork" to "New York",
 			"foobar" to "Foo Bar",
-			"fo ur" to "four"
+			"fo ur" to "four",
+			"Four" to "Grifo\u00A0Uris Bell",
+			"newyork" to "New\u202FYork",
+			"newyork" to "New\u3000York"
 		)
 		val calls = 10_000
 		println("### full rejection: ${cases.size} cases, $calls calls per case")
