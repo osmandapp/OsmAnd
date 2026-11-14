@@ -291,7 +291,7 @@ open class SpatialTextSearchAPI(
 		result.spatialSearchVisibleLevel = ssr.visibleLevel()
 
 		if (ssr.isPoiCategory()) {
-			return convertPoiType(ssr, result, poiTypeSearch)
+			return convertPoiType(ssr, result, poiTypeSearch, lang)
 		} else if (objs.isNotEmpty()) {
 			return convertMapObjects(ssr, objs, result, lang, transliterate)
 		}
@@ -370,7 +370,7 @@ open class SpatialTextSearchAPI(
 		return result
 	}
 
-	private fun convertPoiType(ssr: SpatialSearchResult, result: SearchResult, poiTypeSearch: SpatialPoiSearch): SearchResult? {
+	private fun convertPoiType(ssr: SpatialSearchResult, result: SearchResult, poiTypeSearch: SpatialPoiSearch, lang: String?): SearchResult? {
 		val spatialPoiType = ssr.getPoiCategory(poiTypeSearch) ?: return null
 		val obj: Any
 		val localeName: String
@@ -381,7 +381,8 @@ open class SpatialTextSearchAPI(
 			localeName = PoiAdditionalLabels.getSearchName(poiType)
 		} else if (poiSubType != null) {
 			obj = TopIndexFilter(poiSubType, poiTypes, spatialPoiType.poiAdditional!!)
-			localeName = spatialPoiType.poiAdditional!!
+			// the value of the brand in the map language, else its local value
+			localeName = spatialPoiType.getTitle(poiTypeSearch, lang)!!
 		} else {
 			return null
 		}

@@ -103,6 +103,38 @@ public class SpatialPoiSearch {
 			return parentTypes;
 		}
 
+		/**
+		 * Title of a top index row in the map language (Configure map), like the names of its POIs.
+		 */
+		public String getTitle(SpatialPoiSearch poiSearch, String lang) {
+			if (poiSubType == null || Algorithms.isEmpty(wikidataId)) {
+				return poiAdditional;
+			}
+			int colon = poiSubType.name.indexOf(':');
+			String plainTag = colon == -1 ? poiSubType.name : poiSubType.name.substring(0, colon);
+			String title = Algorithms.isEmpty(lang) ? null : getValueByTag(poiSearch, plainTag + ":" + lang);
+			if (title == null) {
+				title = getValueByTag(poiSearch, plainTag);
+			}
+			return title != null ? title : poiAdditional;
+		}
+
+		private String getValueByTag(SpatialPoiSearch poiSearch, String tag) {
+			if (tag.equals(poiSubType.name)) {
+				return poiAdditional;
+			}
+			List<SpatialPoiType> sameBrand = poiSearch.byWikidataKey.get(wikidataId);
+			if (sameBrand != null) {
+				for (SpatialPoiType other : sameBrand) {
+					if (other.poiSubType != null && tag.equals(other.poiSubType.name)
+							&& !Algorithms.isEmpty(other.poiAdditional)) {
+						return other.poiAdditional;
+					}
+				}
+			}
+			return null;
+		}
+
 		public boolean accept(Amenity a) {
 			if (key.equals(a.getType().getKeyName())) {
 				return true;

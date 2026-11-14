@@ -307,7 +307,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		result.spatialSearchVisibleLevel = ssr.visibleLevel();
 
 		if (ssr.isPoiCategory()) {
-			return convertPoiType(ssr, result, poiTypeSearch);
+			return convertPoiType(ssr, result, poiTypeSearch, lang);
 		} else if (Algorithms.isNotEmpty(objs)) {
 			return convertMapObjects(ssr, objs, result, lang, transliterate);
 		}
@@ -407,7 +407,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return null;
 	}
 
-	private SearchResult convertPoiType(SpatialSearchResult ssr, SearchResult result, SpatialPoiSearch poiTypeSearch) {
+	private SearchResult convertPoiType(SpatialSearchResult ssr, SearchResult result, SpatialPoiSearch poiTypeSearch, String lang) {
 		SpatialPoiSearch.SpatialPoiType spatialPoiType = ssr.getPoiCategory(poiTypeSearch);
 		if (spatialPoiType == null) {
 			return null;
@@ -420,8 +420,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
 			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			// the value itself: the names list starts with the alternative names of the map (Lidl -> its name:fa)
-			localeName = spatialPoiType.poiAdditional;
+			// the value of the brand in the map language, else its local value: the names list starts with the
+			// alternative names of the map (Lidl -> its name:fa)
+			localeName = spatialPoiType.getTitle(poiTypeSearch, lang);
 		} else {
 			return null;
 		}

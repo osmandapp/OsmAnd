@@ -78,6 +78,35 @@ class SpatialPoiSearch(types: MapPoiTypes) {
 
 		fun getParentTypes(): List<AbstractPoiType>? = parentTypes
 
+		/**
+		 * Title of a top index row in the map language (Configure map), like the names of its POIs: the value of the
+		 * same brand (same wikidata id) under the tag of that language (brand:en "Belarusbank" for brand:ru
+		 * "Беларусбанк"), else the local value of the plain tag (brand "Белпошта" for brand:en "Belposhta" when there
+		 * is no brand:ru), else the value itself. So the title does not depend on the script of the query.
+		 */
+		fun getTitle(poiSearch: SpatialPoiSearch, lang: String?): String? {
+			val subTypeName = poiSubType?.name
+			if (subTypeName == null || wikidataId.isNullOrEmpty()) {
+				return poiAdditional
+			}
+			val plainTag = subTypeName.substringBefore(':')
+			val title = if (lang.isNullOrEmpty()) null else getValueOfSameBrand(poiSearch, "$plainTag:$lang")
+			return title ?: getValueOfSameBrand(poiSearch, plainTag) ?: poiAdditional
+		}
+
+		private fun getValueOfSameBrand(poiSearch: SpatialPoiSearch, tag: String): String? {
+			if (tag == poiSubType?.name) {
+				return poiAdditional
+			}
+			val sameBrand = poiSearch.byWikidataKey[wikidataId] ?: return null
+			for (other in sameBrand) {
+				if (tag == other.poiSubType?.name && !other.poiAdditional.isNullOrEmpty()) {
+					return other.poiAdditional
+				}
+			}
+			return null
+		}
+
 		fun accept(a: Amenity): Boolean {
 			if (key == a.getType()!!.getKeyName()) {
 				return true
