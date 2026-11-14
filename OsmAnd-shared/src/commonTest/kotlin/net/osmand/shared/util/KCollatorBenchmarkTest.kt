@@ -107,6 +107,44 @@ class KCollatorBenchmarkTest {
 		println("")
 	}
 
+	/**
+	 * Cases where dropping spaces creates a match, but preserving them rejects the entire name.
+	 * Report hits so the same benchmark can measure both the old and corrected matcher.
+	 */
+	@Test
+	fun rejectingCrossWordMatches() {
+		val cases = listOf(
+			"Four" to "Grifo Uris Bell",
+			"Four" to "Shower at \"Grifo Uris Bell\"",
+			"four" to "Grifo Uris Bell / Grifo Uris Bell",
+			"cafepanta" to "Café Panta",
+			"newyork" to "New York",
+			"foobar" to "Foo Bar",
+			"fo ur" to "four",
+			"Four" to "Grifo\u00A0Uris Bell",
+			"newyork" to "New\u202FYork",
+			"newyork" to "New\u3000York"
+		)
+		val calls = 10_000
+		println("### full rejection: ${cases.size} cases, $calls calls per case")
+		for ((query, name) in cases) {
+			val matcher = KCollatorStringMatcher(query, KStringMatcherMode.CHECK_CONTAINS)
+			var hits = 0
+			val elapsed = measure {
+				hits = 0
+				repeat(calls) {
+					if (matcher.matches(name)) {
+						hits++
+					}
+				}
+			}
+			println(
+				"  query '$query' name '$name' key ${format(elapsed)} ms" +
+						"   per call ${format(elapsed * 1000 / calls)} us   hits $hits/$calls"
+			)
+		}
+	}
+
 	private fun measure(block: () -> Unit): Double {
 		repeat(WARMUP_ROUNDS) { block() }
 		var best = Double.MAX_VALUE

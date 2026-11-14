@@ -13,6 +13,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.RuleBasedCollator;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -20,8 +22,10 @@ import java.util.Set;
 
 /**
  * {@link net.osmand.shared.util.KCollatorStringMatcher} is a copy of {@link CollatorStringMatcher}
- * that reaches its answer without a collator, by reducing each string once to a collation key. That
- * only holds if it answers the same, so this asks both the same questions: every mode, over the road
+ * that reduces each string to a desktop-derived collation key instead of invoking a collator.
+ * CHECK_CONTAINS additionally preserves Android-equivalent spaces.
+ * Its reference below tailors only that space rule; it is not a full Android ICU implementation.
+ * This asks both the same questions: every mode, over the road
  * names of the obf files the routing tests ship with, and over names picked to carry the things a
  * primary collator folds - the german sharp s, the ligatures, apostrophes, dashes, arabic
  * diacritics, greek final sigma.
@@ -41,13 +45,15 @@ public class CollatorCompatTest {
 			"Ελληνικά", "Οδός", "ΟΔΟΣ", "στάσις", "στάσιΣ",
 			"شارع الملك فهد", "شارع ٱلملك فهد", "طريق ٢٥",
 			"İstanbul", "Istanbul", "Kraków", "Krakow", "Nová Ves", "Nova Ves",
+			"New York", "New\u00A0York", "New\u1680York", "Café New\u2009York Deli",
+			"New\u202FYork", "New\u205FYork", "New\u3000York", "Grifo Uris Bell",
 			"A-1", "A 1", "A1", "B-2 north", "no.", "no", "st.", "st",
 			"East 42-nd Street", "East 42 nd Street", "  double  space  ", "-", "--", "",
 			"Đường Nguyễn Huệ", "Duong Nguyen Hue", "東京駅", "서울역",
 	};
 
 	private static final String[] TRICKY_QUERIES = {
-			"", " ", "-", ".", "..", "a.", "st.", "no.", "strasse", "straße", "STRASSE",
+			"new york", "newyork", "four", "", " ", "-", ".", "..", "a.", "st.", "no.", "strasse", "straße", "STRASSE",
 			"église", "eglise", "l'a", "la", "ae", "æ", "th", "þ", "oe", "œ",
 			"йошкар", "иошкар", "ола", "ёлкино", "елкино", "ellhnika", "ελλην", "οδος",
 			"شارع", "istanbul", "ıstanbul", "krakow", "nova", "42", "42-nd", "42 nd",
@@ -113,7 +119,7 @@ public class CollatorCompatTest {
 				CollatorStringMatcher java = new CollatorStringMatcher(query, mode);
 				KCollatorStringMatcher copy = new KCollatorStringMatcher(query, copyMode(mode));
 				for (String name : names) {
-					assertEquals(describe(mode, query, name), java.matches(name), copy.matches(name));
+					assertEquals(describe(mode, query, name), referenceMatches(java, name), copy.matches(name));
 					compared++;
 				}
 			}
@@ -137,7 +143,7 @@ public class CollatorCompatTest {
 				for (String name : names) {
 					assertEquals(
 							describe(mode, query, name),
-							CollatorStringMatcher.cmatches(COLLATOR, name, lowercased, mode),
+							CollatorStringMatcher.cmatches(referenceCollator(mode), name, lowercased, mode),
 							KCollatorStringMatcher.cmatches(name, query, copyMode(mode)));
 				}
 			}
@@ -160,13 +166,42 @@ public class CollatorCompatTest {
 				assertEquals("part of '" + query + "' as " + mode,
 						java.getPart(), copy.getPart().getText());
 				for (String name : names) {
-					assertEquals(describe(mode, query, name), java.matches(name), copy.matches(name));
+					assertEquals(describe(mode, query, name), referenceMatches(java, name), copy.matches(name));
 				}
 			}
 		}
 	}
 
 	private static final net.osmand.Collator COLLATOR = net.osmand.OsmAndCollator.primaryCollator();
+
+	private static final net.osmand.Collator CONTAINS_COLLATOR = containsCollator();
+
+	private static net.osmand.Collator referenceCollator(StringMatcherMode mode) {
+		return mode == StringMatcherMode.CHECK_CONTAINS ? CONTAINS_COLLATOR : COLLATOR;
+	}
+
+	private static boolean referenceMatches(CollatorStringMatcher matcher, String name) {
+		return matcher.getMode() == StringMatcherMode.CHECK_CONTAINS
+				? CollatorStringMatcher.cmatches(CONTAINS_COLLATOR, name, matcher.getPart(), matcher.getMode())
+				: matcher.matches(name);
+	}
+
+	private static net.osmand.Collator containsCollator() {
+		// Android API 37, en-US/de-DE/ru-RU: these 17 spaces are primary-equal, not ignorable.
+		// Give them a distinct primary weight while preserving the JVM rules for everything else.
+		RuleBasedCollator desktop = (RuleBasedCollator) java.text.Collator.getInstance(java.util.Locale.US);
+		StringBuilder rules = new StringBuilder(desktop.getRules()).append(" & z < ' '");
+		for (char space : "\u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000".toCharArray()) {
+			rules.append(" = '").append(space).append("'");
+		}
+		try {
+			RuleBasedCollator collator = new RuleBasedCollator(rules.toString());
+			collator.setStrength(java.text.Collator.PRIMARY);
+			return net.osmand.OsmAndCollator.wrapCollator(collator);
+		} catch (ParseException e) {
+			throw new ExceptionInInitializerError(e);
+		}
+	}
 
 	private static KStringMatcherMode copyMode(StringMatcherMode mode) {
 		return KStringMatcherMode.valueOf(mode.name());
