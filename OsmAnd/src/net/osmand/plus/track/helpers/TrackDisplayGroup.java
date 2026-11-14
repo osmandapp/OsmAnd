@@ -96,6 +96,16 @@ public class TrackDisplayGroup extends GpxDisplayGroup {
 
 	@Override
 	@NonNull
+	public TrackDisplayGroup copy() {
+		TrackDisplayGroup copy = (TrackDisplayGroup) super.copy();
+		copy.splitDistance = splitDistance;
+		copy.splitTime = splitTime;
+		copy.uphillDownhill = uphillDownhill;
+		return copy;
+	}
+
+	@Override
+	@NonNull
 	public GpxDisplayItemType getType() {
 		return GpxDisplayItemType.TRACK_SEGMENT;
 	}
