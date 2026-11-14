@@ -122,7 +122,7 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 		/** Whether [part] is contained in [base]. */
 		fun ccontains(base: KCollationKey, part: KCollationKey): Boolean {
 			if (base.length <= part.length) {
-				return base.keyEquals(part)
+				return base.keyEquals(part) && base.regionSpacesEqual(0, base.length, part)
 			}
 			// java reaches part.length() * 2 characters from each starting position, no further
 			return base.containsKeyOf(part, part.length * 2)

@@ -68,6 +68,20 @@ class KCollationKey private constructor(
 		return true
 	}
 
+	/** Spaces must occupy the same key offsets when matching a substring on Android. */
+	internal fun regionSpacesEqual(from: Int, to: Int, other: KCollationKey): Boolean {
+		var sourceSpace = text.indexOf(' ', from)
+		var otherSpace = other.text.indexOf(' ')
+		while (sourceSpace >= 0 && sourceSpace < to && otherSpace >= 0) {
+			if (starts[sourceSpace] - starts[from] != other.starts[otherSpace]) {
+				return false
+			}
+			sourceSpace = text.indexOf(' ', sourceSpace + 1)
+			otherSpace = other.text.indexOf(' ', otherSpace + 1)
+		}
+		return (sourceSpace < 0 || sourceSpace >= to) && otherSpace < 0
+	}
+
 	/**
 	 * Whether any stretch of this name has the key of [other], within the [maxSourceLength]
 	 * characters that the java `ccontains` loop reaches from each starting position.
@@ -91,7 +105,15 @@ class KCollationKey private constructor(
 				continue
 			}
 			if (regionKeyEquals(pos, end, other)) {
-				return true
+				// Include trailing spaces if the query contains them, without crossing another key.
+				var candidateEnd = end
+				while (candidateEnd <= text.length && candidateEnd - pos <= maxSourceLength
+					&& starts[candidateEnd] == targetEnd) {
+					if (regionSpacesEqual(pos, candidateEnd, other)) {
+						return true
+					}
+					candidateEnd++
+				}
 			}
 		}
 		return false
