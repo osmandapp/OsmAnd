@@ -3,6 +3,7 @@ package net.osmand.search.core.spatial;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -41,9 +42,9 @@ public class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
-	/** "lidl espoo": a POI found together with a city that the map places in another city of the same kind - a city is
-	 *  matched by its bbox, and the bbox of Espoo with its sea area covers Helsinki */
-	public double wOutsideCity = 1.0;
+	/** "lidl espoo": a POI that the map places in another city than the one the query named. More than a POI can score
+	 *  (0.15 name + 1.6 landmark + 0.5 rating + 2 near + 1 exact), so however close it is, it stays below the named city */
+	public double wOutsideCity = 6.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
 
@@ -140,10 +141,8 @@ public class SpatialSearchRanking {
 	}
 
 	/**
-	 * The POI carries the settlements whose boundaries hold it (tag groups of the map: name, name:xx, place). It is
-	 * outside the city the query named when it holds a settlement of the same kind under another name: a Lidl in
-	 * Helsinki is in the city Helsinki, not in Espoo. No settlement of that kind (a village without its own boundary,
-	 * a map without tag groups) - nothing is known, nothing changes.
+	 * "lidl espoo": the bbox of Espoo covers Helsinki. A POI is outside the named city when its tag groups hold
+	 * a settlement of the same rank under another name; it loses wOutsideCity. No tag groups - nothing changes.
 	 */
 	static boolean outsideMatchedCity(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r.getFirstRef();
@@ -160,13 +159,14 @@ public class SpatialSearchRanking {
 	}
 
 	private static boolean outsideCity(Amenity a, City c) {
-		String kind = c.getType().name().toLowerCase();
+		// a town is of the rank of a city: the town Leonding borders the city Linz
+		String kind = c.getType() == City.CityType.TOWN ? "city" : c.getType().name().toLowerCase(Locale.ROOT);
 		boolean sameKind = false;
 		for (List<TagValuePair> group : a.getTagGroups().values()) {
 			boolean kindMatches = false, nameMatches = false;
 			for (TagValuePair p : group) {
 				if (p.tag.equals("place")) {
-					kindMatches = kind.equals(p.value);
+					kindMatches = kind.equals("town".equals(p.value) ? "city" : p.value);
 				} else if (p.tag.equals("name") || p.tag.startsWith("name:")) {
 					nameMatches |= isNameOf(c, p.value);
 				}
