@@ -106,6 +106,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	private static final float ZORDER_RASTER_LOW = 0.8f;
 	private static final float ZORDER_RASTER_HIGH = 0.81f;
 	private static final float ZORDER_CONTOURS = 0.82f;
+	private static final long OUTDATED_CACHE_CHECK_INTERVAL = 6 * 60 * 60 * 1000L;
 
 	private final WeatherHelper weatherHelper;
 	private final WeatherSettings weatherSettings;
@@ -113,6 +114,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	private WeatherRasterLayer weatherLayerLow;
 	private WeatherRasterLayer weatherLayerHigh;
 	private WeatherContourLayer weatherContourLayer;
+	private long lastOutdatedCacheCheckTime;
 	
 	private final List<WeatherSourceChangeListener> weatherSourceChangeListeners = new ArrayList<>();
 
@@ -188,8 +190,19 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 
+	@Override
+	public void mapActivityResume(@NonNull MapActivity activity) {
+		super.mapActivityResume(activity);
+		// The app can stay open for days: outdated forecasts are removed not only at start
+		if (System.currentTimeMillis() - lastOutdatedCacheCheckTime > OUTDATED_CACHE_CHECK_INTERVAL
+				&& weatherHelper.getWeatherResourcesManager() != null) {
+			clearOutdatedCache();
+		}
+	}
+
 	private void clearOutdatedCache() {
 		if (weatherHelper.getWeatherResourcesManager() != null) {
+			lastOutdatedCacheCheckTime = System.currentTimeMillis();
 			weatherHelper.clearOutdatedCacheAsync();
 		} else {
 			log.error("Tile Resources Manager isn't initialized");

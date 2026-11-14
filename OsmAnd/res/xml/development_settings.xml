@@ -132,6 +132,16 @@
 		android:persistent="false"
 		android:title="@string/threads_allocated_for_rendering"
 		tools:summary="8 threads" />
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="map_tile_disk_cache_size_mb"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/map_tiles_disk_cache"
+		tools:summary="256 MB" />
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="terrain_cache_size_mb"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/terrain_cache_limit"
+		tools:summary="1024 MB" />
 
 	<PreferenceCategory
 		android:key="search"

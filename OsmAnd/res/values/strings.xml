@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="map_tiles_disk_cache">Map tiles cache</string>
+    <string name="terrain_cache_limit">Terrain cache limit</string>
+    <string name="terrain_cache_limit_descr">3D relief, hillshade, slope and altitude tiles kept on the device. Older tiles are removed when the limit is reached. Now used: %1$s</string>
+    <string name="weather_rendered_layers">Rendered layers</string>
+    <string name="map_tiles_disk_cache_descr">Rendered map tiles and labels up to zoom 15 kept on the device, so places seen before draw faster. Now used: %1$s</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
