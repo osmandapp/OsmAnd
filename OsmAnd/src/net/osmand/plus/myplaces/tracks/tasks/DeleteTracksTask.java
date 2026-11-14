@@ -80,6 +80,7 @@ public class DeleteTracksTask extends AsyncTask<Void, File, Void> {
 				File dirFile = SharedUtil.jFile(trackFolder.getDirFile());
 				if (Algorithms.removeAllFiles(dirFile)) {
 					deletedFiles++;
+					FileUtils.updateAfterDeleteTrackFolder(app, trackFolder);
 					publishProgress(dirFile);
 				}
 			} else if (tracksGroup instanceof VisibleTracksGroup visibleTracksGroup) {
