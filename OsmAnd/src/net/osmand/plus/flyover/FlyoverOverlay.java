@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.view.Gravity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,8 @@ class FlyoverOverlay {
 	static final String PROFILE_ICON = "profile_icon";
 	static final String RULER = "ruler";
 	static final String COMPASS = "compass";
+	/** The OsmAnd logo (pin and wordmark), at the bottom centred unless the "logo" object says where. */
+	static final String OSMAND_LOGO = "osmand_logo";
 
 	// short form of the attribution the OSM licence asks for, with the app that drew the map
 	private static final String ATTRIBUTION = "OsmAnd · © OpenStreetMap";
@@ -49,6 +52,13 @@ class FlyoverOverlay {
 	private static final float BUTTON_DP = 44;
 	private static final float RULER_MAX_DP = 120;
 	private static final float HEAD_ICON_DP = 44;
+	private static final float LOGO_HEIGHT_DP = 22;
+	/** The pin stands this much taller than the wordmark. */
+	private static final float LOGO_PIN_SCALE = 1.7f;
+	/** The halo around the logo, so it stands out on the map: its width and its colours by day and by night. */
+	private static final float LOGO_HALO_DP = 1.5f;
+	private static final int LOGO_HALO_DAY = 0xE6FFFFFF;
+	private static final int LOGO_HALO_NIGHT = 0xE6000000;
 
 	private final OsmandApplication app;
 	private final float density;
@@ -63,6 +73,23 @@ class FlyoverOverlay {
 	@Nullable
 	private final Drawable rulerImage;
 	private final Map<String, Drawable> headIcons = new HashMap<>();
+	@Nullable
+	private final Drawable logoPin;
+	// the pin and the wordmark in the halo colour, drawn around them so they stand out on the map
+	@Nullable
+	private final Drawable logoPinHalo;
+	@Nullable
+	private final Drawable logoTextHalo;
+	@Nullable
+	private final Drawable logoText;
+	private final float logoOpacity;
+	private final double logoFullFromS;
+	private final double logoFadeS;
+	private final int logoGravity;
+	/** Of the logo from the frame's edges, video pixels; NaN for the overlay's own margin. */
+	private final float logoMargin;
+	/** Of the logo from the top, video pixels; NaN for the margin. */
+	private final float logoMarginTop;
 
 	FlyoverOverlay(@NonNull OsmandApplication app, @NonNull JSONObject spec, int width, int height) {
 		this.app = app;
@@ -81,6 +108,32 @@ class FlyoverOverlay {
 				.getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode))) : null;
 		rulerImage = elements.contains(RULER)
 				? ContextCompat.getDrawable(app, nightMode ? R.drawable.ruler_night : R.drawable.ruler) : null;
+		boolean logo = elements.contains(OSMAND_LOGO);
+		logoPin = logo ? copy(app.getUIUtilities().getIcon(R.drawable.ic_action_osmand_logo, R.color.osmand_orange)) : null;
+		logoText = logo ? copy(app.getUIUtilities().getIcon(R.drawable.image_text_osmand,
+				nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light)) : null;
+		int halo = nightMode ? LOGO_HALO_NIGHT : LOGO_HALO_DAY;
+		logoPinHalo = logo ? tinted(logoPin, halo) : null;
+		logoTextHalo = logo ? tinted(logoText, halo) : null;
+		// "logo": {"opacity": 0.6, "full_from_s": 30, "fade_s": 0.4}: translucent until full_from_s, then opaque
+		JSONObject logoSpec = spec.optJSONObject("logo");
+		logoOpacity = logoSpec != null ? (float) Math.max(0, Math.min(1, logoSpec.optDouble("opacity", 1))) : 1f;
+		logoFullFromS = logoSpec != null ? logoSpec.optDouble("full_from_s", Double.NaN) : Double.NaN;
+		logoFadeS = logoSpec != null ? logoSpec.optDouble("fade_s", 0.4) : 0.4;
+		// "gravity": "top|left" and "margin" (video pixels) place the logo like a panel; default bottom centred
+		logoGravity = FlyoverPanels.parseGravity(logoSpec != null ? logoSpec.optString("gravity", "bottom|center") : "bottom|center");
+		logoMargin = logoSpec != null ? (float) logoSpec.optDouble("margin", Double.NaN) : Float.NaN;
+		logoMarginTop = logoSpec != null ? (float) logoSpec.optDouble("margin_top", Double.NaN) : Float.NaN;
+	}
+
+	/** A copy of a drawable painted in one colour, as a halo behind it. */
+	@Nullable
+	private Drawable tinted(@Nullable Drawable drawable, int color) {
+		Drawable result = copy(drawable);
+		if (result != null) {
+			result.setColorFilter(new android.graphics.PorterDuffColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN));
+		}
+		return result;
 	}
 
 	// painted icons are cached and shared with the app's own views
@@ -107,6 +160,9 @@ class FlyoverOverlay {
 		paint.setTextSize(dp(8));
 		float attribution = paint.measureText(this.attribution) + dp(6);
 		taken.put("attribution", new RectF(width - margin - attribution, height - margin - dp(14), width - margin, height - margin));
+		if (logoPin != null || logoText != null) {
+			taken.put("logo", logoBounds(width, height));
+		}
 		return taken;
 	}
 
@@ -116,6 +172,11 @@ class FlyoverOverlay {
 	 * @param rotation map rotation, degrees: the compass needle turns with it as in OsmAnd
 	 */
 	void draw(@NonNull Canvas canvas, double latitude, float zoom, float rotation) {
+		draw(canvas, latitude, zoom, rotation, 0);
+	}
+
+	/** @param t video time in seconds, for elements that change over the video (the logo's opacity) */
+	void draw(@NonNull Canvas canvas, double latitude, float zoom, float rotation, double t) {
 		float margin = dp(MARGIN_DP);
 		float button = dp(BUTTON_DP);
 		if (profileIcon != null) {
@@ -128,6 +189,78 @@ class FlyoverOverlay {
 			drawRuler(canvas, latitude, zoom, margin);
 		}
 		drawAttribution(canvas, margin);
+		if (logoPin != null || logoText != null) {
+			drawLogo(canvas, margin, t);
+		}
+	}
+
+	private float logoWidth() {
+		float h = dp(LOGO_HEIGHT_DP);
+		float pin = logoPin != null ? h * LOGO_PIN_SCALE * logoPin.getIntrinsicWidth() / Math.max(1, logoPin.getIntrinsicHeight()) : 0;
+		float text = logoText != null ? h * logoText.getIntrinsicWidth() / Math.max(1, logoText.getIntrinsicHeight()) : 0;
+		return pin + (logoPin != null && logoText != null ? dp(4) : 0) + text;
+	}
+
+	/** Where the logo is on the frame, video pixels: the pin's height by the pin's and wordmark's width. */
+	@NonNull
+	private RectF logoBounds(int width, int height) {
+		float margin = Float.isNaN(logoMargin) ? dp(MARGIN_DP) : logoMargin;
+		float w = logoWidth();
+		float h = dp(LOGO_HEIGHT_DP) * LOGO_PIN_SCALE;
+		int horizontal = logoGravity & Gravity.HORIZONTAL_GRAVITY_MASK;
+		int vertical = logoGravity & Gravity.VERTICAL_GRAVITY_MASK;
+		float x = horizontal == Gravity.RIGHT ? width - margin - w
+				: horizontal == Gravity.CENTER_HORIZONTAL ? (width - w) / 2 : margin;
+		float top = Float.isNaN(logoMarginTop) ? margin : logoMarginTop;
+		float y = vertical == Gravity.BOTTOM ? height - margin - h
+				: vertical == Gravity.CENTER_VERTICAL ? (height - h) / 2 : top;
+		return new RectF(x, y, x + w, y + h);
+	}
+
+	/** The pin and the wordmark side by side, at the bottom centred unless placed; translucent until full_from_s. */
+	private void drawLogo(@NonNull Canvas canvas, float margin, double t) {
+		float opacity = logoOpacity;
+		if (!Double.isNaN(logoFullFromS) && t >= logoFullFromS) {
+			float f = logoFadeS > 0 ? (float) Math.min(1, (t - logoFullFromS) / logoFadeS) : 1;
+			opacity = logoOpacity + (1 - logoOpacity) * f;
+		}
+		int alpha = Math.round(255 * opacity);
+		float h = dp(LOGO_HEIGHT_DP);
+		float pinH = h * LOGO_PIN_SCALE;
+		RectF bounds = logoBounds(canvas.getWidth(), canvas.getHeight());
+		float x = bounds.left;
+		float centerY = bounds.centerY();
+		if (logoPin != null) {
+			float w = pinH * logoPin.getIntrinsicWidth() / Math.max(1, logoPin.getIntrinsicHeight());
+			drawWithHalo(canvas, logoPin, logoPinHalo, Math.round(x), Math.round(centerY - pinH / 2),
+					Math.round(x + w), Math.round(centerY + pinH / 2), alpha);
+			x += w + dp(4);
+		}
+		if (logoText != null) {
+			float w = h * logoText.getIntrinsicWidth() / Math.max(1, logoText.getIntrinsicHeight());
+			drawWithHalo(canvas, logoText, logoTextHalo, Math.round(x), Math.round(centerY - h / 2),
+					Math.round(x + w), Math.round(centerY + h / 2), alpha);
+		}
+	}
+
+	/** The drawable over its halo: the halo copy drawn around it, shifted in eight directions. */
+	private void drawWithHalo(@NonNull Canvas canvas, @NonNull Drawable drawable, @Nullable Drawable halo,
+	                          int left, int top, int right, int bottom, int alpha) {
+		if (halo != null) {
+			int r = Math.max(1, Math.round(dp(LOGO_HALO_DP)));
+			halo.setAlpha(alpha);
+			for (int dx = -r; dx <= r; dx += r) {
+				for (int dy = -r; dy <= r; dy += r) {
+					if (dx != 0 || dy != 0) {
+						halo.setBounds(left + dx, top + dy, right + dx, bottom + dy);
+						halo.draw(canvas);
+					}
+				}
+			}
+		}
+		drawable.setBounds(left, top, right, bottom);
+		drawable.setAlpha(alpha);
+		drawable.draw(canvas);
 	}
 
 	/**

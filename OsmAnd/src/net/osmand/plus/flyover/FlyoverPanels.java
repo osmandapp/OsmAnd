@@ -82,23 +82,50 @@ class FlyoverPanels {
 				}
 			}
 			String panelSize = spec.optString("size", "medium");
+			// "columns": a grid of that many equal columns; a widget with "span": "row" takes a row of its own
+			int columns = spec.optInt("columns", 0);
+			if (columns > 0) {
+				root.setOrientation(LinearLayout.VERTICAL);
+			}
+			LinearLayout row = null;
+			int inRow = 0;
 			JSONArray widgets = spec.optJSONArray("widgets");
 			for (int i = 0; widgets != null && i < widgets.length(); i++) {
 				JSONObject w = widgets.optJSONObject(i);
 				if (w == null) continue;
-				if (i > 0) {
+				String type = w.optString("type");
+				Item item = "chart".equals(type) ? new ChartItem(w, appearance)
+						: new WidgetItem(w, appearance, w.optString("size", panelSize));
+				items.add(item);
+				if (columns > 0) {
+					boolean span = "row".equals(w.optString("span"));
+					if (span || row == null || inRow >= columns) {
+						row = new LinearLayout(context);
+						row.setOrientation(LinearLayout.HORIZONTAL);
+						root.addView(row, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+						inRow = 0;
+					}
+					row.addView(item.view, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, span ? columns : 1));
+					inRow = span ? columns : inRow + 1;
+					if (span) {
+						row = null;
+					}
+					continue;
+				}
+				if (root.getChildCount() > 0) {
 					View divider = new View(context);
 					divider.setBackgroundColor(appearance.getDividerColor());
 					int px = AndroidUtils.dpToPx(context, 1);
 					root.addView(divider, horizontal ? new LinearLayout.LayoutParams(px, ViewGroup.LayoutParams.MATCH_PARENT)
 							: new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, px));
 				}
-				Item item = "chart".equals(w.optString("type")) ? new ChartItem(w, appearance)
-						: new WidgetItem(w, appearance, w.optString("size", panelSize));
-				items.add(item);
 				root.addView(item.view, horizontal
 						? new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1)
 						: new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			}
+			// a grid's last row keeps the column width: empty cells fill the rest
+			if (columns > 0 && row != null && inRow < columns) {
+				row.addView(new View(context), new LinearLayout.LayoutParams(0, 1, columns - inRow));
 			}
 		}
 
@@ -143,14 +170,19 @@ class FlyoverPanels {
 		@NonNull
 		private PointF position(int width, int height) {
 			float frameW = frameWidth / scale, frameH = frameHeight / scale;
-			float margin = (float) spec.optDouble("margin", 16) / scale;
+			// "margin" for all sides; "margin_top", "margin_bottom", "margin_left", "margin_right" for one of them
+			double margin = spec.optDouble("margin", 16);
+			float top = (float) spec.optDouble("margin_top", margin) / scale;
+			float bottom = (float) spec.optDouble("margin_bottom", margin) / scale;
+			float left = (float) spec.optDouble("margin_left", margin) / scale;
+			float right = (float) spec.optDouble("margin_right", margin) / scale;
 			int gravity = parseGravity(spec.optString("gravity", "top|left"));
 			int horizontal = gravity & Gravity.HORIZONTAL_GRAVITY_MASK;
 			int vertical = gravity & Gravity.VERTICAL_GRAVITY_MASK;
-			float x = horizontal == Gravity.RIGHT ? frameW - margin - width
-					: horizontal == Gravity.CENTER_HORIZONTAL ? (frameW - width) / 2 : margin;
-			float y = vertical == Gravity.BOTTOM ? frameH - margin - height
-					: vertical == Gravity.CENTER_VERTICAL ? (frameH - height) / 2 : margin;
+			float x = horizontal == Gravity.RIGHT ? frameW - right - width
+					: horizontal == Gravity.CENTER_HORIZONTAL ? (frameW - width) / 2 : left;
+			float y = vertical == Gravity.BOTTOM ? frameH - bottom - height
+					: vertical == Gravity.CENTER_VERTICAL ? (frameH - height) / 2 : top;
 			return new PointF(x, y);
 		}
 
@@ -204,6 +236,7 @@ class FlyoverPanels {
 		WidgetItem(@NonNull JSONObject spec, @NonNull ResolvedPanelAppearance appearance, @NonNull String size) {
 			this.spec = spec;
 			widget = new WidgetView(context, appearance, size, getIcon(spec), spec.optString("title"));
+			widget.maxLines = Math.max(1, spec.optInt("lines", 1));
 			view = widget;
 		}
 
@@ -231,6 +264,8 @@ class FlyoverPanels {
 		final ResolvedPanelAppearance appearance;
 		@Nullable
 		final Drawable icon;
+		@Nullable
+		private Drawable iconHalo;
 		final String title;
 		final float[] size;
 		final float density;
@@ -239,6 +274,9 @@ class FlyoverPanels {
 		String value = "";
 		String unit = "";
 		float valueScale = 1;
+		/** "lines": a value too wide for the panel wraps onto up to this many lines before its font shrinks. */
+		int maxLines = 1;
+		final List<String> lines = new ArrayList<>();
 
 		WidgetView(@NonNull Context context, @NonNull ResolvedPanelAppearance appearance, @NonNull String sizeName,
 		           @Nullable Drawable icon, @NonNull String title) {
@@ -288,9 +326,45 @@ class FlyoverPanels {
 					: Math.min(wanted, MeasureSpec.getSize(widthSpec));
 			float available = width - textStart() - dp(size[3]);
 			float full = valueWidth(1);
-			valueScale = full > available && full > 0 ? Math.max(0.45f, available / full) : 1;
-			float height = 2 * dp(size[4]) + (title.isEmpty() ? 0 : dp(size[2]) * 1.4f) + dp(size[1]) * valueScale * 1.15f;
+			valueScale = 1;
+			lines.clear();
+			if (full > available && full > 0 && maxLines > 1) {
+				wrap(available);
+			}
+			if (lines.isEmpty()) {
+				lines.add(value);
+				valueScale = full > available && full > 0 ? Math.max(0.45f, available / full) : 1;
+			}
+			float height = 2 * dp(size[4]) + (title.isEmpty() ? 0 : dp(size[2]) * 1.4f)
+					+ dp(size[1]) * valueScale * 1.15f * lines.size();
 			setMeasuredDimension(width, Math.round(Math.max(height, dp(size[0]) + 2 * dp(size[4]))));
+		}
+
+		/** The value as whole words on up to maxLines lines of the available width; nothing if it does not go. */
+		private void wrap(float available) {
+			valuePaint.setTextSize(dp(size[1]));
+			float unitWidth = unit.isEmpty() ? 0 : dp(4) + smallPaint.measureText(unit);
+			StringBuilder line = new StringBuilder();
+			for (String word : value.split(" ")) {
+				String candidate = line.length() == 0 ? word : line + " " + word;
+				if (valuePaint.measureText(candidate) <= available || line.length() == 0) {
+					line.setLength(0);
+					line.append(candidate);
+				} else {
+					lines.add(line.toString());
+					line.setLength(0);
+					line.append(word);
+				}
+			}
+			lines.add(line.toString());
+			boolean fits = lines.size() <= maxLines
+					&& valuePaint.measureText(lines.get(lines.size() - 1)) + unitWidth <= available;
+			for (int i = 0; fits && i < lines.size() - 1; i++) {
+				fits = valuePaint.measureText(lines.get(i)) <= available;
+			}
+			if (!fits) {
+				lines.clear();
+			}
 		}
 
 		@Override
@@ -301,6 +375,28 @@ class FlyoverPanels {
 				int s = Math.round(dp(size[0]));
 				int top = Math.round((getHeight() - s) / 2f);
 				int left = Math.round(dp(size[3]));
+				if (outline) {
+					// a halo in the text's outline colour, so the icon reads on the map as the text does
+					if (iconHalo == null) {
+						Drawable.ConstantState state = icon.getConstantState();
+						iconHalo = state != null ? state.newDrawable(getResources()).mutate() : null;
+						if (iconHalo != null) {
+							iconHalo.setColorFilter(new android.graphics.PorterDuffColorFilter(
+									appearance.getTextShadowColor(), android.graphics.PorterDuff.Mode.SRC_IN));
+						}
+					}
+					if (iconHalo != null) {
+						int r = Math.max(1, Math.round(dp(1.5f)));
+						for (int dx = -r; dx <= r; dx += r) {
+							for (int dy = -r; dy <= r; dy += r) {
+								if (dx != 0 || dy != 0) {
+									iconHalo.setBounds(left + dx, top + dy, left + s + dx, top + s + dy);
+									iconHalo.draw(canvas);
+								}
+							}
+						}
+					}
+				}
 				icon.setBounds(left, top, left + s, top + s);
 				icon.draw(canvas);
 			}
@@ -313,11 +409,15 @@ class FlyoverPanels {
 				y += dp(size[2]) * 0.4f;
 			}
 			valuePaint.setTextSize(dp(size[1]) * valueScale);
-			y += dp(size[1]) * valueScale * 0.95f;
-			drawText(canvas, value, x, y, valuePaint, appearance.getPrimaryTextColor(), outline);
-			if (!unit.isEmpty()) {
-				float ux = x + valuePaint.measureText(value) + dp(4);
-				drawText(canvas, unit, ux, y, smallPaint, appearance.getSecondaryTextColor(), outline);
+			List<String> shown = lines.isEmpty() ? java.util.Collections.singletonList(value) : lines;
+			for (int i = 0; i < shown.size(); i++) {
+				String line = shown.get(i);
+				y += dp(size[1]) * valueScale * (i == 0 ? 0.95f : 1.15f);
+				drawText(canvas, line, x, y, valuePaint, appearance.getPrimaryTextColor(), outline);
+				if (!unit.isEmpty() && i == shown.size() - 1) {
+					float ux = x + valuePaint.measureText(line) + dp(4);
+					drawText(canvas, unit, ux, y, smallPaint, appearance.getSecondaryTextColor(), outline);
+				}
 			}
 		}
 
@@ -355,13 +455,20 @@ class FlyoverPanels {
 			String expr = spec.optString("value");
 			FlyoverTrack track = values.trackOf(expr);
 			chart = new ChartView(context, track, smooth(track, values.seriesOf(expr)), appearance);
+			chart.labels = spec.optBoolean("labels", true);
+			chart.showCursor = spec.optBoolean("cursor", true);
+			chart.formatter = range -> values.formatRange(expr, range);
 			// a second value as a line over the first one's area, on its own scale (altitude and speed in one chart)
 			String expr2 = spec.optString("value2");
 			if (!Algorithms.isEmpty(expr2)) {
 				chart.track2 = values.trackOf(expr2);
 				chart.series2 = smooth(chart.track2, values.seriesOf(expr2));
 				chart.color2 = parseColor(spec.optString("color2"), 0xFFFF8800);
+				chart.labelColor2 = parseColor(spec.optString("label_color2"), chart.color2);
+				chart.formatter2 = range -> values.formatRange(expr2, range);
 			}
+			chart.distanceFormatter = () -> track != null ? values.formatRange("gpx[" + track.number + "].dist",
+					new double[] {0, track.getLength() / 2, track.getLength()}) : null;
 			// a panel without a width is as wide as its widgets; a chart has no width of its own
 			chart.setMinimumWidth(AndroidUtils.dpToPx(context, (float) spec.optDouble("width_dp", 280)));
 			box.addView(chart, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -371,10 +478,13 @@ class FlyoverPanels {
 
 		@Override
 		void update(@NonNull FlyoverValues.Frame frame) {
-			chart.cursor = chart.track != null ? chart.track.at(frame.t).distance : Double.NaN;
-			chart.cursor2 = chart.track2 != null ? chart.track2.at(frame.t).distance : Double.NaN;
+			FlyoverTrack.Position at = chart.showCursor && chart.track != null ? chart.track.at(frame.t) : null;
+			chart.cursor = at != null ? at.distance : Double.NaN;
+			chart.cursorDone = at != null && at.finished;
+			chart.cursor2 = chart.showCursor && chart.track2 != null ? chart.track2.at(frame.t).distance : Double.NaN;
 		}
 	}
+
 
 	private static int parseColor(@Nullable String color, int defaultColor) {
 		try {
@@ -409,19 +519,45 @@ class FlyoverPanels {
 		return out;
 	}
 
+	/** Formats the lowest and highest value of a series for the labels of a chart's axis. */
+	interface RangeFormatter {
+		@NonNull
+		String[] format(@NonNull double[] range);
+	}
+
 	private class ChartView extends View {
 		final FlyoverTrack track;
 		final double[] series;
 		final ResolvedPanelAppearance appearance;
 		final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		final Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		// the series as paths, built once for a plot size: a track has thousands of points, and a video many frames
 		final Path path = new Path();
+		final Path path2 = new Path();
+		boolean hasPath;
+		boolean hasPath2;
+		float pathW = -1, pathH = -1;
 		double cursor = Double.NaN;
+		/** The track is through: the whole area is highlighted and the cursor line is gone. */
+		boolean cursorDone;
 		@Nullable
 		FlyoverTrack track2;
 		@Nullable
 		double[] series2;
 		int color2;
+		int labelColor2;
 		double cursor2 = Double.NaN;
+		/** "labels": the lowest and highest value of each series at its axis and the track's length under the plot. */
+		boolean labels = true;
+		/** "cursor": the current point as a line and the passed part highlighted; off for a still picture. */
+		boolean showCursor = true;
+		@Nullable
+		RangeFormatter formatter;
+		@Nullable
+		RangeFormatter formatter2;
+		/** The distance at the start, the middle and the end of the plot, for the axis under it. */
+		@Nullable
+		java.util.concurrent.Callable<String[]> distanceFormatter;
 
 		ChartView(@NonNull Context context, @Nullable FlyoverTrack track, @Nullable double[] series,
 		          @NonNull ResolvedPanelAppearance appearance) {
@@ -433,13 +569,65 @@ class FlyoverPanels {
 
 		@Override
 		protected void onDraw(@NonNull Canvas canvas) {
-			float w = getWidth(), h = getHeight();
 			int primary = appearance.getPrimaryTextColor();
 			int active = ColorUtilities.getActiveColor(app, appearance.getNightMode());
-			if (buildPath(track, series, w, h, true)) {
+			// the plot leaves room for the labels: the ranges at the sides, the length of the track below
+			float labelSize = AndroidUtils.dpToPx(getContext(), 11);
+			textPaint.setTextSize(labelSize);
+			textPaint.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+			textPaint.setColor(primary);
+			String[] range1 = labels && formatter != null ? formatter.format(range(series)) : null;
+			String[] range2 = labels && formatter2 != null ? formatter2.format(range(series2)) : null;
+			String[] distance = null;
+			if (labels && distanceFormatter != null) {
+				try {
+					distance = distanceFormatter.call();
+				} catch (Exception ignored) {
+				}
+			}
+			float gap = AndroidUtils.dpToPx(getContext(), 4);
+			float left = range1 != null ? labelWidth(range1) + gap : 0;
+			float right = range2 != null ? labelWidth(range2) + gap : 0;
+			float bottom = distance != null ? labelSize + gap : 0;
+			float w = getWidth() - left - right, h = getHeight() - bottom;
+			if (range1 != null) {
+				textPaint.setTextAlign(Paint.Align.LEFT);
+				textPaint.setColor(showCursor ? primary : active);
+				canvas.drawText(range1[1], 0, labelSize, textPaint);
+				canvas.drawText(range1[0], 0, h, textPaint);
+				textPaint.setColor(primary);
+			}
+			if (range2 != null) {
+				textPaint.setTextAlign(Paint.Align.LEFT);
+				textPaint.setColor(labelColor2);
+				canvas.drawText(range2[1], left + w + gap, labelSize, textPaint);
+				canvas.drawText(range2[0], left + w + gap, h, textPaint);
+				textPaint.setColor(primary);
+			}
+			if (distance != null && distance.length == 3) {
+				float y = getHeight() - textPaint.descent();
+				textPaint.setTextAlign(Paint.Align.CENTER);
+				canvas.drawText(distance[1], left + w / 2, y, textPaint);
+				textPaint.setTextAlign(Paint.Align.RIGHT);
+				canvas.drawText(distance[2], left + w, y, textPaint);
+			}
+			canvas.translate(left, 0);
+			if (w != pathW || h != pathH) {
+				hasPath = buildPath(path, track, series, w, h, true);
+				hasPath2 = buildPath(path2, track2, series2, w, h, false);
+				pathW = w;
+				pathH = h;
+			}
+			if (hasPath) {
 				paint.setStyle(Paint.Style.FILL);
-				paint.setColor(primary);
-				paint.setAlpha(40);
+				if (showCursor) {
+					paint.setColor(primary);
+					paint.setAlpha(40);
+				} else {
+					// no current point: the whole area in the colour of the passed part, as at the end of a video
+					paint.setColor(active);
+					paint.setAlpha(120);
+				}
 				canvas.drawPath(path, paint);
 				if (!Double.isNaN(cursor)) {
 					float cx = (float) (cursor / track.getLength() * w);
@@ -449,31 +637,51 @@ class FlyoverPanels {
 					paint.setAlpha(120);
 					canvas.drawPath(path, paint);
 					canvas.restore();
-					paint.setAlpha(255);
-					paint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2));
-					canvas.drawLine(cx, 0, cx, h, paint);
+					if (!cursorDone) {
+						paint.setAlpha(255);
+						paint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2));
+						canvas.drawLine(cx, 0, cx, h, paint);
+					}
 				}
 			}
-			if (buildPath(track2, series2, w, h, false)) {
+			if (hasPath2) {
 				paint.setStyle(Paint.Style.STROKE);
 				paint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2));
 				paint.setColor(color2);
 				paint.setAlpha(110);
-				canvas.drawPath(path, paint);
+				canvas.drawPath(path2, paint);
 				if (!Double.isNaN(cursor2)) {
 					float cx = (float) (cursor2 / track2.getLength() * w);
 					canvas.save();
 					canvas.clipRect(0, 0, cx, h);
 					paint.setAlpha(255);
-					canvas.drawPath(path, paint);
+					canvas.drawPath(path2, paint);
 					canvas.restore();
 				}
 				paint.setStyle(Paint.Style.FILL);
 			}
 		}
 
+		private float labelWidth(@NonNull String[] labels) {
+			return Math.max(textPaint.measureText(labels[0]), textPaint.measureText(labels[1]));
+		}
+
+		/** The lowest and highest value of a series, NaN when it has none. */
+		@NonNull
+		private double[] range(@Nullable double[] series) {
+			double min = Double.NaN, max = Double.NaN;
+			for (int i = 0; series != null && i < series.length; i++) {
+				double v = series[i];
+				if (Double.isNaN(v)) continue;
+				min = Double.isNaN(min) ? v : Math.min(min, v);
+				max = Double.isNaN(max) ? v : Math.max(max, v);
+			}
+			return new double[] {min, max};
+		}
+
 		/** The series as a smooth line, or as an area down to the bottom; false if there is nothing to draw. */
-		private boolean buildPath(@Nullable FlyoverTrack track, @Nullable double[] series, float w, float h, boolean area) {
+		private boolean buildPath(@NonNull Path path, @Nullable FlyoverTrack track, @Nullable double[] series,
+		                          float w, float h, boolean area) {
 			path.reset();
 			if (track == null || series == null) {
 				return false;
@@ -491,20 +699,44 @@ class FlyoverPanels {
 				max = min + 1;
 			}
 			double length = track.getLength();
-			float px = 0, py = 0;
-			boolean started = false;
+			// a track has thousands of points and the plot a few hundred pixels: points within half a pixel of
+			// each other are averaged into one, so the path stays small and the drawing fast
+			int count = 0;
+			double sumX = 0, sumY = 0;
+			float[] xs = new float[(int) w * 2 + 4];
+			float[] ys = new float[xs.length];
+			int n = 0;
 			for (int i = 0; i < series.length; i++) {
 				if (Double.isNaN(series[i])) continue;
-				float x = (float) (track.dist[i] / length * w);
-				float y = (float) (h - (series[i] - min) / (max - min) * (h * 0.9));
-				if (!started) {
+				double vx = track.dist[i] / length * w;
+				double vy = h - (series[i] - min) / (max - min) * (h * 0.9);
+				if (count > 0 && vx - sumX / count >= 0.5 && n < xs.length - 1) {
+					xs[n] = (float) (sumX / count);
+					ys[n] = (float) (sumY / count);
+					n++;
+					count = 0;
+					sumX = 0;
+					sumY = 0;
+				}
+				sumX += vx;
+				sumY += vy;
+				count++;
+			}
+			if (count > 0 && n < xs.length) {
+				xs[n] = (float) (sumX / count);
+				ys[n] = (float) (sumY / count);
+				n++;
+			}
+			float px = 0, py = 0;
+			for (int i = 0; i < n; i++) {
+				float x = xs[i], y = ys[i];
+				if (i == 0) {
 					if (area) {
 						path.moveTo(x, h);
 						path.lineTo(x, y);
 					} else {
 						path.moveTo(x, y);
 					}
-					started = true;
 				} else {
 					// through the midpoints: a smooth line instead of a polyline
 					path.quadTo(px, py, (px + x) / 2, (py + y) / 2);
