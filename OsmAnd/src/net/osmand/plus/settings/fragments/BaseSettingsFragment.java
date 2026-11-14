@@ -552,11 +552,21 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			String appName = selectedAppMode.toHumanString();
 			profileTitle.setText(appName);
 		}
+		updateProfileSubtitle(view, selectedAppMode);
 		View toolbarDivider = view.findViewById(R.id.toolbar_divider);
 		if (toolbarDivider != null) {
 			toolbarDivider.setBackgroundColor(iconColor);
 		}
 		updateProfileButton();
+	}
+
+	private void updateProfileSubtitle(@NonNull View view, @NonNull ApplicationMode appMode) {
+		if (currentScreenType != null && currentScreenType.toolbarResId == R.layout.profile_preference_toolbar) {
+			TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
+			if (toolbarSubtitle != null) {
+				toolbarSubtitle.setText(appMode.toHumanString());
+			}
+		}
 	}
 
 	protected void updateProfileButton() {
