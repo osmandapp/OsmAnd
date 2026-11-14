@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.plugins.topoprint.widgets.PrintMapButton xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_print_button"
+	android:layout_width="@dimen/map_button_size"
+	android:layout_height="@dimen/map_button_size"
+	android:clickable="true"
+	android:contentDescription="@string/topoprint_plugin_name"
+	android:focusable="true"
+	tools:background="@drawable/btn_circle"
+	tools:contentDescription="@string/topoprint_plugin_name"
+	tools:src="@drawable/ic_action_gprint_dark"
+	tools:tint="?attr/default_icon_color" />

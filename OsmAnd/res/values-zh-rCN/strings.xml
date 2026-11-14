@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- TopoPrint (Print map) plugin -->
+	<string name="topoprint_plugin_name">打印地图</string>
+	<string name="topoprint_plugin_description">预览打印地图范围，使用当前 OsmAnd 样式渲染所选区域，并导出带 UTM 网格、比例尺与磁偏角信息、适合打印的地图（SVG 或 PNG）。</string>
+	<string name="topoprint_paper_size">纸张尺寸</string>
+	<string name="topoprint_orientation">版式</string>
+	<string name="topoprint_dpi">打印分辨率</string>
+	<string name="topoprint_scale_denominator">地图比例尺</string>
+	<string name="topoprint_projection">地图投影</string>
+	<string name="topoprint_projection_spherical">球面（OpenGL）</string>
+	<string name="topoprint_projection_mercator">墨卡托</string>
+	<string name="topoprint_portrait">纵向</string>
+	<string name="topoprint_landscape">横向</string>
+	<string name="topoprint_show_preview">显示打印预览框</string>
+	<string name="topoprint_show_preview_descr">在地图上叠加打印覆盖范围的矩形框</string>
+	<string name="topoprint_generate">生成打印地图</string>
+	<string name="topoprint_progress_prepare">正在准备打印地图上下文…</string>
+	<string name="topoprint_progress_gl">正在创建离屏 GL 渲染器…</string>
+	<string name="topoprint_progress_tiles">正在加载打印区域的地图瓦片…</string>
+	<string name="topoprint_progress_tiles_frames">正在加载打印区域的地图瓦片…（已渲染 %1$d 帧）</string>
+	<string name="topoprint_progress_wait">检测到画面偏移，正在重新校正并等待渲染稳定…（第 %1$d/%2$d 次尝试）</string>
+	<string name="topoprint_progress_capture">已捕获地图画面，正在合成地图…</string>
+	<string name="topoprint_cancelled">已取消生成</string>
+	<string name="topoprint_rendering">正在使用当前样式渲染地图…</string>
+	<string name="topoprint_rasterizing">正在将地图光栅化为 PNG…</string>
+	<string name="topoprint_failed">无法生成打印地图。请尝试更低的 DPI（内存限制）或检查已下载的地图。</string>
+	<string name="topoprint_print">打印</string>
+	<string name="topoprint_svg_only_hint">PNG 超出了设备内存预算；已保留 SVG 文件，可在电脑上光栅化。</string>
+	<string name="topoprint_title">地图标题</string>
+	<string name="topoprint_output">输出</string>
+	<string name="topoprint_open">打开</string>
+	<string name="topoprint_params_preview">参数:%1$s</string>
+	<string name="topoprint_custom_paper">自定义纸张尺寸</string>
+	<string name="topoprint_custom_width">自定义纸张宽度 (mm)</string>
+	<string name="topoprint_custom_height">自定义纸张高度 (mm)</string>
+	<string name="topoprint_map_button_descr">打开打印地图生成对话框</string>
+
     <string name="email">电子邮件</string>
     <string name="poi_dialog_opening_hours">开放</string>
     <string name="poi_dialog_comment">评论</string>
