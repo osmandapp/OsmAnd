@@ -109,10 +109,13 @@ public class DownloadValidationManager {
 
 	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
 	                                        @NonNull DownloadValidatedCallback callback) {
-		IndexItem[] freeItems = downloadFilesCheck_1_FreeRegion(activity, items, callback);
-		if (freeItems != null) {
-			downloadFilesCheck_2_Internet(activity, freeItems, callback);
-		}
+		// the internet comes first: the replace of the free region deletes maps before the download
+		downloadFilesCheck_1_Internet(activity, () -> {
+			IndexItem[] freeItems = downloadFilesCheck_2_FreeRegion(activity, items, callback);
+			if (freeItems != null) {
+				downloadFilesCheck_3_ValidateSpace(activity, freeItems, callback);
+			}
+		});
 	}
 
 	/**
@@ -123,7 +126,7 @@ public class DownloadValidationManager {
 	 * @return the items to download now, or null when nothing is left or the replace sheet takes over
 	 */
 	@Nullable
-	private IndexItem[] downloadFilesCheck_1_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
+	private IndexItem[] downloadFilesCheck_2_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
 	                                                    @NonNull DownloadValidatedCallback callback) {
 		FreeRegionCheck check = downloadThread.getFreeVersionMapDownloads().check(items);
 		if (check.isAllFree()) {
@@ -143,19 +146,18 @@ public class DownloadValidationManager {
 		return check.getFreeItems().isEmpty() ? null : check.getFreeItems().toArray(new IndexItem[0]);
 	}
 
-	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, @NonNull IndexItem[] items,
-	                                           @NonNull DownloadValidatedCallback callback) {
+	private void downloadFilesCheck_1_Internet(@NonNull FragmentActivity context, @NonNull Runnable onConfirmed) {
 		if (settings.isWifiConnected()) {
-			downloadFilesCheck_3_ValidateSpace(context, items, callback);
+			onConfirmed.run();
 		} else if (settings.isInternetConnectionAvailable()) {
 			if (DOWNLOAD_MOBILE_INTERNET_CONFIRMED) {
-				downloadFilesCheck_3_ValidateSpace(context, items, callback);
+				onConfirmed.run();
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage(context.getString(R.string.download_using_mobile_internet));
 				builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 					DOWNLOAD_MOBILE_INTERNET_CONFIRMED = true;
-					downloadFilesCheck_3_ValidateSpace(context, items, callback);
+					onConfirmed.run();
 				});
 				builder.setNegativeButton(R.string.shared_string_no, null);
 				builder.show();
