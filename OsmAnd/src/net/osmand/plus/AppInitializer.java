@@ -668,7 +668,7 @@ public class AppInitializer implements IProgress {
 		}
 
 		if (!Version.isOpenGlAvailable(app)) {
-			settings.OPENGL_RENDER_FALLBACK_TO_LEGACY.set(true);
+			settings.OPENGL_RENDER_AUTO_DISABLED.set(true);
 		} else {
 			int failedCounter = settings.OPENGL_RENDER_FAILED.get();
 			if (failedCounter >= MAX_OPENGL_FAILURES && failedCounter % 2 == 1) {
@@ -676,7 +676,7 @@ public class AppInitializer implements IProgress {
 				// show warnings before disable
 				warnings.add("Native OpenGL library is not supported. Please try again after exit");
 				if (failedCounter > MAX_OPENGL_DISABLE) {
-					settings.OPENGL_RENDER_FALLBACK_TO_LEGACY.set(true);
+					settings.OPENGL_RENDER_AUTO_DISABLED.set(true);
 				}
 			} else {
 				try {

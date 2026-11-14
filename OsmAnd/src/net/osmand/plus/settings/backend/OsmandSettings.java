@@ -3449,28 +3449,19 @@ public class OsmandSettings {
 			Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
 
 	// Device-local fallback to V1 after V2 is unavailable or repeatedly fails to initialize.
-	public final OsmandPreference<Boolean> OPENGL_RENDER_FALLBACK_TO_LEGACY = new BooleanPreference(this, "opengl_render_fallback_to_legacy", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> OPENGL_RENDER_AUTO_DISABLED = new BooleanPreference(this, "opengl_render_fallback_to_legacy", false).makeGlobal().cache();
 
 	public final OsmandPreference<Integer> OPENGL_RENDER_FAILED = new IntPreference(this, "opengl_render_failed_count", 0).makeGlobal().cache();
 
 	public boolean isOpenGlRendererEnabled() {
-		return USE_OPENGL_RENDER.get() && !OPENGL_RENDER_FALLBACK_TO_LEGACY.get();
+		return USE_OPENGL_RENDER.get() && !OPENGL_RENDER_AUTO_DISABLED.get();
 	}
 
 	// An explicit user choice clears the local fallback before retrying V2.
 	public void setOpenGlRendererEnabled(boolean enabled) {
-		boolean hasStoredValue = USE_OPENGL_RENDER.isSet();
-		boolean sameValue = USE_OPENGL_RENDER.get() == enabled;
-		if (!hasStoredValue || !sameValue) {
-			if (!USE_OPENGL_RENDER.set(enabled)) {
-				return;
-			}
-			if (sameValue) {
-				// Export the first explicit choice even if it matches the default.
-				updateLastPreferencesEditTime(globalPreferences);
-			}
+		if (USE_OPENGL_RENDER.set(enabled)) {
+			OPENGL_RENDER_AUTO_DISABLED.set(false);
 		}
-		OPENGL_RENDER_FALLBACK_TO_LEGACY.set(false);
 	}
 
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference(this, "CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
