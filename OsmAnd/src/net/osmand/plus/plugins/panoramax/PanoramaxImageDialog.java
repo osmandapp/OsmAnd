@@ -305,7 +305,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 	@Override
 	protected void createMenuItems(Menu menu) {
 		MenuItem item = menu.add(R.string.open_panoramax)
-				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_photo_street));
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_panoramax));
 		item.setOnMenuItemClickListener(i -> {
 			PanoramaxPlugin.openPanoramax(getMapActivity(), imageId);
 			return true;
