@@ -12,8 +12,8 @@ import net.osmand.util.Algorithms;
 
 public class ClimbsCountWidgetState extends ResizableWidgetState {
 
-	private static final int DEFAULT_MIN_CLIMB_ELEVATION = 30; // meters
-	private static final float DEFAULT_MIN_CLIMB_GRADE = 3.0f; // percentage
+	private static final int DEFAULT_MIN_CLIMB_ELEVATION = 3; // meters
+	private static final float DEFAULT_MIN_CLIMB_GRADE = 1.0f; // percentage
 	private static final boolean DEFAULT_SHOW_OVERLAY = true;
 	private static final int DEFAULT_VAM_TARGET = 800; // vm/h
 

@@ -161,11 +161,11 @@ public class ClimbsCountWidget extends SimpleWidget {
 			canvas.drawPath(path, linePaint);
 
 			// Draw virtual opponent line at position based on VAM target
-			// If user VAM > target VAM, user is faster, opponent is behind (ratio < 1)
-			// If user VAM < target VAM, user is slower, opponent is ahead (ratio > 1)
-			// opponentRatio = (currentVAM / targetVAM) * progress
+			// If user VAM > target VAM, user is faster, opponent is behind (ratio < progress)
+			// If user VAM < target VAM, user is slower, opponent is ahead (ratio > progress)
+			// opponentRatio = (targetVAM / currentVAM) * progress
 			if (vamTarget > 0 && currentVAM > 0) {
-				double opponentRatio = ((double) currentVAM / vamTarget) * progress;
+				double opponentRatio = ((double) vamTarget / currentVAM) * progress;
 				opponentRatio = Math.max(0, Math.min(1, opponentRatio));
 				int opponentX = (int) (width * opponentRatio);
 				
@@ -210,37 +210,46 @@ public class ClimbsCountWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		updateClimbsCount();
+		try {
+			updateClimbsCount();
+		} catch (Exception e) {
+			// Prevent crash from propagating
+		}
 	}
 
 	private void updateClimbsCount() {
-		if (!isRouteAvailable()) {
-			setText(NO_VALUE, null);
-			hideClimbProfileOverlay();
-			return;
+		try {
+			if (!isRouteAvailable()) {
+				setText(NO_VALUE, null);
+				hideClimbProfileOverlay();
+				return;
+			}
+
+			int minElevation = widgetState.getMinClimbElevation();
+			float minGrade = widgetState.getMinClimbGrade();
+
+			ClimbsResult result = calculateClimbs(minElevation, minGrade);
+			totalClimbs = result.info.totalClimbs;
+			completedClimbs = result.info.completedClimbs;
+
+			if (totalClimbs > 0) {
+				String text = completedClimbs + "/" + totalClimbs;
+				setText(text, null);
+			} else {
+				setText("0", null);
+			}
+
+			// Update climb profile overlay
+			updateClimbProfileOverlay();
+		} catch (Exception e) {
+			// Prevent crash from propagating
 		}
-
-		int minElevation = widgetState.getMinClimbElevation();
-		float minGrade = widgetState.getMinClimbGrade();
-
-		ClimbsResult result = calculateClimbs(minElevation, minGrade);
-		totalClimbs = result.info.totalClimbs;
-		completedClimbs = result.info.completedClimbs;
-
-		if (totalClimbs > 0) {
-			String text = completedClimbs + "/" + totalClimbs;
-			setText(text, null);
-		} else {
-			setText("0", null);
-		}
-
-		// Update climb profile overlay
-		updateClimbProfileOverlay();
 	}
 
 	private boolean isRouteAvailable() {
-		// Only detect climbs for navigation routes (A to B), not for GPX tracks
-		return routingHelper != null && routingHelper.isFollowingMode() && routingHelper.getRoute() != null;
+		// Detect climbs for navigation routes (A to B), both during preview and active navigation
+		// Only for calculated routes, not for GPX tracks
+		return routingHelper != null && routingHelper.getRoute() != null && routingHelper.getRoute().isCalculated();
 	}
 
 	private ClimbsResult calculateClimbs(int minElevation, float minGrade) {
@@ -283,14 +292,16 @@ public class ClimbsCountWidget extends SimpleWidget {
 		this.cumulativeDistances = new ArrayList<>(cumulativeDistances);
 
 		// Find climbs by identifying uphill segments that meet criteria
-		// Improved algorithm: track peak elevation and end climb when descended significantly
+		// ALGORITHM: Allow small descents and plateaus within a climb
+		// - Start climb on first positive elevation gain
+		// - Continue through flat and small descents (<10m, net elevation >= 0)
+		// - End climb on significant descent (>10m) or negative net elevation
+		// - Use cumulative distances for total climb distance (not just ascending parts)
 		int climbStartIndex = 0;
 		boolean inClimb = false;
-		double currentClimbGain = 0;
-		double currentClimbDistance = 0;
-		double peakElevation = 0; // Track the highest point in the current climb
-		double distanceSincePeak = 0; // Distance since we started descending from peak
-
+		double currentClimbGain = 0;  // Total elevation gain (only ascending parts)
+		double netElevationSinceStart = 0;  // Net elevation from climb start (ascending - descending)
+		
 		// For building elevation profiles per climb
 		List<Double> climbElevationProfile = new ArrayList<>();
 		List<Double> climbDistanceProfile = new ArrayList<>();
@@ -303,9 +314,11 @@ public class ClimbsCountWidget extends SimpleWidget {
 			if (Double.isNaN(prevPoint.getEle()) || Double.isNaN(currPoint.getEle())) {
 				// End current climb if we were in one and it meets criteria
 				if (inClimb && currentClimbGain >= minElevation) {
-					float avgGrade = calculateGrade(currentClimbGain, currentClimbDistance);
+					// ALWAYS use cumulative distances for accurate distance
+					double climbDistance = cumulativeDistances.get(i - 1) - cumulativeDistances.get(climbStartIndex);
+					float avgGrade = climbDistance > 0 ? calculateGrade(currentClimbGain, climbDistance) : 0;
 					if (avgGrade >= minGrade) {
-						Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+						Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, climbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 						result.climbs.add(climb);
 						climbs.add(climb);
 						result.info.totalClimbs++;
@@ -315,9 +328,7 @@ public class ClimbsCountWidget extends SimpleWidget {
 				climbElevationProfile = new ArrayList<>();
 				climbDistanceProfile = new ArrayList<>();
 				currentClimbGain = 0;
-				currentClimbDistance = 0;
-				peakElevation = 0;
-				distanceSincePeak = 0;
+				netElevationSinceStart = 0;
 				continue;
 			}
 
@@ -325,82 +336,76 @@ public class ClimbsCountWidget extends SimpleWidget {
 			double segmentDistance = MapUtils.getDistance(prevPoint.getLatitude(), prevPoint.getLongitude(), currPoint.getLatitude(), currPoint.getLongitude());
 
 			if (!inClimb) {
-				// Not in a climb, check if we should start one
+				// Not in a climb, check if we should start one (only on positive elevation gain)
 				if (elevationGain > 0) {
 					inClimb = true;
 					climbStartIndex = i - 1;
 					currentClimbGain = elevationGain;
-					currentClimbDistance = segmentDistance;
-					peakElevation = currPoint.getEle();
-					distanceSincePeak = 0;
+					netElevationSinceStart = elevationGain;
 					// Start fresh profiles for this climb
 					climbElevationProfile = new ArrayList<>();
 					climbDistanceProfile = new ArrayList<>();
 					climbElevationProfile.add(prevPoint.getEle());
 					climbDistanceProfile.add(0.0);
 					climbElevationProfile.add(currPoint.getEle());
-					climbDistanceProfile.add(segmentDistance);
-				} else {
-					// Not in a climb and not climbing - reset profiles
-					climbElevationProfile = new ArrayList<>();
-					climbDistanceProfile = new ArrayList<>();
+					climbDistanceProfile.add(cumulativeDistances.get(i) - cumulativeDistances.get(i - 1));
 				}
 			} else {
-				// We're in a climb - add to profiles
+				// We're in a climb
+				// Always add to profiles (for visualization)
 				climbElevationProfile.add(currPoint.getEle());
-				if (climbDistanceProfile.isEmpty()) {
-					climbDistanceProfile.add(segmentDistance);
-				} else {
-					climbDistanceProfile.add(climbDistanceProfile.get(climbDistanceProfile.size() - 1) + segmentDistance);
-				}
+				// For distance profile, use cumulative distance from climb start
+				climbDistanceProfile.add(cumulativeDistances.get(i) - cumulativeDistances.get(climbStartIndex));
 
-				// Update peak elevation and distance since peak
-				if (currPoint.getEle() > peakElevation) {
-					peakElevation = currPoint.getEle();
-					distanceSincePeak = 0;
-				} else {
-					distanceSincePeak += segmentDistance;
-				}
+				// Track net elevation from climb start
+				netElevationSinceStart += elevationGain;
 
-				if (elevationGain >= 0) {
-					// Still climbing or flat
+				if (elevationGain > 0) {
+					// Still climbing - add to total gain
 					currentClimbGain += elevationGain;
-					currentClimbDistance += segmentDistance;
-				} else {
-					// Descending - only track distance, don't reduce gain
-					currentClimbDistance += segmentDistance;
-
-					// End climb if we've descended significantly from peak (100m descent OR 200m without ascent)
-					// This handles both long plateaus and actual descents
-					if (distanceSincePeak > 200 || (peakElevation - currPoint.getEle()) > 100) {
+				} else if (elevationGain < 0) {
+					// Descending - check if we should end the climb
+					// End climb if: net elevation < 0 OR single descent > 10m
+					// This allows small descents (<10m) within a climb
+					if (netElevationSinceStart < 0 || (prevPoint.getEle() - currPoint.getEle()) > 10) {
 						// End of climb - check if it meets criteria
 						if (currentClimbGain >= minElevation) {
-							float avgGrade = calculateGrade(currentClimbGain, currentClimbDistance);
+							// ALWAYS use cumulative distances for accurate distance
+							double climbDistance = cumulativeDistances.get(i - 1) - cumulativeDistances.get(climbStartIndex);
+							float avgGrade = climbDistance > 0 ? calculateGrade(currentClimbGain, climbDistance) : 0;
 							if (avgGrade >= minGrade) {
-								Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+								Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, climbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 								result.climbs.add(climb);
 								climbs.add(climb);
 								result.info.totalClimbs++;
 							}
 						}
+						// Reset
 						inClimb = false;
 						climbElevationProfile = new ArrayList<>();
 						climbDistanceProfile = new ArrayList<>();
+						currentClimbGain = 0;
+						netElevationSinceStart = 0;
 					}
 				}
+				// Flat segments: continue climb, no action needed
 			}
 		}
 
 		// Handle the last climb if we're still in one
 		if (inClimb && currentClimbGain >= minElevation) {
-			float avgGrade = calculateGrade(currentClimbGain, currentClimbDistance);
+			// Use cumulative distances for accurate distance calculation
+			double climbDistance = cumulativeDistances.get(allPoints.size() - 1) - cumulativeDistances.get(climbStartIndex);
+			float avgGrade = climbDistance > 0 ? calculateGrade(currentClimbGain, climbDistance) : 0;
 			if (avgGrade >= minGrade) {
-				Climb climb = createClimb(climbStartIndex, allPoints.size() - 1, currentClimbGain, currentClimbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+				Climb climb = createClimb(climbStartIndex, allPoints.size() - 1, currentClimbGain, climbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
 				result.climbs.add(climb);
 				climbs.add(climb);
 				result.info.totalClimbs++;
 			}
 		}
+		// Reset net elevation tracker
+		netElevationSinceStart = 0;
 
 		// Calculate completed climbs based on current location
 		if (!result.climbs.isEmpty()) {
@@ -634,176 +639,187 @@ public class ClimbsCountWidget extends SimpleWidget {
 	}
 
 	private void updateClimbProfileOverlay() {
-		if (!widgetState.shouldShowOverlay()) {
-			hideClimbProfileOverlay();
-			return;
-		}
+		// All overlay state changes should happen on UI thread
+		handler.post(() -> {
+			try {
+				if (!widgetState.shouldShowOverlay()) {
+					hideClimbProfileOverlay();
+					return;
+				}
 
-		// Show overlay if user is on a climb
-		if (currentClimbInfo != null && currentClimbInfo.climb != null) {
-			showClimbProfileOverlay(currentClimbInfo);
-			return;
-		}
+				// Only show overlay when user is ACTIVELY on a climb
+				// Don't show for next/previous climbs to avoid showing overlay for entire route
+				if (currentClimbInfo != null && currentClimbInfo.climb != null) {
+					showClimbProfileOverlay(currentClimbInfo);
+					return;
+				}
 
-		// Also show overlay for next upcoming climb (within 500m)
-		// This helps users see what's coming up
-		RouteCalculationResult route = routingHelper.getRoute();
-		if (route != null && !cumulativeDistances.isEmpty()) {
-			int routeDistance = route.getDistanceFromStart();
-			
-			// Find next climb
-			Climb nextClimb = findNextClimb(cumulativeDistances, routeDistance);
-			if (nextClimb != null) {
-				// Create a dummy CurrentClimbInfo for the next climb
-				// This will show the climb profile but with 0 progress
-				CurrentClimbInfo nextClimbInfo = new CurrentClimbInfo();
-				nextClimbInfo.climb = nextClimb;
-				nextClimbInfo.currentPointIndex = nextClimb.startIndex;
-				nextClimbInfo.currentDistanceInClimb = 0;
-				nextClimbInfo.totalClimbDistance = nextClimb.distance;
-				
-				showClimbProfileOverlay(nextClimbInfo);
-				return;
+				// Hide overlay if user is not on a climb
+				hideClimbProfileOverlay();
+			} catch (Exception e) {
+				// Catch any errors in overlay state management
 			}
-			
-			// Also check for recently completed climb (within 200m after end)
-			Climb prevClimb = findPreviousClimb(cumulativeDistances, routeDistance);
-			if (prevClimb != null) {
-				// Create a dummy CurrentClimbInfo for the previous climb
-				// This will show the climb profile with 100% progress (completed)
-				CurrentClimbInfo prevClimbInfo = new CurrentClimbInfo();
-				prevClimbInfo.climb = prevClimb;
-				prevClimbInfo.currentPointIndex = prevClimb.endIndex;
-				prevClimbInfo.currentDistanceInClimb = prevClimb.distance;
-				prevClimbInfo.totalClimbDistance = prevClimb.distance;
-				
-				showClimbProfileOverlay(prevClimbInfo);
-				return;
-			}
-		}
-
-		// Hide overlay if no climb is active, upcoming, or recently completed
-		hideClimbProfileOverlay();
+		});
 	}
 
 	private void showClimbProfileOverlay(@NonNull CurrentClimbInfo climbInfo) {
-		// Reuse existing overlay if it already exists
-		if (climbProfileOverlay != null) {
-			updateOverlayContent(climbInfo);
-			return;
-		}
+		// Ensure all view operations happen on UI thread
+		handler.post(() -> {
+			try {
+				// Reuse existing overlay if it already exists
+				if (climbProfileOverlay != null) {
+					updateOverlayContent(climbInfo);
+					return;
+				}
 
-		// Create new overlay from layout
-		try {
-			climbProfileOverlay = mapActivity.getLayoutInflater().inflate(R.layout.climb_profile_overlay, null);
+				// Create new overlay from layout
+				climbProfileOverlay = mapActivity.getLayoutInflater().inflate(R.layout.climb_profile_overlay, null);
 
-			// Configure overlay
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-					ViewGroup.LayoutParams.MATCH_PARENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT
-			);
-			params.gravity = Gravity.BOTTOM;
-			params.setMargins(0, 0, 0, 0);
+				// Configure overlay
+				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+						ViewGroup.LayoutParams.MATCH_PARENT,
+						ViewGroup.LayoutParams.WRAP_CONTENT
+				);
+				params.gravity = Gravity.BOTTOM;
+				params.setMargins(0, 0, 0, 0);
 
-			climbProfileOverlay.setLayoutParams(params);
+				climbProfileOverlay.setLayoutParams(params);
 
-			// Add to map activity
-			ViewGroup rootView = mapActivity.findViewById(android.R.id.content);
-			if (rootView != null) {
-				rootView.addView(climbProfileOverlay);
-			} else {
-				// Can't add overlay without root view
+				// Add to map activity
+				ViewGroup rootView = mapActivity.findViewById(android.R.id.content);
+				if (rootView != null) {
+					// Check if already has parent
+					ViewGroup existingParent = (ViewGroup) climbProfileOverlay.getParent();
+					if (existingParent != null) {
+						existingParent.removeView(climbProfileOverlay);
+					}
+					rootView.addView(climbProfileOverlay);
+				} else {
+					// Can't add overlay without root view
+					climbProfileOverlay = null;
+					return;
+				}
+
+				// Add elevation profile view programmatically
+				FrameLayout elevationContainer = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_container);
+				if (elevationContainer != null) {
+					elevationProfileView = new ElevationProfileView(mapActivity);
+					elevationContainer.addView(elevationProfileView,
+						new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+				}
+
+				// Update content
+				updateOverlayContent(climbInfo);
+			} catch (Exception e) {
+				// If anything goes wrong, clean up on UI thread
+				handler.post(() -> {
+					try {
+						hideClimbProfileOverlay();
+					} catch (Exception ex) {}
+				});
 				climbProfileOverlay = null;
-				return;
+				elevationProfileView = null;
 			}
-
-			// Add elevation profile view programmatically
-			FrameLayout elevationContainer = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_container);
-			if (elevationContainer != null) {
-				elevationProfileView = new ElevationProfileView(mapActivity);
-				elevationContainer.addView(elevationProfileView,
-					new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-			}
-
-			// Update content
-			updateOverlayContent(climbInfo);
-		} catch (Exception e) {
-			// If anything goes wrong, clean up
-			climbProfileOverlay = null;
-			elevationProfileView = null;
-		}
+		});
 	}
 
 	private void hideClimbProfileOverlay() {
-		if (climbProfileOverlay != null) {
-			ViewGroup parent = (ViewGroup) climbProfileOverlay.getParent();
-			if (parent != null) {
-				try {
-					parent.removeView(climbProfileOverlay);
-				} catch (Exception e) {
-					// Ignore - view might already be removed
+		// Ensure removal happens on UI thread
+		handler.post(() -> {
+			try {
+				if (climbProfileOverlay != null) {
+					ViewGroup parent = (ViewGroup) climbProfileOverlay.getParent();
+					if (parent != null) {
+						try {
+							parent.removeView(climbProfileOverlay);
+						} catch (Exception e) {
+							// Ignore - view might already be removed
+						}
+					}
+					climbProfileOverlay = null;
+					elevationProfileView = null;
 				}
+			} catch (Exception e) {
+				climbProfileOverlay = null;
+				elevationProfileView = null;
 			}
-			climbProfileOverlay = null;
-			elevationProfileView = null;
-		}
+		});
 	}
 
 	private void updateOverlayContent(@NonNull CurrentClimbInfo climbInfo) {
-		if (climbProfileOverlay == null) {
-			return;
-		}
+		// Ensure content update happens on UI thread
+		handler.post(() -> {
+			try {
+				if (climbProfileOverlay == null) {
+					return;
+				}
 
-		Climb climb = climbInfo.climb;
+				Climb climb = climbInfo.climb;
 
-		// Calculate progress percentage
-		double progress = climbInfo.totalClimbDistance > 0 ? (climbInfo.currentDistanceInClimb / climbInfo.totalClimbDistance) : 0;
+			// Calculate progress percentage
+			double progress = climbInfo.totalClimbDistance > 0 ? (climbInfo.currentDistanceInClimb / climbInfo.totalClimbDistance) : 0;
 
-		// Update average grade (gemiddelde stijgingspercentage)
-		TextView avgGradeText = climbProfileOverlay.findViewById(R.id.climb_profile_average_grade);
-		if (avgGradeText != null) {
-			avgGradeText.setText(String.format("%.1f%%", climb.averageGrade));
-		}
+			// Update average grade (gemiddelde stijgingspercentage)
+			TextView avgGradeText = climbProfileOverlay.findViewById(R.id.climb_profile_average_grade);
+			if (avgGradeText != null) {
+				avgGradeText.setText(String.format("%.1f%%", climb.averageGrade));
+			}
 
-		// Update current grade (huidige stijgingspercentage)
-		TextView currentGradeText = climbProfileOverlay.findViewById(R.id.climb_profile_current_grade);
-		if (currentGradeText != null) {
-			float currentGrade = calculateCurrentGrade(climbInfo);
-			currentGradeText.setText(String.format("%.1f%%", currentGrade));
-		}
+			// Update current grade (huidige stijgingspercentage)
+			TextView currentGradeText = climbProfileOverlay.findViewById(R.id.climb_profile_current_grade);
+			if (currentGradeText != null) {
+				float currentGrade = calculateCurrentGrade(climbInfo);
+				currentGradeText.setText(String.format("%.1f%%", currentGrade));
+			}
 
-		// Update VAM (Vertical Ascent per Minute)
-		TextView vamText = climbProfileOverlay.findViewById(R.id.climb_profile_vam);
-		if (vamText != null) {
-			float vam = calculateVAM(climbInfo);
-			vamText.setText(String.format("%.0f vm/h", vam));
-		}
+			// Update VAM (Vertical Ascent per Minute)
+			TextView vamText = climbProfileOverlay.findViewById(R.id.climb_profile_vam);
+			if (vamText != null) {
+				float vam = calculateVAM(climbInfo);
+				vamText.setText(String.format("%.0f vm/h", vam));
+			}
 
-		// Update elevation gain
-		TextView elevationText = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_gain);
-		if (elevationText != null) {
-			elevationText.setText("+" + (int) climb.elevationGain + "m");
-		}
+			// Update elevation gain
+			TextView elevationText = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_gain);
+			if (elevationText != null) {
+				elevationText.setText("+" + (int) climb.elevationGain + "m");
+			}
 
-		// Ensure elevation profile view exists and is added to container with proper layout params
-		FrameLayout elevationContainer = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_container);
-		if (elevationContainer != null && elevationProfileView == null) {
-			elevationProfileView = new ElevationProfileView(mapActivity);
-			elevationContainer.addView(elevationProfileView,
-				new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-		}
+			// Ensure elevation profile view exists and is added to container with proper layout params
+			FrameLayout elevationContainer = climbProfileOverlay.findViewById(R.id.climb_profile_elevation_container);
+			if (elevationContainer != null && elevationProfileView == null) {
+				try {
+					elevationProfileView = new ElevationProfileView(mapActivity);
+					elevationContainer.addView(elevationProfileView,
+						new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+				} catch (Exception e) {
+					// Ignore
+				}
+			}
 
-		// Update elevation profile view with data
-		if (elevationProfileView != null && climb.elevationProfile != null && !climb.elevationProfile.isEmpty()) {
-			float currentVAM = calculateVAM(climbInfo);
-			int vamTarget = getVamTarget();
-			elevationProfileView.setData(climb.elevationProfile, climb.distanceProfile, progress, vamTarget, currentVAM);
-		}
-		// Hide the XML position indicator - we use the red line drawn in ElevationProfileView instead
-		View positionIndicator = climbProfileOverlay.findViewById(R.id.climb_profile_position_indicator);
-		if (positionIndicator != null) {
-			positionIndicator.setVisibility(View.GONE);
-		}
+			// Update elevation profile view with data
+			if (elevationProfileView != null && climb.elevationProfile != null && !climb.elevationProfile.isEmpty()) {
+				try {
+					float currentVAM = calculateVAM(climbInfo);
+					int vamTarget = getVamTarget();
+					elevationProfileView.setData(climb.elevationProfile, climb.distanceProfile, progress, vamTarget, currentVAM);
+				} catch (Exception e) {
+					// Ignore
+				}
+			}
+				// Hide the XML position indicator - we use the red line drawn in ElevationProfileView instead
+				View positionIndicator = climbProfileOverlay.findViewById(R.id.climb_profile_position_indicator);
+				if (positionIndicator != null) {
+					try {
+						positionIndicator.setVisibility(View.GONE);
+					} catch (Exception e) {
+						// Ignore
+					}
+				}
+			} catch (Exception e) {
+				// Catch any errors in content update
+			}
+		});
 	}
 
 	@Override

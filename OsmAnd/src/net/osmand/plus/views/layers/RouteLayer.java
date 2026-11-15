@@ -63,6 +63,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private Location lastRouteProjection;
 	private final ClimbDetector climbDetector;
 	private RouteCalculationResult lastClimbDetectionRoute;
+	private final OsmandApplication app;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -98,7 +99,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	public RouteLayer(@NonNull Context context) {
 		super(context);
-		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.helper = app.getRoutingHelper();
 		this.transportHelper = helper.getTransportRoutingHelper();
 		this.chartPointsHelper = new ChartPointsHelper(app);
@@ -112,6 +113,20 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
+	}
+
+	/**
+	 * Get minimum climb elevation from ClimbsCountWidget settings
+	 */
+	private int getClimbMinElevation() {
+		return app.getSettings().CLIMBS_COUNT_MIN_ELEVATION.get();
+	}
+
+	/**
+	 * Get minimum climb grade from ClimbsCountWidget settings
+	 */
+	private float getClimbMinGrade() {
+		return app.getSettings().CLIMBS_COUNT_MIN_GRADE.get();
 	}
 
 	@Override
@@ -509,18 +524,28 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
 					getDirectionArrowsColor(), actualColoringType, routeInfoAttribute, routeGradientPalette);
 			
-			// Detect and set climb segments for highlighting - only for active navigation and when route changes
+			// Detect and set climb segments for highlighting on the route line
+			// Use the same thresholds as ClimbsCountWidget for consistency
 			List<Location> locations = route.getImmutableAllLocations();
 			boolean shouldDetectClimbs = locations != null && locations.size() >= 2 && 
-					!helper.isPublicTransportMode() && helper.isFollowingMode();
+					!helper.isPublicTransportMode() && route.isCalculated();
 			
-			// Only recompute climbs when route changes to avoid flickering
-			// Don't call setClimbSegments here - it will be handled in updateRoute via the route object
-			if (shouldDetectClimbs && (lastClimbDetectionRoute != route || routeGeometry == null)) {
-				List<ClimbSegment> climbs = climbDetector.detectClimbs(locations);
-				routeGeometry.setClimbSegments(climbs);
-				lastClimbDetectionRoute = route;
-			} else if (!shouldDetectClimbs && lastClimbDetectionRoute != null) {
+			if (shouldDetectClimbs && routeGeometry != null) {
+				// Get climb detection thresholds from ClimbsCountWidget settings
+				int minClimbElevation = getClimbMinElevation();
+				float minClimbGrade = getClimbMinGrade();
+				
+				// Only recompute climbs when route changes
+				if (lastClimbDetectionRoute != route || routeGeometry == null) {
+					// Configure climb detector with current thresholds
+					climbDetector.setMinClimbElevation(minClimbElevation);
+					climbDetector.setMinClimbGrade(minClimbGrade);
+					
+					List<ClimbSegment> climbs = climbDetector.detectClimbs(locations);
+					routeGeometry.setClimbSegments(climbs);
+					lastClimbDetectionRoute = route;
+				}
+			} else if (!shouldDetectClimbs && lastClimbDetectionRoute != null && routeGeometry != null) {
 				// Clear climb segments when not navigating
 				routeGeometry.setClimbSegments(new ArrayList<>());
 				lastClimbDetectionRoute = null;
