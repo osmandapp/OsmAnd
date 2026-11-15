@@ -16,9 +16,8 @@ public class ClimbDetector {
 
 	private static final int DEFAULT_MIN_CLIMB_ELEVATION = 1; // meters
 	private static final float DEFAULT_MIN_CLIMB_GRADE = 0.2f; // percentage
-	private static final double WINDOW_SIZE = 200.0; // meters - rolling window size for segment-based detection
-	private static final double PEAK_DESCENT_THRESHOLD = 100; // meters
-	private static final double FLAT_DISTANCE_THRESHOLD = 200; // meters
+	private static final double WINDOW_SIZE = 200.0; // meters - window size for moving average
+	private static final double MIN_WINDOW_DISTANCE = 50.0; // minimum distance for a valid window
 
 	private int minClimbElevation = DEFAULT_MIN_CLIMB_ELEVATION;
 	private float minClimbGrade = DEFAULT_MIN_CLIMB_GRADE;
@@ -43,27 +42,36 @@ public class ClimbDetector {
 	}
 
 	/**
-	 * Detect climbs in the given list of locations using ROLLING WINDOW approach.
+	 * Detect climbs in the given list of locations using SLIDING WINDOW approach.
 	 * 
-	 * ROLLING WINDOW ALGORITHM (2026-11-15 v3):
-	 * Based on user suggestion: use a rolling window of 200m to calculate average grade
+	 * SLIDING WINDOW ALGORITHM (2026-11-15 v4):
+	 * Based on user request: use a rolling window to calculate average grade
 	 * 
 	 * Steps:
-	 * 1. Create fixed-size windows of WINDOW_SIZE (200m) along the route
-	 * 2. For each window, calculate:
-	 *    - Total positive elevation gain
-	 *    - Total distance (WINDOW_SIZE)
-	 *    - Average grade = (positiveElevationGain / WINDOW_SIZE) * 100
-	 * 3. A window is a "climb window" if its average grade >= minClimbGrade
-	 * 4. Group consecutive climb windows into a single climb
-	 * 5. For each climb, calculate:
-	 *    - Total elevation gain: sum of all positive elevation changes in all windows
-	 *    - Total distance: sum of all window distances
+	 * 1. Pre-calculate cumulative distances for all points
+	 * 2. For each point, calculate the average grade in a window extending forward WINDOW_SIZE meters
+	 *    - The window includes the current point and all subsequent points within WINDOW_SIZE meters
+	 *    - Average grade = (total positive elevation gain in window / window distance) * 100
+	 * 3. Mark a point as being in a climb if its window average grade >= minClimbGrade
+	 * 4. Group consecutive points that are in a climb into climb segments
+	 * 5. For each climb segment, calculate:
+	 *    - Total positive elevation gain: sum of all positive elevation changes
+	 *    - Total distance: sum of all segment distances
 	 *    - Average grade: (totalElevationGain / totalDistance) * 100
 	 * 6. Only count climbs where total elevation gain >= minClimbElevation AND average grade >= minClimbGrade
 	 * 
-	 * This approach provides more stable climb detection by averaging over fixed distances,
-	 * reducing the impact of small undulations and noise in the elevation data.
+	 * This approach:
+	 * - Smooths out small undulations and noise in elevation data
+	 * - Properly handles climbs with small descents within them
+	 * - Uses the user's settings for thresholds
+	 * - Groups consecutive climbing points into single climbs
+	 * 
+	 * Example: 5m climb over 250m with 2% avg grade, with minClimbElevation=3, minClimbGrade=1%
+	 * - Each window will have avg grade around 2%
+	 * - All windows will be marked as climb
+	 * - Grouped into 1 climb with 5m gain, 250m distance, 2% grade
+	 * - Meets both thresholds: 5m >= 3m AND 2% >= 1%
+	 * - Result: 1 climb (correct)
 	 * 
 	 * @param locations List of locations with elevation data
 	 * @return List of detected climb segments
@@ -86,137 +94,161 @@ public class ClimbDetector {
 			cumulativeDistances.add(cumulativeDistances.get(i - 1) + dist);
 		}
 
-		// Create windows of WINDOW_SIZE (200m)
-		// Each window starts at a location and spans WINDOW_SIZE meters
-		List<Boolean> isClimbWindow = new ArrayList<>();
-		List<Double> windowElevationGains = new ArrayList<>();
-		List<Double> windowStartDistances = new ArrayList<>();
-		List<Double> windowEndDistances = new ArrayList<>();
-		List<Integer> windowStartIndices = new ArrayList<>();
-		List<Integer> windowEndIndices = new ArrayList<>();
+		double totalRouteDistance = cumulativeDistances.get(cumulativeDistances.size() - 1);
 
-		// Create windows
-		double totalDistance = cumulativeDistances.get(cumulativeDistances.size() - 1);
-		int numWindows = (int) Math.ceil(totalDistance / WINDOW_SIZE);
-		
-		for (int w = 0; w < numWindows; w++) {
-			double windowStartDist = w * WINDOW_SIZE;
-			double windowEndDist = Math.min((w + 1) * WINDOW_SIZE, totalDistance);
-			
-			// Find the indices for this window
-			int startIdx = 0;
-			int endIdx = locations.size() - 1;
-			
-			// Find first location >= windowStartDist
-			for (int i = 0; i < cumulativeDistances.size(); i++) {
-				if (cumulativeDistances.get(i) >= windowStartDist) {
-					startIdx = i;
-					break;
-				}
-			}
-			
-			// Find last location <= windowEndDist
-			for (int i = cumulativeDistances.size() - 1; i >= 0; i--) {
-				if (cumulativeDistances.get(i) <= windowEndDist) {
-					endIdx = i;
-					break;
-				}
-			}
-			
-			// If we have valid indices, calculate the elevation gain for this window
-			if (startIdx < endIdx && startIdx >= 0 && endIdx < locations.size()) {
-				double positiveElevationGain = 0;
-				
-				// Calculate elevation gain within this window
-				for (int i = startIdx + 1; i <= endIdx; i++) {
-					Location prevPoint = locations.get(i - 1);
-					Location currPoint = locations.get(i);
-					
-					if (Double.isNaN(prevPoint.getAltitude()) || Double.isNaN(currPoint.getAltitude())) {
-						continue;
-					}
-					
-					double elevationGain = currPoint.getAltitude() - prevPoint.getAltitude();
-					if (elevationGain > 0) {
-						positiveElevationGain += elevationGain;
-					}
-				}
-				
-				double windowActualDistance = cumulativeDistances.get(endIdx) - cumulativeDistances.get(startIdx);
-				
-				// Calculate average grade for this window
-				float avgGrade = windowActualDistance > 0 ? 
-					(float) ((positiveElevationGain / windowActualDistance) * 100) : 0f;
-				
-				// Check if this is a climb window
-				boolean climbWindow = avgGrade >= minClimbGrade && positiveElevationGain > 0;
-				
-				isClimbWindow.add(climbWindow);
-				windowElevationGains.add(positiveElevationGain);
-				windowStartDistances.add(windowStartDist);
-				windowEndDistances.add(windowEndDist);
-				windowStartIndices.add(startIdx);
-				windowEndIndices.add(endIdx);
-			} else {
-				// Empty window, add default values
-				isClimbWindow.add(false);
-				windowElevationGains.add(0.0);
-				windowStartDistances.add(windowStartDist);
-				windowEndDistances.add(windowEndDist);
-				windowStartIndices.add(startIdx);
-				windowEndIndices.add(endIdx);
-			}
+		// If route is very short, adjust window size
+		double effectiveWindowSize = Math.min(WINDOW_SIZE, totalRouteDistance * 0.5);
+		if (effectiveWindowSize < MIN_WINDOW_DISTANCE) {
+			// For very short routes, just check the whole route
+			effectiveWindowSize = totalRouteDistance;
 		}
 
-		// Now group consecutive climb windows into climbs
-		int climbStartWindow = -1;
-		boolean inClimb = false;
-		double currentClimbElevationGain = 0;
-		double currentClimbDistance = 0;
-		int currentClimbStartIndex = -1;
-		int currentClimbEndIndex = -1;
+		// Step 1: Calculate window average grade for each point
+		// For each point i, calculate the average grade in the window [i, i + effectiveWindowSize]
+		List<Float> windowAvgGrades = new ArrayList<>();
+		List<Boolean> isClimbPoint = new ArrayList<>();
 
-		for (int w = 0; w < isClimbWindow.size(); w++) {
+		for (int i = 0; i < locations.size(); i++) {
+			// Find all points within effectiveWindowSize from point i
+			double windowStartDist = cumulativeDistances.get(i);
+			double windowEndDist = windowStartDist + effectiveWindowSize;
+
+			// Find end point of window
+			int endIdx = locations.size() - 1;
+			for (int j = i + 1; j < locations.size(); j++) {
+				if (cumulativeDistances.get(j) > windowEndDist) {
+					endIdx = j - 1;
+					break;
+				}
+			}
+
+			// If endIdx <= i, we don't have enough points for a window
+			// Use the next point if available
+			if (endIdx <= i && i + 1 < locations.size()) {
+				endIdx = i + 1;
+			}
+
+			// Calculate positive elevation gain and distance in this window
+			double windowPositiveElevationGain = 0;
+			double windowDistance = 0;
+			boolean hasValidElevation = true;
+
+			for (int j = i + 1; j <= endIdx; j++) {
+				Location prevPoint = locations.get(j - 1);
+				Location currPoint = locations.get(j);
+
+				if (Double.isNaN(prevPoint.getAltitude()) || Double.isNaN(currPoint.getAltitude())) {
+					hasValidElevation = false;
+					break;
+				}
+
+				double elevationGain = currPoint.getAltitude() - prevPoint.getAltitude();
+				double segmentDistance = cumulativeDistances.get(j) - cumulativeDistances.get(j - 1);
+
+				if (elevationGain > 0) {
+					windowPositiveElevationGain += elevationGain;
+				}
+				windowDistance += segmentDistance;
+			}
+
+			// Calculate average grade for this window
+			float avgGrade = hasValidElevation && windowDistance > 0 ?
+				(float) ((windowPositiveElevationGain / windowDistance) * 100) : 0f;
+
+			windowAvgGrades.add(avgGrade);
+			isClimbPoint.add(avgGrade >= minClimbGrade && windowPositiveElevationGain > 0);
+		}
+
+		// Step 2: Group consecutive climb points into climb segments
+		// A climb starts when we have a climb point and continues through consecutive climb points
+		// This allows small non-climb points (with avg grade < minClimbGrade) to be included
+		// if they're surrounded by climb points
+		
+		int climbStart = -1;
+		boolean inClimb = false;
+
+		for (int i = 0; i < isClimbPoint.size(); i++) {
 			if (!inClimb) {
-				if (isClimbWindow.get(w)) {
+				if (isClimbPoint.get(i)) {
 					inClimb = true;
-					climbStartWindow = w;
-					currentClimbElevationGain = windowElevationGains.get(w);
-					currentClimbDistance = windowEndDistances.get(w) - windowStartDistances.get(w);
-					currentClimbStartIndex = windowStartIndices.get(w);
-					currentClimbEndIndex = windowEndIndices.get(w);
+					climbStart = i;
 				}
 			} else {
-				if (isClimbWindow.get(w)) {
-					// Continue the climb
-					currentClimbElevationGain += windowElevationGains.get(w);
-					currentClimbDistance += windowEndDistances.get(w) - windowStartDistances.get(w);
-					currentClimbEndIndex = windowEndIndices.get(w);
-				} else {
-					// End of climb
-					if (currentClimbElevationGain >= minClimbElevation) {
-						float avgGrade = currentClimbDistance > 0 ? 
-							(float) ((currentClimbElevationGain / currentClimbDistance) * 100) : 0f;
-						if (avgGrade >= minClimbGrade) {
-							climbs.add(new ClimbSegment(currentClimbStartIndex, currentClimbEndIndex, 
-									currentClimbElevationGain, currentClimbDistance, avgGrade));
+				if (!isClimbPoint.get(i)) {
+					// End of climb - check if it meets thresholds
+					if (climbStart < i - 1) {
+						// Calculate total elevation gain and distance for this climb
+						double climbElevationGain = 0;
+						double climbDistance = 0;
+
+						for (int j = climbStart + 1; j < i; j++) {
+							Location prevPoint = locations.get(j - 1);
+							Location currPoint = locations.get(j);
+
+							if (Double.isNaN(prevPoint.getAltitude()) || Double.isNaN(currPoint.getAltitude())) {
+								climbElevationGain = 0;
+								climbDistance = 0;
+								break;
+							}
+
+							double elevationGain = currPoint.getAltitude() - prevPoint.getAltitude();
+							if (elevationGain > 0) {
+								climbElevationGain += elevationGain;
+							}
+							double segmentDistance = cumulativeDistances.get(j) - cumulativeDistances.get(j - 1);
+							climbDistance += segmentDistance;
+						}
+
+						// Calculate average grade
+						float avgGrade = climbDistance > 0 ?
+							(float) ((climbElevationGain / climbDistance) * 100) : 0f;
+
+						// Check thresholds
+						if (climbElevationGain >= minClimbElevation && avgGrade >= minClimbGrade) {
+							climbs.add(new ClimbSegment(climbStart, i - 1, climbElevationGain, climbDistance, avgGrade));
 						}
 					}
 					// Reset
 					inClimb = false;
-					currentClimbElevationGain = 0;
-					currentClimbDistance = 0;
+					climbStart = -1;
 				}
 			}
 		}
 
 		// Handle the last climb if we're still in one
-		if (inClimb && currentClimbElevationGain >= minClimbElevation) {
-			float avgGrade = currentClimbDistance > 0 ? 
-				(float) ((currentClimbElevationGain / currentClimbDistance) * 100) : 0f;
-			if (avgGrade >= minClimbGrade) {
-				climbs.add(new ClimbSegment(currentClimbStartIndex, currentClimbEndIndex, 
-						currentClimbElevationGain, currentClimbDistance, avgGrade));
+		if (inClimb && climbStart >= 0) {
+			int end = isClimbPoint.size() - 1;
+			if (climbStart < end) {
+				// Calculate total elevation gain and distance for this climb
+				double climbElevationGain = 0;
+				double climbDistance = 0;
+
+				for (int j = climbStart + 1; j <= end; j++) {
+					Location prevPoint = locations.get(j - 1);
+					Location currPoint = locations.get(j);
+
+					if (Double.isNaN(prevPoint.getAltitude()) || Double.isNaN(currPoint.getAltitude())) {
+						climbElevationGain = 0;
+						climbDistance = 0;
+						break;
+					}
+
+					double elevationGain = currPoint.getAltitude() - prevPoint.getAltitude();
+					if (elevationGain > 0) {
+						climbElevationGain += elevationGain;
+					}
+					double segmentDistance = cumulativeDistances.get(j) - cumulativeDistances.get(j - 1);
+					climbDistance += segmentDistance;
+				}
+
+				// Calculate average grade
+				float avgGrade = climbDistance > 0 ?
+					(float) ((climbElevationGain / climbDistance) * 100) : 0f;
+
+				// Check thresholds
+				if (climbElevationGain >= minClimbElevation && avgGrade >= minClimbGrade) {
+					climbs.add(new ClimbSegment(climbStart, end, climbElevationGain, climbDistance, avgGrade));
+				}
 			}
 		}
 
