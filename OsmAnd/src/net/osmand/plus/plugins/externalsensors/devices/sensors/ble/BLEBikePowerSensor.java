@@ -292,6 +292,7 @@ public class BLEBikePowerSensor extends BLEAbstractSensor {
 				BikePowerData powerData = lastBikePowerData;
 				if (powerData != null) {
 					json.put(SENSOR_TAG_BIKE_POWER, powerData.getCalculatedPower());
+					json.put("pwr:PowerInWatts", powerData.getCalculatedPower());
 				}
 				break;
 			default:

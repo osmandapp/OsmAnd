@@ -166,6 +166,7 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 		double calculatedPower = data != null ? data.getCalculatedPower() : 0;
 		if (calculatedPower > 0) {
 			json.put(SENSOR_TAG_BIKE_POWER, DECIMAL_FORMAT.format(calculatedPower));
+			json.put("pwr:PowerInWatts", DECIMAL_FORMAT.format(calculatedPower));
 		}
 	}
 }
