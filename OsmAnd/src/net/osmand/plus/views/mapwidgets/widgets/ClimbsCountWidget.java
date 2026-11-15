@@ -39,6 +39,8 @@ import java.util.List;
 
 public class ClimbsCountWidget extends SimpleWidget {
 
+	private static final float DESCENT_TOLERANCE = 3.0f; // percentage - allow descents up to this slope within a climb
+
 	// Custom view for drawing elevation profile
 	private static class ElevationProfileView extends View {
 		private List<Double> elevations;
@@ -291,121 +293,139 @@ public class ClimbsCountWidget extends SimpleWidget {
 		}
 		this.cumulativeDistances = new ArrayList<>(cumulativeDistances);
 
-		// Find climbs by identifying uphill segments that meet criteria
-		// ALGORITHM: Allow small descents and plateaus within a climb
-		// - Start climb on first positive elevation gain
-		// - Continue through flat and small descents (<10m, net elevation >= 0)
-		// - End climb on significant descent (>10m) or negative net elevation
-		// - Use cumulative distances for total climb distance (not just ascending parts)
-		int climbStartIndex = 0;
-		boolean inClimb = false;
-		double currentClimbGain = 0;  // Total elevation gain (only ascending parts)
-		double netElevationSinceStart = 0;  // Net elevation from climb start (ascending - descending)
+		// NEW HYBRID ALGORITHM (2026-11-15 v2):
+		// Based on user feedback: "kijk naar de route. detecteer waar er hoogteverschil wordt gemaakt
+		// en bepaal op basis van de instellingen wanneer dat zo is."
+		//
+		// This approach:
+		// 1. Identifies all segments with positive elevation gain (climbing segments)
+		// 2. Groups consecutive climbing segments into a single climb
+		// 3. Allows small descents (slope > -minGrade) and flat segments within a climb
+		// 4. Ends a climb when a significant descent is encountered (slope <= -minGrade)
+		// 5. For each climb, calculates total elevation gain, total distance, and average grade
+		// 6. Only counts climbs where total elevation gain >= minElevation AND average grade >= minGrade
 		
-		// For building elevation profiles per climb
-		List<Double> climbElevationProfile = new ArrayList<>();
-		List<Double> climbDistanceProfile = new ArrayList<>();
-
+		// Pre-calculate segment slopes and elevation gains
+		List<Float> segmentSlopes = new ArrayList<>();
+		List<Double> segmentDistancesList = new ArrayList<>();
+		List<Double> segmentElevationGainsList = new ArrayList<>();
+		
 		for (int i = 1; i < allPoints.size(); i++) {
 			WptPt prevPoint = allPoints.get(i - 1);
 			WptPt currPoint = allPoints.get(i);
-
+			
 			// Skip if no valid elevation data
 			if (Double.isNaN(prevPoint.getEle()) || Double.isNaN(currPoint.getEle())) {
-				// End current climb if we were in one and it meets criteria
-				if (inClimb && currentClimbGain >= minElevation) {
-					// ALWAYS use cumulative distances for accurate distance
-					double climbDistance = cumulativeDistances.get(i - 1) - cumulativeDistances.get(climbStartIndex);
-					float avgGrade = climbDistance > 0 ? calculateGrade(currentClimbGain, climbDistance) : 0;
-					if (avgGrade >= minGrade) {
-						Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, climbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
-						result.climbs.add(climb);
-						climbs.add(climb);
-						result.info.totalClimbs++;
-					}
-				}
-				inClimb = false;
-				climbElevationProfile = new ArrayList<>();
-				climbDistanceProfile = new ArrayList<>();
-				currentClimbGain = 0;
-				netElevationSinceStart = 0;
+				segmentSlopes.add(0f);
+				segmentDistancesList.add(0.0);
+				segmentElevationGainsList.add(0.0);
 				continue;
 			}
-
+			
 			double elevationGain = currPoint.getEle() - prevPoint.getEle();
-			double segmentDistance = MapUtils.getDistance(prevPoint.getLatitude(), prevPoint.getLongitude(), currPoint.getLatitude(), currPoint.getLongitude());
+			double distance = cumulativeDistances.get(i) - cumulativeDistances.get(i - 1);
+			
+			// Calculate slope as percentage: (elevationGain / distance) * 100
+			float slope = distance > 0 ? (float) ((elevationGain / distance) * 100) : 0f;
+			
+			segmentSlopes.add(slope);
+			segmentDistancesList.add(distance);
+			segmentElevationGainsList.add(elevationGain);
+		}
+
+		// Now detect climbs based on grouping segments with tolerance for small descents
+		int climbStartSegment = -1;
+		boolean inClimb = false;
+		double currentClimbElevationGain = 0;
+		double currentClimbDistance = 0;
+		
+		// For building elevation profiles per climb
+		List<Double> climbElevationProfile = new ArrayList<>();
+
+		for (int segIdx = 0; segIdx < segmentSlopes.size(); segIdx++) {
+			float slope = segmentSlopes.get(segIdx);
+			double distance = segmentDistancesList.get(segIdx);
+			double elevationGain = segmentElevationGainsList.get(segIdx);
 
 			if (!inClimb) {
-				// Not in a climb, check if we should start one (only on positive elevation gain)
-				if (elevationGain > 0) {
+				// Not in a climb, check if we should start one
+				// Start a climb when we have a positive slope that meets the grade threshold
+				if (slope >= minGrade && elevationGain > 0) {
 					inClimb = true;
-					climbStartIndex = i - 1;
-					currentClimbGain = elevationGain;
-					netElevationSinceStart = elevationGain;
-					// Start fresh profiles for this climb
+					climbStartSegment = segIdx;
+					currentClimbElevationGain = elevationGain;
+					currentClimbDistance = distance;
+					
+					// Start elevation profile for this climb
 					climbElevationProfile = new ArrayList<>();
-					climbDistanceProfile = new ArrayList<>();
-					climbElevationProfile.add(prevPoint.getEle());
-					climbDistanceProfile.add(0.0);
-					climbElevationProfile.add(currPoint.getEle());
-					climbDistanceProfile.add(cumulativeDistances.get(i) - cumulativeDistances.get(i - 1));
+					climbElevationProfile.add(allPoints.get(segIdx).getEle());
+					climbElevationProfile.add(allPoints.get(segIdx + 1).getEle());
 				}
 			} else {
 				// We're in a climb
-				// Always add to profiles (for visualization)
-				climbElevationProfile.add(currPoint.getEle());
-				// For distance profile, use cumulative distance from climb start
-				climbDistanceProfile.add(cumulativeDistances.get(i) - cumulativeDistances.get(climbStartIndex));
-
-				// Track net elevation from climb start
-				netElevationSinceStart += elevationGain;
-
-				if (elevationGain > 0) {
-					// Still climbing - add to total gain
-					currentClimbGain += elevationGain;
-				} else if (elevationGain < 0) {
-					// Descending - check if we should end the climb
-					// End climb if: net elevation < 0 OR single descent > 10m
-					// This allows small descents (<10m) within a climb
-					if (netElevationSinceStart < 0 || (prevPoint.getEle() - currPoint.getEle()) > 10) {
-						// End of climb - check if it meets criteria
-						if (currentClimbGain >= minElevation) {
-							// ALWAYS use cumulative distances for accurate distance
-							double climbDistance = cumulativeDistances.get(i - 1) - cumulativeDistances.get(climbStartIndex);
-							float avgGrade = climbDistance > 0 ? calculateGrade(currentClimbGain, climbDistance) : 0;
-							if (avgGrade >= minGrade) {
-								Climb climb = createClimb(climbStartIndex, i - 1, currentClimbGain, climbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
-								result.climbs.add(climb);
-								climbs.add(climb);
-								result.info.totalClimbs++;
-							}
-						}
-						// Reset
-						inClimb = false;
-						climbElevationProfile = new ArrayList<>();
-						climbDistanceProfile = new ArrayList<>();
-						currentClimbGain = 0;
-						netElevationSinceStart = 0;
+				// Continue if: slope > -DESCENT_TOLERANCE (allows descents up to DESCENT_TOLERANCE)
+				// End if: slope <= -DESCENT_TOLERANCE (significant downhill)
+				
+				if (slope > -DESCENT_TOLERANCE) {
+					// Continue the climb (includes positive, flat, and small negative slopes)
+					if (elevationGain > 0) {
+						currentClimbElevationGain += elevationGain;
 					}
+					currentClimbDistance += distance;
+					climbElevationProfile.add(allPoints.get(segIdx + 1).getEle());
+				} else {
+					// Significant downhill - end the climb
+					if (currentClimbElevationGain >= minElevation) {
+						float avgGrade = currentClimbDistance > 0 ? 
+							(float) ((currentClimbElevationGain / currentClimbDistance) * 100) : 0f;
+						
+						// Create distance profile based on cumulative distances
+						List<Double> climbDistanceProfile = new ArrayList<>();
+						for (int j = climbStartSegment; j <= segIdx; j++) {
+							climbDistanceProfile.add(cumulativeDistances.get(j + 1) - cumulativeDistances.get(climbStartSegment));
+						}
+						
+						if (avgGrade >= minGrade) {
+							// Segment segIdx ends at location segIdx+1, but we ended at segIdx
+							// So climb is from location climbStartSegment to segIdx
+							Climb climb = createClimb(climbStartSegment, segIdx, 
+									currentClimbElevationGain, currentClimbDistance, avgGrade, 
+									climbElevationProfile, climbDistanceProfile);
+							result.climbs.add(climb);
+							climbs.add(climb);
+							result.info.totalClimbs++;
+						}
+					}
+					// Reset
+					inClimb = false;
+					climbElevationProfile = new ArrayList<>();
+					currentClimbElevationGain = 0;
+					currentClimbDistance = 0;
 				}
-				// Flat segments: continue climb, no action needed
 			}
 		}
 
 		// Handle the last climb if we're still in one
-		if (inClimb && currentClimbGain >= minElevation) {
-			// Use cumulative distances for accurate distance calculation
-			double climbDistance = cumulativeDistances.get(allPoints.size() - 1) - cumulativeDistances.get(climbStartIndex);
-			float avgGrade = climbDistance > 0 ? calculateGrade(currentClimbGain, climbDistance) : 0;
+		if (inClimb && currentClimbElevationGain >= minElevation) {
+			float avgGrade = currentClimbDistance > 0 ? 
+				(float) ((currentClimbElevationGain / currentClimbDistance) * 100) : 0f;
+			
+			// Create distance profile for the last climb
+			List<Double> climbDistanceProfile = new ArrayList<>();
+			for (int j = climbStartSegment; j < segmentSlopes.size(); j++) {
+				climbDistanceProfile.add(cumulativeDistances.get(j + 1) - cumulativeDistances.get(climbStartSegment));
+			}
+			
 			if (avgGrade >= minGrade) {
-				Climb climb = createClimb(climbStartIndex, allPoints.size() - 1, currentClimbGain, climbDistance, avgGrade, climbElevationProfile, climbDistanceProfile);
+				// Last climb ends at the last location
+				Climb climb = createClimb(climbStartSegment, allPoints.size() - 1, 
+						currentClimbElevationGain, currentClimbDistance, avgGrade, 
+						climbElevationProfile, climbDistanceProfile);
 				result.climbs.add(climb);
 				climbs.add(climb);
 				result.info.totalClimbs++;
 			}
 		}
-		// Reset net elevation tracker
-		netElevationSinceStart = 0;
 
 		// Calculate completed climbs based on current location
 		if (!result.climbs.isEmpty()) {
