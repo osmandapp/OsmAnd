@@ -31,10 +31,12 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.ManeuverTester;
 import net.osmand.plus.auto.NavigationListener;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -246,11 +248,24 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 							.setOnClickListener(this::goBack)
 							.build());
 		}
-		actionStripBuilder.addAction(
-				new Action.Builder()
-						.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), compassResId)).build())
-						.setOnClickListener(this::compassClick)
-						.build());
+		NavigationSession session = getApp().getCarNavigationSession();
+		ManeuverTester maneuverTester = session != null ? session.getManeuverTester() : null;
+		if (navigating && maneuverTester != null && PluginsHelper.isDevelopment()) {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setTitle(maneuverTester.getTitle())
+							.setOnClickListener(() -> {
+								session.showNextTestManeuver();
+								invalidate();
+							})
+							.build());
+		} else {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), compassResId)).build())
+							.setOnClickListener(this::compassClick)
+							.build());
+		}
 		if (getApp().useOpenGlRenderer()) {
 			int dButtonResource = use3DButton ? R.drawable.ic_action_3d : R.drawable.ic_action_2d;
 			actionStripBuilder.addAction(

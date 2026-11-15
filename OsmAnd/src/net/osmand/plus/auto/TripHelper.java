@@ -52,11 +52,18 @@ public class TripHelper {
 	private TravelEstimate lastStepTravelEstimate;
 	private CharSequence lastCurrentRoad;
 	private AnnounceTimeDistances timeDistances;
+	private String lastClusterDiag;
+	private final ManeuverTester maneuverTester = new ManeuverTester();
 
 	public TripHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.routingHelper = app.getRoutingHelper();
+	}
+
+	@NonNull
+	public ManeuverTester getManeuverTester() {
+		return maneuverTester;
 	}
 
 	public Destination getLastDestination() {
@@ -102,6 +109,7 @@ public class TripHelper {
 		TurnType nextTurnType = null;
 		boolean leftSide = app.getSettings().DRIVING_REGION.get().leftHandDriving;
 		boolean deviatedFromRoute = routingHelper.isDeviatedFromRoute();
+		CarIcon turnIcon = null;
 		int turnImminent = 0;
 		int nextTurnDistance = 0;
 		NextDirectionInfo nextDirInfo = null;
@@ -128,11 +136,12 @@ public class TripHelper {
 			if (turnType.isRoundAbout()) {
 				turnBuilder.setRoundaboutExitNumber(turnType.getExitOut());
 			}
-			turnBuilder.setIcon(new CarIcon.Builder(IconCompat.createWithBitmap(bitmap)).build());
+			turnIcon = new CarIcon.Builder(IconCompat.createWithBitmap(bitmap)).build();
+			turnBuilder.setIcon(turnIcon);
 		} else {
 			turnBuilder = new Maneuver.Builder(Maneuver.TYPE_UNKNOWN);
 		}
-		Maneuver maneuver = turnBuilder.build();
+		Maneuver maneuver = maneuverTester.isActive() ? maneuverTester.buildManeuver(turnIcon) : turnBuilder.build();
 		AnnounceTimeDistances atd = routingHelper.getVoiceRouter().getAnnounceTimeDistances();
 		if (nextDirInfo != null && atd != null) {
 			float speed = atd.getSpeed(currentLocation);
@@ -140,7 +149,8 @@ public class TripHelper {
 			nextTurnType = TripUtils.getNextTurnType(atd, nextNextDirInfo, speed, nextDirInfo.distanceTo);
 		}
 		stepBuilder.setManeuver(maneuver);
-		stepBuilder.setCue(TripUtils.getNextTurnDescription(app, nextDirInfo, turnType, nextTurnType));
+		String cue = TripUtils.getNextTurnDescription(app, nextDirInfo, turnType, nextTurnType);
+		stepBuilder.setCue(maneuverTester.isActive() ? maneuverTester.getTitle() : cue);
 
 		nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, false);
 		if (nextDirInfo != null && nextDirInfo.directionInfo != null && nextDirInfo.directionInfo.getTurnType() != null) {
@@ -160,6 +170,7 @@ public class TripHelper {
 				Bitmap lanesBitmap = createLanesBitmap(stepBuilder, lanes, locimminent, leftSide, density);
 				stepBuilder.setLanesImage(new CarIcon.Builder(IconCompat.createWithBitmap(lanesBitmap)).build());
 			}
+			logClusterDiag(turnType, maneuver, lanes);
 		}
 
 		if (deviatedFromRoute) {
@@ -232,6 +243,17 @@ public class TripHelper {
 			Step nextStep = nextStepBuilder.build();
 			TravelEstimate nextStepTravelEstimate = nextStepTravelEstimateBuilder.build();
 			tripBuilder.addStep(nextStep, nextStepTravelEstimate);
+		}
+	}
+
+	// Collect with: adb logcat -s AACluster
+	private void logClusterDiag(@Nullable TurnType turnType, @NonNull Maneuver maneuver, @Nullable int[] lanes) {
+		String diag = "turn=" + (turnType != null ? turnType.toXmlString() + " (" + turnType + ")" : "null")
+				+ " maneuverType=" + maneuver.getType()
+				+ " lanes=" + (lanes != null ? TurnType.lanesToString(lanes) : "none");
+		if (!diag.equals(lastClusterDiag)) {
+			lastClusterDiag = diag;
+			android.util.Log.i("AACluster", diag);
 		}
 	}
 

@@ -11,6 +11,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.car.app.CarAppService;
 import androidx.car.app.Session;
+import androidx.car.app.SessionInfo;
 import androidx.car.app.validation.HostValidator;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -19,6 +20,7 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.auto.cluster.ClusterSession;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 import java.util.Arrays;
@@ -66,6 +68,15 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 		super.onDestroy();
 		getApp().setCarAppPermissionListener(null);
 		getApp().setNavigationCarAppService(null);
+	}
+
+	@Override
+	@NonNull
+	public Session onCreateSession(@NonNull SessionInfo sessionInfo) {
+		if (sessionInfo.getDisplayType() == SessionInfo.DISPLAY_TYPE_CLUSTER) {
+			return new ClusterSession();
+		}
+		return onCreateSession();
 	}
 
 	@Override

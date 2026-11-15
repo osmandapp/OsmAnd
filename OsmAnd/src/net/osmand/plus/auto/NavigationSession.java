@@ -1008,6 +1008,20 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		);
 	}
 
+	@Nullable
+	public ManeuverTester getManeuverTester() {
+		TripHelper tripHelper = this.tripHelper;
+		return tripHelper != null ? tripHelper.getManeuverTester() : null;
+	}
+
+	public void showNextTestManeuver() {
+		ManeuverTester maneuverTester = getManeuverTester();
+		if (maneuverTester != null) {
+			maneuverTester.next();
+			updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
+		}
+	}
+
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		TripHelper tripHelper = this.tripHelper;

@@ -34,6 +34,7 @@ import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.auto.cluster.ClusterRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -537,14 +538,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
-			if (offscreenMapRendererView != null) {
-				float leftOffset = 0.0f;
-				if (surfaceAdditionalWidth != 0) {
-					leftOffset = -surfaceAdditionalWidth * ((maxRatio - cachedRatioX) / (maxRatio - minRatio));
-				}
-				canvas.drawBitmap(offscreenMapRendererView.getBitmap(), leftOffset, 0, null);
-			}
-			mapView.drawOverMap(canvas, tileBox, drawSettings);
+			drawMap(canvas, tileBox, drawSettings);
 			SurfaceRendererCallback callback = this.callback;
 			if (callback != null) {
 				Rect visibleArea = this.visibleArea;
@@ -556,6 +550,61 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		} finally {
 			surface.unlockCanvasAndPost(canvas);
 		}
+		ClusterRenderer clusterRenderer = getApp().getCarClusterRenderer();
+		if (clusterRenderer != null) {
+			clusterRenderer.renderFrame(this, tileBox, new DrawSettings(darkMode, false));
+		}
+	}
+
+	public void drawMap(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull DrawSettings drawSettings) {
+		OsmandMapTileView mapView = this.mapView;
+		if (mapView == null) {
+			return;
+		}
+		AtlasMapRendererView offscreenMapRendererView = this.offscreenMapRendererView;
+		if (offscreenMapRendererView != null) {
+			float leftOffset = 0.0f;
+			if (surfaceAdditionalWidth != 0) {
+				leftOffset = -surfaceAdditionalWidth * ((maxRatio - cachedRatioX) / (maxRatio - minRatio));
+			}
+			canvas.drawBitmap(offscreenMapRendererView.getBitmap(), leftOffset, 0, null);
+		}
+		mapView.drawOverMap(canvas, tileBox, drawSettings);
+	}
+
+	@Nullable
+	public Rect getSurfaceArea() {
+		SurfaceContainer surfaceContainer = this.surfaceContainer;
+		return surfaceContainer != null ? new Rect(0, 0, surfaceContainer.getWidth(), surfaceContainer.getHeight()) : null;
+	}
+
+	/**
+	 * The part of the surface where the map is not covered by the host UI.
+	 */
+	@Nullable
+	public Rect getMapArea() {
+		Rect visibleArea = this.visibleArea;
+		if (visibleArea != null && !visibleArea.isEmpty()) {
+			return new Rect(visibleArea);
+		}
+		return getSurfaceArea();
+	}
+
+	/**
+	 * My location is kept horizontally in the middle of the map area.
+	 */
+	public float getMyLocationX() {
+		Rect mapArea = getMapArea();
+		return mapArea != null ? mapArea.exactCenterX() : 0;
+	}
+
+	public float getMyLocationY() {
+		SurfaceContainer surfaceContainer = this.surfaceContainer;
+		if (cachedRatioY > 0 && surfaceContainer != null) {
+			return cachedRatioY * surfaceContainer.getHeight();
+		}
+		Rect mapArea = getMapArea();
+		return mapArea != null ? mapArea.exactCenterY() : 0;
 	}
 
 
