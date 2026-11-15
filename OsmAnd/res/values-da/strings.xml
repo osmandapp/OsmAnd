@@ -5555,4 +5555,5 @@
     <string name="terrain_shadows">Terrænskygger</string>
     <string name="terrain_shadows_description">Dynamisk skyggeeffekt i realtid til 3D-terræn. Fremhæver landskabets geometri med minimal indvirkning på ydeevnen.</string>
     <string name="terrain_shadows_relief_3d_footer">3D-relief aktiveres automatisk, da det er nødvendigt for at gengive terrænskygger.</string>
+    <string name="attach_to_track">Vedhæft til spor</string>
 </resources>
