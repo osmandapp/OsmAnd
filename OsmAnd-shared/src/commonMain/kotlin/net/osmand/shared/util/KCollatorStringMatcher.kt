@@ -4,27 +4,16 @@ import net.osmand.shared.api.KStringMatcherMode
 import kotlin.jvm.JvmStatic
 
 /**
- * Copy of `net.osmand.CollatorStringMatcher` in OsmAnd-java: does a name start with, contain or
- * equal what was typed, folding case and accents with desktop-derived collation keys.
+ * Shared implementation of the OsmAnd-java matcher modes using [KCollationKey] comparisons.
+ * Each query/name is aligned once, and prepared names reuse the same key across modes. All modes
+ * preserve significant spaces and fold their Unicode equivalents as observed on Android.
  *
- * Same modes, with a deliberate Android space rule for CHECK_CONTAINS: ordinary and equivalent
- * Unicode spaces are significant. Other modes retain the desktop JVM separator rules.
- * Java asks a collator whether two stretches
- * of text are equal, once per starting position and once per length, which for a name of 30
- * characters and a query of 5 is a few hundred collator calls and as many substrings - the java
- * source calls it "not effective code, it runs on each comparison". Here each string is reduced
- * once to a [KCollationKey], and the stretches are compared inside it without cutting substrings
- * out. On iOS that is also the difference between one crossing into Foundation per name and
- * several hundred.
+ * Other separator/expansion rules remain desktop-derived; locale-dependent Android ICU behavior
+ * is not fully reproduced. The static [cmatches] lowercases its query like the instance path,
+ * whereas Java only lowercases it in the constructor.
  *
- * Another deliberate difference. Java lowercases the query in the constructor but not in the static
- * [cmatches], and `java.text.Collator` only folds case for the scripts its locale rules name - for
- * everything else it compares by code point, so `cmatches` treats `Ш` and `ш` as different letters
- * while `matches` does not. Here the query is lowercased on both paths, which is what the instance
- * path and the iOS matcher already do; see also the notes on `KSearchAlgorithms`.
- *
- * `CollatorCompatTest` compares the test-map corpus with a JVM reference whose contains-space
- * rule is explicitly tailored to the Android observations; it is not a complete ICU oracle.
+ * `CollatorCompatTest` uses a desktop reference with Android's space rule in every mode; direct
+ * Android observations and common regression tests cover spaces and word boundaries separately.
  */
 class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMatcher {
 
@@ -124,13 +113,11 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 
 		/** Whether [part] is contained in [base]. */
 		fun ccontains(base: KCollationKey, part: KCollationKey): Boolean {
-			val baseKey = base.withNormalizedSpaces()
-			val partKey = part.withNormalizedSpaces()
-			if (baseKey.length <= partKey.length) {
-				return baseKey.keyEquals(partKey) && baseKey.regionSpacesEqual(0, baseKey.length, partKey)
+			if (base.length <= part.length) {
+				return base.keyEquals(part)
 			}
 			// java reaches part.length() * 2 characters from each starting position, no further
-			return baseKey.containsKeyOf(partKey, partKey.length * 2)
+			return base.containsKeyOf(part, part.length * 2)
 		}
 
 		/**

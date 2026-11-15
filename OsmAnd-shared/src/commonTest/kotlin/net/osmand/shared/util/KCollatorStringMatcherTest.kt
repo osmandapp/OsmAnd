@@ -36,20 +36,50 @@ class KCollatorStringMatcherTest {
 	}
 
 	@Test
-	fun containsFoldsAndroidUnicodeSpaces() {
-		// Observed with Android API 37 java.text.Collator PRIMARY in en-US/de-DE/ru-RU.
+	fun allModesFoldAndroidUnicodeSpaces() {
+		// Recorded from OsmAnd's Java matcher on Android API 37 in en-US/de-DE/ru-RU.
+		// Each answer string follows the explicit mode order below; 1 means a match.
+		val modes = listOf(
+			KStringMatcherMode.CHECK_ONLY_STARTS_WITH,
+			KStringMatcherMode.CHECK_STARTS_FROM_SPACE,
+			KStringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
+			KStringMatcherMode.CHECK_EQUALS_FROM_SPACE,
+			KStringMatcherMode.CHECK_CONTAINS,
+			KStringMatcherMode.CHECK_EQUALS,
+			KStringMatcherMode.MULTISEARCH
+		)
 		val spaces = " \u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000"
 		for (space in spaces) {
-			assertContains(true, "new york", "New${space}York")
-			assertContains(true, "new york", "Café New${space}York Deli")
-			assertContains(true, "new${space}york", "New York")
-			assertContains(false, "Four", "Grifo${space}Uris Bell")
-			assertContains(false, "newyork", "New${space}York")
-			assertContains(true, "four$space", "four square")
-			assertContains(false, "four$space", "fourteen")
-		}
-		for (control in "\t\n\u200B\uFEFF") {
-			assertContains(false, "new york", "New${control}York")
+			val cases = listOf(
+				Triple("new york", "New${space}York", "1101111"),
+				Triple("newyork", "New${space}York", "0000000"),
+				Triple("new${space}york", "New York", "1101111"),
+				Triple("new york", "Café New${space}York Deli", "0111100"),
+				Triple("Four", "Grifo${space}Uris Bell", "0000000"),
+				Triple("york", "New${space}York", "0111100"),
+				Triple("four$space", "four square", "1100100"),
+				Triple("four$space", "fourteen", "0000000"),
+				Triple("four$space$space", "four  square", "1100100"),
+				Triple("st john", "St$space${space}John", "0000000"),
+				Triple("$space", "Auhofstraße", "0000000"),
+				Triple("$space", "$space", "1101111"),
+				Triple("", "New${space}York", "1111110"),
+				Triple("new york.", "New${space}York Deli", "1101110"),
+				Triple("new$space", "new york", "1100100"),
+				Triple("new york", "New${space}Yorker", "1100100")
+			)
+			for ((query, name, answers) in cases) {
+				for ((index, mode) in modes.withIndex()) {
+					val expected = answers[index] == '1'
+					val matcher = KCollatorStringMatcher(query, mode)
+					val label = "${mode.name}: '$query' in '$name'"
+					assertEquals(expected, matcher.matches(name), label)
+					// Java's instance path resolves an incomplete dot before its static matcher.
+					assertEquals(expected, KCollatorStringMatcher.cmatches(name, matcher.part.text, matcher.mode), label)
+					assertEquals(expected, KCollatorStringMatcher.cmatchesPrepared(
+						KCollatorStringMatcher.PreparedName(name), matcher.part, matcher.mode), label)
+				}
+			}
 		}
 	}
 

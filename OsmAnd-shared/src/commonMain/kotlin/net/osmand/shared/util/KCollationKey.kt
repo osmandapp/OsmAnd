@@ -1,38 +1,19 @@
 package net.osmand.shared.util
 
 /**
- * A name reduced to what a primary-strength collator compares, so that comparing two names is
- * comparing two char arrays.
+ * A name reduced to a key so matching compares arrays instead of calling a platform collator
+ * at each character position. Case and diacritics are aligned before the key is built; æ, œ and þ
+ * expand to ae, oe and th. [starts] maps source positions to key offsets without substrings.
  *
- * Desktop JVM `java.text.Collator` at PRIMARY strength ignores
- * case, accents and separators. `CollatorStringMatcher` hands it text that is already lowercased
- * and stripped of diacritics, so the only differences left for the collator to fold are:
- * - the separators, which it skips entirely: spaces, control characters, every kind of dash, the
- *   soft hyphen and the zero width characters. `a-b` and `ab` are equal to it, `no.` and `no` are
- *   not, because a full stop is not one of them;
- * - three letters that expand: `æ` is `ae`, `œ` is `oe`, `þ` is `th`.
+ * Spaces have a primary weight in every matcher mode, as on Android. Ordinary space and its
+ * 16 Unicode equivalents are written as U+0020 in the same pass that builds the key. Repeated,
+ * leading and trailing spaces are retained. The original text stays available for word boundaries
+ * and source-length limits; no normalized copy or second key is needed.
  *
- * Both sets were taken from the collator itself rather than guessed, by asking it for the collation
- * key of every character of the basic plane; `KCollationKeyTest` checks them against it and against
- * a corpus of real names. Nothing else folds: of the 60167 characters that survive lowercasing and
- * diacritic stripping, no two are primary-equal unless both are separators, and no character
- * expands into three.
- *
- * Android uses different collation rules: spaces are significant. CHECK_CONTAINS additionally
- * normalizes Android-equivalent Unicode spaces and compares their positions; other matcher modes
- * still use the desktop-derived keys described here. This is not a general Android ICU key.
- *
- * So a name's key is its aligned text with the separators dropped and those three letters expanded,
- * and `collator.equals(a, b)` is `key(a) == key(b)`. The matcher builds one key per name instead of
- * calling a collator once per character position, which on iOS is also one bridge crossing per name
- * instead of hundreds.
- *
- * [starts] keeps the link back to the text, so that a stretch of the name can be compared without
- * cutting a substring out of it first.
- *
- * Deliberately locale independent, where java takes the collator of the device's locale. Locale
- * rules make the same map read differently on two phones - the java side already forces US rules
- * for romanian, czech and slovak to get away from that - and iOS matches names without a locale.
+ * Other ignored characters and letter expansions retain the desktop-JVM-derived rules. This is
+ * not a complete implementation of Android ICU collation: locale-dependent rules and differences
+ * for other separators are outside this key's contract. Tests distinguish that JVM reference from
+ * space/matcher cases observed on Android.
  */
 class KCollationKey private constructor(
 	/** Lowercased and aligned text: what a java matcher indexes into. */
@@ -40,8 +21,7 @@ class KCollationKey private constructor(
 	private val key: CharArray,
 	private val keyLength: Int,
 	/** Key offset where `text[i]` begins, with `starts[text.length]` the whole key length. */
-	private val starts: IntArray,
-	private val hasUnicodeSpaces: Boolean
+	private val starts: IntArray
 ) {
 
 	val length: Int
@@ -73,34 +53,6 @@ class KCollationKey private constructor(
 		return true
 	}
 
-	/** Fold Android-equivalent spaces only for contains matching; keep other modes unchanged. */
-	internal fun withNormalizedSpaces(): KCollationKey {
-		if (!hasUnicodeSpaces) {
-			return this
-		}
-		val chars = text.toCharArray()
-		for (i in chars.indices) {
-			if (isUnicodeSpace(chars[i])) {
-				chars[i] = ' '
-			}
-		}
-		return ofAligned(chars.concatToString())
-	}
-
-	/** Spaces must occupy the same key offsets when matching a substring on Android. */
-	internal fun regionSpacesEqual(from: Int, to: Int, other: KCollationKey): Boolean {
-		var sourceSpace = text.indexOf(' ', from)
-		var otherSpace = other.text.indexOf(' ')
-		while (sourceSpace >= 0 && sourceSpace < to && otherSpace >= 0) {
-			if (starts[sourceSpace] - starts[from] != other.starts[otherSpace]) {
-				return false
-			}
-			sourceSpace = text.indexOf(' ', sourceSpace + 1)
-			otherSpace = other.text.indexOf(' ', otherSpace + 1)
-		}
-		return (sourceSpace < 0 || sourceSpace >= to) && otherSpace < 0
-	}
-
 	/**
 	 * Whether any stretch of this name has the key of [other], within the [maxSourceLength]
 	 * characters that the java `ccontains` loop reaches from each starting position.
@@ -124,15 +76,7 @@ class KCollationKey private constructor(
 				continue
 			}
 			if (regionKeyEquals(pos, end, other)) {
-				// Include trailing spaces if the query contains them, without crossing another key.
-				var candidateEnd = end
-				while (candidateEnd <= text.length && candidateEnd - pos <= maxSourceLength
-					&& starts[candidateEnd] == targetEnd) {
-					if (regionSpacesEqual(pos, candidateEnd, other)) {
-						return true
-					}
-					candidateEnd++
-				}
+				return true
 			}
 		}
 		return false
@@ -150,12 +94,13 @@ class KCollationKey private constructor(
 			val key = CharArray(aligned.length * 2)
 			val starts = IntArray(aligned.length + 1)
 			var at = 0
-			var hasUnicodeSpaces = false
 			for (i in aligned.indices) {
 				starts[i] = at
 				val ch = aligned[i]
-				hasUnicodeSpaces = hasUnicodeSpaces || (ch >= '\u00A0' && isUnicodeSpace(ch))
 				when {
+					// Common names stay on the existing printable-ASCII path; spaces now have a weight.
+					ch in ' '..'~' -> if (ch != '-') key[at++] = ch
+					isUnicodeSpace(ch) -> key[at++] = ' '
 					isSeparator(ch) -> {}
 					ch == 'æ' -> {
 						key[at++] = 'a'
@@ -173,11 +118,10 @@ class KCollationKey private constructor(
 				}
 			}
 			starts[aligned.length] = at
-			return KCollationKey(aligned, key, at, starts, hasUnicodeSpaces)
+			return KCollationKey(aligned, key, at, starts)
 		}
 
-		// Verified with java.text.Collator at PRIMARY strength on Android API 37 (en/de/ru).
-		// Tabs, newlines and zero-width characters are not equivalent to a space.
+		// java.text.Collator PRIMARY on Android API 37, checked in en-US/de-DE/ru-RU.
 		private fun isUnicodeSpace(ch: Char): Boolean =
 			ch == '\u00A0' || ch == '\u1680' || ch in '\u2000'..'\u200A' ||
 					ch == '\u202F' || ch == '\u205F' || ch == '\u3000'
@@ -209,32 +153,24 @@ class KCollationKey private constructor(
 			return chars?.concatToString() ?: text
 		}
 
-		/** What `collator.equals(source, target)` answers at primary strength. */
+		/** Primary key equality, including significant Android-equivalent spaces. */
 		fun primaryEquals(source: String, target: String): Boolean = of(source).keyEquals(of(target))
 
-		/**
-		 * The characters a primary-strength collator skips: it gives every one of them the same
-		 * collation key as the empty string.
-		 *
-		 * Taken from `java.text.Collator` over the whole basic plane, see the class comment. The
-		 * combining mark ranges are in it for completeness; diacritic stripping has already removed
-		 * them by the time a key is built.
-		 */
+		/** Characters omitted from the key: desktop JVM ignorables except significant spaces. */
 		fun isSeparator(ch: Char): Boolean {
 			val code = ch.code
-			if (code > 0x0020 && code < 0x007F) {
+			if (code >= 0x0020 && code < 0x007F) {
 				return code == 0x002D // hyphen-minus, the one separator among the printable ascii
 			}
-			return code <= 0x0020
-					|| code <= 0x00A0 // 0x007F..0x00A0, the c1 controls and the no-break space
+			return code < 0x0020
+					|| code in 0x007F..0x009F // c1 controls; U+00A0 has a space weight
 					|| code == 0x00AD
 					|| code in 0x0300..0x0345
 					|| code in 0x0360..0x0361
 					|| code in 0x0483..0x0486
-					|| code in 0x2000..0x2015
+					|| code in 0x200B..0x2015
 					|| code in 0x20D0..0x20E1
 					|| code == 0x2212
-					|| code == 0x3000
 					|| code == 0xFEFF
 		}
 	}

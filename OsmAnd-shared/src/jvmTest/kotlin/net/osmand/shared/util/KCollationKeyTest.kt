@@ -1,6 +1,7 @@
 package net.osmand.shared.util
 
 import java.text.Collator
+import java.text.RuleBasedCollator
 import java.util.Locale
 import kotlin.random.Random
 import kotlin.test.Test
@@ -8,16 +9,17 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
- * [KCollationKey] claims that comparing two keys answers what `java.text.Collator` answers at
- * primary strength, for text that lowercasing and diacritic stripping has already been through.
- * That claim is the whole reason the matcher needs no collator, so it is checked against the
- * collator itself rather than against a list of examples someone wrote down.
+ * Exhaustive checks against the desktop-JVM-derived key rules, with significant/equivalent spaces
+ * tailored to observations on Android API 37. This is not a full Android ICU oracle; the common
+ * matcher regressions separately replay Android answers for all seven modes.
  */
 class KCollationKeyTest {
 
-	private val collator: Collator = Collator.getInstance(Locale.US).apply {
-		strength = Collator.PRIMARY
-	}
+	private val collator: Collator = RuleBasedCollator(
+		(Collator.getInstance(Locale.US) as RuleBasedCollator).rules + " & z < ' '" +
+				"\u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000"
+					.map { " = '$it'" }.joinToString("")
+	).apply { strength = Collator.PRIMARY }
 
 	@Test
 	fun theSeparatorsAreTheCharactersTheCollatorSkips() {
@@ -42,11 +44,11 @@ class KCollationKeyTest {
 
 	/**
 	 * Every character that survives the normalisation is its own primary class, apart from the
-	 * separators and the three that expand. If a jdk ever folds two of them together, the key stops
+	 * equivalent spaces, ignored separators and the three that expand. If a jdk ever folds two of them together, the key stops
 	 * being equivalent to the collator and this says so.
 	 */
 	@Test
-	fun noTwoSurvivingCharactersAreFoldedTogether() {
+	fun onlyEquivalentSpacesShareASurvivingPrimaryWeight() {
 		val byKey = HashMap<String, Int>()
 		val collisions = StringBuilder()
 		var collisionCount = 0
@@ -61,7 +63,7 @@ class KCollationKeyTest {
 			}
 			survivors++
 			val previous = byKey.put(key(text), code)
-			if (previous != null) {
+			if (previous != null && !(collator.equals(text, " ") && collator.equals(previous.toChar().toString(), " "))) {
 				collisionCount++
 				if (collisionCount <= 10) {
 					collisions.append("\n  U+%04X and U+%04X".format(previous, code))
@@ -107,7 +109,7 @@ class KCollationKeyTest {
 	 */
 	@Test
 	fun keyEqualityIsCollatorEqualityOnRandomStrings() {
-		val alphabet = "abcdefgz0129 -.'" + "æþœßéø" + "абйё" + "ασς" + "中あ"
+		val alphabet = "abcdefgz0129 -.'\u00A0\u1680\u2009\u202F\u205F\u3000" + "æþœßéø" + "абйё" + "ασς" + "中あ"
 		val random = Random(7)
 		var differing = 0
 		val firstDifferences = StringBuilder()

@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * {@link net.osmand.shared.util.KCollatorStringMatcher} is a copy of {@link CollatorStringMatcher}
  * that reduces each string to a desktop-derived collation key instead of invoking a collator.
- * CHECK_CONTAINS additionally preserves Android-equivalent spaces.
+ * All modes preserve Android-equivalent spaces.
  * Its reference below tailors only that space rule; it is not a full Android ICU implementation.
  * This asks both the same questions: every mode, over the road
  * names of the obf files the routing tests ship with, and over names picked to carry the things a
@@ -143,7 +143,7 @@ public class CollatorCompatTest {
 				for (String name : names) {
 					assertEquals(
 							describe(mode, query, name),
-							CollatorStringMatcher.cmatches(referenceCollator(mode), name, lowercased, mode),
+							CollatorStringMatcher.cmatches(COLLATOR, name, lowercased, mode),
 							KCollatorStringMatcher.cmatches(name, query, copyMode(mode)));
 				}
 			}
@@ -172,21 +172,13 @@ public class CollatorCompatTest {
 		}
 	}
 
-	private static final net.osmand.Collator COLLATOR = net.osmand.OsmAndCollator.primaryCollator();
-
-	private static final net.osmand.Collator CONTAINS_COLLATOR = containsCollator();
-
-	private static net.osmand.Collator referenceCollator(StringMatcherMode mode) {
-		return mode == StringMatcherMode.CHECK_CONTAINS ? CONTAINS_COLLATOR : COLLATOR;
-	}
+	private static final net.osmand.Collator COLLATOR = spaceCollator();
 
 	private static boolean referenceMatches(CollatorStringMatcher matcher, String name) {
-		return matcher.getMode() == StringMatcherMode.CHECK_CONTAINS
-				? CollatorStringMatcher.cmatches(CONTAINS_COLLATOR, name, matcher.getPart(), matcher.getMode())
-				: matcher.matches(name);
+		return CollatorStringMatcher.cmatches(COLLATOR, name, matcher.getPart(), matcher.getMode());
 	}
 
-	private static net.osmand.Collator containsCollator() {
+	private static net.osmand.Collator spaceCollator() {
 		// Android API 37, en-US/de-DE/ru-RU: these 17 spaces are primary-equal, not ignorable.
 		// Give them a distinct primary weight while preserving the JVM rules for everything else.
 		RuleBasedCollator desktop = (RuleBasedCollator) java.text.Collator.getInstance(java.util.Locale.US);

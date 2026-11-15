@@ -41,7 +41,7 @@ import kotlin.time.TimeSource
  *   --ktest_filter='net.osmand.shared.util.KCollatorBenchmarkTest.*'
  * ```
  *
- * Measured over 14 queries and 304 road names, microseconds per `matches` call, best of 3 rounds,
+ * Historical measurements before significant space weights were introduced, over 14 queries and 304 road names, microseconds per `matches` call, best of 3 rounds,
  * the native side on a release binary on an iPhone 17 Pro simulator:
  * ```
  *                            jvm key   jvm collator    native key   native collator
@@ -273,7 +273,11 @@ class KCollatorBenchmarkTest {
 		private val MODES = listOf(
 			KStringMatcherMode.CHECK_CONTAINS,
 			KStringMatcherMode.CHECK_STARTS_FROM_SPACE,
-			KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+			KStringMatcherMode.CHECK_ONLY_STARTS_WITH,
+			KStringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
+			KStringMatcherMode.CHECK_EQUALS_FROM_SPACE,
+			KStringMatcherMode.CHECK_EQUALS,
+			KStringMatcherMode.MULTISEARCH
 		)
 
 		private val QUERIES = listOf(
