@@ -5480,4 +5480,6 @@
     <string name="aidl_permissions_request_title">Ĉu permesi al %1$s uzi OsmAnd?</string>
     <string name="aidl_permissions_request_descr">%1$s\nVi povos ŝanĝi tion ĉi poste per en “Kromprogramoj”.</string>
     <string name="aidl_app_disabled_descr">OsmAnd ignoras ĉiujn petojn de tiu ĉi aplikaĵo.</string>
+    <string name="attach_to_track">Kunligi al spuro</string>
+    <string name="aidl_group_system_footer">Permesas al la aplikaĵo kopii dosierojn al OsmAnd, anstataŭigi vian lokon kaj ŝanĝi ĝian aspekton. Aktivigu tion ĉi nur por plene fidindajn aplikaĵojn.</string>
 </resources>
