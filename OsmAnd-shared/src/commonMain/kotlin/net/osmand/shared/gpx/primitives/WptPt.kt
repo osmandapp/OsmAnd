@@ -337,6 +337,18 @@ class WptPt : GpxExtensions, Linkable {
 		}
 	}
 
+	/**
+	 * The timestamp shown as the point's creation time: the osmand:created_on extension when it is
+	 * present, otherwise the GPX time, which is the only known timestamp of an older point, and may
+	 * or may not be the actual creation time since the `/gpx/wpt/time` element is, per the GPX spec, 
+	 * effectively a modification timestamp. Yet in the special cases of (1) a point that has never been
+	 * edited and (2) a point that has only ever been edited through the creation-time-preserving code in
+	 * this codebase, it is in fact the true creation time.
+	 */
+	fun getCreationTimeForDisplay(): Long {
+		return getCreatedOn().takeIf({ it != 0L}) ?: time
+	}
+
 	override fun hashCode(): Int {
 		return KAlgorithms.hash(name, category, desc, comment, lat, lon)
 	}
