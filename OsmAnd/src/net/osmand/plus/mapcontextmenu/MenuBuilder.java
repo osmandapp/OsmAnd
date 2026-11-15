@@ -1304,7 +1304,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildDateRow(@NonNull View view, @NonNull String textPrefix, long timestamp) {
-		if (timestamp > 0) {
+		if (timestamp != 0) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(timestamp);
