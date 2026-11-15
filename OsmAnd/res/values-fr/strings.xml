@@ -5429,4 +5429,5 @@
     <string name="terrain_shadows_description">Ombrage dynamique et temps réel du relief 3D. Met en valeur la géométrie du paysage avec un impact minimal sur les performances.</string>
     <string name="terrain_shadows_relief_3d_footer">Le relief 3D est activé automatiquement car il est requis pour afficher l\'ombrage du relief.</string>
     <string name="visualization">Visualisation</string>
+    <string name="attach_to_track">Déplacer sur la trace</string>
 </resources>
