@@ -37,6 +37,7 @@ import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Building3DDetailLevel;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.building.SunLight;
+import net.osmand.plus.plugins.srtm.building.SunParametersController;
 import net.osmand.plus.plugins.srtm.building.SunLightMode;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -492,7 +493,43 @@ public class SRTMPlugin extends OsmandPlugin {
 				nauticalPlugin.createAdapterItem(TERRAIN_DEPTH_CONTOURS, adapter, mapActivity, customRules);
 			}
 			createSphericalMapItem(adapter, mapActivity);
+			if (app.useOpenGlRenderer()) {
+				createSunPositionItem(adapter, mapActivity);
+			}
 		}
+	}
+
+	/** The switch casts the sun shadows, the row opens the light direction: Live, Date or Manual. */
+	private void createSunPositionItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+		boolean shadows = settings.CAST_SHADOWS.get();
+		adapter.addItem(new ContextMenuItem(TERRAIN_SUN_POSITION)
+				.setTitleId(R.string.map_widget_sun_position, activity)
+				.setIcon(R.drawable.ic_action_sun)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setDescription(sunLight.getDescription())
+				.setSelected(shadows)
+				.setColor(app, shadows ? R.color.osmand_orange : INVALID_ID)
+				.setListener(new OnRowItemClick() {
+					@Override
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
+						activity.getDashboard().hideDashboard();
+						SunParametersController.showDialog(app, activity.getSupportFragmentManager());
+						return false;
+					}
+
+					@Override
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						settings.CAST_SHADOWS.set(isChecked);
+						item.setSelected(isChecked);
+						item.setColor(app, isChecked ? R.color.osmand_orange : INVALID_ID);
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						return true;
+					}
+				}).setItemDeleteAction(settings.CAST_SHADOWS));
 	}
 
 	private void addTerrainDescriptionItem(@NonNull ContextMenuAdapter adapter,

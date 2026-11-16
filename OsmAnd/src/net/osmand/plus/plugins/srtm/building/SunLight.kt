@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.srtm.building
 
 import android.os.Handler
+import android.text.format.DateFormat
 import android.os.Looper
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.Body
@@ -11,7 +12,10 @@ import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
 import net.osmand.plus.plugins.srtm.SRTMPlugin
+import net.osmand.plus.utils.OsmAndFormatter
+import java.util.Date
 import kotlin.math.roundToInt
 
 /**
@@ -57,6 +61,19 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 	fun getDateTime(): Long {
 		val time = plugin.SUN_LIGHT_TIME.get()
 		return if (time > 0) time else System.currentTimeMillis()
+	}
+
+	/** Short state for the Configure map row: the mode, the date and time, or the manual angles. */
+	fun getDescription(): String = when (plugin.SUN_LIGHT_MODE.get()) {
+		SunLightMode.LIVE -> app.getString(R.string.sun_light_live)
+		SunLightMode.DATE -> {
+			val date = Date(getDateTime())
+			DateFormat.getMediumDateFormat(app).format(date) + ", " + DateFormat.getTimeFormat(app).format(date)
+		}
+		else -> {
+			val azimuth = plugin.HILLSHADE_SUN_AZIMUTH.get()
+			"$azimuth°, ${OsmAndFormatter.getCardinalDirectionForDegrees(azimuth.toDouble())}"
+		}
 	}
 
 	fun getSunAtMapCenter(timeMillis: Long): Angles {

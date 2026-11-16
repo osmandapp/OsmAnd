@@ -70,6 +70,7 @@ public interface OsmAndCustomizationConstants {
 	String TERRAIN_DEPTH_CONTOURS = TERRAIN_ITEMS_ID_SCHEME + "depth_contours";
 	String TERRAIN_SPHERICAL_MAP = TERRAIN_ITEMS_ID_SCHEME + "spherical_map";
 	String TERRAIN_3D_MAP_OBJECTS = TERRAIN_ITEMS_ID_SCHEME + "3d_map_objects";
+	String TERRAIN_SUN_POSITION = TERRAIN_ITEMS_ID_SCHEME + "sun_position";
 
 	String OPEN_STREET_MAP_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "open_street_map.";
 	String OSM_NOTES = OPEN_STREET_MAP_ITEMS_ID_SCHEME + "osm_notes";

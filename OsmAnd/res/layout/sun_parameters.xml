@@ -81,16 +81,4 @@
 			android:id="@+id/altitude_slider_row"
 			layout="@layout/item_ui_slider_list_item" />
 	</LinearLayout>
-
-	<LinearLayout
-		android:id="@+id/shadows_rows"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/ui_group_gap"
-		android:orientation="vertical">
-
-		<include
-			android:id="@+id/shadows_row"
-			layout="@layout/item_ui_setting_row" />
-	</LinearLayout>
 </LinearLayout>

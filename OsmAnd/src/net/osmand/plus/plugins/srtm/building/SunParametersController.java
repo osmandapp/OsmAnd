@@ -23,13 +23,11 @@ public class SunParametersController extends BaseDialogController {
 	private final SRTMPlugin plugin;
 	private final int initialAzimuth;
 	private final int initialAltitude;
-	private final boolean initialShadowsEnabled;
 	private final SunLightMode initialMode;
 	private final long initialTime;
 
 	private int azimuth;
 	private int altitude;
-	private boolean shadowsEnabled;
 	private SunLightMode mode;
 	private long time;
 	private boolean applyChanges = false;
@@ -39,10 +37,8 @@ public class SunParametersController extends BaseDialogController {
 		this.plugin = plugin;
 		this.initialAzimuth = plugin.HILLSHADE_SUN_AZIMUTH.get();
 		this.initialAltitude = plugin.HILLSHADE_SUN_ANGLE.get();
-		this.initialShadowsEnabled = app.getSettings().CAST_SHADOWS.get();
 		this.azimuth = initialAzimuth;
 		this.altitude = initialAltitude;
-		this.shadowsEnabled = initialShadowsEnabled;
 		this.initialMode = plugin.SUN_LIGHT_MODE.get();
 		this.initialTime = plugin.SUN_LIGHT_TIME.get();
 		this.mode = initialMode;
@@ -63,15 +59,6 @@ public class SunParametersController extends BaseDialogController {
 	public void setAltitude(int value) {
 		altitude = value;
 		plugin.HILLSHADE_SUN_ANGLE.set(value);
-	}
-
-	public boolean isShadowsEnabled() {
-		return shadowsEnabled;
-	}
-
-	public void setShadowsEnabled(boolean enabled) {
-		shadowsEnabled = enabled;
-		app.getSettings().CAST_SHADOWS.set(enabled);
 	}
 
 	@NonNull
@@ -108,7 +95,6 @@ public class SunParametersController extends BaseDialogController {
 		if (super.finishProcessIfNeeded(activity)) {
 			setAzimuth(applyChanges ? azimuth : initialAzimuth);
 			setAltitude(applyChanges ? altitude : initialAltitude);
-			setShadowsEnabled(applyChanges ? shadowsEnabled : initialShadowsEnabled);
 			setTime(applyChanges ? time : initialTime);
 			setMode(applyChanges ? mode : initialMode);
 			return true;
@@ -134,7 +120,7 @@ public class SunParametersController extends BaseDialogController {
 
 	protected boolean hasChanges() {
 		return initialAzimuth != azimuth || initialAltitude != altitude
-				|| initialShadowsEnabled != shadowsEnabled || initialMode != mode || initialTime != time;
+				|| initialMode != mode || initialTime != time;
 	}
 
 	public static void showDialog(@NonNull OsmandApplication app, @NonNull FragmentManager manager) {

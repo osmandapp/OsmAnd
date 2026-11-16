@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm.building;
 
-import static net.osmand.plus.dashboard.DashboardType.BUILDINGS_3D;
+import static net.osmand.plus.dashboard.DashboardType.CONFIGURE_MAP;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_ANGLE;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_AZIMUTH;
 
@@ -62,7 +62,6 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	private SliderListItem timeSlider;
 	private SliderListItem azimuthSlider;
 	private SliderListItem altitudeSlider;
-	private SettingRow shadowsRow;
 
 	/* Live shows the sun of the current minute */
 	private final Runnable liveRefresh = new Runnable() {
@@ -95,7 +94,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 			@Override
 			public void handleOnBackPressed() {
 				activity.getSupportFragmentManager().popBackStack();
-				activity.getDashboard().setDashboardVisibility(true, BUILDINGS_3D, false);
+				activity.getDashboard().setDashboardVisibility(true, CONFIGURE_MAP, false);
 			}
 		});
 	}
@@ -127,7 +126,6 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		altitudeSlider = new SliderListItem(content.findViewById(R.id.altitude_slider_row));
 		altitudeSlider.setTitle(R.string.altitude);
 
-		setupShadowsRow(iconColor);
 		modeToggle.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
 			SunLightMode mode = getMode(checkedId);
 			if (isChecked && mode != controller.getMode()) {
@@ -152,21 +150,6 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		row.getView().setClickable(false);
 		row.getView().setFocusable(false);
 		return row;
-	}
-
-	private void setupShadowsRow(int iconColor) {
-		View rows = content.findViewById(R.id.shadows_rows);
-		rows.setVisibility(app.useOpenGlRenderer() ? View.VISIBLE : View.GONE);
-		shadowsRow = new SettingRow(content.findViewById(R.id.shadows_row));
-		shadowsRow.setIcon(R.drawable.ic_action_3d_buildings, iconColor);
-		shadowsRow.setTitle(R.string.cast_shadows);
-		shadowsRow.setChecked(controller.isShadowsEnabled());
-		shadowsRow.setOnClickListener(v -> {
-			controller.setShadowsEnabled(!controller.isShadowsEnabled());
-			shadowsRow.setChecked(controller.isShadowsEnabled());
-			onChanged();
-		});
-		SegmentedList.apply((ViewGroup) rows);
 	}
 
 	/** Shows the rows of the selected mode and puts the values on them. */
@@ -280,8 +263,6 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		controller.setMode(SunLightMode.MANUAL);
 		controller.setAzimuth(DEFAULT_HILLSHADE_SUN_AZIMUTH);
 		controller.setAltitude(DEFAULT_HILLSHADE_SUN_ANGLE);
-		controller.setShadowsEnabled(settings.CAST_SHADOWS.getDefaultValue());
-		shadowsRow.setChecked(controller.isShadowsEnabled());
 		updateContent();
 		onChanged();
 	}
