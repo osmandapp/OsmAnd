@@ -17,6 +17,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
@@ -35,13 +36,16 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
@@ -122,6 +126,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		info.setIconSpaceReserved(false);
 
 		setupMaxRenderingThreadsPref();
+		setupMapTileDiskCachePref();
+		setupTerrainCacheSizePref();
 		setupMemoryAllocatedForRoutingPref();
 		setupGlobalAppAllocatedMemoryPref();
 		setupNativeAppAllocatedMemoryPref();
@@ -261,6 +267,37 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), (value == 1 ? "thread" : "threads")));
 		preference.setIconSpaceReserved(false);
 		preference.setVisible(mapRenderer != null);
+	}
+
+	private void setupMapTileDiskCachePref() {
+		Integer[] entryValues = {0, 128, 256, 384, 512, 768, 1024};
+		String[] entries = new String[entryValues.length];
+		entries[0] = getString(R.string.shared_string_off);
+		for (int i = 1; i < entryValues.length; i++) {
+			entries[i] = getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(entryValues[i]), "MB");
+		}
+		File file = new File(app.getCacheDir(), MapRendererContext.MAP_TILE_DISK_CACHE_FILE);
+		ListPreferenceEx preference = findPreference(settings.MAP_TILE_DISK_CACHE_SIZE_MB.getId());
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setDescription(getString(R.string.map_tiles_disk_cache_descr,
+				AndroidUtils.formatSize(app, file.exists() ? file.length() : 0)));
+		preference.setIconSpaceReserved(false);
+	}
+
+	private void setupTerrainCacheSizePref() {
+		Integer[] entryValues = {256, 512, 1024, 2048, 4096};
+		String[] entries = new String[entryValues.length];
+		for (int i = 0; i < entryValues.length; i++) {
+			entries[i] = getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(entryValues[i]), "MB");
+		}
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		long size = mapRendererContext != null ? mapRendererContext.getTerrainCacheSize() : 0;
+		ListPreferenceEx preference = findPreference(settings.TERRAIN_CACHE_SIZE_MB.getId());
+		preference.setEntries(entries);
+		preference.setEntryValues(entryValues);
+		preference.setDescription(getString(R.string.terrain_cache_limit_descr, AndroidUtils.formatSize(app, size)));
+		preference.setIconSpaceReserved(false);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {
@@ -466,6 +503,19 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		} else if (prefId.equals(settings.MAX_RENDERING_THREADS.getId())) {
 			applyPreference(settings.MAX_RENDERING_THREADS.getId(), applyToAllProfiles, newValue);
 			setupMaxRenderingThreadsPref();
+		} else if (prefId.equals(settings.MAP_TILE_DISK_CACHE_SIZE_MB.getId())) {
+			applyPreference(prefId, applyToAllProfiles, newValue);
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				mapRendererContext.updateMapTileDiskCache();
+			}
+			setupMapTileDiskCachePref();
+		} else if (prefId.equals(settings.TERRAIN_CACHE_SIZE_MB.getId())) {
+			applyPreference(prefId, applyToAllProfiles, newValue);
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				new Thread(mapRendererContext::limitTerrainCacheSize, "TerrainCacheLimit").start();
+			}
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		}

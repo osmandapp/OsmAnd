@@ -28,6 +28,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -62,6 +63,9 @@ import java.util.Map.Entry;
  */
 public class MapRendererContext {
 	private static final String TAG = "MapRendererContext";
+	public static final String MAP_TILE_DISK_CACHE_FILE = "map_tiles.db";
+	private static final String LEGACY_HILLSHADE_CACHE_FILE = "hillshade.cache";
+	private static final long TERRAIN_CACHE_KEEP_TIME = 7 * 24 * 60 * 60 * 1000L;
 
 	public static final int OBF_RASTER_LAYER = 0;
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
@@ -77,6 +81,8 @@ public class MapRendererContext {
 
 	// input parameters
 	private MapStylesCollection mapStylesCollection;
+	@Nullable
+	private MapTileDiskCache mapTileDiskCache;
 	private Map<ProviderType, ObfsCollection> obfsCollections;
 	@NonNull
 	private ProviderType providerType;
@@ -432,7 +438,69 @@ public class MapRendererContext {
 				renderingThreadsLimit > 3 || renderingThreadsLimit == 0 ? 2 : 1);
 		mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
 				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
+		MapTileDiskCache diskCache = providerType == ProviderType.MAIN ? getMapTileDiskCache() : null;
+		if (diskCache != null) {
+			mapPrimitivesProvider.setDiskCache(diskCache, getMapTileDiskCacheStyleKey());
+		}
 		return true;
+	}
+
+	@Nullable
+	private MapTileDiskCache getMapTileDiskCache() {
+		long limitBytes = app.getSettings().MAP_TILE_DISK_CACHE_SIZE_MB.get() * 1024L * 1024L;
+		if (limitBytes <= 0) {
+			if (mapTileDiskCache != null) {
+				mapTileDiskCache.clear();
+				mapTileDiskCache = null;
+			}
+			return null;
+		}
+		if (mapTileDiskCache == null) {
+			File file = new File(app.getCacheDir(), MAP_TILE_DISK_CACHE_FILE);
+			mapTileDiskCache = new MapTileDiskCache(file.getAbsolutePath(), limitBytes);
+		} else {
+			mapTileDiskCache.setLimit(limitBytes);
+		}
+		return mapTileDiskCache.isOpen() ? mapTileDiskCache : null;
+	}
+
+	/**
+	 * Applies a changed cache size to the current map: 0 turns the cache off and empties it
+	 */
+	public void updateMapTileDiskCache() {
+		MapPrimitivesProvider provider = mapPrimitivesProvider;
+		if (provider != null && providerType == ProviderType.MAIN) {
+			MapTileDiskCache diskCache = getMapTileDiskCache();
+			provider.setDiskCache(diskCache, diskCache != null ? getMapTileDiskCacheStyleKey() : "");
+		} else if (app.getSettings().MAP_TILE_DISK_CACHE_SIZE_MB.get() <= 0) {
+			getMapTileDiskCache();
+		}
+	}
+
+	/**
+	 * Empties the rendered map tiles cache; the open SQLite file is not deleted under the renderer
+	 */
+	public void clearMapTileDiskCache() {
+		if (mapTileDiskCache != null) {
+			mapTileDiskCache.clear();
+		} else {
+			File file = new File(app.getCacheDir(), MAP_TILE_DISK_CACHE_FILE);
+			Algorithms.removeAllFiles(file);
+		}
+	}
+
+	/**
+	 * What the style settings do not show: the style itself and its version
+	 */
+	@NonNull
+	private String getMapTileDiskCacheStyleKey() {
+		String rendererName = app.getSettings().RENDERER.get();
+		StringBuilder key = new StringBuilder(rendererName).append('|').append(Version.getFullVersion(app));
+		File externalStyle = app.getRendererRegistry().getExternalRenderers().get(rendererName);
+		if (externalStyle != null) {
+			key.append('|').append(externalStyle.lastModified());
+		}
+		return key.toString();
 	}
 
 	public void recreateHeightmapProvider() {
@@ -674,8 +742,41 @@ public class MapRendererContext {
 			}
 			geoTiffCollection.addDirectory(geotiffDir.getAbsolutePath());
 			geoTiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
+			new Thread(this::limitTerrainCacheSize, "TerrainCacheLimit").start();
 		}
 		return geoTiffCollection;
+	}
+
+	/**
+	 * Keeps the terrain caches under the size limit: removes the tiles older than a week first, then all of them
+	 */
+	public void limitTerrainCacheSize() {
+		Algorithms.removeAllFiles(new File(app.getCacheDir(), LEGACY_HILLSHADE_CACHE_FILE));
+		long limitBytes = app.getSettings().TERRAIN_CACHE_SIZE_MB.get() * 1024L * 1024L;
+		if (limitBytes <= 0 || getTerrainCacheSize() <= limitBytes) {
+			return;
+		}
+		GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
+		long now = System.currentTimeMillis();
+		for (long time : new long[] {now - TERRAIN_CACHE_KEEP_TIME, now}) {
+			for (RasterType rasterType : RasterType.values()) {
+				geoTiffCollection.removeOlderTilesFromCache(rasterType, time);
+			}
+			if (getTerrainCacheSize() <= limitBytes) {
+				break;
+			}
+		}
+	}
+
+	public long getTerrainCacheSize() {
+		long size = 0;
+		File[] files = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR).listFiles();
+		if (files != null) {
+			for (File file : files) {
+				size += file.length();
+			}
+		}
+		return size;
 	}
 
 	@Nullable
