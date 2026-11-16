@@ -5358,4 +5358,5 @@
     <string name="release_5_5">• 預設啟用空間搜尋：可搜尋某地點周邊資訊、更佳的排名、同義詞支援、容許拼寫錯誤\n\n • 3D 建築物會投射陰影，並可調整陽光方向\n\n • Panoramax 外掛程式：地圖上顯示街道級影像\n\n • 多媒體資料庫：所有照片、影片和語音筆記集中管理\n\n • 虛線與點線軌跡標示，各軌跡資料夾預設樣式\n\n • 路線規劃與抵達時間的行駛速度設定\n\n • Android Auto：最近目的地、自動「搭便車」模式、Google 助理與 Gemini\n\n • 快速操作以顯示或隱藏軌跡\n\n • 等高線標籤朝向上坡方向</string>
     <string name="city_type_boundary">區域</string>
     <string name="file_name_containes_illegal_char">名稱不能包含：%1$s</string>
+    <string name="attach_to_track">附加至軌跡</string>
 </resources>
