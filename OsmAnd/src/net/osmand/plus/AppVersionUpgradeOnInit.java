@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.IndexConstants.OPENGL_SHADERS_CACHE_DIR;
 import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
@@ -90,7 +89,6 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -376,18 +374,12 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_5_5_01) {
 					app.getAppInitializer().addOnFinishListener(init -> migrateUnsetSensorTrackSources());
 				}
-				removeOpenGLShadersCache();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 				startPrefs.edit().putLong(UPDATE_TIME_MS, System.currentTimeMillis()).commit();
 				appVersionChanged = true;
 			}
 		}
-	}
-
-	private void removeOpenGLShadersCache() {
-		Algorithms.removeAllFiles(new File(app.getCacheDir(), OPENGL_SHADERS_CACHE_DIR));
-		Algorithms.removeAllFiles(new File(app.getNoBackupFilesDir(), OPENGL_SHADERS_CACHE_DIR));
 	}
 
 	private boolean needsUpgrade(SharedPreferences startPrefs, int maxVersion) {
