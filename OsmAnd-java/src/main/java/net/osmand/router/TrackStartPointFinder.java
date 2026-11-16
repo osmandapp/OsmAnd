@@ -11,7 +11,8 @@ import java.util.List;
  * the nearest one, and nothing of the track is left to follow (#25428, #13851, #11717). Here the track is
  * split into passes near the position: at the track start the whole track wins, elsewhere the earliest pass,
  * or, when the position is moving, the earliest pass going the same way (#15013), so a loop, an out-and-back
- * or a figure-eight starts from its beginning instead of its end.
+ * or a figure-eight starts from its beginning instead of its end. On the first calculation a closed track is
+ * not joined in its last quarter, unless the position moves along it towards the finish (#27061).
  */
 public class TrackStartPointFinder {
 
@@ -23,6 +24,8 @@ public class TrackStartPointFinder {
 	private static final double MAX_BEARING_DIFF = 90;
 	// neighbouring points of a recorded track jitter by a few metres
 	private static final float MIN_BEARING_DISTANCE = 20;
+	// on the first calculation a closed track is not joined in this last share of its length
+	private static final float LOOP_TAIL_SHARE = 0.25f;
 
 	private final List<Location> track;
 	// route points are joined by routes calculated later, the bearing between two of them is not the way to go
@@ -86,12 +89,12 @@ public class TrackStartPointFinder {
 					boolean reachesPrevious = !recalculation || toFinish[i - 1] <= previousDistanceToFinish;
 					boolean sameWay = !moving || sameDirection(passNearest, position);
 					int rank = (reachesPrevious ? 2 : 0) + (sameWay ? 1 : 0);
-					if (rank == 3) {
-						return passNearest;
-					}
 					if (rank > bestRank) {
 						best = passNearest;
 						bestRank = rank;
+					}
+					if (rank == 3) {
+						break;
 					}
 				}
 				passNearest = -1;
@@ -100,7 +103,31 @@ public class TrackStartPointFinder {
 			}
 		}
 		// no pass both gets as far as the previous route and goes the way the position moves
+		if (!recalculation && best > 0 && !(moving && sameDirection(best, position))
+				&& isLoopTail(best)) {
+			return 0;
+		}
 		return best;
+	}
+
+	// The tail of a loop comes back to its start: next to it before setting off, the loop is meant, not its last
+	// metres (#27061). How far the start is does not tell them apart: the start is the finish, so it is never much
+	// farther than the finish via the tail. Riding the tail towards the finish, or a recalculation, keeps it.
+	private boolean isLoopTail(int index) {
+		int last = track.size() - 1;
+		if (track.get(0).distanceTo(track.get(last)) > SAME_PLACE_DISTANCE) {
+			return false;
+		}
+		float left = 0;
+		float whole = 0;
+		for (int i = 0; i < last; i++) {
+			float d = track.get(i).distanceTo(track.get(i + 1));
+			whole += d;
+			if (i >= index) {
+				left += d;
+			}
+		}
+		return left <= whole * LOOP_TAIL_SHARE;
 	}
 
 	private boolean sameDirection(int index, Location position) {
