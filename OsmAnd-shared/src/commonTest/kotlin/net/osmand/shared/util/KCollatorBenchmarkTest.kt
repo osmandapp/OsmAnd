@@ -41,7 +41,7 @@ import kotlin.time.TimeSource
  *   --ktest_filter='net.osmand.shared.util.KCollatorBenchmarkTest.*'
  * ```
  *
- * Measured over 14 queries and 304 road names, microseconds per `matches` call, best of 3 rounds,
+ * Historical measurements before significant space weights were introduced, over 14 queries and 304 road names, microseconds per `matches` call, best of 3 rounds,
  * the native side on a release binary on an iPhone 17 Pro simulator:
  * ```
  *                            jvm key   jvm collator    native key   native collator
@@ -107,6 +107,44 @@ class KCollatorBenchmarkTest {
 		println("")
 	}
 
+	/**
+	 * Cases where dropping spaces creates a match, but preserving them rejects the entire name.
+	 * Report hits so the same benchmark can measure both the old and corrected matcher.
+	 */
+	@Test
+	fun rejectingCrossWordMatches() {
+		val cases = listOf(
+			"Four" to "Grifo Uris Bell",
+			"Four" to "Shower at \"Grifo Uris Bell\"",
+			"four" to "Grifo Uris Bell / Grifo Uris Bell",
+			"cafepanta" to "Café Panta",
+			"newyork" to "New York",
+			"foobar" to "Foo Bar",
+			"fo ur" to "four",
+			"Four" to "Grifo\u00A0Uris Bell",
+			"newyork" to "New\u202FYork",
+			"newyork" to "New\u3000York"
+		)
+		val calls = 10_000
+		println("### full rejection: ${cases.size} cases, $calls calls per case")
+		for ((query, name) in cases) {
+			val matcher = KCollatorStringMatcher(query, KStringMatcherMode.CHECK_CONTAINS)
+			var hits = 0
+			val elapsed = measure {
+				hits = 0
+				repeat(calls) {
+					if (matcher.matches(name)) {
+						hits++
+					}
+				}
+			}
+			println(
+				"  query '$query' name '$name' key ${format(elapsed)} ms" +
+						"   per call ${format(elapsed * 1000 / calls)} us   hits $hits/$calls"
+			)
+		}
+	}
+
 	private fun measure(block: () -> Unit): Double {
 		repeat(WARMUP_ROUNDS) { block() }
 		var best = Double.MAX_VALUE
@@ -130,7 +168,7 @@ class KCollatorBenchmarkTest {
 	 * `net.osmand.CollatorStringMatcher` as it stands, on top of [primaryCollator]: the same loops
 	 * over positions and lengths, each step cutting a substring and asking the collator.
 	 */
-	private class LiteralCollatorMatcher(part: String, private val mode: KStringMatcherMode) {
+	internal class LiteralCollatorMatcher(part: String, private val mode: KStringMatcherMode) {
 
 		private val collator = primaryCollator()
 		private val part = KCollationKey.lowercaseAndAlignChars(part)
@@ -235,7 +273,11 @@ class KCollatorBenchmarkTest {
 		private val MODES = listOf(
 			KStringMatcherMode.CHECK_CONTAINS,
 			KStringMatcherMode.CHECK_STARTS_FROM_SPACE,
-			KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+			KStringMatcherMode.CHECK_ONLY_STARTS_WITH,
+			KStringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
+			KStringMatcherMode.CHECK_EQUALS_FROM_SPACE,
+			KStringMatcherMode.CHECK_EQUALS,
+			KStringMatcherMode.MULTISEARCH
 		)
 
 		private val QUERIES = listOf(
