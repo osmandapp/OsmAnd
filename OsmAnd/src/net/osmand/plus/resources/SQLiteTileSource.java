@@ -148,19 +148,6 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void createDataBase() {
-		writeDataBase();
-	}
-
-	public boolean tryCreateDataBase() {
-		try {
-			return writeDataBase();
-		} catch (SQLException e) {
-			LOG.error("Failed to create tile database: " + fileName, e);
-			return false;
-		}
-	}
-
-	private boolean writeDataBase() {
 		String name = app.getAppPath(TILES_INDEX_DIR).getAbsolutePath() + "/" + fileName + SQLITE_EXT;
 		SQLiteConnection db = app.getSQLiteAPI().getOrCreateDatabase(name, true);
 		if (db != null) {
@@ -182,9 +169,7 @@ public class SQLiteTileSource implements ITileSource {
 			} finally {
 				db.close();
 			}
-			return true;
 		}
-		return false;
 	}
 
 	@Override
@@ -287,9 +272,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void initDatabaseIfNeeded() {
-		if (file != null) {
-			getDatabase();
-		}
+		getDatabase();
 	}
 
 	protected synchronized SQLiteConnection getDatabase() {
