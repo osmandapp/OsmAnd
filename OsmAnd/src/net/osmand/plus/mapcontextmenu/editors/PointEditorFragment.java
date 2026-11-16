@@ -61,6 +61,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 public abstract class PointEditorFragment extends EditorFragment {
 
@@ -400,6 +401,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 			TextInputLayout creationTimestampCaption = view.findViewById(R.id.creation_date_caption);
 			creationTimestampCaption.setEndIconDrawable(getPaintedIcon(R.drawable.ic_action_edit_outlined, activeColor));
 			creationTimestampCaption.setEndIconOnClickListener(listener);
+			creationTimestampCaption.setHelperText(getString(R.string.showing_in_timezone, getLocalTimeZoneName()));
 		}
 	}
 
@@ -419,6 +421,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 				.inflate(R.layout.dialog_date_time_picker, null);
 		DatePicker datePicker = dialogView.findViewById(R.id.date_picker);
 		TimePicker timePicker = dialogView.findViewById(R.id.time_picker);
+		TextView timezoneSubtext = dialogView.findViewById(R.id.timezone_subtext);
+		timezoneSubtext.setText(getString(R.string.showing_in_timezone, getLocalTimeZoneName()));
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(editedCreationTimestamp);
@@ -455,6 +459,35 @@ public abstract class PointEditorFragment extends EditorFragment {
 	private static LocalDateTime getSelectedLocalDateTime(@NonNull DatePicker datePicker, @NonNull TimePicker timePicker) {
 		return LocalDateTime.of(datePicker.getYear(), datePicker.getMonth() + 1, datePicker.getDayOfMonth(),
 				timePicker.getHour(), timePicker.getMinute());
+	}
+
+	/**
+	 * @return ID of the device time zone with its current offset, e.g. "Africa/Casablanca (UTC+1)"
+	 */
+	@NonNull
+	private String getLocalTimeZoneName() {
+		// The ID is always available, unlike the display name which describes the standard
+		// offset only and can be misleading for zones with a DST rule (e.g. Africa/Casablanca)
+		TimeZone timeZone = TimeZone.getDefault();
+		return timeZone.getID() + " (" + formatTimeZoneOffset(timeZone) + ")";
+	}
+
+	/**
+	 * Formats the current offset of the given time zone, e.g. "UTC+1", "UTC+5:30" or "UTC-3:30".
+	 * The current offset is used rather than the raw offset, so it accounts for daylight saving time.
+	 */
+	@NonNull
+	private static String formatTimeZoneOffset(@NonNull TimeZone timeZone) {
+		int offsetMinutes = timeZone.getOffset(System.currentTimeMillis()) / 60000;
+		int absMinutes = Math.abs(offsetMinutes);
+		int hours = absMinutes / 60;
+		int minutes = absMinutes % 60;
+		StringBuilder sb = new StringBuilder("UTC");
+		sb.append(offsetMinutes < 0 ? '-' : '+').append(hours);
+		if (minutes != 0) {
+			sb.append(':').append(minutes < 10 ? "0" : "").append(minutes);
+		}
+		return sb.toString();
 	}
 
 	/**
