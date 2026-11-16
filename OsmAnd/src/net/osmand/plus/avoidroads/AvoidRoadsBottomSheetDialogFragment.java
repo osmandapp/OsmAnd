@@ -6,6 +6,7 @@ import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,8 +19,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.GeocodingLookupService;
+import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -35,9 +40,11 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.Serializable;
@@ -66,6 +73,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private final Map<CommonPreference<Boolean>, StateChangedListener<Boolean>> routingPrefListeners = new HashMap<>();
 	private List<AvoidRoadInfo> removedImpassableRoads;
 	private final List<String> enabledFiles = new ArrayList<>();
+	private final List<AddressLookupRequest> addressRequests = new ArrayList<>();
 	private LinearLayout stylesContainer;
 
 	private boolean hideImpassableRoads;
@@ -143,7 +151,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				if (removedImpassableRoads.contains(roadInfo)) {
 					continue;
 				}
-				inflate(R.layout.bottom_sheet_item_simple_right_icon, stylesContainer, true);
+				inflate(R.layout.waypoint_reached, stylesContainer, true);
 			}
 			populateImpassableRoadsObjects();
 
@@ -181,8 +189,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void populateImpassableRoadsObjects() {
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
+		LatLon distanceOrigin = getDistanceOrigin();
 
 		int counter = 0;
 		for (AvoidRoadInfo roadInfo : avoidRoadsHelper.getImpassableRoads()) {
@@ -191,20 +199,85 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 
 			View view = stylesContainer.getChildAt(counter);
-			view.setOnClickListener(v -> {
+			view.setOnClickListener(v -> showOnMap(roadInfo));
+
+			ImageView icon = view.findViewById(R.id.waypoint_icon);
+			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_road_works_dark));
+
+			TextView title = view.findViewById(R.id.waypoint_text);
+			title.setText(roadInfo.getName(app));
+
+			TextView distance = view.findViewById(R.id.waypoint_dist);
+			if (distanceOrigin != null) {
+				double meters = MapUtils.getDistance(distanceOrigin, roadInfo.getLatLon());
+				distance.setText(OsmAndFormatter.getFormattedDistance((float) meters, app));
+			}
+			AndroidUiHelper.updateVisibility(distance, distanceOrigin != null);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.waypoint_deviation), false);
+			showPlace(roadInfo, view.findViewById(R.id.waypoint_desc_text), distanceOrigin != null);
+
+			ImageButton removeButton = view.findViewById(R.id.info_close);
+			removeButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+			removeButton.setOnClickListener(v -> {
 				removedImpassableRoads.add(roadInfo);
-				stylesContainer.removeView(v);
+				stylesContainer.removeView(view);
 			});
-
-			TextView titleTv = view.findViewById(R.id.title);
-			titleTv.setText(roadInfo.getName(app));
-			titleTv.setTextColor(activeColor);
-
-			ImageView icon = view.findViewById(R.id.icon);
-			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 
 			counter++;
 		}
+	}
+
+	@Nullable
+	private LatLon getDistanceOrigin() {
+		Location location = app.getLocationProvider().getLastKnownLocation();
+		if (location != null) {
+			return new LatLon(location.getLatitude(), location.getLongitude());
+		}
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null ? mapActivity.getMapLocation() : null;
+	}
+
+	// coordinates at once, replaced by the address when the lookup finds one
+	private void showPlace(@NonNull AvoidRoadInfo roadInfo, @NonNull TextView placeView, boolean afterDistance) {
+		LatLon latLon = roadInfo.getLatLon();
+		String coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(),
+				latLon.getLongitude(), OsmAndFormatter.FORMAT_DEGREES_SHORT);
+		setPlace(placeView, coordinates, afterDistance);
+
+		AddressLookupRequest request = new AddressLookupRequest(latLon, address -> {
+			if (!Algorithms.isEmpty(address)) {
+				setPlace(placeView, address, afterDistance);
+			}
+		}, null);
+		addressRequests.add(request);
+		app.getGeocodingLookupService().lookupAddress(request);
+	}
+
+	private void setPlace(@NonNull TextView placeView, @NonNull String place, boolean afterDistance) {
+		placeView.setText(afterDistance ? app.getString(R.string.ltr_or_rtl_combine_via_bold_point, "", place) : place);
+	}
+
+	private void showOnMap(@NonNull AvoidRoadInfo roadInfo) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().hide();
+			app.getAvoidSpecificRoads().showOnMap(mapActivity, roadInfo);
+			Fragment fragment = getTargetFragment();
+			if (fragment != null) {
+				fragment.onActivityResult(getTargetRequestCode(), OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE, null);
+			}
+		}
+		dismiss();
+	}
+
+	@Override
+	public void onDestroyView() {
+		GeocodingLookupService lookupService = app.getGeocodingLookupService();
+		for (AddressLookupRequest request : addressRequests) {
+			lookupService.cancel(request);
+		}
+		addressRequests.clear();
+		super.onDestroyView();
 	}
 
 	private void populateImpassableRoadsTypes() {
