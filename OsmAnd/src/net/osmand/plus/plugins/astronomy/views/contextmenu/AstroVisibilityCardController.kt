@@ -55,6 +55,8 @@ class AstroVisibilityCardController(
 		private set
 	var locationText: String = ""
 		private set
+	var timeZoneText: String = ""
+		private set
 	var culminationColor: Int = 0
 		private set
 	var titleText: String = app.getString(R.string.astro_today_visibility)
@@ -113,6 +115,7 @@ class AstroVisibilityCardController(
 			culminationTime = null
 			setTime = null
 			locationText = ""
+			timeZoneText = ""
 			culminationColor = 0
 			graphSnapshot = null
 			graphObjectId = null
@@ -139,6 +142,7 @@ class AstroVisibilityCardController(
 		setTime = set?.format(timeFormatter)
 		culminationColor = AstroChartColorPalette.fromContext(app)
 			.colorForObjectAltitude(culmination.altitude ?: 0.0)
+		timeZoneText = AstroUtils.formatTimeZone(app, zoneId, startLocal, endLocal)
 		maybeRecomputeGraph(skyObject, observer, date, zoneId)
 
 		val location = resolveLocationTarget()
@@ -162,6 +166,7 @@ class AstroVisibilityCardController(
 			culminationTime = culminationTime,
 			setTime = setTime,
 			locationText = locationText,
+			timeZoneText = timeZoneText,
 			culminationColor = culminationColor,
 			titleText = titleText,
 			showResetButton = showResetButton

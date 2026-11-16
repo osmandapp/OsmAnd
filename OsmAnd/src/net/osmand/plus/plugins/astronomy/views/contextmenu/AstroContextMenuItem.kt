@@ -6,6 +6,7 @@ import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.plugins.astronomy.Catalog
 import java.time.LocalDate
 import java.time.ZoneId
+import java.time.ZonedDateTime
 
 enum class AstroContextCardKey(val stableId: Long) {
 	KNOWLEDGE(1L),
@@ -136,6 +137,7 @@ data class AstroVisibilityCardItem(
 	val culminationTime: String?,
 	val setTime: String?,
 	val locationText: String,
+	val timeZoneText: String,
 	val culminationColor: Int,
 	val titleText: String,
 	val showResetButton: Boolean
@@ -171,6 +173,7 @@ data class AstroScheduleDayItem(
 	val dayLabel: String,
 	val riseTime: String?,
 	val setTime: String?,
+	val setDateTime: ZonedDateTime?,
 	val setDayOffset: Int,
 	val graph: AstroScheduleDayGraphSnapshot
 )
@@ -178,6 +181,7 @@ data class AstroScheduleDayItem(
 data class AstroScheduleCardItem(
 	val periodStart: LocalDate,
 	val rangeLabel: String,
+	val timeZoneText: String,
 	val days: List<AstroScheduleDayItem>,
 	val showResetPeriodButton: Boolean
 ) : AstroContextMenuItem {

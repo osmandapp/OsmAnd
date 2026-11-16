@@ -63,7 +63,11 @@ class AstroVisibilityCardViewHolder(
 			time = item.setTime,
 			symbol = "▼"
 		)
-		locationText.text = item.locationText
+		locationText.text = if (Algorithms.isEmpty(item.timeZoneText)) {
+			item.locationText
+		} else {
+			"${item.locationText} · ${item.timeZoneText}"
+		}
 		locationRow.isVisible = !Algorithms.isEmpty(item.locationText)
 		updateDividers()
 	}
