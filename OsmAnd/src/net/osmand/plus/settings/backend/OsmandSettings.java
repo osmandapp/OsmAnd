@@ -3457,9 +3457,10 @@ public class OsmandSettings {
 		return USE_OPENGL_RENDER.get() && !OPENGL_RENDER_AUTO_DISABLED.get();
 	}
 
-	// An explicit user choice clears the local fallback before retrying V2.
+	// An explicit user choice clears the local fallback before retrying V2;
+	// choosing the renderer already in use writes nothing.
 	public void setOpenGlRendererEnabled(boolean enabled) {
-		if (USE_OPENGL_RENDER.set(enabled)) {
+		if (isOpenGlRendererEnabled() != enabled && USE_OPENGL_RENDER.set(enabled)) {
 			OPENGL_RENDER_AUTO_DISABLED.set(false);
 		}
 	}

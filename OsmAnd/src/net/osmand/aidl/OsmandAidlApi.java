@@ -2988,7 +2988,13 @@ public class OsmandAidlApi {
 			String value = params.getValue();
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
 
-			boolean success = settings.setPreference(prefId, value, appMode);
+			boolean success = true;
+			if (pref == settings.USE_OPENGL_RENDER && value != null) {
+				// as in the engine dialog: also clears the device-local V1 fallback
+				settings.setOpenGlRendererEnabled(Boolean.parseBoolean(value));
+			} else {
+				success = settings.setPreference(prefId, value, appMode);
+			}
 			if (success) {
 				if (settings.isRenderProperty(prefId)) {
 					if (mapActivity != null) {
