@@ -31,6 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.building.SunLight;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -632,8 +633,9 @@ public class MapRendererContext {
 		}
 		if (plugin != null) {
 			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
-			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
-			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+			SunLight sunLight = plugin.getSunLight();
+			elevationConfiguration.setHillshadeSunAngle(sunLight.getLightAltitude());
+			elevationConfiguration.setHillshadeSunAzimuth(sunLight.getLightAzimuth());
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}

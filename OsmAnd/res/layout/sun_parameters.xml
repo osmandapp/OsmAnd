@@ -1,103 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+	Sun panel below the map preview. Inflated with the Material 3 theme by SunParametersFragment:
+	the mode toggle, then one group of rows - the rows of the other modes are hidden.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="@color/color_transparent"
+	android:background="?attr/colorSurface"
 	android:orientation="vertical">
 
-	<LinearLayout
-		android:id="@+id/azimuth_container"
+	<com.google.android.material.button.MaterialButtonToggleGroup
+		android:id="@+id/mode_toggle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		app:selectionRequired="true"
+		app:singleSelection="true">
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/mode_live"
+			style="@style/Widget.Material3Expressive.Button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/sun_light_live"
+			android:textColor="@color/ui_toggle_button_text"
+			app:backgroundTint="@color/ui_toggle_button_background" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/mode_date"
+			style="@style/Widget.Material3Expressive.Button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/shared_string_date"
+			android:textColor="@color/ui_toggle_button_text"
+			app:backgroundTint="@color/ui_toggle_button_background" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/mode_manual"
+			style="@style/Widget.Material3Expressive.Button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/shared_string_manual"
+			android:textColor="@color/ui_toggle_button_text"
+			app:backgroundTint="@color/ui_toggle_button_background" />
+	</com.google.android.material.button.MaterialButtonToggleGroup>
+
+	<LinearLayout
+		android:id="@+id/sun_rows"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/ui_group_gap"
 		android:orientation="vertical">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:layout_marginTop="@dimen/content_padding"
-			android:orientation="horizontal">
+		<include
+			android:id="@+id/azimuth_row"
+			layout="@layout/item_ui_setting_row" />
 
-			<TextView
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:text="@string/shared_string_azimuth"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size" />
+		<include
+			android:id="@+id/altitude_row"
+			layout="@layout/item_ui_setting_row" />
 
-			<TextView
-				android:id="@+id/azimuth_value_tv"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_list_text_size"
-				tools:text="315°" />
+		<include
+			android:id="@+id/date_row"
+			layout="@layout/item_ui_setting_row" />
 
-		</LinearLayout>
+		<include
+			android:id="@+id/time_row"
+			layout="@layout/item_ui_slider_list_item" />
 
-		<com.google.android.material.slider.Slider
-			android:id="@+id/azimuth_slider"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:stepSize="1.0" />
+		<include
+			android:id="@+id/azimuth_slider_row"
+			layout="@layout/item_ui_slider_list_item" />
 
+		<include
+			android:id="@+id/altitude_slider_row"
+			layout="@layout/item_ui_slider_list_item" />
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/altitude_container"
+		android:id="@+id/shadows_rows"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/ui_group_gap"
 		android:orientation="vertical">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:layout_marginTop="@dimen/content_padding_small"
-			android:orientation="horizontal">
-
-			<TextView
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:text="@string/altitude"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size" />
-
-			<TextView
-				android:id="@+id/altitude_value_tv"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_list_text_size"
-				tools:text="45°" />
-
-		</LinearLayout>
-
-		<com.google.android.material.slider.Slider
-			android:id="@+id/altitude_slider"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:stepSize="1.0" />
-
+		<include
+			android:id="@+id/shadows_row"
+			layout="@layout/item_ui_setting_row" />
 	</LinearLayout>
-
-	<androidx.appcompat.widget.SwitchCompat
-		android:id="@+id/shadows_switch"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:minHeight="@dimen/context_menu_action_buttons_h"
-		android:background="?attr/selectableItemBackground"
-		android:padding="@dimen/content_padding"
-		android:saveEnabled="false"
-		android:text="@string/cast_shadows"
-		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/default_list_text_size"
-		app:switchPadding="@dimen/content_padding" />
-
 </LinearLayout>

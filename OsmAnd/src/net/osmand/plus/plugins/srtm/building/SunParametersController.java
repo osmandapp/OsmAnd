@@ -24,10 +24,14 @@ public class SunParametersController extends BaseDialogController {
 	private final int initialAzimuth;
 	private final int initialAltitude;
 	private final boolean initialShadowsEnabled;
+	private final SunLightMode initialMode;
+	private final long initialTime;
 
 	private int azimuth;
 	private int altitude;
 	private boolean shadowsEnabled;
+	private SunLightMode mode;
+	private long time;
 	private boolean applyChanges = false;
 
 	public SunParametersController(@NonNull OsmandApplication app, @NonNull SRTMPlugin plugin) {
@@ -39,6 +43,10 @@ public class SunParametersController extends BaseDialogController {
 		this.azimuth = initialAzimuth;
 		this.altitude = initialAltitude;
 		this.shadowsEnabled = initialShadowsEnabled;
+		this.initialMode = plugin.SUN_LIGHT_MODE.get();
+		this.initialTime = plugin.SUN_LIGHT_TIME.get();
+		this.mode = initialMode;
+		this.time = initialTime;
 	}
 
 	@NonNull
@@ -66,6 +74,31 @@ public class SunParametersController extends BaseDialogController {
 		app.getSettings().CAST_SHADOWS.set(enabled);
 	}
 
+	@NonNull
+	public SunLightMode getMode() {
+		return mode;
+	}
+
+	public void setMode(@NonNull SunLightMode mode) {
+		this.mode = mode;
+		plugin.SUN_LIGHT_MODE.set(mode);
+	}
+
+	/** Date and time of {@link SunLightMode#DATE}, now until one is chosen. */
+	public long getTime() {
+		return plugin.getSunLight().getDateTime();
+	}
+
+	public void setTime(long time) {
+		this.time = time;
+		plugin.SUN_LIGHT_TIME.set(time);
+	}
+
+	@NonNull
+	public SunLight.Angles getSunAngles() {
+		return plugin.getSunLight().getAngles();
+	}
+
 	public void onApplyChanges() {
 		applyChanges = true;
 	}
@@ -76,6 +109,8 @@ public class SunParametersController extends BaseDialogController {
 			setAzimuth(applyChanges ? azimuth : initialAzimuth);
 			setAltitude(applyChanges ? altitude : initialAltitude);
 			setShadowsEnabled(applyChanges ? shadowsEnabled : initialShadowsEnabled);
+			setTime(applyChanges ? time : initialTime);
+			setMode(applyChanges ? mode : initialMode);
 			return true;
 		}
 		return false;
@@ -99,7 +134,7 @@ public class SunParametersController extends BaseDialogController {
 
 	protected boolean hasChanges() {
 		return initialAzimuth != azimuth || initialAltitude != altitude
-				|| initialShadowsEnabled != shadowsEnabled;
+				|| initialShadowsEnabled != shadowsEnabled || initialMode != mode || initialTime != time;
 	}
 
 	public static void showDialog(@NonNull OsmandApplication app, @NonNull FragmentManager manager) {
