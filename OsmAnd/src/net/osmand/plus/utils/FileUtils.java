@@ -216,16 +216,13 @@ public class FileUtils {
 		updateMovedGpxFiles(app, files, srcDir, destDir);
 
 		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
-		sortModesHelper.onTrackFolderIdChanged(srcDir, destDir);
+		sortModesHelper.onTrackFolderIdChanged(trackFolder, srcDir, destDir);
 	}
 
 	public static void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app,
 			@NonNull TrackFolder trackFolder) {
-		// A partially deleted folder keeps its sorting.
-		if (!trackFolder.getDirFile().exists()) {
-			TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
-			sortModesHelper.onTrackFolderDeleted(trackFolder);
-		}
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.onTrackFolderDeleted(trackFolder);
 	}
 
 	private static void updateMovedGpxFiles(@NonNull OsmandApplication app,

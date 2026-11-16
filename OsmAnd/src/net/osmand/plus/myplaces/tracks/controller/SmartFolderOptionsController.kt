@@ -123,9 +123,7 @@ class SmartFolderOptionsController(
 						if (app.smartFolderHelper.isSmartFolderPresent(newName)) {
 							app.showToastMessage(R.string.smart_folder_name_present)
 						} else {
-							val previousId = smartFolder.getId()
 							app.smartFolderHelper.renameSmartFolder(smartFolder, newName)
-							app.trackSortModesHelper.onSmartFolderRenamed(previousId, smartFolder.getId())
 							onSmartFolderRenamed(smartFolder)
 						}
 					}

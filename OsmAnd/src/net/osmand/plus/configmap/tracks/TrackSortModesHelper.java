@@ -3,37 +3,43 @@ package net.osmand.plus.configmap.tracks;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.StateChangedListener;
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.shared.gpx.data.OrganizedTracksGroup;
+import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.gpx.enums.TracksSortScope;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TrackSortModesHelper {
 
-	private volatile Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
+	private static final String ROOT_FOLDER_ID = "";
+	private static final String SEPARATOR = ",,";
+	private static final String SCOPE_SEPARATOR = "::";
+
+	private final Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
 	private final ListStringPreference preference;
-	// Held because the preference keeps its listeners weakly.
-	private final StateChangedListener<String> preferenceListener;
 
 	public TrackSortModesHelper(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		preference = settings.TRACKS_TABS_SORT_MODES;
-		reloadFromPreference();
-		preferenceListener = change -> reloadFromPreference();
-		preference.addListener(preferenceListener);
+		loadFromPreference();
 	}
 
 	@NonNull
 	public TracksSortMode getRootFolderSortMode() {
-		return requireSortMode(TrackSortModeKeyUtils.ROOT_FOLDER_ID, TracksSortScope.TRACKS);
+		return requireSortMode(ROOT_FOLDER_ID, TracksSortScope.TRACKS);
 	}
 
 	@NonNull
@@ -44,40 +50,77 @@ public class TrackSortModesHelper {
 
 	@Nullable
 	public TracksSortMode getSortMode(@NonNull String id, @NonNull TracksSortScope scope) {
-		return TrackSortModeKeyUtils.resolveSortMode(cachedSortModes, id, scope);
+		TracksSortMode sortMode = cachedSortModes.get(getInternalId(id, scope));
+		if (sortMode == null && scope == TracksSortScope.TRACKS && !id.startsWith(SmartFolder.ID_PREFIX)) {
+			// Older versions keyed a folder by its name (V1). Read that key as a fallback:
+			// rewriting the shared preference at startup shows up as a Global Settings change.
+			String idV1 = getFolderIdV1(id);
+			sortMode = idV1 != null ? cachedSortModes.get(getInternalId(idV1, scope)) : null;
+		}
+		return sortMode != null ? TracksSortMode.getValidOrDefault(id, scope, sortMode) : null;
 	}
 
 	public void setSortMode(@NonNull String id,
 	                        @NonNull TracksSortScope scope,
 	                        @Nullable TracksSortMode sortMode) {
-		String sortModeKey = TrackSortModeKeyUtils.getSortModeKey(id, scope);
+		String internalId = getInternalId(id, scope);
 		if (sortMode != null) {
-			cachedSortModes.put(sortModeKey, sortMode);
+			cachedSortModes.put(internalId, sortMode);
 		} else {
-			cachedSortModes.remove(sortModeKey);
+			cachedSortModes.remove(internalId);
 		}
 	}
 
-	public void onTrackFolderIdChanged(@NonNull File oldDir, @NonNull File newDir) {
+	public void onTrackFolderIdChanged(@NonNull TracksGroup trackFolder, @NonNull File oldDir, @NonNull File newDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
 		String newId = getFolderId(newDir.getAbsolutePath());
-		boolean keysChanged = TrackSortModeKeyUtils.copyLegacyTrackSortModeForRenamedFolder(cachedSortModes, previousId, newId);
-		keysChanged |= TrackSortModeKeyUtils.moveFolderKeys(cachedSortModes, previousId, newId);
-		if (keysChanged) {
-			syncSettings();
+		boolean updated = false;
+		for (TracksSortScope scope : trackFolder.getSupportedSortScopes()) {
+			TracksSortMode sortMode = getSortMode(previousId, scope);
+			if (sortMode != null) {
+				setSortMode(previousId, scope, null);
+				setSortMode(newId, scope, sortMode);
+				updated = true;
+			}
 		}
-	}
-
-	public void onSmartFolderRenamed(@NonNull String previousId, @NonNull String newId) {
-		if (TrackSortModeKeyUtils.moveFolderKeys(cachedSortModes, previousId, newId)) {
+		// TODO: update all sub folders / dependent groups as well
+		if (updated) {
 			syncSettings();
 		}
 	}
 
 	public void onTrackFolderDeleted(@NonNull TracksGroup trackFolder) {
-		if (TrackSortModeKeyUtils.removeFolderKeys(cachedSortModes, trackFolder.getId())) {
-			syncSettings();
+		String folderId = trackFolder.getId();
+		for (TracksSortScope scope : trackFolder.getSupportedSortScopes()) {
+			setSortMode(folderId, scope, null);
 		}
+		clearRelatedKeys(folderId);
+		syncSettings();
+	}
+
+	public void clearRelatedKeys(@NonNull String folderId) {
+		List<String> prefixesToRemove = getRelatedKeyPrefixes(folderId);
+		if (prefixesToRemove.isEmpty()) return;
+
+		cachedSortModes.keySet().removeIf(key -> {
+			for (String prefix : prefixesToRemove) {
+				if (key.startsWith(prefix)) {
+					return true;
+				}
+			}
+			return false;
+		});
+	}
+
+	/**
+	 * Returns a list of ID prefixes that are considered "nested" or dependent on the given folderId.
+	 * Used to clean up cache when the parent folder is modified.
+	 */
+	@NonNull
+	private List<String> getRelatedKeyPrefixes(@NonNull String folderId) {
+		List<String> prefixes = new ArrayList<>();
+		prefixes.add(OrganizedTracksGroup.Companion.getBaseId(folderId));
+		return prefixes;
 	}
 
 	public void syncSettings() {
@@ -100,19 +143,68 @@ public class TrackSortModesHelper {
 				: null;
 	}
 
-	void reloadFromPreference() {
-		Map<String, TracksSortMode> stored = TrackSortModeKeyUtils.parseSortModes(preference.getStringsList());
-		// Import runs on the UI thread while folder moves and deletions may mutate the cache in background,
-		// so the map is replaced atomically instead of updated in place.
-		cachedSortModes = new ConcurrentHashMap<>(stored);
+	private void loadFromPreference() {
+		List<String> tokens = preference.getStringsList();
+		if (!Algorithms.isEmpty(tokens)) {
+			for (String token : tokens) {
+				String[] tokenParts = token.split(SEPARATOR);
+				if (tokenParts.length == 2) {
+					String internalId = removeExtraFileSeparator(tokenParts[0]);
+					cachedSortModes.put(internalId, TracksSortMode.getByValue(tokenParts[1]));
+				}
+			}
+		}
 	}
 
 	private void saveToPreference() {
-		preference.setStringsList(TrackSortModeKeyUtils.serializeSortModes(cachedSortModes));
+		List<String> tokens = new ArrayList<>();
+		for (Entry<String, TracksSortMode> entry : cachedSortModes.entrySet()) {
+			TracksSortMode value = entry.getValue();
+			tokens.add(entry.getKey() + SEPARATOR + value.name());
+		}
+		preference.setStringsList(tokens);
+	}
+
+	@NonNull
+	public static String getInternalId(@NonNull String folderId, @NonNull TracksSortScope scope) {
+		String cleanId = removeExtraFileSeparator(folderId);
+		if (scope == TracksSortScope.TRACKS) {
+			return cleanId;
+		}
+		return cleanId + SCOPE_SEPARATOR + scope.name();
 	}
 
 	@NonNull
 	public static String getFolderId(@NonNull String absolutePath) {
-		return TrackSortModeKeyUtils.getFolderId(absolutePath);
+		String basePath = IndexConstants.GPX_INDEX_DIR;
+		int index = absolutePath.indexOf(basePath);
+		if (index > 0) {
+			index += basePath.length();
+			String relativePath = absolutePath.substring(index);
+			return removeExtraFileSeparator(relativePath);
+		} else if (absolutePath.endsWith(removeExtraFileSeparator(basePath))) {
+			return ROOT_FOLDER_ID;
+		}
+		return absolutePath;
+	}
+
+	@Nullable
+	private static String getFolderIdV1(@NonNull String folderId) {
+		if (folderId.isEmpty()) {
+			return IndexConstants.GPX_INDEX_DIR;
+		}
+		String cleanId = removeExtraFileSeparator(folderId);
+		int index = cleanId.lastIndexOf(File.separator);
+		return index > 0 ? cleanId.substring(index + 1) : null;
+	}
+
+	@NonNull
+	private static String removeExtraFileSeparator(@NonNull String id) {
+		// Ensure consistency by removing trailing File.separator from relative paths
+		// before querying or saving to settings to avoid key mismatches.
+		if (id.endsWith(File.separator)) {
+			return id.substring(0, id.length() - 1);
+		}
+		return id;
 	}
 }
