@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="map_tiles_disk_cache">Map tiles cache</string>
+    <string name="map_tiles_disk_cache_descr">Rendered map tiles and labels up to zoom 15 kept on the device, so places seen before draw faster. Now used: %1$s</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/

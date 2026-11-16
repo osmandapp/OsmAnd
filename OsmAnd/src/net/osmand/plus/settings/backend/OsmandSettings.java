@@ -1940,6 +1940,8 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Integer> MAX_RENDERING_THREADS = new IntPreference(this, "max_rendering_threads", 0).makeGlobal();
+	// rendered map tiles and their labels of zoom 15 and below kept on disk, 0 turns it off
+	public final CommonPreference<Integer> MAP_TILE_DISK_CACHE_SIZE_MB = new IntPreference(this, "map_tile_disk_cache_size_mb", 256).makeGlobal();
 
 	// Json
 	public final OsmandPreference<String> SELECTED_GPX = new StringPreference(this, "selected_gpx", "").makeGlobal().makeShared();
