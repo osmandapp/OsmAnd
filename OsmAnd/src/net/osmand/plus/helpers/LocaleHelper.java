@@ -33,11 +33,12 @@ import java.util.Objects;
 public class LocaleHelper {
 
 	private final static Log log = PlatformUtil.getLog(LocaleHelper.class);
+	private static final String LOCALE_STATE_PREFS = "locale_helper";
 	private static final String LAST_SYSTEM_LOCALE = "last_system_locale";
 
 	private final OsmandApplication app;
 
-	private final Locale defaultLocale;
+	private Locale defaultLocale;
 	private final StateChangedListener<String> localeListener;
 
 	private Locale preferredLocale;
@@ -57,8 +58,11 @@ public class LocaleHelper {
 
 	private void onPreferredLocaleChanged() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			app.getSharedPreferences("locale_helper", Context.MODE_PRIVATE).edit().remove(LAST_SYSTEM_LOCALE).apply();
 			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
+			SharedPreferences localeState = getLocaleState();
+			if (!Algorithms.stringsEqual(preferredLocale, localeState.getString(LAST_SYSTEM_LOCALE, null))) {
+				localeState.edit().remove(LAST_SYSTEM_LOCALE).apply();
+			}
 
 			if (!Algorithms.isEmpty(preferredLocale)) {
 				Locale locale = SupportedLocale.parseLocale(preferredLocale);
@@ -72,12 +76,31 @@ public class LocaleHelper {
 		}
 	}
 
+	@NonNull
+	private SharedPreferences getLocaleState() {
+		return app.getSharedPreferences(LOCALE_STATE_PREFS, Context.MODE_PRIVATE);
+	}
+
+	private void updateDefaultLocale() {
+		List<String> supportedTags = new ArrayList<>();
+		for (SupportedLocale supportedLocale : SupportedLocale.values()) {
+			if (!Algorithms.isEmpty(supportedLocale.getModernTag())) {
+				supportedTags.add(supportedLocale.getModernTag());
+			}
+		}
+		Locale systemLocale = LocaleManagerCompat.getSystemLocales(app).getFirstMatch(supportedTags.toArray(new String[0]));
+		if (systemLocale != null) {
+			defaultLocale = systemLocale;
+		}
+	}
+
 	public void checkPreferredLocale() {
 		OsmandSettings settings = app.getSettings();
 		String locale = settings.PREFERRED_LOCALE.get();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			SharedPreferences localeState = app.getSharedPreferences("locale_helper", Context.MODE_PRIVATE);
+			updateDefaultLocale();
+			SharedPreferences localeState = getLocaleState();
 			LocaleListCompat appLocales = LocaleManagerCompat.getApplicationLocales(app);
 			String currentLocale = appLocales.isEmpty() ? "" : appLocales.get(0).toLanguageTag();
 			currentLocale = SupportedLocale.normalizeToOsmandLegacy(currentLocale);

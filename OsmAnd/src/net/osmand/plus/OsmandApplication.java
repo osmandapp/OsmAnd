@@ -609,6 +609,9 @@ public class OsmandApplication extends MultiDexApplication {
 			localeHelper.checkPreferredLocale();
 		} else {
 			super.onConfigurationChanged(newConfig);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+				localeHelper.checkPreferredLocale();
+			}
 		}
 	}
 
