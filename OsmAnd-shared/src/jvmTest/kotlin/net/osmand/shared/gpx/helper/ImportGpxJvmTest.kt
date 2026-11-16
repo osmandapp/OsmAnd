@@ -87,6 +87,23 @@ class ImportGpxJvmTest {
 		assertEquals("Trips 2025-26", gpxFile.getPointsList().single().category)
 	}
 
+	@Test
+	fun testUnnamedDocumentKeepsFirstFolder() {
+		val gpxFile = ImportGpx.loadGPXFileFromKml(
+			Buffer().writeUtf8(
+				"<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>" +
+						"<Folder><name>Group A</name><Folder><name>Subgroup B</name>" +
+						"<Placemark><name>Point 1</name><Point><coordinates>0.0,0.0,0</coordinates></Point></Placemark>" +
+						"</Folder></Folder></Document></kml>"
+			)
+		).first
+
+		assertNull(gpxFile.error)
+		val point = gpxFile.getPointsList().single()
+		assertEquals("Point 1", point.name)
+		assertEquals("Group A/Subgroup B", point.category)
+	}
+
 	private fun importKml(body: String): GpxFile =
 		ImportGpx.loadGPXFileFromKml(
 			Buffer().writeUtf8(
