@@ -1066,16 +1066,16 @@ class BinaryMapIndexReader {
 		return true
 	}
 
-	/** One block of amenities at a known offset, or one amenity of it when [index] is not -1. */
-	fun readAmenityBlock(pr: PoiRegion, offset: Long, index: Int): MutableList<Amenity> {
+	/** The amenity at [index] of the block at a known offset. */
+	fun readAmenity(pr: PoiRegion, offset: Long, index: Int): Amenity? {
 		poiAdapter.initCategories(pr)
 		codedIS.seek(pr.filePointer + offset)
 		val len = readInt()
 		val oldLim = codedIS.pushLimitLong(len)
 		val sr = SearchRequest<Amenity>()
-		poiAdapter.readPoiData(0, Int.MAX_VALUE, 0, Int.MAX_VALUE, sr, pr, index, null, 0)
+		val read = poiAdapter.readPoiData(0, Int.MAX_VALUE, 0, Int.MAX_VALUE, sr, pr, index, null, 0)
 		codedIS.popLimit(oldLim)
-		return sr.getSearchResults()
+		return if (read) sr.getSearchResults().last() else null
 	}
 
 	/** The header of the settlement at [offset] of [r], without its streets. */
