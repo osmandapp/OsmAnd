@@ -133,6 +133,9 @@ public class DownloadItemFragment extends BaseFullScreenDialogFragment implement
 		DownloadActivity activity = (DownloadActivity) requireActivity();
 		DownloadResources indexes = activity.getDownloadThread().getIndexes();
 		group = indexes.getGroupById(regionId);
+		if (group == null) {
+			return;
+		}
 		CustomIndexItem indexItem = (CustomIndexItem) group.getItemByIndex(itemIndex);
 		if (indexItem != null) {
 			toolbar.setTitle(indexItem.getVisibleName(app, app.getRegions()));
