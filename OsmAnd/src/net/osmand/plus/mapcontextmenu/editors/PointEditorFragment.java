@@ -4,6 +4,7 @@ import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY
 import static net.osmand.plus.myplaces.favorites.FavoriteGroup.isPersonalCategoryDisplayName;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -15,9 +16,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +53,11 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +65,8 @@ import java.util.Map;
 public abstract class PointEditorFragment extends EditorFragment {
 
 	private static final String SELECTED_GROUP_KEY = "editor_selected_group";
+	private static final String CREATION_TIMESTAMP_KEY = "editor_creation_date";
+	private static final String CREATION_TIMESTAMP_EDITED_KEY = "editor_creation_date_edited";
 
 	private TextView addDelDescription;
 	private TextView addAddressBtn;
@@ -71,6 +80,10 @@ public abstract class PointEditorFragment extends EditorFragment {
 	private View addressCaption;
 	private EditText descriptionEdit;
 	private EditText addressEdit;
+	private TextView creationTimestampView;
+
+	private long editedCreationTimestamp;
+	private boolean isCreationTimestampDirtied;
 
 	protected PointsGroup selectedGroup;
 	protected PointBitmapDrawer pointDrawer;
@@ -87,6 +100,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 		if (selectedGroup != null) {
 			outState.putString(SELECTED_GROUP_KEY, selectedGroup.getName());
 		}
+		outState.putLong(CREATION_TIMESTAMP_KEY, editedCreationTimestamp);
+		outState.putBoolean(CREATION_TIMESTAMP_EDITED_KEY, isCreationTimestampDirtied);
 	}
 
 	@Override
@@ -100,6 +115,10 @@ public abstract class PointEditorFragment extends EditorFragment {
 					break;
 				}
 			}
+		}
+		if (savedInstanceState.containsKey(CREATION_TIMESTAMP_KEY)) {
+			editedCreationTimestamp = savedInstanceState.getLong(CREATION_TIMESTAMP_KEY);
+			isCreationTimestampDirtied = savedInstanceState.getBoolean(CREATION_TIMESTAMP_EDITED_KEY);
 		}
 	}
 
@@ -203,7 +222,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 			}
 		});
 		updateNameIcon();
-		setupCreationTimestamp();
+		setupCreationTimestamp(activeColor);
 
 		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
@@ -361,19 +380,95 @@ public abstract class PointEditorFragment extends EditorFragment {
 		}
 	}
 
-	private void setupCreationTimestamp() {
+	private void setupCreationTimestamp(int activeColor) {
 		View creationTimestampRow = view.findViewById(R.id.creation_date_row);
-		TextView creationTimestampView = view.findViewById(R.id.creation_date);
+		creationTimestampView = view.findViewById(R.id.creation_date);
 		PointEditor editor = getEditor();
 		long timestamp = getCreationTimestamp();
-		boolean visible = timestamp != 0 && (editor == null || !editor.isNew());
+		boolean visible = timestamp != 0 && (editor == null || !editor.isNew()) && isCreationTimestampEditable();
 		AndroidUiHelper.updateVisibility(creationTimestampRow, visible);
 		if (visible) {
-			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
-			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
-			Date date = new Date(timestamp);
+			if (!isCreationTimestampDirtied) {
+				editedCreationTimestamp = timestamp;
+			}
+			updateCreationTimestampText();
+
+			View.OnClickListener listener = v -> showCreationTimestampDialog();
+			creationTimestampRow.setOnClickListener(listener);
+			creationTimestampView.setOnClickListener(listener);
+
+			TextInputLayout creationTimestampCaption = view.findViewById(R.id.creation_date_caption);
+			creationTimestampCaption.setEndIconDrawable(getPaintedIcon(R.drawable.ic_action_edit_outlined, activeColor));
+			creationTimestampCaption.setEndIconOnClickListener(listener);
+		}
+	}
+
+	private void updateCreationTimestampText() {
+		if (creationTimestampView != null) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(creationTimestampView.getContext());
+			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(creationTimestampView.getContext());
+			Date date = new Date(editedCreationTimestamp);
 			creationTimestampView.setText(dateFormat.format(date) + " — " + timeFormat.format(date));
 		}
+	}
+
+	private void showCreationTimestampDialog() {
+		Context context = requireContext();
+		Context themedContext = UiUtilities.getThemedContext(context, nightMode);
+		View dialogView = UiUtilities.getInflater(context, nightMode)
+				.inflate(R.layout.dialog_date_time_picker, null);
+		DatePicker datePicker = dialogView.findViewById(R.id.date_picker);
+		TimePicker timePicker = dialogView.findViewById(R.id.time_picker);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(editedCreationTimestamp);
+		timePicker.setIs24HourView(android.text.format.DateFormat.is24HourFormat(context));
+		timePicker.setHour(calendar.get(Calendar.HOUR_OF_DAY));
+		timePicker.setMinute(calendar.get(Calendar.MINUTE));
+
+		AlertDialog dialog = new AlertDialog.Builder(themedContext)
+				.setTitle(R.string.created_on)
+				.setView(dialogView)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_ok, null)
+				.create();
+
+		dialog.setOnShowListener(d -> {
+			dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+				LocalDateTime localTime = getSelectedLocalDateTime(datePicker, timePicker);
+				List<ZoneOffset> offsets = ZoneId.systemDefault().getRules().getValidOffsets(localTime);
+				ZoneOffset offset = offsets.isEmpty()
+						? ZoneId.systemDefault().getRules().getOffset(localTime) : offsets.get(0);
+				editedCreationTimestamp = localTime.atOffset(offset).toInstant().toEpochMilli();
+				isCreationTimestampDirtied = editedCreationTimestamp != getCreationTimestamp();
+				updateCreationTimestampText();
+				dialog.dismiss();
+			});
+		});
+
+		datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH), null);
+		dialog.show();
+	}
+
+	@NonNull
+	private static LocalDateTime getSelectedLocalDateTime(@NonNull DatePicker datePicker, @NonNull TimePicker timePicker) {
+		return LocalDateTime.of(datePicker.getYear(), datePicker.getMonth() + 1, datePicker.getDayOfMonth(),
+				timePicker.getHour(), timePicker.getMinute());
+	}
+
+	/**
+	 * @return true if the user changed the creation timestamp in the editor
+	 */
+	protected boolean isCreationTimestampEdited() {
+		return isCreationTimestampDirtied;
+	}
+
+	/**
+	 * @return the creation timestamp currently selected in the editor
+	 */
+	protected long getEditedCreationTimestamp() {
+		return isCreationTimestampDirtied ? editedCreationTimestamp : getCreationTimestamp();
 	}
 
 	/**
@@ -381,6 +476,16 @@ public abstract class PointEditorFragment extends EditorFragment {
 	 */
 	protected long getCreationTimestamp() {
 		return 0;
+	}
+
+	/**
+	 * @return true if the creation timestamp of the edited point can be changed by the user.
+	 * For a currently recording track we don't expose editing, because the attributes are
+	 * persisted in a database rather than in an XML structure until the recording is finished,
+	 * and handling that second serialization format is not worth it for this uncommon use case.
+	 */
+	protected boolean isCreationTimestampEditable() {
+		return true;
 	}
 
 	@NonNull

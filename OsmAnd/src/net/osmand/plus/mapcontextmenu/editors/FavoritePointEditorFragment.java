@@ -310,6 +310,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			point.setColor(getColor());
 			point.setIconId(getIconId());
 			point.setBackgroundType(getBackgroundType());
+			if (isCreationTimestampEdited()) {
+				point.setCreatedOn(getEditedCreationTimestamp());
+			}
 			return isChanged(favorite, point);
 		}
 		return saved;
@@ -327,6 +330,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			point.setColor(getColor());
 			point.setIconId(getIconId());
 			point.setBackgroundType(getBackgroundType());
+			if (isCreationTimestampEdited()) {
+				point.setCreatedOn(getEditedCreationTimestamp());
+			}
 			AlertDialog.Builder builder = FavoriteDialogs.checkDuplicates(point, activity);
 
 			if (isChanged(favorite, point)) {
@@ -357,7 +363,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				favorite.getCategory().equals(point.getCategory()) &&
 				favorite.getBackgroundType().equals(point.getBackgroundType()) &&
 				Algorithms.stringsEqual(favorite.getDescription(), point.getDescription()) &&
-				Algorithms.stringsEqual(favorite.getAddress(), point.getAddress());
+				Algorithms.stringsEqual(favorite.getAddress(), point.getAddress()) &&
+				(!isCreationTimestampEdited() || favorite.getCreatedOn() == point.getCreatedOn());
 	}
 
 	private void doSave(@NonNull FragmentActivity activity, FavouritePoint favorite, String name, String category, String description, String address,
@@ -395,6 +402,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		favorite.setColor(color);
 		favorite.setBackgroundType(backgroundType);
 		favorite.setIconId(iconId);
+		if (isCreationTimestampEdited()) {
+			favorite.setCreatedOn(getEditedCreationTimestamp());
+		}
 		helper.editFavouriteName(favorite, name, category, description, address);
 	}
 
