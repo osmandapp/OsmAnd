@@ -16,8 +16,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -430,6 +433,15 @@ public abstract class PointEditorFragment extends EditorFragment {
 		timePicker.setHour(calendar.get(Calendar.HOUR_OF_DAY));
 		timePicker.setMinute(calendar.get(Calendar.MINUTE));
 
+		View occurrenceContainer = dialogView.findViewById(R.id.dst_occurrence_container);
+		RadioGroup occurrenceGroup = dialogView.findViewById(R.id.dst_occurrence_group);
+		RadioButton firstOccurrence = dialogView.findViewById(R.id.dst_occurrence_first);
+		RadioButton secondOccurrence = dialogView.findViewById(R.id.dst_occurrence_second);
+		TextView gapMessage = dialogView.findViewById(R.id.dst_gap_message);
+
+		// The offset the user picked for the ambiguous hour, kept while the time stays ambiguous
+		ZoneOffset[] selectedOffset = new ZoneOffset[1];
+
 		AlertDialog dialog = new AlertDialog.Builder(themedContext)
 				.setTitle(R.string.created_on)
 				.setView(dialogView)
@@ -437,12 +449,59 @@ public abstract class PointEditorFragment extends EditorFragment {
 				.setPositiveButton(R.string.shared_string_ok, null)
 				.create();
 
+		Runnable updateState = () -> {
+			LocalDateTime localTime = getSelectedLocalDateTime(datePicker, timePicker);
+			List<ZoneOffset> offsets = ZoneId.systemDefault().getRules().getValidOffsets(localTime);
+
+			boolean ambiguous = offsets.size() > 1;
+			boolean nonexistent = offsets.isEmpty();
+			AndroidUiHelper.updateVisibility(occurrenceContainer, ambiguous);
+			AndroidUiHelper.updateVisibility(gapMessage, nonexistent);
+
+			if (ambiguous) {
+				// Keep the previous choice if it is still one of the valid offsets
+				if (selectedOffset[0] == null || !offsets.contains(selectedOffset[0])) {
+					selectedOffset[0] = offsets.get(0);
+				}
+				firstOccurrence.setText(getString(R.string.dst_time_occurs_twice_first,
+						formatOffset(offsets.get(0))));
+				secondOccurrence.setText(getString(R.string.dst_time_occurs_twice_second,
+						formatOffset(offsets.get(1))));
+				int checkedId = selectedOffset[0].equals(offsets.get(0))
+						? R.id.dst_occurrence_first : R.id.dst_occurrence_second;
+				if (occurrenceGroup.getCheckedRadioButtonId() != checkedId) {
+					occurrenceGroup.check(checkedId);
+				}
+			} else {
+				selectedOffset[0] = offsets.isEmpty() ? null : offsets.get(0);
+			}
+
+			Button okButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+			if (okButton != null) {
+				okButton.setEnabled(!nonexistent);
+			}
+		};
+
+		DatePicker.OnDateChangedListener dateChangedListener = (picker, year, month, day) -> updateState.run();
+		timePicker.setOnTimeChangedListener((picker, hour, minute) -> updateState.run());
+		occurrenceGroup.setOnCheckedChangeListener((group, checkedId) -> {
+			LocalDateTime localTime = getSelectedLocalDateTime(datePicker, timePicker);
+			List<ZoneOffset> offsets = ZoneId.systemDefault().getRules().getValidOffsets(localTime);
+			if (offsets.size() > 1) {
+				selectedOffset[0] = checkedId == R.id.dst_occurrence_first ? offsets.get(0) : offsets.get(1);
+			}
+		});
+
 		dialog.setOnShowListener(d -> {
+			updateState.run();
 			dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
 				LocalDateTime localTime = getSelectedLocalDateTime(datePicker, timePicker);
 				List<ZoneOffset> offsets = ZoneId.systemDefault().getRules().getValidOffsets(localTime);
-				ZoneOffset offset = offsets.isEmpty()
-						? ZoneId.systemDefault().getRules().getOffset(localTime) : offsets.get(0);
+				if (offsets.isEmpty()) {
+					return;
+				}
+				ZoneOffset offset = selectedOffset[0] != null && offsets.contains(selectedOffset[0])
+						? selectedOffset[0] : offsets.get(0);
 				editedCreationTimestamp = localTime.atOffset(offset).toInstant().toEpochMilli();
 				isCreationTimestampDirtied = editedCreationTimestamp != getCreationTimestamp();
 				updateCreationTimestampText();
@@ -450,15 +509,34 @@ public abstract class PointEditorFragment extends EditorFragment {
 			});
 		});
 
+		// Registering the date listener also refreshes the state for the initial values
 		datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH), null);
+				calendar.get(Calendar.DAY_OF_MONTH), dateChangedListener);
 		dialog.show();
+		updateState.run();
 	}
 
 	@NonNull
 	private static LocalDateTime getSelectedLocalDateTime(@NonNull DatePicker datePicker, @NonNull TimePicker timePicker) {
 		return LocalDateTime.of(datePicker.getYear(), datePicker.getMonth() + 1, datePicker.getDayOfMonth(),
 				timePicker.getHour(), timePicker.getMinute());
+	}
+
+	/**
+	 * @return offset formatted as "UTC+2" or "UTC+5:30"
+	 */
+	@NonNull
+	private static String formatOffset(@NonNull ZoneOffset offset) {
+		int totalMinutes = offset.getTotalSeconds() / 60;
+		int absMinutes = Math.abs(totalMinutes);
+		int hours = absMinutes / 60;
+		int minutes = absMinutes % 60;
+		StringBuilder sb = new StringBuilder("UTC");
+		sb.append(totalMinutes < 0 ? '-' : '+').append(hours);
+		if (minutes != 0) {
+			sb.append(':').append(minutes < 10 ? "0" : "").append(minutes);
+		}
+		return sb.toString();
 	}
 
 	/**

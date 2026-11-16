@@ -39,6 +39,61 @@
 			android:layout_gravity="center_horizontal"
 			android:timePickerMode="spinner" />
 
+		<LinearLayout
+			android:id="@+id/dst_occurrence_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+			<TextView
+				android:id="@+id/dst_occurrence_title"
+				style="@style/TextAppearance.Material3.BodySmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/content_padding_small"
+				android:text="@string/dst_time_occurs_twice"
+				android:textColor="?android:textColorSecondary" />
+
+			<RadioGroup
+				android:id="@+id/dst_occurrence_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<androidx.appcompat.widget.AppCompatRadioButton
+					android:id="@+id/dst_occurrence_first"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:checkMark="?android:attr/listChoiceIndicatorSingle"
+					android:paddingVertical="@dimen/content_padding_small_half"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<androidx.appcompat.widget.AppCompatRadioButton
+					android:id="@+id/dst_occurrence_second"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:checkMark="?android:attr/listChoiceIndicatorSingle"
+					android:paddingVertical="@dimen/content_padding_small_half"
+					android:textSize="@dimen/default_list_text_size" />
+
+			</RadioGroup>
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/dst_gap_message"
+			style="@style/TextAppearance.Material3.BodySmall"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:text="@string/dst_time_does_not_exist"
+			android:textColor="@color/color_invalid"
+			android:visibility="gone" />
+
 	</LinearLayout>
 
 </ScrollView>
