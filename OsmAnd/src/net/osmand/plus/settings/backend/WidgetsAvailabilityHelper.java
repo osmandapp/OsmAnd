@@ -86,6 +86,11 @@ public class WidgetsAvailabilityHelper {
 		return widgetsVisibility != null && widgetsVisibility.contains(appMode);
 	}
 
+	// the default of such a widget differs between portrait and a phone in landscape
+	public static boolean isVisibleByDefaultDependsOnOrientation(@NonNull String widgetId) {
+		return phoneLandscapeVisibilityMap.containsKey(widgetId);
+	}
+
 	private static boolean isPhoneLandscape(@NonNull OsmandApplication app) {
 		int orientation = app.getResources().getConfiguration().orientation;
 		return orientation == Configuration.ORIENTATION_LANDSCAPE && !AndroidUiHelper.isTablet(app);
