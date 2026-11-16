@@ -101,7 +101,6 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 							SettingsHelper.LOG.warn("No preference while importing settings: " + key);
 						}
 					}
-					getApp().getSelectedGpxHelper().onSelectionsImported();
 					settings.setLastGlobalPreferencesEditTime(lastModifiedTime);
 				});
 			}
