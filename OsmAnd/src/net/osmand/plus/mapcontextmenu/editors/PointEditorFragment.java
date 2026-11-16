@@ -49,7 +49,9 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -201,6 +203,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 			}
 		});
 		updateNameIcon();
+		setupCreationTimestamp();
 
 		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
@@ -356,6 +359,28 @@ public abstract class PointEditorFragment extends EditorFragment {
 		if (nameIcon != null) {
 			nameIcon.setImageDrawable(getNameIcon());
 		}
+	}
+
+	private void setupCreationTimestamp() {
+		View creationTimestampRow = view.findViewById(R.id.creation_date_row);
+		TextView creationTimestampView = view.findViewById(R.id.creation_date);
+		PointEditor editor = getEditor();
+		long timestamp = getCreationTimestamp();
+		boolean visible = timestamp != 0 && (editor == null || !editor.isNew());
+		AndroidUiHelper.updateVisibility(creationTimestampRow, visible);
+		if (visible) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
+			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
+			Date date = new Date(timestamp);
+			creationTimestampView.setText(dateFormat.format(date) + " — " + timeFormat.format(date));
+		}
+	}
+
+	/**
+	 * @return creation timestamp of the edited point in milliseconds, or 0 if it is unknown
+	 */
+	protected long getCreationTimestamp() {
+		return 0;
 	}
 
 	@NonNull

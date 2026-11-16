@@ -441,6 +441,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
+	protected long getCreationTimestamp() {
+		FavouritePoint favourite = getFavorite();
+		if (favourite == null) {
+			return 0;
+		}
+		long createdOn = favourite.getCreatedOn();
+		return createdOn != 0 ? createdOn : favourite.getTimestamp();
+	}
+
+	@Override
 	public Drawable getNameIcon() {
 		FavouritePoint favorite = getFavorite();
 		FavouritePoint point = null;

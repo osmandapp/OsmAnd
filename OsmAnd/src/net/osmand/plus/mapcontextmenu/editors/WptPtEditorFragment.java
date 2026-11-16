@@ -340,6 +340,16 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
+	protected long getCreationTimestamp() {
+		WptPt wpt = getWpt();
+		if (wpt == null) {
+			return 0;
+		}
+		long createdOn = wpt.getCreatedOn();
+		return createdOn != 0 ? createdOn : wpt.getTime();
+	}
+
+	@Override
 	public String getDescriptionInitValue() {
 		return wpt != null ? wpt.getDesc() : "";
 	}
