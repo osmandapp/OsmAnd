@@ -2045,6 +2045,15 @@ public class OsmandSettings {
 		}
 	}.makeProfile();
 
+	public final CommonPreference<Integer> CLUSTER_POSITION_PLACEMENT_ON_MAP = new IntPreference(this, "cluster_position_placement_on_map", POSITION_PLACEMENT_AUTOMATIC) {
+
+		@Override
+		public Integer getProfileDefaultValue(ApplicationMode mode) {
+			// Follows the main map until the cluster gets a value of its own
+			return mode != null ? POSITION_PLACEMENT_ON_MAP.getModeValue(mode) : POSITION_PLACEMENT_ON_MAP.get();
+		}
+	}.makeProfile();
+
 	public final CommonPreference<Long> LAST_MAP_ACTIVITY_PAUSED_TIME = new LongPreference(this, "last_map_activity_paused_time", 0).makeGlobal().cache();
 	public final CommonPreference<Boolean> MAP_LINKED_TO_LOCATION = new BooleanPreference(this, "map_linked_to_location", true).makeGlobal().cache();
 
@@ -2748,7 +2757,17 @@ public class OsmandSettings {
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
 	private final CommonPreference<Float> LAST_KNOWN_MANUALLY_MAP_ROTATION = new FloatPreference(this, "last_known_manually_map_rotation", 0).makeProfile();
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
-	private final CommonPreference<Float> LAST_KNOWN_AA_MAP_ELEVATION = new FloatPreference(this, "last_known_aa_map_elevation", 90).makeProfile();
+	public final CommonPreference<Float> LAST_KNOWN_AA_MAP_ELEVATION = new FloatPreference(this, "last_known_aa_map_elevation", 90).makeProfile();
+
+	public final CommonPreference<Float> CLUSTER_MAP_ELEVATION = new FloatPreference(this, "cluster_map_elevation", 90) {
+
+		@Override
+		public Float getProfileDefaultValue(ApplicationMode mode) {
+			// Follows the Android Auto map until the cluster gets a value of its own
+			float elevation = mode != null ? LAST_KNOWN_AA_MAP_ELEVATION.getModeValue(mode) : LAST_KNOWN_AA_MAP_ELEVATION.get();
+			return Float.isNaN(elevation) ? LAST_KNOWN_AA_MAP_ELEVATION.getDefaultValue() : elevation;
+		}
+	}.makeProfile();
 
 	public float getLastKnownMapRotation() {
 		return getLastKnownMapRotation(getApplicationMode());

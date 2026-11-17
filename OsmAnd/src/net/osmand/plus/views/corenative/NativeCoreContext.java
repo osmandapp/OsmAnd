@@ -110,6 +110,11 @@ public class NativeCoreContext {
 		return mapRendererContext;
 	}
 
+	@Nullable
+	public static Map<ProviderType, ObfsCollection> getObfsCollections() {
+		return obfsCollectionsByProviderType;
+	}
+
 	public static void setMapRendererContext(@NonNull OsmandApplication app, float density) {
 		if (mapRendererContext != null && mapRendererContext.getDensity() == density) {
 			return;

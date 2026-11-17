@@ -54,6 +54,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Context container and utility class for MapRendererView and derivatives.
@@ -103,6 +104,8 @@ public class MapRendererContext {
 
 	private float cachedReferenceTileSize;
 	private boolean heightmapsActive;
+
+	private final List<MapSettingsListener> mapSettingsListeners = new CopyOnWriteArrayList<>();
 
 	public boolean showDebugPrimivitisationTiles = false;
 
@@ -177,6 +180,21 @@ public class MapRendererContext {
 		if (mapPresentationEnvironment != null) {
 			updateMapPresentationEnvironment(forceUpdateProviders);
 		}
+		for (MapSettingsListener listener : mapSettingsListeners) {
+			listener.onMapSettingsUpdated(forceUpdateProviders);
+		}
+	}
+
+	public void addMapSettingsListener(@NonNull MapSettingsListener listener) {
+		mapSettingsListeners.add(listener);
+	}
+
+	public void removeMapSettingsListener(@NonNull MapSettingsListener listener) {
+		mapSettingsListeners.remove(listener);
+	}
+
+	public interface MapSettingsListener {
+		void onMapSettingsUpdated(boolean forceUpdateProviders);
 	}
 
 	public void setupObfMap(@NonNull MapStylesCollection mapStylesCollection,

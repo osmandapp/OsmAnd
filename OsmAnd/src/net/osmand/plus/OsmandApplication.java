@@ -46,7 +46,6 @@ import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
-import net.osmand.plus.auto.cluster.ClusterRenderer;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
@@ -161,7 +160,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
-	ClusterRenderer carClusterRenderer;
 	OnRequestPermissionsResultCallback carAppPermissionListener;
 
 	private final MemoryLog memoryLog = new MemoryLog();
@@ -849,15 +847,6 @@ public class OsmandApplication extends MultiDexApplication {
 	@Nullable
 	public NavigationSession getCarNavigationSession() {
 		return carNavigationSession;
-	}
-
-	@Nullable
-	public ClusterRenderer getCarClusterRenderer() {
-		return carClusterRenderer;
-	}
-
-	public void setCarClusterRenderer(@Nullable ClusterRenderer clusterRenderer) {
-		this.carClusterRenderer = clusterRenderer;
 	}
 
 	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
