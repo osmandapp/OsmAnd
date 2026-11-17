@@ -290,7 +290,8 @@ public class MapSelectionHelper {
 					addTravelGpx(result, routeId, objectLatLon); // WikiVoyage or User TravelGpx
 				}
 
-				boolean allowMapObjects = !renderedObject.isDrawOnPath() &&
+				// a route segment (its shield) is the route itself, already added by addFilteredOsmRoutesAtLatLon
+				boolean allowMapObjects = !isNewOsmRoute && !renderedObject.isDrawOnPath() &&
 						!NetworkRouteSelector.containsUnclickableRouteTags(tags);
 
 				if (allowMapObjects) {
@@ -374,7 +375,7 @@ public class MapSelectionHelper {
 							addTravelGpx(result, routeId, objectLatLon); // WikiVoyage or User TravelGpx
 						}
 
-						boolean allowMapObjects = getOnPathMapSymbol(symbolInfo) == null &&
+						boolean allowMapObjects = !isNewOsmRoute && getOnPathMapSymbol(symbolInfo) == null &&
 								!NetworkRouteSelector.containsUnclickableRouteTags(tags);
 
 						if (allowMapObjects) {
