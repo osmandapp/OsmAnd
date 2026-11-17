@@ -212,7 +212,8 @@ public class CachedTrack {
 		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		ColorizationType colorizationType = scaleType.toColorizationType();
 		GradientPaletteCategory category = scaleType.toPaletteCategory();
-		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
+		// speed scale reaches at least the profile default speed, see RouteColorize.getMaxValue
+		float maxSpeed = app.getSettings().getApplicationMode().getDefaultSpeed();
 
 		boolean fixedValues = false;
 		ColorPalette colorPalette = null;

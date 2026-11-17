@@ -18,6 +18,7 @@ import net.osmand.shared.units.SpeedUnits
 import net.osmand.shared.util.Localization
 import java.text.DecimalFormat
 import kotlin.math.abs
+import kotlin.math.max
 
 object GradientFormatter {
 
@@ -32,13 +33,19 @@ object GradientFormatter {
 		return getAxisFormatter(paletteCategory.getFileType(), realDataLimits = null)
 	}
 
+	/**
+	 * @param profileSpeed profile default speed (m/s): the speed scale reaches at least it, as the track
+	 * colouring does (RouteColorize.getMaxValue)
+	 */
 	@JvmStatic
+	@JvmOverloads
 	fun getAxisFormatter(
 		fileType: GradientFileType,
-		analysis: GpxTrackAnalysis?
+		analysis: GpxTrackAnalysis?,
+		profileSpeed: Float = 0f
 	): IAxisValueFormatter {
 		val unitType = fileType.category.measureUnitType
-		val limits = if (analysis != null) calculateRealDataLimits(analysis, unitType) else null
+		val limits = if (analysis != null) calculateRealDataLimits(analysis, unitType, profileSpeed) else null
 		return getAxisFormatter(fileType, limits)
 	}
 
@@ -157,7 +164,7 @@ object GradientFormatter {
 		if (analysis == null) return originalPalette
 
 		// Calculate actual track limits (e.g. 0..120 km/h)
-		val limits = calculateRealDataLimits(analysis, fileType.category.measureUnitType)
+		val limits = calculateRealDataLimits(analysis, fileType.category.measureUnitType, 0f)
 			?: return originalPalette
 
 		// Validate limits (must be a valid range)
@@ -174,7 +181,8 @@ object GradientFormatter {
 
 	private fun calculateRealDataLimits(
 		analysis: GpxTrackAnalysis,
-		unitType: MeasureUnitType
+		unitType: MeasureUnitType,
+		profileSpeed: Float
 	): RealDataLimits? {
 
 		var result: RealDataLimits? = null
@@ -183,8 +191,9 @@ object GradientFormatter {
 			SPEED -> {
 				if (analysis.maxSpeed > 0f) {
 					result = RealDataLimits(
-						minValue = analysis.minSpeed,
-						maxValue = analysis.maxSpeed,
+						// same scale as the track colouring: [0, max(profile default speed, track max)]
+						minValue = 0f,
+						maxValue = max(analysis.maxSpeed, profileSpeed),
 						units = SpeedUnits.METERS_PER_SECOND
 					)
 				}
