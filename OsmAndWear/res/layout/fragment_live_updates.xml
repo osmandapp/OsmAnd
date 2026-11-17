@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/app_bar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical" />
+
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+		android:id="@+id/swipe_refresh"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<ExpandableListView
+			android:id="@android:id/list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:divider="@null"
+			android:drawSelectorOnTop="true"
+			android:footerDividersEnabled="false"
+			android:groupIndicator="@null"
+			android:headerDividersEnabled="false"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/bottom_sheet_list_item_height"
+			tools:context=".liveupdates.LiveUpdatesFragment" />
+
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

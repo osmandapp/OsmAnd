@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/main_content"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding">
+
+	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+		android:id="@+id/load_forecast_progress"
+		style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="4dp"
+		android:indeterminate="true"
+		android:minHeight="0dp"
+		android:visibility="gone"
+		app:mpb_progressStyle="horizontal"
+		app:mpb_showProgressBackground="false"
+		app:mpb_useIntrinsicPadding="false"
+		tools:visibility="visible" />
+
+	<net.osmand.plus.widgets.chips.HorizontalChipsView
+		android:id="@+id/chips_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small_half"
+		tools:itemCount="3"
+		tools:listitem="@layout/custom_chip_view" />
+
+	<include
+		layout="@layout/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp" />
+
+	<net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel
+		android:id="@+id/weather_widgets_panel"
+		android:layout_width="match_parent"
+		android:layout_height="95dp" />
+
+	<include
+		layout="@layout/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<FrameLayout
+			android:id="@+id/play_forecast_button"
+			android:layout_width="46dp"
+			android:layout_height="36dp"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/content_padding"
+			android:background="@drawable/ui_button_pro"
+			android:backgroundTint="?attr/active_color_secondary"
+			android:contentDescription="@string/play_weather_forecast"
+			android:paddingHorizontal="9dp"
+			android:paddingVertical="4dp">
+
+			<ImageView
+				android:id="@+id/play_forecast_button_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:contentDescription="@string/play_weather_forecast"
+				android:src="@drawable/ic_play_dark"
+				app:tint="?attr/colorPrimary" />
+		</FrameLayout>
+
+		<net.osmand.plus.plugins.weather.dialogs.TimeSlider
+			android:id="@+id/time_slider"
+			app:labelStyle="@style/TimeSlider"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:valueTo="24"
+			tools:stepSize="1"
+			tools:value="12"
+			tools:valueFrom="0" />
+	</LinearLayout>
+
+</LinearLayout>

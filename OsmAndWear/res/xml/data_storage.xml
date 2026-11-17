@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/application_dir">
+
+	<Preference
+		android:key="memory_usage"
+		android:layout="@layout/memory_usage_preference" />
+
+	<PreferenceCategory
+		android:key="change_data_storage_folder"
+		android:layout="@layout/preference_category_with_right_text"
+		android:title="@string/change_data_storage_folder" />
+
+</PreferenceScreen>

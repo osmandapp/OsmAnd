@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item>
+		<inset>
+			<shape android:shape="oval">
+				<solid android:color="@color/feature_purchased_bg" />
+			</shape>
+		</inset>
+	</item>
+
+	<item android:drawable="@drawable/ic_action_marker_passed" />
+
+</layer-list>

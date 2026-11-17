@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_fuel_type">ಇಂಧನದ ಪ್ರಕಾರ</string>
+    <string name="poi_fuel_avia_type">ಇಂಧನದ ಪ್ರಕಾರ (ಏವಿಯಾ)</string>
+    <string name="poi_payment_type">ಪಾವತಿಸುವ ವಿಧಾನ</string>
+    <string name="poi_additional_type">ಹೆಚ್ಚುವರಿ</string>
+    <string name="poi_internet_access_type">ಇಂಟರ್ನೆಟ್ access ಪ್ರಕಾರ</string>
+    <string name="poi_vending_type">ವಿತರಣಾ ಮಾದರಿ</string>
+    <string name="poi_bicycle_service">ಬೈಸಿಕಲ್ ಸೇವೆ</string>
+    <string name="poi_clothes_type">ಮಾದರಿ</string>
+    <string name="poi_shoes_type">ಮಾದರಿ</string>
+    <string name="poi_fire_hydrant_type">ಮಾದರಿ</string>
+    <string name="poi_fire_hydrant_position">ಸ್ಥಾನ</string>
+    <string name="poi_water_source">ನೀರಿನ ಮೂಲ</string>
+    <string name="poi_payment_toll_type">ಪಾವತಿಸುವ ವಿಧಾನ</string>
+    <string name="poi_traffic_signals_sound">ಧ್ವನಿ</string>
+    <string name="poi_highway_crossing_type">ಮಾದರಿ</string>
+    <string name="poi_site_type_fortification">ಕೋಟೆ</string>
+</resources>
