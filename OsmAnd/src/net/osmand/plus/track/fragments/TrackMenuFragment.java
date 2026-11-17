@@ -65,6 +65,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.binary.ObfConstants;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.shared.SharedUtil;
@@ -149,6 +150,7 @@ import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.shared.data.Amenity;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
@@ -410,7 +412,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (!Algorithms.isBlank(gpxFile.getArticleTitle())) {
 			gpxTitle = gpxFile.getArticleTitle();
 		} else {
-			gpxTitle = GpxHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
+			String filenameTitle = GpxHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
+			String routeId = gpxFile.getExtensionsToRead().get(Amenity.ROUTE_ID);
+			boolean isOsmRoute = routeId != null && ObfConstants.getOsmIdFromPrefixedRouteId(routeId) > 0;
+			if (isOsmRoute) {
+				// an OSM route keeps its real name in the metadata, its file name is that name with the illegal characters replaced
+				String routeName = gpxFile.getMetadata().getName();
+				boolean isFileNamedAfterRoute = !Algorithms.isEmpty(routeName)
+						&& filenameTitle.equals(Algorithms.sanitizeFileName(routeName));
+				gpxTitle = isFileNamedAfterRoute ? routeName : filenameTitle;
+			} else {
+				gpxTitle = filenameTitle;
+			}
 		}
 	}
 
