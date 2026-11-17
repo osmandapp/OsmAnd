@@ -73,7 +73,7 @@ public interface TravelHelper {
 
 	@NonNull
 	List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull NetworkRouteSelectorFilter filter,
-	                                @NonNull Predicate<BinaryMapDataObject> isRouteDrawn);
+	                                @NonNull Predicate<BinaryMapDataObject> isRouteDrawn, int radius);
 
 	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
 					   @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition);

@@ -69,6 +69,7 @@ public class MapSelectionHelper {
 
 	private static final Log log = PlatformUtil.getLog(MapSelectionHelper.class);
 	private static final int TILE_SIZE = 256;
+	private static final int ROUTES_ON_LINE_RADIUS = 25;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -144,6 +145,13 @@ public class MapSelectionHelper {
 			selectObjectsFromOpenGl(result, rules, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, rules, nativeLib, tileBox, point);
+		}
+		if (result.isEmpty() && !rules.isOnlyPoints()) {
+			// both engines hit-test only labels and icons, so a tap on a route line is matched by the route geometry
+			int touchRadius = OsmandMapLayer.getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi());
+			int radius = (int) tileBox.getDistance((int) point.x, (int) point.y, (int) point.x + touchRadius, (int) point.y);
+			addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), createRouteFilter(),
+					createRouteDrawnFilter(tileBox.getZoom()), radius, result);
 		}
 	}
 
@@ -281,7 +289,7 @@ public class MapSelectionHelper {
 
 				if (isNewOsmRoute || isOldOsmRoute) {
 					NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, result);
+					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, ROUTES_ON_LINE_RADIUS, result);
 				}
 				if (isClickableWay) {
 					addClickableWay(result, app.getClickableWayHelper()
@@ -367,7 +375,7 @@ public class MapSelectionHelper {
 
 						if (isNewOsmRoute || isOldOsmRoute) {
 							NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, result);
+							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, ROUTES_ON_LINE_RADIUS, result);
 						}
 						if (isClickableWay) {
 							addClickableWay(result, app.getClickableWayHelper()
@@ -564,8 +572,8 @@ public class MapSelectionHelper {
 	}
 
 	private void addFilteredOsmRoutesAtLatLon(LatLon ll, NetworkRouteSelectorFilter filter,
-			Predicate<BinaryMapDataObject> isRouteDrawn, MapSelectionResult result) {
-		for (TravelGpx travelGpx : app.getTravelHelper().searchTravelGpx(ll, filter, isRouteDrawn)) {
+			Predicate<BinaryMapDataObject> isRouteDrawn, int radius, MapSelectionResult result) {
+		for (TravelGpx travelGpx : app.getTravelHelper().searchTravelGpx(ll, filter, isRouteDrawn, radius)) {
 			if (travelGpx.getAmenity() != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
 				result.collect(travelGpx.getAmenity(), mapLayers.getPoiMapLayer());
 			}

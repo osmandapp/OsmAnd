@@ -751,7 +751,7 @@ public class TravelDbHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull NetworkRouteSelectorFilter filter,
-	                                       @NonNull Predicate<BinaryMapDataObject> isRouteDrawn) {
+	                                       @NonNull Predicate<BinaryMapDataObject> isRouteDrawn, int radius) {
 		return new ArrayList<>();
 	}
 
