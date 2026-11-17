@@ -226,6 +226,7 @@ public class MapSelectionHelper {
 			renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, coordX, coordY, true);
 		}
 		if (renderedObjects != null) {
+			Predicate<BinaryMapDataObject> isRouteDrawn = createRouteDrawnFilter(tileBox.getZoom());
 			Set<Long> uniqueRenderedObjectIds = new HashSet<>();
 			for (RenderedObject renderedObject : renderedObjects) {
 				Long objectId = renderedObject.getId();
@@ -280,7 +281,7 @@ public class MapSelectionHelper {
 
 				if (isNewOsmRoute || isOldOsmRoute) {
 					NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, tileBox.getZoom(), result);
+					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, result);
 				}
 				if (isClickableWay) {
 					addClickableWay(result, app.getClickableWayHelper()
@@ -317,6 +318,7 @@ public class MapSelectionHelper {
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+			Predicate<BinaryMapDataObject> isRouteDrawn = createRouteDrawnFilter(tileBox.getZoom());
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
 				MapSymbol mapSymbol = symbolInfo.getMapSymbol();
@@ -365,7 +367,7 @@ public class MapSelectionHelper {
 
 						if (isNewOsmRoute || isOldOsmRoute) {
 							NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, tileBox.getZoom(), result);
+							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, result);
 						}
 						if (isClickableWay) {
 							addClickableWay(result, app.getClickableWayHelper()
@@ -561,8 +563,8 @@ public class MapSelectionHelper {
 		return latLon;
 	}
 
-	private void addFilteredOsmRoutesAtLatLon(LatLon ll, NetworkRouteSelectorFilter filter, int zoom, MapSelectionResult result) {
-		Predicate<BinaryMapDataObject> isRouteDrawn = createRouteDrawnFilter(zoom);
+	private void addFilteredOsmRoutesAtLatLon(LatLon ll, NetworkRouteSelectorFilter filter,
+			Predicate<BinaryMapDataObject> isRouteDrawn, MapSelectionResult result) {
 		for (TravelGpx travelGpx : app.getTravelHelper().searchTravelGpx(ll, filter, isRouteDrawn)) {
 			if (travelGpx.getAmenity() != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
 				result.collect(travelGpx.getAmenity(), mapLayers.getPoiMapLayer());
@@ -575,7 +577,7 @@ public class MapSelectionHelper {
 	private Predicate<BinaryMapDataObject> createRouteDrawnFilter(int zoom) {
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (storage == null) {
-			return object -> false;
+			return object -> true; // no style to judge by: keep the filter by route type only
 		}
 		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP, true);
 		RenderingRuleSearchRequest request = app.getResourceManager().getRenderer()

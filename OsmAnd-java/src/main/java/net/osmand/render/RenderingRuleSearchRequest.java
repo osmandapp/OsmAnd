@@ -205,7 +205,7 @@ public class RenderingRuleSearchRequest {
 
 	private boolean isChildRuleEnabled(RenderingRule childRule, String parentRClassValue) {
 		String additional = childRule.getStringPropertyValue(RenderingRuleStorageProperties.ADDITIONAL);
-		if (!Algorithms.isEmpty(additional) && !Algorithms.isEmpty(parentRClassValue)) {
+		if (!Algorithms.isEmpty(additional) && parentRClassValue != null) {
 			int equalPos = additional.indexOf('=');
 			if (equalPos >= 0) {
 				String additionalKey = additional.substring(0, equalPos);
