@@ -156,6 +156,7 @@ class SmartFolderOptionsController(
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_delete) { dialog: DialogInterface?, which: Int ->
 					app.smartFolderHelper.deleteSmartFolder(smartFolder)
+					app.trackSortModesHelper.onTrackFolderDeleted(smartFolder)
 					onSmartFolderDeleted()
 				}
 			val folderName = smartFolder.getName()

@@ -10,6 +10,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.gpx.data.OrganizedTracksGroup;
+import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.util.Algorithms;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TrackSortModesHelper {
@@ -34,7 +34,7 @@ public class TrackSortModesHelper {
 	public TrackSortModesHelper(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		preference = settings.TRACKS_TABS_SORT_MODES;
-		loadFromPreference(app);
+		loadFromPreference();
 	}
 
 	@NonNull
@@ -51,6 +51,12 @@ public class TrackSortModesHelper {
 	@Nullable
 	public TracksSortMode getSortMode(@NonNull String id, @NonNull TracksSortScope scope) {
 		TracksSortMode sortMode = cachedSortModes.get(getInternalId(id, scope));
+		if (sortMode == null && scope == TracksSortScope.TRACKS && !id.startsWith(SmartFolder.ID_PREFIX)) {
+			// Older versions keyed a folder by its name (V1). Read that key as a fallback:
+			// rewriting the shared preference at startup shows up as a Global Settings change.
+			String idV1 = getFolderIdV1(id);
+			sortMode = idV1 != null ? cachedSortModes.get(getInternalId(idV1, scope)) : null;
+		}
 		return sortMode != null ? TracksSortMode.getValidOrDefault(id, scope, sortMode) : null;
 	}
 
@@ -65,20 +71,14 @@ public class TrackSortModesHelper {
 		}
 	}
 
-	public void setSortModes(@NonNull Map<String, TracksSortMode> sortModes) {
-		// The extra file separator is not checked here to avoid redundant validations.
-		// It should be handled in the methods that call this one.
-		cachedSortModes.clear();
-		cachedSortModes.putAll(sortModes);
-	}
-
-	public void onTrackFolderIdChanged(@NonNull TracksGroup trackFolder, @NonNull File oldDir) {
+	public void onTrackFolderIdChanged(@NonNull TracksGroup trackFolder, @NonNull File oldDir, @NonNull File newDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
-		String newId = trackFolder.getId();
+		String newId = getFolderId(newDir.getAbsolutePath());
 		boolean updated = false;
 		for (TracksSortScope scope : trackFolder.getSupportedSortScopes()) {
 			TracksSortMode sortMode = getSortMode(previousId, scope);
 			if (sortMode != null) {
+				setSortMode(previousId, scope, null);
 				setSortMode(newId, scope, sortMode);
 				updated = true;
 			}
@@ -143,7 +143,7 @@ public class TrackSortModesHelper {
 				: null;
 	}
 
-	private void loadFromPreference(@NonNull OsmandApplication app) {
+	private void loadFromPreference() {
 		List<String> tokens = preference.getStringsList();
 		if (!Algorithms.isEmpty(tokens)) {
 			for (String token : tokens) {
@@ -153,7 +153,6 @@ public class TrackSortModesHelper {
 					cachedSortModes.put(internalId, TracksSortMode.getByValue(tokenParts[1]));
 				}
 			}
-			UpgradeTrackSortModeKeysAlgorithm.Companion.execute(app, this);
 		}
 	}
 
@@ -164,16 +163,6 @@ public class TrackSortModesHelper {
 			tokens.add(entry.getKey() + SEPARATOR + value.name());
 		}
 		preference.setStringsList(tokens);
-	}
-
-	@NonNull
-	public Set<String> getAllCachedInternalIds() {
-		return cachedSortModes.keySet();
-	}
-
-	@Nullable
-	public TracksSortMode getRawSortMode(@NonNull String internalId) {
-		return cachedSortModes.get(internalId);
 	}
 
 	@NonNull
@@ -197,6 +186,16 @@ public class TrackSortModesHelper {
 			return ROOT_FOLDER_ID;
 		}
 		return absolutePath;
+	}
+
+	@Nullable
+	private static String getFolderIdV1(@NonNull String folderId) {
+		if (folderId.isEmpty()) {
+			return IndexConstants.GPX_INDEX_DIR;
+		}
+		String cleanId = removeExtraFileSeparator(folderId);
+		int index = cleanId.lastIndexOf(File.separator);
+		return index > 0 ? cleanId.substring(index + 1) : null;
 	}
 
 	@NonNull
