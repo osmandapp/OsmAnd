@@ -250,6 +250,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private double fullZoom;
 	private boolean targetChanged;
 	private boolean magnifying;
+	private double appliedMagnificationScale = 1.0;
 	private int targetPixelX;
 	private int targetPixelY;
 	private int firstTouchLocationX;
@@ -2373,11 +2374,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float getMagnificationScale() {
+		MapRendererView mapRenderer = getMapRenderer();
 		if (MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled
 				&& magnifying
+				&& mapRenderer != null
 				&& multiTouchSupport != null
 				&& multiTouchSupport.isInZoomAndRotationMode()) {
-			return (float) limitMagnificationScale(multiTouchSupport.getZoomRelative());
+			return (float) appliedMagnificationScale;
 		}
 		return 1.0f;
 	}
@@ -2387,8 +2390,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (mapRenderer == null || scale <= 1.0) {
 			return scale;
 		}
-		float maxScale = 1.0f / Zoom.getDistanceAfterZoom(1.0f, getRendererZoom(mapRenderer), mapRenderer.getMaxZoomLevel());
-		return Math.min(scale, Math.max(1.0f, maxScale));
+		double maxScale = 1.0f / Zoom.getDistanceAfterZoom(1.0f, getRendererZoom(mapRenderer), mapRenderer.getMaxZoomLevel());
+		maxScale = Math.min(maxScale, mapRenderer.getMaxViewportScale());
+		return Math.min(scale, Math.max(1.0, maxScale));
 	}
 
 	private float getRendererZoom(@NonNull MapRendererView mapRenderer) {
@@ -2443,11 +2447,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (completedAnimation) {
 				if (wasMagnifying) {
+					double appliedScale = appliedMagnificationScale;
+					float magnifiedZoom = Zoom.fromDistanceRatio(1.0, 1.0 / appliedScale, getRendererZoom(mapRenderer));
 					mapRenderer.setViewportScale(0.0, false);
 					mapRenderer.setViewportShift(0, 0, false);
-					// The magnification was only a viewport transform while the fingers
-					// were down. Commit that scale to camera zoom before ending the gesture.
-					float zoomDelta = (float) (Math.log(relativeToStart) / Math.log(2.0));
+					// Commit the applied viewport scale using the camera's fractional zoom conversion.
+					float zoomDelta = magnifiedZoom - (float) initialViewport.getFullZoom();
 					PointF zoomCenter = multiTouchSupport != null
 							? multiTouchSupport.getFirstPoint() : initialMultiTouchCenterPoint;
 					if (zoomCenter != null) {
@@ -2641,11 +2646,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					}
 					if (!magnifying) {
 						magnifying = true;
+						appliedMagnificationScale = 1.0;
 						setZoomAndAnimationImpl(initialViewport.getZoom(), 0, initialViewport.getZoomFloatPart(), multiTouchFirstX, multiTouchFirstY);
 						initialFirstLocation = new PointI(firstTouchLocationX, firstTouchLocationY);
 					}
 					// Scale and shift around the pinch center
-					mapRenderer.setViewportScale(limitMagnificationScale(relativeToStart), false);
+					double scale = limitMagnificationScale(relativeToStart);
+					if (mapRenderer.setViewportScale(scale, false)) {
+						appliedMagnificationScale = scale;
+					}
 					mapRenderer.setViewportShift(multiTouchFirstX, getViewHeight() - multiTouchFirstY,  false);
 					// Re-center so the same initial tile stays under the finger
 					mapRenderer.setMapTarget(new PointI(multiTouchFirstX, multiTouchFirstY), initialFirstLocation);
