@@ -35,6 +35,8 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
+import net.osmand.plus.routing.ClimbDetector;
+import net.osmand.plus.routing.ClimbDetector.ClimbSegment;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWay;
 import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
@@ -49,6 +51,8 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
@@ -57,6 +61,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
 	private Location lastRouteProjection;
+	private final ClimbDetector climbDetector;
+	private RouteCalculationResult lastClimbDetectionRoute;
+	private final OsmandApplication app;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -92,11 +99,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	public RouteLayer(@NonNull Context context) {
 		super(context);
-		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.helper = app.getRoutingHelper();
 		this.transportHelper = helper.getTransportRoutingHelper();
 		this.chartPointsHelper = new ChartPointsHelper(app);
 		this.coloringAvailabilityCache = new ColoringTypeAvailabilityCache(app);
+		this.climbDetector = new ClimbDetector();
 	}
 
 	public RoutingHelper getHelper() {
@@ -105,6 +113,20 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
+	}
+
+	/**
+	 * Get minimum climb elevation from ClimbsCountWidget settings
+	 */
+	private int getClimbMinElevation() {
+		return app.getSettings().CLIMBS_COUNT_MIN_ELEVATION.get();
+	}
+
+	/**
+	 * Get minimum climb grade from ClimbsCountWidget settings
+	 */
+	private float getClimbMinGrade() {
+		return app.getSettings().CLIMBS_COUNT_MIN_GRADE.get();
 	}
 
 	@Override
@@ -501,6 +523,34 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean shouldShowDirectionArrows = shouldShowDirectionArrows();
 			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
 					getDirectionArrowsColor(), actualColoringType, routeInfoAttribute, routeGradientPalette);
+			
+			// Detect and set climb segments for highlighting on the route line
+			// Use the same thresholds as ClimbsCountWidget for consistency
+			List<Location> locations = route.getImmutableAllLocations();
+			boolean shouldDetectClimbs = locations != null && locations.size() >= 2 && 
+					!helper.isPublicTransportMode() && route.isCalculated();
+			
+			if (shouldDetectClimbs && routeGeometry != null) {
+				// Get climb detection thresholds from ClimbsCountWidget settings
+				int minClimbElevation = getClimbMinElevation();
+				float minClimbGrade = getClimbMinGrade();
+				
+				// Only recompute climbs when route changes
+				if (lastClimbDetectionRoute != route || routeGeometry == null) {
+					// Configure climb detector with current thresholds
+					climbDetector.setMinClimbElevation(minClimbElevation);
+					climbDetector.setMinClimbGrade(minClimbGrade);
+					
+					List<ClimbSegment> climbs = climbDetector.detectClimbs(locations);
+					routeGeometry.setClimbSegments(climbs);
+					lastClimbDetectionRoute = route;
+				}
+			} else if (!shouldDetectClimbs && lastClimbDetectionRoute != null && routeGeometry != null) {
+				// Clear climb segments when not navigating
+				routeGeometry.setClimbSegments(new ArrayList<>());
+				lastClimbDetectionRoute = null;
+			}
+			
 			boolean routeUpdated = routeGeometry.updateRoute(tileBox, route);
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
 
@@ -531,18 +581,18 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					currentLocation.setLatitude(tileBox.getLatitude());
 					currentLocation.setLongitude(tileBox.getLongitude());
 				}
-				List<Location> locations = route.getImmutableAllLocations();
+				List<Location> routeLocations = route.getImmutableAllLocations();
 				int currentRoute = route.getCurrentRouteForLocation(currentLocation);
 				if (currentRoute > 0) {
-					Location previousRouteLocation = locations.get(currentRoute - 1);
-					Location currentRouteLocation = locations.get(currentRoute);
+					Location previousRouteLocation = routeLocations.get(currentRoute - 1);
+					Location currentRouteLocation = routeLocations.get(currentRoute);
 					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
 					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
 							previousRouteLocation.bearingTo(currentLocation);
 					lastProjection.setBearing(MapUtils.normalizeDegrees360(calcbearing));
 					if (currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation)) {
 						lastProjection = null;
-					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
+					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < routeLocations.size()) {
 						// Not needed here as this code for preview turns
 //						Location nextRouteLocation = locations.get(currentRoute + 1);
 //						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,

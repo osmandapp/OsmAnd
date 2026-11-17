@@ -3708,6 +3708,9 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> BUILDINGS_3D_COLOR_STYLE = new IntPreference(this, "buildings_3d_color_style", 1).makeProfile().cache();
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_NIGHT_COLOR = new IntPreference(this, "buildings_3d_custom_night_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
 	public final CommonPreference<Integer> BUILDINGS_3D_CUSTOM_DAY_COLOR = new IntPreference(this, "buildings_3d_custom_day_color", BUILDINGS_3D_DEFAULT_COLOR).makeProfile().cache();
+	// Climbs detection settings for route highlighting (used by RouteLayer and ClimbsCountWidget)
+	public final CommonPreference<Integer> CLIMBS_COUNT_MIN_ELEVATION = new IntPreference(this, "climbs_count_min_elevation", 3).makeProfile();
+	public final CommonPreference<Float> CLIMBS_COUNT_MIN_GRADE = new FloatPreference(this, "climbs_count_min_grade", 1.0f).makeProfile();
 
 	@NonNull
 	public OsmandPreference<Boolean> getAllowPrivatePreference(@NonNull ApplicationMode appMode) {
