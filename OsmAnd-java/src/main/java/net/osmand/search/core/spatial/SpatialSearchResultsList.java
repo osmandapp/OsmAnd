@@ -510,6 +510,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		Building partial2 = null;
 		double distPartial1 = 0;
 		Building partial1 = null;
+		boolean partial1First = false;
 		double distExact = 0;
 		Building exact = null;
 		Set<String> query = SearchAlgorithms.getBuildingCompareSet(bld, tempBuildNames1);
@@ -523,6 +524,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				}
 			} else {
 				Set<String> bldSet = SearchAlgorithms.getBuildingCompareSet(b.getName(), tempBuildNames2);
+				boolean first = !tempBuildNames1.isEmpty() && !tempBuildNames2.isEmpty() && tempBuildNames1.get(0).equals(tempBuildNames2.get(0));
 //				System.out.println(street + " " + original + " ?= " + cmp);
 				if (bldSet.equals(query)) {
 					// exact match but could be duplicates 8-8
@@ -531,9 +533,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 							&& !tempBuildNames2.equals(tempBuildNames1)) {
 						double d = ctx.location == null ? 0 : MapUtils.getDistance(ctx.location, b.getLocation());
 						// just for tests makes sense
-						if (distPartial1 == 0 || d < distPartial1) {
+						if (first != partial1First ? first : (distPartial1 == 0 || d < distPartial1)) {
 							partial1 = b;
 							distPartial1 = d;
+							partial1First = first;
 						}
 					} else {
 						// just for tests makes sense
@@ -550,9 +553,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					if (bldSet.containsAll(query)) {
 						double d = ctx.location == null ? 0 : MapUtils.getDistance(ctx.location, b.getLocation());
 						// just for tests makes sense
-						if (distPartial1 == 0 || d < distPartial1) {
+						if (first != partial1First ? first : (distPartial1 == 0 || d < distPartial1)) {
 							partial1 = b;
 							distPartial1 = d;
+							partial1First = first;
 						}
 					}
 				} else if (bldSet.size() + 1 == query.size()) {
