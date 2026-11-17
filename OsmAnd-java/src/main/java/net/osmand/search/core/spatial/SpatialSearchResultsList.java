@@ -514,8 +514,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		double distExact = 0;
 		Building exact = null;
 		Set<String> query = SearchAlgorithms.getBuildingCompareSet(bld, tempBuildNames1);
-		String queryFirst = firstBuildingToken(query, tempBuildNames1);
-		boolean querySlash = bld.indexOf('/') >= 0;
 		for (Building b : street.getBuildings()) {
 			if (b.isInterpolation()) {
 				// interpolation only over 1 set
@@ -526,7 +524,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				}
 			} else {
 				Set<String> bldSet = SearchAlgorithms.getBuildingCompareSet(b.getName(), tempBuildNames2);
-				boolean first = queryFirst.equals(firstBuildingToken(bldSet, tempBuildNames2));
+				boolean first = !tempBuildNames1.isEmpty() && !tempBuildNames2.isEmpty() && tempBuildNames1.get(0).equals(tempBuildNames2.get(0));
 //				System.out.println(street + " " + original + " ?= " + cmp);
 				if (bldSet.equals(query)) {
 					// exact match but could be duplicates 8-8
@@ -535,7 +533,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 							&& !tempBuildNames2.equals(tempBuildNames1)) {
 						double d = ctx.location == null ? 0 : MapUtils.getDistance(ctx.location, b.getLocation());
 						// just for tests makes sense
-						if (betterPartial(first, partial1First, d, distPartial1)) {
+						if (first != partial1First ? first : (distPartial1 == 0 || d < distPartial1)) {
 							partial1 = b;
 							distPartial1 = d;
 							partial1First = first;
@@ -552,10 +550,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				}
 				if (bldSet.size() == query.size() + 1 || bldSet.size() == query.size() + 2) {
 					// case data only 18-B present, 18 searched (151 + unit Upper level)
-					if (bldSet.containsAll(query) && (querySlash || matchesBeforeUnitSlash(b.getName(), query))) {
+					if (bldSet.containsAll(query)) {
 						double d = ctx.location == null ? 0 : MapUtils.getDistance(ctx.location, b.getLocation());
 						// just for tests makes sense
-						if (betterPartial(first, partial1First, d, distPartial1)) {
+						if (first != partial1First ? first : (distPartial1 == 0 || d < distPartial1)) {
 							partial1 = b;
 							distPartial1 = d;
 							partial1First = first;
@@ -596,20 +594,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			return partial2;
 		}
 		return null;
-	}
-
-	private static String firstBuildingToken(Set<String> set, List<String> ordered) {
-		return ordered.isEmpty() ? set.iterator().next() : ordered.get(0);
-	}
-
-	private static boolean matchesBeforeUnitSlash(String name, Set<String> query) {
-		int unit = name.indexOf('-');
-		int slash = unit < 0 ? -1 : name.indexOf('/', unit);
-		return slash < 0 || SearchAlgorithms.getBuildingCompareSet(name.substring(0, slash), null).containsAll(query);
-	}
-
-	private static boolean betterPartial(boolean first, boolean bestFirst, double d, double bestDist) {
-		return first != bestFirst ? first : bestDist == 0 || d < bestDist;
 	}
 
 	private int getTokenByOriginalOrder(int originalOrder) {

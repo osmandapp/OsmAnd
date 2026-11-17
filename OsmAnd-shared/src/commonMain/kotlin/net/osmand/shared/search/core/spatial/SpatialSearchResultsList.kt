@@ -480,6 +480,7 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 		var partial2: Building? = null
 		var distPartial1 = 0.0
 		var partial1: Building? = null
+		var partial1First = false
 		var distExact = 0.0
 		var exact: Building? = null
 		val query = KSearchAlgorithms.getBuildingCompareSet(bld, tempBuildNames1)
@@ -493,6 +494,7 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 				}
 			} else {
 				val bldSet = KSearchAlgorithms.getBuildingCompareSet(b.getName(), tempBuildNames2)
+				val first = tempBuildNames1.isNotEmpty() && tempBuildNames2.isNotEmpty() && tempBuildNames1[0] == tempBuildNames2[0]
 				if (bldSet == query) {
 					// exact match but could be duplicates 8-8
 					// duplicate could be in query or in house number
@@ -501,9 +503,10 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 					) {
 						val d = if (ctx.location == null) 0.0 else KMapUtils.getDistance(ctx.location, b.getLocation()!!)
 						// just for tests makes sense
-						if (distPartial1 == 0.0 || d < distPartial1) {
+						if (if (first != partial1First) first else (distPartial1 == 0.0 || d < distPartial1)) {
 							partial1 = b
 							distPartial1 = d
+							partial1First = first
 						}
 					} else {
 						// just for tests makes sense
@@ -519,9 +522,10 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 					if (bldSet.containsAll(query)) {
 						val d = if (ctx.location == null) 0.0 else KMapUtils.getDistance(ctx.location, b.getLocation()!!)
 						// just for tests makes sense
-						if (distPartial1 == 0.0 || d < distPartial1) {
+						if (if (first != partial1First) first else (distPartial1 == 0.0 || d < distPartial1)) {
 							partial1 = b
 							distPartial1 = d
+							partial1First = first
 						}
 					}
 				} else if (bldSet.size + 1 == query.size) {

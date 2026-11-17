@@ -372,11 +372,11 @@ object KSearchAlgorithms {
 			lastType = type
 		}
 		if (currentToken.isNotEmpty()) {
-			if (resultSet == null) {
-				return setOf(currentToken.toString().lowercase())
-			}
 			val toAdd = currentToken.toString().lowercase()
 			inCaseDuplicates?.add(toAdd)
+			if (resultSet == null) {
+				return setOf(toAdd)
+			}
 			resultSet.add(toAdd)
 		}
 		if (resultSet == null) {
