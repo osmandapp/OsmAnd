@@ -5393,4 +5393,5 @@
     <string name="gallery_sort_last_modified">Zuletzt geändert</string>
     <string name="gallery_sort_duration_short_long">Kürzeste Dauer zuerst</string>
     <string name="crash_report_send_failed">Der Bericht konnte nicht gesendet werden. Versuchen Sie es später noch einmal.</string>
+    <string name="media_delete_failed">Datei konnte nicht gelöscht werdenm</string>
 </resources>
