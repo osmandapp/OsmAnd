@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
@@ -38,6 +40,7 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
@@ -46,6 +49,8 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.search.AmenitySearcher;
@@ -57,6 +62,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 
 public class MapSelectionHelper {
@@ -274,7 +280,7 @@ public class MapSelectionHelper {
 
 				if (isNewOsmRoute || isOldOsmRoute) {
 					NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, result);
+					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, tileBox.getZoom(), result);
 				}
 				if (isClickableWay) {
 					addClickableWay(result, app.getClickableWayHelper()
@@ -358,7 +364,7 @@ public class MapSelectionHelper {
 
 						if (isNewOsmRoute || isOldOsmRoute) {
 							NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, result);
+							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, tileBox.getZoom(), result);
 						}
 						if (isClickableWay) {
 							addClickableWay(result, app.getClickableWayHelper()
@@ -554,12 +560,45 @@ public class MapSelectionHelper {
 		return latLon;
 	}
 
-	private void addFilteredOsmRoutesAtLatLon(LatLon ll, NetworkRouteSelectorFilter filter, MapSelectionResult result) {
-		for (TravelGpx travelGpx : app.getTravelHelper().searchTravelGpx(ll, filter)) {
+	private void addFilteredOsmRoutesAtLatLon(LatLon ll, NetworkRouteSelectorFilter filter, int zoom, MapSelectionResult result) {
+		Predicate<BinaryMapDataObject> isRouteDrawn = createRouteDrawnFilter(zoom);
+		for (TravelGpx travelGpx : app.getTravelHelper().searchTravelGpx(ll, filter, isRouteDrawn)) {
 			if (travelGpx.getAmenity() != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
 				result.collect(travelGpx.getAmenity(), mapLayers.getPoiMapLayer());
 			}
 		}
+	}
+
+	// Only the routes the map draws are listed: the style decides it by route type, network level and color mode
+	@NonNull
+	private Predicate<BinaryMapDataObject> createRouteDrawnFilter(int zoom) {
+		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (storage == null) {
+			return object -> false;
+		}
+		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP, true);
+		RenderingRuleSearchRequest request = app.getResourceManager().getRenderer()
+				.getSearchRequestWithAppliedCustomRules(storage, nightMode);
+		request.saveState();
+		return object -> isLineDrawn(request, object, zoom);
+	}
+
+	// The same check as the renderers' drawPolyline: a line rule is found and gives the line a width and a color
+	// (without a color the line is transparent, e.g. a route whose network class is switched off)
+	private static boolean isLineDrawn(@NonNull RenderingRuleSearchRequest request,
+	                                   @NonNull BinaryMapDataObject object, int zoom) {
+		for (int type : object.getTypes()) {
+			TagValuePair pair = object.getMapIndex().decodeType(type);
+			if (pair != null) {
+				request.setInitialTagValueZoom(pair.tag, pair.value, zoom, object);
+				request.setIntFilter(request.ALL.R_LAYER, object.getSimpleLayer());
+				if (request.search(RenderingRulesStorage.LINE_RULES) && request.isSpecified(request.ALL.R_STROKE_WIDTH)
+						&& request.isSpecified(request.ALL.R_COLOR)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId, @NonNull LatLon location) {

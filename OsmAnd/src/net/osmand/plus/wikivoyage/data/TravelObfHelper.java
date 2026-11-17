@@ -57,6 +57,7 @@ import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Predicate;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.TLongSet;
@@ -188,11 +189,12 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon ll, @NonNull NetworkRouteSelectorFilter filter) {
+	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon ll, @NonNull NetworkRouteSelectorFilter filter,
+	                                                    @NonNull Predicate<BinaryMapDataObject> isRouteDrawn) {
 		Set<String> routeIds = new HashSet<>();
 
 		SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader.buildSearchRequest(0, 0, 0, 0,
-				ROUTES_ON_LINE_ZOOM, getRoutesSearchFilter(filter), getRoutesResultMatcher(routeIds, ll));
+				ROUTES_ON_LINE_ZOOM, getRoutesSearchFilter(filter), getRoutesResultMatcher(routeIds, ll, isRouteDrawn));
 		mapRequest.setBBoxRadius(ll.getLatitude(), ll.getLongitude(), ROUTES_ON_LINE_RADIUS);
 
 		if (!Algorithms.isEmpty(filter.typeFilter)) {
@@ -243,14 +245,15 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	private ResultMatcher<BinaryMapDataObject> getRoutesResultMatcher(@NonNull Set<String> routeIds,
-	                                                                  @NonNull LatLon pointLatLon) {
+	                                                                  @NonNull LatLon pointLatLon,
+	                                                                  @NonNull Predicate<BinaryMapDataObject> isRouteDrawn) {
 		return new ResultMatcher<>() {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				if (object.getPointsLength() > 1 && !TravelObfGpxFileReader.isDeletedBinaryMapDataObject(object)) {
 					String routeIdPrefixed = object.getTagValue(ROUTE_ID);
 					if (ObfConstants.getOsmIdFromPrefixedRouteId(routeIdPrefixed) > 0
-							&& matchByDistance(object, pointLatLon)) {
+							&& matchByDistance(object, pointLatLon) && isRouteDrawn.test(object)) {
 						routeIds.add(routeIdPrefixed);
 					}
 				}
