@@ -5016,7 +5016,7 @@
     <string name="prediction_time_description">O ícone de posição no OsmAnd é animado a cada atualização do GPS (uma vez por segundo). Pode ocorrer um ligeiro atraso, especialmente durante movimentos rápidos ou quando o sinal do GPS está instável.</string>
     <string name="us_gallons">Galões americanos</string>
     <string name="shared_string_online_only">Somente on-line</string>
-    <string name="ais_load_data">Carregar dados AIS do arquivo</string>
+    <string name="ais_load_data">Simular o tráfego de embarcações</string>
     <string name="save_favorite_default_appearance">Aplicar as alterações a todos os pontos existentes na pasta ou apenas aos recém-adicionados?</string>
     <string name="meridian_180">180º meridiano</string>
     <string name="shared_string_offline_only">Somente off-line</string>
@@ -5058,7 +5058,7 @@
     <string name="show_image_previews">Mostrar pré-visualizações de imagens</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Alterne a visibilidade da grade de coordenadas no mapa.</string>
     <string name="layer_coordinates_grid">Grade de coordenada</string>
-    <string name="plugin_ais_tracker_name">Rastreador de embarcações AIS</string>
+    <string name="plugin_ais_tracker_name">Rastreador de embarcações (AIS)</string>
     <string name="plugin_ais_tracker_description">Exibe as posições AIS e informações sobre embarcações próximas. Os dados AIS são recebidos pela rede a partir de um receptor AIS externo.</string>
     <string name="no_places_available">Nenhum lugar na região visível</string>
     <string name="selected_delayed_profile">Perfil selecionado \"%s\"</string>
@@ -5243,7 +5243,7 @@
     <string name="slots">Slots</string>
     <string name="routing_attr_weightrating_name">Peso máximo com carga total</string>
     <string name="routing_attr_maxaxleload_name">Carga máxima por eixo</string>
-    <string name="deleted_maps_prompt">Esses mapas não são mais compatíveis e foram substituídos por regiões menores. Remova-os e baixe as novas versões.</string>
+    <string name="deleted_maps_prompt">Esses mapas não são mais suportados. Por favor, remova-os e baixe as novas versões.</string>
     <string name="routing_attr_pt_limit_description">Especifique o número de melhores rotas a serem exibidas</string>
     <string name="centimeter">cm</string>
     <string name="unsupported_maps">Mapas não suportados</string>
@@ -5643,7 +5643,7 @@
     <string name="duplicate_map_replace_with_road">Substituir por Somente estrada</string>
     <string name="rendering_attr_surface_clay_name">Argila</string>
     <string name="rendering_attr_surface_laterite_name">Laterita</string>
-    <string name="release_5_4">• Nova pesquisa espacial — encontre locais e pesquise nas proximidades de um local\n\n • Interface de pesquisa renovada: classificação, filtros por categoria e visual mais limpo\n\n • Anexe fotos e arquivos de mídia aos Favoritos\n\n • Favoritos: suporte a subgrupos e pastas que podem ser fixadas\n\n • Coordenadas: a pesquisa, a grade do mapa e a exibição de POIs agora suportam os sistemas de localização EPSG e Maidenhead\n\n • Corrigidas interrupções na navegação; alterne entre os percursos Padrão e Rápido\n\n • Defina a escala do mapa do Android Auto separadamente do seu celular\n\n • Adicionados eclipses solares e lunares à seção de Astronomia</string>
+    <string name="release_5_4">• Interface de pesquisa renovada: classificação, filtros por categoria e visual mais limpo\n\n • Anexe fotos e arquivos de mídia aos Favoritos\n\n • Favoritos: suporte a subgrupos e pastas que podem ser fixadas\n\n • Coordenadas: a pesquisa, a grade do mapa e a exibição de POIs agora suportam os sistemas de localização EPSG e Maidenhead\n\n • Corrigidas interrupções na navegação; alterne entre os percursos Padrão e Rápido\n\n • Defina a escala do mapa do Android Auto separadamente do seu celular\n \n• Nova pesquisa espacial — encontre locais e pesquise nas proximidades de um local \n\n • Adicionados eclipses solares e lunares à seção de Astronomia</string>
     <string name="use_spatial_search">Usar a pesquisa espacial de texto</string>
     <string name="use_spatial_search_description">Substitua as APIs padrão de pesquisa rápida pelo mecanismo experimental de pesquisa espacial de texto.</string>
     <string name="astro_close_lunar_eclipse">Fechar o explorador do eclipse lunar</string>

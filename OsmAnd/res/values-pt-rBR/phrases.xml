@@ -98,7 +98,7 @@
     <string name="poi_kitchen">Mobiliário de cozinha;loja de cozinha</string>
     <string name="poi_medical_supply">Suprimentos médicos</string>
     <string name="poi_mobile_phone">Loja de celulares</string>
-    <string name="poi_motorcycle">Loja de motos</string>
+    <string name="poi_motorcycle">Loja de motocicletas; motocicletas; loja de motocicletas</string>
     <string name="poi_musical_instrument">Loja de instrumentos musicais</string>
     <string name="poi_newsagent">Banca de jornal;banca de jornais</string>
     <string name="poi_optician">Ótica;oculista</string>
@@ -194,7 +194,7 @@
     <string name="poi_vehicle_ramp">Rampa de veículo</string>
     <string name="poi_compressed_air">Ar comprimido</string>
     <string name="poi_parking">Estacionamento</string>
-    <string name="poi_motorcycle_parking">Estacionamento de moto;estacionamento de motos</string>
+    <string name="poi_motorcycle_parking">Estacionamento de motos</string>
     <string name="poi_parking_entrance">Entrada do estacionamento</string>
     <string name="poi_garages">Garagens</string>
     <string name="poi_public_transport_platform">Parada de transporte público</string>
@@ -1485,7 +1485,7 @@
     <string name="poi_service_repair">Retífica</string>
     <string name="poi_service_repair_no">Sem retífica</string>
     <string name="poi_service_electrical">Retífica de veículos elétricos</string>
-    <string name="poi_motorcycle_repair">Retífica de motos;oficina de motos</string>
+    <string name="poi_motorcycle_repair">Oficina de motos</string>
     <string name="poi_self_service_yes">Auto-Serviço: sim</string>
     <string name="poi_self_service_no">Sem auto-serviço: não</string>
     <string name="poi_automated_yes">Automatizado: sim</string>
