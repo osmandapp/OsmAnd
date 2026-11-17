@@ -546,7 +546,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		((ViewGroup) view).addView(baseContainer);
 
 		if (nextSegment != null) {
-			double walkDist = (long) getWalkDistance(segment, nextSegment, segment.walkDist);
+			double walkDist = (long) getWalkDistance(segment, nextSegment, nextSegment.walkDist);
 
 			if (walkDist > 0) {
 				int walkTime = (int) getWalkTime(segment, nextSegment, walkDist, walkSpeed);
@@ -1379,7 +1379,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 							   @Nullable TransportRouteResultSegment nextSegment, double walkDistPT, double walkSpeedPT) {
 		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(segment, nextSegment);
 		if (walkingRouteSegment != null) {
-			return walkingRouteSegment.getRoutingTime();
+			return walkingRouteSegment.getWholeTime();
 		}
 		return walkDistPT / walkSpeedPT;
 	}
