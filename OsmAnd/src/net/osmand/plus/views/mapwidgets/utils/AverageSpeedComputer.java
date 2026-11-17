@@ -27,6 +27,8 @@ import java.util.List;
 
 public class AverageSpeedComputer extends AverageValueComputer {
 
+	private static final long MAX_SAMPLE_DURATION_MILLIS = 5000; // a longer gap without fixes is not counted as moving
+
 	private final List<MapWidgetInfo> widgetInfos = new ArrayList<>();
 
 	public AverageSpeedComputer(@NonNull OsmandApplication app) {
@@ -93,6 +95,51 @@ public class AverageSpeedComputer extends AverageValueComputer {
 
 	public float getAverageSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
 		return calculateUniformSpeed(startTimestamp, measuredInterval, skipLowSpeed);
+	}
+
+	/**
+	 * Average speed over the last {@code movingInterval} of movement after {@code startTimestamp}.
+	 * Stops don't use up the interval: after a stop the speed before it still counts.
+	 */
+	public float getMovingAverageSpeed(long startTimestamp, long movingInterval) {
+		long toSkip = getMovingTime(startTimestamp) - movingInterval;
+		float speedToSkip = getSpeedToSkipInMetersPerSecond();
+		float distance = 0;
+		long time = 0;
+		long prevTime = 0;
+		for (Location location : locations) {
+			long locationTime = location.getTime();
+			if (locationTime >= startTimestamp && location.getSpeed() >= speedToSkip) {
+				long dt = getSampleDuration(prevTime, locationTime);
+				if (toSkip > 0) {
+					toSkip -= dt;
+				} else {
+					distance += location.getSpeed() * dt;
+					time += dt;
+				}
+			}
+			prevTime = locationTime;
+		}
+		return time > 0 ? distance / time : Float.NaN;
+	}
+
+	public long getMovingTime(long startTimestamp) {
+		float speedToSkip = getSpeedToSkipInMetersPerSecond();
+		long time = 0;
+		long prevTime = 0;
+		for (Location location : locations) {
+			long locationTime = location.getTime();
+			if (locationTime >= startTimestamp && location.getSpeed() >= speedToSkip) {
+				time += getSampleDuration(prevTime, locationTime);
+			}
+			prevTime = locationTime;
+		}
+		return time;
+	}
+
+	private static long getSampleDuration(long prevTime, long time) {
+		long dt = prevTime > 0 ? time - prevTime : ADD_POINT_INTERVAL_MILLIS;
+		return Math.max(0, Math.min(dt, MAX_SAMPLE_DURATION_MILLIS));
 	}
 
 	private float calculateUniformSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
