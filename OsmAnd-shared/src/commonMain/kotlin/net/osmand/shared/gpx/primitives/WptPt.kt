@@ -413,14 +413,32 @@ class WptPt : GpxExtensions, Linkable {
 	}
 
 	fun updatePoint(pt: WptPt) {
+		updatePoint(pt, true)
+	}
+
+	fun updatePoint(pt: WptPt, updateTimestamp: Boolean) {
 		lat = GpxFormatter.formatLatLon(pt.lat).toDouble()
 		lon = GpxFormatter.formatLatLon(pt.lon).toDouble()
-		time = currentTimeMillis()
 		desc = pt.desc
 		name = pt.name
 		category = pt.category
 
 		val extensions = pt.getExtensionsToRead()
+
+		if (updateTimestamp) {
+			// The creation time the already stored one, and if it doesn't exist,
+			// we initialize it to the pre-edit "GPX time" (at xpath: /gpx/wpt/time;
+			// which is the point's first known timestamp).
+			// Having saved the *creation timestamp*, we update the "GPX time", by
+			// which it becomes the de facto *modification timestamp*.
+			// Note that GPX defines it as a "creation/modification timestamp".
+			val createdOn = pt.getExtension(PointAttributes.POINT_CREATED_ON) ?: getExtension(PointAttributes.POINT_CREATED_ON)
+				?: time.takeIf({it != 0L})?.let{ GpxUtilities.formatTime(it) }
+			createdOn?.let {
+				getExtensionsToWrite()[PointAttributes.POINT_CREATED_ON] = it
+			}
+			time = currentTimeMillis()
+		}
 
 		val color = extensions[GpxUtilities.COLOR_NAME_EXTENSION]
 		setColor(color)
