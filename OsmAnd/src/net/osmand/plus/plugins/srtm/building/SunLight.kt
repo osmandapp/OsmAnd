@@ -63,7 +63,7 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 		return if (time > 0) time else System.currentTimeMillis()
 	}
 
-	/** Short state for the Configure map row: the mode, the date and time, or the manual angles. */
+	/** Short state for the Sun position rows: the mode, the date and time, or the manual angles. */
 	fun getDescription(): String = when (plugin.SUN_LIGHT_MODE.get()) {
 		SunLightMode.LIVE -> app.getString(R.string.sun_light_live)
 		SunLightMode.DATE -> {

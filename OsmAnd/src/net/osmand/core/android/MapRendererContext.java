@@ -624,9 +624,9 @@ public class MapRendererContext {
 		}
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		// The vertex hillshade is drawn only as Terrain shadows, as on iOS
+		// Terrain shadows are the vertex hillshade of the 3D relief
 		if (plugin != null && plugin.isTerrainShadowsEnabled()) {
-			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainTransparency() / 255f);
+			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainShadowsIntensity() / 100f);
 		} else {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);

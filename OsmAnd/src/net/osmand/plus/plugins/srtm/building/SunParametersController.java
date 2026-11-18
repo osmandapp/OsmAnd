@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 
@@ -21,6 +22,8 @@ public class SunParametersController extends BaseDialogController {
 	private static final int MAX_ALTITUDE = 90;
 
 	private final SRTMPlugin plugin;
+	/* the screen the panel was opened from: 3D Relief or 3D buildings */
+	private final DashboardType returnTo;
 	private final int initialAzimuth;
 	private final int initialAltitude;
 	private final SunLightMode initialMode;
@@ -32,9 +35,11 @@ public class SunParametersController extends BaseDialogController {
 	private long time;
 	private boolean applyChanges = false;
 
-	public SunParametersController(@NonNull OsmandApplication app, @NonNull SRTMPlugin plugin) {
+	public SunParametersController(@NonNull OsmandApplication app, @NonNull SRTMPlugin plugin,
+	                               @NonNull DashboardType returnTo) {
 		super(app);
 		this.plugin = plugin;
+		this.returnTo = returnTo;
 		this.initialAzimuth = plugin.HILLSHADE_SUN_AZIMUTH.get();
 		this.initialAltitude = plugin.HILLSHADE_SUN_ANGLE.get();
 		this.azimuth = initialAzimuth;
@@ -49,6 +54,11 @@ public class SunParametersController extends BaseDialogController {
 	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
+	}
+
+	@NonNull
+	public DashboardType getReturnTo() {
+		return returnTo;
 	}
 
 	public void setAzimuth(int value) {
@@ -123,11 +133,12 @@ public class SunParametersController extends BaseDialogController {
 				|| initialMode != mode || initialTime != time;
 	}
 
-	public static void showDialog(@NonNull OsmandApplication app, @NonNull FragmentManager manager) {
+	public static void showDialog(@NonNull OsmandApplication app, @NonNull FragmentManager manager,
+	                              @NonNull DashboardType returnTo) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			DialogManager dialogManager = app.getDialogManager();
-			dialogManager.register(PROCESS_ID, new SunParametersController(app, plugin));
+			dialogManager.register(PROCESS_ID, new SunParametersController(app, plugin, returnTo));
 
 			if (!SunParametersFragment.showInstance(manager)) {
 				dialogManager.unregister(PROCESS_ID);

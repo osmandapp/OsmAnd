@@ -1,34 +1,30 @@
 package net.osmand.plus.plugins.srtm.building;
 
-import static net.osmand.plus.dashboard.DashboardType.CONFIGURE_MAP;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_ANGLE;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_AZIMUTH;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
-import net.osmand.plus.widgets.ui.SegmentedList;
-import net.osmand.plus.widgets.ui.SettingRow;
-import net.osmand.plus.widgets.ui.SliderListItem;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -36,14 +32,19 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Locale;
-
-import kotlin.Unit;
+import java.util.Map;
 
 /**
  * Light of the hillshade and the sun shadows: the real sun now (Live), the real sun at a chosen
  * date and time (Date), or azimuth and altitude set by hand (Manual).
+ * <p>
+ * A panel like Terrain - Visibility: the map shows the light while it is changed, Apply keeps it,
+ * leaving the panel without Apply brings the previous light back.
  */
 public class SunParametersFragment extends ConfigureMapOptionFragment {
 
@@ -54,14 +55,23 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	private SunParametersController controller;
 
 	private View content;
-	private MaterialButtonToggleGroup modeToggle;
-	private ViewGroup sunRows;
-	private SettingRow azimuthRow;
-	private SettingRow altitudeRow;
-	private SettingRow dateRow;
-	private SliderListItem timeSlider;
-	private SliderListItem azimuthSlider;
-	private SliderListItem altitudeSlider;
+	private TextToggleButton modeToggle;
+	private final Map<SunLightMode, TextRadioItem> modeItems = new EnumMap<>(SunLightMode.class);
+
+	private View liveRows;
+	private TextView liveAzimuthValue;
+	private TextView liveAltitudeValue;
+
+	private View dateRows;
+	private TextView dateValue;
+	private TextView timeValue;
+	private Slider timeSlider;
+
+	private View manualRows;
+	private TextView azimuthValue;
+	private Slider azimuthSlider;
+	private TextView altitudeValue;
+	private Slider altitudeSlider;
 
 	/* Live shows the sun of the current minute */
 	private final Runnable liveRefresh = new Runnable() {
@@ -77,7 +87,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	@Nullable
 	@Override
 	protected String getToolbarTitle() {
-		return getString(R.string.astro_name_sun);
+		return getString(R.string.map_widget_sun_position);
 	}
 
 	@Override
@@ -94,122 +104,152 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 			@Override
 			public void handleOnBackPressed() {
 				activity.getSupportFragmentManager().popBackStack();
-				activity.getDashboard().setDashboardVisibility(true, CONFIGURE_MAP, false);
+				activity.getDashboard().setDashboardVisibility(true, controller.getReturnTo(), false);
 			}
 		});
 	}
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		/* the frame of the screen is still Material 2 - the panel uses the Material 3 components */
-		Context themedContext = new ContextThemeWrapper(requireContext(),
-				nightMode ? R.style.OsmandMaterialDarkTheme : R.style.OsmandMaterialLightTheme);
-		content = LayoutInflater.from(themedContext).inflate(R.layout.sun_parameters, container, false);
+		if (controller == null) {
+			return;
+		}
+		content = inflate(R.layout.sun_parameters, container, false);
 
-		modeToggle = content.findViewById(R.id.mode_toggle);
-		sunRows = content.findViewById(R.id.sun_rows);
-		int iconColor = AndroidUtils.getColorFromAttr(themedContext, R.attr.colorOnSurfaceVariant);
+		liveRows = content.findViewById(R.id.live_rows);
+		liveAzimuthValue = content.findViewById(R.id.live_azimuth_value);
+		liveAltitudeValue = content.findViewById(R.id.live_altitude_value);
 
-		azimuthRow = createInfoRow(R.id.azimuth_row, R.drawable.ic_action_compass, R.string.shared_string_azimuth, iconColor);
-		altitudeRow = createInfoRow(R.id.altitude_row, R.drawable.ic_action_altitude, R.string.altitude, iconColor);
+		dateRows = content.findViewById(R.id.date_rows);
+		dateValue = content.findViewById(R.id.date_value);
+		timeValue = content.findViewById(R.id.time_value);
+		timeSlider = content.findViewById(R.id.time_slider);
 
-		dateRow = new SettingRow(content.findViewById(R.id.date_row));
-		dateRow.setIcon(R.drawable.ic_action_calendar_month, iconColor);
-		dateRow.setTitle(R.string.shared_string_date);
-		dateRow.hideSwitch();
-		dateRow.setOnClickListener(v -> showDatePicker());
+		manualRows = content.findViewById(R.id.manual_rows);
+		azimuthValue = content.findViewById(R.id.azimuth_value_tv);
+		azimuthSlider = content.findViewById(R.id.azimuth_slider);
+		altitudeValue = content.findViewById(R.id.altitude_value_tv);
+		altitudeSlider = content.findViewById(R.id.altitude_slider);
 
-		timeSlider = new SliderListItem(content.findViewById(R.id.time_row));
-		timeSlider.setTitle(R.string.shared_string_time);
-		azimuthSlider = new SliderListItem(content.findViewById(R.id.azimuth_slider_row));
-		azimuthSlider.setTitle(R.string.shared_string_azimuth);
-		altitudeSlider = new SliderListItem(content.findViewById(R.id.altitude_slider_row));
-		altitudeSlider.setTitle(R.string.altitude);
-
-		modeToggle.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-			SunLightMode mode = getMode(checkedId);
-			if (isChecked && mode != controller.getMode()) {
-				controller.setMode(mode);
-				updateContent();
-				onChanged();
-			}
-		});
+		setupModeToggle();
+		setupSliders();
+		content.findViewById(R.id.date_row).setOnClickListener(v -> showDatePicker());
 		restoreDatePicker();
+
 		container.addView(content);
 		updateContent();
 		updateApplyButton(controller.hasChanges());
 	}
 
-	@NonNull
-	private SettingRow createInfoRow(@IdRes int id, int iconId, int titleId, int iconColor) {
-		SettingRow row = new SettingRow(content.findViewById(id));
-		row.setIcon(iconId, iconColor);
-		row.setTitle(titleId);
-		row.hideSwitch();
-		/* the row only shows a value, there is nothing to tap */
-		row.getView().setClickable(false);
-		row.getView().setFocusable(false);
-		return row;
+	private void setupModeToggle() {
+		modeToggle = new TextToggleButton(app, content.findViewById(R.id.custom_radio_buttons), nightMode);
+		List<TextRadioItem> items = new ArrayList<>();
+		for (SunLightMode mode : SunLightMode.values()) {
+			TextRadioItem item = new TextRadioItem(getString(mode.getTitleId()));
+			item.setOnClickListener((radioItem, view) -> {
+				if (mode != controller.getMode()) {
+					controller.setMode(mode);
+					if (mode == SunLightMode.DATE) {
+						/* keep the shown moment, an unset time would follow the clock like Live */
+						controller.setTime(controller.getTime());
+					}
+					updateContent();
+					onChanged();
+				}
+				return true;
+			});
+			modeItems.put(mode, item);
+			items.add(item);
+		}
+		modeToggle.setItems(items);
+	}
+
+	private void setupSliders() {
+		int profileColor = getAppModeColor(nightMode);
+
+		UiUtilities.setupSlider(timeSlider, nightMode, profileColor);
+		timeSlider.setValueFrom(0);
+		timeSlider.setValueTo(MINUTES_PER_DAY - 1);
+		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				ZonedDateTime current = getZonedTime(controller.getTime());
+				int minutes = Math.round(value);
+				ZonedDateTime changed = current.with(LocalTime.of(minutes / 60, minutes % 60));
+				controller.setTime(changed.toInstant().toEpochMilli());
+				timeValue.setText(formatMinutes(value));
+				onChanged();
+			}
+		});
+
+		UiUtilities.setupSlider(azimuthSlider, nightMode, profileColor);
+		azimuthSlider.setValueFrom(controller.getMinAzimuth());
+		azimuthSlider.setValueTo(controller.getMaxAzimuth());
+		azimuthSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				int azimuth = Math.round(value);
+				controller.setAzimuth(azimuth);
+				azimuthValue.setText(formatAzimuth(azimuth));
+				onChanged();
+			}
+		});
+
+		UiUtilities.setupSlider(altitudeSlider, nightMode, profileColor);
+		altitudeSlider.setValueFrom(controller.getMinAltitude());
+		altitudeSlider.setValueTo(controller.getMaxAltitude());
+		altitudeSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				int altitude = Math.round(value);
+				controller.setAltitude(altitude);
+				altitudeValue.setText(formatAltitude(altitude));
+				onChanged();
+			}
+		});
 	}
 
 	/** Shows the rows of the selected mode and puts the values on them. */
 	private void updateContent() {
 		SunLightMode mode = controller.getMode();
-		modeToggle.check(getButtonId(mode));
-
-		boolean live = mode == SunLightMode.LIVE;
-		boolean date = mode == SunLightMode.DATE;
-		boolean manual = mode == SunLightMode.MANUAL;
-		azimuthRow.getView().setVisibility(live ? View.VISIBLE : View.GONE);
-		altitudeRow.getView().setVisibility(live ? View.VISIBLE : View.GONE);
-		dateRow.getView().setVisibility(date ? View.VISIBLE : View.GONE);
-		timeSlider.getView().setVisibility(date ? View.VISIBLE : View.GONE);
-		azimuthSlider.getView().setVisibility(manual ? View.VISIBLE : View.GONE);
-		altitudeSlider.getView().setVisibility(manual ? View.VISIBLE : View.GONE);
-		SegmentedList.apply(sunRows);
+		modeToggle.setSelectedItem(modeItems.get(mode));
+		showRows(mode);
 
 		content.removeCallbacks(liveRefresh);
-		if (live) {
+		if (mode == SunLightMode.LIVE) {
 			liveRefresh.run();
-		} else if (date) {
+		} else if (mode == SunLightMode.DATE) {
 			bindDate();
 		} else {
 			bindManual();
 		}
 	}
 
+	/* the rows of the other modes stay laid out, so the panel and the toggle do not move */
+	private void showRows(@NonNull SunLightMode mode) {
+		liveRows.setVisibility(mode == SunLightMode.LIVE ? View.VISIBLE : View.INVISIBLE);
+		dateRows.setVisibility(mode == SunLightMode.DATE ? View.VISIBLE : View.INVISIBLE);
+		manualRows.setVisibility(mode == SunLightMode.MANUAL ? View.VISIBLE : View.INVISIBLE);
+	}
+
 	private void updateLiveRows() {
 		SunLight.Angles angles = controller.getSunAngles();
-		azimuthRow.setSubtitle(formatAzimuth((int) Math.round(angles.getAzimuth()) % 360));
-		altitudeRow.setSubtitle(formatAltitude((int) Math.round(angles.getAltitude())));
+		liveAzimuthValue.setText(formatAzimuth((int) Math.round(angles.getAzimuth()) % 360));
+		liveAltitudeValue.setText(formatAltitude((int) Math.round(angles.getAltitude())));
 	}
 
 	private void bindDate() {
 		ZonedDateTime time = getZonedTime(controller.getTime());
-		dateRow.setSubtitle(DateFormat.getLongDateFormat(requireContext()).format(Date.from(time.toInstant())));
-		float minutes = time.getHour() * 60 + time.getMinute();
-		timeSlider.setContinuous(0, MINUTES_PER_DAY - 1, 1, minutes, this::formatMinutes, value -> {
-			ZonedDateTime current = getZonedTime(controller.getTime());
-			ZonedDateTime changed = current.with(LocalTime.MIN).plusMinutes(Math.round(value));
-			controller.setTime(changed.toInstant().toEpochMilli());
-			onChanged();
-			return Unit.INSTANCE;
-		});
+		dateValue.setText(DateFormat.getLongDateFormat(requireContext()).format(Date.from(time.toInstant())));
+		int minutes = time.getHour() * 60 + time.getMinute();
+		timeSlider.setValue(minutes);
+		timeValue.setText(formatMinutes(minutes));
 	}
 
 	private void bindManual() {
-		azimuthSlider.setContinuous(controller.getMinAzimuth(), controller.getMaxAzimuth(), 1,
-				controller.getValidAzimuth(), value -> formatAzimuth(Math.round(value)), value -> {
-					controller.setAzimuth(Math.round(value));
-					onChanged();
-					return Unit.INSTANCE;
-				});
-		altitudeSlider.setContinuous(controller.getMinAltitude(), controller.getMaxAltitude(), 1,
-				controller.getValidAltitude(), value -> formatAltitude(Math.round(value)), value -> {
-					controller.setAltitude(Math.round(value));
-					onChanged();
-					return Unit.INSTANCE;
-				});
+		int azimuth = controller.getValidAzimuth();
+		azimuthSlider.setValue(azimuth);
+		azimuthValue.setText(formatAzimuth(azimuth));
+		int altitude = controller.getValidAltitude();
+		altitudeSlider.setValue(altitude);
+		altitudeValue.setText(formatAltitude(altitude));
 	}
 
 	private void showDatePicker() {
@@ -281,28 +321,6 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 			controller.finishProcessIfNeeded(getActivity());
 		}
 		super.onDestroy();
-	}
-
-	@NonNull
-	private SunLightMode getMode(@IdRes int buttonId) {
-		if (buttonId == R.id.mode_live) {
-			return SunLightMode.LIVE;
-		} else if (buttonId == R.id.mode_date) {
-			return SunLightMode.DATE;
-		}
-		return SunLightMode.MANUAL;
-	}
-
-	@IdRes
-	private int getButtonId(@NonNull SunLightMode mode) {
-		switch (mode) {
-			case LIVE:
-				return R.id.mode_live;
-			case DATE:
-				return R.id.mode_date;
-			default:
-				return R.id.mode_manual;
-		}
 	}
 
 	@NonNull
