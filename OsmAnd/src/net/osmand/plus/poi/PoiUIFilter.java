@@ -39,6 +39,7 @@ import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchSettings.SortType;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -48,7 +49,6 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
@@ -511,15 +511,31 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	/**
-	 * Matches only the text typed by the user, without the selected filter values.
+	 * Matches the typed name as the category search does (SearchAmenityByTypeAPI): the name,
+	 * other names or ref, a word starting with the text. Tag values do not count: "on" must not
+	 * match takeaway=only.
 	 */
 	@NonNull
 	public PoiFilterUtils.AmenityNameFilter getNameTextFilter(@Nullable String text) {
-		if (Algorithms.isEmpty(text) || text.trim().isEmpty()) {
+		if (Algorithms.isBlank(text)) {
 			return a -> true;
 		}
-		List<String> words = new ArrayList<>(Arrays.asList(text.trim().split("\\s+")));
-		return getNameFilterInternal(words, false, false, null);
+		NameStringMatcher matcher = new NameStringMatcher(text.trim(), CHECK_STARTS_FROM_SPACE);
+		OsmandSettings settings = app.getSettings();
+		String lang = settings.MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+		return amenity -> {
+			String name = amenity.getName(lang, transliterate);
+			if (Algorithms.isEmpty(name)) {
+				AbstractPoiType type = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
+				name = type != null ? type.getTranslation() : amenity.getSubType();
+			}
+			if (matcher.matches(name) || matcher.matches(amenity.getOtherNames(true, name))) {
+				return true;
+			}
+			String ref = amenity.getTagContent(Amenity.REF, null);
+			return ref != null && matcher.matches(ref);
+		};
 	}
 
 	@NonNull
