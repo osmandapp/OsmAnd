@@ -186,6 +186,13 @@ public class InputDevicesHelper {
 		syncSettings(devicesCollection, EventType.DELETE_DEVICE);
 	}
 
+	public void forgetRemovedMergedDevices() {
+		Map<String, String> fingerprints = readMergedFingerprints();
+		if (fingerprints.values().removeIf(REMOVED_MERGED_DEVICE::equals)) {
+			writeMergedFingerprints(fingerprints, readCustomDevices(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get()));
+		}
+	}
+
 	private void markMergedDeviceRemoved(@NonNull String deviceId,
 	                                     @NonNull List<InputDeviceProfile> remainingDevices) {
 		Map<String, String> fingerprints = readMergedFingerprints();

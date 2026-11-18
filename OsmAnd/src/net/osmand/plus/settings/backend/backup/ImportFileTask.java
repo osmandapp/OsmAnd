@@ -112,6 +112,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				return selectedItems;
 			case IMPORT:
 				if (!Algorithms.isEmpty(items)) {
+					app.getInputDeviceHelper().forgetRemovedMergedDevices();
 					for (SettingsItem item : items) {
 						item.apply();
 					}
