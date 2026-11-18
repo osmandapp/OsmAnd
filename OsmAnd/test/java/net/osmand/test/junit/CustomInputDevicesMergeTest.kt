@@ -1,5 +1,6 @@
 package net.osmand.test.junit
 
+import android.os.Looper
 import android.view.KeyEvent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -403,6 +404,19 @@ class CustomInputDevicesMergeTest {
 	}
 
 	@Test
+	fun fileImportRestoresRemovedDevice() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		helper.forgetRemovedMergedDevices()
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
 	fun selectionOfRemovedDeviceFallsBackToKeyboardOnLegacyImport() {
 		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
 		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
@@ -589,6 +603,9 @@ class CustomInputDevicesMergeTest {
 	private fun setLegacyDevices(appMode: ApplicationMode, vararg devices: JSONObject) {
 		val json = JSONObject().put("items", JSONArray(devices.toList()))
 		settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, json.toString())
+		if (Looper.myLooper() != Looper.getMainLooper()) {
+			InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+		}
 	}
 
 	private fun device(id: String, name: String, keyCode: Int,
