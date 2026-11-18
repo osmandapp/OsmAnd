@@ -50,6 +50,7 @@ public class InputDevicesHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(InputDevicesHelper.class);
 	private static final String CUSTOM_DEVICE_PREFIX = "custom_";
+	private static final String REMOVED_MERGED_DEVICE = "";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -181,7 +182,23 @@ public class InputDevicesHelper {
 				settings.EXTERNAL_INPUT_DEVICE.setModeValue(mode, KEYBOARD.getId());
 			}
 		}
+		markMergedDeviceRemoved(deviceId, devicesCollection.getCustomDevices());
 		syncSettings(devicesCollection, EventType.DELETE_DEVICE);
+	}
+
+	private void markMergedDeviceRemoved(@NonNull String deviceId,
+	                                     @NonNull List<InputDeviceProfile> remainingDevices) {
+		Map<String, String> fingerprints = readMergedFingerprints();
+		boolean changed = false;
+		for (Map.Entry<String, String> entry : fingerprints.entrySet()) {
+			if (Objects.equals(entry.getValue(), deviceId)) {
+				entry.setValue(REMOVED_MERGED_DEVICE);
+				changed = true;
+			}
+		}
+		if (changed) {
+			writeMergedFingerprints(fingerprints, remainingDevices);
+		}
 	}
 
 	public boolean hasDeviceNameDuplicate(@NonNull Context context,
@@ -405,11 +422,17 @@ public class InputDevicesHelper {
 		}
 		Map<String, String> fingerprints = readMergedFingerprints();
 		fingerprints.putAll(plan.mergedFingerprints);
+		writeMergedFingerprints(fingerprints, devices);
+	}
+
+	private void writeMergedFingerprints(@NonNull Map<String, String> fingerprints,
+	                                     @NonNull List<InputDeviceProfile> devices) {
 		JSONObject json = new JSONObject();
 		try {
 			for (Map.Entry<String, String> entry : fingerprints.entrySet()) {
-				if (hasDeviceId(devices, entry.getValue())) {
-					json.put(entry.getKey(), entry.getValue());
+				String deviceId = entry.getValue();
+				if (REMOVED_MERGED_DEVICE.equals(deviceId) || hasDeviceId(devices, deviceId)) {
+					json.put(entry.getKey(), deviceId);
 				}
 			}
 			settings.MERGED_LEGACY_INPUT_DEVICES.set(json.toString());
@@ -508,7 +531,12 @@ public class InputDevicesHelper {
 				String fingerprint = getFingerprint(device);
 				String knownId = fingerprint != null ? mergedFingerprints.get(fingerprint) : null;
 				String mergedId;
-				if (knownId != null && hasDeviceId(devices, knownId)) {
+				if (REMOVED_MERGED_DEVICE.equals(knownId)) {
+					if (Objects.equals(device.getId(), selectedId)) {
+						plan.selections.put(appMode, KEYBOARD.getId());
+					}
+					continue;
+				} else if (knownId != null && hasDeviceId(devices, knownId)) {
 					mergedId = knownId;
 				} else {
 					mergedId = mergeLegacyDevice(appMode, devices, mergeCandidates, globalIds, device);

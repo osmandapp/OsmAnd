@@ -377,6 +377,46 @@ class CustomInputDevicesMergeTest {
 	}
 
 	@Test
+	fun removedDeviceDoesNotComeBackFromSameLegacyList() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedDeviceStaysAwayWhenLegacyListGetsNewDevice() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		setLegacyDevices(ApplicationMode.CAR,
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_2"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun selectionOfRemovedDeviceFallsBackToKeyboardOnLegacyImport() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
 	fun importOfLastOwnWrittenListIsAppliedAfterForeignList() {
 		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
 		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
