@@ -235,6 +235,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				mapContext.recreateHeightmapProvider();
 				// 3D tracks take their heights from the heightmaps, as on an ENABLE_3D_MAPS change in MapLayers
 				app.getOsmandMap().getMapLayers().getGpxLayer().setInvalidated(true);
+				app.getOsmandMap().getMapView().refreshMap();
 			}
 		}
 	}
@@ -334,6 +335,8 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (TERRAIN.get() && !getTerrainMode().isTerrainShadows()) {
 			terrainLayer = new TerrainLayer(context, this);
 			app.getOsmandMap().getMapView().addLayer(terrainLayer, 0.6f);
+			// The new layer passes its tiles to the map renderer only on a map refresh
+			app.getOsmandMap().getMapView().refreshMap();
 		}
 	}
 

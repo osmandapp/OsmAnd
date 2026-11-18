@@ -218,6 +218,8 @@ public class MapLayers {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
 				gpxLayer.setInvalidated(true);
+				// The track layer rebuilds its 3D lines only on a map refresh
+				mapView.refreshMap();
 				mapRenderer.requestRender();
 			}
 		});
