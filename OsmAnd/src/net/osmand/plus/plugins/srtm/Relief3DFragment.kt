@@ -78,6 +78,9 @@ class Relief3DFragment : BaseFullScreenFragment(), DownloadEvents {
 		switchCompat.isChecked = relief3DEnabled
 		switchCompat.setOnClickListener { onSwitchClick() }
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT)
+		val mainToggle = root.findViewById<View>(R.id.main_toggle)
+		mainToggle.setOnClickListener { switchCompat.performClick() }
+		UiUtilities.setupListItemBackground(app, mainToggle, profileColor)
 
 		root.findViewById<View>(R.id.vertical_exaggeration_button).setOnClickListener {
 			showPanel { Relief3DExaggerationFragment.showInstance(it, DashboardType.RELIEF_3D) }

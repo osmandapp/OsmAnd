@@ -165,6 +165,9 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		switchCompat.setChecked(terrainEnabled);
 		switchCompat.setOnClickListener(this);
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
+		View mainToggle = root.findViewById(R.id.main_toggle);
+		mainToggle.setOnClickListener(v -> switchCompat.performClick());
+		UiUtilities.setupListItemBackground(app, mainToggle, profileColor);
 
 		modifyButton.setOnClickListener(view -> callMapActivity(mapActivity -> {
 			if (isColoringTypeAvailable()) {

@@ -21,7 +21,16 @@
 			android:background="?attr/activity_background_basic"
 			android:orientation="vertical">
 
-			<include layout="@layout/item_title_with_description_icon_switch" />
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/bg_color">
+
+				<include
+					android:id="@+id/main_toggle"
+					layout="@layout/item_title_with_description_icon_switch" />
+
+			</FrameLayout>
 
 			<include
 				android:id="@+id/titleBottomDivider"
