@@ -39,7 +39,6 @@ public class KeyAssignmentsController extends BaseDialogController {
 
 	private final ApplicationMode appMode;
 	private final InputDevicesHelper deviceHelper;
-	private final InputDeviceProfile inputDevice;
 	private final DialogManager dialogManager;
 	private EditingBundle initialBundle;
 	private EditingBundle editBundle;
@@ -53,8 +52,12 @@ public class KeyAssignmentsController extends BaseDialogController {
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.deviceHelper = app.getInputDeviceHelper();
-		this.inputDevice = deviceHelper.getSelectedDevice(appMode);
 		this.dialogManager = app.getDialogManager();
+	}
+
+	@Nullable
+	private InputDeviceProfile getInputDevice() {
+		return deviceHelper.getSelectedDevice(appMode);
 	}
 
 	@NonNull
@@ -65,13 +68,13 @@ public class KeyAssignmentsController extends BaseDialogController {
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		if (inputDevice == null) {
+		if (getInputDevice() == null) {
 			return new ArrayList<>();
 		}
 		boolean editMode = isInEditMode();
 		List<ScreenItem> screenItems = new ArrayList<>();
 		int itemType = editMode ? EDIT_KEY_ASSIGNMENT_ITEM : KEY_ASSIGNMENT_ITEM;
-		List<KeyAssignment> assignments = editMode ? editBundle.getFilledAssignments() : inputDevice.getFilledAssignments();
+		List<KeyAssignment> assignments = editMode ? editBundle.getFilledAssignments() : getInputDevice().getFilledAssignments();
 		if (!Algorithms.isEmpty(assignments)) {
 			screenItems.add(new ScreenItem(CARD_TOP_DIVIDER));
 			screenItems.add(new ScreenItem(HEADER));
@@ -91,7 +94,7 @@ public class KeyAssignmentsController extends BaseDialogController {
 
 	public void enterEditMode() {
 		editBundle = new EditingBundle();
-		editBundle.assignments = inputDevice.getAssignmentsCopy();
+		editBundle.assignments = getInputDevice().getAssignmentsCopy();
 		initialBundle = new EditingBundle();
 		initialBundle.assignments = new ArrayList<>(editBundle.assignments);
 		askRefreshDialog();
@@ -129,7 +132,7 @@ public class KeyAssignmentsController extends BaseDialogController {
 	}
 
 	public void askRemoveAllAssignments() {
-		if (!inputDevice.hasActiveAssignments()) {
+		if (!getInputDevice().hasActiveAssignments()) {
 			app.showShortToastMessage(R.string.key_assignments_already_cleared_message);
 			return;
 		}
@@ -141,27 +144,27 @@ public class KeyAssignmentsController extends BaseDialogController {
 	}
 
 	private void removeAllAssignments() {
-		deviceHelper.clearAllAssignments(appMode, inputDevice.getId());
+		deviceHelper.clearAllAssignments(appMode, getInputDevice().getId());
 		exitEditMode();
 	}
 
 	public boolean isDeviceTypeEditable() {
-		return inputDevice != null && inputDevice.isCustom();
+		return getInputDevice() != null && getInputDevice().isCustom();
 	}
 
 	public boolean hasAssignments() {
-		return inputDevice.hasActiveAssignments();
+		return getInputDevice().hasActiveAssignments();
 	}
 
 	public void askAddAssignment(@Nullable View sharedElement) {
-		if (inputDevice != null) {
-			EditKeyAssignmentController.showAddAssignmentDialog(activity, appMode, inputDevice.getId(), sharedElement);
+		if (getInputDevice() != null) {
+			EditKeyAssignmentController.showAddAssignmentDialog(activity, appMode, getInputDevice().getId(), sharedElement);
 		}
 	}
 
 	public void askEditAssignment(@NonNull KeyAssignment assignment, @NonNull View anchorView) {
-		if (inputDevice != null) {
-			EditKeyAssignmentController.showEditAssignmentDialog(activity, appMode, inputDevice.getId(), assignment.getId(), anchorView);
+		if (getInputDevice() != null) {
+			EditKeyAssignmentController.showEditAssignmentDialog(activity, appMode, getInputDevice().getId(), assignment.getId(), anchorView);
 		}
 	}
 
@@ -170,7 +173,7 @@ public class KeyAssignmentsController extends BaseDialogController {
 	}
 
 	public void askSaveChanges() {
-		deviceHelper.saveUpdatedAssignmentsList(appMode, inputDevice.getId(), editBundle.assignments);
+		deviceHelper.saveUpdatedAssignmentsList(appMode, getInputDevice().getId(), editBundle.assignments);
 		exitEditMode();
 	}
 
