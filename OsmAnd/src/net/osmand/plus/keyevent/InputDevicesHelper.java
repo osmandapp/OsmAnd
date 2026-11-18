@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.devices.DefaultInputDevices;
 import net.osmand.plus.keyevent.listener.EventType;
@@ -48,11 +49,36 @@ public class InputDevicesHelper {
 
 	private final List<InputDevicesEventListener> listeners = new ArrayList<>();
 	private final Map<Integer, InputDevicesCollection> cachedDevicesCollections = new HashMap<>();
+	private volatile String selfWrittenJson;
+	private final StateChangedListener<String> customDevicesChangedListener = this::onCustomDevicesChanged;
+	private final StateChangedListener<String> legacyDevicesChangedListener = this::onLegacyDevicesChanged;
 
 	public InputDevicesHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		DefaultInputDevices.initialize(app);
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.addListener(customDevicesChangedListener);
+		settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.addListener(legacyDevicesChangedListener);
+	}
+
+	private void onCustomDevicesChanged(@Nullable String value) {
+		if (!Objects.equals(value, selfWrittenJson)) {
+			selfWrittenJson = null;
+			reloadCachedDevices();
+		}
+	}
+
+	private void onLegacyDevicesChanged(@Nullable String value) {
+		if (!Algorithms.isEmpty(value)) {
+			reloadCachedDevices();
+		}
+	}
+
+	private void reloadCachedDevices() {
+		app.runInUIThread(() -> {
+			cachedDevicesCollections.clear();
+			notifyListeners(settings.getApplicationMode(), EventType.CUSTOM_DEVICES_CHANGED);
+		});
 	}
 
 	public void addListener(@NonNull InputDevicesEventListener listener) {
@@ -357,7 +383,9 @@ public class InputDevicesHelper {
 		JSONObject json = new JSONObject();
 		try {
 			writeToJson(app, json, devices);
-			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(json.toString());
+			String value = json.toString();
+			selfWrittenJson = value;
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(value);
 		} catch (JSONException e) {
 			LOG.debug("Error while writing custom devices to JSON ", e);
 		}

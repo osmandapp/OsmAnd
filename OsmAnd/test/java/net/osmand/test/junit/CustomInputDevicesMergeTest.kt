@@ -5,8 +5,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.keyevent.InputDevicesHelper
+import net.osmand.plus.keyevent.assignment.KeyAssignment
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile
+import net.osmand.plus.keyevent.listener.EventType
+import net.osmand.plus.keyevent.listener.InputDevicesEventListener
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener
@@ -22,6 +25,7 @@ import org.json.JSONObject
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -58,6 +62,7 @@ class CustomInputDevicesMergeTest {
 			settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.resetModeToDefault(appMode)
 		}
 		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.resetToDefault()
+		InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 		helper.releaseCustomizationCollection()
 	}
 
@@ -174,6 +179,92 @@ class CustomInputDevicesMergeTest {
 
 		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, KeyboardDeviceProfile.ID)
 		assertNull(helper.getSelectedCustomDeviceJson(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun writeToGlobalPreferenceOutsideHelperRefreshesDevices() {
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		}
+		instrumentation.waitForIdleSync()
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+
+		assertNotNull(helper.getDeviceById(ApplicationMode.CAR, "custom_1"))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		assertNotNull(helper.getFunctionalityDevice(ApplicationMode.CAR)!!.findAction(KeyEvent.KEYCODE_A))
+	}
+
+	@Test
+	fun importOfLastOwnWrittenListIsAppliedAfterForeignList() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.addAssignment(ApplicationMode.CAR, "custom_1", KeyAssignment("zoom_in", KeyEvent.KEYCODE_Z))
+		val ownJson = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get()
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B)))
+		}
+		instrumentation.waitForIdleSync()
+		assertEquals(listOf("custom_2"), customDeviceIds(ApplicationMode.CAR))
+
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(ownJson)
+		}
+		instrumentation.waitForIdleSync()
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun legacyListWrittenOutsideHelperRefreshesDevices() {
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		}
+		instrumentation.waitForIdleSync()
+
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun externalChangeOfGlobalListNotifiesListeners() {
+		val events = java.util.Collections.synchronizedList(mutableListOf<EventType>())
+		val latch = CountDownLatch(1)
+		val listener = InputDevicesEventListener { _, event ->
+			events.add(event)
+			latch.countDown()
+		}
+		helper.addListener(listener)
+		try {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+			assertTrue(latch.await(5, TimeUnit.SECONDS))
+		} finally {
+			helper.removeListener(listener)
+		}
+		assertTrue(events.contains(EventType.CUSTOM_DEVICES_CHANGED))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun ownChangeOfGlobalListDoesNotRaiseExternalChangeEvent() {
+		val events = java.util.Collections.synchronizedList(mutableListOf<EventType>())
+		val listener = InputDevicesEventListener { _, event -> events.add(event) }
+		helper.addListener(listener)
+		try {
+			helper.createAndSaveCustomDevice(ApplicationMode.CAR, "Keyboard Z")
+			InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+		} finally {
+			helper.removeListener(listener)
+		}
+		assertTrue(events.contains(EventType.ADD_NEW_DEVICE))
+		assertFalse(events.contains(EventType.CUSTOM_DEVICES_CHANGED))
 	}
 
 	@Test
