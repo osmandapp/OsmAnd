@@ -36,6 +36,9 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Building3DDetailLevel;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
+import net.osmand.plus.plugins.srtm.building.SunLight;
+import net.osmand.plus.plugins.srtm.building.SunParametersController;
+import net.osmand.plus.plugins.srtm.building.SunLightMode;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -100,18 +103,23 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_SUN_ANGLE;
 	public final CommonPreference<Integer> HILLSHADE_SUN_AZIMUTH;
+	public final CommonPreference<SunLightMode> SUN_LIGHT_MODE;
+	public final CommonPreference<Long> SUN_LIGHT_TIME;
 
 	private final StateChangedListener<Boolean> enable3DMapsListener;
 	private final StateChangedListener<Boolean> terrainListener;
 	private final StateChangedListener<Integer> hillshadeSunAngleListener;
 	private final StateChangedListener<Integer> hillshadeSunAzimuthListener;
 	private final StateChangedListener<Boolean> castShadowsListener;
+	private final StateChangedListener<SunLightMode> sunLightModeListener;
+	private final StateChangedListener<Long> sunLightTimeListener;
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 	private final StateChangedListener<MetricsConstants> metricSystemListener;
 	private final StateChangedListener<Boolean> map3DObjectsListener;
 
 
+	private final SunLight sunLight;
 	private TerrainLayer terrainLayer;
 
 	@Override
@@ -133,6 +141,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		HILLSHADE_SUN_ANGLE = registerIntPreference("hillshade_sun_angle", DEFAULT_HILLSHADE_SUN_ANGLE).makeGlobal().cache();
 		HILLSHADE_SUN_AZIMUTH = registerIntPreference("hillshade_sun_azimuth", DEFAULT_HILLSHADE_SUN_AZIMUTH).makeGlobal().cache();
+		SUN_LIGHT_MODE = registerEnumStringPreference("sun_light_mode", SunLightMode.MANUAL, SunLightMode.values(), SunLightMode.class).makeGlobal().cache();
+		SUN_LIGHT_TIME = registerLongPreference("sun_light_time", 0).makeGlobal().cache();
+		sunLight = new SunLight(app, this);
 
 		enable3DMapsListener = change -> app.runInUIThread(() -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
@@ -183,6 +194,30 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		});
 		settings.CAST_SHADOWS.addListener(castShadowsListener);
+
+		sunLightModeListener = change -> app.runInUIThread(() -> {
+			sunLight.updateLiveUpdates();
+			updateElevationConfiguration();
+		});
+		SUN_LIGHT_MODE.addListener(sunLightModeListener);
+
+		sunLightTimeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		SUN_LIGHT_TIME.addListener(sunLightTimeListener);
+	}
+
+	@NonNull
+	public SunLight getSunLight() {
+		return sunLight;
+	}
+
+	@Override
+	public void mapActivityResume(@NonNull MapActivity activity) {
+		sunLight.setMapVisible(true);
+	}
+
+	@Override
+	public void mapActivityPause(@NonNull MapActivity activity) {
+		sunLight.setMapVisible(false);
 	}
 
 	public void updateElevationConfiguration() {
@@ -286,6 +321,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
+		sunLight.setMapVisible(false);
 		NativeCoreContext.updateContourLinesDirectory(app, false);
 	}
 
@@ -457,7 +493,43 @@ public class SRTMPlugin extends OsmandPlugin {
 				nauticalPlugin.createAdapterItem(TERRAIN_DEPTH_CONTOURS, adapter, mapActivity, customRules);
 			}
 			createSphericalMapItem(adapter, mapActivity);
+			if (app.useOpenGlRenderer()) {
+				createSunPositionItem(adapter, mapActivity);
+			}
 		}
+	}
+
+	/** The switch casts the sun shadows, the row opens the light direction: Live, Date or Manual. */
+	private void createSunPositionItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+		boolean shadows = settings.CAST_SHADOWS.get();
+		adapter.addItem(new ContextMenuItem(TERRAIN_SUN_POSITION)
+				.setTitleId(R.string.map_widget_sun_position, activity)
+				.setIcon(R.drawable.ic_action_sun)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setDescription(sunLight.getDescription())
+				.setSelected(shadows)
+				.setColor(app, shadows ? R.color.osmand_orange : INVALID_ID)
+				.setListener(new OnRowItemClick() {
+					@Override
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
+						activity.getDashboard().hideDashboard();
+						SunParametersController.showDialog(app, activity.getSupportFragmentManager());
+						return false;
+					}
+
+					@Override
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						settings.CAST_SHADOWS.set(isChecked);
+						item.setSelected(isChecked);
+						item.setColor(app, isChecked ? R.color.osmand_orange : INVALID_ID);
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						return true;
+					}
+				}).setItemDeleteAction(settings.CAST_SHADOWS));
 	}
 
 	private void addTerrainDescriptionItem(@NonNull ContextMenuAdapter adapter,
