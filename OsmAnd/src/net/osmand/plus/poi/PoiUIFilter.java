@@ -18,6 +18,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.data.Amenity;
 import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
@@ -194,6 +195,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		poiAdditionals = filter.getPoiAdditionals();
 		filterByName = filter.filterByName;
 		savedFilterByName = filter.savedFilterByName;
+		additionalFilter = filter.additionalFilter;
 		updateAcceptedTypeOrigins();
 	}
 
@@ -585,6 +587,24 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	@Nullable
 	public SearchPoiAdditionalFilter getAdditionalFilter() {
 		return additionalFilter;
+	}
+
+	@Nullable
+	public TopIndexFilter getTopIndexFilter() {
+		return additionalFilter instanceof TopIndexFilter topIndexFilter ? topIndexFilter : null;
+	}
+
+	/**
+	 * Restores the brand / operator of a saved filter, e.g. tag "brand" and value "McDonald's".
+	 */
+	public void setTopIndexFilter(@Nullable String tag, @Nullable String value) {
+		if (Algorithms.isEmpty(tag) || Algorithms.isEmpty(value)) {
+			additionalFilter = null;
+			return;
+		}
+		PoiSubType subType = new PoiSubType();
+		subType.name = MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX + tag;
+		additionalFilter = new TopIndexFilter(subType, poiTypes, value);
 	}
 
 	@NonNull

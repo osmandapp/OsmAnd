@@ -51,6 +51,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -402,9 +403,10 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 		builder.setTitle(R.string.access_hint_enter_name);
 
+		TopIndexFilter topIndexFilter = filter.getTopIndexFilter();
 		EditText editText = new EditText(getContext());
 		editText.setHint(R.string.new_filter);
-		editText.setText(filter.getName());
+		editText.setText(topIndexFilter != null ? topIndexFilter.getValue() : filter.getName());
 
 		TextView textView = new TextView(getContext());
 		textView.setText(getString(R.string.new_filter_desc));
@@ -423,6 +425,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		builder.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
 			String filterName = editText.getText().toString();
 			PoiUIFilter nFilter = new PoiUIFilter(filterName, null, filter.getAcceptedTypes(), app);
+			if (topIndexFilter != null) {
+				nFilter.setTopIndexFilter(topIndexFilter.getTag(), topIndexFilter.getValue());
+			}
 			applyFilterFields();
 			if (!Algorithms.isEmpty(filter.getFilterByName())) {
 				nFilter.setSavedFilterByName(filter.getFilterByName());
