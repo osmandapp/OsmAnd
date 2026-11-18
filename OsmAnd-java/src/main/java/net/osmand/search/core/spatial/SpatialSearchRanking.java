@@ -173,31 +173,20 @@ public class SpatialSearchRanking {
 
 	/**
 	 * "lidl espoo" from Vantaa: by the distance from the person the first screen is the edge of Espoo next to Vantaa.
-	 * For a person outside the bbox of the named city, a POI is as far as from the city's centre plus wayToCityShare
-	 * of the way to it, when that is nearer. Only when the query named the POI's brand: a word for a kind asks for the
-	 * nearest one ("cafe amsterdam"); and, as for wOutsideCity, only a POI with tag groups. Grows over wayToCityRampKm
-	 * from the bbox, so a step across it reorders nothing.
+	 * A POI of the brand the query named is as far as from the city's centre plus wayToCityShare of the way to it,
+	 * when that is nearer.
 	 */
 	private double distanceViaCity(SpatialSearchResult r, LatLon person, double direct) {
 		SpatialSearchResultRef city = matchedCity(r);
 		LatLon poi = r.getLatLon(), centre = city == null ? null : city.atom.object.getLocation();
-		if (centre == null || poi == null || !(r.getFirstRef().atom.object instanceof Amenity a)
-				|| Algorithms.isEmpty(a.getTagGroups()) || !namedBrand(r.getFirstRef())) {
+		int[] b = city == null || city.atom.coords == null ? null : city.atom.coords.bbox31;
+		if (centre == null || poi == null || b == null || !namedBrand(r.getFirstRef())) {
 			return direct;
 		}
-		double via = (MapUtils.getDistance(centre, poi) + wayToCityShare * MapUtils.getDistance(person, centre)) / 1000.0;
-		double share = Math.min(1, distanceFromBbox(city.atom, person) / wayToCityRampKm);
-		return Math.min(direct, direct + share * (via - direct));
-	}
-
-	/** km from the person to the bbox of the city, 0 inside or when it has none */
-	private static double distanceFromBbox(NameIndexAtom atom, LatLon person) {
-		int[] b = atom.coords == null ? null : atom.coords.bbox31;
-		if (b == null) {
-			return 0;
-		}
 		int x = MapUtils.get31TileNumberX(person.getLongitude()), y = MapUtils.get31TileNumberY(person.getLatitude());
-		return distKm(x, y, Math.min(b[0], b[2]), Math.min(b[1], b[3]), Math.max(b[0], b[2]), Math.max(b[1], b[3]));
+		double outside = distKm(x, y, Math.min(b[0], b[2]), Math.min(b[1], b[3]), Math.max(b[0], b[2]), Math.max(b[1], b[3]));
+		double via = (MapUtils.getDistance(centre, poi) + wayToCityShare * MapUtils.getDistance(person, centre)) / 1000.0;
+		return Math.min(direct, direct + Math.min(1, outside / wayToCityRampKm) * (via - direct));
 	}
 
 	/**
