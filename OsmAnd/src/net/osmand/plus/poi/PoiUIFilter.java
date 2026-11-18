@@ -48,6 +48,7 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
@@ -507,6 +508,18 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			}
 		}
 		return getNameFilterInternal(unknownFilters, allTime, open, poiAdditionalsFilter);
+	}
+
+	/**
+	 * Matches only the text typed by the user, without the selected filter values.
+	 */
+	@NonNull
+	public PoiFilterUtils.AmenityNameFilter getNameTextFilter(@Nullable String text) {
+		if (Algorithms.isEmpty(text) || text.trim().isEmpty()) {
+			return a -> true;
+		}
+		List<String> words = new ArrayList<>(Arrays.asList(text.trim().split("\\s+")));
+		return getNameFilterInternal(words, false, false, null);
 	}
 
 	@NonNull
