@@ -189,6 +189,13 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		// navigation started on this screen goes to its own view, not to the one before the screen
 		val navigationStarted = app.routingHelper.isFollowingMode && !prevFollowingMode
 		val zoom = prevZoom ?: mapView.currentZoom
+		// a screen opened at session start saves the phone tilt: the car tilt is applied later, with the car surface
+		val carSessionStarted = app.carNavigationSession?.hasStarted() == true
+		val elevation = if (navigationStarted || carSessionStarted) {
+			app.settings.lastKnownMapElevation
+		} else {
+			prevElevationAngle
+		}
 		mapView.animateToState(
 			lastKnownLocation?.latitude ?: mapView.latitude,
 			lastKnownLocation?.longitude ?: mapView.longitude,
@@ -198,7 +205,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 				zoom
 			},
 			prevRotationAngle,
-			if (navigationStarted) app.settings.lastKnownMapElevation else prevElevationAngle,
+			elevation,
 			ANIMATION_RETURN_FROM_PREVIEW_TIME.toLong(),
 			false)
 	}
