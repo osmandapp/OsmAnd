@@ -537,6 +537,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		clearButton.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(v -> {
 			if (!searchEditText.getText().toString().isEmpty()) {
+				resetAppliedPoiFilter();
 				clearLastWord();
 			} else if ((useMapCenter || useSpatialSearchLocation) && location != null) {
 				searchAroundMyLocation();
@@ -2848,6 +2849,21 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			updateTopFilterChips();
 			applySelectedSortSetting();
 			runCoreSearch(txt, false, false);
+		}
+	}
+
+	/**
+	 * The name and values applied in Filters live in the category's PoiUIFilter: clearing the
+	 * query drops them too, or the category stays filtered with nothing visible in the query.
+	 */
+	private void resetAppliedPoiFilter() {
+		if (Algorithms.isBlank(currentCategoryFilterParams)) {
+			return;
+		}
+		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
+		PoiUIFilter filter = getAppliedFiltersSource(word);
+		if (filter != null) {
+			filter.removeUnsavedFilterByName();
 		}
 	}
 
