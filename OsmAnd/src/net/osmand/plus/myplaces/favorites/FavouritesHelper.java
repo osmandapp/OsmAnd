@@ -753,6 +753,7 @@ public class FavouritesHelper {
 				}
 				point.setCategory(newCategory);
 				FavoriteGroup pg = getOrCreateGroup(point);
+				// IMPORTANT: Move may change colour and shape, never the icon (#16507)
 				point.setVisible(pg.isVisible());
 				if (SpecialPointType.PARKING == point.getSpecialPointType()) {
 					point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
