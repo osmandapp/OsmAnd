@@ -176,6 +176,11 @@ public class InputDevicesHelper {
 	public void removeCustomDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		devicesCollection.removeCustomDevice(deviceId);
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (Objects.equals(settings.EXTERNAL_INPUT_DEVICE.getModeValue(mode), deviceId)) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(mode, KEYBOARD.getId());
+			}
+		}
 		syncSettings(devicesCollection, EventType.DELETE_DEVICE);
 	}
 

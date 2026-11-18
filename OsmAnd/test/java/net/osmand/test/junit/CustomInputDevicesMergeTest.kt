@@ -259,6 +259,20 @@ class CustomInputDevicesMergeTest {
 	}
 
 	@Test
+	fun removeCustomDeviceResetsSelectionInOtherProfiles() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_1")
+
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.BICYCLE))
+		assertTrue(settings.EXTERNAL_INPUT_DEVICE.isSetForMode(ApplicationMode.CAR))
+		assertTrue(settings.EXTERNAL_INPUT_DEVICE.isSetForMode(ApplicationMode.BICYCLE))
+	}
+
+	@Test
 	fun writeToGlobalPreferenceOutsideHelperRefreshesDevices() {
 		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
 
