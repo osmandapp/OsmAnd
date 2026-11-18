@@ -38,7 +38,6 @@ object PoiAdditionalUiRules {
         ),
         PoiAdditionalUiRule(
             key = Amenity.XMAS_OPENING_HOURS,
-            customIconId = R.drawable.ic_action_time,
             customTextPrefixId = R.string.poi_xmas_opening_hours,
             isNeedLinks = false,
             behavior = XmasOpeningHoursRowBehavior

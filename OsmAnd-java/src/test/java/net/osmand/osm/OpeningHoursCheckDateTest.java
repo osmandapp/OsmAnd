@@ -15,6 +15,8 @@ import java.util.Map;
 
 public class OpeningHoursCheckDateTest {
 
+	private static final String POST_OFFICE_OPENING_HOURS = "post_office_opening_hours";
+
 	private MapPoiTypes poiTypes;
 
 	@Before
@@ -39,6 +41,15 @@ public class OpeningHoursCheckDateTest {
 	}
 
 	@Test
+	public void otherOpeningHoursKeysStayHidden() {
+		Amenity amenity = parseCafe(null);
+		assertEquals("Mo-Fr 08:00-12:00", amenity.getAdditionalInfo(POST_OFFICE_OPENING_HOURS));
+
+		assertFalse(amenity.getAmenityExtensions(poiTypes, false).containsKey(POST_OFFICE_OPENING_HOURS));
+		assertFalse(amenity.getAmenityExtensions(poiTypes, true).containsKey(OSM_PREFIX + POST_OFFICE_OPENING_HOURS));
+	}
+
+	@Test
 	public void noCheckDateOfOpeningHoursWithoutTag() {
 		Amenity amenity = parseCafe(null);
 
@@ -52,6 +63,7 @@ public class OpeningHoursCheckDateTest {
 		tags.put("amenity", "cafe");
 		tags.put("opening_hours", "Mo-Fr 09:00-18:00");
 		tags.put("xmas:opening_hours", "Dec 24 10:00-14:00");
+		tags.put("post_office:opening_hours", "Mo-Fr 08:00-12:00");
 		tags.put("check_date", "2025-11-18");
 		if (openingHoursCheckDate != null) {
 			tags.put("check_date:opening_hours", openingHoursCheckDate);

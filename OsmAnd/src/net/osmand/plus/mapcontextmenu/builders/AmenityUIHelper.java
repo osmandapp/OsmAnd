@@ -194,9 +194,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (resolvedType.getAdditionalType() == null && resolvedType.getCategoryType() != null) {
 			return null;
 		}
-		if (XMAS_DAY_DATE.equals(key) && additionalInfo.getFilteredInfo().containsKey(XMAS_OPENING_HOURS)) {
-			return null; // shown under the xmas opening hours
-		}
 		AmenityTagEntry.Builder entryBuilder =
 				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
