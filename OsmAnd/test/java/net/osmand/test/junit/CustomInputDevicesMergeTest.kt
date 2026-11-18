@@ -6,13 +6,24 @@ import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.keyevent.InputDevicesHelper
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem
+import net.osmand.plus.settings.backend.backup.items.SettingsItem
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.zip.ZipFile
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -148,6 +159,98 @@ class CustomInputDevicesMergeTest {
 		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
 		assertFalse(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.isSet)
 		assertFalse(settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.isSetForMode(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun selectedCustomDeviceJsonContainsOnlySelectedDevice() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_2")
+
+		val items = JSONObject(helper.getSelectedCustomDeviceJson(ApplicationMode.CAR)!!).getJSONArray("items")
+		assertEquals(1, items.length())
+		assertEquals("custom_2", items.getJSONObject(0).getString("id"))
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, KeyboardDeviceProfile.ID)
+		assertNull(helper.getSelectedCustomDeviceJson(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun onlyUserFacingExportCarriesSelectedDevice() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		val key = settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.id
+
+		assertTrue(exportProfileFileText(true).contains(key))
+		assertFalse(exportProfileFileText(false).contains(key))
+	}
+
+	@Test
+	fun profileExportWritesSelectedDeviceOnlyWhenRequested() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_2")
+		val key = settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.id
+
+		val cloud = exportProfileJson(false)
+		assertFalse(cloud.has(key))
+
+		val file = exportProfileJson(true)
+		val items = JSONObject(file.getString(key)).getJSONArray("items")
+		assertEquals(1, items.length())
+		assertEquals("custom_2", items.getJSONObject(0).getString("id"))
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, KeyboardDeviceProfile.ID)
+		assertFalse(exportProfileJson(true).has(key))
+	}
+
+	private fun exportProfileFileText(shared: Boolean): String {
+		val dir = app.cacheDir
+		val name = "input_devices_export_" + shared
+		val file = File(dir, name + ".osf")
+		file.delete()
+		val latch = CountDownLatch(1)
+		var succeed = false
+		val listener = SettingsExportListener { _, result ->
+			succeed = result
+			latch.countDown()
+		}
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val items = mutableListOf<SettingsItem>(ProfileSettingsItem(app, ApplicationMode.CAR))
+			if (shared) {
+				app.fileSettingsHelper.exportSharedSettings(dir, name, listener, items)
+			} else {
+				app.fileSettingsHelper.exportSettings(dir, name, listener, items, true)
+			}
+		}
+		assertTrue(latch.await(30, TimeUnit.SECONDS))
+		assertTrue(succeed)
+		try {
+			ZipFile(file).use { zip ->
+				return zip.entries().toList().joinToString("\n") { entry ->
+					zip.getInputStream(entry).bufferedReader().readText()
+				}
+			}
+		} finally {
+			file.delete()
+		}
+	}
+
+	private fun exportProfileJson(writeSelectedDevice: Boolean): JSONObject {
+		val item = ProfileSettingsItem(app, ApplicationMode.CAR)
+		if (writeSelectedDevice) {
+			item.enableSelectedInputDeviceExport()
+		}
+		val out = ByteArrayOutputStream()
+		item.writer!!.writeToStream(out, null)
+		return JSONObject(out.toString("UTF-8"))
+	}
+
+	private fun globalJson(vararg devices: JSONObject): String {
+		return JSONObject().put("items", JSONArray(devices.toList())).toString()
 	}
 
 	private fun setLegacyDevices(appMode: ApplicationMode, vararg devices: JSONObject) {

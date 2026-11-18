@@ -215,7 +215,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			protected void onPostExecute(Integer maxProgress) {
 				if (isAdded() && progress != null && progress.isShowing()) {
 					progress.setMax(maxProgress);
-					app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
+					app.getFileSettingsHelper().exportSharedSettings(tempDir, fileName, getSettingsExportListener(), items);
 				}
 			}
 		});

@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -318,6 +319,26 @@ public class InputDevicesHelper {
 			cachedDevicesCollections.clear();
 		}
 		return devices;
+	}
+
+	@Nullable
+	public String getSelectedCustomDeviceJson(@NonNull ApplicationMode appMode) {
+		String id = getSelectedDeviceId(appMode);
+		if (id == null) {
+			return null;
+		}
+		for (InputDeviceProfile device : readCustomDevices(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get())) {
+			if (device instanceof CustomInputDeviceProfile && Objects.equals(device.getId(), id)) {
+				try {
+					JSONObject json = new JSONObject();
+					writeToJson(app, json, Collections.singletonList(device));
+					return json.toString();
+				} catch (JSONException e) {
+					LOG.debug("Error while writing selected custom device to JSON ", e);
+				}
+			}
+		}
+		return null;
 	}
 
 	@NonNull
