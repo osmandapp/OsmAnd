@@ -28,6 +28,7 @@ import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.media.LinkMediaFactory;
+import net.osmand.shared.media.MediaFileNameFormat;
 import net.osmand.shared.media.MediaProvider;
 import net.osmand.util.Algorithms;
 
@@ -199,9 +200,16 @@ public class AttachedMediaDataHelper {
 
 	@NonNull
 	private static File getRenamedFile(@Nullable Recording recording, @NonNull File source, @NonNull String name) {
-		String extension = Algorithms.getFileNameExtension(source.getName());
-		String newName = recording != null ? name + " " + recording.getOtherName(source.getName())
-				: name + (extension.isEmpty() ? "" : "." + extension);
+		String fileName = source.getName();
+		String newName;
+		if (recording != null || MediaFileNameFormat.isManagedMediaFileName(fileName)) {
+			// The generated part keeps the file managed and holds its location, so only the description is replaced
+			String description = MediaFileNameFormat.getDescription(fileName);
+			newName = name + " " + (description != null ? fileName.substring(description.length() + 1) : fileName);
+		} else {
+			String extension = Algorithms.getFileNameExtension(fileName);
+			newName = name + (extension.isEmpty() ? "" : "." + extension);
+		}
 		return new File(source.getParentFile(), newName);
 	}
 

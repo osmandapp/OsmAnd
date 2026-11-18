@@ -31,6 +31,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
 import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.media.LinkMediaFactory
+import net.osmand.shared.media.MediaFileNameFormat
 import net.osmand.shared.media.domain.MediaItem
 
 object MediaItemMenu {
@@ -101,8 +102,12 @@ object MediaItemMenu {
 	private fun rename(activity: FragmentActivity, entry: MediaLibraryEntry, nightMode: Boolean) {
 		val app = activity.application as OsmandApplication
 		val recording = entry.recording
-		val currentName = if (recording != null) recording.getDescriptionName(recording.fileName).orEmpty()
-		else entry.title.substringBeforeLast('.')
+		val currentName = when {
+			recording != null -> recording.getDescriptionName(recording.fileName).orEmpty()
+			// Only the description of a generated name is renamed, see AttachedMediaDataHelper.getRenamedFile
+			MediaFileNameFormat.isManagedMediaFileName(entry.title) -> MediaFileNameFormat.getDescription(entry.title).orEmpty()
+			else -> entry.title.substringBeforeLast('.')
+		}
 		val helper = AttachedMediaDataHelper(app)
 		TextInputDialog(activity, nightMode, R.string.shared_string_rename, R.string.shared_string_name).apply {
 			initialText = currentName
