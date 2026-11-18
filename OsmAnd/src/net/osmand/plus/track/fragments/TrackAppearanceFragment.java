@@ -429,6 +429,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			} else if (card instanceof DirectionArrowsCard) {
 				refreshMap();
 				updateAppearanceIcon();
+			} else if (card instanceof Track3DCard) {
+				updateLineStyleDependentCards();
+				refreshMap();
 			} else {
 				refreshMap();
 			}
@@ -863,6 +866,15 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			colorCard.update();
 		}
 		refreshMap();
+	}
+
+	private void updateLineStyleDependentCards() {
+		if (lineStyleCard != null) {
+			lineStyleCard.update();
+		}
+		if (colorCard != null) {
+			colorCard.update();
+		}
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {

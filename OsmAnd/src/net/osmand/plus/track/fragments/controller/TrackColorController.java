@@ -81,7 +81,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 			container.addView(new PromoBannerCard(activity).build());
 		} else if (coloringType.isTrackSolid()) {
 			View paletteView = new ColorsPaletteCard(activity, getColorsPaletteController()).build();
-			if (drawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+			if (drawInfo.getDrawnLineStyleType() != GpxLineStyleType.SOLID) {
 				View descriptionView = new DescriptionCard(activity, R.string.gpx_color_desc_unavailable_for_style).build();
 				container.addView(AndroidUiHelper.wrapWithLinearLayout(activity, LinearLayout.VERTICAL, paletteView, descriptionView));
 			} else {
@@ -172,7 +172,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 		if (coloringStyle == null) {
 			return false;
 		}
-		if (!coloringStyle.getType().isTrackSolid() && drawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+		if (!coloringStyle.getType().isTrackSolid() && drawInfo.getDrawnLineStyleType() != GpxLineStyleType.SOLID) {
 			return false;
 		}
 		if (selectedGpx == null || coloringStyle.getType() != ATTRIBUTE && drawInfo.isCurrentRecording()) {
@@ -186,7 +186,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	                                                  @NonNull View view) {
 		ColoringType coloringType = coloringStyle.getType();
 		String text = "";
-		if (!coloringType.isTrackSolid() && drawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+		if (!coloringType.isTrackSolid() && drawInfo.getDrawnLineStyleType() != GpxLineStyleType.SOLID) {
 			text = app.getString(R.string.gpx_color_unavailable_for_line_style);
 		} else if (coloringType == ColoringType.SPEED) {
 			text = app.getString(R.string.track_has_no_speed);
