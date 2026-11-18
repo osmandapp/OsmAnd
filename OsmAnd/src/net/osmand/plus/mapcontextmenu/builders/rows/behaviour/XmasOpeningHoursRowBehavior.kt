@@ -17,7 +17,7 @@ object XmasOpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
 		}
 	}
 
-	fun getText(value: String, additionalInfo: AdditionalInfoBundle): String {
+	private fun getText(value: String, additionalInfo: AdditionalInfoBundle): String {
 		val openingHours = OpeningHoursParser.parseOpenedHours(value)
 		val hours = (openingHours?.toLocalString() ?: value).replace("; ", "\n")
 		val season = additionalInfo.getFilteredInfo()[Amenity.XMAS_DAY_DATE]

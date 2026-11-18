@@ -194,8 +194,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (resolvedType.getAdditionalType() == null && resolvedType.getCategoryType() != null) {
 			return null;
 		}
-		if (isShownInOpeningHoursRow(key)) {
-			return null;
+		if (XMAS_DAY_DATE.equals(key) && additionalInfo.getFilteredInfo().containsKey(XMAS_OPENING_HOURS)) {
+			return null; // shown under the xmas opening hours
 		}
 		AmenityTagEntry.Builder entryBuilder =
 				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
@@ -218,14 +218,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 		entryBuilder.setMatchWidthDivider(!entryBuilder.isDescription() && entryBuilder.isWiki());
 		return entryBuilder;
-	}
-
-	private boolean isShownInOpeningHoursRow(@NonNull String key) {
-		Map<String, String> info = additionalInfo.getFilteredInfo();
-		if (XMAS_DAY_DATE.equals(key)) {
-			return info.containsKey(XMAS_OPENING_HOURS);
-		}
-		return XMAS_OPENING_HOURS.equals(key) && info.containsKey(OPENING_HOURS);
 	}
 
 	@Override
@@ -321,37 +313,24 @@ public class AmenityUIHelper extends MenuBuilder {
 	private CollapsableView getOpeningHoursCollapsableView(@NonNull Context context, @NonNull List<AmenityTagEntry> entries) {
 		CollapsableView collapsableView = getCollapsableTextView(context, true, entries.get(0).text);
 		String checkDate = null;
-		AmenityTagEntry xmasHours = null;
 		for (AmenityTagEntry entry : entries) {
 			if (CHECK_DATE_OPENING_HOURS.equals(entry.key)) {
 				checkDate = entry.text;
-			} else if (XMAS_OPENING_HOURS.equals(entry.key)) {
-				xmasHours = entry;
 			}
 		}
-		if (!Algorithms.isEmpty(checkDate) || xmasHours != null) {
+		if (!Algorithms.isEmpty(checkDate)) {
 			TextView textView = (TextView) collapsableView.getContentView();
-			SpannableStringBuilder text = new SpannableStringBuilder(textView.getText());
-			if (!Algorithms.isEmpty(checkDate)) {
-				appendSecondaryText(text.append('\n'), checkDate);
-			}
-			if (xmasHours != null) {
-				appendSecondaryText(text.append("\n\n"), xmasHours.textPrefix);
-				text.append('\n').append(xmasHours.text);
-			}
+			SpannableStringBuilder text = new SpannableStringBuilder(textView.getText()).append('\n');
+			int start = text.length();
+			text.append(checkDate);
+			int end = text.length();
+			int color = ColorUtilities.getSecondaryTextColor(app, !isLightContent());
+			int size = app.getResources().getDimensionPixelSize(R.dimen.default_desc_text_size);
+			text.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			text.setSpan(new AbsoluteSizeSpan(size), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			textView.setText(text);
 		}
 		return collapsableView;
-	}
-
-	private void appendSecondaryText(@NonNull SpannableStringBuilder text, @Nullable String value) {
-		int start = text.length();
-		text.append(value);
-		int end = text.length();
-		int color = ColorUtilities.getSecondaryTextColor(app, !isLightContent());
-		int size = app.getResources().getDimensionPixelSize(R.dimen.default_desc_text_size);
-		text.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		text.setSpan(new AbsoluteSizeSpan(size), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 	}
 
 	@NonNull

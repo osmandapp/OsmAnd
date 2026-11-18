@@ -24,12 +24,6 @@ object OpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
 			    entries.add(AmenityTagEntry.Builder(Amenity.CHECK_DATE_OPENING_HOURS)
 				    .setValue(checkDate).setText(checkDateText).build())
 		    }
-		    val xmasHours = additionalInfo.getFilteredInfo()[Amenity.XMAS_OPENING_HOURS]
-		    if (key == Amenity.OPENING_HOURS && !xmasHours.isNullOrEmpty()) {
-			    entries.add(AmenityTagEntry.Builder(Amenity.XMAS_OPENING_HOURS)
-				    .setTextPrefix(app.getString(R.string.poi_xmas_opening_hours))
-				    .setText(XmasOpeningHoursRowBehavior.getText(xmasHours, additionalInfo)).build())
-		    }
 		    builder.setCollapsableEntries(entries)
 		    builder.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.OPENING_HOURS)
 
