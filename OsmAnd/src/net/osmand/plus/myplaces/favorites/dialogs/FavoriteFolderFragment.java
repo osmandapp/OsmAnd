@@ -432,7 +432,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
 			updateContent();
 		} else if (selectedPoint != null) {
-			helper.editFavouriteName(selectedPoint, selectedPoint.getName(), category, selectedPoint.getDescription(), selectedPoint.getAddress());
+			helper.editFavouritesGroup(Collections.singletonList(selectedPoint), category);
 		} else {
 			FavoriteGroup group = helper.getGroup(pointsGroup.getName());
 			if (group != null) {

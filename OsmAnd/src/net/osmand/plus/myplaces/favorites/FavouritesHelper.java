@@ -738,14 +738,12 @@ public class FavouritesHelper {
 	}
 
 	public void editFavouritesGroup(@NonNull List<FavouritePoint> points, @NonNull String newCategory) {
-		int skippedDuplicates = 0;
 		FavoriteGroup targetGroup = flatGroups.get(newCategory);
 		for (FavouritePoint point : points) {
 			String oldCategory = point.getCategory();
 			if (!oldCategory.equals(newCategory)) {
-				if (targetGroup != null && targetGroup.containsPointByName(point.getName())) {
-					skippedDuplicates++;
-					continue;
+				if (targetGroup != null) {
+					point.setName(targetGroup.getUniquePointName(point.getName()));
 				}
 				FavoriteGroup old = flatGroups.get(oldCategory);
 				if (old != null) {
@@ -772,9 +770,6 @@ public class FavouritesHelper {
 		saveCurrentPointsIntoFile(true);
 		if (!Algorithms.isEmpty(points)) {
 			runSyncWithMarkers(getOrCreateGroup(points.get(0)));
-		}
-		if (skippedDuplicates > 0) {
-			app.showShortToastMessage(R.string.msg_favorites_skipped_as_existing, skippedDuplicates);
 		}
 	}
 
