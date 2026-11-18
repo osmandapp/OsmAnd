@@ -10,6 +10,7 @@ import net.osmand.shared.data.KLatLon
 import net.osmand.shared.data.MapObject
 import net.osmand.shared.data.Street
 import net.osmand.shared.map.WorldRegion
+import net.osmand.shared.osm.PoiAdditionalLabels
 import net.osmand.shared.search.core.HashQuadTree
 import net.osmand.shared.search.core.spatial.SpatialPoiSearch.SpatialPoiType
 import net.osmand.shared.search.core.spatial.SpatialSearchToken.NameIndexAtom
@@ -218,7 +219,8 @@ class SpatialSearchResult internal constructor(
 		val category = getPoiCategory(poiSearch) ?: return null
 		for (name in category.names) {
 			if (objs[0].tokens.all { it.getMainCollator().matches(name) }) {
-				return category.getOriginalName(name)
+				val matchedName = category.getOriginalName(name)
+				return category.singleType?.let { PoiAdditionalLabels.getSearchName(it, matchedName) } ?: matchedName
 			}
 		}
 		return null

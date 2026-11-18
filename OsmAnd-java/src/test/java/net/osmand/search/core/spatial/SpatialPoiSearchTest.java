@@ -19,15 +19,27 @@ public class SpatialPoiSearchTest {
 
 	@Test
 	public void testMatchedNameKeepsDiacritics() throws IOException {
-		MapPoiTypes poiTypes = new MapPoiTypes(null);
-		poiTypes.init();
-		poiTypes.setPoiTranslator(new PhrasesTranslator(Map.of(
+		SpatialPoiSearch poiSearch = createPoiSearch(Map.of(
 				"sports_centre", "Sports center;Спортивний центр;спорткомплекс",
-				"shelter", "Shelter;Unterstand;Schutzhütte")));
-		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes);
+				"shelter", "Shelter;Unterstand;Schutzhütte"));
 
 		Assert.assertEquals("Спортивний центр", getMatchedName(poiSearch, "спорт", "sports_centre"));
 		Assert.assertEquals("Schutzhütte", getMatchedName(poiSearch, "schutz", "shelter"));
+	}
+
+	@Test
+	public void testMatchedNameOfValueIsCutBeforeColon() throws IOException {
+		SpatialPoiSearch poiSearch = createPoiSearch(Map.of("smoking_yes", "Куріння: дозволено;Rauchen: erlaubt"));
+
+		Assert.assertEquals("Куріння", getMatchedName(poiSearch, "куріння", "smoking_yes"));
+		Assert.assertEquals("Rauchen", getMatchedName(poiSearch, "rauchen", "smoking_yes"));
+	}
+
+	private static SpatialPoiSearch createPoiSearch(Map<String, String> phrases) {
+		MapPoiTypes poiTypes = new MapPoiTypes(null);
+		poiTypes.init();
+		poiTypes.setPoiTranslator(new PhrasesTranslator(phrases));
+		return new SpatialPoiSearch(poiTypes);
 	}
 
 	private static String getMatchedName(SpatialPoiSearch poiSearch, String query, String categoryKey) throws IOException {

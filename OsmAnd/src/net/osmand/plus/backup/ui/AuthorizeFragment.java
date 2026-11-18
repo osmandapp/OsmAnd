@@ -76,6 +76,10 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
 	private static final String LOGIN_STARTING_DIALOG_TYPE_KEY = "login_starting_dialog_type_key";
 	private static final String SIGN_IN_KEY = "sign_in_key";
+	private static final String ERROR_KEY = "error_key";
+	private static final String CONTINUE_ENABLED_KEY = "continue_enabled_key";
+	private static final String BUTTON_VISIBLE_KEY = "button_visible_key";
+	private static final String CHOOSE_PLAN_VISIBLE_KEY = "choose_plan_visible_key";
 
 	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 10 * 60 * 1000; // 10 minutes
 
@@ -172,7 +176,34 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 		outState.putBoolean(SIGN_IN_KEY, signIn);
 		outState.putString(LOGIN_DIALOG_TYPE_KEY, dialogType.name());
 		outState.putString(LOGIN_STARTING_DIALOG_TYPE_KEY, startingDialogType.name());
+		if (mainView != null) {
+			View button = mainView.findViewById(dialogType.viewId).findViewById(R.id.button);
+			outState.putString(ERROR_KEY, errorText.getVisibility() == View.VISIBLE ? errorText.getText().toString() : null);
+			outState.putBoolean(CONTINUE_ENABLED_KEY, buttonContinue.isEnabled());
+			outState.putBoolean(BUTTON_VISIBLE_KEY, button.getVisibility() == View.VISIBLE);
+			outState.putBoolean(CHOOSE_PLAN_VISIBLE_KEY, buttonChoosePlan.getVisibility() == View.VISIBLE);
+		}
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState); // the fields of the shown step come back here
+		if (savedInstanceState != null && savedInstanceState.containsKey(CONTINUE_ENABLED_KEY)) {
+			String error = savedInstanceState.getString(ERROR_KEY);
+			if (error != null) {
+				errorText.setText(error);
+				AndroidUiHelper.updateVisibility(errorText, true);
+			}
+			buttonContinue.setEnabled(savedInstanceState.getBoolean(CONTINUE_ENABLED_KEY));
+			if (savedInstanceState.getBoolean(BUTTON_VISIBLE_KEY)) {
+				// "Sign up" or "Login" after a warning, or "Resend" with its description
+				View step = mainView.findViewById(dialogType.viewId);
+				AndroidUiHelper.updateVisibility(step.findViewById(R.id.button), true);
+				AndroidUiHelper.updateVisibility(step.findViewById(R.id.code_missing_description), true);
+			}
+			AndroidUiHelper.updateVisibility(buttonChoosePlan, savedInstanceState.getBoolean(CHOOSE_PLAN_VISIBLE_KEY));
+		}
 	}
 
 	@Override
@@ -242,6 +273,8 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 				}
 			}
 			AndroidUiHelper.updateVisibility(view, selected);
+			// The steps share view ids, so only the shown one saves and restores its fields
+			view.setSaveFromParentEnabled(selected);
 		}
 	}
 
@@ -303,6 +336,7 @@ public class AuthorizeFragment extends BaseFullScreenFragment implements OnRegis
 		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(resendButton, false);
 		AndroidUiHelper.updateVisibility(codeMissingDescription, false);
+		AndroidUiHelper.updateVisibility(buttonChoosePlan, false);
 
 		editText.requestFocus();
 		AndroidUtils.softKeyboardDelayed(requireActivity(), editText);

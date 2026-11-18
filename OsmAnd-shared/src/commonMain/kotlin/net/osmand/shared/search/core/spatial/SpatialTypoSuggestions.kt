@@ -64,6 +64,9 @@ internal class SpatialTypoSuggestions(private val ctx: SpatialSearchContext) {
 			val query = "typo-key " + t.word
 			var bytes = 0L
 			for (fileInd in filesNearestFirst()) {
+				if (ctx.isCancelled()) {
+					return
+				}
 				if (bytes > KEY_MAX_BYTES) {
 					break
 				}

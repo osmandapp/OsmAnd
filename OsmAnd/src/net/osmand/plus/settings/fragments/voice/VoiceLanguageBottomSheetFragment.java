@@ -48,6 +48,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private VoiceItemsAdapter adapter;
 	private VoiceType selectedVoiceType;
+	private String selectedVoiceProvider;
 	private IndexItem indexToSelectAfterDownload;
 
 	@Override
@@ -96,6 +97,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void updateAdapter() {
+		selectedVoiceProvider = settings.VOICE_PROVIDER.getModeValue(getAppMode());
 		adapter.setVoiceType(selectedVoiceType);
 		adapter.setVoiceItems(selectedVoiceType == VoiceType.TTS ? ttsItems : recordedItems);
 	}
@@ -107,6 +109,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 				app.getRoutingHelper().getVoiceRouter().setMuteForMode(appMode, false);
 			}
 			settings.VOICE_PROVIDER.setModeValue(appMode, indexItem.getBasename());
+			selectedVoiceProvider = indexItem.getBasename();
 			onVoiceProviderChanged();
 			app.initVoiceCommandPlayer(activity, appMode, null, false, false, false, false);
 		});
@@ -124,7 +127,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	@Override
 	public boolean isItemSelected(@NonNull IndexItem item) {
-		return Algorithms.stringsEqual(item.getBasename(), settings.VOICE_PROVIDER.getModeValue(getAppMode()));
+		return Algorithms.stringsEqual(item.getBasename(), selectedVoiceProvider);
 	}
 
 	@Override

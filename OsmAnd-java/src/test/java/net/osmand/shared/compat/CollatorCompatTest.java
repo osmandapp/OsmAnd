@@ -20,7 +20,7 @@ import java.util.Set;
 
 /**
  * {@link net.osmand.shared.util.KCollatorStringMatcher} is a copy of {@link CollatorStringMatcher}
- * that reaches its answer without a collator, by reducing each string once to a collation key. That
+ * that compares collation keys without a collator call for each match. That
  * only holds if it answers the same, so this asks both the same questions: every mode, over the road
  * names of the obf files the routing tests ship with, and over names picked to carry the things a
  * primary collator folds - the german sharp s, the ligatures, apostrophes, dashes, arabic
@@ -41,13 +41,15 @@ public class CollatorCompatTest {
 			"Ελληνικά", "Οδός", "ΟΔΟΣ", "στάσις", "στάσιΣ",
 			"شارع الملك فهد", "شارع ٱلملك فهد", "طريق ٢٥",
 			"İstanbul", "Istanbul", "Kraków", "Krakow", "Nová Ves", "Nova Ves",
+			"New York", "New\u00A0York", "New\u1680York", "Café New\u2009York Deli",
+			"New\u202FYork", "New\u205FYork", "New\u3000York", "Grifo Uris Bell",
 			"A-1", "A 1", "A1", "B-2 north", "no.", "no", "st.", "st",
 			"East 42-nd Street", "East 42 nd Street", "  double  space  ", "-", "--", "",
 			"Đường Nguyễn Huệ", "Duong Nguyen Hue", "東京駅", "서울역",
 	};
 
 	private static final String[] TRICKY_QUERIES = {
-			"", " ", "-", ".", "..", "a.", "st.", "no.", "strasse", "straße", "STRASSE",
+			"new york", "newyork", "four", "", " ", "-", ".", "..", "a.", "st.", "no.", "strasse", "straße", "STRASSE",
 			"église", "eglise", "l'a", "la", "ae", "æ", "th", "þ", "oe", "œ",
 			"йошкар", "иошкар", "ола", "ёлкино", "елкино", "ellhnika", "ελλην", "οδος",
 			"شارع", "istanbul", "ıstanbul", "krakow", "nova", "42", "42-nd", "42 nd",

@@ -14,6 +14,7 @@ import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
@@ -141,6 +142,8 @@ public class SelectedGpxMenuController extends MenuController {
 		private final float bearing;
 		private final boolean showTrackPointMenu;
 		private final boolean splitLabel;
+		@Nullable
+		private final GpxDisplayItem splitItem;
 
 		public SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint) {
 			this(selectedGpxFile, selectedPoint, null, null, Float.NaN, false);
@@ -153,6 +156,12 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
 		                        WptPt nextPoint, float bearing, boolean showTrackPointMenu, boolean splitLabel) {
+			this(selectedGpxFile, selectedPoint, prevPoint, nextPoint, bearing, showTrackPointMenu, splitLabel, null);
+		}
+
+		private SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
+		                         WptPt nextPoint, float bearing, boolean showTrackPointMenu, boolean splitLabel,
+		                         @Nullable GpxDisplayItem splitItem) {
 			this.prevPoint = prevPoint;
 			this.nextPoint = nextPoint;
 			this.selectedPoint = selectedPoint;
@@ -160,12 +169,19 @@ public class SelectedGpxMenuController extends MenuController {
 			this.bearing = bearing;
 			this.showTrackPointMenu = showTrackPointMenu;
 			this.splitLabel = splitLabel;
+			this.splitItem = splitItem;
 		}
 
 		@NonNull
 		public static SelectedGpxPoint createSplitLabel(@NonNull SelectedGpxFile selectedGpxFile,
 		                                                @NonNull WptPt selectedPoint) {
 			return new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN, true, true);
+		}
+
+		@NonNull
+		public static SelectedGpxPoint createSplitItem(@NonNull SelectedGpxFile selectedGpxFile,
+		                                               @NonNull GpxDisplayItem splitItem) {
+			return new SelectedGpxPoint(selectedGpxFile, splitItem.getLabelPoint(), null, null, Float.NaN, false, false, splitItem);
 		}
 
 		@Nullable
@@ -195,6 +211,11 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public boolean isSplitLabel() {
 			return splitLabel;
+		}
+
+		@Nullable
+		public GpxDisplayItem getSplitItem() {
+			return splitItem;
 		}
 	}
 }

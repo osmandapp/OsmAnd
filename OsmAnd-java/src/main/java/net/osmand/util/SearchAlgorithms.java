@@ -456,12 +456,12 @@ public class SearchAlgorithms {
 			lastType = type;
 		}
 		if (currentToken.length() > 0) {
-			if (resultSet == null) {
-				return Collections.singleton(currentToken.toString().toLowerCase());
-			}
 			String toAdd = currentToken.toString().toLowerCase();
 			if (inCaseDuplicates != null) {
 				inCaseDuplicates.add(toAdd);
+			}
+			if (resultSet == null) {
+				return Collections.singleton(toAdd);
 			}
 			resultSet.add(toAdd);
 		}

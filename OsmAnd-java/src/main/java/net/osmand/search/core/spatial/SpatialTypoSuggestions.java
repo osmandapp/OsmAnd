@@ -103,6 +103,9 @@ class SpatialTypoSuggestions {
 			String query = "typo-key " + t.word;
 			long bytes = 0;
 			for (int fileInd : filesNearestFirst()) {
+				if (ctx.isCancelled()) {
+					return;
+				}
 				if (bytes > KEY_MAX_BYTES) {
 					break;
 				}

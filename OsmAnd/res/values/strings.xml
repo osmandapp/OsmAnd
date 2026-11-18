@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="attach_to_track">Attach to track</string>
 	<string name="visualization">Visualization</string>
 	<string name="terrain_shadows">Terrain shadows</string>
 	<string name="terrain_shadows_description">Real-time dynamic shading for 3D terrain. Highlights landscape geometry with minimal performance impact.</string>

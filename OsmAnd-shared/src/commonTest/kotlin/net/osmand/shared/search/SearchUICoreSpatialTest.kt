@@ -54,6 +54,38 @@ class SearchUICoreSpatialTest {
 	}
 
 	@Test
+	fun radiusSourceFollowsTheSmallestAvailablePositiveRadius() {
+		val core = core()
+		core.apis.clear()
+		val spatial = object : SpatialTextSearchAPI(MapPoiTypes.getDefault(), rulesDir.toString()) {
+			override fun getMinimalSearchRadius(phrase: SearchPhrase): Int = 300_000
+		}
+		val phrase = core.resetPhrase("Amsterdam")
+		assertEquals(Int.MAX_VALUE, core.getMinimalSearchRadius(phrase))
+		assertFalse(core.isSpatialSearchRadius(phrase))
+		core.registerAPI(spatial)
+		assertEquals(300_000, core.getMinimalSearchRadius(phrase))
+		assertTrue(core.isSpatialSearchRadius(phrase))
+		fun api(radius: Int, priority: Int = 1, available: Boolean = true) = object : SearchCoreAPI {
+			override fun getSearchPriority(p: SearchPhrase): Int = priority
+			override fun isSearchAvailable(p: SearchPhrase): Boolean = available
+			override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean = true
+			override fun isSearchMoreAvailable(phrase: SearchPhrase): Boolean = false
+			override fun getMinimalSearchRadius(phrase: SearchPhrase): Int = radius
+			override fun getNextSearchRadius(phrase: SearchPhrase): Int = radius
+		}
+		for (ignored in listOf(api(0), api(-1), api(10, -1), api(10, available = false))) {
+			core.registerAPI(ignored)
+		}
+		assertTrue(core.isSpatialSearchRadius(phrase))
+		core.registerAPI(api(300_000))
+		assertTrue(core.isSpatialSearchRadius(phrase), "Equal radii keep the first available API")
+		core.registerAPI(api(5_000))
+		assertEquals(5_000, core.getMinimalSearchRadius(phrase))
+		assertFalse(core.isSpatialSearchRadius(phrase), "Category radius must not receive spatial rounding")
+	}
+
+	@Test
 	fun spatialPoiSearchAfterSelectingCity() {
 		val core = core()
 		val api = core.getApiByClass(SpatialTextSearchAPI::class)
@@ -218,9 +250,8 @@ class SearchUICoreSpatialTest {
 	}
 
 	@Test
-	fun noSearchMoreAfterAllSpatialLevelsShown() = runBlocking {
-		// #25940: the dialog shows the levels in its own collection; the core one stays at level 0 and must not
-		// offer "Increase search radius", which reran the same spatial search and appended a copy of every row
+	fun spatialRadiusCanIncreaseAfterAllVisibleLevelsShown() = runBlocking {
+		// Visibility levels and radius expansion are independent: after all rows are shown, a larger radius can be searched.
 		val core = core()
 		core.registerAPI(object : SpatialTextSearchAPI(MapPoiTypes.getDefault(), rulesDir.toString()) {
 			override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean {
@@ -255,7 +286,9 @@ class SearchUICoreSpatialTest {
 		assertTrue(shown.showMoreSpatialSearchResults())
 		assertEquals(2, shown.getVisibleSpatialSearchResults().size)
 		assertFalse(shown.hasMoreSpatialSearchResults())
-		assertFalse(core.isSearchMoreAvailable(core.getPhrase()), "All levels are shown: nothing more to search")
+		assertTrue(core.isSearchMoreAvailable(core.getPhrase()))
+		assertEquals(300_000, core.getMinimalSearchRadius(core.getPhrase()))
+		assertTrue(core.isSpatialSearchRadius(core.getPhrase()))
 	}
 
 	@Test

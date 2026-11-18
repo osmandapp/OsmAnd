@@ -255,7 +255,6 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 			displayData.anchorView = view;
 			displayData.menuItems = menuItems;
 			displayData.nightMode = nightMode;
-			displayData.layoutId = R.layout.popup_menu_item_checkbox;
 			displayData.widthMode = PopUpMenuWidthMode.STANDARD;
 			PopUpMenu.show(displayData);
 		});

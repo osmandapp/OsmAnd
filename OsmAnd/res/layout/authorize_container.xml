@@ -25,7 +25,6 @@
 			android:imeOptions="actionDone"
 			android:inputType="textEmailAddress"
 			android:maxLines="1"
-			android:saveEnabled="false"
 			tools:text="test@test.com" />
 
 	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
@@ -49,7 +48,6 @@
 			android:imeOptions="actionDone"
 			android:inputType="textEmailAddress"
 			android:maxLines="1"
-			android:saveEnabled="false"
 			tools:text="12345" />
 
 	</net.osmand.plus.widgets.OsmandTextFieldBoxes>

@@ -4,24 +4,17 @@ import net.osmand.shared.api.KStringMatcherMode
 import kotlin.jvm.JvmStatic
 
 /**
- * Copy of `net.osmand.CollatorStringMatcher` in OsmAnd-java: does a name start with, contain or
- * equal what was typed, ignoring case, accents and separators.
+ * Shared implementation of the OsmAnd-java matcher modes using [KCollationKey] comparisons.
+ * Each query/name is aligned once, and prepared names reuse the same key across modes. All modes
+ * use the platform space weights recorded once by KCollationKey: significant on Android/iOS,
+ * ignored on desktop JVM. Mobile Unicode spaces fold as observed on Android.
  *
- * Same modes and the same answers, reached differently. Java asks a collator whether two stretches
- * of text are equal, once per starting position and once per length, which for a name of 30
- * characters and a query of 5 is a few hundred collator calls and as many substrings - the java
- * source calls it "not effective code, it runs on each comparison". Here each string is reduced
- * once to a [KCollationKey], and the stretches are compared inside it without cutting substrings
- * out. On iOS that is also the difference between one crossing into Foundation per name and
- * several hundred.
+ * Other separator/expansion rules remain desktop-derived; locale-dependent Android ICU behavior
+ * is not fully reproduced. The static [cmatches] lowercases its query like the instance path,
+ * whereas Java only lowercases it in the constructor.
  *
- * One deliberate difference. Java lowercases the query in the constructor but not in the static
- * [cmatches], and `java.text.Collator` only folds case for the scripts its locale rules name - for
- * everything else it compares by code point, so `cmatches` treats `Ш` and `ш` as different letters
- * while `matches` does not. Here the query is lowercased on both paths, which is what the instance
- * path and the iOS matcher already do; see also the notes on `KSearchAlgorithms`.
- *
- * `CollatorCompatTest` holds the two side by side over the names of the test maps.
+ * `CollatorCompatTest` compares against the unmodified Java matcher on the JVM. Android
+ * observations and common regression tests cover mobile spaces and word boundaries separately.
  */
 class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMatcher {
 

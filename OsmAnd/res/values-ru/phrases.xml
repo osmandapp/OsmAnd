@@ -3229,8 +3229,8 @@
     <string name="poi_scooter_yes">Скутер: да</string>
     <string name="poi_scooter_no">Скутер: нет</string>
     <string name="poi_truck_no">Грузовик: нет</string>
-    <string name="poi_parking_fee_yes">Есть</string>
-    <string name="poi_parking_fee_no">Нет</string>
+    <string name="poi_parking_fee_yes">Оплата за парковку: есть</string>
+    <string name="poi_parking_fee_no">Оплата за парковку: нет</string>
     <string name="poi_amperage">Ток</string>
     <string name="poi_charging_station_output">Мощность зарядной станции</string>
     <string name="poi_map_type_topo">Тип карты: топографическая</string>
@@ -4501,8 +4501,8 @@
     <string name="poi_climbing_grade_french">Французская шкала скалолазания</string>
     <string name="poi_recycling_pet">PET</string>
     <string name="poi_climbing_bolt_anchor">Крюк</string>
-    <string name="poi_climbing_bolts_yes">Да</string>
-    <string name="poi_climbing_bolts_no">Нет</string>
+    <string name="poi_climbing_bolts_yes">Болты страховки: да</string>
+    <string name="poi_climbing_bolts_no">Болты страховки: нет</string>
     <string name="poi_recycling_electronics">Электроника</string>
     <string name="poi_recycling_gas_bottles">Газовые баллоны</string>
     <string name="poi_recycling_glass_bottles_colour">Цветные стеклянные бутылки</string>
@@ -5071,7 +5071,7 @@
     <string name="poi_climbing_boulder">Лазание по валунам</string>
     <string name="poi_climbing_area">Зона для скалолазания</string>
     <string name="poi_climbing_route">Маршрут скалолазания</string>
-    <string name="poi_cafe_yes">Да</string>
+    <string name="poi_cafe_yes">Кафе: да</string>
     <string name="poi_dog_sled_yes">Собачья упряжка: да</string>
     <string name="poi_padus_area">Природные охраняемые территории США</string>
     <string name="poi_us_maps_recreation_area_activity_gold_panning">Возможная золотодобыча</string>

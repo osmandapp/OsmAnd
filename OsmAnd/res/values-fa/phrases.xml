@@ -720,7 +720,7 @@
     <string name="poi_tents">چادر</string>
     <string name="poi_washing_machine">­ماشين‌ لباس شویی</string>
     <string name="poi_organic_yes">محصولات ارگانیک: بله</string>
-    <string name="poi_organic_no">خیر</string>
+    <string name="poi_organic_no">محصولات ارگانیک: خیر</string>
     <string name="poi_organic_only">محصولات ارگانیک: فقط</string>
     <string name="poi_route_subway_ref">مترو</string>
     <string name="poi_recycling_accepted_waste">محل دفن زباله</string>
@@ -1067,7 +1067,7 @@
     <string name="poi_internet_access_no">دسترسی اینترنت: ندارد</string>
     <string name="poi_internet_access_fee_no">دسترسی اینترنت: رایگان</string>
     <string name="poi_fee_no">پولی: خیر</string>
-    <string name="poi_drinking_water_no">خیر</string>
+    <string name="poi_drinking_water_no">آب آشامیدنی: خیر</string>
     <string name="poi_seasonal_no">فصلی: خیر</string>
     <string name="poi_traffic_signals_sound_no">صدا: خیر</string>
     <string name="poi_piste_grooming_no">خیر</string>

@@ -201,6 +201,9 @@ class SearchUICore(
 					}
 				}
 			}
+			if (phrase.getSettings()!!.getSortType() == SearchSettings.SortType.ONLY_BY_DISTANCE) {
+				visibleResults.sortWith(SearchResultComparator(phrase))
+			}
 			return visibleResults
 		}
 
@@ -1039,16 +1042,25 @@ class SearchUICore(
 	}
 
 	fun getMinimalSearchRadius(phrase: SearchPhrase): Int {
+		return getMinimalSearchRadiusAPI(phrase)?.getMinimalSearchRadius(phrase) ?: Int.MAX_VALUE
+	}
+
+	fun isSpatialSearchRadius(phrase: SearchPhrase): Boolean =
+		getMinimalSearchRadiusAPI(phrase) is SpatialTextSearchAPI
+
+	private fun getMinimalSearchRadiusAPI(phrase: SearchPhrase): SearchCoreAPI? {
+		var minimalRadiusAPI: SearchCoreAPI? = null
 		var radius = Int.MAX_VALUE
 		for (api in apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
 				val apiMinimalRadius = api.getMinimalSearchRadius(phrase)
 				if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
 					radius = apiMinimalRadius
+					minimalRadiusAPI = api
 				}
 			}
 		}
-		return radius
+		return minimalRadiusAPI
 	}
 
 	fun getNextSearchRadius(phrase: SearchPhrase): Int {

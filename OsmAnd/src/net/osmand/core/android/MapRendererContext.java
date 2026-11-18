@@ -506,7 +506,7 @@ public class MapRendererContext {
 	}
 
 	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView, boolean MSAAEnabled) {
-		File shadersCache = new File(app.getCacheDir(), OPENGL_SHADERS_CACHE_DIR);
+		File shadersCache = new File(app.getNoBackupFilesDir(), OPENGL_SHADERS_CACHE_DIR);
 		if (!shadersCache.exists()) {
 			shadersCache.mkdir();
 		}

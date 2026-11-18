@@ -536,7 +536,7 @@ class SpatialPoiSearch(types: MapPoiTypes) {
 		}
 		val addFilter = if (spt.poiAdditional == null) null else object : SearchPoiAdditionalFilter {
 
-			override fun getName(): String = spt.names[0]
+			override fun getName(): String = spt.poiAdditional!!
 
 			override fun getIconResource(): String? = null
 

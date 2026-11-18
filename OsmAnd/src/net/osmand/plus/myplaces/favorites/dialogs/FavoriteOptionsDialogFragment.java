@@ -40,6 +40,7 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.share.ShareFavoritesController;
 import net.osmand.plus.myplaces.favorites.dialogs.share.ShareFavoritesController.ShareHandlingResult;
+import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
@@ -337,14 +338,27 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 
 	private void addToNavigation() {
 		BaseFavoriteListFragment fragment = getFavoriteListFragment();
-		if (fragment == null) return;
+		if (fragment == null || folder == null) return;
 
 		List<FavouritePoint> points = new ArrayList<>();
-		for (FavoriteGroup group : subtreeGroups) {
-			points.addAll(group.getPoints());
-		}
+		collectPointsInListOrder(folder, points);
 		FavoriteMenu.addToNavigation(requireActivity(), points, fragment);
 		dismiss();
+	}
+
+	private void collectPointsInListOrder(@NonNull FavoriteFolder folder, @NonNull List<FavouritePoint> result) {
+		FavoriteListSortMode sortMode = app.getFavoriteSortModesHelper().requireSortMode(folder.getFullPath());
+		FavoriteComparator comparator = new FavoriteComparator(sortMode, app);
+		if (!folder.isRoot()) {
+			List<FavoriteFolder> subFolders = new ArrayList<>(folder.getSubFolders());
+			subFolders.sort(comparator);
+			for (FavoriteFolder subFolder : subFolders) {
+				collectPointsInListOrder(subFolder, result);
+			}
+		}
+		List<FavouritePoint> points = new ArrayList<>(folder.getExactPoints());
+		points.sort(comparator);
+		result.addAll(points);
 	}
 
 	@NonNull

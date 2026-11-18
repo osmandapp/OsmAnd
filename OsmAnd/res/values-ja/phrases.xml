@@ -1697,11 +1697,11 @@
     <string name="poi_drive_in_yes">ドライブイン: 有り</string>
     <string name="poi_healthcare_alternative_types">代替医療の専門種</string>
     <string name="poi_home_visit">往診</string>
-    <string name="poi_home_visit_no">無し</string>
+    <string name="poi_home_visit_no">自宅訪問: 無し</string>
     <string name="poi_home_visit_yes">自宅訪問: 可</string>
     <string name="poi_pharmacy_dispensing">調剤</string>
     <string name="poi_dispensing_yes">処方箋の調剤: 可</string>
-    <string name="poi_dispensing_no">無し</string>
+    <string name="poi_dispensing_no">処方箋の調剤: 無し</string>
     <string name="poi_bench_yes">ベンチ: 有り</string>
     <string name="poi_bench_no">ベンチ: 無し</string>
     <string name="poi_covered">屋根・覆い</string>
@@ -3295,8 +3295,8 @@
     <string name="poi_scooter_yes">スクーター:可</string>
     <string name="poi_scooter_no">スクーター:不可</string>
     <string name="poi_truck_no">トラック:不可</string>
-    <string name="poi_parking_fee_yes">必要</string>
-    <string name="poi_parking_fee_no">不要</string>
+    <string name="poi_parking_fee_yes">駐車料金: 必要</string>
+    <string name="poi_parking_fee_no">駐車料金: 不要</string>
     <string name="poi_parking_fee">駐車料金</string>
     <string name="poi_amperage">アンペア数</string>
     <string name="poi_charging_station_output">充電スタンド全体の最大出力(kW)</string>
@@ -4361,8 +4361,8 @@
     <string name="poi_playground_activitypanel">パネル遊具</string>
     <string name="poi_playground_exercise">健康遊具</string>
     <string name="poi_climbing_grade_advanced">上級</string>
-    <string name="poi_climbing_bolts_yes">有り</string>
-    <string name="poi_climbing_bolts_no">無し</string>
+    <string name="poi_climbing_bolts_yes">クライミングボルト: 有り</string>
+    <string name="poi_climbing_bolts_no">クライミングボルト: 無し</string>
     <string name="poi_climbing_bolts">クライミングボルト</string>
     <string name="poi_climbing_bolt_anchor">アンカー</string>
     <string name="poi_climbing_quality">岩壁、氷壁品質</string>

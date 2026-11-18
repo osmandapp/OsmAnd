@@ -3364,7 +3364,7 @@
     <string name="map_markers_bar_widget_desc">A felső sávban lévő modul megjeleníti a következő térképjelölő távolságát és az irányát a jelenlegi helytől. Beállítható, hogy 1 vagy 2 jelölő legyen látható.</string>
     <string name="bearing_desc">Megjeleníti a cél abszolút vagy relatív irányát szögegységben (180°, 360° vagy milliradián).</string>
     <string name="navigation_points_desc">A navigációs modulok a navigáció során vannak engedélyezve, és olyan információkat jelenítenek meg, mint a távolság, az érkezési vagy hátralévő idő, a következő kanyarok, az irány, a jelenlegi/következő utcanév, a sávokra vonatkozó információk, a sebességkorlátozás, a közelgő figyelmeztetések, az érdekes helyek vagy az útpontok.</string>
-    <string name="track_attach_to_the_roads_descr">A nyomvonal az offline térképek segítségével lesz az úthoz csatolva, a nyomvonal geometriája ezért módosulni fog.</string>
+    <string name="track_attach_to_the_roads_descr">A nyomvonal az offline térképek segítségével az utakhoz lesz igazítva, a nyomvonal geometriája ezért módosulni fog.</string>
     <string name="street_name_widget_desc">Az utcanév modul a jelenlegi utcanevet jeleníti meg egy egyenes helyzetjelző nyíllal, vagy a következő utcanevet egy közelgő kanyart jelző nyíllal.</string>
     <string name="routing_attr_avoid_4wd_only_name">Nehéz terep elkerülése</string>
     <string name="routing_attr_avoid_4wd_only_description">A csak összkerék-meghajtású járművel használható utak elkerülése</string>
@@ -3479,7 +3479,7 @@
     <string name="without_profiles_changing">Profilváltás nélkül</string>
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
-    <string name="attach_roads_descr">Csatlakoztassa a nyomvonalait az utakhoz, hogy részletes útvonaladatokat kaphasson, beleértve a kanyarodási utasításokat és útvonal-tulajdonságokat.</string>
+    <string name="attach_roads_descr">Igazítsa a nyomvonalat az utakhoz, hogy részletes útvonaladatokat kaphasson, beleértve a kanyarodási utasításokat és az útvonal-tulajdonságokat.</string>
     <string name="included_in_your_current_plan">A jelenlegi „%1$s” előfizetési csomagja már tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
     <string name="favorite_confirm_delete_group">Biztosan törölni szeretné a(z) „%1$s” nevű csoportot és az összes benne foglalt pontot (%2$d)?</string>
@@ -5129,7 +5129,7 @@
     <string name="required_maps_route_overview_desc">Ez a térképlista egy egyenes vonalon alapuló becslés. Ha úgy gondolja, hogy a tényleges útvonala elkerüli a hiányzó területeket, a következőket teheti:</string>
     <string name="required_maps_get_accurate_list_online">Szerezzen be egy pontos listát online</string>
     <string name="required_maps_calculate_with_existing_maps">Tervezzen meglévő térképekkel</string>
-    <string name="attached_media">Csatolt média</string>
+    <string name="attached_media">Mellékelt média</string>
     <string name="android_auto_missing_maps_desc">Töltse le a hiányzó térképeket az útvonal folytatásához.</string>
     <string name="android_auto_possible_missing_maps_desc">Lehetséges, hogy hiányoznak térképek. A folytatáshoz próbálja meg a meglévő térképeket használni.</string>
     <string name="route_calculation_calculating_fast_route">Gyors útvonaltervezés...</string>
@@ -5138,7 +5138,7 @@
     <string name="route_calculation_missing_maps_estimate_desc">Lehetséges hiányzó térképek észlelhetőek egy egyenes vonalú becslés alapján.\nHa az útvonala elkerüli ezeket a területeket, használja a meglévő térképeket.</string>
     <string name="route_calculation_review_maps">Térképek áttekintése</string>
     <string name="traffic_warning_red_light_camera">Piroson áthaladást figyelő kamera</string>
-    <string name="attached_media_delete_confirmation">Biztosan töröl %1$d médiaelemet erről a pontról? Az alkalmazás által tárolt és máshová nem csatolt médiafájlok is törlődni fognak az eszközről.</string>
+    <string name="attached_media_delete_confirmation">Biztosan töröl %1$d médiaelemet erről a pontról? Az alkalmazás által tárolt és máshová nem mellékelt médiafájlok is törlődni fognak az eszközről.</string>
     <string name="sort_by_nearest_to_current_location">Legközelebbi a jelenlegi helyhez</string>
     <string name="astro_fit_eclipse_path">Fogyatkozási pálya illesztése</string>
     <string name="astro_show_map">Térkép megjelenítése</string>
@@ -5213,20 +5213,20 @@
     <string name="use_spatial_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
     <string name="always_keep_local_copy">Mindig legyen helyi másolat</string>
     <string name="always_keep_local_copy_description">A médiafájlok akkor is megmaradnak, ha az eredeti fájlt törlik a galériából vagy a fájlok közül.</string>
-    <string name="release_5_4">• Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Képek és médiafájlok csatolása a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG által ismert koordináta-formátumokat és a Maidenhead helykódokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térképméretarányának beállítása a telefontól függetlenül\n\n• Új térbeli keresés: helyek keresése és egy hely környékének átkutatása\n\n • A csillagászati módhoz hozzá lettek adva a nap- és holdfogyatkozások</string>
+    <string name="release_5_4">• Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Képek és médiafájlok mellékelése a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG által ismert koordináta-formátumokat és a Maidenhead helykódokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térképméretarányának beállítása a telefontól függetlenül\n\n• Új térbeli keresés: helyek keresése és egy hely környékének átkutatása\n\n • A csillagászati módhoz hozzá lettek adva a nap- és holdfogyatkozások</string>
     <plurals name="files_count">
         <item quantity="one">%d fájl</item>
         <item quantity="other">%d fájl</item>
     </plurals>
     <string name="preparing_file">Fájl előkészítése</string>
     <string name="shared_string_archive">Arhívum</string>
-    <string name="share_favorites_with_media_description">A(z) %1$s mappában a kedvenc pontjaihoz médiafájlok vannak csatolva. Csak pontok megosztása, vagy a pontok a médiafájlokkal együtt archívumként.</string>
+    <string name="share_favorites_with_media_description">A(z) %1$s mappában a kedvenc pontjaihoz médiafájlok vannak mellékelve. Csak pontok megosztása, vagy a pontok a médiafájlokkal együtt archívumként.</string>
     <string name="share_favorites_points_only">Csak pontok</string>
     <string name="share_favorites_points_and_media">Pontok és média</string>
     <string name="share_favorites_preparation_failed">Nem sikerült elökészíteni a fájlt a megosztáshoz.</string>
     <string name="share_favorites_share_failed">Nem sikerült megosztani a fájlt.</string>
-    <string name="share_favorites_missing_media_warning">Néhány csatolt médiafájl nem volt beilleszthető.</string>
-    <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a csatolt médiafájlokat. Csak pontok megosztása.</string>
+    <string name="share_favorites_missing_media_warning">Néhány mellékelt médiafájl nem volt beilleszthető.</string>
+    <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a mellékelt médiafájlokat. Csak pontok megosztása.</string>
     <string name="astro_eclipse_column_below_horizon">Horizont alatt</string>
     <string name="quick_action_add_track">Nyomvonal hozzáadása</string>
     <string name="quick_action_tracks_select_descr">Adjon hozzá egy vagy több nyomvonalat, hogy egyetlen koppintással megjeleníthesse vagy elrejthesse őket a térképen.</string>
@@ -5329,16 +5329,16 @@
     <string name="shared_string_file">Fájl</string>
     <string name="shared_string_format">Formátum</string>
     <string name="shared_string_resolution">Felbontás</string>
-    <string name="shared_string_attached_to">Csatolva ehhez:</string>
-    <string name="media_not_attached_title">Még semmihez sincs csatolva</string>
-    <string name="media_not_attached_descr">Csatolja ezt a médiafájlt egy kedvenchez, hogy lássa a térképen.</string>
+    <string name="shared_string_attached_to">Mellékelve ehhez:</string>
+    <string name="media_not_attached_title">Még semmihez sincs mellékelve</string>
+    <string name="media_not_attached_descr">Mellékelje ezt a médiafájlt egy kedvenchez, hogy lássa a térképen.</string>
     <string name="detach_external_media_descr">A fájl többé nem jelenik meg ebben a kedvencben. Az eszközén megmarad.</string>
     <string name="detach_external_media_descr_plural">A fájlok többé nem jelennek meg ebben a kedvencben. Az eszközén megmaradnak.</string>
-    <string name="attach_to_favorite">Csatolás kedvenchez</string>
+    <string name="attach_to_favorite">Mellékelés kedvenchez</string>
     <string name="delete_media_title">Biztosan törli a médiafájlt?</string>
-    <string name="delete_media_descr">Ez a fájl véglegesen törlődik az eszközéről. Eltűnik az összes kedvencből, amelyhez csatolva van.</string>
+    <string name="delete_media_descr">Ez a fájl véglegesen törlődik az eszközéről. Eltűnik az összes kedvencből, amelyhez mellékelve van.</string>
     <string name="delete_media_title_plural">Törli a(z) %1$d médiafájlt?</string>
-    <string name="delete_media_descr_plural">Ez a fájlok véglegesen törlődnek az eszközéről. Eltűnnek az összes kedvencből, amelyhez csatolva vannak.</string>
+    <string name="delete_media_descr_plural">Ez a fájlok véglegesen törlődnek az eszközéről. Eltűnnek az összes kedvencből, amelyhez mellékelve vannak.</string>
     <string name="detach_media_title">Biztosan leválasztja a médiafájlt?</string>
     <string name="detach_media_title_plural">Biztosan leválasztja a(z) %1$d médiafájlt?</string>
     <string name="detach_media_descr">A fájl többé nem jelenik meg ebben a kedvencben. Az eszközén és a médiatárban megmarad.</string>
@@ -5347,7 +5347,7 @@
     <string name="media_delete_failed">Nem sikerült törölni a médiafájlt.</string>
     <string name="media_detach_failed">Nem sikerült leválasztani a médiafájlt.</string>
     <string name="media_library_empty_title">Még nincs média</string>
-    <string name="media_library_empty_descr">Készítsen képet, videót vagy hangjegyzetet a térképen, vagy csatoljon fájlokat egy kedvenchez. Minden, amit rögzít vagy csatol, itt jelenik meg.</string>
+    <string name="media_library_empty_descr">Készítsen képet, videót vagy hangjegyzetet a térképen, vagy mellékeljen fájlokat egy kedvenchez. Minden, amit rögzít vagy mellékel, itt jelenik meg.</string>
     <string name="shared_string_grid">Rács</string>
     <string name="shared_string_group">Csoport</string>
     <string name="gallery_sort_size_large_small">Legnagyobb méret először</string>
@@ -5423,4 +5423,9 @@
     <string name="outdated_maps_warning_title">Frissítse a saját térképeit</string>
     <string name="outdated_maps_warning_descr">Az új kereső használatához szükség van az ehhez a verzióhoz tartozó térképekre. Frissítse az összes saját térképét; ez ingyenes.</string>
     <string name="free_region_other_regions_need_maps_plus">Más régiókhoz szükség van a Maps+ alkalmazásra: %1$s</string>
+    <string name="visualization">Megjelenítés</string>
+    <string name="terrain_shadows">Domborzatárnyékolás</string>
+    <string name="terrain_shadows_description">Valós idejű dinamikus árnyékolás 3D-domborzathoz. Kiemeli a táj geometriáját, miközben a teljesítményre gyakorolt hatása minimális.</string>
+    <string name="terrain_shadows_relief_3d_footer">A 3D-domborzat automatikusan lett engedélyezve, mivel ez szükséges a terepárnyékok megjelenítéséhez.</string>
+    <string name="attach_to_track">Mellékelés nyomvonalhoz</string>
 </resources>

@@ -1006,7 +1006,7 @@
     <string name="poi_fee_yes">الرسوم: نعم ، رسوم</string>
     <string name="poi_fee_no">الرسوم: لا</string>
     <string name="poi_drinking_water_yes">مياه شرب: نعم ، مياه الشرب</string>
-    <string name="poi_drinking_water_no">لا</string>
+    <string name="poi_drinking_water_no">مياه شرب: لا</string>
     <string name="poi_seasonal_yes">موسمي: نعم ، موسمي</string>
     <string name="poi_seasonal_no">موسمي: لا</string>
     <string name="poi_seasonal_dry_season">موسم الجفاف</string>
@@ -2676,7 +2676,7 @@
     <string name="poi_group_only_yes">المجموعة فقط: نعم</string>
     <string name="poi_scout_no">المخيم الكشفي: لا</string>
     <string name="poi_scout_yes">مخيم كشافة: نعم ؛ الكشافة</string>
-    <string name="poi_backcountry_no">لا</string>
+    <string name="poi_backcountry_no">الريف: لا</string>
     <string name="poi_backcountry_yes">الريف: نعم ؛ مناطق غير آهلة</string>
     <string name="poi_openfire_no">لا يسمح بإشعال النار</string>
     <string name="poi_openfire_yes">يسمح بإشعال النار</string>
@@ -3187,8 +3187,8 @@
     <string name="poi_map_type_topo">نوع الخريطة: طبوغرافية</string>
     <string name="poi_charging_station_output">مخرج محطة الشحن</string>
     <string name="poi_amperage">التيار/أمبير</string>
-    <string name="poi_parking_fee_no">لا</string>
-    <string name="poi_parking_fee_yes">نعم</string>
+    <string name="poi_parking_fee_no">رسوم موقف السيارات: لا</string>
+    <string name="poi_parking_fee_yes">رسوم موقف السيارات: نعم</string>
     <string name="poi_truck_no">شاحنة: لا</string>
     <string name="poi_socket_cee_red_32a_current">المقبس: CEE الأحمر 32A: التيار</string>
     <string name="poi_socket_cee_red_63a_current">المقبس: CEE الأحمر 63A: التيار</string>
@@ -4380,11 +4380,11 @@
     <string name="poi_climbing_grade_aliens">كائنات فضائية</string>
     <string name="poi_climbing_bolt_abseil">الهبوط من العلو (بالحبل)</string>
     <string name="poi_climbing_bolt_anchor">برغي التثبيت</string>
-    <string name="poi_climbing_bolts_yes">نعم</string>
+    <string name="poi_climbing_bolts_yes">براغي التسلق: نعم</string>
     <string name="poi_climbing_grade_advanced">متقدم</string>
     <string name="poi_climbing_grade_expert">خبير</string>
     <string name="poi_climbing_grade_super_expert">خبير فائق</string>
-    <string name="poi_climbing_bolts_no">ﻻ</string>
+    <string name="poi_climbing_bolts_no">براغي التسلق: ﻻ</string>
     <string name="poi_climbing_bolts">براغي التسلق</string>
     <string name="poi_climbing_quality_medium">متوسط</string>
     <string name="poi_climbing_grade_french_max">أصعب مسار (مستوى فرنسي)</string>
@@ -4906,7 +4906,7 @@
     <string name="poi_mosque">مسجد</string>
     <string name="poi_contact_website">موقع إلكتروني</string>
     <string name="poi_route_activity_type_fitness">لياقة</string>
-    <string name="poi_cafe_yes">نعم</string>
+    <string name="poi_cafe_yes">مقهى: نعم</string>
     <string name="poi_sled_yes">زلاجة: نعم</string>
     <string name="poi_sled_no">زلاجة: لا</string>
     <string name="poi_route_activity_type_horse_riding">ركوب خيل</string>

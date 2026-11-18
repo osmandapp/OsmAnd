@@ -1465,7 +1465,7 @@
     <string name="poi_climbing_grade_aliens">Eachtrannaigh</string>
     <string name="poi_climbing_bolt_abseil">Rópáil anuas</string>
     <string name="poi_climbing_bolt_anchor">Ancaire</string>
-    <string name="poi_climbing_bolts_yes">Tá</string>
+    <string name="poi_climbing_bolts_yes">Boltaí dreapadóireachta: tá</string>
     <string name="poi_climbing_quality_medium">Meánach</string>
     <string name="poi_trampoline_park">Páirc trampailín</string>
     <string name="poi_self_checkout_no">Féin-seiceáil: níl</string>
@@ -2400,7 +2400,7 @@
     <string name="poi_socket_type3a_voltage_high">Ard</string>
     <string name="poi_bicycle_yes">Rothar: tá</string>
     <string name="poi_bicycle_no">Rothar: níl</string>
-    <string name="poi_parking_fee_no">Ní hea</string>
+    <string name="poi_parking_fee_no">Táille pháirceála: ní hea</string>
     <string name="poi_climbing_orientation_s">Treoshuíomh an bhalla: S</string>
     <string name="poi_meadow_perpetual">Cineál: suthain</string>
     <string name="poi_service_vehicle_used_car_sales_yes">Díolacháin gluaisteán úsáidte</string>
@@ -2682,7 +2682,7 @@
     <string name="poi_playground_swing">Luascadh</string>
     <string name="poi_climbing_grade_novice">NoviceName</string>
     <string name="poi_climbing_grade_beginner">Bunleibhéal</string>
-    <string name="poi_climbing_bolts_no">Ní hea</string>
+    <string name="poi_climbing_bolts_no">Boltaí dreapadóireachta: ní hea</string>
     <string name="poi_recycling_boats">Báid</string>
     <string name="poi_recycling_coffee_capsules">Capsúil caife</string>
     <string name="poi_recycling_electrical_appliances">Fearais leictreacha</string>
@@ -4281,7 +4281,7 @@
     <string name="poi_socket_typee_voltage_low">Íseal</string>
     <string name="poi_scooter_yes">Scútar: tá</string>
     <string name="poi_truck_no">Trucail: níl</string>
-    <string name="poi_parking_fee_yes">Tá</string>
+    <string name="poi_parking_fee_yes">Táille pháirceála: tá</string>
     <string name="poi_parking_fee">Táille pháirceála</string>
     <string name="poi_map_type_topo">Cineál léarscáile: topo</string>
     <string name="poi_map_type_toposcope">Cineál léarscáile: toposcope</string>

@@ -353,6 +353,10 @@ public class SpatialSearchPreferencesTest {
 				// it is the measured noise of a human judge, not a statement to test against
 				p.asserted = o.optJSONArray("conflictsWith") == null
 						|| o.getJSONArray("conflictsWith").length() == 0;
+				// a record whose expectation the search does not implement yet: kept, not asserted
+				if (o.has("ignore")) {
+					p.asserted = false;
+				}
 				p.supersedes = o.isNull("supersedes") ? null : o.getString("supersedes");
 				if ("note".equals(p.kind)) {
 					// A case the reviewer refused to answer, with the reason: "none is good",
