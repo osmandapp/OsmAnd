@@ -135,20 +135,11 @@
 
 					</LinearLayout>
 
-					<View
-						android:layout_width="match_parent"
-						android:layout_height="1dp"
-						android:layout_marginStart="@dimen/divider_color_light_margin_start"
-						android:background="?attr/dashboard_divider"
-						android:focusable="false" />
-
-					<include layout="@layout/sun_position_row" />
-
 				</LinearLayout>
 
 				<include layout="@layout/card_bottom_divider" />
 
-				<!-- Says why Terrain shadows cannot be changed -->
+				<!-- Says why Terrain shadows cannot be changed, right under their card -->
 				<TextView
 					android:id="@+id/terrain_shadows_footer"
 					android:layout_width="match_parent"
@@ -160,6 +151,19 @@
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
 					android:visibility="gone" />
+
+				<include layout="@layout/card_top_divider" />
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/bg_color">
+
+					<include layout="@layout/sun_position_row" />
+
+				</FrameLayout>
+
+				<include layout="@layout/card_bottom_divider" />
 
 				<include layout="@layout/download_maps_card" />
 
