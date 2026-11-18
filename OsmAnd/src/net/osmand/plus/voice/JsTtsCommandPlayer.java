@@ -48,6 +48,11 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	 * optimize use of requesting and abandoning audio focus.
 	 */
 	private static int ttsRequests;
+	/**
+	 * Incremented whenever ttsRequests is reset. Utterance ids carry it, so the completion callbacks of
+	 * utterances that were stopped or lost before the reset do not count down the requests made after it.
+	 */
+	private static volatile int utteranceGeneration;
 	private float cSpeechRate = 1;
 	private boolean speechAllowed;
 
@@ -82,7 +87,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		if (mTts == null) {
 			ttsVoiceStatus = "-";
 			ttsVoiceUsed = "-";
-			ttsRequests = 0;
+			resetRequests();
 
 			final TextToSpeech[] textToSpeech = new TextToSpeech[1];
 			textToSpeech[0] = new TextToSpeech(app, status -> {
@@ -111,6 +116,10 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 				// The call back is on a binder thread.
 				@Override
 				public synchronized void onUtteranceCompleted(String utteranceId) {
+					if (!isCurrentUtterance(utteranceId)) {
+						log.debug("Completion of an utterance from before the reset: " + utteranceId);
+						return;
+					}
 					if (--ttsRequests <= 0) {
 						abandonAudioFocus();
 					}
@@ -188,6 +197,13 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		}
 		sendAlertToPebble(bld.toString());
 		if (mTts != null && !voiceRouter.isMute() && speechAllowed) {
+			if (ttsRequests > 0 && !mTts.isSpeaking()) {
+				// The engine is idle, but a completion callback never came (e.g. the engine died in the middle of
+				// a prompt): the counter is stuck and the focus is still held, so this prompt would not request it.
+				log.warn("TTS engine is idle with ttsRequests=" + ttsRequests + ", releasing the stale audio focus");
+				resetRequests();
+				abandonAudioFocus();
+			}
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
 				mTts.setAudioAttributes(new AudioAttributes.Builder()
@@ -201,12 +217,12 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 					int vpd = pref == null ? 0 : pref.getModeValue(app.getRoutingHelper().getAppMode());
 					if (vpd > 0) {
 						ttsRequests++;
-						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
+						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, newUtteranceId());
 					}
 				}
 			}
 			log.debug("ttsRequests=" + ttsRequests);
-			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
+			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, newUtteranceId());
 			if (AudioFocusHelperImpl.playbackAuthorized) {
 				if (mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params) == TextToSpeech.ERROR) {
 					// Not queued (the engine is unbound or died), so no completion callback will come
@@ -257,7 +273,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 
 	@Override
 	public void stop() {
-		ttsRequests = 0;
+		resetRequests();
 		// Before onInit the engine connection is still being set up under TextToSpeech's internal lock, so
 		// stop() would wait for a slow engine on the main thread (ANR). Nothing can be speaking before onInit.
 		if (mTts != null && speechAllowed) {
@@ -273,7 +289,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	}
 
 	private void internalClear() {
-		ttsRequests = 0;
+		resetRequests();
 		speechAllowed = false;
 		if (mTts != null) {
 			mTts.shutdown();
@@ -282,6 +298,20 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 		abandonAudioFocus();
 		ttsVoiceStatus = "-";
 		ttsVoiceUsed = "-";
+	}
+
+	private static void resetRequests() {
+		ttsRequests = 0;
+		utteranceGeneration++;
+	}
+
+	@NonNull
+	private static String newUtteranceId() {
+		return utteranceGeneration + "_" + System.currentTimeMillis();
+	}
+
+	private static boolean isCurrentUtterance(@Nullable String utteranceId) {
+		return utteranceId != null && utteranceId.startsWith(utteranceGeneration + "_");
 	}
 
 	@Override
