@@ -45,12 +45,12 @@ public class SpatialSearchRanking {
 	/** "lidl espoo": a POI that the map places in another city than the one the query named. More than a POI can score
 	 *  (0.15 name + 1.6 landmark + 0.5 rating + 2 near + 1 exact), so however close it is, it stays below the named city */
 	public double wOutsideCity = 6.0;
-	/** share of the way to the named city added to a POI's distance from the centre of the city: see distanceViaCity */
-	public double wayToCityShare = 0.7;
-	/** km beyond the bbox of the named city over which distanceViaCity comes into full effect */
-	public double wayToCityRampKm = 5.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
+
+	/** share of the way to the named city added to a POI's distance from the centre of the city: see distanceViaCity.
+	 *  Below 1, or the way via the centre is never shorter than the direct one */
+	private static final double WAY_TO_CITY_SHARE = 0.7;
 
 	private final SpatialPoiSearch poiSearch;
 
@@ -173,8 +173,8 @@ public class SpatialSearchRanking {
 
 	/**
 	 * "lidl espoo" from Vantaa: by the distance from the person the first screen is the edge of Espoo next to Vantaa.
-	 * A POI of the brand the query named is as far as from the city's centre plus wayToCityShare of the way to it,
-	 * when that is nearer.
+	 * A POI of the brand the query named is as far as from the city's centre plus WAY_TO_CITY_SHARE of the way to it,
+	 * when that is nearer; the farther the person is from the city's bbox, the more, at halfWeightKm by half.
 	 */
 	private double distanceViaCity(SpatialSearchResult r, LatLon person, double direct) {
 		SpatialSearchResultRef city = matchedCity(r);
@@ -185,8 +185,8 @@ public class SpatialSearchRanking {
 		}
 		int x = MapUtils.get31TileNumberX(person.getLongitude()), y = MapUtils.get31TileNumberY(person.getLatitude());
 		double outside = distKm(x, y, Math.min(b[0], b[2]), Math.min(b[1], b[3]), Math.max(b[0], b[2]), Math.max(b[1], b[3]));
-		double via = (MapUtils.getDistance(centre, poi) + wayToCityShare * MapUtils.getDistance(person, centre)) / 1000.0;
-		return Math.min(direct, direct + Math.min(1, outside / wayToCityRampKm) * (via - direct));
+		double via = (MapUtils.getDistance(centre, poi) + WAY_TO_CITY_SHARE * MapUtils.getDistance(person, centre)) / 1000.0;
+		return Math.min(direct, direct + outside / (outside + halfWeightKm) * (via - direct));
 	}
 
 	/**
