@@ -394,18 +394,19 @@ public class QuickSearchHelper implements ResourceListener {
 				sr.objectType = ObjectType.FAVORITE;
 				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 				sr.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITE_ZOOM;
-				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)) {
+				boolean groupSelected = phrase.isLastWord(ObjectType.FAVORITE_GROUP);
+				if (groupSelected) {
 					FavoriteGroup group = (FavoriteGroup) phrase.getLastSelectedWord().getResult().object;
 					if (group != null && !point.getCategory().equals(group.getName())) {
 						continue;
 					}
 				}
-				if (phrase.getFullSearchPhrase().length() <= 1
-						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
+				// the selected group is part of the full phrase: only the text after it filters the points
+				String query = groupSelected ? phrase.getUnknownSearchPhrase().trim() : phrase.getFullSearchPhrase();
+				if (query.length() <= 1 && (phrase.isNoSelectedType() || groupSelected)) {
 					resultMatcher.publish(sr);
 				} else {
-					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
-							StringMatcherMode.CHECK_CONTAINS);
+					NameStringMatcher matcher = new NameStringMatcher(query.trim(), StringMatcherMode.CHECK_CONTAINS);
 					if (matcher.matches(sr.localeName)) {
 						resultMatcher.publish(sr);
 					}
