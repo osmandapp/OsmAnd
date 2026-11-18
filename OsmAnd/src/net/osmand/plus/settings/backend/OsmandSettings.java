@@ -2223,6 +2223,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> CUSTOM_EXTERNAL_INPUT_DEVICES = new StringPreference(this, "custom_external_input_devices_global", "").makeGlobal().makeShared();
 	// Per-profile list used before custom devices became global, still read from old exports and old clients
 	public final CommonPreference<String> LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES = new StringPreference(this, "custom_external_input_devices", "").makeProfile();
+	public final CommonPreference<String> MERGED_LEGACY_INPUT_DEVICES = new StringPreference(this, "merged_legacy_external_input_devices", "").makeGlobal();
 	public final OsmandPreference<Boolean> EXTERNAL_INPUT_DEVICE_ENABLED = new BooleanPreference(this, "external_input_device_enabled", true).makeProfile();
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference(this, "route_map_markers_start_my_loc", false).makeGlobal().makeShared().cache();
