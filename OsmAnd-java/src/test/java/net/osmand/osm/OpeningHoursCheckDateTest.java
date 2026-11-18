@@ -24,18 +24,18 @@ public class OpeningHoursCheckDateTest {
 	}
 
 	@Test
-	public void checkDateOfOpeningHoursSurvivesExtensions() {
+	public void checkDateAndXmasOpeningHoursSurviveExtensions() {
 		Amenity amenity = parseCafe("2025-03-28");
 
 		Map<String, String> extensions = amenity.getAmenityExtensions(poiTypes, false);
 		assertEquals("2025-03-28", extensions.get(Amenity.CHECK_DATE_OPENING_HOURS));
 		assertEquals("Mo-Fr 09:00-18:00", extensions.get(Amenity.OPENING_HOURS));
 		assertEquals("2025-11-18", extensions.get(Amenity.CHECK_DATE));
-		assertFalse(extensions.containsKey("xmas_opening_hours"));
+		assertEquals("Dec 24 10:00-14:00", extensions.get(Amenity.XMAS_OPENING_HOURS));
 
 		Map<String, String> prefixed = amenity.getAmenityExtensions(poiTypes, true);
 		assertEquals("2025-03-28", prefixed.get(OSM_PREFIX + Amenity.CHECK_DATE_OPENING_HOURS));
-		assertFalse(prefixed.containsKey(OSM_PREFIX + "xmas_opening_hours"));
+		assertEquals("Dec 24 10:00-14:00", prefixed.get(OSM_PREFIX + Amenity.XMAS_OPENING_HOURS));
 	}
 
 	@Test
