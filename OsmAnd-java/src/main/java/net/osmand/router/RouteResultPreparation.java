@@ -1492,8 +1492,16 @@ public class RouteResultPreparation {
 
 	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
 			boolean twiceRoadPresent, float prevBearingEnd) {
-		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
-		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
+		List<RouteSegmentResult> attachedRoutes = new ArrayList<>();
+		List<RouteSegmentResult> allAttached = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
+		if (allAttached != null) {
+			for (RouteSegmentResult attached : allAttached) {
+				if (!isAreaOutline(attached.getObject())) {
+					attachedRoutes.add(attached);
+				}
+			}
+		}
+		if (attachedRoutes.isEmpty()) {
 			return null;
 		}
 		String turnLanesPrevSegm = twiceRoadPresent ? null : getTurnLanesString(prevSegm);
@@ -1522,6 +1530,12 @@ public class RouteResultPreparation {
 			
 		}
 		return null;
+	}
+
+	private static boolean isAreaOutline(RouteDataObject road) {
+		int last = road.getPointsLength() - 1;
+		return last > 1 && "yes".equals(road.getValue("area"))
+				&& road.getPoint31XTile(0) == road.getPoint31XTile(last) && road.getPoint31YTile(0) == road.getPoint31YTile(last);
 	}
 
 	protected TurnType createKeepLeftRightTurnBasedOnTurnTypes(RoadSplitStructure rs, RouteSegmentResult prevSegm,
