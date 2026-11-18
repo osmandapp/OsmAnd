@@ -174,7 +174,12 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		imageView.setImageDrawable(item.getIcon());
 		setupIconContainer(view, imageView, app);
-		title.setText(item.getSpannableName());
+		CharSequence name = item.getSpannableName();
+		if (name != null && item.getSearchResult() != null && item.getSearchResult().object instanceof TopIndexFilter) {
+			boolean nightMode = app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.APP);
+			name = QuickSearchListItem.completeWithAltNames(app, name.toString(), item.getSearchResult(), nightMode);
+		}
+		title.setText(name);
 		bindSpatialCategoryPart(view, item, app, subtitle);
 
 		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
