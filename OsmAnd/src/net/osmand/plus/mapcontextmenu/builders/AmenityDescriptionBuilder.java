@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.data.Amenity.CONTENT;
 import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.SHORT_DESCRIPTION;
 import static net.osmand.data.Amenity.WIKIPEDIA;
@@ -51,11 +52,12 @@ final class AmenityDescriptionBuilder {
 	private final MenuBuilder menuBuilder;
 	private final MapActivity mapActivity;
 	private final OsmandApplication app;
+	@Nullable
 	private final Amenity amenity;
 	private final AdditionalInfoBundle infoBundle;
 	private final boolean lightContent;
 
-	AmenityDescriptionBuilder(@NonNull MenuBuilder menuBuilder, @NonNull Amenity amenity,
+	AmenityDescriptionBuilder(@NonNull MenuBuilder menuBuilder, @Nullable Amenity amenity,
 	                          @NonNull AdditionalInfoBundle infoBundle, boolean lightContent) {
 		this.menuBuilder = menuBuilder;
 		this.mapActivity = menuBuilder.getMapActivity();
@@ -74,7 +76,7 @@ final class AmenityDescriptionBuilder {
 
 		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(
 				app, amenity, DESCRIPTION, filteredInfo);
-		boolean travelArticle = !Algorithms.isEmpty(amenity.getRouteId())
+		boolean travelArticle = amenity != null && !Algorithms.isEmpty(amenity.getRouteId())
 				&& app.getResourceManager().hasTravelRepositories();
 		if ((pair == null || travelArticle) && buildShortWikiDescription(view, filteredInfo, true)) {
 			return true;
@@ -96,10 +98,11 @@ final class AmenityDescriptionBuilder {
 	@Nullable
 	View.OnClickListener getWikipediaClickListener(@NonNull Map<String, Object> filteredInfo) {
 		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, SHORT_DESCRIPTION, filteredInfo);
-		if (pair != null && !Algorithms.isEmpty(pair.first)) {
+		if (amenity != null && pair != null && !Algorithms.isEmpty(pair.first)
+				&& !amenity.getNames(CONTENT, "en").isEmpty()) {
 			return v -> WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
 		}
-		String wikipediaUrl = amenity.getAdditionalInfo(WIKIPEDIA);
+		String wikipediaUrl = infoBundle.getFilteredInfo().get(WIKIPEDIA);
 		if (!Algorithms.isEmpty(wikipediaUrl)) {
 			return v -> showOnlineArticle(wikipediaUrl);
 		}
@@ -166,11 +169,11 @@ final class AmenityDescriptionBuilder {
 		textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
 		button.setOnClickListener(v -> {
-			if (hasShortDescription) {
+			if (hasShortDescription && amenity != null && !amenity.getNames(CONTENT, "en").isEmpty()) {
 				WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
 			} else {
-				String wikipediaUrl = amenity.getAdditionalInfo(WIKIPEDIA);
-				if (Algorithms.isEmpty(wikipediaUrl) && locale != null) {
+				String wikipediaUrl = infoBundle.getFilteredInfo().get(WIKIPEDIA);
+				if (Algorithms.isEmpty(wikipediaUrl) && locale != null && amenity != null) {
 					String title = amenity.getName(locale.getLanguage());
 					if (!Algorithms.isEmpty(title)) {
 						wikipediaUrl = "https://" + locale.getLanguage()
@@ -186,7 +189,8 @@ final class AmenityDescriptionBuilder {
 	}
 
 	private void showOnlineArticle(@NonNull String wikipediaUrl) {
-		LatLon location = amenity.getLocation() != null ? amenity.getLocation() : menuBuilder.getLatLon();
+		LatLon location = amenity != null && amenity.getLocation() != null
+				? amenity.getLocation() : menuBuilder.getLatLon();
 		boolean nightMode = app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
 		WikiArticleHelper.askShowArticle(mapActivity, nightMode, location, wikipediaUrl);
 	}
