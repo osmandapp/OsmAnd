@@ -574,6 +574,8 @@ public class SRTMPlugin extends OsmandPlugin {
 						item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						item.setSelected(selected);
 						uiAdapter.onDataSetChanged();
+						// The 3D Relief row says whether the Hillshade layer turns its Terrain shadows off
+						uiAdapter.onRefreshItem(RELIEF_3D_ID);
 						updateLayers(mapActivity, mapActivity);
 						mapActivity.refreshMapComplete();
 					});
@@ -639,7 +641,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 		boolean enabled = settings.ENABLE_3D_MAPS.get();
 		item.setSecondaryIcon(R.drawable.ic_action_additional_option)
-				.setDescription(get3DReliefDescription())
+				.setRefreshCallback(refreshable -> refreshable.setDescription(get3DReliefDescription()))
 				.setSelected(enabled)
 				.setColor(app, enabled ? R.color.osmand_orange : INVALID_ID)
 				.setListener(new OnRowItemClick() {
