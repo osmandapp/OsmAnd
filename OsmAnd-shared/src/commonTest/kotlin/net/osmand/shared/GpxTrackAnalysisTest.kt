@@ -4,6 +4,7 @@ import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxTrackAnalysis
 import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.gpx.SplitSegment
+import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.obd.OBDCommand
@@ -198,6 +199,13 @@ class GpxTrackAnalysisTest {
 		}
 
 		assertEquals(listOf(listOf(true, true), listOf(false, false)), validity)
+	}
+
+	@Test
+	fun analysisCountsSegmentsOfMultiSegmentFile() {
+		val gpx = GpxFile(null).apply { tracks.add(Track().apply { repeat(3) { segments.add(createSparseSegment()) } }) }
+
+		assertEquals(3, gpx.getAnalysis(0).totalTracks)
 	}
 
 	private fun createSparseSegment() = TrkSegment().apply {

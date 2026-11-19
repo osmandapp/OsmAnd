@@ -384,22 +384,18 @@ class GpxFile : GpxExtensions {
 		toDistance: Double?
 	): List<SplitSegment> {
 		val splitSegments = mutableListOf<SplitSegment>()
-		if (fromDistance == null || toDistance == null) {
-			getGeneralSegment()?.let {
-				splitSegments.add(SplitSegment(it))
-				return splitSegments
-			}
-		}
+		val generalSegment = if (fromDistance == null || toDistance == null) getGeneralSegment() else null
 		for (subtrack in tracks) {
 			for (segment in subtrack.segments) {
 				if (!segment.generalSegment) {
 					analysis.totalTracks += 1
-					if (segment.points.size > 1) {
+					if (generalSegment == null && segment.points.size > 1) {
 						splitSegments.add(createSplitSegment(segment, fromDistance, toDistance))
 					}
 				}
 			}
 		}
+		generalSegment?.let { splitSegments.add(SplitSegment(it)) }
 		return splitSegments
 	}
 
