@@ -33,6 +33,8 @@ class AstroScheduleCardController(
 		private set
 	var rangeLabel: String = ""
 		private set
+	var timeZoneText: String = ""
+		private set
 	var days: List<AstroScheduleDayItem> = emptyList()
 		private set
 	var showResetPeriodButton: Boolean = false
@@ -68,6 +70,7 @@ class AstroScheduleCardController(
 		if (skyObject == null || observer == null) {
 			computeJob?.cancel()
 			rangeLabel = ""
+			timeZoneText = ""
 			days = emptyList()
 			lastObjectId = null
 			lastObserverLat = Double.NaN
@@ -82,6 +85,8 @@ class AstroScheduleCardController(
 
 		val periodEnd = periodStart.plusDays((PERIOD_DAYS - 1).toLong())
 		rangeLabel = "${rangeFormatter.format(periodStart)} - ${rangeFormatter.format(periodEnd)}"
+		val periodStartLocal = periodStart.atStartOfDay(zoneId)
+		val periodEndInclusive = periodStart.plusDays(PERIOD_DAYS.toLong()).atStartOfDay(zoneId).minusNanos(1)
 		val computationMatchesState =
 			lastObjectId == skyObject.id &&
 				lastObserverLat == observer.latitude &&
@@ -95,16 +100,21 @@ class AstroScheduleCardController(
 			return
 		}
 
+		timeZoneText = AstroUtils.formatTimeZone(app, zoneId, periodStartLocal, periodEndInclusive)
 		computeJob?.cancel()
 		ensureScope()
 		computeJob = computeScope.launch {
-			val entries = withContext(Dispatchers.Default) {
-				buildPeriodEntries(
+			val (entries, entriesTimeZoneText) = withContext(Dispatchers.Default) {
+				val entries = buildPeriodEntries(
 					obj = skyObject,
 					observer = observer,
 					periodStart = periodStart,
 					zoneId = zoneId
 				)
+				val latestEvent = entries.mapNotNull { it.setDateTime }
+					.plus(periodEndInclusive)
+					.maxOrNull() ?: periodEndInclusive
+				entries to AstroUtils.formatTimeZone(app, zoneId, periodStartLocal, latestEvent)
 			}
 			if (!isActive) {
 				return@launch
@@ -122,6 +132,7 @@ class AstroScheduleCardController(
 			if (days != entries) {
 				days = entries
 			}
+			timeZoneText = entriesTimeZoneText
 			lastObjectId = skyObject.id
 			lastObserverLat = observer.latitude
 			lastObserverLon = observer.longitude
@@ -140,6 +151,7 @@ class AstroScheduleCardController(
 		return AstroScheduleCardItem(
 			periodStart = periodStart,
 			rangeLabel = rangeLabel,
+			timeZoneText = timeZoneText,
 			days = days,
 			showResetPeriodButton = showResetPeriodButton
 		)
@@ -207,6 +219,7 @@ class AstroScheduleCardController(
 			dayLabel = dayLabelFormatter.format(day),
 			riseTime = rise?.format(timeFormatter),
 			setTime = set?.format(timeFormatter),
+			setDateTime = set,
 			setDayOffset = setDayOffset,
 			graph = AstroScheduleDayGraphSnapshot(
 				sunAltitudes = samples.sunAltitudes,

@@ -53,7 +53,15 @@ class AstroScheduleCardViewHolder(
 	fun bind(item: AstroScheduleCardItem) {
 		updateNavigationIcons()
 		rangeText.text = item.rangeLabel
-		noteText.isVisible = item.days.any { day -> day.setDayOffset > 0 }
+		val noteParts = ArrayList<String>(2)
+		if (item.days.any { day -> day.setDayOffset > 0 }) {
+			noteParts.add(itemView.context.getString(R.string.astro_schedule_next_day_note))
+		}
+		if (item.timeZoneText.isNotEmpty()) {
+			noteParts.add(item.timeZoneText)
+		}
+		noteText.text = noteParts.joinToString(" · ")
+		noteText.isVisible = noteParts.isNotEmpty()
 		dateButton.isVisible = item.showResetPeriodButton
 		dateButton.setOnClickListener { onResetPeriod() }
 		prevButton.setOnClickListener { onShiftPeriod(-AstroScheduleCardController.PERIOD_DAYS) }

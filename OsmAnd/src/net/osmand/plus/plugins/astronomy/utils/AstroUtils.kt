@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.astronomy.utils
 
 import android.content.Context
+import android.icu.text.TimeZoneNames
 import android.text.format.DateFormat
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -24,8 +25,10 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.Calendar
+import java.util.Locale
 import java.util.TimeZone
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -103,6 +106,27 @@ object AstroUtils {
 		return DateFormat.getTimeFormat(context).format(calendar.time)
 	}
 	
+	fun formatTimeZone(context: Context, zoneId: ZoneId, start: ZonedDateTime, end: ZonedDateTime): String {
+		val rules = zoneId.rules
+		val startOffset = formatUtcOffset(rules.getOffset(start.toInstant()).totalSeconds)
+		val endOffset = formatUtcOffset(rules.getOffset(end.toInstant()).totalSeconds)
+		val offset = if (startOffset == endOffset) startOffset else "$startOffset → $endOffset"
+		val id = zoneId.id
+		if (!id.contains('/') || id.startsWith("Etc/")) {
+			return offset
+		}
+		val city = TimeZoneNames.getInstance(Locale.getDefault()).getExemplarLocationName(id)
+			?: id.substringAfterLast('/').replace('_', ' ')
+		return context.getString(R.string.astro_city_time_utc_offset, city, offset)
+	}
+
+	private fun formatUtcOffset(seconds: Int): String {
+		val sign = if (seconds < 0) "-" else "+"
+		val hours = abs(seconds) / 3600
+		val minutes = abs(seconds) % 3600 / 60
+		return if (minutes == 0) "UTC$sign$hours" else String.format(Locale.US, "UTC%s%d:%02d", sign, hours, minutes)
+	}
+
 	// ---------- Extensions for Type Conversions ----------
 
 	fun Time.toZoned(zoneId: ZoneId): ZonedDateTime =
