@@ -2477,8 +2477,29 @@ public class RouteResultPreparation {
 		}
 
 		findActiveIndexByUniqueDirections(pair, directions, rs, rawLanes);
+		excludeSharedLanes(pair, rs, rawLanes, prevSegm);
 
 		return pair;
+	}
+
+	private void excludeSharedLanes(int[] pair, RoadSplitStructure rs, int[] rawLanes, RouteSegmentResult prevSegm) {
+		if (pair[0] == -1 || pair[1] == -1) {
+			return;
+		}
+		int[] shared = countSharedLanes(prevSegm, rawLanes.length);
+		int turn = getTurnByAngle(rs.currentDeviation);
+		int start = TurnType.isLeftTurn(turn) ? pair[0] : Math.max(pair[0], shared[0]);
+		int end = TurnType.isRightTurn(turn) ? pair[1] : Math.min(pair[1], rawLanes.length - 1 - shared[1]);
+		if (start > end || (start == pair[0] && end == pair[1])) {
+			return;
+		}
+		if (pair[2] == TurnType.getPrimaryTurn(rawLanes[pair[0]]) && start != pair[0]) {
+			pair[2] = TurnType.getPrimaryTurn(rawLanes[start]);
+		} else if (pair[2] == TurnType.getPrimaryTurn(rawLanes[pair[1]]) && end != pair[1]) {
+			pair[2] = TurnType.getPrimaryTurn(rawLanes[end]);
+		}
+		pair[0] = start;
+		pair[1] = end;
 	}
 
 	private void findActiveIndexByUniqueDirections(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes) {
@@ -2513,27 +2534,53 @@ public class RouteResultPreparation {
 	                                       RouteSegmentResult prevSegm, RouteSegmentResult currentSegm) {
 		int[] prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
 		int[] curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
+		if (prevCntLanes == null || curCntLanes == null) {
+			return false;
+		}
+		// shared (merged both_ways) lanes don't split between the roads: compare only the own lanes
+		int[] prevShared = countSharedLanes(prevSegm, prevCntLanes.length);
+		int[] curShared = countSharedLanes(currentSegm, curCntLanes.length);
+		if (prevCntLanes.length != rawLanes.length) {
+			prevShared = new int[] {0, 0};
+		}
+		int prevLanes = prevCntLanes.length - prevShared[0] - prevShared[1];
+		int curLanes = curCntLanes.length - curShared[0] - curShared[1];
 		int attachedLanesCount = getAttachedLanesCount(rs);
-		if (prevCntLanes != null && curCntLanes != null
-				&& prevCntLanes.length > curCntLanes.length
-				&& prevCntLanes.length == curCntLanes.length + attachedLanesCount) {
+		if (prevLanes > curLanes && prevLanes == curLanes + attachedLanesCount) {
+			int first = prevShared[0];
+			int last = rawLanes.length - 1 - prevShared[1];
 			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
-				pair[0] = 0;
-				pair[1] = curCntLanes.length - 1;
+				pair[0] = first;
+				pair[1] = first + curLanes - 1;
 				pair[2] = directions[0];
-				int secondary = TurnType.getSecondaryTurn(rawLanes[0]);
+				int secondary = TurnType.getSecondaryTurn(rawLanes[first]);
 				if (pair[2] == TurnType.TU && secondary != 0) {
 					pair[2] = secondary;
 				}
 				return true;
 			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
-				pair[0] = rawLanes.length - curCntLanes.length;
-				pair[1] = rawLanes.length - 1;
+				pair[0] = last - curLanes + 1;
+				pair[1] = last;
 				pair[2] = directions[rs.roadsOnLeft];
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private static int[] countSharedLanes(RouteSegmentResult segment, int lanesCount) {
+		int[] res = {0, 0};
+		int[] mods = getLaneModifiers(segment, lanesCount);
+		if (mods == null) {
+			return res;
+		}
+		while (res[0] < lanesCount && (mods[res[0]] & TurnType.MOD_SHARED) != 0) {
+			res[0]++;
+		}
+		while (res[0] + res[1] < lanesCount && (mods[lanesCount - 1 - res[1]] & TurnType.MOD_SHARED) != 0) {
+			res[1]++;
+		}
+		return res;
 	}
 
 	private int getAttachedLanesCount(RoadSplitStructure rs) {
