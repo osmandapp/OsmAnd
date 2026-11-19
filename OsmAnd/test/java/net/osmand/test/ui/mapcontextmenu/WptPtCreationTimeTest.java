@@ -68,6 +68,28 @@ public class WptPtCreationTimeTest extends AndroidTest {
 		onView(withText(unexpected)).check(doesNotExist());
 	}
 
+	@Test
+	public void testCreationTimeIsNotEditableForRecordingTrackPoint() throws Throwable {
+		activityRule.launchActivity(null);
+		skipAppStartDialogs(app);
+		MapActivity mapActivity = activityRule.getActivity();
+		assertNotNull(mapActivity);
+
+		WptPt wpt = app.getSavingTrackHelper().insertPointData(
+				50.45, 30.51, "description", "name", null, 0);
+		app.runInUIThread(() -> {
+			app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(),
+					GpxSelectionParams.getDefaultSelectionParams());
+			WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
+			assertNotNull(editor);
+			editor.edit(wpt);
+		});
+
+		waitForView(withId(R.id.creation_date_row));
+		onView(withId(R.id.creation_date_row))
+				.check(matches(withEffectiveVisibility(Visibility.GONE)));
+	}
+
 	private String formatDate(Context context, long timestamp) {
 		java.text.DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
 		java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
