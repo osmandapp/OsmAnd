@@ -99,6 +99,12 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 		updateContent()
 	}
 
+	// the app may have called OsmAnd while this screen was in the background
+	override fun onResume() {
+		super.onResume()
+		updateContent()
+	}
+
 	private fun updateContent() {
 		val enabled = connectedApp.isEnabled
 		mainSwitch.setChecked(enabled, false)
