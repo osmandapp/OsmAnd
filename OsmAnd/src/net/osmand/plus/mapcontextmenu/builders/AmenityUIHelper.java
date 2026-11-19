@@ -699,7 +699,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	@Nullable
 	public static Pair<String, Locale> getDescriptionWithPreferredLang(@NonNull OsmandApplication app,
-			@NonNull Amenity amenity, @NonNull String key, @NonNull Map<String, Object> map) {
+			@Nullable Amenity amenity, @NonNull String key, @NonNull Map<String, Object> map) {
 		Object object = map.get(key);
 		if (object instanceof Map<?, ?>) {
 			Map<String, Object> descriptions = (Map<String, Object>) object;
@@ -715,7 +715,8 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 			return description != null ? Pair.create(description, locale) : null;
 		}
-		String description = amenity.getAdditionalInfo(key);
+		String description = object instanceof String ? (String) object
+				: amenity != null ? amenity.getAdditionalInfo(key) : null;
 		if (!Algorithms.isEmpty(description)) {
 			return Pair.create(description, null);
 		}
