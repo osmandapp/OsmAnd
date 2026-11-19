@@ -63,7 +63,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public interface BackupCollectListener {
 		void onBackupCollectFinished(boolean succeed, boolean empty,
 		                             @NonNull List<SettingsItem> items,
-		                             @NonNull List<RemoteFile> remoteFiles);
+		                             @NonNull List<RemoteFile> remoteFiles, @Nullable String error);
 	}
 
 	public NetworkSettingsHelper(@NonNull OsmandApplication app) {
