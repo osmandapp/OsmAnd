@@ -136,6 +136,7 @@ import net.osmand.aidlapi.tiles.ASqliteDbFile;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1439,12 +1440,24 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");
-				return api != null && api.importProfileV2(params.getProfileSettingsUri(), params.getSettingsTypeKeys(),
+				return api != null && isImportAllowed(api, params.getSettingsTypeKeys())
+						&& api.importProfileV2(params.getProfileSettingsUri(), params.getSettingsTypeKeys(),
 						params.isReplace(), params.isSilent(), params.getLatestChanges(), params.getVersion());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
 			}
+		}
+
+		// importProfile needs Settings, and each type of the imported items needs its own group
+		private boolean isImportAllowed(@NonNull OsmandAidlApi api, @NonNull List<String> settingsTypeKeys) {
+			String packName = getCallingAppPackName();
+			for (ExportType type : ExportType.valuesOf(settingsTypeKeys)) {
+				if (!api.isGroupAllowed(packName, AidlPermissionGroup.getByImportType(type))) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override

@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ExportCategory;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -129,6 +131,28 @@ public enum AidlPermissionGroup {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @return the group an app needs to import items of this type with importProfile
+	 */
+	@NonNull
+	public static AidlPermissionGroup getByImportType(@NonNull ExportType type) {
+		switch (type) {
+			case FAVORITES:
+			case ACTIVE_MARKERS:
+			case HISTORY_MARKERS:
+			case ITINERARY_GROUPS:
+				return FAVORITES;
+			case TRACKS:
+			case GPX_DIR:
+				return TRACKS_EDIT;
+			case GLOBAL:
+				// also the proxy and privacy preferences that setPreference keeps read-only
+				return SYSTEM;
+			default:
+				return type.isRelatedToCategory(ExportCategory.SETTINGS) ? SETTINGS : SYSTEM;
+		}
 	}
 
 	@NonNull
