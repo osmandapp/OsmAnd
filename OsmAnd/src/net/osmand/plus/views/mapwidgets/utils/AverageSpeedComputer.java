@@ -102,7 +102,7 @@ public class AverageSpeedComputer extends AverageValueComputer {
 	 */
 	@NonNull
 	public MovingSpeedWindow getMovingSpeedWindow(long startTimestamp, long movingInterval) {
-		return new MovingSpeedWindow(locations, startTimestamp, movingInterval, getSpeedToSkipInMetersPerSecond());
+		return new MovingSpeedWindow(locations, startTimestamp, movingInterval);
 	}
 
 	private float calculateUniformSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {

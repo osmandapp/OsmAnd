@@ -10,7 +10,7 @@ import net.osmand.Location;
  */
 public class MovingSpeedWindow {
 
-	private static final float MIN_AVERAGE_SPEED = 0.5f; // m/s, slower counts as standing still
+	private static final float MIN_MOVING_SPEED = 0.5f; // m/s in every speed unit, slower counts as standing still
 	private static final long MAX_POINT_DURATION_MILLIS = 5000; // a longer gap without fixes is not counted as moving
 	private static final long MAX_SPEED_UP_MILLIS = 10_000; // a car gets back to city speed after a stop in about 10 s
 	private static final long FIRST_POINT_DURATION_MILLIS = 1000;
@@ -23,12 +23,11 @@ public class MovingSpeedWindow {
 	 * @param locations      points in time order, with their speeds
 	 * @param startTimestamp points before it are not counted
 	 * @param movingInterval how much of the latest movement is averaged, ms
-	 * @param stopSpeed      points slower than this are stops, m/s
 	 */
-	public MovingSpeedWindow(Iterable<Location> locations, long startTimestamp, long movingInterval, float stopSpeed) {
+	public MovingSpeedWindow(Iterable<Location> locations, long startTimestamp, long movingInterval) {
 		this.movingInterval = movingInterval;
 		long time = 0;
-		MovingTimeCounter counter = new MovingTimeCounter(startTimestamp, stopSpeed);
+		MovingTimeCounter counter = new MovingTimeCounter(startTimestamp);
 		for (Location location : locations) {
 			time += counter.getMovingTime(location);
 		}
@@ -37,7 +36,7 @@ public class MovingSpeedWindow {
 		long toSkip = movingTime - movingInterval;
 		float distance = 0;
 		time = 0;
-		counter = new MovingTimeCounter(startTimestamp, stopSpeed);
+		counter = new MovingTimeCounter(startTimestamp);
 		for (Location location : locations) {
 			long dt = counter.getMovingTime(location);
 			if (dt <= 0) {
@@ -73,7 +72,7 @@ public class MovingSpeedWindow {
 	 * arrival time. The route estimate stays while there is no movement.
 	 */
 	public int adaptTime(int routeTime, int distance) {
-		if (movingInterval <= 0 || Float.isNaN(averageSpeed) || averageSpeed < MIN_AVERAGE_SPEED) {
+		if (movingInterval <= 0 || Float.isNaN(averageSpeed)) {
 			return routeTime;
 		}
 		float filled = Math.min(1f, (float) movingTime / movingInterval);
@@ -89,7 +88,6 @@ public class MovingSpeedWindow {
 	private static class MovingTimeCounter {
 
 		private final long startTimestamp;
-		private final float stopSpeed;
 
 		private long prevTime;
 		private float prevSpeed;
@@ -98,9 +96,8 @@ public class MovingSpeedWindow {
 		private boolean speedingUp;
 		private long speedUpStartTime;
 
-		MovingTimeCounter(long startTimestamp, float stopSpeed) {
+		MovingTimeCounter(long startTimestamp) {
 			this.startTimestamp = startTimestamp;
-			this.stopSpeed = stopSpeed;
 		}
 
 		long getMovingTime(Location location) {
@@ -112,7 +109,7 @@ public class MovingSpeedWindow {
 			prevSpeed = speed;
 			prevTime = time;
 
-			if (speed < stopSpeed) {
+			if (speed < MIN_MOVING_SPEED) {
 				stopped = true;
 				return 0;
 			}
