@@ -379,6 +379,13 @@ public class OsmandAidlApi {
 						}
 						// as a pan by hand: a map linked to my location would go back to it at the next fix
 						app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+						OsmandSettings settings = app.getSettings();
+						if (!settings.MAP_ACTIVITY_ENABLED) {
+							// the map is paused: MapActivity.onResume restores the last known location over this move
+							settings.setLastKnownMapLocation(new LatLon(lat, lon));
+							settings.setLastKnownMapZoom(zoom);
+							settings.setLastKnownMapZoomFloatPart(zoomFloatPart);
+						}
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart);
 						} else {
