@@ -63,7 +63,6 @@ public class GradientColorsPaletteCard extends ColorsPaletteCard implements IPal
 		ColorPalette colorPalette = gradientItem.getColorPalette();
 		GpxTrackAnalysis analysis = controller.getAnalysis();
 		GradientFileType fileType = gradientItem.getProperties().getFileType();
-		// the speed scale reaches at least the profile default speed, as the track colouring (CachedTrack)
 		float profileSpeed = app.getSettings().getApplicationMode().getDefaultSpeed();
 
 		// Use formatter to adjust fixed palettes to track data

@@ -12,13 +12,14 @@ import net.osmand.shared.gpx.filters.MeasureUnitType.SPEED
 import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.filetype.GradientFileType
+import net.osmand.shared.routing.RouteColorize
+import net.osmand.shared.routing.RouteColorize.ColorizationType
 import net.osmand.shared.units.LengthUnits
 import net.osmand.shared.units.MeasurementUnit
 import net.osmand.shared.units.SpeedUnits
 import net.osmand.shared.util.Localization
 import java.text.DecimalFormat
 import kotlin.math.abs
-import kotlin.math.max
 
 object GradientFormatter {
 
@@ -34,15 +35,13 @@ object GradientFormatter {
 	}
 
 	/**
-	 * @param profileSpeed profile default speed (m/s): the speed scale reaches at least it, as the track
-	 * colouring does (RouteColorize.getMaxValue)
+	 * @param profileSpeed profile default speed (m/s), the speed scale reaches at least it
 	 */
 	@JvmStatic
-	@JvmOverloads
 	fun getAxisFormatter(
 		fileType: GradientFileType,
 		analysis: GpxTrackAnalysis?,
-		profileSpeed: Float = 0f
+		profileSpeed: Float
 	): IAxisValueFormatter {
 		val unitType = fileType.category.measureUnitType
 		val limits = if (analysis != null) calculateRealDataLimits(analysis, unitType, profileSpeed) else null
@@ -190,10 +189,12 @@ object GradientFormatter {
 		when(unitType) {
 			SPEED -> {
 				if (analysis.maxSpeed > 0f) {
+					val type = ColorizationType.SPEED
+					val min = RouteColorize.getMinValue(type, analysis)
+					val max = RouteColorize.getMaxValue(type, analysis, min, profileSpeed.toDouble())
 					result = RealDataLimits(
-						// same scale as the track colouring: [0, max(profile default speed, track max)]
-						minValue = 0f,
-						maxValue = max(analysis.maxSpeed, profileSpeed),
+						minValue = min.toFloat(),
+						maxValue = max.toFloat(),
 						units = SpeedUnits.METERS_PER_SECOND
 					)
 				}
