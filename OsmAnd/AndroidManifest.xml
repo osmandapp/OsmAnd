@@ -75,6 +75,10 @@
 		<package android:name="com.android.gpstest.osmdroid" />
 		<package android:name="com.dsi.ant.plugins.antplus" />
 
+		<!-- the AI Connector stays in Plugins after an update; other AIDL apps are visible after their next call only -->
+		<package android:name="net.osmand.aiconnector" />
+		<package android:name="net.osmand.aiconnector.debug" />
+
 		<intent>
 			<action android:name="android.intent.action.TTS_SERVICE" />
 		</intent>
