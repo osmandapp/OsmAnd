@@ -55,10 +55,12 @@ import java.util.TimeZone;
 public class DayNightHelper implements SensorEventListener {
 
 	private static final Log log = PlatformUtil.getLog(DayNightHelper.class);
+	private static final long SENSOR_CHANGE_DELAY_MS = 10_000;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final OsmAndLocationProvider locationProvider;
+	private final AmbientLightMapTheme sensorTheme;
 
 	private MapThemeProvider externalMapThemeProvider;
 	private OsmAndLocationListener locationListener;
@@ -73,6 +75,10 @@ public class DayNightHelper implements SensorEventListener {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.locationProvider = app.getLocationProvider();
+		this.sensorTheme = new AmbientLightMapTheme(
+				change -> app.getUiHandler().postDelayed(change, SENSOR_CHANGE_DELAY_MS),
+				change -> app.getUiHandler().removeCallbacks(change),
+				this::setSensorNightMode);
 
 		if (settings.DAYNIGHT_MODE.get().isAuto()) {
 			locationProvider.addLocationListener(getLocationListener());
@@ -104,6 +110,9 @@ public class DayNightHelper implements SensorEventListener {
 	private StateChangedListener<DayNightMode> getPreferenceStateListener() {
 		if (preferenceStateListener == null) {
 			preferenceStateListener = dayNightMode -> {
+				if (!dayNightMode.isSensor()) {
+					sensorTheme.reset();
+				}
 				if (dayNightMode.isAuto()) {
 					resetLastTime();
 					locationProvider.addLocationListener(getLocationListener());
@@ -219,6 +228,7 @@ public class DayNightHelper implements SensorEventListener {
 	}
 
 	public void stopSensorIfNeeded() {
+		sensorTheme.reset();
 		if (sensorEventListener != null) {
 			SensorManager manager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 			Sensor mLight = manager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -250,18 +260,16 @@ public class DayNightHelper implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		if (event.values.length > 0) {
-			float lux = event.values[0];
-//			log.debug("lux value:" + lux + " setting to day: " + (lux > SensorManager.LIGHT_CLOUDY));
-			boolean nightMode = !(lux > SensorManager.LIGHT_CLOUDY);
-			if (nightMode != lastNightMode) {
-				if (System.currentTimeMillis() - lastTime > 10000) {
-					lastTime = System.currentTimeMillis();
-					lastNightMode = nightMode;
-					if (sensorStateListener != null) {
-						sensorStateListener.stateChanged(nightMode);
-					}
-				}
+		if (sensorEventListener != null && settings.DAYNIGHT_MODE.get().isSensor() && event.values.length > 0) {
+			sensorTheme.onLight(event.values[0]);
+		}
+	}
+
+	private void setSensorNightMode(boolean night) {
+		if (lastNightMode != night) {
+			lastNightMode = night;
+			if (sensorStateListener != null) {
+				sensorStateListener.stateChanged(night);
 			}
 		}
 	}
