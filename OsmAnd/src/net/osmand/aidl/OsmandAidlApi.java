@@ -918,7 +918,7 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				int actionNumber = intent.getIntExtra(AIDL_QUICK_ACTION_NUMBER, -1);
 				MapActivity mapActivity = mapActivityRef.get();
-				if (actionNumber != -1 && mapActivity != null) {
+				if (actionNumber >= 0 && mapActivity != null) {
 					List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 					if (actionNumber < actionsList.size()) {
 						MapButtonsHelper.produceAction(actionsList.get(actionNumber)).onActionSelected(mapActivity, null);
