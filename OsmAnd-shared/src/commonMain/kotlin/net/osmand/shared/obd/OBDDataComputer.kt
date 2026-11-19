@@ -32,8 +32,18 @@ object OBDDataComputer {
 
 	private val osmAndSettings: SettingsAPI = PlatformUtil.getOsmAndContext().getSettings()
 	const val DEFAULT_FUEL_TANK_CAPACITY = 52f
-	private const val SAME_FUEL_LVL_SEQUENCE_LENGTH = 5
+	private const val FUEL_LVL_WINDOW_SECONDS = 30
+	private const val FUEL_LVL_MIN_SAMPLES = 5
+	private const val FUEL_LVL_MAX_GAP_SECONDS = 60
+	// Percent of the tank; smaller rises are sensor noise (seen: 3 steps of 100/255 = 1.2 %)
+	private const val REFUEL_MIN_LEVEL_INCREASE = 5f
 	private const val FUEL_TANK_CAPACITY_SETTING_ID = "fuel_tank_capacity"
+	private val FUEL_LEVEL_DIFF_TYPES = setOf(
+		OBDTypeWidget.FUEL_LEFT_KM,
+		OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM,
+		OBDTypeWidget.FUEL_CONSUMPTION_RATE_M_PER_LITER,
+		OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
+		OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR)
 	var locations = listOf<OBDLocation>()
 	var widgets: List<OBDComputerWidget> = ArrayList()
 		private set
@@ -281,13 +291,22 @@ object OBDDataComputer {
 		val type: OBDTypeWidget,
 		var averageTimeSeconds: Int) {
 		private var values: List<OBDDataField<Any>> = ArrayList()
-		private var tmpValues: List<OBDDataField<Any>> = ArrayList()
+		private var levelSamples: List<OBDDataField<Any>> = ArrayList()
+		private var lastFuelValue: Any? = null
+		private var lastFuelReadingTime = 0L
+		private var fuelNoData = false
+		private var currentLevel: Float? = null
 		private var value: Any? = null
 		private var cachedVersion = 0
 		private var version = 0
 
 		fun clearData() {
 			values = ArrayList()
+			levelSamples = ArrayList()
+			lastFuelValue = null
+			lastFuelReadingTime = 0L
+			fuelNoData = false
+			currentLevel = null
 			value = null
 			cachedVersion = 0
 			version = 0
@@ -296,10 +315,27 @@ object OBDDataComputer {
 		fun computeValue(): Any? {
 			if (cachedVersion != version) {
 				val v = version
-				value = compute()
+				value = if (type in FUEL_LEVEL_DIFF_TYPES) computeFuelLevelDiff() else compute()
 				cachedVersion = v
 			}
 			return value
+		}
+
+		// A history restart, a filtered result or a short loss of readings keeps the last value;
+		// it goes only when the level has not been read for FUEL_LVL_MAX_GAP_SECONDS
+		private fun computeFuelLevelDiff(): Any? {
+			val readingLost = lastFuelReadingTime == 0L
+					|| currentTimeMillis() - lastFuelReadingTime > FUEL_LVL_MAX_GAP_SECONDS * 1000L
+			if (fuelNoData && readingLost) {
+				lastFuelValue = null
+				return "N/A"
+			}
+			val result = compute()
+			if (result is Number && !result.toDouble().isNaN()) {
+				lastFuelValue = result
+				return result
+			}
+			return lastFuelValue ?: result
 		}
 
 		private fun compute(): Any? {
@@ -340,8 +376,8 @@ object OBDDataComputer {
 
 				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
-						val result = getFuelTank() * calculateFuelConsumption(locValues) / 100
-						if (result > LITER_HOUR_CONSUMPTION_LIMIT) {
+						val result = calculateFuelConsumption(locValues)?.let { getFuelTank() * it / 100 }
+						if (result != null && result > LITER_HOUR_CONSUMPTION_LIMIT) {
 							Float.NaN
 						} else {
 							result
@@ -481,71 +517,85 @@ object OBDDataComputer {
 			return dist
 		}
 
-		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float {
+		private fun calculateFuelConsumption(locValues: ArrayList<OBDDataField<Any>>): Float? {
 			val first = locValues[locValues.size - 2]
 			val last = locValues[locValues.size - 1]
 			val diffPerc = (first.value as Number).toFloat() - (last.value as Number).toFloat()
 			val diffTime = last.timestamp - first.timestamp
-			return diffPerc / diffTime * 1000 * 3600
+			return if (diffPerc > 0 && diffTime > 0) diffPerc / diffTime * 1000 * 3600 else null
 		}
 
 		fun acceptValue(value: Map<OBDCommand, OBDDataField<Any>?>) {
 			value[type.requiredCommand]?.let {
-				if (it == OBDDataField.NO_DATA) {
+				if (type in FUEL_LEVEL_DIFF_TYPES) {
+					acceptFuelLevel(it)
+				} else if (it == OBDDataField.NO_DATA) {
 					if (values.isEmpty()) {
 						version++
 					}
 					values = mutableListOf(it)
 				} else {
-					when (type) {
-						// fuel-level difference types: store a level only when it changes
-						// and repeats SAME_FUEL_LVL_SEQUENCE_LENGTH times, otherwise the last
-						// two values are equal and the difference is always 0
-						FUEL_LEFT_KM,
-						FUEL_CONSUMPTION_RATE_LITER_KM,
-						FUEL_CONSUMPTION_RATE_M_PER_LITER,
-						FUEL_CONSUMPTION_RATE_PERCENT_HOUR,
-						FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
-							val lastLvl =
-								if (values.isNotEmpty()) (values[values.size - 1].value as Number).toFloat() else 0f
-							val newlvl = (it.value as Number).toFloat()
-							if (values.isEmpty() || lastLvl != newlvl) {
-								var valueToAdd: OBDDataField<Any>? = it
-								if (tmpValues.isEmpty() || tmpValues.last().value == newlvl) {
-									log.debug("Fuel level increase found. last $lastLvl; new $newlvl tmpValues.size=${tmpValues.size}")
-									tmpValues = KCollectionUtils.addToList(
-										tmpValues,
-										OBDDataField(newlvl))
-									if (tmpValues.size >= SAME_FUEL_LVL_SEQUENCE_LENGTH) {
-										log.debug("New fuel level accepted")
-										valueToAdd = tmpValues[0]
-										tmpValues = emptyList()
-									} else {
-										valueToAdd = null
-									}
-								} else if (tmpValues.isNotEmpty() && tmpValues.last().value != newlvl) {
-									log.debug("Last fuel level increase changed. last $lastLvl; last change ${tmpValues.last().value} new $newlvl")
-									tmpValues = arrayListOf(OBDDataField(newlvl))
-									valueToAdd = null
-								}
-								valueToAdd?.let { newData ->
-									version++
-									values = KCollectionUtils.addToList(values, newData)
-								}
-							}
-						}
+					version++
+					values = KCollectionUtils.addToList(values, it)
+				}
+			}
+		}
 
-						else -> {
-							version++
-							values = KCollectionUtils.addToList(values, it)
-						}
-					}
+		// The raw level wobbles around a sensor step (sloshing, slopes), so a new level is taken
+		// from the median of the readings over FUEL_LVL_WINDOW_SECONDS. The median lags behind
+		// by about the same time at every step, so the time between two accepted levels stays right.
+		// The level only goes down while driving: a rise is noise unless it is big enough
+		// to be a refuel, which restarts the history.
+		private fun acceptFuelLevel(data: OBDDataField<Any>) {
+			val prevSample = levelSamples.lastOrNull()
+			// the dispatcher repeats its cached reading object when a request fails
+			if (data === OBDDataField.NO_DATA || data === prevSample) {
+				fuelNoData = true
+				// recompute to drop the last value once the readings are lost for too long
+				version++
+				return
+			}
+			fuelNoData = false
+			val now = data.timestamp
+			lastFuelReadingTime = now
+			if (prevSample != null && now - prevSample.timestamp > FUEL_LVL_MAX_GAP_SECONDS * 1000L) {
+				// a stop without readings would count into the interval of the next level
+				// while the GPS distance driven before it is already gone
+				log.debug("Fuel level history restarted after a gap of ${(now - prevSample.timestamp) / 1000} s")
+				levelSamples = emptyList()
+				currentLevel = null
+				if (values.isNotEmpty()) {
+					version++
+					values = emptyList()
+				}
+			}
+			val windowStart = now - FUEL_LVL_WINDOW_SECONDS * 1000L
+			levelSamples = KCollectionUtils.addToList(levelSamples.filter { it.timestamp >= windowStart }, data)
+			val first = levelSamples.first()
+			if (levelSamples.size < FUEL_LVL_MIN_SAMPLES || now - first.timestamp < FUEL_LVL_WINDOW_SECONDS * 1000L / 2) {
+				return
+			}
+			val newLvl = levelSamples.map { (it.value as Number).toFloat() }.sorted()[levelSamples.size / 2]
+			val lastLvl = currentLevel
+			if (lastLvl != null && newLvl < lastLvl) {
+				log.debug("New fuel level accepted. last $lastLvl; new $newLvl")
+				currentLevel = newLvl
+				version++
+				values = KCollectionUtils.addToList(values, OBDDataField<Any>(newLvl).also { it.timestamp = now })
+			} else if (lastLvl == null || newLvl - lastLvl >= REFUEL_MIN_LEVEL_INCREASE) {
+				// when the level was reached is unknown, so the history starts from the next drop
+				log.debug("Fuel level history restarted. last $lastLvl; new $newLvl")
+				currentLevel = newLvl
+				if (values.isNotEmpty()) {
+					version++
+					values = emptyList()
 				}
 			}
 		}
 
 		fun resetLocations() {
 			values = ArrayList()
+			lastFuelValue = null
 		}
 
 		fun cleanup(now: Long) {
