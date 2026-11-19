@@ -4,6 +4,9 @@ import android.util.Log
 import fi.iki.elonen.NanoHTTPD
 import org.json.JSONObject
 import java.io.DataInputStream
+import java.net.NetworkInterface
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
 
 /** Minimal MCP Streamable HTTP server: POST /mcp with JSON-RPC, plain JSON responses, no sessions. */
 class McpHttpServer(
@@ -28,6 +31,8 @@ class McpHttpServer(
 				"https://osmand.net/docs/user/ (Android and iOS in tabs), e.g. widgets/configure-screen/, " +
 				"map/configure-map-menu/, map/map-styles/, personal/profiles/, personal/tracks/, navigation/, plugins/. " +
 				"Before bigger tasks read the guide: osmand_guide topic flyover before a flyover video."
+		// osmand_mcp_bridge.py signs the same text
+		private const val PROOF_PREFIX = "osmand-mcp-proof:"
 	}
 
 	override fun serve(session: IHTTPSession): Response {
@@ -40,6 +45,14 @@ class McpHttpServer(
 		val origin = session.headers["origin"]
 		if (origin != null && !origin.matches(Regex("https?://(localhost|127\\.0\\.0\\.1)(:\\d+)?"))) {
 			return text(Response.Status.FORBIDDEN, "Forbidden origin")
+		}
+		// any device on the Wi-Fi can announce itself as the connector: the bridge sends the key only to a server
+		// that signs its random challenge and the address it connected to; this phone signs only its own address
+		val challenge = session.headers["x-osmand-challenge"]
+		if (challenge != null && session.method == Method.GET && !files) {
+			val host = session.headers["host"].orEmpty()
+			if (!isOwnAddress(host)) return text(Response.Status.FORBIDDEN, "Not this phone's address")
+			return text(Response.Status.OK, "").apply { addHeader("X-OsmAnd-Proof", proof("$challenge $host")) }
 		}
 		if (session.headers["authorization"] != "Bearer $token") {
 			return text(Response.Status.UNAUTHORIZED, "Unauthorized")
@@ -133,6 +146,19 @@ class McpHttpServer(
 			addHeader("Content-Disposition", "attachment; filename=\"${name.replace("\"", "")}\"")
 			if (range != null) addHeader("Content-Range", "bytes $from-$to/$size")
 		}
+	}
+
+	/** "address:port" from the Host header is this server: a relay elsewhere gets no proof for its own address. */
+	private fun isOwnAddress(host: String): Boolean {
+		val address = host.substringBeforeLast(':')
+		return host.substringAfterLast(':') == listeningPort.toString() && NetworkInterface.getNetworkInterfaces()
+			.toList().any { networkInterface -> networkInterface.inetAddresses.toList().any { it.hostAddress == address } }
+	}
+
+	private fun proof(signed: String): String {
+		val mac = Mac.getInstance("HmacSHA256")
+		mac.init(SecretKeySpec(token.toByteArray(Charsets.UTF_8), "HmacSHA256"))
+		return mac.doFinal("$PROOF_PREFIX$signed".toByteArray(Charsets.UTF_8)).joinToString("") { "%02x".format(it) }
 	}
 
 	private fun rpcResult(id: Any?, result: JSONObject) =

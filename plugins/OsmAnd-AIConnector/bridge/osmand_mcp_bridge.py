@@ -17,10 +17,13 @@ computer (the video does not pass through the assistant).
 Needs only Python 3 and dns-sd (macOS) or avahi-browse (Linux).
 """
 import argparse
+import hashlib
+import hmac
 import http.client
 import json
 import os
 import re
+import secrets
 import shutil
 import socket
 import subprocess
@@ -31,6 +34,7 @@ SERVICE_TYPE = "_osmand-mcp._tcp"
 BROWSE_SECONDS = 3.0
 CONNECT_SECONDS = 3.0
 FILES_PATH = "/files/flyover/"
+PROOF_PREFIX = "osmand-mcp-proof:"
 CACHE_FILE = os.path.expanduser("~/.osmand/osmand_mcp_cache.json")
 PROTOCOL_VERSIONS = ["2025-06-18", "2025-03-26", "2024-11-05"]
 DOWNLOAD_TOOL = {
@@ -96,7 +100,23 @@ def browse_avahi():
     return found
 
 
-def discover(name_filter):
+def proves_key(url, token):
+    """Any device can announce _osmand-mcp._tcp: the connector signs a challenge and its address with the key."""
+    u = urllib.parse.urlsplit(url)
+    challenge = secrets.token_hex(16)
+    conn = http.client.HTTPConnection(u.hostname, u.port, timeout=CONNECT_SECONDS)
+    try:
+        conn.request("GET", u.path, headers={"Host": u.netloc, "X-OsmAnd-Challenge": challenge})
+        proof = conn.getresponse().getheader("X-OsmAnd-Proof") or ""
+    except (OSError, ValueError, http.client.HTTPException):
+        return False
+    finally:
+        conn.close()
+    expected = hmac.new(token.encode(), f"{PROOF_PREFIX}{challenge} {u.netloc}".encode(), hashlib.sha256).hexdigest()
+    return hmac.compare_digest(proof.encode(), expected.encode())
+
+
+def discover(name_filter, token):
     if shutil.which("dns-sd"):
         services = browse_dns_sd()
     elif shutil.which("avahi-browse"):
@@ -117,9 +137,13 @@ def discover(name_filter):
             log(f"'{name}' at {host}:{port} is not reachable: {e}")
             continue
         url = f"http://{addr}:{port}{txt.get('path') or '/mcp'}"
+        if not proves_key(url, token):
+            log(f"'{name}' at {url} does not know this access key, the key is not sent there")
+            continue
         log(f"found '{name}' at {url}")
         return url
-    raise RuntimeError("the OsmAnd AI Connector was found but does not answer: " + ", ".join(s[0] for s in services))
+    raise RuntimeError("the OsmAnd AI Connector was found but does not answer or does not know this access key "
+                       "(an older connector? update it or pass --url): " + ", ".join(s[0] for s in services))
 
 
 class Unreachable(Exception):
@@ -142,7 +166,7 @@ class Bridge:
         if self.args.url:
             return self.args.url
         if rediscover or not self.url:
-            self.url = discover(self.args.name)
+            self.url = discover(self.args.name, self.args.token)
         return self.url
 
     def post(self, url, body):
