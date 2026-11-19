@@ -2575,6 +2575,22 @@ public class OsmandAidlApi {
 		return res;
 	}
 
+	// grants are saved by package: of the packages of a shared uid (android:sharedUserId), the one turned on
+	@Nullable
+	public String getPackageForUid(int uid) {
+		String[] packages = app.getPackageManager().getPackagesForUid(uid);
+		if (Algorithms.isEmpty(packages)) {
+			return null;
+		}
+		for (String pack : packages) {
+			ConnectedApp connectedApp = connectedApps.get(pack);
+			if (connectedApp != null && connectedApp.isEnabled()) {
+				return pack;
+			}
+		}
+		return packages[0];
+	}
+
 	/**
 	 * Turns the app on or off together with its OsmAnd plugin, if the app has one
 	 */

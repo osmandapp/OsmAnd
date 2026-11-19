@@ -167,7 +167,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	}
 
 	private String getCallingAppPackName() {
-		return getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
+		return getApp().getAidlApi().getPackageForUid(Binder.getCallingUid());
 	}
 
 	private long getCallbackId() {
