@@ -34,7 +34,6 @@ import androidx.car.app.navigation.model.Trip;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -72,6 +71,7 @@ import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.router.FastRoutingState;
@@ -355,12 +355,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 
 	public boolean hasStarted() {
-		Lifecycle.State state = getLifecycle().getCurrentState();
-		return state == Lifecycle.State.STARTED || state == Lifecycle.State.RESUMED;
-	}
-
-	public boolean isStateAtLeast(@NonNull State state) {
-		return getLifecycle().getCurrentState().isAtLeast(state);
+		return AndroidUtils.isStateAtLeast(this, State.STARTED);
 	}
 
 	public boolean hasSurface() {
@@ -568,7 +563,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void processSuggestionIntent(@NonNull Intent intent) {
-		if (!isStateAtLeast(State.CREATED) || retainIntentUntilAccess(intent)) {
+		if (!AndroidUtils.isStateAtLeast(this, State.CREATED) || retainIntentUntilAccess(intent)) {
 			return;
 		}
 		OsmandApplication app = getApp();
@@ -765,7 +760,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void updateSuggestions() {
-		if (suggestionsHelper != null && isStateAtLeast(State.CREATED)) {
+		if (suggestionsHelper != null && AndroidUtils.isStateAtLeast(this, State.CREATED)) {
 			suggestionsNavigationActive = isNavigationActive();
 			suggestionsHelper.update(getCarContext());
 		}
@@ -784,7 +779,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Collection<Screen> displayedScreens = screenManager.getScreenStack();
 		for (Screen screen : displayedScreens) {
 			if (screen instanceof RoutePreviewScreen) {
-				return screen.getLifecycle().getCurrentState().isAtLeast(State.INITIALIZED);
+				return AndroidUtils.isStateAtLeast(screen, State.INITIALIZED);
 			}
 		}
 		return false;
@@ -804,7 +799,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Collection<Screen> displayedScreens = screenManager.getScreenStack();
 		for (Screen screen : displayedScreens) {
 			if (screen instanceof PrivateAccessScreen) {
-				return screen.getLifecycle().getCurrentState() == State.RESUMED;
+				return AndroidUtils.isStateAtLeast(screen, State.RESUMED);
 			}
 		}
 		return false;
