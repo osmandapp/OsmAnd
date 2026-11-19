@@ -57,9 +57,15 @@ class OsmAndBridge(private val ctx: Context, var preferredPackage: String) {
 		null
 	}
 
-	@Synchronized
 	fun get(): IOsmAndAidlInterface {
 		api?.let { return it }
+		// waits outside the lock: disconnect() runs on the main thread and must not wait for an OsmAnd that does not answer
+		bind().await(10, TimeUnit.SECONDS)
+		return api ?: throw IllegalStateException("OsmAnd ($boundPackage) did not connect within 10 s")
+	}
+
+	@Synchronized
+	private fun bind(): CountDownLatch {
 		if (!bound) {
 			val candidates = listOf(preferredPackage)
 			for (pkg in candidates) {
@@ -74,8 +80,7 @@ class OsmAndBridge(private val ctx: Context, var preferredPackage: String) {
 			}
 			if (!bound) throw IllegalStateException("No OsmAnd found to bind (tried $candidates)")
 		}
-		latch.await(10, TimeUnit.SECONDS)
-		return api ?: throw IllegalStateException("OsmAnd ($boundPackage) did not connect within 10 s")
+		return latch
 	}
 
 	@Synchronized
