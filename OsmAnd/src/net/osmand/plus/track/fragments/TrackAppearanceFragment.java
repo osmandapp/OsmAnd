@@ -471,9 +471,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		if (coloringStyle != null) {
 			trackDrawInfo.setColoringStyle(coloringStyle);
-			if (!coloringStyle.getType().isTrackSolid() && trackDrawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
-				trackDrawInfo.setLineStyleType(GpxLineStyleType.SOLID);
-			}
 			View saveButton = view.findViewById(R.id.right_bottom_button);
 			saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
 			updateColorItems();
