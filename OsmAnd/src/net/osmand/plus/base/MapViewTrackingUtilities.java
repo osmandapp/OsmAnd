@@ -7,10 +7,13 @@ import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_T
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import android.view.Display;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
@@ -43,8 +46,10 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -521,7 +526,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				//Hardy, 2019-12-15: Inject A-GPS data if backToLocationImpl fails with no fix:
 				if (app.getSettings().isInternetConnectionAvailable(true)) {
 					locationProvider.redownloadAGPS();
-					app.showToastMessage(app.getString(R.string.unknown_location) + "\n\n" + app.getString(R.string.agps_data_last_downloaded, (new SimpleDateFormat("yyyy-MM-dd  HH:mm")).format(app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
+					String text = app.getString(R.string.unknown_location) + "\n\n" + app.getString(R.string.agps_data_last_downloaded, (new SimpleDateFormat("yyyy-MM-dd  HH:mm")).format(app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get()));
+					View view = mapView.getView();
+					if (view != null) {
+						Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG);
+						UiUtilities.setupSnackbar(snackbar, app.getDaynightHelper().isNightMode(ThemeUsageContext.APP), 5);
+						snackbar.show();
+					}
+					app.getToastHelper().showCarToast(text, true);
 				} else {
 					app.showToastMessage(R.string.unknown_location);
 				}
