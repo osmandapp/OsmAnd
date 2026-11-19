@@ -24,10 +24,10 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.router.FastRoutingState;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.MissingMapsCalculationResult;
+import net.osmand.router.MovingSpeedWindow;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
@@ -55,7 +55,6 @@ public class RoutingHelper {
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
 	private static final int MAX_POSSIBLE_SPEED = 340; // ~ 1 Mach
 	private static final boolean ENABLE_LOG_POS_PROCESSED = false;
-	private static final float MIN_AVERAGE_SPEED_FOR_ETA = 0.5f; // m/s, slower counts as standing still
 	private static final int STOP_NAVIGATION_ON_AA_DISCONNECT_DISTANCE_THRESHOLD = 100;
 	private static final int PAUSE_NAVIGATION_ON_AA_DISCONNECT_SPEED_THRESHOLD = 1;
 
@@ -850,13 +849,8 @@ public class RoutingHelper {
 			return routeTime;
 		}
 		long interval = settings.ETA_AVERAGE_SPEED_INTERVAL.getModeValue(mode);
-		AverageSpeedComputer speedComputer = app.getAverageSpeedComputer();
-		float speed = speedComputer.getMovingAverageSpeed(etaSpeedStartTime, interval);
-		if (interval <= 0 || Float.isNaN(speed) || speed < MIN_AVERAGE_SPEED_FOR_ETA) {
-			return routeTime;
-		}
-		float filled = Math.min(1f, (float) speedComputer.getMovingTime(etaSpeedStartTime) / interval);
-		return Math.round(routeTime + (distance / speed - routeTime) * filled);
+		MovingSpeedWindow window = app.getAverageSpeedComputer().getMovingSpeedWindow(etaSpeedStartTime, interval);
+		return window.adaptTime(routeTime, distance);
 	}
 
 	public OsmandSettings getSettings() {
