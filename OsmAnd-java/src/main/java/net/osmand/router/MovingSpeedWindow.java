@@ -5,12 +5,14 @@ import net.osmand.Location;
 /**
  * The speed measured while moving, for "Adapt to my speed": the average over the last interval of
  * movement after the start of navigation. Stops don't use up the interval, so after a stop the
- * speed before it still counts.
+ * speed before it still counts. Neither does the speeding up after a stop or after the start:
+ * the slow seconds after a red light would fill most of a short interval.
  */
 public class MovingSpeedWindow {
 
 	private static final float MIN_AVERAGE_SPEED = 0.5f; // m/s, slower counts as standing still
 	private static final long MAX_POINT_DURATION_MILLIS = 5000; // a longer gap without fixes is not counted as moving
+	private static final long MAX_SPEED_UP_MILLIS = 10_000; // a car gets back to city speed after a stop in about 10 s
 	private static final long FIRST_POINT_DURATION_MILLIS = 1000;
 
 	private final long movingInterval;
@@ -26,32 +28,27 @@ public class MovingSpeedWindow {
 	public MovingSpeedWindow(Iterable<Location> locations, long startTimestamp, long movingInterval, float stopSpeed) {
 		this.movingInterval = movingInterval;
 		long time = 0;
-		long prevTime = 0;
+		MovingTimeCounter counter = new MovingTimeCounter(startTimestamp, stopSpeed);
 		for (Location location : locations) {
-			long locationTime = location.getTime();
-			if (locationTime >= startTimestamp && location.getSpeed() >= stopSpeed) {
-				time += getPointDuration(prevTime, locationTime);
-			}
-			prevTime = locationTime;
+			time += counter.getMovingTime(location);
 		}
 		movingTime = time;
 
 		long toSkip = movingTime - movingInterval;
 		float distance = 0;
 		time = 0;
-		prevTime = 0;
+		counter = new MovingTimeCounter(startTimestamp, stopSpeed);
 		for (Location location : locations) {
-			long locationTime = location.getTime();
-			if (locationTime >= startTimestamp && location.getSpeed() >= stopSpeed) {
-				long dt = getPointDuration(prevTime, locationTime);
-				if (toSkip > 0) {
-					toSkip -= dt;
-				} else {
-					distance += location.getSpeed() * dt;
-					time += dt;
-				}
+			long dt = counter.getMovingTime(location);
+			if (dt <= 0) {
+				continue;
 			}
-			prevTime = locationTime;
+			if (toSkip > 0) {
+				toSkip -= dt;
+			} else {
+				distance += location.getSpeed() * dt;
+				time += dt;
+			}
 		}
 		averageSpeed = time > 0 ? distance / time : Float.NaN;
 	}
@@ -83,8 +80,53 @@ public class MovingSpeedWindow {
 		return Math.round(routeTime + (distance / averageSpeed - routeTime) * filled);
 	}
 
-	private static long getPointDuration(long prevTime, long time) {
-		long dt = prevTime > 0 ? time - prevTime : FIRST_POINT_DURATION_MILLIS;
-		return Math.max(0, Math.min(dt, MAX_POINT_DURATION_MILLIS));
+	/**
+	 * Walks the points in time order and tells how long each one counts as movement. A stop counts
+	 * as zero, and so does the speeding up after it: the points while the speed is still above the
+	 * one two points earlier, at most {@link #MAX_SPEED_UP_MILLIS}. Two points, because a speed is
+	 * often repeated for two fixes in a row.
+	 */
+	private static class MovingTimeCounter {
+
+		private final long startTimestamp;
+		private final float stopSpeed;
+
+		private long prevTime;
+		private float prevSpeed;
+		private float speedTwoPointsEarlier;
+		private boolean stopped = true;
+		private boolean speedingUp;
+		private long speedUpStartTime;
+
+		MovingTimeCounter(long startTimestamp, float stopSpeed) {
+			this.startTimestamp = startTimestamp;
+			this.stopSpeed = stopSpeed;
+		}
+
+		long getMovingTime(Location location) {
+			long time = location.getTime();
+			float speed = location.getSpeed();
+			long dt = prevTime > 0 ? time - prevTime : FIRST_POINT_DURATION_MILLIS;
+			boolean faster = speed > speedTwoPointsEarlier;
+			speedTwoPointsEarlier = prevSpeed;
+			prevSpeed = speed;
+			prevTime = time;
+
+			if (speed < stopSpeed) {
+				stopped = true;
+				return 0;
+			}
+			if (stopped) {
+				stopped = false;
+				speedingUp = true;
+				speedUpStartTime = time;
+			} else if (speedingUp) {
+				speedingUp = faster && time - speedUpStartTime < MAX_SPEED_UP_MILLIS;
+			}
+			if (speedingUp || time < startTimestamp) {
+				return 0;
+			}
+			return Math.max(0, Math.min(dt, MAX_POINT_DURATION_MILLIS));
+		}
 	}
 }
