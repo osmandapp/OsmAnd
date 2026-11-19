@@ -21,6 +21,10 @@ import java.util.List;
 
 public class ChartPointsHelper {
 
+	// OpenGL order of the point selected on a chart: above favorites, POI and transport stops (layers 3-5),
+	// track splits and start/finish icons, below my location (layer 6) and map markers
+	public static final int HIGHLIGHTED_POINT_ORDER = (int) (5.9f * -100000f);
+
 	private final Drawable highlightedPointIcon;
 
 	private final Paint innerCirclePaint;
