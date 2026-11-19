@@ -109,9 +109,10 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		List<String> checkedIds = savedInstanceState != null
 				? savedInstanceState.getStringArrayList(CHECKED_GROUPS_KEY) : null;
 		for (AidlPermissionGroup group : requested) {
-			// after a recreation the user's choice, else only safe groups are preselected, the user turns on the others
+			// after a recreation the user's choice, else the stored grants (a new app has the safe groups);
+			// while the app is off only the safe ones are preselected
 			if (checkedIds != null ? checkedIds.contains(group.getId())
-					: group.isSafe() || connectedApp.isEnabled() && connectedApp.isGroupGranted(group)) {
+					: connectedApp.isGroupGranted(group) && (group.isSafe() || connectedApp.isEnabled())) {
 				granted.add(group);
 			}
 		}
