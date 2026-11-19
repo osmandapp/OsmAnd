@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.appbar.MaterialToolbar
 import net.osmand.aidl.AidlPermissionGroup
@@ -38,6 +39,12 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 		super.onCreate(savedInstanceState)
 		val pack = requireArguments().getString(PACK_KEY) ?: ""
 		connectedApp = osmandApp.aidlApi.getOrCreateConnectedApp(pack)
+		// Back closes only this screen: the callback of the Plugins screen below would close Plugins too
+		requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				parentFragmentManager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+			}
+		})
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
