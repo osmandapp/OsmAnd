@@ -28,7 +28,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -71,8 +70,6 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		implements CardListener, IExternalPaletteListener, OnIconsPaletteListener<String> {
 
 	private static final String COLOR_KEY = "editor_color";
-	private static final double DARK_COLOR_LUMINANCE = 0.15;
-	private static final float NIGHT_CONTROLS_MIN_LIGHTNESS = 0.7f;
 	private static final String ICON_NAME_KEY = "editor_icon_name";
 	private static final String BACKGROUND_TYPE_KEY = "editor_background_type";
 
@@ -374,7 +371,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	private void createShapeSelector() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			shapesCard = new ShapesCard(activity, getBackgroundType(), getControlsColor());
+			shapesCard = new ShapesCard(activity, getBackgroundType(), getColor());
 			shapesCard.setListener(this);
 			ViewGroup shapesCardContainer = view.findViewById(R.id.shapes_card_container);
 			shapesCardContainer.addView(shapesCard.build(activity));
@@ -475,26 +472,9 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 
 	protected void updateContent() {
 		updateSelectedColorText();
-		int controlsColor = getControlsColor();
-		getIconController().updateAccentColor(controlsColor);
-		shapesCard.updateSelectedShape(controlsColor, backgroundType);
+		getIconController().updateAccentColor(color);
+		shapesCard.updateSelectedShape(color, backgroundType);
 		updateSelectedShapeText();
-	}
-
-	/**
-	 * The colour of the selected icon and shape. In the night theme a dark colour of the point
-	 * is made lighter, otherwise the selection is lost on the dark background.
-	 */
-	@ColorInt
-	private int getControlsColor() {
-		int opaqueColor = ColorUtilities.removeAlpha(color);
-		if (!nightMode || ColorUtils.calculateLuminance(opaqueColor) >= DARK_COLOR_LUMINANCE) {
-			return color;
-		}
-		float[] hsl = new float[3];
-		ColorUtils.colorToHSL(opaqueColor, hsl);
-		hsl[2] = Math.max(hsl[2], NIGHT_CONTROLS_MIN_LIGHTNESS);
-		return ColorUtils.HSLToColor(hsl);
 	}
 
 	protected void updateSelectedShapeText() {

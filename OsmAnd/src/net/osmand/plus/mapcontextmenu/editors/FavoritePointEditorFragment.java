@@ -190,9 +190,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (ctx != null) {
 			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.getName());
 			this.group = favouritesHelper.getGroup(groupIdName);
-			String iconName = getIconName();
 			super.setPointsGroup(group, true);
-			setIconName(manualChanges.iconOnFolderChange(iconName, getIconNameForGroup()));
+			setIconName(manualChanges.iconOnFolderChange(getIconName(), getIconNameForGroup()));
 			selectIconInController();
 			updateContent();
 		}
