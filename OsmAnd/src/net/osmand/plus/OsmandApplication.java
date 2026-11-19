@@ -598,8 +598,17 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
+		Locale preferredLocale = localeHelper.getPreferredLocale();
+		boolean applyPreferredLocale = preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage());
+
+		// newConfig carries the system language: when OsmAnd applies its own, getResources() has to keep it
+		Configuration config = newConfig;
+		if (applyPreferredLocale) {
+			config = new Configuration(newConfig);
+			config.setLocale(preferredLocale);
+		}
 		Resources resources = getResources();
-		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+		resources.updateConfiguration(config, resources.getDisplayMetrics());
 
 		resources = getBaseContext().getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
@@ -618,8 +627,7 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 
-		Locale preferredLocale = localeHelper.getPreferredLocale();
-		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
+		if (applyPreferredLocale) {
 			super.onConfigurationChanged(newConfig);
 			Locale.setDefault(preferredLocale);
 			localeHelper.checkPreferredLocale();
