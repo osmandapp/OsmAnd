@@ -109,6 +109,7 @@ public class BackupHelper {
 	private final OsmandSettings settings;
 	private final BackupDbHelper dbHelper;
 	private final BackupExecutor executor;
+	private final AvoidRoadsBackupMerger avoidRoadsMerger;
 	private List<OnPrepareBackupListener> prepareBackupListeners = new ArrayList<>();
 
 	private PrepareBackupTask prepareBackupTask;
@@ -122,6 +123,12 @@ public class BackupHelper {
 		this.executor = new BackupExecutor(app);
 		this.settings = app.getSettings();
 		this.dbHelper = new BackupDbHelper(app);
+		this.avoidRoadsMerger = new AvoidRoadsBackupMerger(app, this);
+	}
+
+	@NonNull
+	public AvoidRoadsBackupMerger getAvoidRoadsMerger() {
+		return avoidRoadsMerger;
 	}
 
 	@NonNull

@@ -30,6 +30,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 
 	private OsmandSettings settings;
 	private AvoidRoadsHelper avoidRoadsHelper;
+	private boolean replaceAll;
 
 	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
 		super(app, null, items);
@@ -79,8 +80,20 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 		return ctx.getString(R.string.avoid_road);
 	}
 
+	/**
+	 * The items are the whole list, as a list downloaded from OsmAnd Cloud is: roads missing
+	 * from it are removed. Without it, as in an import from a file, roads are only added.
+	 */
+	public void setReplaceAll(boolean replaceAll) {
+		this.replaceAll = replaceAll;
+	}
+
 	@Override
 	public void apply() {
+		if (replaceAll) {
+			replaceAllRoads();
+			return;
+		}
 		List<AvoidRoadInfo> newItems = getNewItems();
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
@@ -96,6 +109,42 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 			avoidRoadsHelper.loadImpassableRoads();
 			avoidRoadsHelper.initRouteObjects(true);
 		}
+	}
+
+	private void replaceAllRoads() {
+		List<AvoidRoadInfo> removedItems = new ArrayList<>();
+		for (AvoidRoadInfo existing : existingItems) {
+			if (!containsRoad(items, existing)) {
+				removedItems.add(existing);
+			}
+		}
+		List<AvoidRoadInfo> addedItems = new ArrayList<>();
+		for (AvoidRoadInfo item : items) {
+			if (!containsRoad(existingItems, item)) {
+				addedItems.add(item);
+			}
+		}
+		if (removedItems.isEmpty() && addedItems.isEmpty()) {
+			return;
+		}
+		appliedItems = new ArrayList<>(addedItems);
+		for (AvoidRoadInfo removed : removedItems) {
+			settings.removeImpassableRoad(removed.getLatLon());
+		}
+		for (AvoidRoadInfo added : addedItems) {
+			settings.addImpassableRoad(added);
+		}
+		avoidRoadsHelper.loadImpassableRoads();
+		avoidRoadsHelper.initRouteObjects(true);
+	}
+
+	private boolean containsRoad(@NonNull List<AvoidRoadInfo> roads, @NonNull AvoidRoadInfo road) {
+		for (AvoidRoadInfo item : roads) {
+			if (item.isSameRoad(road)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
