@@ -67,6 +67,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	static final String PACK_KEY = "pack";
 	static final String ENABLED_KEY = "enabled";
 	static final String GROUPS_KEY = "groups";
+	static final String SIGNATURE_KEY = "signature";
 
 	private final OsmandApplication app;
 
@@ -88,6 +89,9 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	private volatile boolean enabled;
 	// read from the binder threads: never changed in place, a new unmodifiable set replaces the reference
 	private volatile Set<AidlPermissionGroup> groups;
+	// SHA-256 of the certificate the app was signed with when it got its grants
+	@Nullable
+	private volatile String signature;
 
 	ConnectedApp(OsmandApplication app, String pack, boolean enabled, @NonNull Set<AidlPermissionGroup> groups) {
 		this.app = app;
@@ -156,6 +160,15 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 
 	void setGroups(@NonNull Set<AidlPermissionGroup> groups) {
 		this.groups = Collections.unmodifiableSet(new LinkedHashSet<>(groups));
+	}
+
+	@Nullable
+	String getSignature() {
+		return signature;
+	}
+
+	void setSignature(@Nullable String signature) {
+		this.signature = signature;
 	}
 
 	public boolean isMethodAllowed(@NonNull String method) {

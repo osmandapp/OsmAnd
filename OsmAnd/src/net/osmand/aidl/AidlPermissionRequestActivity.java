@@ -90,7 +90,7 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		} catch (PackageManager.NameNotFoundException e) {
 			LOG.error(e);
 		}
-		ConnectedApp connectedApp = app.getAidlApi().getOrCreateConnectedApp(pack);
+		ConnectedApp connectedApp = app.getAidlApi().getCallerApp(pack);
 		Set<AidlPermissionGroup> granted = new LinkedHashSet<>();
 		for (AidlPermissionGroup group : requested) {
 			// only safe groups are preselected, the user turns on the others
