@@ -105,7 +105,7 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		} catch (PackageManager.NameNotFoundException e) {
 			LOG.error(e);
 		}
-		ConnectedApp connectedApp = app.getAidlApi().getOrCreateConnectedApp(pack);
+		ConnectedApp connectedApp = app.getAidlApi().getCallerApp(pack);
 		List<String> checkedIds = savedInstanceState != null
 				? savedInstanceState.getStringArrayList(CHECKED_GROUPS_KEY) : null;
 		for (AidlPermissionGroup group : requested) {
