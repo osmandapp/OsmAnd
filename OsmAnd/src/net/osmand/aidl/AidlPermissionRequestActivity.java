@@ -93,8 +93,8 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		ConnectedApp connectedApp = app.getAidlApi().getOrCreateConnectedApp(pack);
 		Set<AidlPermissionGroup> granted = new LinkedHashSet<>();
 		for (AidlPermissionGroup group : requested) {
-			// only safe groups are preselected, the user turns on the others
-			if (group.isSafe() || connectedApp.isEnabled() && connectedApp.isGroupGranted(group)) {
+			// the stored grants, a new app has the safe groups; while the app is off only the safe ones are preselected
+			if (connectedApp.isGroupGranted(group) && (group.isSafe() || connectedApp.isEnabled())) {
 				granted.add(group);
 			}
 		}
