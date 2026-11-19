@@ -127,22 +127,22 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	public void updateParkingPoint(@NonNull FavouritePoint point) {
-		if (point.getSpecialPointType() == SpecialPointType.PARKING) {
-			// FavouritesHelper.setParkingPoint() keeps the pick-up time in pickupDate and the parking time in timestamp
-			long pickupTime = point.getPickupDate();
-			boolean timeRestricted = pickupTime > 0;
-			setParkingType(timeRestricted);
-			if (timeRestricted) {
-				setParkingTime(pickupTime);
-			}
-			setParkingPickupDate(point.getTimestamp());
-			setParkingPosition(point.getLatitude(), point.getLongitude());
-			addOrRemoveParkingEvent(point.getCalendarEvent());
-
-			if (point.getCalendarEvent()) {
-				addCalendarEvent(app);
-			}
+		if (point.getSpecialPointType() != SpecialPointType.PARKING) {
+			return;
 		}
+
+		long pickupTime = point.getPickupDate();
+		long time = pickupTime > 0 ? pickupTime : -1;
+		// GPX stores whole seconds; an unchanged restore must preserve local milliseconds.
+		if (getParkingTime() / 1000 != time / 1000) {
+			setParkingTime(time);
+		}
+		parkingType.set(time > 0);
+		if (getStartParkingTime() / 1000 != point.getTimestamp() / 1000) {
+			setParkingPickupDate(point.getTimestamp());
+		}
+		setParkingPosition(point.getLatitude(), point.getLongitude());
+		addOrRemoveParkingEvent(point.getCalendarEvent());
 	}
 
 	public boolean clearParkingPosition() {
