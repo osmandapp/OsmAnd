@@ -484,6 +484,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 		mainView.setListener(slideTouchListener);
 		mainView.setOnTouchListener(slideTouchListener);
+		mainView.setOnHoverListener((v, event) -> true);
 
 		buildHeader();
 
