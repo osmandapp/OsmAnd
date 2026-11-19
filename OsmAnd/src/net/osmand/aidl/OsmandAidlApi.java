@@ -377,9 +377,6 @@ public class OsmandAidlApi {
 							zoom = Math.max(zoom, mapView.getMinZoom());
 							zoomFloatPart = 0;
 						}
-						if (!Float.isNaN(rotation)) {
-							mapView.setRotate(rotation, false);
-						}
 						// as a pan by hand: a map linked to my location would go back to it at the next fix
 						app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 						if (animated) {
@@ -387,6 +384,10 @@ public class OsmandAidlApi {
 						} else {
 							mapView.setLatLon(lat, lon);
 							mapView.setZoomWithFloatPart(zoom, zoomFloatPart);
+						}
+						// after the move: moving or zooming the map stops a rotation animation started before it
+						if (!Float.isNaN(rotation)) {
+							mapView.setRotate(rotation, false);
 						}
 					}
 					mapActivity.refreshMap();
@@ -1856,9 +1857,6 @@ public class OsmandAidlApi {
 		}
 		app.runInUIThread(() -> {
 			OsmandMapTileView mapView = mapActivity.getMapView();
-			if (!Float.isNaN(rotation)) {
-				mapView.setRotate(rotation, false);
-			}
 			if (!Float.isNaN(elevationAngle)) {
 				mapView.setElevationAngle(elevationAngle);
 			}
@@ -1878,6 +1876,10 @@ public class OsmandAidlApi {
 					mapView.setLatLon(latitude, longitude);
 					mapView.setZoomWithFloatPart(baseZoom, zoomFloatPart);
 				}
+			}
+			// after the move: moving or zooming the map stops a rotation animation started before it
+			if (!Float.isNaN(rotation)) {
+				mapView.setRotate(rotation, false);
 			}
 			mapActivity.refreshMap();
 		});
