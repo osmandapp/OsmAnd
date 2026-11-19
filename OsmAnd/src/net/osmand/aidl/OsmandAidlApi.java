@@ -1381,10 +1381,21 @@ public class OsmandAidlApi {
 		}
 	}
 
+	// the path comes from the calling app: null when it is empty or leaves the tracks folder
+	@Nullable
+	private File getGpxImportDestination(@Nullable String destinationPath) {
+		if (Algorithms.isEmpty(destinationPath)) {
+			return null;
+		}
+		File tracksDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File destination = new File(tracksDir, destinationPath);
+		return Algorithms.isSubDirectory(tracksDir, destination) ? destination : null;
+	}
+
 	boolean importGpxFromFile(File source, String destinationPath, String color, boolean show) {
-		if (source != null && !Algorithms.isEmpty(destinationPath)) {
+		File destination = getGpxImportDestination(destinationPath);
+		if (source != null && destination != null) {
 			if (source.exists() && source.canRead()) {
-				File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 				if (destination.getParentFile().canWrite()) {
 					boolean destinationExists = destination.exists();
 					if (!destinationExists) {
@@ -1404,8 +1415,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean importGpxFromUri(Uri gpxUri, String destinationPath, String color, boolean show) {
-		if (gpxUri != null && !Algorithms.isEmpty(destinationPath)) {
-			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
+		File destination = getGpxImportDestination(destinationPath);
+		if (gpxUri != null && destination != null) {
 			ParcelFileDescriptor gpxParcelDescriptor;
 			try {
 				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
@@ -1442,8 +1453,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean importGpxFromData(String sourceRawData, String destinationPath, String color, boolean show) {
-		if (!Algorithms.isEmpty(sourceRawData) && !Algorithms.isEmpty(destinationPath)) {
-			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
+		File destination = getGpxImportDestination(destinationPath);
+		if (!Algorithms.isEmpty(sourceRawData) && destination != null) {
 			try {
 				InputStream is = new ByteArrayInputStream(sourceRawData.getBytes());
 				FileOutputStream fout = new FileOutputStream(destination);
