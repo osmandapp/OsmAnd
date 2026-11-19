@@ -19,6 +19,8 @@ class McpHttpServer(
 		const val BRIDGE_FILE = "osmand_mcp_bridge.py"
 		private const val TAG = "OsmAndAiConnector"
 		private val SUPPORTED_VERSIONS = listOf("2025-06-18", "2025-03-26", "2024-11-05")
+		// far above the largest request, a flyover with a few gpx_data tracks of ~300 KB
+		private const val MAX_BODY_BYTES = 8 * 1024 * 1024
 		private const val INSTRUCTIONS = "Controls the OsmAnd map app on an Android phone through OsmAnd's AIDL API. " +
 				"Start with osmand_status. Settings are changed with osmand_set_preference; most settings are per profile. " +
 				"Map widgets: osmand_widget_layout, then osmand_set_widgets. " +
@@ -56,6 +58,11 @@ class McpHttpServer(
 
 	private fun handlePost(session: IHTTPSession): Response {
 		val length = session.headers["content-length"]?.toIntOrNull() ?: 0
+		if (length !in 0..MAX_BODY_BYTES) {
+			// the body stays unread, so the connection cannot carry another request
+			return text(Response.Status.PAYLOAD_TOO_LARGE, "Request body over $MAX_BODY_BYTES bytes")
+				.apply { closeConnection(true) }
+		}
 		val body = ByteArray(length)
 		DataInputStream(session.inputStream).readFully(body)
 		val req = try {
