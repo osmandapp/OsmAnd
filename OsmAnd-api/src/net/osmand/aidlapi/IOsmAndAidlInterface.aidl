@@ -996,7 +996,7 @@ interface IOsmAndAidlInterface {
 
     /**
      * Page of track points (coordinates, elevation, time, speed) of a GPX file
-     * or of the track being recorded.
+     * or of the track being recorded, at most 2000 points per page (AGpxPoints.total has them all).
      *
      * @return AGpxPoints, or null if the file is not found or the app has no access
      */

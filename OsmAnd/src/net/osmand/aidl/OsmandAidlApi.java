@@ -247,6 +247,8 @@ public class OsmandAidlApi {
 	};
 
 	private static final int DEFAULT_ZOOM = 15;
+	// a bigger page of getGpxPoints does not fit into a Binder transaction (about 4,500 points)
+	private static final int MAX_GPX_POINTS_PAGE = 2000;
 
 	private final OsmandApplication app;
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
@@ -2010,7 +2012,7 @@ public class OsmandAidlApi {
 		}
 		ArrayList<net.osmand.aidlapi.gpx.AGpxPoint> page = new ArrayList<>();
 		int from = Math.max(0, offset);
-		int to = Math.min(points.size(), from + Math.max(0, limit));
+		int to = Math.min(points.size(), from + Math.max(0, Math.min(limit, MAX_GPX_POINTS_PAGE)));
 		for (int i = from; i < to; i++) {
 			WptPt point = points.get(i);
 			page.add(new net.osmand.aidlapi.gpx.AGpxPoint(point.getLat(), point.getLon(), point.getEle(),
