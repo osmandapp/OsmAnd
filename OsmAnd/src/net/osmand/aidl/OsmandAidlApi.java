@@ -1862,6 +1862,11 @@ public class OsmandAidlApi {
 			if (!Float.isNaN(elevationAngle)) {
 				mapView.setElevationAngle(elevationAngle);
 			}
+			if ((Double.isNaN(latitude) || Double.isNaN(longitude)) && !Float.isNaN(zoom) && zoom > 0) {
+				// zoom alone keeps the centre and the link to my location, as the zoom buttons do
+				int baseZoom = (int) zoom;
+				mapView.setZoomWithFloatPart(baseZoom, zoom - baseZoom);
+			}
 			if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
 				// as a pan by hand: a map linked to my location would go back to it at the next fix
 				app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
