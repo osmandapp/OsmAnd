@@ -18,6 +18,8 @@ import net.osmand.shared.routing.RouteRegion
 import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
+import net.osmand.shared.util.KCollator
+import net.osmand.shared.util.primaryCollator
 import net.osmand.shared.util.KCollatorStringMatcher
 import net.osmand.shared.util.KLock
 import net.osmand.shared.util.KMapUtils
@@ -1388,7 +1390,7 @@ class BinaryMapIndexReader {
 		for (i in queries.indices) {
 			prefixesByQuery.add(LinkedHashMap())
 		}
-		readIndexedStringTablePrefixes(queries.map { KCollatorStringMatcher.PreparedName(it) }, "", prefixesByQuery)
+		readIndexedStringTablePrefixes(queries.map { KCollatorStringMatcher.PreparedName(it) }, "", prefixesByQuery, primaryCollator())
 
 		val result = ArrayList<List<QueryToken.Prefix>>(queries.size)
 		for (prefixes in prefixesByQuery) {
@@ -1448,7 +1450,7 @@ class BinaryMapIndexReader {
 	 */
 	private fun readIndexedStringTablePrefixes(
 		queries: List<KCollatorStringMatcher.PreparedName?>, prefix: String,
-		prefixesByQuery: List<MutableMap<String, Int>>
+		prefixesByQuery: List<MutableMap<String, Int>>, collator: KCollator
 	) {
 		val matched = BooleanArray(queries.size)
 		val matchedSubtables = BooleanArray(queries.size)
@@ -1462,7 +1464,7 @@ class BinaryMapIndexReader {
 					val top = if (prefix.isEmpty()) readTopIndexedStringKey() else null
 					val read = top?.key ?: (prefix + codedIS.readString())
 					key = read
-					shouldWeReadSubtable = matchIndexedStringTablePrefix(queries, read, top, matched, matchedSubtables)
+					shouldWeReadSubtable = matchIndexedStringTablePrefix(queries, read, top, matched, matchedSubtables, collator)
 				}
 				IndexedStringTable.VAL_FIELD_NUMBER -> {
 					val value = readInt().toInt() // FIXME for 64 bit support
@@ -1490,7 +1492,7 @@ class BinaryMapIndexReader {
 								subqueries[i] = null
 							}
 						}
-						readIndexedStringTablePrefixes(subqueries, key, prefixesByQuery)
+						readIndexedStringTablePrefixes(subqueries, key, prefixesByQuery, collator)
 					} else {
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit())
 					}
@@ -1503,7 +1505,7 @@ class BinaryMapIndexReader {
 
 	private fun matchIndexedStringTablePrefix(
 		queries: List<KCollatorStringMatcher.PreparedName?>, key: String, top: IndexedStringKey?,
-		matched: BooleanArray, matchedSubtables: BooleanArray
+		matched: BooleanArray, matchedSubtables: BooleanArray, collator: KCollator
 	): Boolean {
 		var shouldWeReadSubtable = false
 		var preparedKey = top?.prepared
@@ -1519,10 +1521,10 @@ class BinaryMapIndexReader {
 				top?.prepared = it
 			}
 			val keyStartsWithQuery = KCollatorStringMatcher.cmatchesPrepared(
-				keyName, query.key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+				keyName, query.text, KStringMatcherMode.CHECK_ONLY_STARTS_WITH, collator
 			)
 			val queryStartsWithKey = KCollatorStringMatcher.cmatchesPrepared(
-				query, keyName.key, KStringMatcherMode.CHECK_ONLY_STARTS_WITH
+				query, keyName.text, KStringMatcherMode.CHECK_ONLY_STARTS_WITH, collator
 			)
 			val potentialBranchMatch = keyStartsWithQuery || queryStartsWithKey
 			matched[i] = potentialBranchMatch

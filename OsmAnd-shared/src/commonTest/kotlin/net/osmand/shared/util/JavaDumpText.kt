@@ -57,7 +57,18 @@ internal fun readJavaDump(test: String, env: String, file: String, compatTest: S
 }
 
 /**
- * [readJavaDump], line by line: for a dump too large to hold as one string. The caller closes it.
+ * Reads a Java compatibility dump line by line. The caller closes it.
+ *
+ * To reproduce the iOS index and spatial comparisons, run the ordinary Java tests with ICU4J
+ * 77.1 and its locale SPI on the JDK 17 boot class path. Set ICU_JARS to the two Maven Central
+ * artifacts com.ibm.icu:icu4j and com.ibm.icu:icu4j-localespi, joined by the path separator.
+ * From the Android project, with OSMAND_MAPS_DIR pointing to the regional OBF test maps:
+ * ```sh
+ * JAVA_TOOL_OPTIONS="-Xbootclasspath/a:$ICU_JARS -Djava.locale.providers=SPI,CLDR -Duser.language=en -Duser.country=US" \
+ * OSMAND_SEARCH_COMPAT=1 OSMAND_TEST_HEAP=3g ./gradlew :OsmAnd-java:test --rerun \
+ *   --tests '*NameIndexCompatTest' --tests '*SpatialSearchTokenCompatTest' \
+ *   --tests '*SpatialTextSearchCompatTest' --tests '*SpatialTextSearchAPICompatTest'
+ * ```
  */
 internal fun openJavaDump(test: String, env: String, file: String, compatTest: String): BufferedSource? {
 	val path = javaDumpPath(test, env, file, compatTest) ?: return null

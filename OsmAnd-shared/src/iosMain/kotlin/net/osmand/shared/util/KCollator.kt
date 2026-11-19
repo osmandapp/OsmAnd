@@ -1,7 +1,13 @@
+@file:OptIn(kotlinx.cinterop.ExperimentalForeignApi::class, kotlin.experimental.ExperimentalNativeApi::class)
+
 package net.osmand.shared.util
 
+import kotlinx.cinterop.refTo
+import net.osmand.shared.icu.closePrimaryCollator
+import net.osmand.shared.icu.containsSpan
+import net.osmand.shared.icu.equalsAtAnyOffset
+import net.osmand.shared.icu.openPrimaryCollator
 import kotlinx.cinterop.BetaInteropApi
-import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSCaseInsensitiveSearch
 import platform.Foundation.NSDiacriticInsensitiveSearch
 import platform.Foundation.NSLocale
@@ -14,16 +20,11 @@ import platform.Foundation.compare
 import platform.Foundation.create
 import platform.Foundation.currentLocale
 import platform.Foundation.languageCode
+import platform.Foundation.localeIdentifier
+import kotlin.native.ref.createCleaner
 
-/**
- * The options `OACollatorStringMatcher` compares names with on iOS today, which is what a primary
- * strength collator ignores: case, accents and the full width forms.
- *
- * Use the current locale, like Android's primary collator. Without a locale NSString puts
- * letters such as Ø and Ł after Z instead of comparing their primary letter weights.
- */
-private val PRIMARY_OPTIONS =
-	NSCaseInsensitiveSearch or NSDiacriticInsensitiveSearch or NSWidthInsensitiveSearch
+@kotlin.native.concurrent.ThreadLocal
+private var lastCollator: IOSCollator? = null
 
 actual fun primaryCollator(): KCollator {
 	val current = NSLocale.currentLocale
@@ -31,20 +32,37 @@ actual fun primaryCollator(): KCollator {
 		"ro", "cs", "sk" -> NSLocale(localeIdentifier = "en_US")
 		else -> current
 	}
-	return NSStringCollator(locale)
+	return lastCollator?.takeIf { it.locale == locale } ?: IOSCollator(locale).also { lastCollator = it }
 }
 
-private class NSStringCollator(private val locale: NSLocale) : KCollator {
+// ICU accepts a zero length, but refTo needs an address even for an empty span.
+private fun String.utf16() = ifEmpty { "\u0000" }.refTo(0)
 
-	@OptIn(BetaInteropApi::class, ExperimentalForeignApi::class)
+private class IOSCollator(val locale: NSLocale) : KCollator {
+	private val handle = checkNotNull(openPrimaryCollator(locale.localeIdentifier)) { "Cannot open ICU collator for $locale" }
+	@Suppress("unused")
+	private val cleaner = createCleaner(handle) { closePrimaryCollator(it) }
+
+	@OptIn(BetaInteropApi::class)
 	override fun compare(source: String, target: String): Int =
-		when (NSString.create(string = source).compare(
-			target, PRIMARY_OPTIONS, NSMakeRange(0u, source.length.toULong()), locale
-		)) {
+		when (NSString.create(string = source).compare(target,
+			NSCaseInsensitiveSearch or NSDiacriticInsensitiveSearch or NSWidthInsensitiveSearch,
+			NSMakeRange(0u, source.length.toULong()), locale)) {
 			NSOrderedSame -> 0
 			NSOrderedAscending -> -1
 			else -> 1
 		}
 
 	override fun equals(source: String, target: String): Boolean = compare(source, target) == 0
+
+	override fun contains(base: String, part: String): Boolean =
+		containsSpan(handle, base.utf16(), base.length, part.utf16(), part.length) != 0
+
+	override fun equalsAtAny(base: String, part: String, length: Int, offsets: IntArray, count: Int): Boolean {
+		require(count in 0..offsets.size && length in 0..base.length)
+		if (count == 0) return false
+		val result = equalsAtAnyOffset(handle, base.utf16(), base.length, length, part.utf16(), part.length, offsets.refTo(0), count)
+		require(result >= 0) { "Invalid collation span" }
+		return result != 0
+	}
 }
