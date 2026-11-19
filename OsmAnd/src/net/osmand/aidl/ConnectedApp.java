@@ -68,6 +68,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	static final String ENABLED_KEY = "enabled";
 	static final String GROUPS_KEY = "groups";
 	static final String LAST_USE_KEY = "last_use";
+	static final String SIGNATURE_KEY = "signature";
 
 	// the last use is kept in memory on every call and saved at most once in this interval
 	private static final long LAST_USE_SAVE_INTERVAL = 5 * 60 * 1000;
@@ -94,6 +95,9 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	private volatile Set<AidlPermissionGroup> groups;
 	private volatile long lastUseTime;
 	private volatile long savedLastUseTime;
+	// SHA-256 of the certificate the app was signed with when it got its grants
+	@Nullable
+	private volatile String signature;
 
 	ConnectedApp(OsmandApplication app, String pack, boolean enabled, @NonNull Set<AidlPermissionGroup> groups,
 	             long lastUseTime) {
@@ -181,6 +185,15 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			return true;
 		}
 		return false;
+	}
+
+	@Nullable
+	String getSignature() {
+		return signature;
+	}
+
+	void setSignature(@Nullable String signature) {
+		this.signature = signature;
 	}
 
 	public boolean isMethodAllowed(@NonNull String method) {
