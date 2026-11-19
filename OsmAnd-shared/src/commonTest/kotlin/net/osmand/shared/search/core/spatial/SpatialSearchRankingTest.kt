@@ -19,6 +19,7 @@ class SpatialSearchRankingTest {
 	private fun city(name: String = "Espoo", type: CityType = CityType.CITY) = City(type).apply { setName(name) }
 	private fun group(kind: String, name: String, nameTag: String = "name") = listOf(
 		TagValuePair("place", kind, 0), TagValuePair(nameTag, name, 0))
+	private fun outside(r: SpatialSearchResult) = ranking.outsideCity(r.getFirstRef()!!, ranking.matchedCity(r))
 	private fun result(groups: List<List<TagValuePair>>, vararg cities: City): SpatialSearchResult {
 		val amenity = Amenity().apply { setName("Lidl"); setTagGroups(groups.mapIndexed { i, g -> i to g }.toMap().toMutableMap()) }
 		val result = SpatialSearchResult(SpatialSearchResultsList(), 0, null, null, null)
@@ -33,29 +34,35 @@ class SpatialSearchRankingTest {
 
 	@Test fun poiInAnotherCityLosesExactlyTheOutsideCityWeight() {
 		val result = result(listOf(group("city", "Helsinki")), city())
-		assertTrue(ranking.outsideMatchedCity(result))
+		assertTrue(outside(result))
 		ranking.wOutsideCity = 0.0
 		val withoutPenalty = ranking.score(result, null)
-		ranking.wOutsideCity = 1.0
-		assertEquals(withoutPenalty - 1.0, ranking.score(result, null), 1e-12)
+		ranking.wOutsideCity = 6.0
+		assertEquals(withoutPenalty - 6.0, ranking.score(result, null), 1e-12)
 	}
 
 	@Test fun matchingLocalizedNameAndCaseAvoidPenalty() {
 		val city = city().apply { setName("sv", "Esbo") }
-		assertFalse(ranking.outsideMatchedCity(result(listOf(group("city", "ESBO", "name:sv")), city)))
-		assertFalse(ranking.outsideMatchedCity(result(listOf(group("city", "Helsinki"), group("city", "Espoo")), city)))
+		assertFalse(outside(result(listOf(group("city", "ESBO", "name:sv")), city)))
+		assertFalse(outside(result(listOf(group("city", "Helsinki"), group("city", "Espoo")), city)))
 	}
 
 	@Test fun missingSettlementOrAnotherKindDoesNotProveOutsideCity() {
-		assertFalse(ranking.outsideMatchedCity(result(emptyList(), city())))
-		assertFalse(ranking.outsideMatchedCity(result(listOf(group("town", "Helsinki")), city())))
-		assertFalse(ranking.outsideMatchedCity(result(listOf(group("city", "Helsinki")))))
+		assertFalse(outside(result(emptyList(), city())))
+		assertFalse(outside(result(listOf(group("village", "Helsinki")), city())))
+		assertFalse(outside(result(listOf(group("city", "Helsinki")))))
+	}
+
+	@Test fun townHasTheRankOfCity() {
+		assertTrue(outside(result(listOf(group("town", "Linz")), city("Leonding", CityType.TOWN))))
+		assertTrue(outside(result(listOf(group("city", "Linz")), city("Leonding", CityType.TOWN))))
+		assertFalse(outside(result(listOf(group("town", "Leonding")), city("Leonding", CityType.TOWN))))
 	}
 
 	@Test fun boundariesAndPostcodesAreNotMatchedCities() {
 		for (type in listOf(CityType.BOUNDARY, CityType.POSTCODE, CityType.DISTRICT)) {
-			assertFalse(ranking.outsideMatchedCity(result(listOf(group("city", "Helsinki")), city(type = type))))
+			assertFalse(outside(result(listOf(group("city", "Helsinki")), city(type = type))))
 		}
-		assertTrue(ranking.outsideMatchedCity(result(listOf(group("city", "Helsinki")), city(type = CityType.BOUNDARY), city())))
+		assertTrue(outside(result(listOf(group("city", "Helsinki")), city(type = CityType.BOUNDARY), city())))
 	}
 }
