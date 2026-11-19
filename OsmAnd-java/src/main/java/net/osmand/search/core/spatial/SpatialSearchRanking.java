@@ -174,26 +174,13 @@ public class SpatialSearchRanking {
 		SpatialSearchResultRef city = matchedCity(r);
 		LatLon poi = r.getLatLon(), centre = city == null ? null : city.atom.object.getLocation();
 		int[] b = city == null || city.atom.coords == null ? null : city.atom.coords.bbox31;
-		if (centre == null || poi == null || b == null || !namedCategory(r.getFirstRef())) {
+		if (centre == null || poi == null || b == null || !namedByKind(r.getFirstRef())) {
 			return direct;
 		}
 		int x = MapUtils.get31TileNumberX(person.getLongitude()), y = MapUtils.get31TileNumberY(person.getLatitude());
 		double outside = distKm(x, y, Math.min(b[0], b[2]), Math.min(b[1], b[3]), Math.max(b[0], b[2]), Math.max(b[1], b[3]));
 		double via = (MapUtils.getDistance(centre, poi) + WAY_TO_CITY_SHARE * MapUtils.getDistance(person, centre)) / 1000.0;
 		return Math.min(direct, direct + outside / (outside + halfWeightKm) * (via - direct));
-	}
-
-	/** the query named a category of the object (a brand or a kind: "lidl", "cafe"), not only words of its name:
-	 *  "hofer linz" leaves the physiotherapist Hofer-Worbis where it was */
-	private static boolean namedCategory(SpatialSearchResultRef ref) {
-		for (SpatialSearchToken t : ref.tokens) {
-			for (int id : t.poiCategoryIds) {
-				if (ref.atom.poiTypes != null && ref.atom.poiTypes.contains(id)) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	private static boolean outsideCity(Amenity a, City c) {
