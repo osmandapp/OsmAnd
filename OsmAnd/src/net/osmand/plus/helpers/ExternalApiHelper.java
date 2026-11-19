@@ -632,7 +632,7 @@ public class ExternalApiHelper {
 			case API_CMD_RECORD_VIDEO:
 			case API_CMD_RECORD_PHOTO:
 			case API_CMD_STOP_AV_REC:
-				return AidlPermissionGroup.RECORDING;
+				return AidlPermissionGroup.NOTES;
 			case API_CMD_EXECUTE_QUICK_ACTION:
 			case API_CMD_GET_QUICK_ACTION_INFO:
 				return AidlPermissionGroup.SETTINGS;
