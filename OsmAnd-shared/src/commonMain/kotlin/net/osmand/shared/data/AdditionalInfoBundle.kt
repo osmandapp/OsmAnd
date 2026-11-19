@@ -13,6 +13,7 @@ import net.osmand.shared.data.Amenity.Companion.WIKIDATA
 import net.osmand.shared.data.Amenity.Companion.WIKIMEDIA_COMMONS
 import net.osmand.shared.data.Amenity.Companion.WIKI_PHOTO
 import net.osmand.shared.gpx.GpxUtilities
+import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.osm.PoiType
@@ -358,7 +359,8 @@ class AdditionalInfoBundle(
 			GpxUtilities.COLOR_NAME_EXTENSION, GpxUtilities.ICON_NAME_EXTENSION,
 			GpxUtilities.BACKGROUND_TYPE_EXTENSION, GpxUtilities.PROFILE_TYPE_EXTENSION,
 			GpxUtilities.ADDRESS_EXTENSION, GpxUtilities.AMENITY_ORIGIN_EXTENSION,
-			TYPE, SUBTYPE, GpxUtilities.ORIGIN_EXTENSION, GpxUtilities.OSM_URL_EXTENSION
+			TYPE, SUBTYPE, GpxUtilities.ORIGIN_EXTENSION, GpxUtilities.OSM_URL_EXTENSION,
+			PointAttributes.POINT_CREATED_ON
 		)
 
 		private val SERVICE_KEYS = setOf(

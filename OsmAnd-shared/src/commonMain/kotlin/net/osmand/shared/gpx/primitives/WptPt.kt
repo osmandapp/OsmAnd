@@ -322,6 +322,21 @@ class WptPt : GpxExtensions, Linkable {
 		getExtensionsToWrite()[GpxUtilities.TRKPT_INDEX_EXTENSION] = index.toString()
 	}
 
+	/** Time the point was created, from the osmand:created_on extension, or 0 if it is absent. */
+	fun getCreatedOn(): Long {
+		val value = getExtension(PointAttributes.POINT_CREATED_ON) ?: return 0L
+		return GpxUtilities.parseTime(value)
+	}
+
+	fun setCreatedOn(createdOn: Long) {
+		val extensions = getExtensionsToWrite()
+		if (createdOn == 0L) {
+			extensions.remove(PointAttributes.POINT_CREATED_ON)
+		} else {
+			extensions[PointAttributes.POINT_CREATED_ON] = GpxUtilities.formatTime(createdOn)
+		}
+	}
+
 	override fun hashCode(): Int {
 		return KAlgorithms.hash(name, category, desc, comment, lat, lon)
 	}

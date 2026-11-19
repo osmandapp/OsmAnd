@@ -37,6 +37,7 @@ class PointAttributes(
 
 		const val POINT_SPEED = "point_speed"
 		const val POINT_ELEVATION = "point_elevation"
+		const val POINT_CREATED_ON = OSMAND_EXTENSIONS_PREFIX + "created_on"
 	}
 
 	var speed: Float = Float.NaN
