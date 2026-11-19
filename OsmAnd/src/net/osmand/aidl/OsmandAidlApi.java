@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -475,7 +477,9 @@ public class OsmandAidlApi {
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
 		try {
 			receivers.put(filter, rec);
-			AndroidUtils.registerBroadcastReceiver(ma, filter, rec, true);
+			// OsmAnd sends these as implicit broadcasts, so the receiver stays exported; the signature permission keeps other apps out
+			String permission = ma.getPackageName() + ".DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION";
+			ContextCompat.registerReceiver(ma, rec, new IntentFilter(filter), permission, null, ContextCompat.RECEIVER_EXPORTED);
 		} catch (IllegalStateException e) {
 			LOG.error(e);
 		}
