@@ -57,6 +57,7 @@ import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Predicate;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.TLongSet;
@@ -71,7 +72,6 @@ public class TravelObfHelper implements TravelHelper {
 	private static final int MAX_SEARCH_RADIUS = 800 * 1000;
 	private static final int TRAVEL_GPX_SEARCH_RADIUS = 10 * 1000; // Ref: POI_SEARCH_POINTS_INTERVAL_M in tools
 	private static final int MAX_TRAVEL_GPX_SEARCH_RADIUS = 50 * 1000;
-	private static final int ROUTES_ON_LINE_RADIUS = 25;
 	private static final int ROUTES_ON_LINE_ZOOM = 17;
 
 	private final OsmandApplication app;
@@ -188,12 +188,14 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon ll, @NonNull NetworkRouteSelectorFilter filter) {
+	public synchronized List<TravelGpx> searchTravelGpx(@NonNull LatLon ll, @NonNull NetworkRouteSelectorFilter filter,
+	                                                    @NonNull Predicate<BinaryMapDataObject> isRouteDrawn,
+	                                                    int radius) {
 		Set<String> routeIds = new HashSet<>();
 
 		SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader.buildSearchRequest(0, 0, 0, 0,
-				ROUTES_ON_LINE_ZOOM, getRoutesSearchFilter(filter), getRoutesResultMatcher(routeIds, ll));
-		mapRequest.setBBoxRadius(ll.getLatitude(), ll.getLongitude(), ROUTES_ON_LINE_RADIUS);
+				ROUTES_ON_LINE_ZOOM, getRoutesSearchFilter(filter), getRoutesResultMatcher(routeIds, ll, isRouteDrawn, radius));
+		mapRequest.setBBoxRadius(ll.getLatitude(), ll.getLongitude(), radius);
 
 		if (!Algorithms.isEmpty(filter.typeFilter)) {
 			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
@@ -243,14 +245,16 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	private ResultMatcher<BinaryMapDataObject> getRoutesResultMatcher(@NonNull Set<String> routeIds,
-	                                                                  @NonNull LatLon pointLatLon) {
+	                                                                  @NonNull LatLon pointLatLon,
+	                                                                  @NonNull Predicate<BinaryMapDataObject> isRouteDrawn,
+	                                                                  int radius) {
 		return new ResultMatcher<>() {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				if (object.getPointsLength() > 1 && !TravelObfGpxFileReader.isDeletedBinaryMapDataObject(object)) {
 					String routeIdPrefixed = object.getTagValue(ROUTE_ID);
 					if (ObfConstants.getOsmIdFromPrefixedRouteId(routeIdPrefixed) > 0
-							&& matchByDistance(object, pointLatLon)) {
+							&& matchByDistance(object, pointLatLon) && isRouteDrawn.test(object)) {
 						routeIds.add(routeIdPrefixed);
 					}
 				}
@@ -264,7 +268,7 @@ public class TravelObfHelper implements TravelHelper {
 							MapUtils.get31LatitudeY(object.getPoint31YTile(i)),
 							MapUtils.get31LongitudeX(object.getPoint31XTile(i)),
 							MapUtils.get31LatitudeY(object.getPoint31YTile(i + 1)),
-							MapUtils.get31LongitudeX(object.getPoint31XTile(i + 1))) <= ROUTES_ON_LINE_RADIUS) {
+							MapUtils.get31LongitudeX(object.getPoint31XTile(i + 1))) <= radius) {
 						return true;
 					}
 				}

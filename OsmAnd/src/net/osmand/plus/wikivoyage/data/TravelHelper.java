@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.data.LatLon;
@@ -13,6 +14,7 @@ import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public interface TravelHelper {
 
@@ -70,7 +72,8 @@ public interface TravelHelper {
 	TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId);
 
 	@NonNull
-	List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull NetworkRouteSelectorFilter filter);
+	List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull NetworkRouteSelectorFilter filter,
+	                                @NonNull Predicate<BinaryMapDataObject> isRouteDrawn, int radius);
 
 	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
 					   @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition);

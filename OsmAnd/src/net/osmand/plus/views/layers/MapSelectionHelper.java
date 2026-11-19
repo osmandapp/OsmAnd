@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
@@ -38,6 +40,7 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.MapLayers;
@@ -46,6 +49,8 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.search.AmenitySearcher;
@@ -57,12 +62,14 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 
 public class MapSelectionHelper {
 
 	private static final Log log = PlatformUtil.getLog(MapSelectionHelper.class);
 	private static final int TILE_SIZE = 256;
+	private static final int ROUTES_ON_LINE_RADIUS = 25;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -138,6 +145,13 @@ public class MapSelectionHelper {
 			selectObjectsFromOpenGl(result, rules, tileBox, point);
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, rules, nativeLib, tileBox, point);
+		}
+		if (result.isEmpty() && !rules.isOnlyPoints()) {
+			// both engines hit-test only labels and icons, so a tap on a route line is matched by the route geometry
+			int touchRadius = OsmandMapLayer.getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi());
+			int radius = (int) tileBox.getDistance((int) point.x, (int) point.y, (int) point.x + touchRadius, (int) point.y);
+			addFilteredOsmRoutesAtLatLon(result.getPointLatLon(), createRouteFilter(),
+					createRouteDrawnFilter(tileBox.getZoom()), radius, result);
 		}
 	}
 
@@ -220,6 +234,7 @@ public class MapSelectionHelper {
 			renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, coordX, coordY, true);
 		}
 		if (renderedObjects != null) {
+			Predicate<BinaryMapDataObject> isRouteDrawn = createRouteDrawnFilter(tileBox.getZoom());
 			Set<Long> uniqueRenderedObjectIds = new HashSet<>();
 			for (RenderedObject renderedObject : renderedObjects) {
 				Long objectId = renderedObject.getId();
@@ -274,7 +289,7 @@ public class MapSelectionHelper {
 
 				if (isNewOsmRoute || isOldOsmRoute) {
 					NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, result);
+					addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, ROUTES_ON_LINE_RADIUS, result);
 				}
 				if (isClickableWay) {
 					addClickableWay(result, app.getClickableWayHelper()
@@ -284,7 +299,8 @@ public class MapSelectionHelper {
 					addTravelGpx(result, routeId, objectLatLon); // WikiVoyage or User TravelGpx
 				}
 
-				boolean allowMapObjects = !renderedObject.isDrawOnPath() &&
+				// a route segment (its shield) is the route itself, already added by addFilteredOsmRoutesAtLatLon
+				boolean allowMapObjects = !isNewOsmRoute && !renderedObject.isDrawOnPath() &&
 						!NetworkRouteSelector.containsUnclickableRouteTags(tags);
 
 				if (allowMapObjects) {
@@ -310,6 +326,7 @@ public class MapSelectionHelper {
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
+			Predicate<BinaryMapDataObject> isRouteDrawn = createRouteDrawnFilter(tileBox.getZoom());
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
 				MapSymbol mapSymbol = symbolInfo.getMapSymbol();
@@ -358,7 +375,7 @@ public class MapSelectionHelper {
 
 						if (isNewOsmRoute || isOldOsmRoute) {
 							NetworkRouteSelectorFilter enabledRouteTypes = createRouteFilter();
-							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, result);
+							addFilteredOsmRoutesAtLatLon(objectLatLon, enabledRouteTypes, isRouteDrawn, ROUTES_ON_LINE_RADIUS, result);
 						}
 						if (isClickableWay) {
 							addClickableWay(result, app.getClickableWayHelper()
@@ -368,7 +385,7 @@ public class MapSelectionHelper {
 							addTravelGpx(result, routeId, objectLatLon); // WikiVoyage or User TravelGpx
 						}
 
-						boolean allowMapObjects = getOnPathMapSymbol(symbolInfo) == null &&
+						boolean allowMapObjects = !isNewOsmRoute && getOnPathMapSymbol(symbolInfo) == null &&
 								!NetworkRouteSelector.containsUnclickableRouteTags(tags);
 
 						if (allowMapObjects) {
@@ -554,12 +571,45 @@ public class MapSelectionHelper {
 		return latLon;
 	}
 
-	private void addFilteredOsmRoutesAtLatLon(LatLon ll, NetworkRouteSelectorFilter filter, MapSelectionResult result) {
-		for (TravelGpx travelGpx : app.getTravelHelper().searchTravelGpx(ll, filter)) {
+	private void addFilteredOsmRoutesAtLatLon(LatLon ll, NetworkRouteSelectorFilter filter,
+			Predicate<BinaryMapDataObject> isRouteDrawn, int radius, MapSelectionResult result) {
+		for (TravelGpx travelGpx : app.getTravelHelper().searchTravelGpx(ll, filter, isRouteDrawn, radius)) {
 			if (travelGpx.getAmenity() != null && isUniqueTravelGpx(result.getAllObjects(), travelGpx)) {
 				result.collect(travelGpx.getAmenity(), mapLayers.getPoiMapLayer());
 			}
 		}
+	}
+
+	// Only the routes the map draws are listed: the style decides it by route type, network level and color mode
+	@NonNull
+	private Predicate<BinaryMapDataObject> createRouteDrawnFilter(int zoom) {
+		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (storage == null) {
+			return object -> true; // no style to judge by: keep the filter by route type only
+		}
+		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.MAP, true);
+		RenderingRuleSearchRequest request = app.getResourceManager().getRenderer()
+				.getSearchRequestWithAppliedCustomRules(storage, nightMode);
+		request.saveState();
+		return object -> isLineDrawn(request, object, zoom);
+	}
+
+	// The same check as the renderers' drawPolyline: a line rule is found and gives the line a width and a color
+	// (without a color the line is transparent, e.g. a route whose network class is switched off)
+	private static boolean isLineDrawn(@NonNull RenderingRuleSearchRequest request,
+	                                   @NonNull BinaryMapDataObject object, int zoom) {
+		for (int type : object.getTypes()) {
+			TagValuePair pair = object.getMapIndex().decodeType(type);
+			if (pair != null) {
+				request.setInitialTagValueZoom(pair.tag, pair.value, zoom, object);
+				request.setIntFilter(request.ALL.R_LAYER, object.getSimpleLayer());
+				if (request.search(RenderingRulesStorage.LINE_RULES) && request.isSpecified(request.ALL.R_STROKE_WIDTH)
+						&& request.isSpecified(request.ALL.R_COLOR)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private void addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId, @NonNull LatLon location) {
