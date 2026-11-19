@@ -137,21 +137,12 @@ public class SpatialSearchRanking {
 		if (head == null) {
 			return 0;
 		}
-		Double km = center == null ? null : distanceViaCity(r, center, SpatialSearchResult.getDistance(r, center) / 1000.0);
+		SpatialSearchResultRef city = matchedCity(r);
+		Double km = center == null ? null : distanceViaCity(r, city, center, SpatialSearchResult.getDistance(r, center) / 1000.0);
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
 				- (head.atom.ruleSpelling ? wRuleSpelling : 0)
-				- (outsideMatchedCity(r) ? wOutsideCity : 0);
-	}
-
-	/**
-	 * "lidl espoo": the bbox of Espoo covers Helsinki. A POI is outside the named city when its tag groups hold
-	 * a settlement of the same rank under another name; it loses wOutsideCity. No tag groups - nothing changes.
-	 */
-	static boolean outsideMatchedCity(SpatialSearchResult r) {
-		SpatialSearchResultRef head = r.getFirstRef(), city = matchedCity(r);
-		return head != null && head.atom.object instanceof Amenity a && !Algorithms.isEmpty(a.getTagGroups())
-				&& city != null && outsideCity(a, (City) city.atom.object);
+				- (outsideCity(head, city) ? wOutsideCity : 0);
 	}
 
 	/** the settlement the query named together with the object */
@@ -170,8 +161,7 @@ public class SpatialSearchRanking {
 	 * A POI of a category the query named is as far as from the city's centre plus WAY_TO_CITY_SHARE of the way to it,
 	 * when that is nearer; the farther the person is from the city's bbox, the more, at halfWeightKm by half.
 	 */
-	private double distanceViaCity(SpatialSearchResult r, LatLon person, double direct) {
-		SpatialSearchResultRef city = matchedCity(r);
+	private double distanceViaCity(SpatialSearchResult r, SpatialSearchResultRef city, LatLon person, double direct) {
 		LatLon poi = r.getLatLon(), centre = city == null ? null : city.atom.object.getLocation();
 		int[] b = city == null || city.atom.coords == null ? null : city.atom.coords.bbox31;
 		if (centre == null || poi == null || b == null || !namedByKind(r.getFirstRef())) {
@@ -183,7 +173,15 @@ public class SpatialSearchRanking {
 		return Math.min(direct, direct + outside / (outside + halfWeightKm) * (via - direct));
 	}
 
-	private static boolean outsideCity(Amenity a, City c) {
+	/**
+	 * "lidl espoo": the bbox of Espoo covers Helsinki. A POI is outside the named city when its tag groups hold
+	 * a settlement of the same rank under another name; it loses wOutsideCity. No tag groups - nothing changes.
+	 */
+	private static boolean outsideCity(SpatialSearchResultRef head, SpatialSearchResultRef city) {
+		if (city == null || !(head.atom.object instanceof Amenity a) || Algorithms.isEmpty(a.getTagGroups())) {
+			return false;
+		}
+		City c = (City) city.atom.object;
 		// a town is of the rank of a city: the town Leonding borders the city Linz
 		String kind = c.getType() == City.CityType.TOWN ? "city" : c.getType().name().toLowerCase(Locale.ROOT);
 		boolean sameKind = false;
