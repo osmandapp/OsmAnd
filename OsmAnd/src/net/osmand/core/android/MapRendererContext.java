@@ -31,6 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.building.SunLight;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -623,17 +624,18 @@ public class MapRendererContext {
 		}
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		// The vertex hillshade is drawn only as Terrain shadows, as on iOS
+		// Terrain shadows are the vertex hillshade of the 3D relief
 		if (plugin != null && plugin.isTerrainShadowsEnabled()) {
-			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainTransparency() / 255f);
+			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainShadowsIntensity() / 100f);
 		} else {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
 		if (plugin != null) {
 			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
-			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
-			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+			SunLight sunLight = plugin.getSunLight();
+			elevationConfiguration.setHillshadeSunAngle(sunLight.getLightAltitude());
+			elevationConfiguration.setHillshadeSunAzimuth(sunLight.getLightAzimuth());
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}

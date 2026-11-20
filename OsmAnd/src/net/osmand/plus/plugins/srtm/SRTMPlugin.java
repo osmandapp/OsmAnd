@@ -36,6 +36,8 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Building3DDetailLevel;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
+import net.osmand.plus.plugins.srtm.building.SunLight;
+import net.osmand.plus.plugins.srtm.building.SunLightMode;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -92,26 +94,37 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
 	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
 
+	public static final int MIN_TERRAIN_SHADOWS_INTENSITY = 10;
+	public static final int MAX_TERRAIN_SHADOWS_INTENSITY = 100;
+	public static final int DEFAULT_TERRAIN_SHADOWS_INTENSITY = 40;
+
 
 	public final CommonPreference<Boolean> TERRAIN;
 	public final CommonPreference<String> TERRAIN_MODE;
+	public final CommonPreference<Integer> TERRAIN_SHADOWS_INTENSITY;
 	public final OsmandPreference<Boolean> BUILDINGS_3D_DETAIL_LEVEL;
 	public final OsmandPreference<Boolean> BUILDINGS_3D_ENABLE_COLORING;
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_SUN_ANGLE;
 	public final CommonPreference<Integer> HILLSHADE_SUN_AZIMUTH;
+	public final CommonPreference<SunLightMode> SUN_LIGHT_MODE;
+	public final CommonPreference<Long> SUN_LIGHT_TIME;
 
 	private final StateChangedListener<Boolean> enable3DMapsListener;
 	private final StateChangedListener<Boolean> terrainListener;
 	private final StateChangedListener<Integer> hillshadeSunAngleListener;
 	private final StateChangedListener<Integer> hillshadeSunAzimuthListener;
 	private final StateChangedListener<Boolean> castShadowsListener;
+	private final StateChangedListener<SunLightMode> sunLightModeListener;
+	private final StateChangedListener<Long> sunLightTimeListener;
 	private final StateChangedListener<String> terrainModeListener;
+	private final StateChangedListener<Integer> terrainShadowsIntensityListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 	private final StateChangedListener<MetricsConstants> metricSystemListener;
 	private final StateChangedListener<Boolean> map3DObjectsListener;
 
 
+	private final SunLight sunLight;
 	private TerrainLayer terrainLayer;
 
 	@Override
@@ -128,15 +141,21 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
 		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKeyName()).makeProfile();
+		TERRAIN_SHADOWS_INTENSITY = registerIntPreference("terrain_shadows_intensity", DEFAULT_TERRAIN_SHADOWS_INTENSITY).makeProfile().cache();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
 
 		HILLSHADE_SUN_ANGLE = registerIntPreference("hillshade_sun_angle", DEFAULT_HILLSHADE_SUN_ANGLE).makeGlobal().cache();
 		HILLSHADE_SUN_AZIMUTH = registerIntPreference("hillshade_sun_azimuth", DEFAULT_HILLSHADE_SUN_AZIMUTH).makeGlobal().cache();
+		SUN_LIGHT_MODE = registerEnumStringPreference("sun_light_mode", SunLightMode.MANUAL, SunLightMode.values(), SunLightMode.class).makeGlobal().cache();
+		SUN_LIGHT_TIME = registerLongPreference("sun_light_time", 0).makeGlobal().cache();
+		sunLight = new SunLight(app, this);
 
 		enable3DMapsListener = change -> app.runInUIThread(() -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
+				// Terrain shadows are drawn only on the 3D relief
+				mapContext.updateElevationConfiguration();
 				mapContext.recreateHeightmapProvider();
 			}
 		});
@@ -147,6 +166,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		terrainModeListener = change -> app.runInUIThread(this::updateTerrainRendering);
 		TERRAIN_MODE.addListener(terrainModeListener);
+
+		terrainShadowsIntensityListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		TERRAIN_SHADOWS_INTENSITY.addListener(terrainShadowsIntensityListener);
 		verticalExaggerationListener = scale -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
@@ -183,6 +205,30 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		});
 		settings.CAST_SHADOWS.addListener(castShadowsListener);
+
+		sunLightModeListener = change -> app.runInUIThread(() -> {
+			sunLight.updateLiveUpdates();
+			updateElevationConfiguration();
+		});
+		SUN_LIGHT_MODE.addListener(sunLightModeListener);
+
+		sunLightTimeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		SUN_LIGHT_TIME.addListener(sunLightTimeListener);
+	}
+
+	@NonNull
+	public SunLight getSunLight() {
+		return sunLight;
+	}
+
+	@Override
+	public void mapActivityResume(@NonNull MapActivity activity) {
+		sunLight.setMapVisible(true);
+	}
+
+	@Override
+	public void mapActivityPause(@NonNull MapActivity activity) {
+		sunLight.setMapVisible(false);
 	}
 
 	public void updateElevationConfiguration() {
@@ -200,6 +246,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				mapContext.recreateHeightmapProvider();
 				// 3D tracks take their heights from the heightmaps, as on an ENABLE_3D_MAPS change in MapLayers
 				app.getOsmandMap().getMapLayers().getGpxLayer().setInvalidated(true);
+				app.getOsmandMap().getMapView().refreshMap();
 			}
 		}
 	}
@@ -286,6 +333,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
+		sunLight.setMapVisible(false);
 		NativeCoreContext.updateContourLinesDirectory(app, false);
 	}
 
@@ -295,9 +343,11 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (terrainLayer != null) {
 			app.getOsmandMap().getMapView().removeLayer(terrainLayer);
 		}
-		if (TERRAIN.get() && !getTerrainMode().isTerrainShadows()) {
+		if (TERRAIN.get()) {
 			terrainLayer = new TerrainLayer(context, this);
 			app.getOsmandMap().getMapView().addLayer(terrainLayer, 0.6f);
+			// The new layer passes its tiles to the map renderer only on a map refresh
+			app.getOsmandMap().getMapView().refreshMap();
 		}
 	}
 
@@ -312,7 +362,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	// If enabled, map should be rendered with elevation data (in 3D)
 	public boolean is3DMapsEnabled() {
-		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get() || isTerrainShadowsEnabled();
+		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get();
 	}
 
 	public boolean is3DReliefAllowed() {
@@ -328,9 +378,19 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 
-	// Terrain shadows are drawn on the 3D relief, so they turn it on also without OsmAnd Pro
+	// Terrain shadows shade the 3D relief, unless the Hillshade layer already shades it
 	public boolean isTerrainShadowsEnabled() {
-		return app.useOpenGlRenderer() && isTerrainLayerEnabled() && getTerrainMode().isTerrainShadows();
+		return is3DMapsEnabled() && !isReliefShadedByHillshade();
+	}
+
+	// The Terrain layer is drawn only while the plugin is active, see updateLayers
+	public boolean isReliefShadedByHillshade() {
+		return isActive() && isTerrainLayerEnabled() && getTerrainMode().isHillshade();
+	}
+
+	public int getTerrainShadowsIntensity() {
+		int intensity = TERRAIN_SHADOWS_INTENSITY.get();
+		return Math.max(MIN_TERRAIN_SHADOWS_INTENSITY, Math.min(MAX_TERRAIN_SHADOWS_INTENSITY, intensity));
 	}
 
 	public TerrainMode getTerrainMode() {
@@ -343,9 +403,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public void setTerrainTransparency(int transparency, TerrainMode mode) {
 		mode.setTransparency(transparency);
-		if (mode.isTerrainShadows()) {
-			updateElevationConfiguration();
-		}
 	}
 
 	public void setTerrainZoomValues(int minZoom, int maxZoom, TerrainMode mode) {
@@ -357,10 +414,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public float getVerticalExaggerationScale() {
-		// Vertical exaggeration stays an OsmAnd Pro feature, also when Terrain shadows turn 3D relief on without it
-		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
-			return MIN_VERTICAL_EXAGGERATION;
-		}
 		return normalizeVerticalExaggerationScale(app.getSettings().VERTICAL_EXAGGERATION_SCALE.get());
 	}
 
@@ -377,11 +430,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void resetTransparencyToDefault() {
-		TerrainMode mode = getTerrainMode();
-		mode.resetTransparencyToDefault();
-		if (mode.isTerrainShadows()) {
-			updateElevationConfiguration();
-		}
+		getTerrainMode().resetTransparencyToDefault();
 	}
 
 	public void resetVerticalExaggerationToDefault() {
@@ -525,6 +574,8 @@ public class SRTMPlugin extends OsmandPlugin {
 						item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						item.setSelected(selected);
 						uiAdapter.onDataSetChanged();
+						// The 3D Relief row says whether the Hillshade layer turns its Terrain shadows off
+						uiAdapter.onRefreshItem(RELIEF_3D_ID);
 						updateLayers(mapActivity, mapActivity);
 						mapActivity.refreshMapComplete();
 					});
@@ -561,7 +612,75 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		);
 
+		add3DItems(adapter, mapActivity);
+	}
+
+	/** The rows of 3D Relief and 3D buildings of Configure map; the Terrain screen shows the same two. */
+	public void add3DItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+		if (app.useOpenGlRenderer()) {
+			add3DReliefItem(adapter, mapActivity);
+		}
 		addBuildin3DItem(adapter, mapActivity);
+	}
+
+	/** The switch raises the relief, the row opens the 3D Relief screen. Without OsmAnd Pro it offers the plan. */
+	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+		ContextMenuItem item = new ContextMenuItem(RELIEF_3D_ID)
+				.setTitleId(R.string.relief_3d, activity)
+				.setIcon(R.drawable.ic_action_3d_relief);
+
+		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
+			item.setUseNaturalSecondIconColor(true)
+					.setSecondaryIcon(PurchasingUtils.getProFeatureIconId(isNightMode(activity, app)))
+					.setListener((uiAdapter, view, clicked, isChecked) -> {
+						ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
+						return false;
+					});
+			adapter.addItem(item);
+			return;
+		}
+		boolean enabled = settings.ENABLE_3D_MAPS.get();
+		item.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setRefreshCallback(refreshable -> refreshable.setDescription(get3DReliefDescription()))
+				.setSelected(enabled)
+				.setColor(app, enabled ? R.color.osmand_orange : INVALID_ID)
+				.setListener(new OnRowItemClick() {
+					@Override
+					public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+					                              @NonNull View view, @NonNull ContextMenuItem item) {
+						int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
+						activity.getDashboard().setDashboardVisibility(true, DashboardType.RELIEF_3D, viewCoordinates);
+						return false;
+					}
+
+					@Override
+					public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter,
+					                                  @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+						settings.ENABLE_3D_MAPS.set(isChecked);
+						item.setSelected(isChecked);
+						item.setColor(app, isChecked ? R.color.osmand_orange : INVALID_ID);
+						item.setDescription(get3DReliefDescription());
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(activity));
+						return true;
+					}
+				});
+		adapter.addItem(item);
+	}
+
+	/** Names what shades the relief: Terrain shadows with their intensity, or the Hillshade layer. */
+	@NonNull
+	private String get3DReliefDescription() {
+		if (!settings.ENABLE_3D_MAPS.get()) {
+			return app.getString(R.string.shared_string_off);
+		}
+		String shadows = isReliefShadedByHillshade()
+				? app.getString(R.string.shared_string_off)
+				: getTerrainShadowsIntensity() + "%";
+		return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, app.getString(R.string.shared_string_on),
+				app.getString(R.string.ltr_or_rtl_combine_via_space, app.getString(R.string.terrain_shadows), shadows));
 	}
 
 	private void addBuildin3DItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
