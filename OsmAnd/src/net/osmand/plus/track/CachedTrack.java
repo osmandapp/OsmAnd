@@ -52,6 +52,7 @@ public class CachedTrack {
 	private CachedTrackParams params;
 	private Set<String> availableColoringTypes;
 	private boolean forceUpdate;
+	private float profileSpeed;
 
 	public CachedTrack(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 		this.app = app;
@@ -103,7 +104,7 @@ public class CachedTrack {
 		if (selectedGpxFile.isFiltering()) {
 			return Collections.emptyList();
 		}
-		boolean cleared = clearOutdatedCache();
+		boolean cleared = clearOutdatedCache() | clearOutdatedColors();
 		String trackId = scaleType + "_" + paletteName + "_" + outlineScaleType;
 		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(trackId);
 
@@ -145,7 +146,7 @@ public class CachedTrack {
 		if (selectedGpxFile.isFiltering()) {
 			return Collections.emptyList();
 		}
-		boolean cleared = clearOutdatedCache();
+		boolean cleared = clearOutdatedCache() | clearOutdatedColors();
 		String trackId = zoom + "_" + scaleType + "_" + paletteName;
 		List<TrkSegment> segments = simplifiedSegmentsCache.get(trackId);
 
@@ -205,6 +206,21 @@ public class CachedTrack {
 		return false;
 	}
 
+	/**
+	 * The speed scale reaches the profile default speed: rebuild the colours when it changes
+	 * (Travel speed settings, another profile), as the legend shows the new scale at once.
+	 */
+	private boolean clearOutdatedColors() {
+		float speed = app.getSettings().DEFAULT_SPEED.get();
+		if (speed != profileSpeed) {
+			profileSpeed = speed;
+			nonSimplifiedSegmentsCache.clear();
+			simplifiedSegmentsCache.clear();
+			return true;
+		}
+		return false;
+	}
+
 	@NonNull
 	private RouteColorize createGpxColorization(@NonNull GradientScaleType scaleType,
 	                                           @NonNull String gradientPalette,
@@ -212,7 +228,6 @@ public class CachedTrack {
 		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		ColorizationType colorizationType = scaleType.toColorizationType();
 		GradientPaletteCategory category = scaleType.toPaletteCategory();
-		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
 
 		boolean fixedValues = false;
 		ColorPalette colorPalette = null;
@@ -223,7 +238,7 @@ public class CachedTrack {
 			colorPalette = gradient.getColorPalette();
 		}
 
-		return new RouteColorize(gpxFile, trackAnalysis, colorizationType, colorPalette, maxSpeed, fixedValues);
+		return new RouteColorize(gpxFile, trackAnalysis, colorizationType, colorPalette, profileSpeed, fixedValues);
 	}
 
 	@NonNull

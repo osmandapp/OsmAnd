@@ -12,6 +12,8 @@ import net.osmand.shared.gpx.filters.MeasureUnitType.SPEED
 import net.osmand.shared.palette.domain.GradientRangeType
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory
 import net.osmand.shared.palette.domain.filetype.GradientFileType
+import net.osmand.shared.routing.RouteColorize
+import net.osmand.shared.routing.RouteColorize.ColorizationType
 import net.osmand.shared.units.LengthUnits
 import net.osmand.shared.units.MeasurementUnit
 import net.osmand.shared.units.SpeedUnits
@@ -32,13 +34,17 @@ object GradientFormatter {
 		return getAxisFormatter(paletteCategory.getFileType(), realDataLimits = null)
 	}
 
+	/**
+	 * @param profileSpeed profile default speed (m/s), the speed scale reaches at least it
+	 */
 	@JvmStatic
 	fun getAxisFormatter(
 		fileType: GradientFileType,
-		analysis: GpxTrackAnalysis?
+		analysis: GpxTrackAnalysis?,
+		profileSpeed: Float
 	): IAxisValueFormatter {
 		val unitType = fileType.category.measureUnitType
-		val limits = if (analysis != null) calculateRealDataLimits(analysis, unitType) else null
+		val limits = if (analysis != null) calculateRealDataLimits(analysis, unitType, profileSpeed) else null
 		return getAxisFormatter(fileType, limits)
 	}
 
@@ -157,7 +163,7 @@ object GradientFormatter {
 		if (analysis == null) return originalPalette
 
 		// Calculate actual track limits (e.g. 0..120 km/h)
-		val limits = calculateRealDataLimits(analysis, fileType.category.measureUnitType)
+		val limits = calculateRealDataLimits(analysis, fileType.category.measureUnitType, 0f)
 			?: return originalPalette
 
 		// Validate limits (must be a valid range)
@@ -174,7 +180,8 @@ object GradientFormatter {
 
 	private fun calculateRealDataLimits(
 		analysis: GpxTrackAnalysis,
-		unitType: MeasureUnitType
+		unitType: MeasureUnitType,
+		profileSpeed: Float
 	): RealDataLimits? {
 
 		var result: RealDataLimits? = null
@@ -182,9 +189,12 @@ object GradientFormatter {
 		when(unitType) {
 			SPEED -> {
 				if (analysis.maxSpeed > 0f) {
+					val type = ColorizationType.SPEED
+					val min = RouteColorize.getMinValue(type, analysis)
+					val max = RouteColorize.getMaxValue(type, analysis, min, profileSpeed.toDouble())
 					result = RealDataLimits(
-						minValue = analysis.minSpeed,
-						maxValue = analysis.maxSpeed,
+						minValue = min.toFloat(),
+						maxValue = max.toFloat(),
 						units = SpeedUnits.METERS_PER_SECOND
 					)
 				}
