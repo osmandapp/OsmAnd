@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.appbar.MaterialToolbar
 import net.osmand.aidl.AidlPermissionGroup
 import net.osmand.aidl.ConnectedApp
 import net.osmand.plus.R
+import net.osmand.plus.backup.ui.BackupUiUtils
 import net.osmand.plus.base.BaseMaterialFragment
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.InsetTarget
@@ -29,6 +31,8 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 	private lateinit var mainSwitch: MainSwitchView
 	private lateinit var disabledFooter: GroupFooterView
 	private lateinit var content: View
+	private lateinit var lastUseFooter: GroupFooterView
+	private lateinit var revokeAllButton: Button
 	private val rows = LinkedHashMap<AidlPermissionGroup, SettingRow>()
 
 	override fun getStatusBarColorId(): Int =
@@ -66,6 +70,14 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 		}
 		disabledFooter = view.findViewById(R.id.disabled_footer)
 		content = view.findViewById(R.id.content)
+		lastUseFooter = view.findViewById(R.id.last_use_footer)
+		revokeAllButton = view.findViewById(R.id.revoke_all_button)
+		revokeAllButton.setOnClickListener {
+			// the app stays on: it can ask for the groups again
+			osmandApp.aidlApi.revokeAllGroups(connectedApp)
+			getPluginsFragment()?.onConnectedAppChanged()
+			updateContent()
+		}
 
 		val iconColor = AndroidUtils.getColorFromAttr(view.context, R.attr.colorOnSurfaceVariant)
 		val warningColor = AndroidUtils.getColorFromAttr(view.context, R.attr.colorError)
@@ -99,6 +111,12 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 		updateContent()
 	}
 
+	// the app may have called OsmAnd while this screen was in the background
+	override fun onResume() {
+		super.onResume()
+		updateContent()
+	}
+
 	private fun updateContent() {
 		val enabled = connectedApp.isEnabled
 		mainSwitch.setChecked(enabled, false)
@@ -108,6 +126,11 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 		for ((group, row) in rows) {
 			row.setChecked(connectedApp.isGroupGranted(group))
 		}
+		val lastUse = BackupUiUtils.getFormattedPassedTime(osmandApp, connectedApp.lastUseTime,
+			getString(R.string.shared_string_never), true)
+		lastUseFooter.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
+			getString(R.string.shared_string_last_used), lastUse))
+		revokeAllButton.isEnabled = connectedApp.groups.isNotEmpty()
 	}
 
 	private fun getPluginsFragment(): PluginsFragment? =

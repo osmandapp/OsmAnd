@@ -6,6 +6,10 @@
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<!-- the API permission of each OsmAnd app -->
+	<uses-permission android:name="net.osmand.plus.permission.API" />
+	<uses-permission android:name="net.osmand.permission.API" />
+	<uses-permission android:name="net.osmand.dev.permission.API" />
 
 	<queries>
 		<package android:name="net.osmand.plus" />

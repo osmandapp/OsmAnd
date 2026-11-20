@@ -11,6 +11,9 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="aidl_permissions_revoke_all">Revoke all</string>
+	<string name="permission_api_label">use the OsmAnd API</string>
+	<string name="permission_api_descr">Lets the app use OsmAnd through its API, within the permission groups you allow it in OsmAnd.</string>
 	<string name="gpx_line_style_desc_unavailable_for_3d">Dashed and dotted line styles are not available for a 3D track.</string>
 	<string name="attach_to_track">Attach to track</string>
 	<string name="visualization">Visualization</string>
