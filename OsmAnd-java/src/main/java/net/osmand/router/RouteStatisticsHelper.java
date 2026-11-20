@@ -10,6 +10,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -269,6 +270,11 @@ public class RouteStatisticsHelper {
 		final RenderingRuleSearchRequest currentRenderingRuleSearchRequest;
 		final RenderingRuleSearchRequest defaultRenderingRuleSearchRequest;
 
+		private String lastAttribute;
+		private int lastSlopeClass;
+		private RouteDataObject lastRouteObject;
+		private RouteSegmentAttribute lastSegmentAttribute;
+
 		public RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
 		                              RenderingRuleSearchRequest currentRenderingRuleSearchRequest,
 		                              RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
@@ -371,6 +377,39 @@ public class RouteStatisticsHelper {
 		}
 
 		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteDataObject routeObject) {
+			// consecutive segments mostly have the same tags (one road, straight lines): skip the rendering rule search
+			if (lastSegmentAttribute != null && slopeClass == lastSlopeClass
+					&& Algorithms.objectEquals(attribute, lastAttribute) && hasSameTags(routeObject, lastRouteObject)) {
+				return new RouteSegmentAttribute(lastSegmentAttribute);
+			}
+			RouteSegmentAttribute res = searchSegmentAttribute(attribute, slopeClass, routeObject);
+			lastAttribute = attribute;
+			lastSlopeClass = slopeClass;
+			lastRouteObject = routeObject;
+			lastSegmentAttribute = new RouteSegmentAttribute(res);
+			return res;
+		}
+
+		private boolean hasSameTags(RouteDataObject object, RouteDataObject other) {
+			int[] types = object.getTypes();
+			int[] otherTypes = other.getTypes();
+			if (object.region == other.region && Arrays.equals(types, otherTypes)) {
+				return true;
+			}
+			if (types == null || otherTypes == null || types.length != otherTypes.length) {
+				return false;
+			}
+			for (int i = 0; i < types.length; i++) {
+				if (types[i] < 0 || types[i] >= object.region.quickGetEncodingRulesSize()
+						|| otherTypes[i] < 0 || otherTypes[i] >= other.region.quickGetEncodingRulesSize()
+						|| !object.region.quickGetEncodingRule(types[i]).equals(other.region.quickGetEncodingRule(otherTypes[i]))) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private RouteSegmentAttribute searchSegmentAttribute(String attribute, int slopeClass, RouteDataObject routeObject) {
 			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0, -1);
 			RenderingRuleSearchRequest currentRequest = 
 					currentRenderer == null ? null : new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
