@@ -1103,11 +1103,14 @@ public class BinaryMapRouteReaderAdapter {
 	}
 
 	public void initRouteRegion(RouteRegion routeReg) throws IOException, InvalidProtocolBufferException {
-		if (routeReg.routeEncodingRules.isEmpty()) {
-			codedIS.seek(routeReg.filePointer);
-			long oldLimit = codedIS.pushLimitLong((long) routeReg.length);
-			readRouteIndex(routeReg);
-			codedIS.popLimit(oldLimit);
+		// readers of one file share its regions: wait until another reader has read all the rules
+		synchronized (routeReg) {
+			if (routeReg.routeEncodingRules.isEmpty()) {
+				codedIS.seek(routeReg.filePointer);
+				long oldLimit = codedIS.pushLimitLong((long) routeReg.length);
+				readRouteIndex(routeReg);
+				codedIS.popLimit(oldLimit);
+			}
 		}
 	}
 
