@@ -16,6 +16,7 @@
 	<string name="shadows_off_description">Shadows off: buildings are drawn without shadows.</string>
 	<string name="shared_string_new">New</string>
 	<string name="sun_light_live">Live</string>
+	<string name="gpx_line_style_desc_unavailable_for_3d">Dashed and dotted line styles are not available for a 3D track.</string>
 	<string name="attach_to_track">Attach to track</string>
 	<string name="visualization">Visualization</string>
 	<string name="terrain_shadows">Terrain shadows</string>

@@ -14,6 +14,7 @@ import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.OpeningHoursRowBeh
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.PopulationRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.UsMapsRecreationAreaRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.WikipediaRowBehavior
+import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.XmasOpeningHoursRowBehavior
 
 object PoiAdditionalUiRules {
 
@@ -34,6 +35,12 @@ object PoiAdditionalUiRules {
             customTextPrefixId = R.string.opening_hours,
             isNeedLinks = false,
             behavior = OpeningHoursRowBehavior
+        ),
+        PoiAdditionalUiRule(
+            key = Amenity.XMAS_OPENING_HOURS,
+            customTextPrefixId = R.string.poi_xmas_opening_hours,
+            isNeedLinks = false,
+            behavior = XmasOpeningHoursRowBehavior
         ),
         PoiAdditionalUiRule(
             key = Amenity.PHONE,

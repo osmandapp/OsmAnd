@@ -742,6 +742,26 @@ public class IntentHelper {
 		return false;
 	}
 
+	/**
+	 * Started for result by another app, MapActivity opens as a second instance inside that app's task.
+	 * Such an intent (a file, a link, a shortcut) is passed on to the map in OsmAnd's own task instead,
+	 * except an osmand.api request, which returns its result to the caller.
+	 * Only for a new activity: a recreated API map still has its caller, but its intent is the API result by then.
+	 */
+	public static boolean openInOwnTask(@NonNull MapActivity mapActivity) {
+		Intent intent = mapActivity.getIntent();
+		Uri data = intent.getData();
+		boolean apiRequest = data != null && "osmand.api".equals(data.getScheme());
+		if (mapActivity.getCallingActivity() == null || apiRequest) {
+			return false;
+		}
+		// The system chooser forwards the caller's result, which would keep the map in the caller's task
+		Intent mapIntent = new Intent(intent).setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+		mapActivity.startActivity(mapIntent);
+		mapActivity.finish();
+		return true;
+	}
+
 	public void parseContentIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null) {

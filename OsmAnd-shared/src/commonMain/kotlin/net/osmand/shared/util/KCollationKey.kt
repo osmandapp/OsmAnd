@@ -1,34 +1,20 @@
 package net.osmand.shared.util
 
 /**
- * A name reduced to what a primary-strength collator compares, so that comparing two names is
- * comparing two char arrays.
+ * A name reduced to a key so matching compares arrays instead of calling a platform collator
+ * at each character position. Case and diacritics are aligned before the key is built; æ, œ and þ
+ * expand to ae, oe and th. [starts] maps source positions to key offsets without substrings.
  *
- * `java.text.Collator` at PRIMARY strength, which is what OsmAnd-java matches names with, ignores
- * case, accents and separators. `CollatorStringMatcher` hands it text that is already lowercased
- * and stripped of diacritics, so the only differences left for the collator to fold are:
- * - the separators, which it skips entirely: spaces, control characters, every kind of dash, the
- *   soft hyphen and the zero width characters. `a-b` and `ab` are equal to it, `no.` and `no` are
- *   not, because a full stop is not one of them;
- * - three letters that expand: `æ` is `ae`, `œ` is `oe`, `þ` is `th`.
+ * Space weights follow the real platform collator: significant on Android/iOS, ignored by the
+ * desktop JVM collator. This property is read once, without changing the collator or locale.
+ * On mobile, ordinary space and its 16 Unicode equivalents become U+0020 in the same pass that
+ * builds the key. Desktop keeps its original separator rules. The original text stays available
+ * for word boundaries and source-length limits; no normalized copy or second key is needed.
  *
- * Both sets were taken from the collator itself rather than guessed, by asking it for the collation
- * key of every character of the basic plane; `KCollationKeyTest` checks them against it and against
- * a corpus of real names. Nothing else folds: of the 60167 characters that survive lowercasing and
- * diacritic stripping, no two are primary-equal unless both are separators, and no character
- * expands into three.
- *
- * So a name's key is its aligned text with the separators dropped and those three letters expanded,
- * and `collator.equals(a, b)` is `key(a) == key(b)`. The matcher builds one key per name instead of
- * calling a collator once per character position, which on iOS is also one bridge crossing per name
- * instead of hundreds.
- *
- * [starts] keeps the link back to the text, so that a stretch of the name can be compared without
- * cutting a substring out of it first.
- *
- * Deliberately locale independent, where java takes the collator of the device's locale. Locale
- * rules make the same map read differently on two phones - the java side already forces US rules
- * for romanian, czech and slovak to get away from that - and iOS matches names without a locale.
+ * Other ignored characters and letter expansions retain the desktop-JVM-derived rules. This is
+ * not a complete implementation of Android ICU collation: locale-dependent rules and differences
+ * for other separators are outside this key's contract. Tests distinguish that JVM reference from
+ * space/matcher cases observed on Android.
  */
 class KCollationKey private constructor(
 	/** Lowercased and aligned text: what a java matcher indexes into. */
@@ -101,6 +87,9 @@ class KCollationKey private constructor(
 
 	companion object {
 
+		// A platform property, sampled once; no collator calls while building or comparing keys.
+		private val spacesHaveWeight = !primaryCollator().equals(" ", "")
+
 		/** Lowercases and aligns [source] first, as `CollatorStringMatcher` does. */
 		fun of(source: String): KCollationKey = ofAligned(lowercaseAndAlignChars(source))
 
@@ -113,6 +102,9 @@ class KCollationKey private constructor(
 				starts[i] = at
 				val ch = aligned[i]
 				when {
+					// Keep the single-pass ASCII path; desktop space weights differ from mobile.
+					ch in ' '..'~' -> if (ch != '-' && (ch != ' ' || spacesHaveWeight)) key[at++] = ch
+					spacesHaveWeight && isUnicodeSpace(ch) -> key[at++] = ' '
 					isSeparator(ch) -> {}
 					ch == 'æ' -> {
 						key[at++] = 'a'
@@ -132,6 +124,11 @@ class KCollationKey private constructor(
 			starts[aligned.length] = at
 			return KCollationKey(aligned, key, at, starts)
 		}
+
+		// java.text.Collator PRIMARY on Android API 37, checked in en-US/de-DE/ru-RU.
+		private fun isUnicodeSpace(ch: Char): Boolean =
+			ch == '\u00A0' || ch == '\u1680' || ch in '\u2000'..'\u200A' ||
+					ch == '\u202F' || ch == '\u205F' || ch == '\u3000'
 
 		fun lowercaseAndAlignChars(fullText: String): String =
 			KSearchAlgorithms.alignChars(lowercase(fullText))
@@ -160,18 +157,14 @@ class KCollationKey private constructor(
 			return chars?.concatToString() ?: text
 		}
 
-		/** What `collator.equals(source, target)` answers at primary strength. */
+		/** Primary key equality, including the platform's space weights. */
 		fun primaryEquals(source: String, target: String): Boolean = of(source).keyEquals(of(target))
 
-		/**
-		 * The characters a primary-strength collator skips: it gives every one of them the same
-		 * collation key as the empty string.
-		 *
-		 * Taken from `java.text.Collator` over the whole basic plane, see the class comment. The
-		 * combining mark ranges are in it for completeness; diacritic stripping has already removed
-		 * them by the time a key is built.
-		 */
+		/** Characters omitted from the key on this platform. */
 		fun isSeparator(ch: Char): Boolean {
+			if (spacesHaveWeight && (ch == ' ' || isUnicodeSpace(ch))) {
+				return false
+			}
 			val code = ch.code
 			if (code > 0x0020 && code < 0x007F) {
 				return code == 0x002D // hyphen-minus, the one separator among the printable ascii

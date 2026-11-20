@@ -102,6 +102,9 @@ class AdditionalInfoBundle(
 			if (!allowNoteTag && NOTE == key && value is String) {
 				continue
 			}
+			if (Amenity.XMAS_DAY_DATE == key && getFilteredInfo().containsKey(Amenity.XMAS_OPENING_HOURS)) {
+				continue
+			}
 			val strValue = value as? String
 
 			val resolvedType = resolvePoiType(category, key, strValue)

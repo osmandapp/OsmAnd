@@ -5,7 +5,8 @@ package net.osmand.shared.util
  * would, ignoring case and accents.
  *
  * This is for putting names in order. Deciding whether a name matches what was typed goes through
- * [KCollatorStringMatcher], which needs no platform call at all.
+ * [KCollatorStringMatcher], whose keys sample the platform space weight once and then compare
+ * without further platform calls.
  */
 interface KCollator {
 

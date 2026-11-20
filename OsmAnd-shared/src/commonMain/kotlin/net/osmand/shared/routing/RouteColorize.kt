@@ -302,6 +302,11 @@ class RouteColorize {
 	) {
 		calculateMinMaxValue()
 
+		// Speed scale = [0, max(profile default speed, track max speed)] (OsmAnd-Issues#510):
+		// a slow track stays in the slow colours instead of being stretched over the whole palette
+		if (colorizationType == ColorizationType.SPEED) {
+			minValue = getMinValue(colorizationType, analysis)
+		}
 		// set strict limitations for maxValue ONLY for linear (non-bipolar) types
 		if (colorizationType?.bipolar == false) {
 			maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed.toDouble())
@@ -343,6 +348,9 @@ class RouteColorize {
 			}
 		}
 
+		/**
+		 * @param maxProfileSpeed for SPEED the profile's default speed (m/s): the scale reaches at least it
+		 */
 		fun getMaxValue(
 			type: ColorizationType?, analysis: GpxTrackAnalysis, minValue: Double,
 			maxProfileSpeed: Double

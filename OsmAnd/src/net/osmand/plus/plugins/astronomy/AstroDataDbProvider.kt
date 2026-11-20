@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.astronomy
 
 import android.content.Context
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.core.database.getDoubleOrNull
@@ -270,6 +271,10 @@ class AstroDataDbProvider : AstroDataProvider() {
 			} else { lang }
 
 			val db = dbHelper.readableDatabase
+			if (!hasWikipediaTable(db)) {
+				db.close()
+				return null
+			}
 
 			val languagesCursor = db.query(
 				TABLE_WIKIPEDIA, arrayOf(COL_WIKI_LANG), "$COL_WIKI_WIKIDATA = ?",arrayOf(wikidataId), null, null, null
@@ -330,6 +335,37 @@ class AstroDataDbProvider : AstroDataProvider() {
 			LOG.error("Error reading Wikipedia article from DB", e)
 		}
 		return null
+	}
+
+	override fun getCatalogDescriptions(ctx: Context): Map<String, String> {
+		val descriptions = mutableMapOf<String, String>()
+		val app = ctx.applicationContext as OsmandApplication
+		val lang = app.settings.PREFERRED_LOCALE.get().takeIf { it.isNotEmpty() }?.substringBefore('-')
+			?: ctx.resources.configuration.locales[0].language
+		try {
+			DbHelper(app).readableDatabase.use { db ->
+				if (hasWikipediaTable(db)) {
+					// English first, so the preferred language replaces it, as in getAstroArticleImpl
+					db.query(TABLE_WIKIPEDIA, arrayOf(COL_WIKI_WIKIDATA, COL_WIKI_EXTRACT),
+						"$COL_WIKI_WIKIDATA IN (SELECT $COL_CATALOGS_WID FROM $TABLE_CATALOGS) AND $COL_WIKI_LANG IN (?, 'en')",
+						arrayOf(lang), null, null, "$COL_WIKI_LANG = 'en' DESC"
+					).use { c ->
+						while (c.moveToNext()) {
+							c.getStringOrNull(1)?.let { descriptions[c.getString(0)] = it }
+						}
+					}
+				}
+			}
+		} catch (e: Exception) {
+			LOG.error("Error reading catalog descriptions from DB", e)
+		}
+		return descriptions
+	}
+
+	// The bundled stars.db has no articles, only the extended database has this table
+	private fun hasWikipediaTable(db: SQLiteDatabase): Boolean {
+		return DatabaseUtils.queryNumEntries(db, "sqlite_master", "type = 'table' AND name = ?",
+			arrayOf(TABLE_WIKIPEDIA)) > 0
 	}
 
 	private fun loadLocalizedNames(ctx: Context, db: SQLiteDatabase, objects: List<SkyObject>) {

@@ -107,7 +107,7 @@ class KCollationKeyTest {
 	 */
 	@Test
 	fun keyEqualityIsCollatorEqualityOnRandomStrings() {
-		val alphabet = "abcdefgz0129 -.'" + "æþœßéø" + "абйё" + "ασς" + "中あ"
+		val alphabet = "abcdefgz0129 -.'\u00A0\u1680\u2009\u202F\u205F\u3000" + "æþœßéø" + "абйё" + "ασς" + "中あ"
 		val random = Random(7)
 		var differing = 0
 		val firstDifferences = StringBuilder()

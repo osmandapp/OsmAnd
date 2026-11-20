@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.astronomy.search
 import android.content.Context
 import io.github.cosinekitty.astronomy.Observer
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.plugins.astronomy.AstroDataProvider
@@ -85,20 +84,11 @@ internal class StarMapSearchPreparedDataFactory(
 	}
 
 	/**
-	 * Reads the Wikipedia article of every catalog from the astro database (one query per catalog),
+	 * Reads the Wikipedia descriptions of all catalogs from the astro database,
 	 * so it runs on the IO dispatcher and never on the main thread.
 	 */
 	suspend fun loadCatalogDescriptions(app: OsmandApplication): Map<String, String> =
-		withContext(Dispatchers.IO) {
-			val descriptions = mutableMapOf<String, String>()
-			for (catalog in dataProvider.getCatalogs(app)) {
-				ensureActive()
-				dataProvider.getAstroArticle(app, catalog.wid)?.description?.let {
-					descriptions[catalog.wid] = it
-				}
-			}
-			descriptions
-		}
+		withContext(Dispatchers.IO) { dataProvider.getCatalogDescriptions(app) }
 
 	private fun buildCatalogEntries(
 		context: Context,

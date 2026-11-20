@@ -44,6 +44,7 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapActions;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
@@ -261,7 +262,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	private void startCountdownIfReady() {
 		if (!hasStartCountdown() || countdownDone || isCountdownRunning()
 				|| calculating || Algorithms.isEmpty(routeRows)
-				|| !getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+				|| !AndroidUtils.isStateAtLeast(this, Lifecycle.State.STARTED)) {
 			return;
 		}
 		if (getApp().getRoutingHelper().getRoute().hasMissingMaps()) {

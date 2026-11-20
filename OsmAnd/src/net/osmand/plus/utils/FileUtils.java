@@ -214,7 +214,7 @@ public class FileUtils {
 		updateMovedGpxFiles(app, files, srcDir, destDir);
 
 		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
-		sortModesHelper.onTrackFolderIdChanged(trackFolder, srcDir);
+		sortModesHelper.onTrackFolderIdChanged(trackFolder, srcDir, destDir);
 	}
 
 	public static void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app,

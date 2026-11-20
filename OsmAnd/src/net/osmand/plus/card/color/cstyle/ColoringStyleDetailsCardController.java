@@ -93,7 +93,7 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 			ApplicationMode appMode = app.getSettings().getApplicationMode();
 			ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
 			double min = RouteColorize.Companion.getMinValue(colorizationType, analysis);
-			double max = RouteColorize.Companion.getMaxValue(colorizationType, analysis, min, appMode.getMaxSpeed());
+			double max = RouteColorize.Companion.getMaxValue(colorizationType, analysis, min, appMode.getDefaultSpeed());
 			return new CharSequence[] { formatValue(min), formatValue(max) };
 		} else if (coloringType == ColoringType.SPEED) {
 			return new CharSequence[] {

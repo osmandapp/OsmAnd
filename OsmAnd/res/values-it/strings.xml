@@ -5326,7 +5326,7 @@
     <string name="duplicate_map_replace_with_road">Sostitutisci con Solo-strade</string>
     <string name="rendering_attr_surface_clay_name">Argilla</string>
     <string name="rendering_attr_surface_laterite_name">Laterite</string>
-    <string name="share_favorites_media_preparation_failed">Impossibile includere i file multimediali allegati. Condivisi solo i punti.</string>
+    <string name="share_favorites_media_preparation_failed">Impossibile includere i contenuti multimediali allegati. Condivisi solo i punti.</string>
     <plurals name="files_count">
         <item quantity="one">%d file</item>
         <item quantity="many">%d file</item>
@@ -5370,7 +5370,7 @@
     <string name="heap_dump_share_descr">Invia l\'ultimo rapporto al server.</string>
     <string name="heap_dump_auto">Raccogli in caso di utilizzo elevato</string>
     <string name="heap_dump_auto_descr">Quando la memoria heap è quasi piena, una volta ogni 30 minuti.</string>
-    <string name="visualizing_button_grid_descr">Celle, slot, frame e log.</string>
+    <string name="visualizing_button_grid_descr">Celle, intervalli di tempo, trame e registri.</string>
     <string name="contour_labels">Etichette</string>
     <string name="contour_label_direction_descr">In salita: la parte superiore di ogni numero indicante l\'altitudine guarda verso il terreno più elevato, come sulle mappe topografiche cartacee. Le brevi spunte sulle linee indicano la discesa.</string>
     <string name="rendering_attr_contourLabelDirection_name">Direzione dell\'etichetta</string>
@@ -5443,4 +5443,6 @@
     <string name="terrain_shadows">Ombre del terreno</string>
     <string name="terrain_shadows_description">Ombreggiatura dinamica in tempo reale per il terreno 3D. Evidenzia la geometria del paesaggio con un impatto minimo sulle prestazioni.</string>
     <string name="terrain_shadows_relief_3d_footer">Il rilievo 3D è abilitato automaticamente, in quanto necessario per la resa delle ombre del terreno.</string>
+    <string name="free_region_other_title">%1$s non è la tua regione gratuita</string>
+    <string name="free_region_other_descr">La versione gratuita include le mappe di una sola regione. Scaricando %1$s, le mappe delle altre regioni verranno eliminate.</string>
 </resources>
