@@ -12,6 +12,8 @@
 	Thx - Hardy
 -->
 	<string name="free_region_maps_deactivated">%1$s was not downloaded. Maps of %2$s are kept but deactivated.</string>
+	<string name="free_region_activate_title">Change your free region?</string>
+	<string name="free_region_activate_descr">The free version includes maps of one region. %1$s will become your free region, and maps of %2$s will be deactivated.</string>
 	<string name="gpx_line_style_desc_unavailable_for_3d">Dashed and dotted line styles are not available for a 3D track.</string>
 	<string name="attach_to_track">Attach to track</string>
 	<string name="visualization">Visualization</string>

@@ -43,6 +43,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.freeregion.FreeRegionActivationDialog;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
@@ -396,7 +397,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 	}
 
 	public void performOperation(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
-		OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, this), items);
+		if (type == RESTORE_OPERATION) {
+			new FreeRegionActivationDialog(app).activate(requireActivity(), items, this);
+		} else {
+			OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, this), items);
+		}
 	}
 
 	@Override

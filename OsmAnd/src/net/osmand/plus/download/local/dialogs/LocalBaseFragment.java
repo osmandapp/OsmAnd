@@ -15,6 +15,7 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.freeregion.FreeRegionActivationDialog;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
@@ -104,8 +105,12 @@ public abstract class LocalBaseFragment extends BaseFullScreenFragment implement
 	}
 
 	public void performOperation(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
-		LocalOperationTask task = new LocalOperationTask(app, type, this);
-		OsmAndTaskManager.executeTask(task, items);
+		if (type == RESTORE_OPERATION) {
+			new FreeRegionActivationDialog(app).activate(requireActivity(), items, this);
+		} else {
+			LocalOperationTask task = new LocalOperationTask(app, type, this);
+			OsmAndTaskManager.executeTask(task, items);
+		}
 	}
 
 	@Override
