@@ -228,13 +228,26 @@ public class TurnType {
 		}
 	}
 
-	// Call after setLanes: modifiers that don't match the lanes are dropped
+	// Call after setLanes: modifiers that don't match the lanes or are all 0 are dropped
 	public void setModifiers(int[] modifiers) {
-		if (modifiers == null || lanes == null || modifiers.length != lanes.length) {
-			this.modifiers = null;
-		} else {
-			this.modifiers = modifiers;
+		boolean any = false;
+		if (modifiers != null && lanes != null && modifiers.length == lanes.length) {
+			for (int m : modifiers) {
+				any |= m != 0;
+			}
 		}
+		this.modifiers = any ? modifiers : null;
+	}
+
+	public boolean hasAnyModifier(int mod) {
+		if (modifiers != null) {
+			for (int m : modifiers) {
+				if ((m & mod) != 0) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public int[] getModifiers() {
