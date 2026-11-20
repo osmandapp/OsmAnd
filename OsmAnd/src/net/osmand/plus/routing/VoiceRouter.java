@@ -900,6 +900,9 @@ public class VoiceRouter {
 	}
 
 	public void newRouteIsCalculated(boolean newRoute) {
+		if (newRoute && player != null && app.getCarNavigationSession() != null) {
+			player.pauseMusicOnNextPrompt();
+		}
 		if (newRoute || settings.SPEAK_ROUTE_RECALCULATION.get()) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
