@@ -217,11 +217,7 @@ class GpxFile : GpxExtensions {
 		if (index == -1) return
 
 		val prevGroupName = existingPoint.category ?: DEFAULT_WPT_GROUP_NAME
-		val prevTime = existingPoint.time
-		existingPoint.updatePoint(newWpt)
-		if (!updateTimestamp) {
-			existingPoint.time = prevTime
-		}
+		existingPoint.updatePoint(newWpt, updateTimestamp)
 		if (newWpt.category != prevGroupName || (newWpt.category == null && prevGroupName != DEFAULT_WPT_GROUP_NAME)) {
 			removePointFromGroup(existingPoint, prevGroupName)
 			val pointsGroup = getOrCreateGroup(existingPoint)

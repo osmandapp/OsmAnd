@@ -274,6 +274,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), description, name, category,
 							Algorithms.colorToString(getColor()), getIconName(), getBackgroundType().getTypeName());
 					gpx.updateWptPt(wpt, wptInfo, true);
+					if (isCreationTimestampEdited()) {
+						wpt.setCreatedOn(getEditedCreationTimestamp());
+					}
 					saveGpx(app, gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
@@ -337,6 +340,21 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	@Override
 	public String getNameInitValue() {
 		return wpt != null ? wpt.getName() : "";
+	}
+
+	@Override
+	protected long getCreationTimestamp() {
+		WptPt wpt = getWpt();
+		return wpt != null ? wpt.getCreationTimeForDisplay() : 0;
+	}
+
+	@Override
+	protected boolean isCreationTimestampEditable() {
+		// Points of the track being recorded are stored in the recording log, where the
+		// timestamp is the point identity, so it can't be edited
+		WptPtEditor editor = getWptPtEditor();
+		GpxFile gpx = editor != null ? editor.getGpxFile() : null;
+		return gpx == null || !gpx.isShowCurrentTrack();
 	}
 
 	@Override

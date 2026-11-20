@@ -126,7 +126,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		buildDateRow(view, app.getString(R.string.created_on), wpt.getTime());
+		buildDateRow(view, app.getString(R.string.created_on), wpt.getCreationTimeForDisplay());
 		if (wpt.getSpeed() > 0) {
 			buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_speed)
 					.setText(OsmAndFormatter.getFormattedSpeed((float) wpt.getSpeed(), app))

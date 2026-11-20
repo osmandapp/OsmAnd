@@ -3,6 +3,7 @@ package net.osmand.shared.data
 import net.osmand.shared.data.AmenityTagEntriesBuilder.ValueLabel
 import net.osmand.shared.data.AmenityTagEntriesBuilder.getValueLabel
 import net.osmand.shared.data.AmenityTagEntry.CollapsableEntryType
+import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiType
 import net.osmand.shared.routing.testEnvironment
@@ -206,6 +207,15 @@ class AdditionalInfoBundleTest {
 		val rows = bundle(*tags)!!.getVisibleTags(false, emptyList(), setOf("my_note", "gpxx:city"))
 		assertEquals(listOf("my_note", "gpxx:city"), rows.map { it.key })
 		assertTrue(rows.all { it.order == 90 })
+	}
+
+	@Test
+	fun createdOnExtensionIsHiddenFromTags() {
+		val bundle = bundle(
+			"type" to "sustenance", "subtype" to "cafe",
+			PointAttributes.POINT_CREATED_ON to "2024-01-01T00:00:00Z"
+		) ?: return
+		assertNull(bundle.getFilteredInfo()[PointAttributes.POINT_CREATED_ON])
 	}
 
 	@Test

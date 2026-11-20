@@ -322,6 +322,33 @@ class WptPt : GpxExtensions, Linkable {
 		getExtensionsToWrite()[GpxUtilities.TRKPT_INDEX_EXTENSION] = index.toString()
 	}
 
+	/** Time the point was created, from the osmand:created_on extension, or 0 if it is absent. */
+	fun getCreatedOn(): Long {
+		val value = getExtension(PointAttributes.POINT_CREATED_ON) ?: return 0L
+		return GpxUtilities.parseTime(value)
+	}
+
+	fun setCreatedOn(createdOn: Long) {
+		val extensions = getExtensionsToWrite()
+		if (createdOn == 0L) {
+			extensions.remove(PointAttributes.POINT_CREATED_ON)
+		} else {
+			extensions[PointAttributes.POINT_CREATED_ON] = GpxUtilities.formatTime(createdOn)
+		}
+	}
+
+	/**
+	 * The timestamp shown as the point's creation time: the osmand:created_on extension when it is
+	 * present, otherwise the GPX time, which is the only known timestamp of an older point, and may
+	 * or may not be the actual creation time since the `/gpx/wpt/time` element is, per the GPX spec, 
+	 * effectively a modification timestamp. Yet in the special cases of (1) a point that has never been
+	 * edited and (2) a point that has only ever been edited through the creation-time-preserving code in
+	 * this codebase, it is in fact the true creation time.
+	 */
+	fun getCreationTimeForDisplay(): Long {
+		return getCreatedOn().takeIf({ it != 0L}) ?: time
+	}
+
 	override fun hashCode(): Int {
 		return KAlgorithms.hash(name, category, desc, comment, lat, lon)
 	}
@@ -386,14 +413,32 @@ class WptPt : GpxExtensions, Linkable {
 	}
 
 	fun updatePoint(pt: WptPt) {
+		updatePoint(pt, true)
+	}
+
+	fun updatePoint(pt: WptPt, updateTimestamp: Boolean) {
 		lat = GpxFormatter.formatLatLon(pt.lat).toDouble()
 		lon = GpxFormatter.formatLatLon(pt.lon).toDouble()
-		time = currentTimeMillis()
 		desc = pt.desc
 		name = pt.name
 		category = pt.category
 
 		val extensions = pt.getExtensionsToRead()
+
+		if (updateTimestamp) {
+			// The creation time the already stored one, and if it doesn't exist,
+			// we initialize it to the pre-edit "GPX time" (at xpath: /gpx/wpt/time;
+			// which is the point's first known timestamp).
+			// Having saved the *creation timestamp*, we update the "GPX time", by
+			// which it becomes the de facto *modification timestamp*.
+			// Note that GPX defines it as a "creation/modification timestamp".
+			val createdOn = pt.getExtension(PointAttributes.POINT_CREATED_ON) ?: getExtension(PointAttributes.POINT_CREATED_ON)
+				?: time.takeIf({it != 0L})?.let{ GpxUtilities.formatTime(it) }
+			createdOn?.let {
+				getExtensionsToWrite()[PointAttributes.POINT_CREATED_ON] = it
+			}
+			time = currentTimeMillis()
+		}
 
 		val color = extensions[GpxUtilities.COLOR_NAME_EXTENSION]
 		setColor(color)

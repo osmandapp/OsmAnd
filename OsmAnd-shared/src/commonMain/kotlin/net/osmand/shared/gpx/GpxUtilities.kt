@@ -149,6 +149,7 @@ object GpxUtilities {
 		"wtemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
 		"atemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_A,
 		"activity" to ACTIVITY_TYPE,
+		"created_on" to PointAttributes.POINT_CREATED_ON,
 		// Garmin address, matched by the bare name: an unprefixed or osmand: city/state/country maps here too
 		"streetaddress" to GPXX_STREET_ADDRESS,
 		"city" to GPXX_CITY,

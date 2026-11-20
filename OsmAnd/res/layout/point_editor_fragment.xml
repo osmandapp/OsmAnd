@@ -127,6 +127,52 @@
 				</FrameLayout>
 
 				<LinearLayout
+					android:id="@+id/creation_date_row"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/creation_date_caption"
+						style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_marginRight="@dimen/content_padding"
+						android:layout_weight="1"
+						android:hint="@string/created_on"
+						app:boxBackgroundColor="@color/material_text_input_layout_bg"
+						app:endIconContentDescription="@string/shared_string_edit"
+						app:endIconDrawable="@drawable/ic_action_edit_outlined"
+						app:endIconMode="custom"
+						app:helperTextEnabled="true"
+						app:helperTextTextColor="?android:textColorSecondary">
+
+						<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/creation_date"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:clickable="true"
+							android:cursorVisible="false"
+							android:focusable="false"
+							android:inputType="none"
+							android:minHeight="@dimen/favorites_list_item_height"
+							android:paddingStart="@dimen/content_padding_small"
+							android:paddingLeft="@dimen/content_padding_small"
+							android:paddingEnd="@dimen/content_padding_small"
+							android:paddingRight="@dimen/content_padding_small"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="21 Oct 2025 — 10:00" />
+
+					</com.google.android.material.textfield.TextInputLayout>
+
+				</LinearLayout>
+
+				<LinearLayout
 					android:id="@+id/address"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"

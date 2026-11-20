@@ -55,6 +55,7 @@ public class FavouritePoint implements LocationPoint, Linkable {
 	private SpecialPointType specialPointType;
 
 	private long timestamp;
+	private long createdOn;
 	private long visitedDate;
 	private long pickupDate;
 	private boolean calendarEvent;
@@ -98,6 +99,7 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		this.backgroundType = point.backgroundType;
 		this.altitude = point.altitude;
 		this.timestamp = point.timestamp;
+		this.createdOn = point.createdOn;
 		this.visitedDate = point.visitedDate;
 		this.pickupDate = point.pickupDate;
 		this.calendarEvent = point.calendarEvent;
@@ -238,6 +240,14 @@ public class FavouritePoint implements LocationPoint, Linkable {
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public long getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(long createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public boolean getCalendarEvent() {
@@ -494,6 +504,7 @@ public class FavouritePoint implements LocationPoint, Linkable {
 			category = wptPt.getCategory() != null ? wptPt.getCategory() : "";
 		}
 		FavouritePoint point = new FavouritePoint(wptPt.getLat(), wptPt.getLon(), name, category, wptPt.getEle(), wptPt.getTime());
+		point.setCreatedOn(wptPt.getCreatedOn());
 		point.setDescription(wptPt.getDesc());
 		point.setComment(wptPt.getComment());
 		point.setAmenityOriginName(wptPt.getAmenityOriginName());
@@ -540,6 +551,7 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		point.setLon(getLongitude());
 		point.setEle(getAltitude());
 		point.setTime(getTimestamp());
+		point.setCreatedOn(getCreatedOn());
 		point.setName(getName());
 		point.setDesc(getDescription());
 		point.setComment(getComment());

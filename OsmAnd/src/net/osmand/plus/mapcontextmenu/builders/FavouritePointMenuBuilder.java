@@ -107,7 +107,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		buildDateRow(view, app.getString(R.string.created_on), point.getTimestamp());
+		long createdOn = point.getCreatedOn();
+		buildDateRow(view, app.getString(R.string.created_on), createdOn != 0 ? createdOn : point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(mergedAmenityExtensions)) {

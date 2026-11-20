@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:fillViewport="true">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/dialog_content_margin"
+		android:paddingLeft="@dimen/dialog_content_margin"
+		android:paddingTop="@dimen/dialog_content_bottom_margin"
+		android:paddingEnd="@dimen/dialog_content_margin"
+		android:paddingRight="@dimen/dialog_content_margin"
+		android:paddingBottom="@dimen/dialog_content_bottom_margin">
+
+		<TextView
+			android:id="@+id/timezone_subtext"
+			style="@style/TextAppearance.Material3.BodySmall"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary" />
+
+		<DatePicker
+			android:id="@+id/date_picker"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:calendarViewShown="false"
+			android:datePickerMode="spinner"
+			android:spinnersShown="true" />
+
+		<TimePicker
+			android:id="@+id/time_picker"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:timePickerMode="spinner" />
+
+		<LinearLayout
+			android:id="@+id/dst_occurrence_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+			<TextView
+				android:id="@+id/dst_occurrence_title"
+				style="@style/TextAppearance.Material3.BodySmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/content_padding_small"
+				android:text="@string/dst_time_occurs_twice"
+				android:textColor="?android:textColorSecondary" />
+
+			<RadioGroup
+				android:id="@+id/dst_occurrence_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<androidx.appcompat.widget.AppCompatRadioButton
+					android:id="@+id/dst_occurrence_first"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:checkMark="?android:attr/listChoiceIndicatorSingle"
+					android:paddingVertical="@dimen/content_padding_small_half"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<androidx.appcompat.widget.AppCompatRadioButton
+					android:id="@+id/dst_occurrence_second"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:checkMark="?android:attr/listChoiceIndicatorSingle"
+					android:paddingVertical="@dimen/content_padding_small_half"
+					android:textSize="@dimen/default_list_text_size" />
+
+			</RadioGroup>
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/dst_gap_message"
+			style="@style/TextAppearance.Material3.BodySmall"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:text="@string/dst_time_does_not_exist"
+			android:textColor="@color/color_invalid"
+			android:visibility="gone" />
+
+	</LinearLayout>
+
+</ScrollView>

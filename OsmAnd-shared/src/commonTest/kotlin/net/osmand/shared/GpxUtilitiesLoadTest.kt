@@ -220,6 +220,37 @@ class GpxUtilitiesLoadTest {
 	}
 
 	@Test
+	fun testLoadGpxFileReadsCreatedOnExtension() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test" xmlns:osmand="https://osmand.net">
+			  <wpt lat="10.0" lon="20.0">
+			    <time>2024-02-03T04:05:06Z</time>
+			    <extensions>
+			      <osmand:created_on>2024-01-01T00:00:00Z</osmand:created_on>
+			    </extensions>
+			  </wpt>
+			  <wpt lat="10.1" lon="20.1">
+			    <time>2024-02-03T04:05:06Z</time>
+			  </wpt>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val points = gpxFile.getPointsList()
+		val createdOn = GpxUtilities.parseTime("2024-01-01T00:00:00Z")
+		assertEquals(createdOn, points[0].getCreatedOn())
+		assertEquals(GpxUtilities.parseTime("2024-02-03T04:05:06Z"), points[0].time)
+		assertEquals(0L, points[1].getCreatedOn())
+
+		val reloaded = loadGpx(writeGpxToString(gpxFile), addGeneralTrack = false)
+		assertNull(reloaded.error)
+		assertEquals(createdOn, reloaded.getPointsList()[0].getCreatedOn())
+	}
+
+	@Test
 	fun testLoadGpxFilePreservesGeneralTrackBehaviorForMultipleSegments() {
 		val gpxFile = loadGpx(
 			"""

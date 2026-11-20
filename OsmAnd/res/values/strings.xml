@@ -11,6 +11,11 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="dst_time_occurs_twice">This time occurs twice. Choose which one:</string>
+	<string name="dst_time_occurs_twice_first">First occurrence (%1$s)</string>
+	<string name="dst_time_occurs_twice_second">Second occurrence (%1$s)</string>
+	<string name="dst_time_does_not_exist">This wall clock time does not exist during this DST transition in your time zone.</string>
+	<string name="showing_in_timezone">Showing in timezone: %1$s</string>
 	<string name="gpx_line_style_desc_unavailable_for_3d">Dashed and dotted line styles are not available for a 3D track.</string>
 	<string name="attach_to_track">Attach to track</string>
 	<string name="visualization">Visualization</string>
