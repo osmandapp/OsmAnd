@@ -47,7 +47,10 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 
 		@JvmStatic
 		fun cmatches(fullName: String, part: String, mode: KStringMatcherMode): Boolean =
-			cmatchesAligned(fullName, KSearchAlgorithms.lowercaseAndAlignChars(part), true, mode, primaryCollator())
+			cmatches(fullName, part, mode, primaryCollator())
+
+		internal fun cmatches(fullName: String, part: String, mode: KStringMatcherMode, collator: KCollator): Boolean =
+			cmatchesAligned(fullName, KSearchAlgorithms.lowercaseAndAlignChars(part), true, mode, collator)
 
 		@JvmStatic
 		fun cmatchesNoAlign(fullName: String, part: String, mode: KStringMatcherMode): Boolean =

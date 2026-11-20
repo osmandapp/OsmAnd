@@ -54,20 +54,8 @@ kotlin {
 			defFile(project.file("src/nativeInterop/cinterop/sqlite3.def"))
 			packageName("sqlite3")
 		}
-		val workspace = rootProject.projectDir.parentFile
-		val icu = workspace.resolve("core/externals/icu4c/upstream.patched/icu4c/source")
-		iosTarget.compilations.getByName("main").cinterops.create("icuCollator") {
-			compilerOpts("-I" + icu.resolve("common"), "-I" + icu.resolve("i18n"), "-DU_LIB_SUFFIX_C_NAME=_osmand")
-		}
-		// sqlite3.def carries no linkerOpts, so the test binaries link sqlite themselves
 		iosTarget.binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.TestExecutable::class.java).configureEach {
-			val sdk = if (iosTarget.name == "iosArm64") "iphoneos" else "iphonesimulator"
-			val configuration = buildType.name.lowercase().replaceFirstChar { it.uppercase() }
-			val library = workspace.resolve("binaries/ios.clang-$sdk/$configuration/libicu4c_static.a")
-			// Standalone tests embed the same ICU data that OsmAnd Core loads from the app bundle.
-			val data = workspace.resolve("resources/misc/icu4c/icudt52l.dat")
-			linkerOpts("-lsqlite3", library.absolutePath, "-sectcreate", "__DATA", "__icudata", data.absolutePath,
-				"-alias", "section\$start\$__DATA\$__icudata", "_icudt_osmand52_dat")
+			linkerOpts("-lsqlite3")
 		}
 	}
 

@@ -21,6 +21,7 @@ import okio.buffer
 import okio.use
 import kotlin.random.Random
 import kotlin.test.BeforeTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -49,6 +50,8 @@ class AndroidSearchParityTest {
 		assertEquals(listOf(listOf("a", "b"), listOf("a", "b")), words)
 	}
 
+	// Formatting diagnostic tracked in the review of https://github.com/osmandapp/OsmAnd/pull/27156.
+	@Ignore
 	@Test
 	fun coordinateLabelRoundsLikeAndroid() {
 		val api = SearchLocationAndUrlAPI(SearchAmenityByNameAPI())

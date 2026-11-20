@@ -2,11 +2,6 @@
 
 package net.osmand.shared.util
 
-import kotlinx.cinterop.refTo
-import net.osmand.shared.icu.closePrimaryCollator
-import net.osmand.shared.icu.containsSpan
-import net.osmand.shared.icu.equalsAtAnyOffset
-import net.osmand.shared.icu.openPrimaryCollator
 import kotlinx.cinterop.BetaInteropApi
 import platform.Foundation.NSCaseInsensitiveSearch
 import platform.Foundation.NSDiacriticInsensitiveSearch
@@ -21,7 +16,18 @@ import platform.Foundation.create
 import platform.Foundation.currentLocale
 import platform.Foundation.languageCode
 import platform.Foundation.localeIdentifier
-import kotlin.native.ref.createCleaner
+import platform.Foundation.stringByFoldingWithOptions
+import kotlin.concurrent.Volatile
+
+/** null indicates that Core is unavailable and Foundation should handle the operation. */
+interface IOSSearchCollationProvider {
+	fun contains(locale: String, base: String, part: String): Boolean?
+	fun equalsAtAny(locale: String, base: String, part: String, length: Int, offsets: IntArray, count: Int): Boolean?
+}
+
+object IOSSearchCollation {
+	@Volatile var provider: IOSSearchCollationProvider? = null
+}
 
 @kotlin.native.concurrent.ThreadLocal
 private var lastCollator: IOSCollator? = null
@@ -35,34 +41,37 @@ actual fun primaryCollator(): KCollator {
 	return lastCollator?.takeIf { it.locale == locale } ?: IOSCollator(locale).also { lastCollator = it }
 }
 
-// ICU accepts a zero length, but refTo needs an address even for an empty span.
-private fun String.utf16() = ifEmpty { "\u0000" }.refTo(0)
-
 private class IOSCollator(val locale: NSLocale) : KCollator {
-	private val handle = checkNotNull(openPrimaryCollator(locale.localeIdentifier)) { "Cannot open ICU collator for $locale" }
-	@Suppress("unused")
-	private val cleaner = createCleaner(handle) { closePrimaryCollator(it) }
+	private val identifier = locale.localeIdentifier
 
 	@OptIn(BetaInteropApi::class)
-	override fun compare(source: String, target: String): Int =
-		when (NSString.create(string = source).compare(target,
+	private fun foldCase(text: String): String =
+		NSString.create(string = text).stringByFoldingWithOptions(NSCaseInsensitiveSearch, locale)
+
+	@OptIn(BetaInteropApi::class)
+	override fun compare(source: String, target: String): Int {
+		// Fold both operands first so Foundation orders expansions consistently across comparisons.
+		val left = foldCase(source)
+		val right = foldCase(target)
+		return when (NSString.create(string = left).compare(right,
 			NSCaseInsensitiveSearch or NSDiacriticInsensitiveSearch or NSWidthInsensitiveSearch,
-			NSMakeRange(0u, source.length.toULong()), locale)) {
+			NSMakeRange(0u, left.length.toULong()), locale)) {
 			NSOrderedSame -> 0
 			NSOrderedAscending -> -1
 			else -> 1
 		}
 
+	}
+
 	override fun equals(source: String, target: String): Boolean = compare(source, target) == 0
 
 	override fun contains(base: String, part: String): Boolean =
-		containsSpan(handle, base.utf16(), base.length, part.utf16(), part.length) != 0
+		IOSSearchCollation.provider?.contains(identifier, base, part) ?: super.contains(base, part)
 
 	override fun equalsAtAny(base: String, part: String, length: Int, offsets: IntArray, count: Int): Boolean {
 		require(count in 0..offsets.size && length in 0..base.length)
 		if (count == 0) return false
-		val result = equalsAtAnyOffset(handle, base.utf16(), base.length, length, part.utf16(), part.length, offsets.refTo(0), count)
-		require(result >= 0) { "Invalid collation span" }
-		return result != 0
+		return IOSSearchCollation.provider?.equalsAtAny(identifier, base, part, length, offsets, count)
+			?: super.equalsAtAny(base, part, length, offsets, count)
 	}
 }

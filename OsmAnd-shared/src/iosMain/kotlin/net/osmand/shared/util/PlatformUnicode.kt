@@ -30,3 +30,5 @@ internal actual fun platformNormalizeNFC(value: String): String =
 @OptIn(BetaInteropApi::class)
 internal actual fun platformNormalizeNFD(value: String): String =
 	NSString.create(string = value).decomposedStringWithCanonicalMapping
+
+internal actual val searchWordSeparators = Regex("[\\p{Z}\\t-\\r\\u0085,]")
