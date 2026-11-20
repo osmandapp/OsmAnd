@@ -23,6 +23,7 @@ import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
+import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -164,27 +165,33 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
     }
 
     public void addToData(@NonNull Recording recording, float textScale) {
+        TypeNotes type = recording.isPhoto() ? TypeNotes.PHOTO
+                : recording.isAudio() ? TypeNotes.AUDIO : TypeNotes.VIDEO;
+        addToData(recording.getLatitude(), recording.getLongitude(), type, textScale);
+    }
+
+    public void addToData(double latitude, double longitude, @NonNull MediaType mediaType, float textScale) {
+        TypeNotes type = mediaType == MediaType.PHOTO ? TypeNotes.PHOTO
+                : mediaType == MediaType.AUDIO ? TypeNotes.AUDIO : TypeNotes.VIDEO;
+        addToData(latitude, longitude, type, textScale);
+    }
+
+    private void addToData(double latitude, double longitude, @NonNull TypeNotes type, float textScale) {
         if (providerInstance != null) {
             throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
         }
-
-        int x31 = MapUtils.get31TileNumberX(recording.getLongitude());
-        int y31 = MapUtils.get31TileNumberY(recording.getLatitude());
+        int x31 = MapUtils.get31TileNumberX(longitude);
+        int y31 = MapUtils.get31TileNumberY(latitude);
         points31.add(new PointI(x31, y31));
-        mapLayerDataList.add(new MapLayerData(recording, textScale));
+        mapLayerDataList.add(new MapLayerData(type, textScale));
     }
 
     private static class MapLayerData {
-        TypeNotes type;
-        float textScale;
-        MapLayerData(@NonNull Recording recording, float textScale) {
-            if (recording.isPhoto()) {
-                type = TypeNotes.PHOTO;
-            } else if (recording.isAudio()) {
-                type = TypeNotes.AUDIO;
-            } else {
-                type = TypeNotes.VIDEO;
-            }
+        final TypeNotes type;
+        final float textScale;
+
+        MapLayerData(@NonNull TypeNotes type, float textScale) {
+            this.type = type;
             this.textScale = textScale;
         }
     }
