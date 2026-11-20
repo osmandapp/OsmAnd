@@ -200,6 +200,9 @@ class TravelGpx : TravelArticle {
 
 	fun getAmenity(): Amenity? = amenity
 
+	override fun getGpxFileName(): String =
+		amenity?.getGpxFileName(null) ?: super.getGpxFileName()
+
 	// Based on Android AmenityMenuController.getNameStr().
 	// Fallback follows TravelArticle.getGpxFileName().
 	fun getDisplayName(lang: String?, transliterate: Boolean): String {
