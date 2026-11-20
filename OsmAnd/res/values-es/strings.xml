@@ -309,7 +309,7 @@
     <string name="navigate_point_format_DMS">GGG MM SS.S</string>
     <string name="shared_string_show_on_map">Mostrar en el mapa</string>
     <string name="search_address_street">Calle</string>
-    <string name="search_address_building">Edificio</string>
+    <string name="search_address_building">Edificación</string>
     <string name="context_menu_item_update_map">Actualizar mapa</string>
     <string name="context_menu_item_create_poi">Crear PDI</string>
     <string name="shared_string_yes">Sí</string>
@@ -757,11 +757,11 @@
     <string name="sort_by_distance">Ordenar por distancia</string>
     <string name="sort_by_name">Ordenar por nombre</string>
     <string name="no_index_file_to_download">No se encontraron descargas, comprueba tu conexión a Internet.</string>
-    <string name="rendering_attr_hideBuildings_name">Edificios</string>
+    <string name="rendering_attr_hideBuildings_name">Edificaciones</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vías no aptas para vehículos</string>
     <string name="rendering_attr_hideText_name">Textos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Bosques y matorrales</string>
-    <string name="rendering_attr_buildings15zoom_name">Edificios en zoom 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Edificaciones en zum 15</string>
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
@@ -950,7 +950,7 @@
     <string name="shared_string_go">Ir</string>
     <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios local</string>
     <string name="welmode_download_maps">Descargar mapas</string>
-    <string name="welcome_header">Te damos la bienvenida</string>
+    <string name="welcome_header">Le damos la bienvenida</string>
     <string name="current_route">Ruta actual</string>
     <string name="agps_info">Información A-GPS</string>
     <string name="shared_string_message">Mensaje</string>
@@ -962,7 +962,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">Asistente al mapeador OSM</string>
     <string name="shared_string_manage">Gestionar</string>
     <string name="shared_string_edit">Editar</string>
-    <string name="shared_string_places">Sitios</string>
+    <string name="shared_string_places">Lugares</string>
     <string name="shared_string_search">Buscar</string>
     <string name="filter_poi_hint">Filtrar por nombre</string>
     <string name="search_poi_category_hint">Escribe para buscar</string>
@@ -1041,12 +1041,12 @@
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
     <string name="restart_is_required">Reinicia para aplicar los cambios.</string>
-    <string name="do_you_like_osmand">¿Te gusta OsmAnd\?</string>
-    <string name="user_hates_app_get_feedback">Dinos por qué.</string>
-    <string name="user_hates_app_get_feedback_long">Por favor, háganos saber cualquier sugerencia.</string>
+    <string name="do_you_like_osmand">¿Le gusta OsmAnd?</string>
+    <string name="user_hates_app_get_feedback">Díganos por qué.</string>
+    <string name="user_hates_app_get_feedback_long">Háganos saber cualquier sugerencia.</string>
     <string name="download_live_updates">Actualizaciones en vivo</string>
-    <string name="failed_to_upload">Subida fallida</string>
-    <string name="delete_change">Borrar cambio</string>
+    <string name="failed_to_upload">No se pudo cargar</string>
+    <string name="delete_change">Eliminar cambio</string>
     <string name="successfully_uploaded_pattern">Subido {0}/{1}</string>
     <string name="try_again">Prueba de nuevo</string>
     <string name="error_message_pattern">Error: {0}</string>
@@ -1054,7 +1054,7 @@
     <string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de peligro</string>
     <string name="dahboard_options_dialog_title">Configurar panel</string>
-    <string name="shared_string_card_was_hidden">Tarjeta ocultada</string>
+    <string name="shared_string_card_was_hidden">Se ocultó la tarjeta</string>
     <string name="shared_string_undo">Deshacer</string>
     <string name="shared_string_skip">Omitir</string>
     <string name="app_name_osmand">OsmAnd</string>
@@ -1063,7 +1063,7 @@
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
     <string name="tab_title_advanced">Avanzado</string>
-    <string name="building_number">Número de edificio</string>
+    <string name="building_number">Número de edificación</string>
     <string name="next_proceed">Siguiente</string>
     <string name="opening_at">Abren a las</string>
     <string name="closing_at">Cierran a las</string>
@@ -1836,10 +1836,10 @@
     <string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
     <string name="welcome_to_open_beta_description">Las guías turísticas, se basan actualmente en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita.</string>
-    <string name="start_editing_card_description">Puedes y debes editar cualquier artículo en Wikiviajes. Comparte tu conocimiento, experiencia, talento y atención.</string>
-    <string name="start_editing">Comenzar edición</string>
+    <string name="start_editing_card_description">Puede ―y debería― editar cualquier artículo en Wikiviajes. Comparta su conocimiento, experiencia, talento y atención.</string>
+    <string name="start_editing">Empezar a editar</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
-    <string name="welcome_to_open_beta">Te damos la bienvenida a la beta abierta</string>
+    <string name="welcome_to_open_beta">Le damos la bienvenida a la beta abierta</string>
     <string name="download_wikipedia_description">Descarga los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
@@ -1850,7 +1850,7 @@
     <string name="osmand_team">Equipo de OsmAnd</string>
     <string name="shared_string_restart">Reiniciar aplicación</string>
     <string name="maps_you_need_descr">Basado en los artículos destacados, se recomienda descargar los siguientes mapas:</string>
-    <string name="maps_you_need">Mapas que necesitas</string>
+    <string name="maps_you_need">Mapas que necesita</string>
     <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
     <string name="how_to_open_link">¿Cómo abrir el enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
@@ -3830,7 +3830,7 @@
     <string name="rssi_widget_desc">Muestra el nivel RSSI del dispositivo externo.</string>
     <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (RSSI)</string>
     <string name="tracks_empty_folder_description">Esta carpeta no contiene trazas aún.</string>
-    <string name="tracks_empty_folder"/>
+    <string name="tracks_empty_folder">Carpeta vacía</string>
     <string name="track_not_recorded">No grabado</string>
     <string name="shared_string_new_track">Nueva traza</string>
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
@@ -3988,7 +3988,7 @@
     <string name="free_versions_descr">Descarga e instala la versión gratuita de OsmAnd</string>
     <string name="send_logcat_log_descr">Archivo de registro detallado</string>
     <string name="open_issue_on_github">Abrir una discusión en GitHub</string>
-    <string name="report_an_issues">Informar un problema</string>
+    <string name="report_an_issues">Informar de un problema</string>
     <string name="copy_build_version">Copiar la versión de la compilación</string>
     <string name="help_article_widgets_radius_ruler_name">Regla radial y brújula</string>
     <string name="free_versions">Versiones gratuitas</string>
@@ -4824,7 +4824,7 @@
     <string name="shared_string_azimuth">Acimut</string>
     <string name="vehicle_metrics_chart_category">Métricas vehiculares</string>
     <string name="delete_folder_description">¿Quiere eliminar la carpeta «%1$s»?</string>
-    <string name="enable_3d_objects">Edificios en 3D</string>
+    <string name="enable_3d_objects">Edificaciones 3D</string>
     <string name="nearest_city">Ciudad más próxima</string>
     <string name="shared_string_price">Precio</string>
     <string name="shared_string_magnitude">Magnitud</string>
@@ -5004,10 +5004,10 @@
     <string name="intersection">Intersección</string>
     <string name="astro_daily_path">Camino diario</string>
     <string name="astro_deep_sky">Cielo profundo</string>
-    <string name="building_3d_low_details_content_desc">Edificios en 3D (bajo nivel de detalle)</string>
-    <string name="building_3d_high_details_content_desc">Edificios en 3D (alto nivel de detalle)</string>
-    <string name="building_3d_near_distance_content_desc">Edificios en 3D (distancia cercana)</string>
-    <string name="building_3d_far_distance_content_desc">Edificios en 3D (distancia lejana)</string>
+    <string name="building_3d_low_details_content_desc">Edificaciones 3D (bajo nivel de detalle)</string>
+    <string name="building_3d_high_details_content_desc">Edificaciones 3D (alto nivel de detalle)</string>
+    <string name="building_3d_near_distance_content_desc">Edificaciones 3D (distancia cercana)</string>
+    <string name="building_3d_far_distance_content_desc">Edificaciones 3D (distancia lejana)</string>
     <string name="astronomy_plugin_name">Astronomía</string>
     <string name="obd_alt_battery_voltage_desc">Muestra el nivel de voltaje en el adaptador OBD</string>
     <string name="shared_string_radians">Radianes</string>
@@ -5228,4 +5228,12 @@
     <string name="cloud_file_name_too_long">El nombre del archivo es demasiado largo para este dispositivo; cámbielo en OsmAnd Cloud</string>
     <string name="no_media_descr">Puede añadir fotos, vídeos o notas de audio desde su cámara o su fototeca.</string>
     <string name="media_storage_shared_storage_descr">Los archivos se guardan en carpetas públicas (Imágenes, Videos, Música). Se pueden ver en la Galería y en Google Fotos.</string>
+    <string name="visualization">Visualización</string>
+    <string name="media_storage">Almacenamiento multimedia</string>
+    <string name="aidl_permissions_deny">No permitir</string>
+    <string name="astro_ar_mode">Modo RA</string>
+    <string name="astro_camera_view">Vista de cámara</string>
+    <string name="ais_reset_plugin_settings">Restablecer configuración de complemento</string>
+    <string name="ais_reset_connection_settings">Restablecer configuración de conexión</string>
+    <string name="astro_partial_solar_eclipse">Eclipse solar parcial</string>
 </resources>
