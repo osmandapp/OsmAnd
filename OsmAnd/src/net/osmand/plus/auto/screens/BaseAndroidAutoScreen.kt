@@ -32,6 +32,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	private var prevMapLinkedToLocation = false
 	private var prevFollowingMode = false
 	private var prevStateSaved = false
+	private var prevSavedBeforeCarTilt = false
 	protected var firstTimeGetTemplate = true
 
 	protected val app: OsmandApplication
@@ -179,6 +180,8 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		prevZoom = mapView.currentZoom
 		prevRotationAngle = mapView.rotate
 		prevElevationAngle = mapView.normalizeElevationAngle(mapView.elevationAngle)
+		prevSavedBeforeCarTilt = app.useOpenGlRenderer()
+				&& app.carNavigationSession?.navigationCarSurface?.isCarTiltApplied != true
 		prevStateSaved = true
 	}
 
@@ -190,8 +193,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		val navigationStarted = app.routingHelper.isFollowingMode && !prevFollowingMode
 		val zoom = prevZoom ?: mapView.currentZoom
 		// a screen opened at session start saves the phone tilt: the car tilt is applied later, with the car surface
-		val carSessionStarted = app.carNavigationSession?.hasStarted() == true
-		val elevation = if (navigationStarted || carSessionStarted) {
+		val elevation = if (navigationStarted || prevSavedBeforeCarTilt) {
 			app.settings.lastKnownMapElevation
 		} else {
 			prevElevationAngle
