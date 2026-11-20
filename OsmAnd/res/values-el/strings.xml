@@ -5336,4 +5336,5 @@
     <string name="rendering_attr_hideNoLNAM_name">Θαλάσσιες σημάνσεις OSM (μερικές)</string>
     <string name="rendering_attr_hideNoLNAM_description">Απόκρυψη θαλάσσιων σημάνσεων OSM (μερικών)</string>
     <string name="attach_to_track">Προσκόλληση σε ίχνος</string>
+    <string name="gpx_line_style_desc_unavailable_for_3d">Τα στυλ γραμμών με παύλες και με τελείες δεν είναι διαθέσιμα για ένα 3D ίχνος.</string>
 </resources>
