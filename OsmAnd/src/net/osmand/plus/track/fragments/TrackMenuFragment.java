@@ -410,7 +410,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (!Algorithms.isBlank(gpxFile.getArticleTitle())) {
 			gpxTitle = gpxFile.getArticleTitle();
 		} else {
-			gpxTitle = GpxHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
+			String routeName = routeKey != null ? routeKey.getRouteName(
+					settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()) : null;
+			gpxTitle = !Algorithms.isBlank(routeName) ? routeName
+					: GpxHelper.INSTANCE.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
 		}
 	}
 
