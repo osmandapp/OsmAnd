@@ -144,12 +144,29 @@ tasks.register('validateTranslations') {
 
 	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
 
+	// Translations are formatted the way the app does: String.format with arguments of the types
+	// the source string expects, and MessageFormat for {n} patterns
+	def formatPattern = /%(?:(\d+)\$)?[-#+ 0,(]*\d*(?:\.\d+)?([sSdft%])/
+	def sampleArgs = [d: 1, f: 1.0d, t: 1L]
+	def formatArgs = [:]
+	def messageFormatKeys = [] as Set
+
 	files.each { fileName ->
 		def file = new File(file("res/values"), fileName)
 		if (file.exists()) {
 			parser.parse(file).string.each { node ->
-				def placeholders = (node.text() ?: "").findAll(pattern)
+				def text = node.text() ?: ""
+				def placeholders = text.findAll(pattern)
 				defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
+				def args = []
+				int nextIndex = 0
+				text.eachMatch(formatPattern) { spec, index, conversion ->
+					if (conversion != '%') {
+						args[index ? index.toInteger() - 1 : nextIndex++] = sampleArgs.getOrDefault(conversion, "")
+					}
+				}
+				if (args) formatArgs[node.@name] = args.toArray()
+				if (text =~ /\{\d+\}/) messageFormatKeys << node.@name
 			}
 		} else {
 			println "Skipping missing default file: ${file.path}"
@@ -167,8 +184,15 @@ tasks.register('validateTranslations') {
 			if (file.exists()) {
 				def placeholders = [:]
 				parser.parse(file).string.each { node ->
-					def translationPlaceholders = (node.text() ?: "").findAll(pattern)
+					def text = node.text() ?: ""
+					def translationPlaceholders = text.findAll(pattern)
 					placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+					try {
+						if (formatArgs[node.@name] != null) String.format(text, formatArgs[node.@name])
+						if (node.@name in messageFormatKeys) new java.text.MessageFormat(text)
+					} catch (Exception e) {
+						issues << "Format error in ${file.path}: '${node.@name}' -> ${e}"
+					}
 				}
 
 				defaultPlaceholders.each { key, defaultValues ->
