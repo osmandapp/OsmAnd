@@ -94,7 +94,7 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			if (data.shouldResetParameter(parameter)) {
 				if (gpxFile != null) {
-					item.readGpxAppearanceParameter(gpxFile, parameter);
+					resetToOriginal(item, gpxFile, parameter);
 				}
 			} else {
 				Object value = data.getParameter(parameter);
@@ -108,6 +108,15 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().absolutePath());
 		if (selectedGpxFile != null) {
 			selectedGpxFile.resetSplitProcessed();
+		}
+	}
+
+	// The line style can't be cleared, so a file without the tag resets the track to solid
+	private void resetToOriginal(@NonNull GpxDataItem item, @NonNull GpxFile gpxFile, @NonNull GpxParameter parameter) {
+		if (parameter == LINE_STYLE) {
+			item.setParameter(LINE_STYLE, gpxFile.getLineStyleType().getTypeName());
+		} else {
+			item.readGpxAppearanceParameter(gpxFile, parameter);
 		}
 	}
 

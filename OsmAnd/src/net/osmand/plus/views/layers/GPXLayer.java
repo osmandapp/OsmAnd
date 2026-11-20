@@ -1413,7 +1413,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
-				GpxLineStyleType lineStyleType = selected && coloringType.isTrackSolid()
+				boolean lineStyleAvailable = selected && coloringType.isTrackSolid()
+						&& !track3DStyle.getVisualizationType().is3dType();
+				GpxLineStyleType lineStyleType = lineStyleAvailable
 						? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
 						: GpxLineStyleType.SOLID;
 				boolean showArrows = appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);

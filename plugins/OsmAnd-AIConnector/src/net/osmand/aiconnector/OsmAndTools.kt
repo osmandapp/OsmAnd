@@ -419,7 +419,11 @@ class OsmAndTools(private val bridge: OsmAndBridge, private val assets: AssetMan
 			"Run a quick action by its number from osmand_list_quick_actions.",
 			schema(prop("number", "integer", "Quick action number"), required = listOf("number"))
 		) { a ->
-			check(SETTINGS, bridge.get().executeQuickAction(QuickActionParams(a.getInt("number"))))
+			val number = a.getInt("number")
+			val list = ArrayList<QuickActionInfoParams>()
+			check(SETTINGS, bridge.get().getQuickActionsInfo(list))
+			if (number !in 1..list.size) throw ToolError("No quick action $number; see osmand_list_quick_actions")
+			check(SETTINGS, bridge.get().executeQuickAction(QuickActionParams(number - 1)))
 			"Quick action executed"
 		},
 		Tool(
