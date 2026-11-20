@@ -11,6 +11,7 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -148,6 +149,17 @@ public class FileSettingsHelper extends SettingsHelper {
 		ExportFileTask exportAsyncTask = new ExportFileTask(this, file, listener, items, exportItemsFiles);
 		exportAsyncTasks.put(file, exportAsyncTask);
 		OsmAndTaskManager.executeTask(exportAsyncTask);
+	}
+
+	public void exportSharedSettings(@NonNull File fileDir, @NonNull String fileName,
+	                                 @Nullable SettingsExportListener listener,
+	                                 @NonNull List<SettingsItem> items) {
+		for (SettingsItem item : items) {
+			if (item instanceof ProfileSettingsItem profileItem) {
+				profileItem.enableSelectedInputDeviceExport();
+			}
+		}
+		exportSettings(fileDir, fileName, listener, items, true);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,

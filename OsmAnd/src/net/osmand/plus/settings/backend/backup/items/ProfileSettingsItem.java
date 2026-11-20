@@ -32,6 +32,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	private ApplicationModeBean modeBean;
 
 	private JSONObject additionalPrefsJson;
+	private boolean writeSelectedInputDevice;
 	private Set<String> appModeBeanPrefsIds;
 
 	public ProfileSettingsItem(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
@@ -254,6 +255,10 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 		json.put("appMode", new JSONObject(appMode.toJson()));
 	}
 
+	public void enableSelectedInputDeviceExport() {
+		writeSelectedInputDevice = true;
+	}
+
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
@@ -267,6 +272,14 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 			@Override
 			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference,
 					@NonNull JSONObject json) throws JSONException {
+				if (writeSelectedInputDevice
+						&& preference.getId().equals(app.getSettings().LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.getId())) {
+					String selectedDevice = app.getInputDeviceHelper().getSelectedCustomDeviceJson(appMode);
+					if (selectedDevice != null) {
+						json.put(preference.getId(), selectedDevice);
+						return;
+					}
+				}
 				if (!appModeBeanPrefsIds.contains(preference.getId())) {
 					preference.writeToJson(json, appMode);
 				}
