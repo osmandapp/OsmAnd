@@ -69,11 +69,11 @@ class TravelModelTest {
 	}
 
 	@Test
-	fun displayNameUsesRefWithoutChangingTheFileName() {
+	fun displayAndFileNamesUseRef() {
 		val gpx = TravelGpx(amenity(tags = mapOf("route_id" to "O13634629", "ref" to "367A")))
 
 		assertEquals("367A", gpx.getDisplayName(null, false))
-		assertEquals("O13634629", gpx.getGpxFileName())
+		assertEquals("367A", gpx.getGpxFileName())
 		assertEquals("", gpx.title)
 
 		val restored = TravelGpx().apply {
@@ -81,6 +81,7 @@ class TravelModelTest {
 			ref = "367A"
 		}
 		assertEquals("367A", restored.getDisplayName(null, false))
+		assertEquals("O13634629", restored.getGpxFileName())
 		restored.ref = null
 		assertEquals("O13634629", restored.getDisplayName(null, false))
 	}
@@ -93,7 +94,7 @@ class TravelModelTest {
 
 		assertEquals("367A", gpx.getDisplayName(null, false))
 		assertEquals("Local trail (367A)", gpx.getDisplayName("en", false))
-		assertEquals("367A", gpx.getGpxFileName())
+		assertEquals("Local trail", gpx.getGpxFileName())
 
 		val withoutRef = TravelGpx(amenity(name = "Local trail"))
 		assertEquals("Local trail", withoutRef.getDisplayName(null, false))
