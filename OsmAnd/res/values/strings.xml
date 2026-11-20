@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="media_export_to_gpx">Export to GPX</string>
+	<string name="media_locations_export_empty">None of the selected files has a location.</string>
 	<string name="gpx_line_style_desc_unavailable_for_3d">Dashed and dotted line styles are not available for a 3D track.</string>
 	<string name="attach_to_track">Attach to track</string>
 	<string name="visualization">Visualization</string>

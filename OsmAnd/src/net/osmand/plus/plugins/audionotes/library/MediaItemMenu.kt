@@ -14,6 +14,7 @@ import net.osmand.plus.gallery.controller.GalleryPagerController
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.library.MediaDialogs
 import net.osmand.plus.gallery.library.MediaLibraryEntry
+import net.osmand.plus.gallery.library.MediaLocationsExport
 import net.osmand.plus.gallery.library.MediaShareHelper
 import net.osmand.plus.gallery.library.ShowOnMapNavigator
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
@@ -77,6 +78,9 @@ object MediaItemMenu {
 		popup(anchor, nightMode, listOf(
 			item(app, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, nightMode) {
 				MediaShareHelper.share(activity, entries.map { it.mediaItem }); onDone()
+			},
+			item(app, R.string.media_export_to_gpx, R.drawable.ic_action_export, nightMode) {
+				MediaLocationsExport(app).share(activity, entries); onDone()
 			},
 			item(app, R.string.shared_string_delete, R.drawable.ic_action_delete_outlined, nightMode, warning = true) {
 				MediaDialogs.delete(activity, entries.size, nightMode) { delete(activity, entries, onDone) }
