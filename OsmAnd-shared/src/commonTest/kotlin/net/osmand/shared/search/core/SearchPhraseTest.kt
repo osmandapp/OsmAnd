@@ -79,10 +79,12 @@ class SearchPhraseTest {
 	@Test
 	fun splitWordsAsTheRegex() {
 		setUp
-		// java's \s is [ \t\n\x0B\f\r]
+		// Unicode White_Space as matched by Android's Pattern.
+		val mobile = !testPlatformName().startsWith("jvm")
 		for (c in 0..0xFFFF) {
 			val between = "a" + c.toChar() + "b"
-			val delimiter = c == ' '.code || c == ','.code || c in 9..13
+			val delimiter = c == ','.code || c in 9..13 || c == 0x20 || mobile && (c == 0x85 || c == 0xA0 ||
+				c == 0x1680 || c in 0x2000..0x200A || c in 0x2028..0x2029 || c == 0x202F || c == 0x205F || c == 0x3000)
 			assertEquals(if (delimiter) 2 else 1, SearchPhrase.splitWords(between, ArrayList(), SearchPhrase.ALLDELIMITERS).size, c.toString(16))
 			assertEquals(if (delimiter || c == '-'.code) 2 else 1,
 				SearchPhrase.splitWords(between, ArrayList(), SearchPhrase.ALLDELIMITERS_WITH_HYPHEN).size, c.toString(16))
@@ -90,9 +92,10 @@ class SearchPhraseTest {
 		// what the delimiters and trim take, among letters and spaces they do not take
 		val alphabet = (0..0x20).map { it.toChar() } + listOf(',', '-', 'a', 'b', '\u0451', '1', '\u00A0', '\u2003', '\u0085', '\u007F')
 		// java's regexes with its \s spelled out
+		val space = if (mobile) "[\\p{Z}\\u0085\\t-\\r]" else "\\s"
 		val regexes = mapOf(
-			SearchPhrase.ALLDELIMITERS to Regex("[ \\t\\n\\u000B\\f\\r,]"),
-			SearchPhrase.ALLDELIMITERS_WITH_HYPHEN to Regex("[ \\t\\n\\u000B\\f\\r,-]")
+			SearchPhrase.ALLDELIMITERS to Regex("$space|,"),
+			SearchPhrase.ALLDELIMITERS_WITH_HYPHEN to Regex("$space|,|-")
 		)
 		val random = Random(7)
 		repeat(20000) {

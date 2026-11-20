@@ -22,6 +22,34 @@ import net.osmand.shared.util.collections.KTreeSet
  */
 object KSearchAlgorithms {
 
+	fun lowercaseAndAlignChars(fullText: String): String =
+		KSearchAlgorithms.alignChars(lowercase(fullText))
+
+	/**
+	 * What [String.lowercase] answers, char by char. Only `İ`, which lowercases into two chars,
+	 * `Σ`, which lowercases by its neighbours, and surrogate pairs, which lowercase as one code
+	 * point, need the whole string: text holding any of them goes to [String.lowercase].
+	 */
+	internal fun lowercase(text: String): String {
+		var chars: CharArray? = null
+		for (i in text.indices) {
+			val c = text[i]
+			val lower = when {
+				c < '\u0080' -> if (c in 'A'..'Z') c + ('a' - 'A') else c
+				c == 'İ' || c == 'Σ' || c.isSurrogate() -> return text.lowercase()
+				else -> c.lowercaseChar()
+			}
+			if (lower != c) {
+				if (chars == null) {
+					chars = text.toCharArray()
+				}
+				chars[i] = lower
+			}
+		}
+		return chars?.concatToString() ?: text
+	}
+
+
 	const val SUFFIX_DICT_MARKER_RAW_ESCAPE = ''
 	const val SUFFIX_DICT_MARKER_BASE = 0xE100
 	const val SUFFIX_DICT_MARKER_MAX = 0xF8FF

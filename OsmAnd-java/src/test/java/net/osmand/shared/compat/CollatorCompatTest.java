@@ -19,14 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * {@link net.osmand.shared.util.KCollatorStringMatcher} is a copy of {@link CollatorStringMatcher}
- * that compares collation keys without a collator call for each match. That
- * only holds if it answers the same, so this asks both the same questions: every mode, over the road
- * names of the obf files the routing tests ship with, and over names picked to carry the things a
- * primary collator folds - the german sharp s, the ligatures, apostrophes, dashes, arabic
- * diacritics, greek final sigma.
- *
- * The names are real ones rather than invented, because invented names are the easy ones.
+ * Compares the Java and shared matchers in every mode over road names and Unicode edge cases.
  */
 public class CollatorCompatTest {
 
@@ -160,7 +153,7 @@ public class CollatorCompatTest {
 				assertEquals("mode of '" + query + "' as " + mode,
 						java.getMode().name(), copy.getMode().name());
 				assertEquals("part of '" + query + "' as " + mode,
-						java.getPart(), copy.getPart().getText());
+						java.getPart(), copy.getPart());
 				for (String name : names) {
 					assertEquals(describe(mode, query, name), java.matches(name), copy.matches(name));
 				}
