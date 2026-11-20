@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -475,7 +477,9 @@ public class OsmandAidlApi {
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma, String filter) {
 		try {
 			receivers.put(filter, rec);
-			AndroidUtils.registerBroadcastReceiver(ma, filter, rec, true);
+			// OsmAnd sends these as implicit broadcasts, so the receiver stays exported; the signature permission keeps other apps out
+			String permission = ma.getPackageName() + ".DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION";
+			ContextCompat.registerReceiver(ma, rec, new IntentFilter(filter), permission, null, ContextCompat.RECEIVER_EXPORTED);
 		} catch (IllegalStateException e) {
 			LOG.error(e);
 		}
@@ -1377,10 +1381,21 @@ public class OsmandAidlApi {
 		}
 	}
 
+	// the path comes from the calling app: null when it is empty or leaves the tracks folder
+	@Nullable
+	private File getGpxImportDestination(@Nullable String destinationPath) {
+		if (Algorithms.isEmpty(destinationPath)) {
+			return null;
+		}
+		File tracksDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File destination = new File(tracksDir, destinationPath);
+		return Algorithms.isSubDirectory(tracksDir, destination) ? destination : null;
+	}
+
 	boolean importGpxFromFile(File source, String destinationPath, String color, boolean show) {
-		if (source != null && !Algorithms.isEmpty(destinationPath)) {
+		File destination = getGpxImportDestination(destinationPath);
+		if (source != null && destination != null) {
 			if (source.exists() && source.canRead()) {
-				File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 				if (destination.getParentFile().canWrite()) {
 					boolean destinationExists = destination.exists();
 					if (!destinationExists) {
@@ -1400,8 +1415,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean importGpxFromUri(Uri gpxUri, String destinationPath, String color, boolean show) {
-		if (gpxUri != null && !Algorithms.isEmpty(destinationPath)) {
-			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
+		File destination = getGpxImportDestination(destinationPath);
+		if (gpxUri != null && destination != null) {
 			ParcelFileDescriptor gpxParcelDescriptor;
 			try {
 				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
@@ -1438,8 +1453,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean importGpxFromData(String sourceRawData, String destinationPath, String color, boolean show) {
-		if (!Algorithms.isEmpty(sourceRawData) && !Algorithms.isEmpty(destinationPath)) {
-			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
+		File destination = getGpxImportDestination(destinationPath);
+		if (!Algorithms.isEmpty(sourceRawData) && destination != null) {
 			try {
 				InputStream is = new ByteArrayInputStream(sourceRawData.getBytes());
 				FileOutputStream fout = new FileOutputStream(destination);
@@ -2608,6 +2623,12 @@ public class OsmandAidlApi {
 		return connectedApp.isEnabled() && connectedApp.isGroupGranted(group);
 	}
 
+	// callbacks are called from OsmAnd's own threads, where the caller is OsmAnd: checks the app that registered one
+	boolean isCallbackAllowed(@Nullable String pack, @Nullable AidlPermissionGroup group) {
+		ConnectedApp connectedApp = pack != null ? connectedApps.get(pack) : null;
+		return connectedApp != null && connectedApp.isEnabled() && (group == null || connectedApp.isGroupGranted(group));
+	}
+
 	@NonNull
 	public ConnectedApp getOrCreateConnectedApp(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
@@ -2785,7 +2806,7 @@ public class OsmandAidlApi {
 					}
 				}
 				for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
-					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
+					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.NAVIGATION)) {
 						try {
 							cb.getCallback().updateNavigationInfo(directionInfo);
 						} catch (Exception e) {
@@ -2808,7 +2829,7 @@ public class OsmandAidlApi {
 					}
 				}
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.NAVIGATION)) {
 						try {
 							cb.getCallback().updateNavigationInfo(directionInfo);
 						} catch (Exception e) {
@@ -2833,7 +2854,7 @@ public class OsmandAidlApi {
 		VoiceRouter.VoiceMessageListener listener = (cmds, played) -> {
 			if (aidlCallbackListener != null) {
 				for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
-					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
+					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.NAVIGATION)) {
 						try {
 							cb.getCallback().onVoiceRouterNotify(new OnVoiceNavigationParams(cmds, played));
 						} catch (Exception e) {
@@ -2844,7 +2865,7 @@ public class OsmandAidlApi {
 			}
 			if (aidlCallbackListenerV2 != null) {
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.NAVIGATION)) {
 						try {
 							cb.getCallback().onVoiceRouterNotify(new net.osmand.aidlapi.navigation.OnVoiceNavigationParams(cmds, played));
 						} catch (Exception e) {
@@ -2869,7 +2890,7 @@ public class OsmandAidlApi {
 		LogcatMessageListener listener = (_filterLevel, logs) -> {
 			if (aidlCallbackListenerV2 != null) {
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_LOGCAT_MESSAGE) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_LOGCAT_MESSAGE) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.SYSTEM)) {
 						try {
 							cb.getCallback().onLogcatMessage(new OnLogcatMessageParams(_filterLevel, logs));
 						} catch (Exception e) {
@@ -2946,7 +2967,7 @@ public class OsmandAidlApi {
 		IContextMenuButtonListener listener = (buttonId, pointId, layerId) -> {
 			if (aidlCallbackListener != null) {
 				for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
-					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0) {
+					if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.MAP)) {
 						try {
 							cb.getCallback().onContextMenuButtonClicked(buttonId, pointId, layerId);
 						} catch (Exception e) {
@@ -2957,7 +2978,7 @@ public class OsmandAidlApi {
 			}
 			if (aidlCallbackListenerV2 != null) {
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
-					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0) {
+					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_CONTEXT_MENU_BUTTONS_CLICK) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.MAP)) {
 						try {
 							cb.getCallback().onContextMenuButtonClicked(buttonId, pointId, layerId);
 						} catch (Exception e) {
@@ -3476,7 +3497,7 @@ public class OsmandAidlApi {
 		if (aidlCallbackListenerV2 != null) {
 			for (Map.Entry<Long, OsmandAidlServiceV2.AidlCallbackParams> entry : aidlCallbackListenerV2.getAidlCallbacks().entrySet()) {
 				OsmandAidlServiceV2.AidlCallbackParams cb = entry.getValue();
-				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0) {
+				if ((cb.getKey() & KEY_ON_KEY_EVENT) > 0 && isCallbackAllowed(cb.getPack(), AidlPermissionGroup.SYSTEM)) {
 					Set<Integer> keyEventsList = keyEventCallbacks.get(entry.getKey());
 					// An empty list means all key are requested
 					if (keyEventsList != null && (keyEventsList.isEmpty() || keyEventsList.contains(event.getKeyCode()))) {
