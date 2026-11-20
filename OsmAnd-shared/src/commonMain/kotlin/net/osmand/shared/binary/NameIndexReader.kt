@@ -2,6 +2,7 @@ package net.osmand.shared.binary
 
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.util.KCollatorStringMatcher
+import net.osmand.shared.util.primaryCollator
 import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.collections.KTLongArrayList
 import net.osmand.shared.util.collections.KTLongHashSet
@@ -55,6 +56,8 @@ class NameIndexReader private constructor(
 
 	open class NameIndexReaderMatcher(query: String) {
 
+		private val matcherCollator = primaryCollator()
+
 		protected val queryAligned: String = KSearchAlgorithms.alignChars(query)
 		protected val queryIncomplete: String? =
 			if (query.endsWith(KCollatorStringMatcher.INCOMPLETE_DOT)) query.substring(0, query.length - 1) else null
@@ -66,22 +69,22 @@ class NameIndexReader private constructor(
 
 		protected open fun matchAlignedKey(alignedKey: String): Boolean {
 			// 1. simple match
-			var match = KCollatorStringMatcher.cmatches(queryAligned, alignedKey, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
+			var match = KCollatorStringMatcher.cmatches(queryAligned, alignedKey, KStringMatcherMode.CHECK_ONLY_STARTS_WITH, matcherCollator)
 			// 2. match 2-xx (key) -> 2 (query) - another solution number, NC-42 (key) -> NC (query) or 'NC 42' 2 tokens
 			if (!match && alignedKey.indexOf('-') != -1) {
 				// check equals for any substring ('-' is space for collator) - mostly we interested in first part before '-' for equals
-				match = KCollatorStringMatcher.cmatches(alignedKey, queryAligned, KStringMatcherMode.CHECK_EQUALS_FROM_SPACE)
+				match = KCollatorStringMatcher.cmatches(alignedKey, queryAligned, KStringMatcherMode.CHECK_EQUALS_FROM_SPACE, matcherCollator)
 				// case data - '2-x...' query '2xyz', we check that user writes without space
 				if (!match) {
 					val alignedSingleWord = alignedKey.replace("-", "")
-					match = KCollatorStringMatcher.cmatches(queryAligned, alignedSingleWord, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
+					match = KCollatorStringMatcher.cmatches(queryAligned, alignedSingleWord, KStringMatcherMode.CHECK_ONLY_STARTS_WITH, matcherCollator)
 				}
 			}
 			// 3. incomplete query match
 			val incomplete = queryIncomplete
 			if (!match && incomplete != null) {
-				match = KCollatorStringMatcher.cmatches(incomplete, alignedKey, KStringMatcherMode.CHECK_ONLY_STARTS_WITH) ||
-						KCollatorStringMatcher.cmatches(alignedKey, incomplete, KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
+				match = KCollatorStringMatcher.cmatches(incomplete, alignedKey, KStringMatcherMode.CHECK_ONLY_STARTS_WITH, matcherCollator) ||
+						KCollatorStringMatcher.cmatches(alignedKey, incomplete, KStringMatcherMode.CHECK_ONLY_STARTS_WITH, matcherCollator)
 			}
 			return match
 		}

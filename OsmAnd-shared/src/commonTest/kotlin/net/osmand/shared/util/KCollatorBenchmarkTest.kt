@@ -11,17 +11,6 @@ import kotlin.time.TimeSource
  * and once per length. Runs on every target, so the same workload can be compared between JVM,
  * Android and Kotlin/Native.
  *
- * This is the measurement behind the decision not to port the java algorithm as it stands. On the
- * JVM a collator call is a call; on Kotlin/Native there is no collator in the standard library, so
- * a literal port has to reach for `NSString.compare`, and every call converts a Kotlin string,
- * allocates an NSString and crosses into Foundation. [LiteralCollatorMatcher] is that port, and it
- * is here rather than in the module because nothing should use it.
- *
- * The two do not answer identically - the platform collator of a literal port is `NSString` on iOS
- * and `java.text.Collator` on the jvm, and neither treats separators the way the other does - so
- * the hit counts are printed rather than asserted. They are close enough that the two are doing
- * comparable amounts of work.
- *
  * **Disabled on purpose.** Measuring takes seconds and the timings are noise in a normal test run.
  * What the matcher has to answer is covered by `CollatorCompatTest` in OsmAnd-java, which does run.
  *
@@ -41,24 +30,6 @@ import kotlin.time.TimeSource
  *   --ktest_filter='net.osmand.shared.util.KCollatorBenchmarkTest.*'
  * ```
  *
- * Historical measurements before significant space weights were introduced, over 14 queries and 304 road names, microseconds per `matches` call, best of 3 rounds,
- * the native side on a release binary on an iPhone 17 Pro simulator:
- * ```
- *                            jvm key   jvm collator    native key   native collator
- * CHECK_CONTAINS                 0.37          27.77          0.77             35.42
- * CHECK_STARTS_FROM_SPACE        0.29           0.80          0.76              1.28
- * CHECK_ONLY_STARTS_WITH         0.30           0.44          0.77              0.95
- * ```
- * The contains mode is where the java algorithm pays for its double loop over positions and
- * lengths: around 150 collator calls per name, against one key per name here. The jvm collator
- * column lands within 2% of the real `CollatorStringMatcher`, which `CollatorBenchmarkTest` in
- * OsmAnd-java measures on the same corpus, so this port stands in for it faithfully.
- *
- * Worth knowing for the next port: a call into Foundation costs about what a `java.text.Collator`
- * call costs, so a literal port would not have been dramatically worse on iOS than on the jvm.
- * What is slower on Kotlin/Native is the key itself, about twice the jvm, which is why the speedup
- * there is 45x and on the jvm 75x. Building the key allocates; the collator call does not.
- *
  * Nothing here asserts a timing, so a slow machine can never turn the build red.
  */
 @Ignore
@@ -71,14 +42,14 @@ class KCollatorBenchmarkTest {
 		println("### matching ${QUERIES.size} queries against ${names.size} names")
 		println("    best of $MEASURED_ROUNDS rounds after $WARMUP_ROUNDS warmup rounds")
 		for (mode in MODES) {
-			var keyHits = 0
-			val keyTime = measure {
-				keyHits = 0
+			var matcherHits = 0
+			val matcherTime = measure {
+				matcherHits = 0
 				for (query in QUERIES) {
 					val matcher = KCollatorStringMatcher(query, mode)
 					for (name in names) {
 						if (matcher.matches(name)) {
-							keyHits++
+							matcherHits++
 						}
 					}
 				}
@@ -97,11 +68,11 @@ class KCollatorBenchmarkTest {
 			}
 			val calls = QUERIES.size * names.size
 			println(
-				"  ${mode.name.padEnd(37)} key ${format(keyTime)} ms" +
+				"  ${mode.name.padEnd(37)} matcher ${format(matcherTime)} ms" +
 						"   collator ${format(literalTime)} ms" +
-						"   speedup ${format(literalTime / keyTime)}x" +
-						"   per call ${format(keyTime * 1000 / calls)} vs ${format(literalTime * 1000 / calls)} us" +
-						"   hits $keyHits/$literalHits"
+						"   speedup ${format(literalTime / matcherTime)}x" +
+						"   per call ${format(matcherTime * 1000 / calls)} vs ${format(literalTime * 1000 / calls)} us" +
+						"   hits $matcherHits/$literalHits"
 			)
 		}
 		println("")
@@ -139,7 +110,7 @@ class KCollatorBenchmarkTest {
 				}
 			}
 			println(
-				"  query '$query' name '$name' key ${format(elapsed)} ms" +
+				"  query '$query' name '$name' matcher ${format(elapsed)} ms" +
 						"   per call ${format(elapsed * 1000 / calls)} us   hits $hits/$calls"
 			)
 		}
@@ -171,7 +142,7 @@ class KCollatorBenchmarkTest {
 	internal class LiteralCollatorMatcher(part: String, private val mode: KStringMatcherMode) {
 
 		private val collator = primaryCollator()
-		private val part = KCollationKey.lowercaseAndAlignChars(part)
+		private val part = KSearchAlgorithms.lowercaseAndAlignChars(part)
 
 		fun matches(name: String): Boolean = cmatches(name, part)
 
@@ -179,7 +150,7 @@ class KCollatorBenchmarkTest {
 			if (fullName.indexOf('-') != -1 && cmatches(fullName.replace("-", ""), part)) {
 				return true
 			}
-			val searchIn = KCollationKey.lowercaseAndAlignChars(fullName)
+			val searchIn = KSearchAlgorithms.lowercaseAndAlignChars(fullName)
 			return when (mode) {
 				KStringMatcherMode.CHECK_CONTAINS -> ccontains(searchIn, part)
 				KStringMatcherMode.CHECK_EQUALS_FROM_SPACE -> cstartsWith(searchIn, part, true, true, true)

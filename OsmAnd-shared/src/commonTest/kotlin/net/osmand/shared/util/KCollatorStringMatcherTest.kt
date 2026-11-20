@@ -76,12 +76,12 @@ class KCollatorStringMatcherTest {
 				for ((index, mode) in modes.withIndex()) {
 					val matcher = KCollatorStringMatcher(query, mode)
 					val expected = if (desktopSpaces)
-						KCollatorBenchmarkTest.LiteralCollatorMatcher(matcher.part.text, matcher.mode).matches(name)
+						KCollatorBenchmarkTest.LiteralCollatorMatcher(matcher.part, matcher.mode).matches(name)
 					else answers[index] == '1'
 					val label = "${mode.name}: '$query' in '$name'"
 					assertEquals(expected, matcher.matches(name), label)
 					// Java's instance path resolves an incomplete dot before its static matcher.
-					assertEquals(expected, KCollatorStringMatcher.cmatches(name, matcher.part.text, matcher.mode), label)
+					assertEquals(expected, KCollatorStringMatcher.cmatches(name, matcher.part, matcher.mode), label)
 					assertEquals(expected, KCollatorStringMatcher.cmatchesPrepared(
 						KCollatorStringMatcher.PreparedName(name), matcher.part, matcher.mode), label)
 				}
@@ -101,6 +101,64 @@ class KCollatorStringMatcherTest {
 			KCollatorStringMatcher.PreparedName(name), matcher.part, mode), label)
 	}
 
+	@Test
+	fun matchesAndroidPrimaryFoldsAtSourceBoundaries() {
+		if (net.osmand.shared.routing.testPlatformName().startsWith("jvm")) return
+		// Android Java API 37, in KStringMatcherMode declaration order.
+		val cases = listOf(
+			Triple("Łódź", "Lodz", "1101111"),
+			Triple("Sø", "So", "1101111"),
+			Triple("Þingvellir", "Thingvellir", "0000000"),
+			Triple("A–B", "AB", "0000000"),
+			Triple("ＡＢ", "AB", "1101111"),
+			Triple("Grifo Uris Bell", "Four", "0000000"),
+			Triple("Straße", "strasse", "1101111"),
+			Triple("X ĳssel", "ij", "0000100"),
+			Triple("xĳy", "j", "0000000"),
+			Triple("xĳy", "ij", "0000100"),
+			Triple("xĳy", "i", "0000000"),
+			Triple("æx", "a", "0000000"),
+			Triple("foo-bar", "foobar", "1101111"),
+			Triple("가", "가", "0000100"),
+			Triple("New York", "new york", "1101111"),
+			Triple("a\tb", "ab", "0000000"),
+			Triple("ﷺ", "صلى الله عليه وسلم", "0000000"),
+			Triple("กำ", "กํา", "0000000"),
+			Triple("﷽", "بسم الله الرحمن الرحيم", "0000000"),
+		)
+		for ((name, query, answers) in cases) {
+			for ((index, mode) in KStringMatcherMode.entries.withIndex()) {
+				val matcher = KCollatorStringMatcher(query, mode)
+				val expected = answers[index] == '1'
+				assertEquals(expected, matcher.matches(name), "$name / $query / $mode")
+				assertEquals(expected, KCollatorStringMatcher.cmatchesPrepared(
+					KCollatorStringMatcher.PreparedName(name), matcher.part, matcher.mode))
+			}
+		}
+	}
+
+	@Test
+	fun containsMatchesLiteralCollatorOnPrintableCharacters() {
+		val mode = KStringMatcherMode.CHECK_CONTAINS
+		val alphabet = (' '..'~').joinToString("")
+		val collator = primaryCollator()
+		for (left in alphabet) {
+			for (right in alphabet) {
+				val base = left.toString()
+				val part = right.toString()
+				assertEquals(collator.equals(base, part), collator.contains(base, part), "'$left' / '$right'")
+			}
+		}
+		val queries = alphabet.map { it.toString() } + listOf("Aa", "A B", "vW", "aa", "ij", "ch", "01", "!~")
+		for (query in queries) {
+			val literal = KCollatorBenchmarkTest.LiteralCollatorMatcher(query, mode)
+			val matcher = KCollatorStringMatcher(query, mode)
+			for (name in listOf(query, "X${query}Y", query.lowercase(), "A bc-012!", "Z[~]az", "Sø", "X ĳssel")) {
+				assertEquals(literal.matches(name), matcher.matches(name), "'$query' in '$name'")
+			}
+		}
+	}
+
 	private val names = listOf(
 		"", "a", "b", "ab", "a-b", "a b", "-", "--", "-1", "1-", "12-3", "st.", "st", "St. Pölten",
 		"Sankt Pölten", "Auhofstraße", "auhofstrasse", "Straße", "strasse", "Ærø", "aero", "œuvre", "oeuvre",
@@ -116,11 +174,11 @@ class KCollatorStringMatcherTest {
 		for (full in names) {
 			val prepared = KCollatorStringMatcher.PreparedName(full)
 			for (part in names) {
-				val partKey = KCollationKey.of(part)
+				val alignedPart = KSearchAlgorithms.lowercaseAndAlignChars(part)
 				for (mode in KStringMatcherMode.entries) {
 					assertEquals(
 						KCollatorStringMatcher.cmatches(full, part, mode),
-						KCollatorStringMatcher.cmatchesPrepared(prepared, partKey, mode),
+						KCollatorStringMatcher.cmatchesPrepared(prepared, alignedPart, mode),
 						"'$full' '$part' $mode"
 					)
 					compared++
@@ -131,9 +189,9 @@ class KCollatorStringMatcherTest {
 	}
 
 	@Test
-	fun preparedKeyIsThePartKey() {
+	fun preparedNameUsesTheSameAlignmentAsTheQuery() {
 		for (name in names) {
-			assertEquals(KCollationKey.of(name).toString(), KCollatorStringMatcher.PreparedName(name).key.toString(), name)
+			assertEquals(KSearchAlgorithms.lowercaseAndAlignChars(name), KCollatorStringMatcher.PreparedName(name).text, name)
 		}
 	}
 

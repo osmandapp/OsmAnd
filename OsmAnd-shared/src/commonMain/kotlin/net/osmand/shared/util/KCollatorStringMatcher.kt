@@ -3,37 +3,20 @@ package net.osmand.shared.util
 import net.osmand.shared.api.KStringMatcherMode
 import kotlin.jvm.JvmStatic
 
-/**
- * Shared implementation of the OsmAnd-java matcher modes using [KCollationKey] comparisons.
- * Each query/name is aligned once, and prepared names reuse the same key across modes. All modes
- * use the platform space weights recorded once by KCollationKey: significant on Android/iOS,
- * ignored on desktop JVM. Mobile Unicode spaces fold as observed on Android.
- *
- * Other separator/expansion rules remain desktop-derived; locale-dependent Android ICU behavior
- * is not fully reproduced. The static [cmatches] lowercases its query like the instance path,
- * whereas Java only lowercases it in the constructor.
- *
- * `CollatorCompatTest` compares against the unmodified Java matcher on the JVM. Android
- * observations and common regression tests cover mobile spaces and word boundaries separately.
- */
+/** Matches aligned text using primary-strength comparisons from the current platform. */
 class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMatcher {
 
-	/**
-	 * A name as [cmatches] reduces it when it is the full name: its key, and the key of the name
-	 * with its hyphens dropped when it has any, which is tried first. [key] is also what [cmatches]
-	 * builds for the same text when it is the part.
-	 */
-	internal class PreparedName(fullName: String) {
-		val key: KCollationKey = KCollationKey.of(fullName)
-		val withoutHyphens: KCollationKey? =
-			if (fullName.indexOf('-') != -1) KCollationKey.of(fullName.replace("-", "")) else null
+	class PreparedName(fullName: String) {
+		internal val text = KSearchAlgorithms.lowercaseAndAlignChars(fullName)
+		internal val withoutHyphens = if ('-' in fullName) KSearchAlgorithms.lowercaseAndAlignChars(fullName.replace("-", "")) else null
 	}
 
-	val part: KCollationKey
+	internal val collator = primaryCollator()
+	val part: String
 	val mode: KStringMatcherMode
 
 	init {
-		var aligned = KCollationKey.lowercaseAndAlignChars(part)
+		var aligned = KSearchAlgorithms.lowercaseAndAlignChars(part)
 		var resolved = mode
 		if (aligned.isNotEmpty() && aligned[aligned.length - 1] == INCOMPLETE_DOT && !onlyDots(aligned)) {
 			aligned = aligned.substring(0, aligned.length - 1)
@@ -43,11 +26,11 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 				resolved = KStringMatcherMode.CHECK_ONLY_STARTS_WITH
 			}
 		}
-		this.part = KCollationKey.ofAligned(aligned)
+		this.part = aligned
 		this.mode = resolved
 	}
 
-	override fun matches(name: String): Boolean = cmatchesKey(name, part, alignFull = true, mode = mode)
+	override fun matches(name: String): Boolean = cmatchesAligned(name, part, true, mode, collator)
 
 	fun onlyDots(part: String): Boolean {
 		for (c in part) {
@@ -64,70 +47,46 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 
 		@JvmStatic
 		fun cmatches(fullName: String, part: String, mode: KStringMatcherMode): Boolean =
-			cmatchesKey(fullName, KCollationKey.of(part), alignFull = true, mode = mode)
+			cmatches(fullName, part, mode, primaryCollator())
 
-		/** For a part that was aligned already, such as one the caller reuses across names. */
+		internal fun cmatches(fullName: String, part: String, mode: KStringMatcherMode, collator: KCollator): Boolean =
+			cmatchesAligned(fullName, KSearchAlgorithms.lowercaseAndAlignChars(part), true, mode, collator)
+
 		@JvmStatic
 		fun cmatchesNoAlign(fullName: String, part: String, mode: KStringMatcherMode): Boolean =
-			cmatchesKey(fullName, KCollationKey.ofAligned(part), alignFull = false, mode = mode)
+			cmatchesAligned(fullName, part, false, mode, primaryCollator())
 
-		fun cmatchesKey(
-			fullName: String,
-			part: KCollationKey,
-			alignFull: Boolean,
-			mode: KStringMatcherMode
-		): Boolean {
-			if (fullName.indexOf('-') != -1) {
-				// the hyphen is a separator to the collator, but dropping it also closes the gaps it
-				// leaves in the word starts and the stretch lengths below, which the java copy tests
-				if (cmatchesKey(fullName.replace("-", ""), part, alignFull = true, mode = mode)) {
-					return true
-				}
-			}
-			val name = if (alignFull) KCollationKey.of(fullName) else KCollationKey.ofAligned(fullName)
-			return matchesKeys(name, part, mode)
-		}
-
-		/**
-		 * What [cmatches] answers for the name [name] was prepared from, with the name's keys built
-		 * once rather than on every call. For a caller that holds one name against many parts, as
-		 * the walk over the string table of a name index does.
-		 */
-		internal fun cmatchesPrepared(name: PreparedName, part: KCollationKey, mode: KStringMatcherMode): Boolean {
-			val withoutHyphens = name.withoutHyphens
-			if (withoutHyphens != null && matchesKeys(withoutHyphens, part, mode)) {
+		internal fun cmatchesAligned(fullName: String, part: String, alignFull: Boolean, mode: KStringMatcherMode, collator: KCollator): Boolean {
+			if ('-' in fullName && matchesText(KSearchAlgorithms.lowercaseAndAlignChars(fullName.replace("-", "")), part, mode, collator)) {
 				return true
 			}
-			return matchesKeys(name.key, part, mode)
+			val text = if (alignFull) KSearchAlgorithms.lowercaseAndAlignChars(fullName) else fullName
+			return matchesText(text, part, mode, collator)
 		}
 
-		private fun matchesKeys(name: KCollationKey, part: KCollationKey, mode: KStringMatcherMode): Boolean =
+		internal fun cmatchesPrepared(name: PreparedName, part: String, mode: KStringMatcherMode, collator: KCollator = primaryCollator()): Boolean {
+			val withoutHyphens = name.withoutHyphens
+			return (withoutHyphens != null && matchesText(withoutHyphens, part, mode, collator)) ||
+					matchesText(name.text, part, mode, collator)
+		}
+
+		private fun matchesText(searchIn: String, part: String, mode: KStringMatcherMode, collator: KCollator): Boolean =
 			when (mode) {
-				KStringMatcherMode.CHECK_CONTAINS -> ccontains(name, part)
-				KStringMatcherMode.CHECK_EQUALS_FROM_SPACE -> cstartsWith(name, part, true, true, true)
-				KStringMatcherMode.CHECK_STARTS_FROM_SPACE -> cstartsWith(name, part, true, true, false)
-				KStringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING -> cstartsWith(name, part, false, true, false)
-				KStringMatcherMode.CHECK_ONLY_STARTS_WITH -> cstartsWith(name, part, true, false, false)
-				KStringMatcherMode.CHECK_EQUALS -> cstartsWith(name, part, false, false, true)
-				KStringMatcherMode.MULTISEARCH -> cstartsWith(part, name, true, true, true)
+				KStringMatcherMode.CHECK_CONTAINS -> collator.contains(searchIn, part)
+				KStringMatcherMode.CHECK_EQUALS_FROM_SPACE -> cstartsWith(collator, searchIn, part, true, true, true)
+				KStringMatcherMode.CHECK_STARTS_FROM_SPACE -> cstartsWith(collator, searchIn, part, true, true, false)
+				KStringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING -> cstartsWith(collator, searchIn, part, false, true, false)
+				KStringMatcherMode.CHECK_ONLY_STARTS_WITH -> cstartsWith(collator, searchIn, part, true, false, false)
+				KStringMatcherMode.CHECK_EQUALS -> cstartsWith(collator, searchIn, part, false, false, true)
+				KStringMatcherMode.MULTISEARCH -> cstartsWith(collator, part, searchIn, true, true, true)
 			}
 
-		/** Whether [part] is contained in [base]. */
-		fun ccontains(base: KCollationKey, part: KCollationKey): Boolean {
-			if (base.length <= part.length) {
-				return base.keyEquals(part)
-			}
-			// java reaches part.length() * 2 characters from each starting position, no further
-			return base.containsKeyOf(part, part.length * 2)
-		}
+		private val beginning = intArrayOf(0)
 
-		/**
-		 * Whether [searchIn] starts with [theStart], or, when [checkSpaces], whether any of its
-		 * words does.
-		 */
-		fun cstartsWith(
-			searchIn: KCollationKey,
-			theStart: KCollationKey,
+		private fun cstartsWith(
+			collator: KCollator,
+			searchIn: String,
+			theStart: String,
 			checkBeginning: Boolean,
 			checkSpaces: Boolean,
 			equals: Boolean
@@ -137,39 +96,23 @@ class KCollatorStringMatcher(part: String, mode: KStringMatcherMode) : KStringMa
 			if (startLength == 0) {
 				return true
 			}
-			// this is not correct without (lowercaseAndAlignChars) because of Auhofstrasse != Auhofstraße
 			if (startLength > searchInLength) {
 				return false
 			}
-			// simulate starts with for collator
-			if (checkBeginning && searchIn.regionKeyEquals(0, startLength, theStart)) {
-				if (!equals) {
-					return true
-				}
-				if (startLength == searchInLength || isSpace(searchIn.text[startLength])) {
-					return true
-				}
+			val wholeName = !checkBeginning && !checkSpaces && equals
+			val length = if (wholeName) searchInLength else startLength
+			val last = if (checkSpaces) searchInLength - length else 0
+			val offsets = if (last > 0) IntArray(last + 1) else beginning
+			var count = 0
+			for (i in 0..last) {
+				if (i == 0 && !checkBeginning && !wholeName) continue
+				if (i > 0 && !isWordStart(searchIn, i, theStart)) continue
+				val end = i + length
+				if (equals && end < searchInLength && !isSpace(searchIn[end])) continue
+				if (last > 0) offsets[count] = i
+				count++
 			}
-			if (checkSpaces) {
-				for (i in 1..searchInLength - startLength) {
-					if (!isWordStart(searchIn.text, i, theStart.text)) {
-						continue
-					}
-					if (!searchIn.regionKeyEquals(i, i + startLength, theStart)) {
-						continue
-					}
-					if (!equals) {
-						return true
-					}
-					if (i + startLength == searchInLength || isSpace(searchIn.text[i + startLength])) {
-						return true
-					}
-				}
-			}
-			if (!checkBeginning && !checkSpaces && equals) {
-				return searchIn.keyEquals(theStart)
-			}
-			return false
+			return count > 0 && collator.equalsAtAny(searchIn, theStart, length, offsets, count)
 		}
 
 		private fun isWordStart(searchIn: String, index: Int, part: String): Boolean {
