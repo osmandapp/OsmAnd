@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -50,7 +49,7 @@ public class AvoidRoadsDialog {
 				builder.setAdapter(adapter, (dialog, which) -> {
 					AvoidRoadInfo point = adapter.getItem(which);
 					if (point != null) {
-						showOnMap(activity, point.getLatitude(), point.getLongitude(), point.getName(app));
+						avoidRoadsHelper.showOnMap(activity, point);
 					}
 					dialog.dismiss();
 				});
@@ -113,12 +112,5 @@ public class AvoidRoadsDialog {
 				return OsmAndFormatter.getFormattedDistance((float) dist, app);
 			}
 		};
-	}
-
-	private static void showOnMap(@NonNull MapActivity activity, double lat, double lon, String name) {
-		int zoom = Math.max(activity.getMapView().getZoom(), 15);
-		PointDescription pd = new PointDescription("", name);
-		activity.getSettings().setMapLocationToShow(lat, lon, zoom, pd, false, null);
-		MapActivity.launchMapActivityMoveToTop(activity);
 	}
 }
