@@ -69,6 +69,38 @@ class TravelModelTest {
 	}
 
 	@Test
+	fun displayAndFileNamesUseRef() {
+		val gpx = TravelGpx(amenity(tags = mapOf("route_id" to "O13634629", "ref" to "367A")))
+
+		assertEquals("367A", gpx.getDisplayName(null, false))
+		assertEquals("367A", gpx.getGpxFileName())
+		assertEquals("", gpx.title)
+
+		val restored = TravelGpx().apply {
+			routeId = "O13634629"
+			ref = "367A"
+		}
+		assertEquals("367A", restored.getDisplayName(null, false))
+		assertEquals("O13634629", restored.getGpxFileName())
+		restored.ref = null
+		assertEquals("O13634629", restored.getDisplayName(null, false))
+	}
+
+	@Test
+	fun displayNameUsesLocalizedNamesAndAvoidsRepeatingRef() {
+		val amenity = amenity(name = "367A", tags = mapOf("ref" to "367A"))
+		amenity.setName("en", "Local trail")
+		val gpx = TravelGpx(amenity)
+
+		assertEquals("367A", gpx.getDisplayName(null, false))
+		assertEquals("Local trail (367A)", gpx.getDisplayName("en", false))
+		assertEquals("Local trail", gpx.getGpxFileName())
+
+		val withoutRef = TravelGpx(amenity(name = "Local trail"))
+		assertEquals("Local trail", withoutRef.getDisplayName(null, false))
+	}
+
+	@Test
 	fun theRadiusLetterIsRead() {
 		assertEquals(5000, TravelGpx(amenity(tags = mapOf("route_bbox_radius" to "A"))).routeRadius)
 		assertEquals(10000, TravelGpx(amenity(tags = mapOf("route_bbox_radius" to "B"))).routeRadius)

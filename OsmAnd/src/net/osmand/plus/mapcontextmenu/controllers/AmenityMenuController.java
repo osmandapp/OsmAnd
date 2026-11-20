@@ -209,8 +209,8 @@ public class AmenityMenuController extends MenuController {
 				getPreferredMapAppLang(), getPreferredMapLang());
 		String name = amenity.getName(preferredLang, isTransliterateNames());
 		String ref = amenity.getAdditionalInfo("ref");
-		if (!TextUtils.isEmpty(ref) && !ref.equals(name)) {
-			return name + " (" + ref + ")";
+		if (Algorithms.isNotEmpty(ref) && !ref.equals(name)) {
+			return Algorithms.isBlank(name) ? ref : name + " (" + ref + ")";
 		}
 		if (Algorithms.isEmpty(name) && amenity.getSubType().equalsIgnoreCase("atm")) {
 			String operator = amenity.getAdditionalInfo("operator");

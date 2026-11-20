@@ -200,6 +200,20 @@ class TravelGpx : TravelArticle {
 
 	fun getAmenity(): Amenity? = amenity
 
+	override fun getGpxFileName(): String =
+		amenity?.getGpxFileName(null) ?: super.getGpxFileName()
+
+	// Based on Android AmenityMenuController.getNameStr().
+	// Fallback follows TravelArticle.getGpxFileName().
+	fun getDisplayName(lang: String?, transliterate: Boolean): String {
+		val name = amenity?.getName(lang, transliterate) ?: title.orEmpty()
+		val ref = ref
+		if (!ref.isNullOrEmpty() && ref != name) {
+			return if (name.isEmpty()) ref else "$name ($ref)"
+		}
+		return name.ifEmpty { getGpxFileName() }
+	}
+
 	companion object {
 		private val log = LoggerFactory.getLogger("TravelGpx")
 
