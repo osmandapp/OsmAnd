@@ -511,6 +511,10 @@ class Amenity : MapObject() {
 		if (!KAlgorithms.isEmpty(gpxFileName)) {
 			return KAlgorithms.sanitizeFileName(gpxFileName)
 		}
+		val ref = getRef()
+		if (!ref.isNullOrEmpty()) {
+			return KAlgorithms.sanitizeFileName(ref)
+		}
 		if (!KAlgorithms.isEmpty(getRouteId())) {
 			return getRouteId()
 		}
