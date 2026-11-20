@@ -5428,4 +5428,5 @@
     <string name="terrain_shadows_description">Valós idejű dinamikus árnyékolás 3D-domborzathoz. Kiemeli a táj geometriáját, miközben a teljesítményre gyakorolt hatása minimális.</string>
     <string name="terrain_shadows_relief_3d_footer">A 3D-domborzat automatikusan lett engedélyezve, mivel ez szükséges a terepárnyékok megjelenítéséhez.</string>
     <string name="attach_to_track">Mellékelés nyomvonalhoz</string>
+    <string name="gpx_line_style_desc_unavailable_for_3d">Szaggatott és pontozott vonalstílusok nem érhetők el a 3D nyomvonalakhoz.</string>
 </resources>
