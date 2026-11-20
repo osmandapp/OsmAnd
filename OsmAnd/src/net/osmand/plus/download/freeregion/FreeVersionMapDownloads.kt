@@ -134,6 +134,40 @@ class FreeVersionMapDownloads(private val app: OsmandApplication) {
 	}
 
 	/**
+	 * Activating deactivated maps keeps the maps of one region active: maps of a region other than the
+	 * free one make it the free region, see [activateFreeRegion]. Items that are active already are
+	 * left out.
+	 *
+	 * @return that region, or null when the items don't change the free region
+	 */
+	fun getActivatedRegion(items: List<LocalItem>): WorldRegion? {
+		if (!isFreeVersion || !isRegionsLoaded) {
+			return null
+		}
+		val freeRegion = freeRegion
+		return items.firstNotNullOfOrNull { item ->
+			val type = item.type
+			if ((type == LocalItemType.MAP_DATA || type == LocalItemType.ROAD_DATA) && item.isBackuped(app)) {
+				getRegionByDownloadName(getDownloadName(item.fileName))?.takeIf { it != freeRegion }
+			} else {
+				null
+			}
+		}
+	}
+
+	/**
+	 * Its maps are on the device already, so the region becomes free with no server call and no replace
+	 * counted.
+	 *
+	 * @return the maps of other regions, to deactivate
+	 */
+	@Synchronized
+	fun activateFreeRegion(region: WorldRegion): List<LocalItem> {
+		storeFreeRegion(region)
+		return collectMapsToDelete(region).values.flatten()
+	}
+
+	/**
 	 * Splits a download request into the maps free now and the regions that need a replace. Before the
 	 * first map the region of the first counted item is the free one - it is stored only when its
 	 * download starts, see [canDownload].
