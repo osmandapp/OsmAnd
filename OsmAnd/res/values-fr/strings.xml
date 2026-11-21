@@ -5430,4 +5430,5 @@
     <string name="terrain_shadows_relief_3d_footer">Le relief 3D est activé automatiquement car il est requis pour afficher l\'ombrage du relief.</string>
     <string name="visualization">Visualisation</string>
     <string name="attach_to_track">Déplacer sur la trace</string>
+    <string name="gpx_line_style_desc_unavailable_for_3d">Les styles de lignes tirets et pointillés ne sont pas disponibles pour une trace 3D.</string>
 </resources>
