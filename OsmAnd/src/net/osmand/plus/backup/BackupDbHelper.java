@@ -19,18 +19,20 @@ public class BackupDbHelper {
 	private final OsmandApplication app;
 
 	private static final String DB_NAME = "backup_files";
-	private static final int DB_VERSION = 4;
+	private static final int DB_VERSION = 5;
 	private static final String UPLOADED_FILES_TABLE_NAME = "uploaded_files";
 	private static final String UPLOADED_FILE_COL_TYPE = "type";
 	private static final String UPLOADED_FILE_COL_NAME = "name";
 	private static final String UPLOADED_FILE_COL_UPLOAD_TIME = "upload_time";
 	private static final String UPLOADED_FILE_COL_MD5_DIGEST = "md5_digest";
+	private static final String UPLOADED_FILE_COL_REJECTED_TIME = "rejected_time";
 
 	private static final String UPLOADED_FILES_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + UPLOADED_FILES_TABLE_NAME + " (" +
 			UPLOADED_FILE_COL_TYPE + " TEXT, " +
 			UPLOADED_FILE_COL_NAME + " TEXT, " +
 			UPLOADED_FILE_COL_UPLOAD_TIME + " long, " +
-			UPLOADED_FILE_COL_MD5_DIGEST + " TEXT);";
+			UPLOADED_FILE_COL_MD5_DIGEST + " TEXT, " +
+			UPLOADED_FILE_COL_REJECTED_TIME + " long);";
 
 	private static final String UPLOADED_FILES_INDEX_TYPE_NAME = "indexTypeName";
 
@@ -38,7 +40,8 @@ public class BackupDbHelper {
 					UPLOADED_FILE_COL_TYPE + ", " +
 					UPLOADED_FILE_COL_NAME + ", " +
 					UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
-					UPLOADED_FILE_COL_MD5_DIGEST;
+					UPLOADED_FILE_COL_MD5_DIGEST + ", " +
+					UPLOADED_FILE_COL_REJECTED_TIME;
 
 	private static final String LAST_MODIFIED_TABLE_NAME = "last_modified_items";
 	private static final String LAST_MODIFIED_COL_NAME = "name";
@@ -126,6 +129,9 @@ public class BackupDbHelper {
 		if (oldVersion < 4) {
 			db.execSQL(STATISTICS_TABLE_CREATE);
 		}
+		if (oldVersion < 5) {
+			db.execSQL("ALTER TABLE " + UPLOADED_FILES_TABLE_NAME + " ADD " + UPLOADED_FILE_COL_REJECTED_TIME + " long");
+		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + UPLOADED_FILES_INDEX_TYPE_NAME + " ON " + UPLOADED_FILES_TABLE_NAME
 				+ " (" + UPLOADED_FILE_COL_TYPE + ", " + UPLOADED_FILE_COL_NAME + ");");
 	}
@@ -162,9 +168,10 @@ public class BackupDbHelper {
 		db.execSQL(
 				"UPDATE " + UPLOADED_FILES_TABLE_NAME + " SET "
 						+ UPLOADED_FILE_COL_UPLOAD_TIME + " = ?, "
-						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ? "
+						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ?, "
+						+ UPLOADED_FILE_COL_REJECTED_TIME + " = ? "
 						+ "WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-				new Object[] {info.getUploadTime(), info.getMd5Digest(), info.getType(), info.getName()});
+				new Object[] {info.getUploadTime(), info.getMd5Digest(), info.getRejectedTime(), info.getType(), info.getName()});
 	}
 
 	private void addUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
@@ -173,6 +180,7 @@ public class BackupDbHelper {
 		rowsMap.put(UPLOADED_FILE_COL_NAME, info.getName());
 		rowsMap.put(UPLOADED_FILE_COL_UPLOAD_TIME, info.getUploadTime());
 		rowsMap.put(UPLOADED_FILE_COL_MD5_DIGEST, info.getMd5Digest());
+		rowsMap.put(UPLOADED_FILE_COL_REJECTED_TIME, info.getRejectedTime());
 
 		db.execSQL(AndroidDbUtils.createDbInsertQuery(UPLOADED_FILES_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
@@ -266,10 +274,30 @@ public class BackupDbHelper {
 				UploadedFileInfo info = getUploadedFileInfo(db, type, fileName);
 				if (info != null) {
 					info.setUploadTime(updateTime);
+					info.setRejectedTime(0);
 					updateUploadedFileInfo(db, info);
 				} else {
 					info = new UploadedFileInfo(type, fileName, updateTime);
 					addUploadedFileInfo(db, info);
+				}
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void updateFileRejectedTime(@NonNull String type, @NonNull String fileName, long rejectedTime) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				UploadedFileInfo info = getUploadedFileInfo(db, type, fileName);
+				if (info == null) {
+					info = new UploadedFileInfo(type, fileName);
+					info.setRejectedTime(rejectedTime);
+					addUploadedFileInfo(db, info);
+				} else {
+					info.setRejectedTime(rejectedTime);
+					updateUploadedFileInfo(db, info);
 				}
 			} finally {
 				db.close();
@@ -312,7 +340,9 @@ public class BackupDbHelper {
 		String name = query.getString(1);
 		long uploadTime = query.getLong(2);
 		String md5Digest = query.getString(3);
-		return new UploadedFileInfo(type, name, uploadTime, md5Digest);
+		UploadedFileInfo info = new UploadedFileInfo(type, name, uploadTime, md5Digest);
+		info.setRejectedTime(query.getLong(4));
+		return info;
 	}
 
 	public void addAutoSyncEvent(@NonNull AutoSyncEvent event) {

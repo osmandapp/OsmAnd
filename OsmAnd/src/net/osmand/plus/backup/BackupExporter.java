@@ -22,10 +22,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BackupExporter extends Exporter {
@@ -141,13 +141,16 @@ public class BackupExporter extends Exporter {
 	private void exportItems() throws IOException {
 		AtomicInteger dataProgress = new AtomicInteger(0);
 		Set<Object> itemsProgress = Collections.synchronizedSet(new HashSet<>());
-		Map<String, String> errors = new ConcurrentHashMap<>();
+		Map<String, String> errors = Collections.synchronizedMap(new LinkedHashMap<>());
 
 		OnUploadItemListener uploadItemListener = getOnUploadItemListener(itemsProgress, dataProgress, errors);
 		OnDeleteFilesListener deleteFilesListener = getOnDeleteFilesListener(itemsProgress, dataProgress);
 
 		NetworkWriter networkWriter = new NetworkWriter(backupHelper, uploadItemListener, autoSync);
 		writeItems(networkWriter);
+		if (!errors.isEmpty()) {
+			throw new IOException(errors.values().iterator().next());
+		}
 		deleteFiles(deleteFilesListener);
 		deleteOldFiles(deleteFilesListener);
 		deleteLocalFiles(itemsProgress, dataProgress);

@@ -248,6 +248,10 @@ public class BackupHelper {
 		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
 	}
 
+	public void updateFileRejectedTime(@NonNull String type, @NonNull String fileName, long rejectedTime) {
+		dbHelper.updateFileRejectedTime(type, fileName, rejectedTime);
+	}
+
 	public void addAutoSyncEvent(@NonNull String type, @NonNull String name, long time,
 			long fileSize, @NonNull AutoSyncActionType actionType) {
 		dbHelper.addAutoSyncEvent(new AutoSyncEvent(type, name, time, fileSize, actionType));
@@ -290,10 +294,10 @@ public class BackupHelper {
 		List<File> filesToUpload = new ArrayList<>();
 		BackupInfo info = getBackup().getBackupInfo();
 		if (!BackupUtils.isLimitedFilesCollectionItem(item) && info != null &&
-				(!Algorithms.isEmpty(info.filesToUpload)
+				(!Algorithms.isEmpty(info.filteredFilesToUpload)
 						|| !Algorithms.isEmpty(info.filesToMerge)
 						|| !Algorithms.isEmpty(info.filesToDownload))) {
-			for (LocalFile localFile : info.filesToUpload) {
+			for (LocalFile localFile : info.filteredFilesToUpload) {
 				File file = localFile.file;
 				if (item.equals(localFile.item) && file != null) {
 					filesToUpload.add(file);
