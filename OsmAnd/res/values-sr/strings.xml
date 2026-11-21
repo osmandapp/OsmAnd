@@ -2090,13 +2090,13 @@
     <string name="select_icon_profile_dialog_title">Одаберите сличицу</string>
     <string name="routing_profile_ski">Скијање</string>
     <string name="profile_type_descr_string">Врста: %s</string>
-    <string name="profile_alert_need_profile_name_title">Унесите име налог</string>
-    <string name="profile_alert_need_profile_name_msg">Прво морате унети име налога.</string>
-    <string name="profile_alert_duplicate_name_msg">Већ постоји налог са овим именом</string>
-    <string name="profile_alert_cant_delete_base">Не можете обрисати основни налог смАнда</string>
-    <string name="profile_alert_delete_title">Обриши налог</string>
-    <string name="profile_alert_delete_msg">Обрисати налог \"%s\"</string>
-    <string name="select_base_profile_dialog_title">Одаберите почетни налог</string>
+    <string name="profile_alert_need_profile_name_title">Унесите име профила</string>
+    <string name="profile_alert_need_profile_name_msg">Прво морате унети име профила.</string>
+    <string name="profile_alert_duplicate_name_msg">Већ постоји профил са овим именом</string>
+    <string name="profile_alert_cant_delete_base">Не можете обрисати основне профиле ОсмАнда</string>
+    <string name="profile_alert_delete_title">Обриши профил</string>
+    <string name="profile_alert_delete_msg">Обриши профил \"%s\"</string>
+    <string name="select_base_profile_dialog_title">Одаберите почетни профил</string>
     <string name="select_nav_profile_dialog_title">Одаберите врсту навођења</string>
     <string name="base_profile_descr_car">Кола, камион, мотор</string>
     <string name="base_profile_descr_bicycle">Планинарски бицикл, мопед, коњ</string>
@@ -2122,7 +2122,7 @@
     <string name="shared_string_max_speed">Највећа брзина</string>
     <string name="default_speed_setting_title">Подразумевана брзина</string>
     <string name="default_speed_setting_descr">Промени подешавања подразумеване брзине</string>
-    <string name="new_profile">Нови налог</string>
+    <string name="new_profile">Нови профил</string>
     <string name="shared_string_crash">Рушење</string>
     <string name="last_launch_crashed">Последње извршавање програма није успело. Помозите нам да побољшамо ОсмАнд тако што ћете поделити поруку о грешци са нама.</string>
     <string name="app_mode_ufo">НЛО</string>
@@ -2132,7 +2132,7 @@
     <string name="precision_hdop_and_vdop">Водоравна тачност: %1$s, усправна: %2$s</string>
     <string name="precision_hdop">Водоравна тачност: %s</string>
     <string name="app_mode_offroad">Ван пута</string>
-    <string name="edit_profile_screen_options_subtitle">Одаберите могућности заслона за налог</string>
+    <string name="edit_profile_screen_options_subtitle">Одаберите могућности заслона за профил</string>
     <string name="routing_attr_max_num_changes_description">Наведите горњу границу за промене транспорта</string>
     <string name="routing_attr_max_num_changes_name">Максималан број промена транспорта</string>
     <string name="turn_screen_on_sensor">Користи пријемник близине</string>
@@ -2162,7 +2162,7 @@
 \nПромените свој избор у сваком тренутку са ’Поставке’ → ’Приватност и Безбедност’.</string>
     <string name="osmand_routing_promo">Додајте Вашу сопствено измењено издање датотеке routing.xml у ..osmand/routing</string>
     <string name="show_compass_ruler">Прикажи лењир компас</string>
-    <string name="select_base_profile_dialog_message">Засновите свој произвољни налог на једном од подразумеваних налога, којим се одређују основне поставке као што су подразуемвана видљивост справица или јединице брзине и даљине. Ово су подразумевани применљиви налози, заједно са примерима произвољних налога којима се може проширити:</string>
+    <string name="select_base_profile_dialog_message">Заснујте свој произвољни профил на једном од подразумеваних профила, којим се одређују основне поставке као што су подразуемвана видљивост справица или јединице брзине и даљине. Ово су подразумевани применљиви профили, заједно са примерима произвољних профила на које се могу проширити:</string>
     <string name="quick_action_need_to_add_item_to_list">Додајте бар једну ставку на поставкама у Брзим радњама</string>
     <string name="routing_attr_piste_type_downhill_name">Алпско и скијање спуштање</string>
     <string name="routing_attr_piste_type_downhill_description">Падине алпског скијања или спуштања и приступ скијаштим жичарама.</string>
@@ -2183,7 +2183,7 @@
     <string name="routing_attr_allow_classic_only_name">Дозволи само уобичајене путеве</string>
     <string name="routing_attr_allow_classic_only_description">Стазе припремљене за обичан начин без путева за клизање. Ово укључује и стазе припремљене малим возилима за снег и путањама које су скијаши направили.</string>
     <string name="routing_attr_difficulty_preference_description">Тежи путањама ове тежине, али остави могућност навођења преко тежих или лакших путања ако су краће.</string>
-    <string name="release_3_4">• Применљиви налози: стварање произвољних налога за сопствене потребе, са произвољном сличицом и бојом \n \n • Постави произвољне најмање/највише брзине на подразумеване налоге \n \n • Додата је справица за тренутне координате \n \n • Додата могућност да се приказује компас и лењир за пречник на карти \n \n • Поправљено је позадинско бележење трагова \n \n • Унапређено је позадинско преузимање карата \n \n • Враћена је могућност \'Укључивање заслона\' \n \n • Поправљен је избор језика на Википедији \n \n • Исправљено је понашање дугмета за компас приликом навођења \n \n • Остале исправке грешака</string>
+    <string name="release_3_4">• Применљиви налози: стварање произвољних налога за сопствене потребе, са произвољном сличицом и бојом \n \n • Постави произвољне најмање/највише брзине на подразумеване профиле \n \n • Додата је справица за тренутне координате \n \n • Додата могућност да се приказује компас и лењир за пречник на карти \n \n • Поправљено је позадинско бележење трагова \n \n • Унапређено је позадинско преузимање карата \n \n • Враћена је могућност \'Укључивање заслона\' \n \n • Поправљен је избор језика на Википедији \n \n • Исправљено је понашање дугмета за компас приликом навођења \n \n • Остале исправке грешака</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Квалитет 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Квалитет 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Квалитет 3</string>
@@ -2211,30 +2211,30 @@
     <string name="get_discount_first_few_part">%1$s првих %2$s</string>
     <string name="get_discount_second_part">Онда %1$s</string>
     <string name="cancel_subscription">Поништи чланарину</string>
-    <string name="configure_profile_info">Поставке за налог:</string>
+    <string name="configure_profile_info">Поставке за профил:</string>
     <string name="shared_string_example">Пример</string>
     <string name="navigate_point_format_utm">Стандард УТМ-а</string>
     <string name="change_default_settings">Промени поставке</string>
     <string name="discard_changes">Одбаци промену</string>
     <string name="apply_to_current_profile">Примени само на \"%1$s\"</string>
-    <string name="apply_to_all_profiles">Примени на све налоге</string>
+    <string name="apply_to_all_profiles">Примени на све профиле</string>
     <string name="start_up_message_pref">Порука по отварању</string>
     <string name="analytics_pref_title">Рашчлањивања</string>
     <string name="turn_screen_on_info">Прикажи карту на закључаном заслону за време навођења.</string>
-    <string name="route_parameters_info">Поставке за образовање рута у означеном налогу \"%1$s\".</string>
+    <string name="route_parameters_info">Поставке рутирања у одабраном профилу \"%1$s\".</string>
     <string name="wake_time">Време чекања после буђења</string>
     <string name="units_and_formats">Мерне јединице и облици</string>
     <string name="map_look_descr">Изглед карте</string>
     <string name="list_of_installed_plugins">Урађени додаци</string>
     <string name="configure_navigation">Подеси навођење</string>
     <string name="general_settings_profile_descr">Тема програма, јединице,област</string>
-    <string name="configure_profile">Подеси налог</string>
+    <string name="configure_profile">Подеси профил</string>
     <string name="screen_alerts_descr">Упозорења се приказују у доњем левом углу заслона за време навођења.</string>
-    <string name="switch_profile">Замени налог</string>
+    <string name="switch_profile">Замени профил</string>
     <string name="reset_to_default">Поврати на подразумевано</string>
     <string name="osmand_settings_descr">Утиче на цели програм</string>
     <string name="osmand_settings">Поставке Османда</string>
-    <string name="copy_from_other_profile">Умножи из другог налога</string>
+    <string name="copy_from_other_profile">Умножи из другог профила</string>
     <string name="turn_screen_on">Укључивање заслона</string>
     <string name="map_during_navigation_info">Карта за време навођења</string>
     <string name="map_during_navigation">Карта за време навођења</string>
@@ -2247,7 +2247,7 @@
     <string name="screen_alerts">Упозорења на заслону</string>
     <string name="route_parameters_descr">Подеси одреднице пута</string>
     <string name="route_parameters">Одреднице пута</string>
-    <string name="application_profile_changed">Приименљиви налог је промењен на \"%s\"</string>
+    <string name="application_profile_changed">Профил апликације је промењен на \"%s\"</string>
     <string name="logcat_buffer">Спремник дневника</string>
     <string name="plugins_settings">Поставке додатака</string>
     <string name="shared_string_by_default">Подразумевано</string>
@@ -2306,16 +2306,16 @@
     <string name="routing_attr_prefer_unpaved_description">Предност неасфалтираним путевима.</string>
     <string name="update_all_maps">Осежи све карте</string>
     <string name="update_all_maps_q">Освжи све (%1$d) карте\?</string>
-    <string name="release_3_5">• Осежене су поставке програма и нналога. Згодно ређање поставки по врстама, и могућности за мењање сваког налога \n \n • Нови прозор за преузимање карти који препоручује карте за преузимање док се разгледа карта \n \n • Поправке за тамну тему \n \n • Исправљено је неколико грешака у навођењу свуда по свету \n \n • Освежена је основна карта са богатијом мрежом путева \n \n • Порављене су поплављене области свуда по свету \n \n • Скијашко навођење: додати су налози надморске висине и сложеност стаза приликом гледања појединости стаза \n \n • Остале исправке грешака</string>
+    <string name="release_3_5">• Осежене су поставке програма и профила. Згодно ређање поставки по врстама, и могућности за мењање сваког профила \n \n • Нови прозор за преузимање карти који препоручује карте за преузимање док се разгледа карта \n \n • Поправке за тамну тему \n \n • Исправљено је неколико грешака у навођењу свуда по свету \n \n • Освежена је основна карта са богатијом мрежом путева \n \n • Порављене су поплављене области свуда по свету \n \n • Скијашко навођење: додати су налози надморске висине и сложеност стаза приликом гледања појединости стаза \n \n • Остале исправке грешака</string>
     <string name="default_speed_dialog_msg">Процењује време стизања код непознатих врста путева, ограничава брзину на свим путевима (може да промени навођење)</string>
-    <string name="apply_preference_to_all_profiles">Применити ову измену на све или на само тренутно одабраном налогу.</string>
+    <string name="apply_preference_to_all_profiles">Применити ову измену на све или на само тренутно одабраном профилу.</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Дај предност непресвученим путевима</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Даје предност непресвученим путевима радије него ли асфалтрираним за навођење.</string>
     <string name="layer_osm_edits">Измене ОСМ-а</string>
     <string name="quick_action_contour_lines_descr">Дугме које приказује или сакрива линије изохипси на карти.</string>
     <string name="tts_initialization_error">Нисам успео да покренем мотор за старање гласа.</string>
-    <string name="export_profile">Извези налог</string>
-    <string name="export_profile_failed">Нисам успео да извезем налог.</string>
+    <string name="export_profile">Извези профил</string>
+    <string name="export_profile_failed">Нисам успео да извезем профил.</string>
     <string name="file_import_error">%1$s грешка увоза: %2$s</string>
     <string name="rendering_value_white_name">Бело</string>
     <string name="swap_two_places">Замени %1$s и %2$s</string>
@@ -2343,17 +2343,17 @@
     <string name="shared_string_downloading_formatted">Преузимам %s</string>
     <string name="rendering_value_thick_name">Дебело</string>
     <string name="desert_render_descr">За пустиње и остале ретко насељене области. Подробније.</string>
-    <string name="delete_profiles_descr">Избрисани налог ће заувек бити избрисани када кликнете ’примени’.</string>
+    <string name="delete_profiles_descr">Уклоњени профили ће заувек бити избрисани када кликнете ’примени’.</string>
     <string name="select_color">Одаберите боју</string>
     <string name="edit_profiles_descr">Подразумевани налози ОсмАнда не могу да се избришу, али могу да се искључе (на претходном приказу), или да се ставе на дно.</string>
-    <string name="edit_profiles">Измени налоге</string>
-    <string name="profile_appearance">Изглед налога</string>
+    <string name="edit_profiles">Уреди профиле</string>
+    <string name="profile_appearance">Изглед профила</string>
     <string name="choose_icon_color_name">Сличица, боја и име</string>
-    <string name="reorder_profiles">Измени списак налога</string>
-    <string name="selected_profile">Изабрани налог</string>
+    <string name="reorder_profiles">Уреди списак профила</string>
+    <string name="selected_profile">Изабрани профил</string>
     <string name="reset_confirmation_descr">Кликом на %1$s одбацују се све ваше промене.</string>
-    <string name="reset_all_profile_settings_descr">Поврати сва подешавања налога на стање после уградње.</string>
-    <string name="reset_all_profile_settings">Да ли вратити на подразумевано сва подешавања налога\?</string>
+    <string name="reset_all_profile_settings_descr">Поврати сва подешавања профила на стање после уградње.</string>
+    <string name="reset_all_profile_settings">Да ли вратити на подразумевано сва подешавања профила?</string>
     <string name="button_rate">Оцени</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -2372,7 +2372,7 @@
     <string name="video_notes">Белешке видеа</string>
     <string name="photo_notes">Белешке слика</string>
     <string name="accessibility_announce">Објави</string>
-    <string name="plugin_global_prefs_info">Ове поставке прикључака су опште и примењују се на све налоге</string>
+    <string name="plugin_global_prefs_info">Ове поставке прикључака су опште и примењују се на све профиле</string>
     <string name="osm_editing">Уређивање ОСМ-а</string>
     <string name="osm_edits_view_descr">Погледајте све Ваше још увек неотпремљене измене или белешке ОСМ-а у %1$s. Отпремљене тачке се не више приказују.</string>
     <string name="app_mode_osm">ОСМ</string>
@@ -2406,7 +2406,7 @@
     <string name="add_custom_category">Додај произвољну врсту</string>
     <string name="rendering_attr_streetLightingNight_name">Прикажи само ноћу</string>
     <string name="plugin_prefs_reset_successful">Све поставке додатка враћене су на подразумевано.</string>
-    <string name="profile_prefs_reset_successful">Све поставке налога враћене су на подразумевано.</string>
+    <string name="profile_prefs_reset_successful">Све поставке профила враћене су на подразумевано.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Сунце залази у %1$s</string>
     <string name="sunrise_at">Сунце излази у %1$s</string>
@@ -2416,15 +2416,15 @@
     <string name="copy_coordinates">Копирај координате</string>
     <string name="routing_profile_direct_to">Дикретно-на-тачку</string>
     <string name="sort_by_category">Распореди по врсти</string>
-    <string name="please_provide_profile_name_message">Унесите име налога</string>
+    <string name="please_provide_profile_name_message">Унесите име профила</string>
     <string name="open_settings">Отвори поставке</string>
     <string name="plugin_disabled">Додатак је искључен</string>
     <string name="shared_string_menu">Изборник</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_include_data">Укључи додатне податке</string>
     <string name="index_name_antarctica">Антарктик</string>
-    <string name="create_custom_categories_list_promo">Промените редослед списка и сакријте врсте. Увезите или извезите све промене као налоге.</string>
-    <string name="release_3_6">• Налози: сада можете променити редослед, поставити сличицу карте, променити све поставке основних налога и повратити их назад на подразумеване вредности \n \n • Додати бројеви излаза приликом навођења \n \n • Преуређене су поставке додатака \n \n • Преуређен је приказ поставки за бржи приступ свим налозима \n \n • Додата је могућност за умножавање поставки из другог налога \n \n • Додата је могућност промене редоследа или скривања врсти тачака занимања у Претрази \n \n • Исправно су поравнате сличице тачака занимања на карти \n \n • Додати су подаци изласка и заласка сунца на подешавању карте \n \n • На карту је додата сличица кућа/посао \n \n • Додата је подршка за описе из више редова у поставкама \n \n • Додато је исправно пресловљавање на карту Јапана \n \n • Додата је карта Антарктика</string>
+    <string name="create_custom_categories_list_promo">Промените редослед списка и сакријте врсте. Увезите или извезите све промене као профиле.</string>
+    <string name="release_3_6">• Профили: сада можете променити редослед, поставити сличицу карте, променити све поставке основних профила и повратити их назад на подразумеване вредности \n \n • Додати бројеви излаза приликом навођења \n \n • Преуређене су поставке додатака \n \n • Преуређен је приказ поставки за бржи приступ свим профилима \n \n • Додата је могућност за умножавање поставки из другог профила \n \n • Додата је могућност промене редоследа или скривања врсти тачака занимања у Претрази \n \n • Исправно су поравнате сличице тачака занимања на карти \n \n • Додати су подаци изласка и заласка сунца на подешавању карте \n \n • На карту је додата сличица кућа/посао \n \n • Додата је подршка за описе из више редова у поставкама \n \n • Додато је исправно пресловљавање на карту Јапана \n \n • Додата је карта Антарктика</string>
     <string name="plugin_disabled_descr">Овај додатак је посебан програм и ако га искључите, нећете га уклонити.
 \n
 \nМожете да га избришете из подешавања програма на Андроиду.</string>
@@ -2450,10 +2450,10 @@
     <string name="import_duplicates_title">Неке ставке већ постоје</string>
     <string name="select_data_to_import">Одаберите податке за увоз.</string>
     <string name="shared_string_rendering_style">Стил исцртавања</string>
-    <string name="restore_all_profile_settings_descr">Све поставке налога ће бити враћене на почетно стање пре стварања/увожења овог налога.</string>
-    <string name="restore_all_profile_settings">Поврати све поставке налога\?</string>
-    <string name="saving_new_profile">Чувам нови налог</string>
-    <string name="profile_backup_failed">Нисам успео да направим складиште за чување налога.</string>
+    <string name="restore_all_profile_settings_descr">Све поставке профила ће бити враћене на почетно стање пре стварања/увожења овог профила.</string>
+    <string name="restore_all_profile_settings">Поврати све поставке профила?</string>
+    <string name="saving_new_profile">Чувам нови профил</string>
+    <string name="profile_backup_failed">Нисам успео да направим складиште за чување профила.</string>
     <string name="quick_action_terrain_descr">Дугме да прикаже или сакрије слој тла на карти.</string>
     <string name="delete_description">Обриши опис</string>
     <string name="add_description">Додај опис</string>
@@ -2471,12 +2471,12 @@
     <string name="shared_string_languages">Језици</string>
     <string name="shared_string_language">Језик</string>
     <string name="shared_string_all_languages">Сви језици</string>
-    <string name="profiles_for_action_not_found">Нисам успео да пронађем такав налог.</string>
+    <string name="profiles_for_action_not_found">Нису пронађени такви профили.</string>
     <string name="index_item_world_basemap_detailed">Светска општа карта (богата)</string>
     <string name="create_edit_poi">Направите или измените ТЗ</string>
     <string name="add_edit_favorite">Додајте или измените омиљено</string>
     <string name="back_to_editing">Повратак уређивању</string>
-    <string name="shared_string_add_profile">Додај налог</string>
+    <string name="shared_string_add_profile">Додај профил</string>
     <string name="extra_maps_menu_group">Додатне карте</string>
     <string name="download_unsupported_action">Неподржана радња %1$s</string>
     <string name="tracker_item">ОсмАнд пратилац</string>
@@ -2484,7 +2484,7 @@
     <string name="favorites_item">Омиљени</string>
     <string name="quick_action_transport_descr">Дугме које приказује или скрива јавни превоз на карти.</string>
     <string name="parking_positions">Положаји паркирања кола</string>
-    <string name="quick_action_switch_profile_descr">Дејствено дугме мења између изабраних налога.</string>
+    <string name="quick_action_switch_profile_descr">Дејствено дугме мења између изабраних профила.</string>
     <string name="unsupported_type_error">Неподржана врста</string>
     <string name="width_limit_description">Унесите ширину возила, нека ограничења пута могу бити примењена за широка возила.</string>
     <string name="height_limit_description">Унесите висину возила, нека ограничења пута могу бити примењена за висока возила.</string>
@@ -2612,7 +2612,7 @@
     <string name="developer_plugin">Додатак за програмере</string>
     <string name="app_mode_ski_touring">Скијашки програм</string>
     <string name="shared_string_items">Ставке</string>
-    <string name="changes_applied_to_profile">Измене примењене на ’%1$s’ налог.</string>
+    <string name="changes_applied_to_profile">Измене примењене на профил ’%1$s’.</string>
     <string name="wiki_menu_download_descr">За приказ Википедијиних тачака занимања су потребне додатне карте.</string>
     <string name="select_wikipedia_article_langs">Одаберите језик за Википедијине чланке на карти. Пребаците на било који други доступни језик док читате чланак.</string>
     <string name="some_articles_may_not_available_in_lang">Неки чланци са Википедија су можда доступни на Вашем језику.</string>
@@ -2636,11 +2636,7 @@
 \nОнемогућите некоришћене додатке ради скривања њихових управљача. %1$s.</string>
     <string name="ui_customization_short_descr">Јединице ладице, приручни изборник</string>
     <string name="context_menu_actions">Дејства приручног изборника</string>
-    <string name="osm_live_payment_subscription_management">Наплатом ће бити оптерећен ваш налог Гуглове продавнице при потврди куповине.
-\n
-\nПретплата се самостално обнавља уколико није отказана пре датума обнове.
-\n
-\nПретплатама можете управљати и отказати их тако што ћете отићи на своја подешавања Гуглове продавнице.</string>
+    <string name="osm_live_payment_subscription_management">Плаћање ће бити извршено са вашег налога Гуглове продавнице при потврди куповине. \n \nПретплата се самостално обнавља уколико није отказана пре датума обнове. \n \nПретплатама можете управљати и отказати их тако што ћете отићи на своја подешавања Гуглове продавнице.</string>
     <string name="release_3_7">• Нове ванмрежне карте нагиба\n\n• Пуно прилагођавање омиљених и тачака ГПИкса – прилагођавање боја, сличица, облика\n\n• Прилагођавање редоследа јединица \"Приручног изборника\", \"Подешавање карте\" и \"Кутије\"\n\n• Википедија као посебан слој у подешавању карте, изаберите само потребне језике\n\n• Направите свој пропусник тачака занимања / прилагодљиву карту\n\n• Додата је могућност да се поврате подешавања корисничких налога\n\n• Целовите путање ГПИкс-а са подршком за саобраћајне траке и целовита упутства скретања\n\n• Исправљене величине корисничког сучеља на таблицама\n\n• Исправљене грешке са ДНЛ\n\n</string>
     <string name="gpx_parse_error">Пронађен је проблем са датотеком ГПИкс-а
 \n
@@ -2682,13 +2678,13 @@
     <string name="shared_string_done">Завршено</string>
     <string name="save_as_new_track">Сачувај као нови траг</string>
     <string name="reverse_route">Обрнута путања</string>
-    <string name="route_between_points_whole_track_button_desc">Цели траг ће се прерачунати користећи одабрани налог.</string>
-    <string name="route_between_points_next_segment_button_desc">Само ће следећи чланак бити прерачунат користећи одабрани налог.</string>
+    <string name="route_between_points_whole_track_button_desc">Цели траг ће се прерачунати користећи одабрани профил.</string>
+    <string name="route_between_points_next_segment_button_desc">Само следећи део ће бити прерачунат користећи одабрани профил.</string>
     <string name="route_between_points_desc">Изаберите како повезати тачке, по правој линији, или израчунајте пут између њих како је доле назначено.</string>
     <string name="whole_track">Цели траг</string>
     <string name="next_segment">Следећи чланак</string>
     <string name="threshold_distance">Праг удаљености</string>
-    <string name="navigation_profile">Налог навођења</string>
+    <string name="navigation_profile">Профил навођења</string>
     <string name="route_between_points_add_track_desc">Изаберите датотеку трага којој ће се додати нови чланак.</string>
     <string name="street_level_imagery">Слике на нивоу улице</string>
     <string name="plan_route_exit_dialog_descr">Одбацити све промене на планираној путањи\?</string>
@@ -2753,13 +2749,13 @@
     <string name="all_next_segments">Сви наредни делови</string>
     <string name="previous_segment">Претходни део</string>
     <string name="all_previous_segments">Сви претходни делови</string>
-    <string name="only_selected_segment_recalc">Само изабрани део ће се поново израчунати помоћу изабраног налога.</string>
-    <string name="all_next_segments_will_be_recalc">Сви наредни делови ће се поново израчунати помоћу изабраног налога.</string>
-    <string name="all_previous_segments_will_be_recalc">Сви претходни делови ће се поново израчунати помоћу изабраног налога.</string>
+    <string name="only_selected_segment_recalc">Само изабрани део ће се поново израчунати помоћу изабраног профила.</string>
+    <string name="all_next_segments_will_be_recalc">Сви наредни делови ће се поново израчунати помоћу изабраног профила.</string>
+    <string name="all_previous_segments_will_be_recalc">Сви претходни делови ће се поново израчунати помоћу изабраног профила.</string>
     <string name="open_saved_track">Отвори сачувани траг</string>
     <string name="shared_string_is_saved">је сачувано</string>
     <string name="shared_string_redo">Поврати</string>
-    <string name="release_3_8">• Освежена је могућност путање: омогућава употребу различитих врста навођења по делу и укључивање трагова \n \n • Нови изборник трагова: одаберите боју, дебљину, стрелице смера приказа, сличице почетка и завршетка \n \n • Побољшана је видљивост бициклистичких чворова. \n \n • Трагови се сада могу тапкати, имају приручни изборник са основним подацима. \n \n • Побољшани су погони претраге \n \n • Побољшане су могућности праћења трагова у навођењу \n \n • Решени проблеми са увозом / извозом подешавања налога</string>
+    <string name="release_3_8">• Освежена је могућност путање: омогућава употребу различитих врста навођења по делу и укључивање трагова \n \n • Нови изборник трагова: одаберите боју, дебљину, стрелице смера приказа, сличице почетка и завршетка \n \n • Побољшана је видљивост бициклистичких чворова. \n \n • Трагови се сада могу тапкати, имају приручни изборник са основним подацима. \n \n • Побољшани су погони претраге \n \n • Побољшане су могућности праћења трагова у навођењу \n \n • Решени проблеми са увозом / извозом подешавања профила</string>
     <string name="sort_last_modified">Последња измена</string>
     <string name="sort_name_descending">Име: З – А</string>
     <string name="sort_name_ascending">Име: А – З</string>
@@ -3202,7 +3198,7 @@
     <string name="rendering_attr_natureReserves_name">Заштићена подручја природе</string>
     <string name="show_parameter_seekbar">Прикажи траку за тражење одредница</string>
     <string name="clear_all_history_warning">Желите ли да обришете све уносе историје, укључујући претрагу, навођење и историју ознака\?</string>
-    <string name="release_4_1">• Додата почетна подршка за Андроид Ауто \n \n • Освежавање корисничког сучеља за претрагу координата УТМ \n \n• Пропусник ГПС-а трагова ГПИкс-а \n \n • Справица за висински налог (издања про) \n \n • Омиљено: додата је могућност прегледа недавно коришћених сличица \n \n • Планирање путање: користиће се изабрани налог након покретања \n \n • Поправљен је слој Мапиларија, прикључак је сада подразумевано онемогућен \n \n • Додат је приказ за управљање целокупном историјом у програму \n \n • Усмерење карте се не враћа на почетно након поновног покретања програма \n \n • Побољшано је приказивање ознаке висине СРТМ \n \n • Исправљени су арапски натписи карата \n \n • Исправљени су различити проблеми са навођењем</string>
+    <string name="release_4_1">• Додата почетна подршка за Андроид Ауто \n \n • Освежавање корисничког сучеља за претрагу координата УТМ \n \n• Пропусник ГПС-а трагова ГПИкс-а \n \n • Справица за висински профил (издања про) \n \n • Омиљено: додата је могућност прегледа недавно коришћених сличица \n \n • Планирање путање: користиће се изабрани профил након покретања \n \n • Поправљен је слој Мапиларија, прикључак је сада подразумевано онемогућен \n \n • Додат је приказ за управљање целокупном историјом у програму \n \n • Усмерење карте се не враћа на почетно након поновног покретања програма \n \n • Побољшано је приказивање ознаке висине СРТМ \n \n • Исправљени су арапски натписи карата \n \n • Исправљени су различити проблеми са навођењем</string>
     <string name="continue_on_phone">Наставите на мобилном уређају</string>
     <string name="location_access_request_action">Одобри приступ</string>
     <string name="is_disabled">%1$s је онемогућен</string>
@@ -3242,7 +3238,7 @@
     <string name="shared_string_hide_all">Сакриј све</string>
     <string name="shared_string_downhill">Низбрдо</string>
     <string name="fold_unfold">склопи/развиј</string>
-    <string name="app_profile_type">Врста применљивих налога</string>
+    <string name="app_profile_type">Врста профила</string>
     <string name="add_to_group">Додај у групу</string>
     <string name="app_modes_options">Одаберите начин рада програма</string>
     <string name="shared_string_memory">Меморија</string>
@@ -3493,7 +3489,7 @@
     <string name="compass_always_hidden">Увек сакривено</string>
     <string name="download_tiles">Преузми сличице</string>
     <string name="connect_with_straight_line">Повежи правом линијом</string>
-    <string name="without_profiles_changing">Без промене налога</string>
+    <string name="without_profiles_changing">Без промене профила</string>
     <string name="shared_string_only_missing">Само недостајуће</string>
     <string name="auto_25_chars_route_tl_kl">Скрените лево и држите лево</string>
     <string name="auto_25_chars_route_tl_kr">Скрените лево и држите десно</string>
@@ -3933,7 +3929,7 @@
     <string name="send_crash_log_descr">Садржи само податке о рушењима програма</string>
     <string name="help_article_plan_route_coordinate_input_name">Унос координата</string>
     <string name="dangerous_goods_description">На неким путевима и тунелима није дозвољен превоз опасних материја.</string>
-    <string name="delete_account">Обриши налог</string>
+    <string name="delete_account">Избриши налог</string>
     <string name="write_bearing">Пиши усмерење страна света</string>
     <string name="routing_attr_allow_via_ferrata_description">Планинарска путања опремљена постављеним ужадима, гредама, лествицама и брвнима.</string>
     <string name="help_article_map_vector_maps_name">Векторске карте (начини приказа карте)</string>
@@ -4212,7 +4208,7 @@
     <string name="delete_smart_folder_dialog_message">Ово ће уклонити паметану фасциклу \"%1$s\". (Ниједан траг неће бити избрисан.)</string>
     <string name="discard_filter_changes_prompt">Ресетовати све филтере?</string>
     <string name="empty_name">Празно име</string>
-    <string name="release_4_5">• БЛЕ/АНТ пријемници: прерађено повезивање, упис и преглед примљених података у ГПКС\n\n • Бесплатна остава за омиљене и подешавања у \"Облак ОсмАнда\"\n\n • Нови облик за карте тла са подршком за просторни приказ тла\n\n • Управљање траговима: обновљен КИ, додато разврставање, подршка за гњеждење фасцикли\n\n • Андроид кола: нови почетни изборник за приступ омиљенима, путањама и врстама тачака занимања\n\n • Један списак справица за вишу/нижу полицу\n\n • Нови налог „Воз“, омогућава израчунавање железничких путања \n \n • Линије обриса раде са било којим „Извором карте“ \n \n • Проширени списак дејстава за спољашње тастатуре \n \n • Произвољне датотеке путања, додата је могућност брисања или преписивања \n \n • Додата је могућност „Обавести о одступању од путање“ \n \n • Почетни приказ: додата је могућност поврати стање ОсмАнда из датотеке \n \n • Додата је врста „Опасне твари“ за навођење теретних возила у Северној Америци \n \n • Додата је подршка „ојачаног пута“ за пешачке путање \n \n • Додата је размера „ЦАИ“ за разврставање тежине путања \n \n • Поправљен је избор језика при покретању програма \n \n • Додата је подршка за предметне сличице \n \n • Облак ОсмАнда: додата је могућност брисања налога \n \n • Приступачност: промењена додирна величина дугмади на 48 дп; поправљена видљивост карте КИ за читаче заслона \n \n • Јапански глас навођења је преправљен \n \n • Прерађена је промена успона и процена нагиба</string>
+    <string name="release_4_5">• БЛЕ/АНТ пријемници: прерађено повезивање, упис и преглед примљених података у ГПКС\n\n • Бесплатна остава за омиљене и подешавања у \"Облак ОсмАнда\"\n\n • Нови облик за карте тла са подршком за просторни приказ тла\n\n • Управљање траговима: обновљен КИ, додато разврставање, подршка за гњеждење фасцикли\n\n • Андроид кола: нови почетни изборник за приступ омиљенима, путањама и врстама тачака занимања\n\n • Један списак справица за вишу/нижу полицу\n\n • Нови профил „Воз“, омогућава израчунавање железничких путања \n \n • Линије обриса раде са било којим „Извором карте“ \n \n • Проширени списак дејстава за спољашње тастатуре \n \n • Произвољне датотеке путања, додата је могућност брисања или преписивања \n \n • Додата је могућност „Обавести о одступању од путање“ \n \n • Почетни приказ: додата је могућност поврати стање ОсмАнда из датотеке \n \n • Додата је врста „Опасне твари“ за навођење теретних возила у Северној Америци \n \n • Додата је подршка „ојачаног пута“ за пешачке путање \n \n • Додата је размера „ЦАИ“ за разврставање тежине путања \n \n • Поправљен је избор језика при покретању програма \n \n • Додата је подршка за предметне сличице \n \n • Облак ОсмАнда: додата је могућност брисања налога \n \n • Приступачност: промењена додирна величина дугмади на 48 дп; поправљена видљивост карте КИ за читаче заслона \n \n • Јапански глас навођења је преправљен \n \n • Прерађена је промена успона и процена нагиба</string>
     <string name="relief_3d_description">Присвоји и посматрај модел у размери твоје околине или целог континента.</string>
     <string name="lang_zh_hans">Поједностављени Кинески</string>
     <string name="lang_zh_hant">Традиционални Кинески</string>
@@ -4359,7 +4355,7 @@
     <string name="quick_action_new_route">Нова рута</string>
     <string name="quick_action_previous_app_profile">Додај профил претходном</string>
     <string name="quick_action_next_app_profile">Додај профил следећем</string>
-    <string name="app_profile">Налог програма</string>
+    <string name="app_profile">Профил програма</string>
     <string name="shared_string_create">Креирај</string>
     <string name="shared_string_replace">Замени</string>
     <string name="quick_action_display_position_in_center">Приказуј положај увек у средишту</string>
@@ -4383,7 +4379,7 @@
     <string name="resting_position_icon">Сличица положаја одмарања</string>
     <string name="shared_string_all_icons">Све сличице</string>
     <string name="rendering_value_pale_name">Бледо</string>
-    <string name="profile_icon">Сличица налога</string>
+    <string name="profile_icon">Иконица профила</string>
     <string name="navigation_position_icon_summary">Сличица видљива приликом навођења или кретања.</string>
     <string name="resting_position_icon_summary">Сличица видљива приликом некретања.</string>
     <string name="navigation_position">Положај навођења</string>
@@ -4731,7 +4727,7 @@
     <string name="enable_msaa">Омогући MSAA</string>
     <string name="next_turn_information">Обавештење о следећем скретању</string>
     <string name="next_turn_information_desc">Приказује смер надолазећег скретања и назив улице.</string>
-    <string name="description_purchases_fastspring">Можете управљати својим куповинама путем налога за управљање ФастСпригном.</string>
+    <string name="description_purchases_fastspring">Можете управљати својим куповинама путем портала за управљање ФастСпринг налогом.</string>
     <string name="description_subscription_fastspring">Можете управљати или отказати претплату путем портала за управљање FastSpring налозима.</string>
     <string name="manage_purchases">Управљање куповинама</string>
     <string name="map_orientation_portrait_inverted">Усправно (обрнуто)</string>
