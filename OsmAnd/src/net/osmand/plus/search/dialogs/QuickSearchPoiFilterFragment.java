@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -44,6 +46,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.poi.PoiFilterUtils.AmenityNameFilter;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
@@ -51,6 +54,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -80,6 +84,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private static final String QUICK_SEARCH_POI_FILTER_SHOW_ALL_CATEGORIES = "quick_search_poi_filter_show_all_categories";
 	// Radius of the first category search, see SearchAmenityByTypeAPI
 	private static final int PLACES_COUNT_RADIUS = 10000;
+	private static final long RECOUNT_DELAY_MS = 500;
 	private static final int MAX_VALUES_WITH_PLACES = 5;
 	// Collapsible section at the end with the categories that no place around has
 	private static final String OTHER_CATEGORIES = "quick_search_poi_filter_other_categories";
@@ -105,6 +110,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	// Places around with a value (by key name) and with any value of a category, null until counted
 	private Map<String, Integer> placesCounts;
 	private Map<String, Integer> categoryPlacesCounts;
+	private int countGeneration;
+	private final Handler recountHandler = new Handler(Looper.getMainLooper());
+	private final Runnable recountTask = this::countPlaces;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
@@ -211,6 +219,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			public void afterTextChanged(Editable s) {
 				nameFilterText = s.toString();
 				updateApplyButton();
+				// the counts follow the typed name
+				recountHandler.removeCallbacks(recountTask);
+				recountHandler.postDelayed(recountTask, RECOUNT_DELAY_MS);
 			}
 		});
 
@@ -301,6 +312,8 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 		Map<String, Integer> counts = new HashMap<>();
 		Map<String, Integer> categoryCounts = new HashMap<>();
+		int generation = ++countGeneration;
+		AmenityNameFilter nameFilter = filter.getNameTextFilter(nameFilterText);
 		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Integer>() {
 			@Override
 			protected Integer doInBackground(Void... params) {
@@ -313,7 +326,12 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 					allPoiAdditionals.addAll(categoryPoiAdditionals);
 				}
 				Map<PoiType, PoiType> textPoiAdditionals = filter.getTextPoiAdditionals(allPoiAdditionals);
+				int placesCount = 0;
 				for (Amenity amenity : amenities) {
+					if (!nameFilter.accept(amenity)) {
+						continue;
+					}
+					placesCount++;
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						boolean accepted = false;
 						for (PoiType poiType : entry.getValue()) {
@@ -327,12 +345,23 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						}
 					}
 				}
-				return amenities.size();
+				return placesCount;
 			}
 
 			@Override
 			protected void onPostExecute(Integer placesCount) {
-				if (placesCount > 0 && isAdded()) {
+				if (generation != countGeneration || !isAdded()) {
+					return;
+				}
+				if (placesCount == 0) {
+					if (placesCounts != null) {
+						// the typed name matches nothing around: the list as without counts
+						placesCounts = null;
+						categoryPlacesCounts = null;
+						description.setText(filter.getName());
+						updateListView();
+					}
+				} else {
 					placesCounts = counts;
 					categoryPlacesCounts = categoryCounts;
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
@@ -402,9 +431,10 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 		builder.setTitle(R.string.access_hint_enter_name);
 
+		TopIndexFilter topIndexFilter = filter.getTopIndexFilter();
 		EditText editText = new EditText(getContext());
 		editText.setHint(R.string.new_filter);
-		editText.setText(filter.getName());
+		editText.setText(topIndexFilter != null ? topIndexFilter.getValue() : filter.getName());
 
 		TextView textView = new TextView(getContext());
 		textView.setText(getString(R.string.new_filter_desc));
@@ -423,6 +453,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		builder.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
 			String filterName = editText.getText().toString();
 			PoiUIFilter nFilter = new PoiUIFilter(filterName, null, filter.getAcceptedTypes(), app);
+			if (topIndexFilter != null) {
+				nFilter.setTopIndexFilter(topIndexFilter.getTag(), topIndexFilter.getValue());
+			}
 			applyFilterFields();
 			if (!Algorithms.isEmpty(filter.getFilterByName())) {
 				nFilter.setSavedFilterByName(filter.getFilterByName());
@@ -449,6 +482,12 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		outState.putStringArrayList(QUICK_SEARCH_POI_FILTER_SELECTED_ADDITIONALS, new ArrayList<>(selectedPoiAdditionals));
 		outState.putStringArrayList(QUICK_SEARCH_POI_FILTER_COLLAPSED_CATEGORIES, collapsedCategories);
 		outState.putStringArrayList(QUICK_SEARCH_POI_FILTER_SHOW_ALL_CATEGORIES, showAllCategories);
+	}
+
+	@Override
+	public void onDestroyView() {
+		recountHandler.removeCallbacks(recountTask);
+		super.onDestroyView();
 	}
 
 	@Override

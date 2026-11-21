@@ -12,6 +12,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.backup.BackupUtils;
+import net.osmand.search.core.TopIndexFilter;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -51,7 +52,7 @@ public class PoiFilterDbHelper {
 	private static final int FALSE_INT = 0;
 
 	public static final String DATABASE_NAME = "poi_filters";
-	private static final int DATABASE_VERSION = 7;
+	private static final int DATABASE_VERSION = 8;
 
 	private static final String FILTER_NAME = "poi_filters";
 	private static final String FILTER_COL_NAME = "name";
@@ -59,6 +60,8 @@ public class PoiFilterDbHelper {
 	private static final String FILTER_COL_FILTERBYNAME = "filterbyname";
 	private static final String FILTER_COL_HISTORY = "history";
 	private static final String FILTER_COL_DELETED = "deleted";
+	private static final String FILTER_COL_TOP_INDEX_TAG = "top_index_tag";
+	private static final String FILTER_COL_TOP_INDEX_VALUE = "top_index_value";
 
 	private static final String FILTER_TABLE_CREATE = "CREATE TABLE " +
 			FILTER_NAME + " (" +
@@ -66,7 +69,9 @@ public class PoiFilterDbHelper {
 			FILTER_COL_ID + ", " +
 			FILTER_COL_FILTERBYNAME + ", " +
 			FILTER_COL_HISTORY + ", " +
-			FILTER_COL_DELETED + ");";
+			FILTER_COL_DELETED + ", " +
+			FILTER_COL_TOP_INDEX_TAG + ", " +
+			FILTER_COL_TOP_INDEX_VALUE + ");";
 
 	private static final String CATEGORIES_NAME = "categories";
 	private static final String CATEGORIES_FILTER_ID = "filter_id";
@@ -162,6 +167,11 @@ public class PoiFilterDbHelper {
 			conn.execSQL(POI_CACHE_TABLE_CREATE);
 			upgraded = true;
 		}
+		if (oldVersion < 8) {
+			conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_TOP_INDEX_TAG + " text");
+			conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_TOP_INDEX_VALUE + " text");
+			upgraded = true;
+		}
 		if (upgraded) {
 			updateLastModifiedTime();
 		}
@@ -234,8 +244,11 @@ public class PoiFilterDbHelper {
 			if (!addOnlyCategories) {
 				p.setDeleted(forHistory);
 				int value = forHistory ? TRUE_INT : FALSE_INT;
-				db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?, ?, ?)",
-						new Object[] {p.getName(), p.getFilterId(), p.getFilterByName(), value, value});
+				TopIndexFilter topIndexFilter = p.getTopIndexFilter();
+				db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
+						new Object[] {p.getName(), p.getFilterId(), p.getFilterByName(), value, value,
+								topIndexFilter != null ? topIndexFilter.getTag() : null,
+								topIndexFilter != null ? topIndexFilter.getValue() : null});
 			}
 			Map<PoiCategory, LinkedHashSet<String>> types = p.getAcceptedTypes();
 			SQLiteStatement insertCategories = db.compileStatement("INSERT INTO " + CATEGORIES_NAME + " VALUES (?, ?, ?)");
@@ -295,7 +308,9 @@ public class PoiFilterDbHelper {
 					FILTER_COL_ID + ", " +
 					FILTER_COL_NAME + ", " +
 					FILTER_COL_FILTERBYNAME + ", " +
-					FILTER_COL_DELETED +
+					FILTER_COL_DELETED + ", " +
+					FILTER_COL_TOP_INDEX_TAG + ", " +
+					FILTER_COL_TOP_INDEX_VALUE +
 					" FROM " + FILTER_NAME, null);
 			if (query != null && query.moveToFirst()) {
 				do {
@@ -309,6 +324,7 @@ public class PoiFilterDbHelper {
 						}
 						PoiUIFilter filter = new PoiUIFilter(filterName, filterId, map.get(filterId), app);
 						filter.setSavedFilterByName(query.getString(2));
+						filter.setTopIndexFilter(query.getString(4), query.getString(5));
 						filter.setDeleted(deleted);
 						if (filter.getAcceptedTypesCount() > 0) {
 							list.add(filter);
