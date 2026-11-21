@@ -23,6 +23,7 @@ import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -526,26 +527,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && selectedGpxFile != null) {
 			mapActivity.getMapView();
 			GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 			KQuadRect r = gpxFile.getRect();
 
 			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
-			int tileBoxWidthPx = 0;
-			int tileBoxHeightPx = 0;
-			int marginLeftPx = 0;
-
-			if (!isPortrait()) {
-				tileBoxWidthPx = tb.getPixWidth() - getWidth();
-				marginLeftPx = getWidth();
+			Rect box = new Rect(0, 0, tb.getPixWidth(), tb.getPixHeight());
+			if (isPortrait()) {
+				box.top = AndroidUtils.getStatusBarHeight(mapActivity);
+				box.bottom = y;
 			} else {
-				int fHeight = getViewHeight() - y - AndroidUtils.getStatusBarHeight(mapActivity);
-				tileBoxHeightPx = tb.getPixHeight() - fHeight;
+				AndroidUtils.cutStartSide(mapActivity, box, getWidth());
 			}
-			if (r.getLeft() != 0 && r.getRight() != 0) {
-				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
-						tileBoxWidthPx, tileBoxHeightPx, 0, marginLeftPx);
+			if (r.getLeft() != 0 && r.getRight() != 0 && box.width() > 0 && box.height() > 0) {
+				mapActivity.getMapView().fitRectToBox(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(), box);
 			}
 		}
 	}
