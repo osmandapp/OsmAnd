@@ -2704,7 +2704,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		LatLon location = referenceObject != null ? referenceObject.getLocation() : null;
 		if (location != null) {
 			spatialSearchLocation = new LatLon(location.getLatitude(), location.getLongitude());
-			spatialSearchScopeName = referenceObject.getName();
+			spatialSearchScopeName = referenceObject.getName(searchSettings.getLang(), searchSettings.isTransliterate());
 			spatialSearchBBox31 = getSpatialCategoryBBox31(referenceObject);
 			useSpatialSearchLocation = true;
 			useMapCenter = false;
