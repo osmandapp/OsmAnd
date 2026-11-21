@@ -51,6 +51,7 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult;
@@ -197,7 +198,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		if (chip != null) {
 			MapObject refObject = spatialSearchResult.getReferenceObject();
 			if (refObject != null) {
-				chip.setScopeName(refObject.getName(), nightMode);
+				SearchSettings settings = item.getSearchResult().requiredSearchPhrase.getSettings();
+				chip.setScopeName(refObject.getName(settings.getLang(), settings.isTransliterate()), nightMode);
 			}
 		}
 		subtitle.setText(app.getString(R.string.shared_string_near).toLowerCase());
