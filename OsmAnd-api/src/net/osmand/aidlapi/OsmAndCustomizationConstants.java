@@ -128,6 +128,8 @@ public interface OsmAndCustomizationConstants {
 	String MAP_CONTEXT_MENU_AUDIO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "audio_note";
 	String MAP_CONTEXT_MENU_VIDEO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "video_note";
 	String MAP_CONTEXT_MENU_PHOTO_NOTE = MAP_CONTEXT_MENU_ACTIONS + "photo_note";
+	String MAP_CONTEXT_MENU_TOPOPRINT_PREVIEW = MAP_CONTEXT_MENU_ACTIONS + "topoprint_preview";
+	String MAP_CONTEXT_MENU_TOPOPRINT_GENERATE = MAP_CONTEXT_MENU_ACTIONS + "topoprint_generate";
 
 	//Plug-in's IDs:
 	String PLUGIN_OSMAND_MONITORING = "osmand.monitoring";
@@ -147,6 +149,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_VEHICLE_METRICS = "osmand.vehicle.metrics";
 	String PLUGIN_WEATHER = "osmand.weather";
 	String PLUGIN_ASTRONOMY = "osmand.astronomy";
+	String PLUGIN_TOPOPRINT = "osmand.topoprint";
 
 	//Settings:
 	String SETTINGS_ID = "settings.";

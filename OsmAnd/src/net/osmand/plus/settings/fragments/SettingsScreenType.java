@@ -12,6 +12,7 @@ import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
 import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment;
 import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
+import net.osmand.plus.plugins.topoprint.TopoPrintSettingsFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.mediastorage.MediaStorageFragment;
@@ -57,7 +58,8 @@ public enum SettingsScreenType {
 	EXTERNAL_INPUT_DEVICE(MainExternalInputDevicesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.external_input_device_settings, R.layout.profile_preference_toolbar_with_switch),
 	/* not a preference screen - the Vessel tracker (AIS) plugin builds its own Material 3 UI */
 	AIS_SETTINGS(AisTrackerSettingsFragment.class.getName(), true, ApplyQueryType.NONE, 0, 0),
-	POSITION_ANIMATION(PositionAnimationFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.position_animation_settings, R.layout.profile_preference_toolbar_with_switch);
+	POSITION_ANIMATION(PositionAnimationFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.position_animation_settings, R.layout.profile_preference_toolbar_with_switch),
+	TOPOPRINT_SETTINGS(TopoPrintSettingsFragment.class.getName(), false, ApplyQueryType.NONE, R.xml.topoprint_settings, R.layout.global_preference_toolbar);
 
 	public final String fragmentName;
 	public final boolean profileDependent;

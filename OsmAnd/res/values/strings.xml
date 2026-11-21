@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<!-- TopoPrint (Print map) plugin -->
+	<string name="topoprint_plugin_name">Print map</string>
+	<string name="topoprint_plugin_description">Preview a printable map extent, render the selected area with the current OsmAnd style, and export a print-ready map with UTM grid, map scale and declination as SVG or PNG.</string>
+	<string name="topoprint_paper_size">Paper size</string>
+	<string name="topoprint_orientation">Page orientation</string>
+	<string name="topoprint_dpi">Print resolution</string>
+	<string name="topoprint_scale_denominator">Map scale</string>
+	<string name="topoprint_projection">Map projection</string>
+	<string name="topoprint_projection_spherical">Spherical (OpenGL)</string>
+	<string name="topoprint_projection_mercator">Mercator</string>
+	<string name="topoprint_portrait">Portrait</string>
+	<string name="topoprint_landscape">Landscape</string>
+	<string name="topoprint_show_preview">Show print preview frame</string>
+	<string name="topoprint_show_preview_descr">Overlay the map with the frame of the area covered by the printout</string>
+	<string name="topoprint_symbols_scale">Label scale (print)</string>
+	<string name="topoprint_symbols_scale_descr">Size of map labels and POI icons on the printout; smaller text fits more labels (default 1.0 = current app setting)</string>
+	<string name="topoprint_output_dir">Output folder</string>
+	<string name="topoprint_output_dir_descr">Absolute path for generated posters; empty uses the app\'s private topoprint folder</string>
+	<string name="topoprint_saved_to">Saved to %s</string>
+	<string name="topoprint_generate">Generate print map</string>
+	<string name="topoprint_progress_prepare">Preparing the print map context...</string>
+	<string name="topoprint_progress_gl">Creating the offscreen GL renderer...</string>
+	<string name="topoprint_progress_tiles">Loading map tiles for the print area...</string>
+	<string name="topoprint_progress_tiles_frames">Loading map tiles for the print area... (%1$d frames rendered)</string>
+	<string name="topoprint_progress_wait">Camera offset detected - re-centering and waiting for the map to settle (attempt %1$d of %2$d)...</string>
+	<string name="topoprint_progress_capture">Frame captured, composing the map...</string>
+	<string name="topoprint_cancelled">Map generation cancelled</string>
+	<string name="topoprint_rendering">Rendering the map with the current style...</string>
+	<string name="topoprint_rasterizing">Rasterizing the map to PNG...</string>
+	<string name="topoprint_failed">Could not generate the print map. Try a lower DPI (memory) or check downloaded maps.</string>
+	<string name="topoprint_print">Print</string>
+	<string name="topoprint_svg_only_hint">The PNG exceeded the device memory budget; the SVG file was kept and can be rasterized on a PC.</string>
+	<string name="topoprint_title">Map title</string>
+	<string name="topoprint_output">Export</string>
+	<string name="topoprint_open">Open</string>
+	<string name="topoprint_params_preview">Parameters: %1$s</string>
+	<string name="topoprint_custom_paper">Custom paper size</string>
+	<string name="topoprint_custom_width">Custom paper width (mm)</string>
+	<string name="topoprint_custom_height">Custom paper height (mm)</string>
+	<string name="topoprint_map_button_descr">Open the print map generation dialog</string>
+
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
