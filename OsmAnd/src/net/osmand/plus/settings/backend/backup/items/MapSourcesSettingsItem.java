@@ -11,19 +11,26 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
@@ -57,6 +64,23 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public long getLocalModifiedTime() {
+		OsmandSettings settings = app.getSettings();
+		String savedHash = settings.MAP_SOURCES_BACKUP_STATE_HASH.get();
+		long savedTime = settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.get();
+		boolean firstRun = Algorithms.isEmpty(savedHash);
+		// Read the file times before the hash: opening a tile database may add info columns to it.
+		long fileTime = firstRun ? getFilesModifiedTime() : 0;
+		String hash = getStateHash(items);
+		if (hash.equals(savedHash)) {
+			return savedTime;
+		}
+		// The first run keeps the file time, so that an edit made before the update is not lost.
+		long modifiedTime = firstRun ? fileTime : Math.max(System.currentTimeMillis(), savedTime + 1);
+		saveState(hash, modifiedTime);
+		return modifiedTime;
+	}
+
+	private long getFilesModifiedTime() {
 		long lastModifiedTime = 0;
 		for (ITileSource source : items) {
 			if (source instanceof SQLiteTileSource) {
@@ -77,19 +101,77 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		for (ITileSource source : items) {
-			if (source instanceof SQLiteTileSource) {
-				File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName() + IndexConstants.SQLITE_EXT);
-				if (file.lastModified() > lastModifiedTime) {
-					file.setLastModified(lastModifiedTime);
+		if (appliedItems.isEmpty()) {
+			// Nothing was installed, so there is no imported state to acknowledge.
+			return;
+		}
+		Set<String> appliedIds = new HashSet<>();
+		for (ITileSource source : appliedItems) {
+			appliedIds.add(getSourceId(source));
+		}
+		// Hash the sources as installed, the way the next local scan reads them. Local sources
+		// that were not imported stay out of the hash and remain a local change.
+		List<?> installedSources = ExportType.MAP_SOURCES.fetchExportData(app, false);
+		try {
+			List<ITileSource> importedSources = new ArrayList<>();
+			for (Object object : installedSources) {
+				ITileSource source = (ITileSource) object;
+				if (appliedIds.contains(getSourceId(source))) {
+					importedSources.add(source);
 				}
-			} else if (source instanceof TileSourceManager.TileSourceTemplate) {
-				File file = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()), ".metainfo");
-				if (file.lastModified() > lastModifiedTime) {
-					file.setLastModified(lastModifiedTime);
+			}
+			saveState(getStateHash(importedSources), lastModifiedTime);
+		} finally {
+			for (Object source : installedSources) {
+				if (source instanceof SQLiteTileSource) {
+					((SQLiteTileSource) source).closeConnection();
 				}
 			}
 		}
+	}
+
+	@NonNull
+	private static String getSourceId(@NonNull ITileSource source) {
+		return (source instanceof SQLiteTileSource ? "sqlite:" : "template:") + source.getName();
+	}
+
+	private void saveState(@NonNull String hash, long modifiedTime) {
+		OsmandSettings settings = app.getSettings();
+		// The hash goes last: an interrupted save then repeats the change instead of losing it.
+		settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.set(modifiedTime);
+		settings.MAP_SOURCES_BACKUP_STATE_HASH.set(hash);
+	}
+
+	/**
+	 * Hash of the source settings that go to the backup. Tile writes do not change it, unlike the
+	 * file time of a tile database.
+	 */
+	@NonNull
+	private static String getStateHash(@NonNull List<ITileSource> sources) {
+		List<String> states = new ArrayList<>();
+		for (ITileSource source : sources) {
+			if (source instanceof SQLiteTileSource && ((SQLiteTileSource) source).isFileExist()) {
+				// The getters return defaults until the database info is read.
+				((SQLiteTileSource) source).initDatabaseIfNeeded();
+			}
+			try {
+				JSONObject json = writeSourceToJson(source);
+				if (source instanceof SQLiteTileSource) {
+					// Detected from the first decoded tile and saved to the database, not a user edit.
+					json.remove("tileSize");
+				}
+				states.add(json.toString());
+			} catch (JSONException e) {
+				SettingsHelper.LOG.error("Failed to write map source state", e);
+			}
+		}
+		Collections.sort(states);
+		StringBuilder state = new StringBuilder();
+		for (String sourceState : states) {
+			state.append(sourceState).append('\n');
+		}
+		// Older Android versions provide a platform Hex class without encodeHexString().
+		return new String(Hex.encodeHex(DigestUtils.sha256(state.toString())));
 	}
 
 	@Override
@@ -243,27 +325,7 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 		if (!items.isEmpty()) {
 			try {
 				for (ITileSource template : items) {
-					JSONObject jsonObject = new JSONObject();
-					boolean sql = template instanceof SQLiteTileSource;
-					jsonObject.put("sql", sql);
-					jsonObject.put("name", template.getName());
-					jsonObject.put("minZoom", template.getMinimumZoomSupported());
-					jsonObject.put("maxZoom", template.getMaximumZoomSupported());
-					jsonObject.put("url", template.getUrlTemplate());
-					jsonObject.put("randoms", template.getRandoms());
-					jsonObject.put("ellipsoid", template.isEllipticYTile());
-					jsonObject.put("inverted_y", template.isInvertedYTile());
-					jsonObject.put("referer", template.getReferer());
-					jsonObject.put("userAgent", template.getUserAgent());
-					jsonObject.put("timesupported", template.isTimeSupported());
-					jsonObject.put("expire", template.getExpirationTimeMinutes());
-					jsonObject.put("inversiveZoom", template.getInversiveZoom());
-					jsonObject.put("ext", template.getTileFormat());
-					jsonObject.put("tileSize", template.getTileSize());
-					jsonObject.put("bitDensity", template.getBitDensity());
-					jsonObject.put("avgSize", template.getAvgSize());
-					jsonObject.put("rule", template.getRule());
-					jsonArray.put(jsonObject);
+					jsonArray.put(writeSourceToJson(template));
 				}
 				json.put("items", jsonArray);
 
@@ -273,6 +335,31 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 			}
 		}
 		return json;
+	}
+
+	@NonNull
+	private static JSONObject writeSourceToJson(@NonNull ITileSource template) throws JSONException {
+		JSONObject jsonObject = new JSONObject();
+		boolean sql = template instanceof SQLiteTileSource;
+		jsonObject.put("sql", sql);
+		jsonObject.put("name", template.getName());
+		jsonObject.put("minZoom", template.getMinimumZoomSupported());
+		jsonObject.put("maxZoom", template.getMaximumZoomSupported());
+		jsonObject.put("url", template.getUrlTemplate());
+		jsonObject.put("randoms", template.getRandoms());
+		jsonObject.put("ellipsoid", template.isEllipticYTile());
+		jsonObject.put("inverted_y", template.isInvertedYTile());
+		jsonObject.put("referer", template.getReferer());
+		jsonObject.put("userAgent", template.getUserAgent());
+		jsonObject.put("timesupported", template.isTimeSupported());
+		jsonObject.put("expire", template.getExpirationTimeMinutes());
+		jsonObject.put("inversiveZoom", template.getInversiveZoom());
+		jsonObject.put("ext", template.getTileFormat());
+		jsonObject.put("tileSize", template.getTileSize());
+		jsonObject.put("bitDensity", template.getBitDensity());
+		jsonObject.put("avgSize", template.getAvgSize());
+		jsonObject.put("rule", template.getRule());
+		return jsonObject;
 	}
 
 	@Nullable
