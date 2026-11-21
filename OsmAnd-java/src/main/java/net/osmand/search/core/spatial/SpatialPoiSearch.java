@@ -103,6 +103,51 @@ public class SpatialPoiSearch {
 			return parentTypes;
 		}
 
+		/**
+		 * The value of the same brand under the plain tag (brand for brand:en): a brand row shows and filters it.
+		 */
+		public SpatialPoiType getLocalType(SpatialPoiSearch poiSearch) {
+			SpatialPoiType local = poiSubType == null ? null : getSameBrandType(poiSearch, getPlainTag());
+			return local != null ? local : this;
+		}
+
+		/**
+		 * The name in brackets of a brand row: the value the query matched, else the value in lang.
+		 */
+		public String getAltName(SpatialPoiSearch poiSearch, String lang) {
+			if (poiSubType == null) {
+				return null;
+			}
+			String local = getLocalType(poiSearch).poiAdditional;
+			String alt = poiAdditional;
+			if ((alt == null || alt.equalsIgnoreCase(local)) && !Algorithms.isEmpty(lang)) {
+				SpatialPoiType inLang = getSameBrandType(poiSearch, getPlainTag() + ":" + lang);
+				alt = inLang != null ? inLang.poiAdditional : null;
+			}
+			return alt == null || alt.equalsIgnoreCase(local) ? null : alt;
+		}
+
+		private String getPlainTag() {
+			int colon = poiSubType.name.indexOf(':');
+			return colon == -1 ? poiSubType.name : poiSubType.name.substring(0, colon);
+		}
+
+		private SpatialPoiType getSameBrandType(SpatialPoiSearch poiSearch, String tag) {
+			if (tag.equals(poiSubType.name)) {
+				return this;
+			}
+			List<SpatialPoiType> sameBrand = Algorithms.isEmpty(wikidataId) ? null : poiSearch.byWikidataKey.get(wikidataId);
+			if (sameBrand != null) {
+				for (SpatialPoiType other : sameBrand) {
+					if (other.poiSubType != null && tag.equals(other.poiSubType.name)
+							&& !Algorithms.isEmpty(other.poiAdditional)) {
+						return other;
+					}
+				}
+			}
+			return null;
+		}
+
 		public boolean accept(Amenity a) {
 			if (key.equals(a.getType().getKeyName())) {
 				return true;

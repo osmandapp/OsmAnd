@@ -29,6 +29,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
@@ -419,9 +420,13 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			object = poiType;
 			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
-			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			// the value itself: the names list starts with the alternative names of the map (Lidl -> its name:fa)
-			localeName = spatialPoiType.poiAdditional;
+			SpatialPoiSearch.SpatialPoiType local = spatialPoiType.getLocalType(poiTypeSearch);
+			object = new TopIndexFilter(local.poiSubType, poiTypes, local.poiAdditional);
+			localeName = local.poiAdditional;
+			SearchSettings settings = result.requiredSearchPhrase.getSettings();
+			String lang = settings == null ? null
+					: Algorithms.isEmpty(settings.getLang()) ? settings.getAppLang() : settings.getLang();
+			result.alternateName = spatialPoiType.getAltName(poiTypeSearch, lang);
 		} else {
 			return null;
 		}

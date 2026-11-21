@@ -78,6 +78,36 @@ class SpatialPoiSearch(types: MapPoiTypes) {
 
 		fun getParentTypes(): List<AbstractPoiType>? = parentTypes
 
+		/**
+		 * The value of the same brand under the plain tag (brand for brand:en): a brand row shows and filters it.
+		 */
+		fun getLocalType(poiSearch: SpatialPoiSearch): SpatialPoiType {
+			val subTypeName = poiSubType?.name ?: return this
+			return getSameBrandType(poiSearch, subTypeName.substringBefore(':')) ?: this
+		}
+
+		/**
+		 * The name in brackets of a brand row: the value the query matched, else the value in lang.
+		 */
+		fun getAltName(poiSearch: SpatialPoiSearch, lang: String?): String? {
+			val subTypeName = poiSubType?.name ?: return null
+			val local = getLocalType(poiSearch).poiAdditional
+			var alt = poiAdditional
+			if ((alt == null || alt.equals(local, ignoreCase = true)) && !lang.isNullOrEmpty()) {
+				alt = getSameBrandType(poiSearch, subTypeName.substringBefore(':') + ":" + lang)?.poiAdditional
+			}
+			return if (alt == null || alt.equals(local, ignoreCase = true)) null else alt
+		}
+
+		private fun getSameBrandType(poiSearch: SpatialPoiSearch, tag: String): SpatialPoiType? {
+			if (tag == poiSubType?.name) {
+				return this
+			}
+			val id = wikidataId
+			val sameBrand = if (id.isNullOrEmpty()) null else poiSearch.byWikidataKey[id]
+			return sameBrand?.firstOrNull { tag == it.poiSubType?.name && !it.poiAdditional.isNullOrEmpty() }
+		}
+
 		fun accept(a: Amenity): Boolean {
 			if (key == a.getType()!!.getKeyName()) {
 				return true

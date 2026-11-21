@@ -380,8 +380,12 @@ open class SpatialTextSearchAPI(
 			obj = poiType
 			localeName = PoiAdditionalLabels.getSearchName(poiType)
 		} else if (poiSubType != null) {
-			obj = TopIndexFilter(poiSubType, poiTypes, spatialPoiType.poiAdditional!!)
-			localeName = spatialPoiType.poiAdditional!!
+			val local = spatialPoiType.getLocalType(poiTypeSearch)
+			obj = TopIndexFilter(local.poiSubType!!, poiTypes, local.poiAdditional!!)
+			localeName = local.poiAdditional!!
+			val settings = result.requiredSearchPhrase.getSettings()
+			val lang = settings?.getLang().takeUnless { it.isNullOrEmpty() } ?: settings?.getAppLang()
+			result.alternateName = spatialPoiType.getAltName(poiTypeSearch, lang)
 		} else {
 			return null
 		}
