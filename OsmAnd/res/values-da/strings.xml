@@ -553,7 +553,7 @@
     <string name="hno">Husnummer</string>
     <string name="choose_osmand_theme">App-tema</string>
     <string name="accessibility_options">Indstillinger for tilgængelighed</string>
-    <string name="monitoring_settings">Optagelse af tur</string>
+    <string name="monitoring_settings">Turoptagelse</string>
     <string name="download_using_mobile_internet">Ikke forbundet til Wi-Fi. Brug den aktuelle forbindelse til internettet for at hente?</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="cancel_route">Annuller rute\?</string>
@@ -790,7 +790,7 @@
     <string name="distance">Afstand</string>
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
-    <string name="record_plugin_name">Optagelse af tur</string>
+    <string name="record_plugin_name">Turoptagelse</string>
     <string name="record_plugin_description">Registrer dine ture eller træninger, og analysér dataene med hensyn til hastighed, akkumulerede stigninger og nedstigninger, højdeprofil osv. Optagede spor kan arkiveres, deles med venner, redigeres og efterbehandles.
 \n
 \nYderligere information på %1$s.</string>
@@ -1124,7 +1124,7 @@
     <string name="downloads_left_template">%1$s filhentninger tilbage</string>
     <string name="roads">Veje</string>
     <string name="favourites_context_menu_add">Tilføj favorit</string>
-    <string name="shared_string_trip_recording">Optagelse af tur</string>
+    <string name="shared_string_trip_recording">Turoptagelse</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="default_speed_system">Hastighed</string>
     <string name="nm">sømil</string>
@@ -1793,7 +1793,7 @@
     <string name="total_donations">Samlede donationer</string>
     <string name="what_is_here">Hvad er der her:</string>
     <string name="parked_at">parkeret på</string>
-    <string name="pick_up_till">Hent indtil</string>
+    <string name="pick_up_till">Hent inden</string>
     <string name="without_time_limit">Uden tidsbegrænsning</string>
     <string name="context_menu_read_full_article">Læs hele artiklen</string>
     <string name="context_menu_read_article">Læs artikel</string>
@@ -2651,7 +2651,7 @@
     <string name="shared_string_gpx_files">Spor</string>
     <string name="layer_gpx_layer">Spor</string>
     <string name="show_gpx">Spor</string>
-    <string name="map_widget_monitoring">Optagelse af tur</string>
+    <string name="map_widget_monitoring">Turoptagelse</string>
     <string name="marker_save_as_track">Gem som sporfil</string>
     <string name="follow_track">Følg spor</string>
     <string name="follow_track_descr">Vælg den sporfil, der skal følges</string>
@@ -2737,8 +2737,8 @@
     <string name="approximate_file_size">Omtrentlig filstørrelse</string>
     <string name="select_data_to_export">Vælg de data, der skal eksporteres til filen.</string>
     <string name="export_not_enough_space_descr">Enheden har kun %1$s fri. Frigør plads, eller fravælg nogle elementer fra eksport.</string>
-    <string name="select_groups_for_import">Vælg grupper, der skal importeres.</string>
-    <string name="select_items_for_import">Vælg emner, der skal importeres.</string>
+    <string name="select_groups_for_import">Vælg grupper, der vil blive importeret.</string>
+    <string name="select_items_for_import">Vælg de emner, der vil blive importeret.</string>
     <string name="use_dev_url_descr">Skift til dev.openstreetmap.org i stedet for openstreetmap.org for at teste overførelse af OSM-bemærkning / IP / GPX.</string>
     <string name="use_dev_url">Brug dev.openstreetmap.org</string>
     <string name="lang_de_casual">Tysk (uformelt)</string>
