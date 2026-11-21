@@ -28,10 +28,12 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
 import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.track.TrackMapSync;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
@@ -46,6 +48,9 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 	private MapDisplayPositionManager displayPositionManager;
 	private View view;
 	private View mainView;
+	private TrackMapSync mapSync;
+	private MapHudLayout mapHudLayout;
+	private View syncButtonContainer;
 	private BoundsChangeListener boundsChangeListener;
 
 	private boolean locationUpdateStarted;
@@ -130,7 +135,22 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		} else {
 			forceFitTrackOnMap = true;
 		}
-		updateInfo(forceFitTrackOnMap);
+		TrackMenuFragment trackMenu = mapActivity.getFragmentsHelper().getTrackMenuFragment();
+		Boolean savedSync = menu.getMapSyncState();
+		boolean syncOnStart = trackMenu != null ? trackMenu.isMapInSync()
+				: savedSync != null ? savedSync : !app.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		boolean fitOnLayout = forceFitTrackOnMap || savedSync != null;
+		if (mapSync == null) {
+			mapSync = new TrackMapSync(app, menu::fitTrackOnMap, syncOnStart);
+		}
+		ImageButton syncButton = view.findViewById(R.id.map_center_on_track);
+		if (syncButton == null) {
+			mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
+			syncButtonContainer = inflate(R.layout.track_map_sync_button, mapHudLayout, false);
+			syncButton = syncButtonContainer.findViewById(R.id.map_center_on_track);
+		}
+		mapSync.attach(syncButton, nightMode);
+		updateInfo(false);
 
 		ViewTreeObserver vto = mainView.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -140,12 +160,19 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
 				obs.removeOnGlobalLayoutListener(this);
 				if (getMapActivity() != null) {
-					updateInfo(forceFitTrackOnMap);
+					updateInfo(false);
+					if (fitOnLayout && isMapInSync()) {
+						menu.fitTrackOnMap();
+					}
 				}
 			}
 		});
 
 		return view;
+	}
+
+	public boolean isMapInSync() {
+		return mapSync == null || mapSync.isInSync();
 	}
 
 	@Override
@@ -168,6 +195,9 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		}
 		startLocationUpdate();
 		updateBoundsChangeListener(true);
+		if (mapHudLayout != null && syncButtonContainer != null) {
+			mapHudLayout.addWidget(syncButtonContainer);
+		}
 	}
 
 	@Override
@@ -175,6 +205,9 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		super.onPause();
 		stopLocationUpdate();
 		updateBoundsChangeListener(false);
+		if (mapHudLayout != null && syncButtonContainer != null) {
+			mapHudLayout.removeWidget(syncButtonContainer);
+		}
 	}
 
 	private void updateBoundsChangeListener(boolean listen) {
@@ -224,6 +257,15 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		mapHudLayout = null;
+		syncButtonContainer = null;
+		if (mapSync != null) {
+			MapActivity mapActivity = getMapActivity();
+			mapSync.detach(mapActivity != null ? mapActivity.getFragmentsHelper().getTrackMenuFragment() : null);
+			if (menu != null) {
+				menu.setMapSyncState(mapSync.isInSync());
+			}
+		}
 		if (menu != null) {
 			menu.onDismiss();
 		}

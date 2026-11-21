@@ -64,6 +64,7 @@ import net.osmand.plus.track.helpers.GpxDisplayHelper.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.plus.track.TrackMapSync;
 import net.osmand.plus.track.cards.ActionsCard;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
@@ -109,6 +110,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Nullable
 	private GpxDataItem gpxDataItem;
 	private TrackDrawInfo trackDrawInfo;
+	private TrackMapSync mapSync;
+	private boolean fitOnFirstLayout;
 	private SelectedGpxFile selectedGpxFile;
 	private List<GpxDisplayGroup> displayGroups;
 
@@ -295,6 +298,19 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
+	protected void setupControlButtons(@NonNull View view) {
+		super.setupControlButtons(view);
+		if (mapSync == null) {
+			mapSync = new TrackMapSync(app, () -> adjustMapPosition(getViewY()), getTargetFragment(), () -> selectedGpxFile);
+		}
+		mapSync.attach(view.findViewById(R.id.map_center_on_track), isNightMode());
+	}
+
+	private boolean isMapSyncActive() {
+		return mapSync == null || mapSync.isInSync();
+	}
+
+	@Override
 	public boolean shouldShowMapControls(int menuState) {
 		return menuState == MenuState.HEADER_ONLY
 				|| menuState == MenuState.HALF_SCREEN
@@ -321,11 +337,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
-		Fragment fragment = getTargetFragment();
-		if (!(fragment instanceof TrackMenuFragment)) {
-			adjustMapPosition(getHeight());
-		}
+		fitOnFirstLayout = true;
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				dismiss();
@@ -334,8 +346,22 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
+	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState) {
+		super.onContextMenuStateChanged(fragment, menuState, previousMenuState);
+		if (fitOnFirstLayout) {
+			fitOnFirstLayout = false;
+			if (isMapSyncActive()) {
+				adjustMapPosition(getMenuStatePosY(menuState));
+			}
+		}
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		if (mapSync != null) {
+			mapSync.detach(getTargetFragment());
+		}
 		exitTrackAppearanceMode();
 	}
 
@@ -499,7 +525,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust, int previousMenuState, int newMenuState, int dZoom, boolean animated) {
 		int y = super.applyPosY(currentY, needCloseMenu, needMapAdjust, previousMenuState, newMenuState, dZoom, animated);
-		if (needMapAdjust) {
+		if (needMapAdjust && isMapSyncActive()) {
 			adjustMapPosition(y);
 		}
 		return y;
@@ -522,7 +548,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	protected void onHeaderClick() {
-		adjustMapPosition(getViewY());
+		if (isMapSyncActive()) {
+			adjustMapPosition(getViewY());
+		}
 	}
 
 	private void adjustMapPosition(int y) {

@@ -133,6 +133,6 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<include layout="@layout/gps_filter_bottom_hud_controls" />
+	<include layout="@layout/track_map_controls" />
 
 </FrameLayout>

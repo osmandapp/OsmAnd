@@ -4,7 +4,6 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +25,14 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
 import net.osmand.plus.track.GpsFilterScreensAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.TrackMapSync;
 import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
@@ -73,6 +74,8 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	private View routeMenuTopShadowAll;
 	private View view;
+	private TrackMapSync mapSync;
+	private boolean fitOnFirstLayout;
 	private GpsFilterScreensAdapter gpsFilterScreensAdapter;
 
 	private String savedGpxFilePath;
@@ -238,19 +241,11 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	protected void setupControlButtons(@NonNull View view) {
 		super.setupControlButtons(view);
-		setupCenterOnTrackButton(view.findViewById(R.id.map_center_on_track));
-	}
-
-	private void setupCenterOnTrackButton(@NonNull ImageButton centerOnTrackButton) {
-		int backgroundId = isNightMode() ? R.drawable.btn_circle_night : R.drawable.btn_circle;
-		centerOnTrackButton.setBackgroundResource(backgroundId);
-
-		int iconColorId = ColorUtilities.getDefaultIconColorId(isNightMode());
-		Drawable centerOnTrackIcon = getIcon(R.drawable.ic_action_center_on_track, iconColorId);
-		Drawable directedIcon = AndroidUtils.getDrawableForDirection(requireContext(), centerOnTrackIcon);
-		centerOnTrackButton.setImageDrawable(directedIcon);
-
-		centerOnTrackButton.setOnClickListener(v -> adjustMapPosition(getViewY()));
+		ImageButton centerOnTrackButton = view.findViewById(R.id.map_center_on_track);
+		if (mapSync == null) {
+			mapSync = new TrackMapSync(app, () -> adjustMapPosition(getViewY()), getTargetFragment(), () -> selectedGpxFile);
+		}
+		mapSync.attach(centerOnTrackButton, isNightMode());
 		AndroidUiHelper.updateVisibility(centerOnTrackButton, true);
 	}
 
@@ -269,12 +264,23 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		adjustMapPosition(getHeight());
+		fitOnFirstLayout = true;
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				dismiss(false);
 			}
 		});
+	}
+
+	@Override
+	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState) {
+		super.onContextMenuStateChanged(fragment, menuState, previousMenuState);
+		if (fitOnFirstLayout) {
+			fitOnFirstLayout = false;
+			if (isMapSyncActive()) {
+				adjustMapPosition(getMenuStatePosY(menuState));
+			}
+		}
 	}
 
 	@Override
@@ -293,6 +299,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		if (mapSync != null) {
+			mapSync.detach(getTargetFragment());
+		}
 		exitGpsFilterMode();
 	}
 
@@ -349,10 +358,14 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	protected int applyPosY(int currentY, boolean needCloseMenu, boolean needMapAdjust,
 	                        int previousMenuState, int newMenuState, int dZoom, boolean animated) {
 		int y = super.applyPosY(currentY, needCloseMenu, needMapAdjust, previousMenuState, newMenuState, dZoom, animated);
-		if (needMapAdjust) {
+		if (needMapAdjust && isMapSyncActive()) {
 			adjustMapPosition(y);
 		}
 		return y;
+	}
+
+	private boolean isMapSyncActive() {
+		return mapSync == null || mapSync.isInSync();
 	}
 
 	private void adjustMapPosition(int y) {
