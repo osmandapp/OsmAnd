@@ -21,6 +21,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.util.KUnicode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -387,6 +388,30 @@ public class FileSettingsItem extends StreamSettingsItem {
 				return newFile;
 			}
 		}
+	}
+
+	public void useExistingFileForm() {
+		file = getExistingFileForm(file);
+	}
+
+	@NonNull
+	private static File getExistingFileForm(@NonNull File file) {
+		File parent = file.getParentFile();
+		String path = file.getPath();
+		if (parent == null || KUnicode.INSTANCE.normalizeNFC(path).equals(KUnicode.INSTANCE.normalizeNFD(path))) {
+			return file;
+		}
+		File dir = parent.exists() ? parent : getExistingFileForm(parent);
+		String name = file.getName();
+		File nfcFile = new File(dir, KUnicode.INSTANCE.normalizeNFC(name));
+		File nfdFile = new File(dir, KUnicode.INSTANCE.normalizeNFD(name));
+		if (!nfdFile.exists()) {
+			return nfcFile.exists() ? nfcFile : new File(dir, name);
+		}
+		if (!nfcFile.exists() || nfdFile.lastModified() > nfcFile.lastModified()) {
+			return nfdFile;
+		}
+		return nfcFile;
 	}
 
 	@Override

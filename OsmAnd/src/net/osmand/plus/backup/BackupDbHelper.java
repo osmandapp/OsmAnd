@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.utils.AndroidDbUtils;
+import net.osmand.shared.util.KUnicode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -214,7 +215,11 @@ public class BackupDbHelper {
 				if (query != null && query.moveToFirst()) {
 					do {
 						UploadedFileInfo info = readUploadedFileInfo(query);
-						infoMap.put(info.getType() + "___" + info.getName(), info);
+						String key = getUploadedFileInfoKey(info.getType(), info.getName());
+						UploadedFileInfo existing = infoMap.get(key);
+						if (existing == null || info.getUploadTime() > existing.getUploadTime()) {
+							infoMap.put(key, info);
+						}
 					} while (query.moveToNext());
 				}
 				if (query != null) {
@@ -225,6 +230,11 @@ public class BackupDbHelper {
 			}
 		}
 		return infoMap;
+	}
+
+	@NonNull
+	public static String getUploadedFileInfoKey(@NonNull String type, @NonNull String name) {
+		return type + "___" + KUnicode.INSTANCE.normalizeNFC(name);
 	}
 
 	@Nullable

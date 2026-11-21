@@ -16,10 +16,12 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.shared.util.KUnicode;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,12 +80,16 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.size() + deletedRemoteFiles.size());
 		remoteFiles.addAll(uniqueRemoteFiles.values());
 		remoteFiles.addAll(deletedRemoteFiles.values());
-		for (RemoteFile remoteFile : remoteFiles) {
+		Map<String, LocalFile> normalizedLocalFiles = getNormalizedLocalFiles();
+		Map<String, RemoteFile> normalizedRemoteFiles = getNormalizedRemoteFiles(remoteFiles);
+		Map<String, UploadedFileInfo> uploadedFileInfos = backupHelper.getDbHelper().getUploadedFileInfoMap();
+		for (Map.Entry<String, RemoteFile> entry : normalizedRemoteFiles.entrySet()) {
+			RemoteFile remoteFile = entry.getValue();
 			ExportType exportType = ExportType.findBy(remoteFile);
 			if (exportType == null || !exportType.isAvailable() || remoteFile.isRecordedVoiceFile()) {
 				continue;
 			}
-			LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
+			LocalFile localFile = normalizedLocalFiles.get(entry.getKey());
 			if (localFile != null) {
 				boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
 				boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
@@ -112,7 +118,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 					}
 				}
 			} else if (!remoteFile.isDeleted()) {
-				UploadedFileInfo fileInfo = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+				UploadedFileInfo fileInfo = uploadedFileInfos.get(BackupDbHelper.getUploadedFileInfoKey(remoteFile.getType(), remoteFile.getName()));
 				// suggest to remove only if file exists in db
 				if (fileInfo != null && fileInfo.getUploadTime() >= remoteFile.getUpdatetimems()) {
 					// conflicts not supported yet
@@ -128,8 +134,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 			if (exportType == null || !exportType.isAvailable()) {
 				continue;
 			}
-			boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName())
-					|| deletedRemoteFiles.containsKey(localFile.getTypeFileName());
+			boolean hasRemoteFile = normalizedRemoteFiles.containsKey(KUnicode.INSTANCE.normalizeNFC(localFile.getTypeFileName()));
 			boolean toDelete = info.localFilesToDelete.contains(localFile);
 			if (!hasRemoteFile && !toDelete) {
 				boolean shouldSkip = shouldSkip(localFile);
@@ -148,7 +153,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		operationLog.log("=== filesToUpload ===");
 		operationLog.log("=== filesToDownload ===");
 		for (RemoteFile remoteFile : info.filesToDownload) {
-			LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
+			LocalFile localFile = normalizedLocalFiles.get(getNormalizedTypeNamePath(remoteFile));
 			if (localFile != null) {
 				operationLog.log(remoteFile + " localUploadTime=" + localFile.uploadTime);
 			} else {
@@ -172,6 +177,45 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		}
 		operationLog.log("=== filesToMerge ===");
 		return info;
+	}
+
+	@NonNull
+	private Map<String, LocalFile> getNormalizedLocalFiles() {
+		Map<String, LocalFile> result = new HashMap<>(localFiles.size());
+		for (Map.Entry<String, LocalFile> entry : localFiles.entrySet()) {
+			String key = KUnicode.INSTANCE.normalizeNFC(entry.getKey());
+			LocalFile localFile = entry.getValue();
+			LocalFile existing = result.get(key);
+			if (existing == null || localFile.localModifiedTime > existing.localModifiedTime) {
+				result.put(key, localFile);
+			}
+		}
+		return result;
+	}
+
+	@NonNull
+	private Map<String, RemoteFile> getNormalizedRemoteFiles(@NonNull List<RemoteFile> remoteFiles) {
+		Map<String, RemoteFile> result = new HashMap<>(remoteFiles.size());
+		for (RemoteFile remoteFile : remoteFiles) {
+			String key = getNormalizedTypeNamePath(remoteFile);
+			RemoteFile existing = result.get(key);
+			if (existing == null || isPreferredRemoteFile(remoteFile, existing)) {
+				result.put(key, remoteFile);
+			}
+		}
+		return result;
+	}
+
+	private static boolean isPreferredRemoteFile(@NonNull RemoteFile remoteFile, @NonNull RemoteFile other) {
+		if (remoteFile.isDeleted() != other.isDeleted()) {
+			return other.isDeleted();
+		}
+		return remoteFile.getUpdatetimems() > other.getUpdatetimems();
+	}
+
+	@NonNull
+	private String getNormalizedTypeNamePath(@NonNull RemoteFile remoteFile) {
+		return KUnicode.INSTANCE.normalizeNFC(remoteFile.getTypeNamePath());
 	}
 
 	private boolean shouldSkip(@NonNull LocalFile localFile) {

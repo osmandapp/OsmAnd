@@ -172,6 +172,9 @@ class BackupImporter {
 					LOG.debug("Temp file downloaded " + errorStr + " " + tempFile.getAbsolutePath());
 				}
 				if (!error) {
+					if (item instanceof FileSettingsItem fileItem) {
+						fileItem.useExistingFileForm();
+					}
 					is = new FileInputStream(tempFile);
 					File file = reader.readFromStream(is, tempFile, remoteFile.getName());
 					boolean applied = true;
@@ -348,7 +351,7 @@ class BackupImporter {
 						break;
 					}
 				}
-				UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
+				UploadedFileInfo fileInfo = infoMap.get(BackupDbHelper.getUploadedFileInfoKey(remoteFile.getType(), origFileName));
 				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
 				if (shouldDownloadOnCollecting(remoteFile, readItems)
 						&& (uploadTime != remoteFile.getUpdatetimems() || delete)) {
