@@ -70,7 +70,6 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		implements CardListener, IExternalPaletteListener, OnIconsPaletteListener<String> {
 
 	private static final String COLOR_KEY = "editor_color";
-	private static final String COLOR_SELECTED_KEY = "editor_color_selected";
 	private static final String ICON_NAME_KEY = "editor_icon_name";
 	private static final String BACKGROUND_TYPE_KEY = "editor_background_type";
 
@@ -84,7 +83,8 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	private OnGlobalLayoutListener onGlobalLayoutListener;
 
 	private int color;
-	private boolean colorSelected;
+	protected final ManualAppearanceChanges manualChanges = new ManualAppearanceChanges();
+	private boolean selectingIconInPalette;
 	private String iconName = DEFAULT_ICON_NAME;
 	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
@@ -101,10 +101,6 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 
 	public void setColor(@ColorInt int color) {
 		this.color = color;
-	}
-
-	protected void setColorSelected(boolean colorSelected) {
-		this.colorSelected = colorSelected;
 	}
 
 	public String getIconName() {
@@ -163,7 +159,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(COLOR_KEY, color);
-		outState.putBoolean(COLOR_SELECTED_KEY, colorSelected);
+		manualChanges.saveState(outState);
 		outState.putString(ICON_NAME_KEY, iconName);
 		outState.putString(BACKGROUND_TYPE_KEY, backgroundType.getTypeName());
 	}
@@ -175,7 +171,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	protected void restoreEditorState(@NonNull Bundle savedInstanceState) {
 		if (savedInstanceState.containsKey(COLOR_KEY)) {
 			setColor(savedInstanceState.getInt(COLOR_KEY));
-			setColorSelected(savedInstanceState.getBoolean(COLOR_SELECTED_KEY));
+			manualChanges.restoreState(savedInstanceState);
 			setIconName(savedInstanceState.getString(ICON_NAME_KEY));
 			setBackgroundType(savedInstanceState.getString(BACKGROUND_TYPE_KEY, DEFAULT_BACKGROUND_TYPE.getTypeName()));
 		}
@@ -424,6 +420,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		if (card instanceof ShapesCard) {
+			manualChanges.onShapeChanged();
 			setBackgroundType(shapesCard.getSelectedShape());
 			updateSelectedShapeText();
 		}
@@ -432,7 +429,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		if (item instanceof PaletteItem.Solid solidItem) {
-			colorSelected = true;
+			manualChanges.onColorChanged();
 			setColor(solidItem.getColorInt());
 			updateContent();
 		}
@@ -444,8 +441,23 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 
 	@Override
 	public void onIconSelectedFromPalette(@Nullable String icon) {
+		if (!selectingIconInPalette) {
+			manualChanges.onIconChanged();
+		}
 		setIconName(icon);
 		updateContent();
+	}
+
+	/**
+	 * Shows the current icon as selected in the palette. It is not a choice of the user.
+	 */
+	protected void selectIconInPalette(@Nullable String categoryKey) {
+		selectingIconInPalette = true;
+		try {
+			getIconController().onIconSelectedFromPalette(getIconName(), categoryKey);
+		} finally {
+			selectingIconInPalette = false;
+		}
 	}
 
 	@NonNull
@@ -538,7 +550,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	protected void savePressed() {
-		if (colorSelected) {
+		if (manualChanges.isColorChanged()) {
 			getColorController().renewLastUsedTime();
 		}
 		save(true);
