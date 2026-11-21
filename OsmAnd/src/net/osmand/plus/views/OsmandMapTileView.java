@@ -169,6 +169,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		void onMapZoomChanged(boolean manual);
 	}
 
+	public interface ManualMapMoveListener {
+		void onManualMapMove();
+	}
+
 	public interface ViewportListener {
 		void onViewportChanged();
 	}
@@ -184,6 +188,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 	private List<ElevationListener> elevationListeners = new ArrayList<>();
 	private List<MapZoomChangeListener> manualZoomListeners = new ArrayList<>();
+	private List<ManualMapMoveListener> manualMoveListeners = new ArrayList<>();
 	private List<ViewportListener> viewportListeners = new ArrayList<>();
 	private List<TouchListener> touchListeners = new ArrayList<>();
 
@@ -683,8 +688,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
 
+		notifyManualZoomChanged();
+	}
+
+	private void notifyManualZoomChanged() {
 		for (MapZoomChangeListener listener : manualZoomListeners) {
 			listener.onMapZoomChanged(true);
+		}
+	}
+
+	public void notifyManualMapMove() {
+		for (ManualMapMoveListener listener : manualMoveListeners) {
+			listener.onManualMapMove();
 		}
 	}
 
@@ -966,6 +981,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void removeMapZoomChangeListener(@NonNull MapZoomChangeListener listener) {
 		manualZoomListeners = CollectionUtils.removeFromList(manualZoomListeners, listener);
+	}
+
+	public void addManualMapMoveListener(@NonNull ManualMapMoveListener listener) {
+		if (!manualMoveListeners.contains(listener)) {
+			manualMoveListeners = CollectionUtils.addToList(manualMoveListeners, listener);
+		}
+	}
+
+	public void removeManualMapMoveListener(@NonNull ManualMapMoveListener listener) {
+		manualMoveListeners = CollectionUtils.removeFromList(manualMoveListeners, listener);
 	}
 
 	public void addElevationListener(@NonNull ElevationListener listener) {
@@ -2148,6 +2173,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			} else {
 				getAnimatedDraggingThread().startMoving(latlon.getLatitude(), latlon.getLongitude(), endZoom, zoomFloatPart);
 			}
+			notifyManualZoomChanged();
 			return true;
 		}
 		return false;

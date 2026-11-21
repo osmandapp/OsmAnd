@@ -53,6 +53,7 @@ import net.osmand.util.MapUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
@@ -77,6 +78,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private MapContextMenu contextMenu;
 
 	private boolean isMapLinkedToLocation = true;
+	private final List<Runnable> mapLinkedToLocationListeners = new CopyOnWriteArrayList<>();
 	private boolean movingToMyLocation;
 	private volatile boolean trackingPaused;
 
@@ -598,8 +600,22 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		settings.MAP_LINKED_TO_LOCATION.set(isMapLinkedToLocation);
 	}
 
+	public void addMapLinkedToLocationListener(@NonNull Runnable listener) {
+		mapLinkedToLocationListeners.add(listener);
+	}
+
+	public void removeMapLinkedToLocationListener(@NonNull Runnable listener) {
+		mapLinkedToLocationListeners.remove(listener);
+	}
+
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
+		boolean linked = isMapLinkedToLocation && !this.isMapLinkedToLocation;
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
+		if (linked) {
+			for (Runnable listener : mapLinkedToLocationListeners) {
+				listener.run();
+			}
+		}
 		if (!isMapLinkedToLocation) {
 			movingToMyLocation = false;
 		}
