@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
@@ -119,6 +121,11 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	protected void setupControlButtons(@NonNull View view) {
 		MapActivity activity = requireMapActivity();
 		MapLayers mapLayers = activity.getMapLayers();
+		if (!isPortrait() && hasMapControlsBesideMenuInLandscape()) {
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.map_hud_controls), false);
+			setupMapRulerWidget(view, mapLayers);
+			return;
+		}
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
 		mapButtons = new ArrayList<>();
@@ -143,9 +150,27 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		rulerWidget = layer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
 	}
 
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		super.onApplyInsets(insets);
+		if (!isPortrait() && getView() != null && hasMapControlsBesideMenuInLandscape()) {
+			updateMapControlsPos(this, getViewY(), false);
+		}
+	}
+
+	protected boolean hasMapControlsBesideMenuInLandscape() {
+		return false;
+	}
+
 	public void updateMapControlsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
 		View mapControlsView = this.mapBottomHudButtons;
-		if (mapControlsView != null) {
+		if (!isPortrait() && hasMapControlsBesideMenuInLandscape()) {
+			View mainView = getMainView();
+			if (mainView != null && mapControlsView != null) {
+				int bottomPadding = getResources().getDimensionPixelSize(R.dimen.map_button_margin) + navBarHeight;
+				AndroidUtils.setPadding(mapControlsView, mainView.getWidth(), 0, 0, bottomPadding);
+			}
+		} else if (mapControlsView != null) {
 			int zoomY = y - getMapControlsHeight();
 			if (animated) {
 				fragment.animateView(mapControlsView, zoomY, null);
