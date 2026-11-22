@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.util.Algorithms;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TerrainMode {
@@ -238,6 +240,11 @@ public class TerrainMode {
 
 	public int getMaxZoom() {
 		return MAX_ZOOM.get();
+	}
+
+	@NonNull
+	public List<OsmandPreference<?>> getZoomPreferences() {
+		return Arrays.asList(MIN_ZOOM, MAX_ZOOM);
 	}
 
 	@NonNull

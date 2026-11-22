@@ -10,6 +10,7 @@ import net.osmand.plus.dashboard.DashboardType.BUILDINGS_3D
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.srtm.SRTMPlugin
 import net.osmand.plus.settings.backend.OsmandSettings
+import net.osmand.plus.settings.backend.preferences.OsmandPreference
 import net.osmand.plus.settings.enums.DayNightMode
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -116,6 +117,12 @@ class Buildings3DColorScreenController(
 		plugin.apply3DBuildingsColorStyle(colorType)
 		loadSavedColors()
 	}
+
+	override fun getPreviewPreferences(): List<OsmandPreference<*>> = listOf(
+		settings.BUILDINGS_3D_COLOR_STYLE,
+		settings.BUILDINGS_3D_CUSTOM_DAY_COLOR,
+		settings.BUILDINGS_3D_CUSTOM_NIGHT_COLOR
+	)
 
 	override fun onResetToDefault() {
 		colorDay = OsmandSettings.BUILDINGS_3D_DEFAULT_COLOR
