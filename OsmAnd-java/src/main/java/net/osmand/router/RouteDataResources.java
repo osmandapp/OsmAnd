@@ -18,6 +18,8 @@ public class RouteDataResources {
 	private int currentSegmentStartLocationIndex;
 
 	private final List<Integer> routePointIndexes;
+	private final Map<Integer, Integer> routePointPositions = new HashMap<>();
+	private int indexedRoutePoints = -1;
 
 	private final Map<RouteDataObject, int[][]> pointNamesMap = new HashMap<>();
 
@@ -56,12 +58,26 @@ public class RouteDataResources {
 	}
 
 	public void updateNextSegmentStartLocation(int currentSegmentLength) {
-		int routePointIndex = routePointIndexes.indexOf(currentSegmentStartLocationIndex + currentSegmentLength);
+		int routePointIndex = getRoutePointPosition(currentSegmentStartLocationIndex + currentSegmentLength);
 		boolean overlappingNextRouteSegment =
 				!(routePointIndex > 0 && routePointIndex < routePointIndexes.size() - 1);
 		currentSegmentStartLocationIndex += overlappingNextRouteSegment
 				? currentSegmentLength - 1
 				: currentSegmentLength;
+	}
+
+	// routePointIndexes.indexOf() without scanning the list for every segment;
+	// indexed again when the list changes size (RouteImporter fills it after the constructor)
+	private int getRoutePointPosition(int locationIndex) {
+		int size = routePointIndexes.size();
+		if (indexedRoutePoints != size) {
+			routePointPositions.clear();
+			for (int i = 0; i < size; i++) {
+				routePointPositions.putIfAbsent(routePointIndexes.get(i), i);
+			}
+			indexedRoutePoints = size;
+		}
+		return routePointPositions.getOrDefault(locationIndex, -1);
 	}
 
 	public Map<RouteDataObject, int[][]> getPointNamesMap() {
