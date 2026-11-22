@@ -52,6 +52,8 @@ public class PerformLiveUpdateAsyncTask
 	private final String localIndexFileName;
 	private final boolean userRequested;
 	private Runnable runOnSuccess;
+	// Unlike runOnSuccess, runs at the end of every check: after an error and with nothing to download too
+	private Runnable runOnFinish;
 
 	public PerformLiveUpdateAsyncTask(@NonNull Context context,
 	                                  @NonNull String localIndexFileName,
@@ -65,6 +67,10 @@ public class PerformLiveUpdateAsyncTask
 
 	public void setRunOnSuccess(Runnable runOnSuccess) {
 		this.runOnSuccess = runOnSuccess;
+	}
+
+	public void setRunOnFinish(Runnable runOnFinish) {
+		this.runOnFinish = runOnFinish;
 	}
 
 	@Override
@@ -157,6 +163,9 @@ public class PerformLiveUpdateAsyncTask
 					app.showShortToastMessage(R.string.no_updates_available);
 				}
 			}
+		}
+		if (runOnFinish != null) {
+			runOnFinish.run();
 		}
 	}
 

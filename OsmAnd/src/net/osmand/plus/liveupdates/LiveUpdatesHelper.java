@@ -167,6 +167,13 @@ public class LiveUpdatesHelper {
 
 		return nextUpdateTime;
 	}
+
+	public static boolean isUpdateOverdue(@NonNull String fileName, @NonNull OsmandSettings settings) {
+		UpdateFrequency frequency = UpdateFrequency.values()[preferenceUpdateFrequency(fileName, settings).get()];
+		long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
+		return System.currentTimeMillis() - lastCheck > frequency.intervalMillis * 2;
+	}
+
 	public static PendingIntent getPendingIntent(@NonNull Context context,
 												 @NonNull String fileName) {
 		Intent intent = new Intent(context, LiveUpdatesAlarmReceiver.class);
