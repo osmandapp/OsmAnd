@@ -1,13 +1,12 @@
 package net.osmand.plus.plugins.srtm.building;
 
-import static net.osmand.plus.dashboard.DashboardType.BUILDINGS_3D;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_ANGLE;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.DEFAULT_HILLSHADE_SUN_AZIMUTH;
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -15,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
@@ -23,24 +23,71 @@ import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+/**
+ * Light of the hillshade and the sun shadows: the real sun now (Live), the real sun at a chosen
+ * date and time (Date), or azimuth and altitude set by hand (Manual).
+ * <p>
+ * A panel like Terrain - Visibility: the map shows the light while it is changed, Apply keeps it,
+ * leaving the panel without Apply brings the previous light back.
+ */
 public class SunParametersFragment extends ConfigureMapOptionFragment {
 
-	private TextView tvAzimuth;
-	private Slider azimuthSlider;
-
-	private TextView tvAltitude;
-	private Slider altitudeSlider;
-	private CompoundButton shadowsSwitch;
+	private static final String DATE_PICKER_TAG = "sun_date_picker";
+	private static final long LIVE_REFRESH_INTERVAL_MS = 60_000L;
+	private static final int MINUTES_PER_DAY = 24 * 60;
 
 	private SunParametersController controller;
+
+	private View content;
+	private TextToggleButton modeToggle;
+	private final Map<SunLightMode, TextRadioItem> modeItems = new EnumMap<>(SunLightMode.class);
+
+	private View liveRows;
+	private TextView liveAzimuthValue;
+	private TextView liveAltitudeValue;
+
+	private View dateRows;
+	private TextView dateValue;
+	private TextView timeValue;
+	private Slider timeSlider;
+
+	private View manualRows;
+	private TextView azimuthValue;
+	private Slider azimuthSlider;
+	private TextView altitudeValue;
+	private Slider altitudeSlider;
+
+	/* Live shows the sun of the current minute */
+	private final Runnable liveRefresh = new Runnable() {
+		@Override
+		public void run() {
+			if (content != null && isAdded() && controller.getMode() == SunLightMode.LIVE) {
+				updateLiveRows();
+				content.postDelayed(this, LIVE_REFRESH_INTERVAL_MS);
+			}
+		}
+	};
 
 	@Nullable
 	@Override
 	protected String getToolbarTitle() {
-		return getString(R.string.astro_name_sun);
+		return getString(R.string.map_widget_sun_position);
 	}
 
 	@Override
@@ -49,90 +96,203 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 		controller = SunParametersController.getExistedInstance(app);
 		if (controller == null) {
-			dismiss();
+			closeWithoutController(savedInstanceState);
 			return;
 		}
+		saveOriginalValues(savedInstanceState, controller.getPreviewPreferences());
 		MapActivity activity = requireMapActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
 				activity.getSupportFragmentManager().popBackStack();
-				activity.getDashboard().setDashboardVisibility(true, BUILDINGS_3D, false);
+				activity.getDashboard().setDashboardVisibility(true, controller.getReturnTo(), false);
 			}
 		});
 	}
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = inflate(R.layout.sun_parameters, container, false);
+		if (controller == null) {
+			return;
+		}
+		content = inflate(R.layout.sun_parameters, container, false);
 
-		azimuthSlider = view.findViewById(R.id.azimuth_slider);
-		tvAzimuth = view.findViewById(R.id.azimuth_value_tv);
+		liveRows = content.findViewById(R.id.live_rows);
+		liveAzimuthValue = content.findViewById(R.id.live_azimuth_value);
+		liveAltitudeValue = content.findViewById(R.id.live_altitude_value);
 
-		altitudeSlider = view.findViewById(R.id.altitude_slider);
-		tvAltitude = view.findViewById(R.id.altitude_value_tv);
+		dateRows = content.findViewById(R.id.date_rows);
+		dateValue = content.findViewById(R.id.date_value);
+		timeValue = content.findViewById(R.id.time_value);
+		timeSlider = content.findViewById(R.id.time_slider);
 
+		manualRows = content.findViewById(R.id.manual_rows);
+		azimuthValue = content.findViewById(R.id.azimuth_value_tv);
+		azimuthSlider = content.findViewById(R.id.azimuth_slider);
+		altitudeValue = content.findViewById(R.id.altitude_value_tv);
+		altitudeSlider = content.findViewById(R.id.altitude_slider);
+
+		setupModeToggle();
 		setupSliders();
-		setupShadowsSwitch(view);
-		container.addView(view);
+		content.findViewById(R.id.date_row).setOnClickListener(v -> showDatePicker());
+		restoreDatePicker();
+
+		container.addView(content);
+		updateContent();
 		updateApplyButton(controller.hasChanges());
 	}
 
-	private void setupShadowsSwitch(@NonNull View view) {
-		shadowsSwitch = view.findViewById(R.id.shadows_switch);
-		shadowsSwitch.setVisibility(app.useOpenGlRenderer() ? View.VISIBLE : View.GONE);
-		shadowsSwitch.setChecked(controller.isShadowsEnabled());
-		UiUtilities.setupCompoundButton(nightMode, getAppModeColor(nightMode), shadowsSwitch);
-		shadowsSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-			controller.setShadowsEnabled(isChecked);
-			updateApplyButton(controller.hasChanges());
-			refreshMap();
-		});
+	private void setupModeToggle() {
+		modeToggle = new TextToggleButton(app, content.findViewById(R.id.custom_radio_buttons), nightMode);
+		List<TextRadioItem> items = new ArrayList<>();
+		for (SunLightMode mode : SunLightMode.values()) {
+			TextRadioItem item = new TextRadioItem(getString(mode.getTitleId()));
+			item.setOnClickListener((radioItem, view) -> {
+				if (mode != controller.getMode()) {
+					controller.setMode(mode);
+					if (mode == SunLightMode.DATE) {
+						/* keep the shown moment, an unset time would follow the clock like Live */
+						controller.setTime(controller.getTime());
+					}
+					updateContent();
+					onChanged();
+				}
+				return true;
+			});
+			modeItems.put(mode, item);
+			items.add(item);
+		}
+		modeToggle.setItems(items);
 	}
 
 	private void setupSliders() {
-		int azimuth = controller.getValidAzimuth();
-		tvAzimuth.setText(formatAzimuth(azimuth));
-		azimuthSlider.addOnChangeListener(azimuthSliderChangeListener);
+		int profileColor = getAppModeColor(nightMode);
+
+		UiUtilities.setupSlider(timeSlider, nightMode, profileColor);
+		timeSlider.setValueFrom(0);
+		timeSlider.setValueTo(MINUTES_PER_DAY - 1);
+		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				ZonedDateTime current = getZonedTime(controller.getTime());
+				int minutes = Math.round(value);
+				ZonedDateTime changed = current.with(LocalTime.of(minutes / 60, minutes % 60));
+				controller.setTime(changed.toInstant().toEpochMilli());
+				timeValue.setText(formatMinutes(value));
+				onChanged();
+			}
+		});
+
+		UiUtilities.setupSlider(azimuthSlider, nightMode, profileColor);
 		azimuthSlider.setValueFrom(controller.getMinAzimuth());
 		azimuthSlider.setValueTo(controller.getMaxAzimuth());
-		azimuthSlider.setValue(azimuth);
-		UiUtilities.setupSlider(azimuthSlider, nightMode, getAppModeColor(nightMode));
+		azimuthSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				int azimuth = Math.round(value);
+				controller.setAzimuth(azimuth);
+				azimuthValue.setText(formatAzimuth(azimuth));
+				onChanged();
+			}
+		});
 
-		int altitude = controller.getValidAltitude();
-		tvAltitude.setText(formatAltitude(altitude));
-		altitudeSlider.addOnChangeListener(altitudeSliderChangeListener);
+		UiUtilities.setupSlider(altitudeSlider, nightMode, profileColor);
 		altitudeSlider.setValueFrom(controller.getMinAltitude());
 		altitudeSlider.setValueTo(controller.getMaxAltitude());
-		altitudeSlider.setValue(altitude);
-		UiUtilities.setupSlider(altitudeSlider, nightMode, getAppModeColor(nightMode));
+		altitudeSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser) {
+				int altitude = Math.round(value);
+				controller.setAltitude(altitude);
+				altitudeValue.setText(formatAltitude(altitude));
+				onChanged();
+			}
+		});
 	}
 
-	private final Slider.OnChangeListener azimuthSliderChangeListener = new Slider.OnChangeListener() {
-		@Override
-		public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-			if (fromUser) {
-				int val = (int) value;
-				controller.setAzimuth(val);
-				tvAzimuth.setText(formatAzimuth(val));
-				updateApplyButton(controller.hasChanges());
-				refreshMap();
-			}
-		}
-	};
+	/** Shows the rows of the selected mode and puts the values on them. */
+	private void updateContent() {
+		SunLightMode mode = controller.getMode();
+		modeToggle.setSelectedItem(modeItems.get(mode));
+		showRows(mode);
 
-	private final Slider.OnChangeListener altitudeSliderChangeListener = new Slider.OnChangeListener() {
-		@Override
-		public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-			if (fromUser) {
-				int val = (int) value;
-				controller.setAltitude(val);
-				tvAltitude.setText(formatAltitude(val));
-				updateApplyButton(controller.hasChanges());
-				refreshMap();
-			}
+		content.removeCallbacks(liveRefresh);
+		if (mode == SunLightMode.LIVE) {
+			liveRefresh.run();
+		} else if (mode == SunLightMode.DATE) {
+			bindDate();
+		} else {
+			bindManual();
 		}
-	};
+	}
+
+	/* the rows of the other modes stay laid out, so the panel and the toggle do not move */
+	private void showRows(@NonNull SunLightMode mode) {
+		liveRows.setVisibility(mode == SunLightMode.LIVE ? View.VISIBLE : View.INVISIBLE);
+		dateRows.setVisibility(mode == SunLightMode.DATE ? View.VISIBLE : View.INVISIBLE);
+		manualRows.setVisibility(mode == SunLightMode.MANUAL ? View.VISIBLE : View.INVISIBLE);
+	}
+
+	private void updateLiveRows() {
+		SunLight.Angles angles = controller.getSunAngles();
+		liveAzimuthValue.setText(formatAzimuth((int) Math.round(angles.getAzimuth()) % 360));
+		liveAltitudeValue.setText(formatAltitude((int) Math.round(angles.getAltitude())));
+	}
+
+	private void bindDate() {
+		ZonedDateTime time = getZonedTime(controller.getTime());
+		dateValue.setText(DateFormat.getLongDateFormat(requireContext()).format(Date.from(time.toInstant())));
+		int minutes = time.getHour() * 60 + time.getMinute();
+		timeSlider.setValue(minutes);
+		timeValue.setText(formatMinutes(minutes));
+	}
+
+	private void bindManual() {
+		int azimuth = controller.getValidAzimuth();
+		azimuthSlider.setValue(azimuth);
+		azimuthValue.setText(formatAzimuth(azimuth));
+		int altitude = controller.getValidAltitude();
+		altitudeSlider.setValue(altitude);
+		altitudeValue.setText(formatAltitude(altitude));
+	}
+
+	private void showDatePicker() {
+		FragmentManager manager = getChildFragmentManager();
+		if (!AndroidUtils.isFragmentCanBeAdded(manager, DATE_PICKER_TAG, true)) {
+			return;
+		}
+		/* the picker works with midnight UTC of the selected day */
+		LocalDate day = getZonedTime(controller.getTime()).toLocalDate();
+		MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker()
+				.setTheme(nightMode
+						? R.style.ThemeOverlay_App_Material_DatePicker_Dark
+						: R.style.ThemeOverlay_App_Material_DatePicker_Light)
+				.setSelection(day.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli())
+				.build();
+		addDateListener(picker);
+		picker.show(manager, DATE_PICKER_TAG);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void restoreDatePicker() {
+		Object picker = getChildFragmentManager().findFragmentByTag(DATE_PICKER_TAG);
+		if (picker instanceof MaterialDatePicker) {
+			addDateListener((MaterialDatePicker<Long>) picker);
+		}
+	}
+
+	private void addDateListener(@NonNull MaterialDatePicker<Long> picker) {
+		picker.addOnPositiveButtonClickListener(selection -> {
+			LocalDate day = Instant.ofEpochMilli(selection).atZone(ZoneOffset.UTC).toLocalDate();
+			ZonedDateTime current = getZonedTime(controller.getTime());
+			ZonedDateTime changed = current.with(day);
+			controller.setTime(changed.toInstant().toEpochMilli());
+			bindDate();
+			onChanged();
+		});
+	}
+
+	private void onChanged() {
+		updateApplyButton(controller.hasChanges());
+		refreshMap();
+	}
 
 	@Override
 	protected void applyChanges() {
@@ -141,13 +301,19 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void resetToDefault() {
+		controller.setMode(SunLightMode.MANUAL);
 		controller.setAzimuth(DEFAULT_HILLSHADE_SUN_AZIMUTH);
 		controller.setAltitude(DEFAULT_HILLSHADE_SUN_ANGLE);
-		controller.setShadowsEnabled(settings.CAST_SHADOWS.getDefaultValue());
-		shadowsSwitch.setChecked(controller.isShadowsEnabled());
-		setupSliders();
-		updateApplyButton(controller.hasChanges());
-		refreshMap();
+		updateContent();
+		onChanged();
+	}
+
+	@Override
+	public void onDestroyView() {
+		if (content != null) {
+			content.removeCallbacks(liveRefresh);
+		}
+		super.onDestroyView();
 	}
 
 	@Override
@@ -156,6 +322,18 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 			controller.finishProcessIfNeeded(getActivity());
 		}
 		super.onDestroy();
+	}
+
+	@NonNull
+	private static ZonedDateTime getZonedTime(long millis) {
+		return Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault());
+	}
+
+	@NonNull
+	private String formatMinutes(float minutes) {
+		int value = Math.round(minutes);
+		ZonedDateTime time = ZonedDateTime.now().with(LocalTime.of(value / 60, value % 60));
+		return DateFormat.getTimeFormat(requireContext()).format(Date.from(time.toInstant()));
 	}
 
 	@NonNull

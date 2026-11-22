@@ -21,6 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -44,13 +45,62 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 
 	public static final String TAG = ConfigureMapOptionFragment.class.getSimpleName();
 
+	private static final String ORIGINAL_VALUES_KEY = "original_values";
+
 	private RulerWidget rulerWidget;
 	private DialogButton applyButton;
 	private List<MapButton> mapButtons = new ArrayList<>();
+	private Bundle originalValues;
 
 	@Override
 	protected boolean isUsedOnMap() {
 		return true;
+	}
+
+	/**
+	 * The panel previews by writing these preferences, and its controller keeps their original values
+	 * only in memory. Keep them in the saved state too, for {@link #closeWithoutController}.
+	 */
+	protected void saveOriginalValues(@Nullable Bundle savedInstanceState,
+	                                  @NonNull List<OsmandPreference<?>> preferences) {
+		originalValues = savedInstanceState != null ? savedInstanceState.getBundle(ORIGINAL_VALUES_KEY) : null;
+		if (originalValues == null) {
+			originalValues = new Bundle();
+			for (OsmandPreference<?> preference : preferences) {
+				originalValues.putString(preference.getId(), preference.asString());
+			}
+		}
+	}
+
+	/**
+	 * After process death the panel is recreated without its controller: put back the values
+	 * its preview replaced, as closing it without Apply does, and close it. The pop runs right after
+	 * the fragments are restored, before the panel builds its view.
+	 */
+	protected void closeWithoutController(@Nullable Bundle savedInstanceState) {
+		Bundle values = savedInstanceState != null ? savedInstanceState.getBundle(ORIGINAL_VALUES_KEY) : null;
+		if (values != null) {
+			for (String id : values.keySet()) {
+				OsmandPreference<?> preference = settings.getPreference(id);
+				String value = values.getString(id);
+				if (preference != null && value != null) {
+					setPreferenceValue(preference, value);
+				}
+			}
+		}
+		getParentFragmentManager().popBackStack();
+	}
+
+	private static <T> void setPreferenceValue(@NonNull OsmandPreference<T> preference, @NonNull String value) {
+		preference.set(preference.parseString(value));
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (originalValues != null) {
+			outState.putBundle(ORIGINAL_VALUES_KEY, originalValues);
+		}
 	}
 
 	@Override

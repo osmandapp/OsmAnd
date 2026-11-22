@@ -432,11 +432,24 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (gpsFilterFragment != null) {
 				selectedGpxFile = gpsFilterFragment.getSelectedGpxFile();
 			}
-			if (selectedGpxFile != null && !selectedGpxFiles.contains(selectedGpxFile)) {
+			if (selectedGpxFile != null && !containsTrack(selectedGpxFiles, selectedGpxFile)) {
 				return selectedGpxFile;
 			}
 		}
 		return null;
+	}
+
+	// Another copy of a track already drawn, such as the one Android Auto's TracksScreen loads, is not drawn again:
+	// the rendered segments are kept per path, so two copies would remove each other's line on every frame
+	private static boolean containsTrack(@NonNull List<SelectedGpxFile> selectedGpxFiles,
+	                                     @NonNull SelectedGpxFile selectedGpxFile) {
+		String path = selectedGpxFile.getGpxFile().getPath();
+		for (SelectedGpxFile file : selectedGpxFiles) {
+			if (file == selectedGpxFile || !Algorithms.isEmpty(path) && path.equals(file.getGpxFile().getPath())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void showManyPointsVisibleWarningIfNeeded(long total) {

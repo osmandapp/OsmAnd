@@ -18,12 +18,14 @@ import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnPaletteModeSelectedListener;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -118,6 +120,12 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 	public abstract void onApplyChanges();
 
 	public abstract void onResetToDefault();
+
+	/** The preferences the panel writes its preview into before Apply. */
+	@NonNull
+	public List<OsmandPreference<?>> getPreviewPreferences() {
+		return Collections.emptyList();
+	}
 
 	public boolean hasChanges() {
 		return initialColorDay != colorDay || initialColorNight != colorNight;

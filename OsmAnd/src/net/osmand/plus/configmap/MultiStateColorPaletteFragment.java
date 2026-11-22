@@ -22,7 +22,7 @@ public abstract class MultiStateColorPaletteFragment extends ConfigureMapOptionF
 
 	protected MultiStateCard multiStateCard;
 
-	@NonNull
+	@Nullable
 	protected abstract MultiStateColorPaletteController getScreenController();
 
 	@Override
@@ -30,6 +30,11 @@ public abstract class MultiStateColorPaletteFragment extends ConfigureMapOptionF
 		super.onCreate(savedInstanceState);
 
 		MultiStateColorPaletteController controller = getScreenController();
+		if (controller == null) {
+			closeWithoutController(savedInstanceState);
+			return;
+		}
+		saveOriginalValues(savedInstanceState, controller.getPreviewPreferences());
 		controller.setListener(this);
 		controller.setUiProvider(this);
 
@@ -102,7 +107,10 @@ public abstract class MultiStateColorPaletteFragment extends ConfigureMapOptionF
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getScreenController().finishProcessIfNeeded(getActivity());
+		MultiStateColorPaletteController controller = getScreenController();
+		if (controller != null) {
+			controller.finishProcessIfNeeded(getActivity());
+		}
 	}
 
 	@Override

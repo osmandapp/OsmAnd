@@ -14,9 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ProgressHelper;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -32,6 +34,8 @@ import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 public class Buildings3DFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = Buildings3DFragment.class.getSimpleName();
+	/* the NEW badge on Shadows is shown only in this release */
+	private static final String SHADOWS_ADDED_IN_VERSION = "5.5";
 
 	private final SRTMPlugin plugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 
@@ -40,6 +44,8 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	private View view;
 	private IconToggleButton detailsLevelToggleButton;
 	private IconToggleButton viewDistanceToggleButton;
+	private IconToggleButton shadowsToggleButton;
+	private TextView shadowsDescription;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -120,8 +126,24 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 		setupAppearance(contentContainer);
 		setupPerformance(contentContainer);
+		setupSunPosition(contentContainer);
+	}
 
-		setupSunParameters(contentContainer);
+	/* The light that casts the sun shadows; the same panel opens from the 3D Relief screen */
+	private void setupSunPosition(@NonNull ViewGroup container) {
+		View cardContainer = container.findViewById(R.id.sun_card_container);
+		AndroidUiHelper.updateVisibility(cardContainer, app.useOpenGlRenderer());
+		View card = cardContainer.findViewById(R.id.sun_card);
+		AndroidUtils.setBackgroundColor(card.getContext(), card, ColorUtilities.getListBgColorId(nightMode));
+
+		TextView sunPositionValue = card.findViewById(R.id.sun_position_value);
+		sunPositionValue.setText(plugin.getSunLight().getDescription());
+		View sunPositionRow = card.findViewById(R.id.sun_position_button);
+		sunPositionRow.setOnClickListener(v -> callMapActivity(mapActivity -> {
+			mapActivity.getDashboard().hideDashboard();
+			SunParametersController.showDialog(app, mapActivity.getSupportFragmentManager(), DashboardType.BUILDINGS_3D);
+		}));
+		setupSelectableBackground(sunPositionRow);
 	}
 
 	private void setupAppearance(@NonNull ViewGroup container) {
@@ -161,21 +183,53 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 		setupDetailsLevelToggleButtons(performanceContainer.findViewById(R.id.details_lvl_container));
 		setupViewDistanceToggleButtons(performanceContainer.findViewById(R.id.view_distance_container));
+		setupShadowsToggleButtons(performanceContainer);
 	}
 
-	private void setupSunParameters(@NonNull ViewGroup container) {
-		View sunContainer = container.findViewById(R.id.sun_container);
-		AndroidUtils.setBackgroundColor(sunContainer.getContext(), sunContainer, ColorUtilities.getListBgColorId(nightMode));
+	/* Sun shadows of buildings and relief: they cost performance, so they are off by default */
+	private void setupShadowsToggleButtons(@NonNull View performanceContainer) {
+		View shadowsContainer = performanceContainer.findViewById(R.id.shadows_container);
+		boolean available = app.useOpenGlRenderer();
+		AndroidUiHelper.updateVisibility(shadowsContainer, available);
+		AndroidUiHelper.updateVisibility(performanceContainer.findViewById(R.id.shadows_divider), available);
+		shadowsDescription = view.findViewById(R.id.shadows_description);
+		updateShadowsDescription();
 
-		sunContainer.setOnClickListener((v) -> callMapActivity(mapActivity -> {
-			mapActivity.getDashboard().hideDashboard();
-			SunParametersController.showDialog(app, mapActivity.getSupportFragmentManager());
-		}));
-		setupSelectableBackground(sunContainer);
+		boolean newInThisVersion = Version.getAppVersion(app).startsWith(SHADOWS_ADDED_IN_VERSION);
+		AndroidUiHelper.updateVisibility(shadowsContainer.findViewById(R.id.shadows_new_badge), newInThisVersion);
 
-		boolean visible = PluginsHelper.isDevelopment();
-		AndroidUiHelper.updateVisibility(container.findViewById(R.id.sun_divider), visible);
-		AndroidUiHelper.updateVisibility(container.findViewById(R.id.sun_parameters_container), visible);
+		IconToggleButton.IconRadioItem off = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_shadows_off);
+		off.setOnClickListener((radioItem, v) -> {
+			onShadowsChanged(off, false);
+			return true;
+		});
+		off.setContentDescription(getString(R.string.ltr_or_rtl_combine_via_comma,
+				getString(R.string.cast_shadows), getString(R.string.shared_string_off)));
+
+		IconToggleButton.IconRadioItem on = new IconToggleButton.IconRadioItem(R.drawable.ic_action_3d_buildings_shadows_on);
+		on.setOnClickListener((radioItem, v) -> {
+			onShadowsChanged(on, true);
+			return true;
+		});
+		on.setContentDescription(getString(R.string.ltr_or_rtl_combine_via_comma,
+				getString(R.string.cast_shadows), getString(R.string.shared_string_on)));
+
+		LinearLayout container = shadowsContainer.findViewById(R.id.custom_radio_buttons);
+		shadowsToggleButton = new IconToggleButton(app, container, nightMode);
+		shadowsToggleButton.setItems(off, on);
+		shadowsToggleButton.setSelectedItem(settings.CAST_SHADOWS.get() ? on : off);
+	}
+
+	private void onShadowsChanged(@NonNull IconToggleButton.IconRadioItem selectItem, boolean enable) {
+		settings.CAST_SHADOWS.set(enable);
+		refreshMap();
+		shadowsToggleButton.setSelectedItem(selectItem);
+		updateShadowsDescription();
+	}
+
+	/* both states have a line, so the rows below keep their place when the toggle changes */
+	private void updateShadowsDescription() {
+		shadowsDescription.setText(settings.CAST_SHADOWS.get() ? R.string.shadows_on_description : R.string.shadows_off_description);
 	}
 
 	private void setupDetailsLevelToggleButtons(@NonNull View view) {
