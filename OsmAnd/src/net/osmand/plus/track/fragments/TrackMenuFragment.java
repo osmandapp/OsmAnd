@@ -236,6 +236,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
+	private OnBackPressedCallback backPressedCallback;
 	private boolean menuTypeChanged;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
@@ -355,31 +356,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (selectedGpxFile != null) {
 			onSelectedGpxFileAvailable();
 		}
-
-		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			public void handleOnBackPressed() {
-				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
-					openMenuHeaderOnly();
-				} else {
-					dismiss();
-					hideSelectedGpx();
-
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						MapContextMenu contextMenu = mapActivity.getContextMenu();
-						PointDescription pointDescription = contextMenu.getPointDescription();
-						if (pointDescription != null && pointDescription.isGpxPoint()) {
-							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
-							contextMenu.show();
-						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
-							mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-						} else {
-							mapActivity.launchPrevActivityIntent();
-						}
-					}
-				}
-			}
-		});
 	}
 
 	private void onSelectedGpxFileAvailable() {
@@ -460,6 +436,36 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void setAnalysis(@Nullable GpxTrackAnalysis analysis) {
 		this.analysis = analysis;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		backPressedCallback = new OnBackPressedCallback(!isHidden()) {
+			public void handleOnBackPressed() {
+				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
+					openMenuHeaderOnly();
+				} else {
+					dismiss();
+					hideSelectedGpx();
+
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						MapContextMenu contextMenu = mapActivity.getContextMenu();
+						PointDescription pointDescription = contextMenu.getPointDescription();
+						if (pointDescription != null && pointDescription.isGpxPoint()) {
+							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
+							contextMenu.show();
+						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
+							mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+						} else {
+							mapActivity.launchPrevActivityIntent();
+						}
+					}
+				}
+			}
+		};
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
 	}
 
 	@Override
@@ -978,6 +984,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onHiddenChanged(boolean hidden) {
 		super.onHiddenChanged(hidden);
+		if (backPressedCallback != null) {
+			backPressedCallback.setEnabled(!hidden);
+		}
 		if (isResumed()) {
 			updateTrackMenuVisibilityState(hidden);
 		}

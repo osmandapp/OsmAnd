@@ -200,6 +200,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	private boolean progressBarVisible;
 	private boolean infoExpanded;
+	private boolean showTrackMenuOnDismiss;
 
 	private int modes;
 
@@ -793,7 +794,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		callMapActivity(mapActivity -> {
 			if (mapActivity.getMapLayers().hasMapActivity()) {
 				mapActivity.getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
-				onBackPressedCallback.setEnabled(true);
+				onBackPressedCallback.setEnabled(!isHidden());
 				detailsMenu.setMapActivity(mapActivity);
 				mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 				mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
@@ -825,6 +826,12 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		if (mapHudLayout != null && measurementButtons != null) {
 			mapHudLayout.removeWidget(measurementButtons);
 		}
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		onBackPressedCallback.setEnabled(!hidden);
 	}
 
 	@Override
@@ -1022,8 +1029,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private void onExitDialogResult(int resultCode) {
 		callMapActivity(mapActivity -> {
 			if (resultCode == ExitBottomSheetDialogFragment.EXIT_RESULT_CODE) {
+				showHiddenTrackMenu(mapActivity);
 				dismiss(mapActivity);
 			} else if (resultCode == ExitBottomSheetDialogFragment.SAVE_RESULT_CODE) {
+				showTrackMenuOnDismiss = true;
 				openSaveAsNewTrackMenu(mapActivity);
 			}
 		});
@@ -2123,14 +2132,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			cancelAddPointBeforeOrAfterMode();
 			return;
 		}
-		callMapActivity(activity -> {
-			TrackMenuFragment fragment = activity.getFragmentsHelper().getTrackMenuFragment();
-			if (fragment != null && fragment.isHidden()) {
-				fragment.show();
-			}
-		});
 		if (isFollowTrackMode()) {
 			callMapActivity(mapActivity -> {
+				showHiddenTrackMenu(mapActivity);
 				mapActivity.getMapActions().showRouteInfoControlDialog();
 				dismiss(mapActivity);
 			});
@@ -2146,6 +2150,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				return;
 			}
 			if (!editingCtx.hasChanges()) {
+				showHiddenTrackMenu(mapActivity);
 				dismiss(mapActivity);
 				return;
 			}
@@ -2154,12 +2159,22 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		});
 	}
 
+	private void showHiddenTrackMenu(@NonNull MapActivity mapActivity) {
+		TrackMenuFragment fragment = mapActivity.getFragmentsHelper().getTrackMenuFragment();
+		if (fragment != null && fragment.isHidden()) {
+			fragment.show();
+		}
+	}
+
 	private void dismiss(@NonNull MapActivity mapActivity) {
 		dismiss(mapActivity, true);
 	}
 
 	private void dismiss(@NonNull MapActivity mapActivity, boolean clearContext) {
 		try {
+			if (showTrackMenuOnDismiss) {
+				showHiddenTrackMenu(mapActivity);
+			}
 			if (clearContext) {
 				editingCtx.clearSegments();
 			}

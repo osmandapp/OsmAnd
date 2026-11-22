@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -51,6 +52,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -751,6 +753,74 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			onTrackMenu(fragment -> assertEquals("Menu state", state, fragment.getCurrentMenuState()));
 			assertTrackFittedAboveMenu(state);
 		}
+	}
+
+	@Test
+	public void testBackAfterRotationCollapsesTrackMenu() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		assumeTrue("Back collapses the menu only in portrait", isPortrait());
+		int rotation = getRotation();
+		try {
+			scenarioRule.getScenario().onActivity(activity ->
+					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+			awaitTrackMenuSettled();
+			turnToLandscape(rotation);
+			awaitTrackMenuSettled();
+			setRotation(rotation);
+			for (int i = 0; i < 50 && !isPortrait(); i++) {
+				SystemClock.sleep(100);
+			}
+			awaitTrackMenuSettled();
+			onTrackMenu(fragment -> fragment.openMenuScreen(MenuState.HALF_SCREEN, true));
+			awaitTrackMenuSettled();
+
+			Espresso.pressBack();
+			awaitTrackMenuSettled();
+			onTrackMenu(fragment -> assertEquals("Back after a rotation has to collapse the track menu",
+					MenuState.HEADER_ONLY, fragment.getCurrentMenuState()));
+		} finally {
+			setRotation(rotation);
+		}
+	}
+
+	@Test
+	public void testBackAfterRotationReturnsFromGpsFilterToPlanRoute() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		int rotation = getRotation();
+		try {
+			scenarioRule.getScenario().onActivity(activity ->
+					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(this::openPlanRoute);
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity ->
+					activity.getFragmentsHelper().getMeasurementToolFragment().gpsFilterOnClick());
+			awaitTrackMenuSettled();
+
+			turnToLandscape(rotation);
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity -> assertNotNull("Plan route is gone after the rotation, fragments "
+					+ activity.getSupportFragmentManager().getFragments(), activity.getFragmentsHelper().getMeasurementToolFragment()));
+			Espresso.pressBack();
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity -> {
+				FragmentManager manager = activity.getSupportFragmentManager();
+				assertNull("Back after the rotation left GPS filter open", manager.findFragmentByTag(GpsFilterFragment.TAG));
+				Fragment planRoute = activity.getFragmentsHelper().getMeasurementToolFragment();
+				assertTrue("Back after the rotation has to return to Plan route, fragments " + manager.getFragments(),
+						planRoute != null && planRoute.isVisible());
+			});
+		} finally {
+			setRotation(rotation);
+		}
+	}
+
+	private void openPlanRoute(@NonNull MapActivity activity) {
+		activity.getFragmentsHelper().getTrackMenuFragment().dismiss();
+		MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(),
+				selectedGpxFile.getGpxFile().getPath(), false);
 	}
 
 	private void zoomIntoTrack() {
