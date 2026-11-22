@@ -96,9 +96,10 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 		controller = SunParametersController.getExistedInstance(app);
 		if (controller == null) {
-			dismiss();
+			closeWithoutController(savedInstanceState);
 			return;
 		}
+		saveOriginalValues(savedInstanceState, controller.getPreviewPreferences());
 		MapActivity activity = requireMapActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override

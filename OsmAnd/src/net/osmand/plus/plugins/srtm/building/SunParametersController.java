@@ -11,6 +11,10 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class SunParametersController extends BaseDialogController {
 
@@ -98,6 +102,12 @@ public class SunParametersController extends BaseDialogController {
 
 	public void onApplyChanges() {
 		applyChanges = true;
+	}
+
+	@NonNull
+	public List<OsmandPreference<?>> getPreviewPreferences() {
+		return Arrays.asList(plugin.HILLSHADE_SUN_AZIMUTH, plugin.HILLSHADE_SUN_ANGLE,
+				plugin.SUN_LIGHT_MODE, plugin.SUN_LIGHT_TIME);
 	}
 
 	@Override

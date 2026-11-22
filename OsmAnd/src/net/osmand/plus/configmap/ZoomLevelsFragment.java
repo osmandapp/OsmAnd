@@ -34,6 +34,7 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 		super.onCreate(savedInstanceState);
 		controller = ZoomLevelsController.getExistedInstance(app);
 		if (controller != null) {
+			saveOriginalValues(savedInstanceState, controller.getPreviewPreferences());
 			MapActivity activity = requireMapActivity();
 			activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 				@Override
@@ -42,7 +43,7 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 				}
 			});
 		} else {
-			dismiss();
+			closeWithoutController(savedInstanceState);
 		}
 	}
 
@@ -108,7 +109,9 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.finishProcessIfNeeded(getActivity());
+		if (controller != null) {
+			controller.finishProcessIfNeeded(getActivity());
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
