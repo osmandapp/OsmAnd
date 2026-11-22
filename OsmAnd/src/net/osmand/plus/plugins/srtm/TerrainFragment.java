@@ -37,9 +37,7 @@ import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
-import net.osmand.plus.configmap.MapOptionSliderFragment;
 import net.osmand.plus.configmap.TerrainZoomLevelsController;
-import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.LocalItemType;
@@ -55,6 +53,12 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -75,7 +79,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TerrainFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents {
+public class TerrainFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents,
+		OnDataChangeUiAdapter {
 
 	public static final String TAG = TerrainFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
@@ -99,9 +104,10 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	private LinearLayout emptyState;
 	private View emptyStateDivider;
 	private LinearLayout contentContainer;
+	private View contentContainerBottom;
+	private ViewGroup reliefBuildingsRows;
 	private View titleBottomDivider;
 	private GradientChart gradientChart;
-	private View rootView;
 
 	private DownloadMapsCard downloadMapsCard;
 
@@ -122,7 +128,6 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View root = inflate(R.layout.fragment_terrain, container, false);
-		rootView = root;
 		profileColor = getAppMode().getProfileColor(nightMode);
 
 		showHideTopShadow(root);
@@ -139,6 +144,8 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		downloadDescriptionTv = root.findViewById(R.id.download_description_tv);
 		titleBottomDivider = root.findViewById(R.id.titleBottomDivider);
 		contentContainer = root.findViewById(R.id.content_container);
+		contentContainerBottom = root.findViewById(R.id.content_container_bottom);
+		reliefBuildingsRows = root.findViewById(R.id.relief_buildings_rows);
 		switchCompat = root.findViewById(R.id.switch_compat);
 		descriptionTv = root.findViewById(R.id.description);
 		emptyState = root.findViewById(R.id.empty_state);
@@ -158,6 +165,9 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		switchCompat.setChecked(terrainEnabled);
 		switchCompat.setOnClickListener(this);
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
+		View mainToggle = root.findViewById(R.id.main_toggle);
+		mainToggle.setOnClickListener(v -> switchCompat.performClick());
+		UiUtilities.setupListItemBackground(app, mainToggle, profileColor);
 
 		modifyButton.setOnClickListener(view -> callMapActivity(mapActivity -> {
 			if (isColoringTypeAvailable()) {
@@ -170,10 +180,62 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		}));
 
 		setupColorSchemeCard(root);
-		setupRelief3DCard(root);
 		setupCacheSizeCard();
 		updateUiMode();
 		return root;
+	}
+
+	/*
+	 * 3D Relief and 3D buildings: the rows of Configure map, built by the plugin and drawn the same way.
+	 * Rebuilt with the rest of the screen, as the 3D Relief row names what shades the relief.
+	 */
+	private void updateReliefAndBuildingsCard() {
+		callMapActivity(mapActivity -> {
+			ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+			srtmPlugin.add3DItems(adapter, mapActivity);
+			List<ContextMenuItem> items = adapter.getItems();
+			/* the edge of the card replaces the divider of the last row */
+			items.get(items.size() - 1).setHideDivider(true);
+
+			ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
+			viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+			viewCreator.setCustomControlsColor(profileColor);
+			viewCreator.setUiAdapter(this);
+			for (int i = 0; i < items.size(); i++) {
+				ContextMenuItem item = items.get(i);
+				View existing = reliefBuildingsRows.getChildAt(i);
+				View view = viewCreator.getView(item, existing);
+				if (existing == null) {
+					reliefBuildingsRows.addView(view);
+					AndroidUtils.setBackground(view, UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f));
+				}
+				view.setOnClickListener(v -> onReliefOrBuildingsRowClick(v, item));
+			}
+		});
+	}
+
+	private void onReliefOrBuildingsRowClick(@NonNull View view, @NonNull ContextMenuItem item) {
+		ItemClickListener click = item.getItemClickListener();
+		if (click instanceof OnRowItemClick) {
+			((OnRowItemClick) click).onRowItemClick(this, view, item);
+		} else if (click != null) {
+			click.onContextMenuClick(this, view, item, false);
+		}
+	}
+
+	@Override
+	public void onDataSetChanged() {
+		updateReliefAndBuildingsCard();
+	}
+
+	@Override
+	public void onDataSetInvalidated() {
+		updateReliefAndBuildingsCard();
+	}
+
+	@Override
+	public void onRefreshItem(@NonNull String itemId) {
+		updateReliefAndBuildingsCard();
 	}
 
 	private void updateChart() {
@@ -181,10 +243,6 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
 		TerrainMode mode = srtmPlugin.getTerrainMode();
-		if (mode.isTerrainShadows()) {
-			AndroidUiHelper.updateVisibility(gradientChart, false);
-			return;
-		}
 		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
 		TerrainType type = mode.getType();
 
@@ -242,11 +300,10 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 			List<PopUpMenuItem> menuItems = new ArrayList<>();
 			TerrainType selectedType = srtmPlugin.getTerrainMode().getType();
 			for (TerrainMode mode : TerrainMode.values(app)) {
-				if (mode.isDefaultMode() && (!mode.isTerrainShadows() || app.useOpenGlRenderer())) {
+				if (mode.isDefaultMode()) {
 					menuItems.add(new PopUpMenuItem.Builder(app)
 							.setTitle(mode.getType().getName(app))
 							.setSelected(mode.getType() == selectedType)
-							.showTopDivider(mode.isTerrainShadows())
 							.setOnClickListener(v -> setupTerrainMode(mode))
 							.create());
 				}
@@ -271,59 +328,6 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 			mapActivity.getDashboard().hideDashboard();
 			TerrainZoomLevelsController.showDialog(mapActivity, srtmPlugin);
 		}));
-	}
-
-	private void setupRelief3DCard(@NonNull View root) {
-		AndroidUiHelper.updateVisibility(root.findViewById(R.id.relief_3d_container), app.useOpenGlRenderer());
-		int proIconId = PurchasingUtils.getProFeatureIconId(nightMode);
-		((ImageView) root.findViewById(R.id.relief_3d_pro_icon)).setImageResource(proIconId);
-		((ImageView) root.findViewById(R.id.exaggeration_pro_icon)).setImageResource(proIconId);
-		UiUtilities.setupCompoundButton(root.findViewById(R.id.relief_3d_switch), nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
-
-		root.findViewById(R.id.relief_3d_button).setOnClickListener(v -> callMapActivity(mapActivity -> {
-			if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-				settings.ENABLE_3D_MAPS.set(!settings.ENABLE_3D_MAPS.get());
-				app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(mapActivity));
-				updateRelief3DCard();
-			} else {
-				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
-			}
-		}));
-		root.findViewById(R.id.vertical_exaggeration_button).setOnClickListener(v -> callMapActivity(mapActivity -> {
-			if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-				mapActivity.getDashboard().hideDashboard();
-				Relief3DExaggerationFragment.showInstance(mapActivity.getSupportFragmentManager(), DashboardType.TERRAIN);
-			} else {
-				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
-			}
-		}));
-	}
-
-	private void updateRelief3DCard() {
-		// Terrain shadows need 3D relief: it is shown as On and is not switchable, also without OsmAnd Pro
-		boolean terrainShadows = srtmPlugin.getTerrainMode().isTerrainShadows();
-		boolean reliefAvailable = InAppPurchaseUtils.is3dMapsAvailable(app);
-		boolean reliefEnabled = terrainShadows || reliefAvailable && settings.ENABLE_3D_MAPS.get();
-
-		ImageView reliefIcon = rootView.findViewById(R.id.relief_3d_icon);
-		reliefIcon.setImageDrawable(reliefEnabled
-				? getPaintedIcon(R.drawable.ic_action_3d_relief, profileColor)
-				: getIcon(R.drawable.ic_action_3d_relief, ColorUtilities.getSecondaryIconColorId(nightMode)));
-		rootView.findViewById(R.id.relief_3d_button).setClickable(!terrainShadows);
-		AndroidUiHelper.updateVisibility(rootView.findViewById(R.id.relief_3d_value), terrainShadows);
-		SwitchCompat reliefSwitch = rootView.findViewById(R.id.relief_3d_switch);
-		reliefSwitch.setChecked(reliefEnabled);
-		AndroidUiHelper.updateVisibility(reliefSwitch, !terrainShadows && reliefAvailable);
-		AndroidUiHelper.updateVisibility(rootView.findViewById(R.id.relief_3d_pro_icon), !terrainShadows && !reliefAvailable);
-
-		AndroidUiHelper.setVisibility(reliefEnabled,
-				rootView.findViewById(R.id.vertical_exaggeration_divider),
-				rootView.findViewById(R.id.vertical_exaggeration_button));
-		TextView exaggerationTv = rootView.findViewById(R.id.exaggeration_value);
-		exaggerationTv.setText(MapOptionSliderFragment.getFormattedValue(app, srtmPlugin.getVerticalExaggerationScale()));
-		AndroidUiHelper.updateVisibility(exaggerationTv, reliefAvailable);
-		AndroidUiHelper.updateVisibility(rootView.findViewById(R.id.exaggeration_pro_icon), !reliefAvailable);
-		AndroidUiHelper.updateVisibility(rootView.findViewById(R.id.relief_3d_footer), terrainShadows);
 	}
 
 	private void setupCacheSizeCard() {
@@ -380,9 +384,6 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 				downloadDescriptionTv.setText(R.string.slope_download_description);
 			} else if (mode.getType() == HEIGHT) {
 				descriptionTv.setText(R.string.height_legend_description);
-			} else if (mode.isTerrainShadows()) {
-				descriptionTv.setText(R.string.terrain_shadows_description);
-				downloadDescriptionTv.setText(R.string.relief_3d_download_description);
 			}
 			callMapActivity(downloadMapsCard::updateDownloadSection);
 		} else {
@@ -391,15 +392,11 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		}
 		AndroidUiHelper.updateVisibility(proIv, !isColoringTypeAvailable());
 		proIv.setImageResource(PurchasingUtils.getProFeatureIconId(nightMode));
-		// Terrain shadows have no palette and no zoom range
-		AndroidUiHelper.setVisibility(!mode.isTerrainShadows(),
-				rootView.findViewById(R.id.button_modify_divider), rootView.findViewById(R.id.button_modify),
-				rootView.findViewById(R.id.zoom_levels_divider), rootView.findViewById(R.id.zoom_levels_button));
 
 		adjustGlobalVisibility();
 		updateColorSchemeCard(mode);
 		updateChart();
-		updateRelief3DCard();
+		updateReliefAndBuildingsCard();
 	}
 
 	private void adjustGlobalVisibility() {
@@ -407,6 +404,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		emptyStateDivider.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		titleBottomDivider.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		contentContainer.setVisibility(terrainEnabled ? View.VISIBLE : View.GONE);
+		contentContainerBottom.setVisibility(terrainEnabled ? View.VISIBLE : View.GONE);
 	}
 
 	private void setupClickableText(TextView textView,

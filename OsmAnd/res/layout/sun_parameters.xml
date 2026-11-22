@@ -1,103 +1,256 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?><!--
+	Sun position panel below the map preview: the mode toggle and the rows of the selected mode,
+	as in the other panels of Configure map (terrain_visibility_fragment).
+	It scrolls when a landscape phone has less height than the rows need.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="@color/color_transparent"
-	android:orientation="vertical">
+	android:background="@color/color_transparent">
 
 	<LinearLayout
-		android:id="@+id/azimuth_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
-		<LinearLayout
+		<include layout="@layout/custom_radio_buttons" />
+
+		<!-- The rows of the three modes lie on each other: the panel keeps the height of the tallest one -->
+		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:layout_marginTop="@dimen/content_padding"
-			android:orientation="horizontal">
+			android:layout_marginTop="@dimen/content_padding_small">
 
-			<TextView
-				android:layout_width="0dp"
+			<!-- Live: the sun of this minute, nothing to change -->
+			<LinearLayout
+				android:id="@+id/live_rows"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:text="@string/shared_string_azimuth"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size" />
+				android:orientation="vertical">
 
-			<TextView
-				android:id="@+id/azimuth_value_tv"
-				android:layout_width="wrap_content"
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:minHeight="@dimen/context_menu_action_buttons_h"
+					android:orientation="horizontal"
+					android:paddingHorizontal="@dimen/content_padding">
+
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/shared_string_azimuth"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size" />
+
+					<TextView
+						android:id="@+id/live_azimuth_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_list_text_size"
+						tools:text="174°, S" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:minHeight="@dimen/context_menu_action_buttons_h"
+					android:orientation="horizontal"
+					android:paddingHorizontal="@dimen/content_padding">
+
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/altitude"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size" />
+
+					<TextView
+						android:id="@+id/live_altitude_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_list_text_size"
+						tools:text="24°" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<!-- Date: the day opens a date picker, the time is a slider -->
+			<LinearLayout
+				android:id="@+id/date_rows"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_list_text_size"
-				tools:text="315°" />
+				android:orientation="vertical">
 
-		</LinearLayout>
+				<LinearLayout
+					android:id="@+id/date_row"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/selectableItemBackground"
+					android:gravity="center_vertical"
+					android:minHeight="@dimen/context_menu_action_buttons_h"
+					android:orientation="horizontal"
+					android:paddingHorizontal="@dimen/content_padding">
 
-		<com.google.android.material.slider.Slider
-			android:id="@+id/azimuth_slider"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:stepSize="1.0" />
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/shared_string_date"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size" />
+
+					<TextView
+						android:id="@+id/date_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?attr/active_color_basic"
+						android:textSize="@dimen/default_list_text_size"
+						tools:text="November 17, 2026" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/shared_string_time"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<TextView
+							android:id="@+id/time_value"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="1:10 PM" />
+
+					</LinearLayout>
+
+					<com.google.android.material.slider.Slider
+						android:id="@+id/time_slider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:saveEnabled="false"
+						android:stepSize="1.0" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<!-- Manual: azimuth and altitude set by hand -->
+			<LinearLayout
+				android:id="@+id/manual_rows"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/shared_string_azimuth"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<TextView
+							android:id="@+id/azimuth_value_tv"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="315°, NW" />
+
+					</LinearLayout>
+
+					<com.google.android.material.slider.Slider
+						android:id="@+id/azimuth_slider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:saveEnabled="false"
+						android:stepSize="1.0" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginTop="@dimen/content_padding_small"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="@string/altitude"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<TextView
+							android:id="@+id/altitude_value_tv"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="45°" />
+
+					</LinearLayout>
+
+					<com.google.android.material.slider.Slider
+						android:id="@+id/altitude_slider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:saveEnabled="false"
+						android:stepSize="1.0" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</FrameLayout>
 
 	</LinearLayout>
 
-	<LinearLayout
-		android:id="@+id/altitude_container"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:layout_marginTop="@dimen/content_padding_small"
-			android:orientation="horizontal">
-
-			<TextView
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:text="@string/altitude"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size" />
-
-			<TextView
-				android:id="@+id/altitude_value_tv"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_list_text_size"
-				tools:text="45°" />
-
-		</LinearLayout>
-
-		<com.google.android.material.slider.Slider
-			android:id="@+id/altitude_slider"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			android:stepSize="1.0" />
-
-	</LinearLayout>
-
-	<androidx.appcompat.widget.SwitchCompat
-		android:id="@+id/shadows_switch"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:minHeight="@dimen/context_menu_action_buttons_h"
-		android:background="?attr/selectableItemBackground"
-		android:padding="@dimen/content_padding"
-		android:saveEnabled="false"
-		android:text="@string/cast_shadows"
-		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/default_list_text_size"
-		app:switchPadding="@dimen/content_padding" />
-
-</LinearLayout>
+</ScrollView>

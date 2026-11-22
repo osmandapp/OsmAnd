@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	The row that opens Sun position, on the 3D Relief and 3D buildings screens.
+	The second line is the light: the direction, the mode or the date.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/sun_position_button"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/setting_list_item_large_height"
+	android:orientation="horizontal">
+
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/content_padding"
+		android:src="@drawable/ic_action_sun"
+		app:tint="?attr/default_icon_color" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/content_padding">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/map_widget_sun_position"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<TextView
+			android:id="@+id/sun_position_value"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size"
+			tools:text="315°, NW" />
+
+	</LinearLayout>
+
+</LinearLayout>
