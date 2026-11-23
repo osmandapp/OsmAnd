@@ -1579,13 +1579,28 @@ public class RouteResultPreparation {
 				}
 			}
 		} else {
+			boolean straightAllowed = hasStraightLane(rawLanes);
 			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex, activeTurn);
 			t = getActiveTurnType(rawLanes, leftSide, t);
+			if (t.getValue() == TurnType.C && !straightAllowed && activeTurn > 0 && !TurnType.isSlightTurn(activeTurn)) {
+				t = TurnType.valueOf(activeTurn, leftSide);
+			}
 		}
 		t.setLanes(rawLanes);
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);
 		return t;
+	}
+
+	private boolean hasStraightLane(int[] rawLanes) {
+		for (int lane : rawLanes) {
+			if (TurnType.isSlightTurn(TurnType.getPrimaryTurn(lane))
+					|| TurnType.isSlightTurn(TurnType.getSecondaryTurn(lane))
+					|| TurnType.isSlightTurn(TurnType.getTertiaryTurn(lane))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void setActiveLanesRange(int[] rawLanes, int activeBeginIndex, int activeEndIndex, int activeTurn) {
