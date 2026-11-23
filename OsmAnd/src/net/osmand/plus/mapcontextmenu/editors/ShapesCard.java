@@ -80,11 +80,15 @@ public class ShapesCard extends BaseCard {
 	}
 
 	protected Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
+		int iconRes = getShapeVariantId(shapeIconId, "_contour");
+		return getColoredIcon(iconRes, ColorUtilities.getActiveColorId(nightMode));
+	}
+
+	@DrawableRes
+	private int getShapeVariantId(@DrawableRes int shapeIconId, @NonNull String suffix) {
 		Resources resources = app.getResources();
 		String shapeIconName = resources.getResourceName(shapeIconId);
-		String shapeBackgroundIconName = shapeIconName + "_contour";
-		int iconRes = resources.getIdentifier(shapeBackgroundIconName, "drawable", app.getPackageName());
-		return getColoredIcon(iconRes, ColorUtilities.getActiveColorId(nightMode));
+		return resources.getIdentifier(shapeIconName + suffix, "drawable", app.getPackageName());
 	}
 
 	private void reselectShape(@NonNull BackgroundType shape, boolean notifyListener) {
@@ -121,13 +125,11 @@ public class ShapesCard extends BaseCard {
 	@NonNull
 	private Drawable getSelectedShapeDrawable(@NonNull BackgroundType shape) {
 		int borderColor = ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode);
+		int borderId = getShapeVariantId(shape.getIconId(), "_border");
 		// own copies: the layer drawable sets their bounds, cached icons are shared
-		Drawable border = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, shape.getIconId()), borderColor);
 		Drawable solid = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, shape.getIconId()), selectedColor);
-		LayerDrawable drawable = new LayerDrawable(new Drawable[] {border, solid});
-		int borderWidth = getDimen(R.dimen.favorites_shape_border_width);
-		drawable.setLayerInset(1, borderWidth, borderWidth, borderWidth, borderWidth);
-		return drawable;
+		Drawable border = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, borderId), borderColor);
+		return new LayerDrawable(new Drawable[] {solid, border});
 	}
 
 	protected void setUnselectedBackground(@NonNull BackgroundType backgroundType, @NonNull ImageView background) {

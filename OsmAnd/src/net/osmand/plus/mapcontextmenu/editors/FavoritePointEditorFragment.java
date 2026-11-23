@@ -218,7 +218,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			return iconName;
 		}
 
-		// the point's own icon: the POI icon of a new point, the saved icon of an existing one
+		// the point's own icon: the POI icon, as on Add, or the saved icon of a point not from a POI
+		if (!Algorithms.isEmpty(originalIconKey)) {
+			return originalIconKey;
+		}
 		FavouritePoint favorite = getFavorite();
 		iconName = favorite != null ? RenderingIcons.getBigIconName(favorite.getIconId()) : null;
 		if (!Algorithms.isEmpty(iconName)) {

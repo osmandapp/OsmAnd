@@ -142,10 +142,11 @@ public class FavoritePointEditor extends PointEditor {
 	public String getPoiIconName(@NonNull FavouritePoint favorite) {
 		Map<String, String> extensions = favorite.getAmenityExtensions();
 		String subtype = extensions.get(AMENITY_PREFIX + Amenity.SUBTYPE);
-		if (Algorithms.isEmpty(subtype)) {
+		String[] subtypes = subtype != null ? subtype.split(";") : new String[0];
+		if (subtypes.length == 0 || Algorithms.isEmpty(subtypes[0])) {
 			return null;
 		}
-		String firstSubtype = subtype.split(";")[0];
+		String firstSubtype = subtypes[0];
 		String type = extensions.get(AMENITY_PREFIX + Amenity.TYPE);
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		PoiCategory category = Algorithms.isEmpty(type) ? null : poiTypes.getPoiCategoryByName(type);

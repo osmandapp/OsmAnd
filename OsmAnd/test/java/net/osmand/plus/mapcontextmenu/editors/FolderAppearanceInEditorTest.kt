@@ -108,6 +108,14 @@ class FolderAppearanceInEditorTest {
 	}
 
 	@Test
+	fun favoriteWithoutSubtypeValuesHasNoOriginalIcon() {
+		waitForPoiTypes()
+		val favorite = FavouritePoint(50.0, 30.0, "Spot", "")
+		favorite.amenityExtensions["amenity_subtype"] = ";"
+		assertNull(FavoritePointEditor(app).getPoiIconName(favorite))
+	}
+
+	@Test
 	fun movedPointGetsTheNextFreeNumber() {
 		val group = FavoriteGroup("Folder", mutableListOf(), Color.RED, true, false)
 		assertEquals("Cafe", group.getUniquePointName("Cafe"))
