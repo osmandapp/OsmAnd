@@ -40,6 +40,7 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -341,11 +342,13 @@ public class TravelRoutesFragment extends BaseFullScreenFragment {
 			} else {
 				name = Algorithms.capitalizeFirstLetterAndLowercase(attrName);
 			}
-			updateTypeItemView(itemView, name, pref.get());
+			RouteActivity activity = app.getRouteActivityHelper().findRouteActivity(attrName);
+			int iconId = activity != null ? AndroidUtils.getActivityIconId(app, activity) : settings.getApplicationMode().getIconRes();
+			updateItemView(itemView, name, iconId, pref.get(), DescriptionType.ENABLED_DISABLED);
 			itemView.setOnClickListener(v -> {
 				boolean selected = !pref.get();
 				pref.set(selected);
-				updateTypeItemView(itemView, name, selected);
+				updateItemView(itemView, name, iconId, selected, DescriptionType.ENABLED_DISABLED);
 				app.runInUIThread(() -> {
 					RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 					rendererHelper.updateRouteTypeVisibility(storage, attrName, selected);
