@@ -185,30 +185,19 @@ object PoiAdditionalUiRules {
 
     private val RULES_BY_KEY: Map<String, PoiAdditionalUiRule> = RULES.associateBy { it.key }
 
-    fun findRule(key: String): PoiAdditionalUiRule {
-        val baseKey = key.substringBefore(":")
-
-        // First, try exact match
+    @JvmOverloads
+    fun findRule(key: String, useGenericFallback: Boolean = false): PoiAdditionalUiRule {
         RULES_BY_KEY[key]?.let { return it }
 
-        for (rule in RULES) {
-            // Decide whether to use baseKey or full key based on the rule
-            val keyToSearch = if (rule.checkBaseKey) baseKey else key
-
-            // If the rule requires "contains" match
+        val baseKey = key.substringBefore(':')
+        val matchSubstrings = !useGenericFallback || baseKey == key
+        return RULES.firstOrNull { rule ->
+            val candidate = if (rule.checkBaseKey) baseKey else key
             if (rule.checkKeyOnContains) {
-                if (keyToSearch.contains(rule.key)) {
-                    return rule
-                }
+                matchSubstrings && candidate.contains(rule.key)
             } else {
-                // Else check for exact match
-                if (keyToSearch == rule.key) {
-                    return rule
-                }
+                candidate == rule.key
             }
-        }
-
-        // If no match found, return a default rule with the given key
-        return PoiAdditionalUiRule(key = key)
+        } ?: PoiAdditionalUiRule(key = key)
     }
 }

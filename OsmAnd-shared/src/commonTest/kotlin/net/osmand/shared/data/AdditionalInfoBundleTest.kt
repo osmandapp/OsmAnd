@@ -209,10 +209,52 @@ class AdditionalInfoBundleTest {
 	}
 
 	@Test
+	fun storedNamespacedKeysMatchingPoiFiltersKeepTheirValues() {
+		val types = poiTypes ?: return
+		val custom = mapOf(
+			"vendor:route_id" to "1234",
+			"vendor:content" to "abc",
+			"vendor:wikipedia" to "en:Richmond, Virginia",
+			"vendor:short_description" to "Trail note",
+			"vendor:wiki_lang" to "uk"
+		)
+		val stored = custom + mapOf(
+			"subtype" to MapPoiTypes.ROUTE_ARTICLE,
+			"description" to "Article description",
+			"short_description" to "Article summary",
+			"wiki_lang" to "en",
+			"wiki_lang:en" to "yes",
+			"route_id" to "1",
+			"content" to "article",
+			"wikipedia" to "en:City",
+			"wikipedia:en" to "en:Richmond",
+			"route:ref" to "A1",
+			"operator:route_id" to "2",
+			"osm_tag_vendor:content_id" to "OSM",
+			"osmand:route_id" to "service",
+			"hidden" to "true"
+		)
+		val bundle = AdditionalInfoBundle(types, stored)
+
+		assertEquals(emptyList(), bundle.getVisibleTags(false, emptyList()))
+		val rows = bundle.getVisibleTags(false, emptyList(), AdditionalInfoBundle.getGenericRowKeys(stored))
+		assertEquals(custom, rows.associate { it.key to it.value })
+		assertTrue(rows.none { it.isDescription })
+	}
+
+	@Test
 	fun colonKeyResolvesThroughUnderscoreKey() {
-		val row = single(bundle("type" to "sustenance", "subtype" to "fast_food", "internet_access:fee" to "no")
-			?.getVisibleTags(false, emptyList()) ?: return)
-		assertEquals("internet_access_fee_no", row.resolvedType?.additionalType?.getKeyName())
+		val feeKey = "internet_access:fee"
+		val bundle = bundle(
+			"type" to "sustenance", "subtype" to "fast_food",
+			feeKey to "no", "internet_access:ssid" to "CafeWiFi"
+		) ?: return
+
+		val fee = bundle.resolvePoiType(bundle.getCategory(), feeKey, bundle.get(feeKey))
+		assertEquals("internet_access_fee_no", fee.additionalType?.getKeyName())
+
+		val row = single(bundle.getVisibleTags(false, emptyList()))
+		assertEquals("internet_access_ssid", row.resolvedType?.additionalType?.getKeyName())
 	}
 
 	@Test
