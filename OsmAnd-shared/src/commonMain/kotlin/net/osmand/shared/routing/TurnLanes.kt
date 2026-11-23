@@ -924,6 +924,21 @@ object TurnLanes {
 	// ---- odds and ends ----
 
 	/** How loudly a road deserves to be mentioned; the bigger the road, the smaller the number. */
+	/**
+	 * A bicycle or foot route on a cycleway or a footway is on a minor way itself, like on a path or a track, so a
+	 * track or a path forking off it is a real choice and is spoken (#27188). Only the route's own ways are judged so:
+	 * the roads attached to it keep their priority, and car routes keep the old order.
+	 */
+	@JvmStatic
+	fun highwaySpeakPriority(highway: String?, footOrBicycle: Boolean): Int {
+		if (footOrBicycle && highway != null && (highway.endsWith("cycleway") || highway.endsWith("footway") ||
+				highway.endsWith("pedestrian") || highway.endsWith("bridleway") || highway.endsWith("steps"))
+		) {
+			return MAX_SPEAK_PRIORITY
+		}
+		return highwaySpeakPriority(highway)
+	}
+
 	@JvmStatic
 	fun highwaySpeakPriority(highway: String?): Int {
 		if (highway == null || highway.endsWith("track") || highway.endsWith("services") ||
@@ -1020,13 +1035,14 @@ object TurnLanes {
 		currentSegm: RouteSegmentResult,
 		attachedRoutes: List<RouteSegmentResult>,
 		turnLanesPrevSegm: String?,
-		prevBearingEnd: Float
+		prevBearingEnd: Float,
+		footOrBicycle: Boolean = false
 	): RoadSplitStructure {
 		val rs = RoadSplitStructure()
 		rs.currentDeviation = KMapUtils.degreesDiff(prevBearingEnd.toDouble(), currentSegm.getBearingBegin().toDouble())
 		val speakPriority = max(
-			highwaySpeakPriority(prevSegm.getObject().getHighway()),
-			highwaySpeakPriority(currentSegm.getObject().getHighway())
+			highwaySpeakPriority(prevSegm.getObject().getHighway(), footOrBicycle),
+			highwaySpeakPriority(currentSegm.getObject().getHighway(), footOrBicycle)
 		)
 		// java computed these in float and widened, because normalizeDegrees360 takes a float
 		val currentAngle = KMapUtils.normalizeDegrees360(currentSegm.getBearingBegin()).toDouble()
@@ -1322,7 +1338,8 @@ object TurnLanes {
 		prevSegm: RouteSegmentResult,
 		currentSegm: RouteSegmentResult,
 		twiceRoadPresent: Boolean,
-		prevBearingEnd: Float
+		prevBearingEnd: Float,
+		footOrBicycle: Boolean = false
 	): TurnType? {
 		val attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex())
 		if (attachedRoutes.isEmpty()) {
@@ -1330,7 +1347,7 @@ object TurnLanes {
 		}
 		var turnLanesPrevSegm = if (twiceRoadPresent) null else getTurnLanesString(prevSegm)
 		// keep left/right
-		var rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd)
+		var rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd, footOrBicycle)
 		if (rs.roadsOnLeft + rs.roadsOnRight == 0) {
 			return null
 		}
@@ -1340,7 +1357,7 @@ object TurnLanes {
 			val converted = convertNoneLanes(withNone, rs, getTurnLanesString(currentSegm))
 			if (converted != withNone) {
 				turnLanesPrevSegm = converted
-				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, converted, prevBearingEnd)
+				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, converted, prevBearingEnd, footOrBicycle)
 			}
 		}
 

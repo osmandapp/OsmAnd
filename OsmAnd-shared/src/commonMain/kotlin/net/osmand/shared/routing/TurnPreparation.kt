@@ -50,8 +50,10 @@ object TurnPreparation {
 	 */
 	@JvmStatic
 	fun prepareTurnResults(request: RoutingRequest, result: MutableList<RouteSegmentResult>) {
+		val profile = (request.getRouter() as GeneralRouter).getProfile()
+		val footOrBicycle = profile == GeneralRouterProfile.BICYCLE || profile == GeneralRouterProfile.PEDESTRIAN
 		for (i in result.indices) {
-			val turnType = getTurnInfo(result, i, request.leftSideNavigation)
+			val turnType = getTurnInfo(result, i, request.leftSideNavigation, footOrBicycle)
 			result[i].setTurnType(turnType)
 		}
 
@@ -63,7 +65,7 @@ object TurnPreparation {
 	}
 
 	/** The manoeuvre for arriving on segment [i], from the angle, the tags and the lanes. */
-	private fun getTurnInfo(result: List<RouteSegmentResult>, i: Int, leftSide: Boolean): TurnType? {
+	private fun getTurnInfo(result: List<RouteSegmentResult>, i: Int, leftSide: Boolean, footOrBicycle: Boolean): TurnType? {
 		if (i == 0) {
 			return TurnType.valueOf(TurnType.C, false)
 		}
@@ -94,7 +96,7 @@ object TurnPreparation {
 				t = TurnLanes.getActiveTurnType(lanes, leftSide, t)
 				t.lanes = lanes
 			} else if (fromTag != TurnType.C) {
-				t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist))
+				t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist), footOrBicycle)
 				if (t != null) {
 					val mainTurnType = TurnType.valueOf(fromTag, leftSide)
 					val lanes = t.lanes
@@ -137,7 +139,7 @@ object TurnPreparation {
 			t = TurnLanes.getActiveTurnType(lanes, leftSide, t)
 			t.lanes = lanes
 		} else {
-			t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist))
+			t = TurnLanes.attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist), footOrBicycle)
 		}
 		if (t != null) {
 			t.turnAngle = (-mpi).toFloat()

@@ -127,7 +127,7 @@ public class RouteResultPreparationTest {
                 RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
                 RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT
         );
-        RoutingConfiguration config = builder.build("car", memoryLimit, params);
+        RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car", memoryLimit, params);
         BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
         
         if (useNative) {
