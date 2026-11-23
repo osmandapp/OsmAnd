@@ -1594,9 +1594,8 @@ public class RouteResultPreparation {
 
 	private boolean hasStraightLane(int[] rawLanes) {
 		for (int lane : rawLanes) {
-			if (TurnType.isSlightTurn(TurnType.getPrimaryTurn(lane))
-					|| TurnType.isSlightTurn(TurnType.getSecondaryTurn(lane))
-					|| TurnType.isSlightTurn(TurnType.getTertiaryTurn(lane))) {
+			if (TurnType.getPrimaryTurn(lane) == TurnType.C || TurnType.getSecondaryTurn(lane) == TurnType.C
+					|| TurnType.getTertiaryTurn(lane) == TurnType.C) {
 				return true;
 			}
 		}
