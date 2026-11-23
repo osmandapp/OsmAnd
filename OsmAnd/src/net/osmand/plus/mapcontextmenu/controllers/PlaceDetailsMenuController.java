@@ -41,7 +41,9 @@ public class PlaceDetailsMenuController extends AmenityMenuController {
 	}
 
 	public int getRightIconId() {
-		int iconId = transportStopController != null ? transportStopController.getRightIconId() : 0;
+		int iconId = transportStopController != null
+				&& !Algorithms.isEmpty(transportStopController.getLocalTransportStopRoutes())
+				? transportStopController.getRightIconId() : 0;
 		if (iconId == 0) {
 			for (Amenity amenity : detailsObject.getAmenities()) {
 				iconId = getRightIconId(getApplication(), amenity);
