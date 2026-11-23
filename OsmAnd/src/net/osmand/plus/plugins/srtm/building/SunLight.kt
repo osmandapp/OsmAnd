@@ -70,7 +70,7 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 		}
 		else -> {
 			val azimuth = plugin.HILLSHADE_SUN_AZIMUTH.get()
-			"$azimuth°, ${OsmAndFormatter.getCardinalDirectionForDegrees(azimuth.toDouble())}"
+			"$azimuth°, ${OsmAndFormatter.getLocalizedCardinalDirection(app, azimuth.toDouble())}"
 		}
 	}
 
