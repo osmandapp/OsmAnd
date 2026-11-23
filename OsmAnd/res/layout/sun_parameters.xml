@@ -104,7 +104,7 @@
 						android:layout_height="wrap_content"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_list_text_size"
-						tools:text="10:51 AM" />
+						tools:text="11/23/26, 10:51 AM" />
 
 				</LinearLayout>
 

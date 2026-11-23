@@ -22,6 +22,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -76,7 +77,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	private TextView altitudeValue;
 	private Slider altitudeSlider;
 
-	/* Live shows the time and the sun of the current minute; the next refresh comes
+	/* Live shows the sun and the date and time of the current minute; the next refresh comes
 	   when the minute changes, so the time row follows the clock */
 	private final Runnable liveRefresh = new Runnable() {
 		@Override
@@ -246,7 +247,9 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		SunLight.Angles angles = controller.getSunAngles();
 		liveAzimuthValue.setText(formatSunAzimuth(angles));
 		liveAltitudeValue.setText(formatSunAltitude(angles));
-		liveTimeValue.setText(DateFormat.getTimeFormat(requireContext()).format(new Date()));
+		Date now = new Date();
+		liveTimeValue.setText(getString(R.string.ltr_or_rtl_combine_via_comma,
+				OsmAndFormatter.getDateFormat(requireContext()).format(now), DateFormat.getTimeFormat(requireContext()).format(now)));
 	}
 
 	private void bindDate() {
