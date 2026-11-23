@@ -58,7 +58,7 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 	/** Date and time of [SunLightMode.DATE]; until one is chosen, now. */
 	fun getDateTime(): Long {
 		val time = plugin.SUN_LIGHT_TIME.get()
-		return if (time > 0) time else System.currentTimeMillis()
+		return if (time != 0L) time else System.currentTimeMillis()
 	}
 
 	/** Short state for the Sun position rows: the mode, the date and time, or the manual angles. */
