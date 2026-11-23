@@ -3,6 +3,7 @@ package net.osmand.plus.views.layers;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.*;
 import android.graphics.Paint.Style;
 import android.os.SystemClock;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
@@ -37,9 +39,11 @@ import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
@@ -80,7 +84,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private QuadPoint cacheCenter;
 	private float cacheMapDensity;
 	private MetricsConstants cacheMetricSystem;
-	private int cacheIntZoom;
+	private double cacheZoom;
 	private boolean cacheSphericalMap;
 	private float cacheElevationAngle = Float.NaN;
 	private LatLon cacheCenterLatLon;
@@ -116,6 +120,17 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	private float cachedHeading;
 	private boolean sphericalMap;
+
+	private PointI location31;
+	private PointI screenPoint31;
+	private PointI elevatedLocation31;
+	private boolean heightmapsActive;
+	private boolean hasElevatedPoint;
+	private final PointF elevatedPixel = new PointF();
+	private boolean elevationShiftValid;
+	private float elevationShiftX;
+	private float elevationShiftY;
+
 	private long lastCompassRefreshTime;
 	@Nullable
 	private View compassRefreshView;
@@ -285,11 +300,12 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 
-		if (isRulerWidgetOn() && !animatedThread.isAnimatingMapZoom()) {
+		if (isRulerWidgetOn()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
 			sphericalMap = hasMapRenderer() && settings.SPHERICAL_MAP.get();
 			currentCenterLatLon = getCenterLatLon(tb);
+			startElevationFallback(tb);
 			circleAttrs.updatePaints(app, drawSettings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
@@ -306,7 +322,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			drawCenterIcon(canvas, tb, center, drawSettings.isNightMode(), radiusRulerNightMode);
 
 			if (showRadiusRuler) {
-				updateData(tb, center);
+				boolean zoomAnimating = tb.isZoomAnimated() || animatedThread.isAnimatingMapZoom();
+				updateData(tb, center, zoomAnimating);
 				if (showCompass) {
 					updateHeading();
 					resetDrawingPaths();
@@ -330,21 +347,56 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	public boolean isRulerWidgetOn() {
 		MapActivity activity = getMapActivity();
-		boolean on = false;
-		if (activity != null) {
-			ApplicationMode appMode = app.getSettings().getApplicationMode();
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
-
-			rulerWidgets.clear();
-			widgetRegistry.collectWidgetsInfo(rulerWidgets, appMode, layoutMode, null, RADIUS_RULER, true);
-
-			for (int i = 0; i < rulerWidgets.size() && !on; i++) {
-				on = isPanelVisible(rulerWidgets.get(i).getWidgetPanel());
-			}
-			// the widgets hold their activity: keep none of them between two draws
-			rulerWidgets.clear();
+		if (activity == null) {
+			// Android Auto can show the map before the phone activity and its widgets exist
+			return isRulerWidgetEnabled();
 		}
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+
+		rulerWidgets.clear();
+		widgetRegistry.collectWidgetsInfo(rulerWidgets, appMode, layoutMode, null, RADIUS_RULER, true);
+
+		boolean on = false;
+		for (int i = 0; i < rulerWidgets.size() && !on; i++) {
+			on = isPanelVisible(rulerWidgets.get(i).getWidgetPanel());
+		}
+		// the widgets hold their activity: keep none of them between two draws
+		rulerWidgets.clear();
 		return on;
+	}
+
+	private boolean isRulerWidgetEnabled() {
+		OsmandSettings settings = app.getSettings();
+		ApplicationMode appMode = settings.getApplicationMode();
+		ScreenLayoutMode layoutMode = getPhoneLayoutMode(settings);
+		List<String> visibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+		if (MapWidgetInfo.isEnabledForAppMode(app, RADIUS_RULER.id, appMode, visibility)) {
+			return true;
+		}
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			List<String> pages = panel.getOrderPreference(settings, layoutMode).getStringsListForProfile(appMode);
+			if (pages != null) {
+				for (String page : pages) {
+					for (String widgetId : page.split(WidgetsPanel.WIDGET_SEPARATOR)) {
+						if (RADIUS_RULER.id.equals(WidgetType.getDefaultWidgetId(widgetId))
+								&& MapWidgetInfo.isEnabledForAppMode(app, widgetId, appMode, visibility)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	@Nullable
+	private ScreenLayoutMode getPhoneLayoutMode(@NonNull OsmandSettings settings) {
+		if (!settings.USE_SEPARATE_LAYOUTS.get()) {
+			return null;
+		}
+		int orientation = app.getResources().getConfiguration().orientation;
+		return orientation == Configuration.ORIENTATION_LANDSCAPE ? ScreenLayoutMode.LANDSCAPE : ScreenLayoutMode.PORTRAIT;
 	}
 
 	private boolean isPanelVisible(WidgetsPanel widgetsPanel) {
@@ -427,7 +479,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		return getApplication().getOsmandMap().getMapView().getAACanvasOffset();
 	}
 
-	private void updateData(RotatedTileBox tb, QuadPoint center) {
+	private void updateData(RotatedTileBox tb, QuadPoint center, boolean zoomAnimating) {
 		if (tb.getPixHeight() > 0 && tb.getPixWidth() > 0 && maxRadiusInDp > 0
 				&& !Double.isNaN(tb.getLatitude()) && !Double.isNaN(tb.getLongitude())) {
 			if (cacheCenter.y != center.y || cacheCenter.x != center.x) {
@@ -439,14 +491,15 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			float mapDensity = getMapDensity();
 			MapRendererView mapRenderer = getMapRenderer();
 			float elevationAngle = mapRenderer != null ? mapRenderer.getElevationAngle() : view.getElevationAngle();
-			boolean updateCache = tb.getZoom() != cacheIntZoom
+			double zoom = tb.getZoom() + tb.getZoomFloatPart();
+			boolean updateCache = zoom != cacheZoom
 					|| !currentCenterLatLon.equals(cacheCenterLatLon) || mapDensity != cacheMapDensity
 					|| cacheMetricSystem != currentMetricSystem || cacheSphericalMap != sphericalMap
 					|| Float.compare(cacheElevationAngle, elevationAngle) != 0;
 
-			if (!tb.isZoomAnimated() && updateCache) {
+			if (updateCache && (radius == 0 || !zoomAnimating)) {
 				cacheMetricSystem = currentMetricSystem;
-				cacheIntZoom = tb.getZoom();
+				cacheZoom = zoom;
 				cacheSphericalMap = sphericalMap;
 				cacheElevationAngle = elevationAngle;
 				cacheCenterLatLon = new LatLon(currentCenterLatLon.getLatitude(), currentCenterLatLon.getLongitude());
@@ -878,7 +931,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	}
 
 	private double getDistanceForPixelRadius(double pixelRadius, @NonNull RotatedTileBox tb) {
-		return sphericalMap && radius > 0
+		return radius > 0
 				? roundedDist * pixelRadius / radius
 				: pixelRadius / tb.getPixDensity();
 	}
@@ -914,21 +967,67 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			return null;
 		}
 		MapRendererView mapRenderer = getMapRenderer();
-		if (sphericalMap && mapRenderer != null) {
-			double absoluteLatitude = Math.abs(latLon.getLatitude());
-			PointI location31 = absoluteLatitude > MapUtils.MAX_LATITUDE
-					? calculateGlobePoint31(latLon)
-					: NativeUtilities.getPoint31FromLatLon(latLon);
+		if (mapRenderer == null) {
+			return NativeUtilities.getElevatedPixelFromLatLon(null, tb, latLon);
+		}
+		if (sphericalMap && Math.abs(latLon.getLatitude()) > MapUtils.MAX_LATITUDE) {
 			PointI screenPoint = new PointI();
-			boolean projected = absoluteLatitude > MapUtils.MAX_LATITUDE
-					? mapRenderer.getScreenPointFromLocation(location31, screenPoint, allowOffscreen)
-					: mapRenderer.getElevatedPointFromLocation(location31, screenPoint, allowOffscreen);
-			if (projected) {
-				return new PointF(screenPoint.getX(), screenPoint.getY());
-			}
+			boolean projected = mapRenderer.getScreenPointFromLocation(calculateGlobePoint31(latLon), screenPoint, allowOffscreen);
+			return projected ? new PointF(screenPoint.getX(), screenPoint.getY()) : null;
+		}
+		int x31 = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(latLon.getLatitude());
+		if (sphericalMap) {
+			return getElevatedPixel(mapRenderer, x31, y31, allowOffscreen);
+		}
+		PointF pixel = getElevatedPixel(mapRenderer, x31, y31, true);
+		return pixel != null ? pixel : new PointF(tb.getPixXFrom31(x31, y31), tb.getPixYFrom31(x31, y31));
+	}
+
+	private void startElevationFallback(@NonNull RotatedTileBox tb) {
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		heightmapsActive = hasMapRenderer() && mapRendererContext != null && mapRendererContext.isHeightmapsActive();
+		hasElevatedPoint = false;
+		if (heightmapsActive) {
+			getRulerPixelFromLatLon(tb, currentCenterLatLon);
+		}
+	}
+
+	@Nullable
+	private PointF getElevatedPixel(@NonNull MapRendererView mapRenderer, int x31, int y31, boolean allowOffscreen) {
+		if (location31 == null) { // PointI needs the native library, which loads after the layer is created
+			location31 = new PointI();
+			screenPoint31 = new PointI();
+			elevatedLocation31 = new PointI();
+		}
+		location31.setX(x31);
+		location31.setY(y31);
+		if (!mapRenderer.getElevatedPointFromLocation(location31, screenPoint31, allowOffscreen)) {
 			return null;
 		}
-		return NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, latLon);
+		PointF pixel = new PointF(screenPoint31.getX(), screenPoint31.getY());
+		if (heightmapsActive) {
+			if (mapRenderer.getLocationHeightInMeters(location31) > NativeUtilities.MIN_ALTITUDE_VALUE) {
+				hasElevatedPoint = true;
+				elevationShiftValid = false;
+				elevatedLocation31.setX(x31);
+				elevatedLocation31.setY(y31);
+				elevatedPixel.set(pixel);
+			} else if (hasElevatedPoint && calculateElevationShift(mapRenderer)) {
+				pixel.offset(elevationShiftX, elevationShiftY);
+			}
+		}
+		return pixel;
+	}
+
+	private boolean calculateElevationShift(@NonNull MapRendererView mapRenderer) {
+		if (!elevationShiftValid
+				&& mapRenderer.getScreenPointFromLocation(elevatedLocation31, screenPoint31, true)) {
+			elevationShiftX = elevatedPixel.x - screenPoint31.getX();
+			elevationShiftY = elevatedPixel.y - screenPoint31.getY();
+			elevationShiftValid = true;
+		}
+		return elevationShiftValid;
 	}
 
 	@NonNull
