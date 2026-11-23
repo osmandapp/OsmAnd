@@ -5359,4 +5359,5 @@
     <string name="city_type_boundary">區域</string>
     <string name="file_name_containes_illegal_char">名稱不能包含：%1$s</string>
     <string name="attach_to_track">附加至軌跡</string>
+    <string name="gpx_line_style_desc_unavailable_for_3d">3D 軌跡不支援虛線與點線樣式。</string>
 </resources>

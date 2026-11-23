@@ -612,7 +612,7 @@
     <string name="poi_weir">Невелика гребля</string>
     <string name="poi_recycling_hardcore">Будівельне сміття</string>
     <string name="poi_waste_disposal">Утилізація сміття;сміттєвий контейнер</string>
-    <string name="poi_commercial">Землі комерційного використання</string>
+    <string name="poi_commercial">Комерційний простір</string>
     <string name="poi_retail">Роздрібна торгівля (землекористування)</string>
     <string name="poi_forest">Ліс (обслуговується)</string>
     <string name="poi_farmyard">Фермерське господарство</string>
