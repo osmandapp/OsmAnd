@@ -12,43 +12,16 @@ import net.osmand.shared.util.collections.KTreeSet
  * What stayed in java is the search pipeline's own: encoding suffixes, dropping common words,
  * splitting a house number into its parts, and the reader helpers that take a protobuf stream.
  *
- * Two deliberate differences from the java original, both about the default locale:
- * - lowercasing here is locale independent. Java lowercases a name with the device's locale, which
- *   turns `I` into `ı` on a turkish phone and makes the same map read differently on two devices.
- *   Obj-C `-lowercaseString`, which iOS matches names with today, is locale independent too.
- * - code points above the basic plane count as letters. Common code cannot ask for the category of
- *   one, and the supplementary characters that appear in place names - the cjk extensions, the
- *   historic scripts - are letters; only a query holding an emoji would tokenize differently.
+ * Token splitting follows the platform default locale, as in Java.
+ *
+ * Code points above the basic plane count as letters. Common code cannot ask for the category of
+ * one, and the supplementary characters that appear in place names - the cjk extensions, the
+ * historic scripts - are letters; only a query holding an emoji would tokenize differently.
  */
 object KSearchAlgorithms {
 
 	fun lowercaseAndAlignChars(fullText: String): String =
-		KSearchAlgorithms.alignChars(lowercase(fullText))
-
-	/**
-	 * What [String.lowercase] answers, char by char. Only `İ`, which lowercases into two chars,
-	 * `Σ`, which lowercases by its neighbours, and surrogate pairs, which lowercase as one code
-	 * point, need the whole string: text holding any of them goes to [String.lowercase].
-	 */
-	internal fun lowercase(text: String): String {
-		var chars: CharArray? = null
-		for (i in text.indices) {
-			val c = text[i]
-			val lower = when {
-				c < '\u0080' -> if (c in 'A'..'Z') c + ('a' - 'A') else c
-				c == 'İ' || c == 'Σ' || c.isSurrogate() -> return text.lowercase()
-				else -> c.lowercaseChar()
-			}
-			if (lower != c) {
-				if (chars == null) {
-					chars = text.toCharArray()
-				}
-				chars[i] = lower
-			}
-		}
-		return chars?.concatToString() ?: text
-	}
-
+		alignChars(lowercaseWithDefaultLocale(fullText))
 
 	const val SUFFIX_DICT_MARKER_RAW_ESCAPE = ''
 	const val SUFFIX_DICT_MARKER_BASE = 0xE100
@@ -83,7 +56,7 @@ object KSearchAlgorithms {
 			}
 			if (!tokenCharacter) {
 				if (prev != -1) {
-					namesToAdd.add(name.substring(prev, i).lowercase())
+					namesToAdd.add(lowercaseWithDefaultLocale(name.substring(prev, i)))
 					prev = -1
 				}
 			} else {
