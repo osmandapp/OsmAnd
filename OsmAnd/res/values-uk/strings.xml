@@ -5534,4 +5534,9 @@
     <string name="terrain_shadows_description">Динамічне затінення 3D-рельєфу в реальному часі. Підкреслює геометрію ландшафту з мінімальним впливом на продуктивність.</string>
     <string name="terrain_shadows_relief_3d_footer">3D-рельєф вмикається автоматично, оскільки він необхідний для візуалізації тіней на рельєфі.</string>
     <string name="visualization">Візуалізація</string>
+    <string name="gpx_line_style_desc_unavailable_for_3d">Стилі штрихових і крапкових ліній недоступні для 3D-траси.</string>
+    <string name="attach_to_track">Прикріпити до доріжки</string>
+    <string name="shared_string_resolution">Роздільна здатність</string>
+    <string name="gpx_line_style_solid">Твердий</string>
+    <string name="astro_az_short">Az</string>
 </resources>
