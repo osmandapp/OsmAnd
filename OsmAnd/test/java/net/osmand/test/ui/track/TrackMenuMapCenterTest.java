@@ -29,7 +29,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.espresso.Espresso;
-import androidx.test.espresso.IdlingResource;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -916,10 +915,15 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 	}
 
 	private void awaitTrackMenuSettled() {
-		IdlingResource idlingResource = new TrackMenuSettledIdlingResource(app);
+		TrackMenuSettledIdlingResource idlingResource = new TrackMenuSettledIdlingResource(app);
 		registerIdlingResources(idlingResource);
-		Espresso.onIdle();
-		unregisterIdlingResources(idlingResource);
+		try {
+			Espresso.onIdle();
+		} finally {
+			// after a timeout it would go on checking the activity, which the end of the test destroys
+			idlingResource.stop();
+			unregisterIdlingResources(idlingResource);
+		}
 	}
 
 	private void importAndSelectGpx() {
@@ -950,6 +954,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 
 		private int stableChecks;
 		private int lastMenuTop = Integer.MIN_VALUE;
+		private volatile boolean stopped;
 
 		public TrackMenuSettledIdlingResource(@NonNull OsmandApplication app) {
 			super(app);
@@ -961,8 +966,15 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			return stableChecks >= STABLE_CHECKS_COUNT;
 		}
 
+		private void stop() {
+			stopped = true;
+		}
+
 		private void scheduleCheck() {
 			new Handler(Looper.getMainLooper()).postDelayed(() -> {
+				if (stopped) {
+					return;
+				}
 				View menuView = getTrackMenuView();
 				int menuTop = menuView != null ? AndroidUtils.getViewBoundOnScreen(menuView).top : Integer.MIN_VALUE;
 				if (menuTop == lastMenuTop && !app.getOsmandMap().getMapView().getAnimatedDraggingThread().isAnimating()) {
