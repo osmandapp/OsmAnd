@@ -24,8 +24,8 @@ import kotlin.math.roundToInt
  * In [SunLightMode.MANUAL] it is the stored azimuth and altitude. In the other modes it is the
  * real sun above the centre of the map - now ([SunLightMode.LIVE]) or at the stored date and time
  * ([SunLightMode.DATE]). Those two follow the map, and live mode also the clock: the light is
- * recalculated every minute while the map is on screen, and the renderer is told only when a whole
- * degree changes.
+ * recalculated every minute while the map is on screen. The renderer gets whole degrees and skips
+ * a configuration that did not change.
  */
 class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugin) {
 
@@ -34,12 +34,10 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 
 	private val handler = Handler(Looper.getMainLooper())
 	private var mapVisible = false
-	private var appliedAzimuth = Int.MIN_VALUE
-	private var appliedAltitude = Int.MIN_VALUE
 
 	private val liveUpdate = object : Runnable {
 		override fun run() {
-			applyIfChanged()
+			plugin.updateElevationConfiguration()
 			handler.postDelayed(this, LIVE_UPDATE_INTERVAL_MS)
 		}
 	}
@@ -60,7 +58,7 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 	/** Date and time of [SunLightMode.DATE]; until one is chosen, now. */
 	fun getDateTime(): Long {
 		val time = plugin.SUN_LIGHT_TIME.get()
-		return if (time > 0) time else System.currentTimeMillis()
+		return if (time != 0L) time else System.currentTimeMillis()
 	}
 
 	/** Short state for the Sun position rows: the mode, the date and time, or the manual angles. */
@@ -72,7 +70,7 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 		}
 		else -> {
 			val azimuth = plugin.HILLSHADE_SUN_AZIMUTH.get()
-			"$azimuth°, ${OsmAndFormatter.getCardinalDirectionForDegrees(azimuth.toDouble())}"
+			"$azimuth°, ${OsmAndFormatter.getLocalizedCardinalDirection(app, azimuth.toDouble())}"
 		}
 	}
 
@@ -89,6 +87,7 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 		return Angles(horizontal.azimuth, horizontal.altitude)
 	}
 
+	/** The map of MapActivity is on the phone screen. */
 	fun setMapVisible(visible: Boolean) {
 		mapVisible = visible
 		updateLiveUpdates()
@@ -97,19 +96,17 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 	/** Starts or stops the minute updates after the mode or the visibility of the map changed. */
 	fun updateLiveUpdates() {
 		handler.removeCallbacks(liveUpdate)
-		if (mapVisible && plugin.SUN_LIGHT_MODE.get() != SunLightMode.MANUAL) {
+		// The Android Auto map stays on the car screen also while the phone is locked
+		val mapOnScreen = mapVisible || app.isAppInForegroundOnAndroidAuto
+		if (mapOnScreen && plugin.SUN_LIGHT_MODE.get() != SunLightMode.MANUAL) {
 			liveUpdate.run()
 		}
 	}
 
-	private fun applyIfChanged() {
-		val azimuth = getLightAzimuth()
-		val altitude = getLightAltitude()
-		if (azimuth != appliedAzimuth || altitude != appliedAltitude) {
-			appliedAzimuth = azimuth
-			appliedAltitude = altitude
-			plugin.updateElevationConfiguration()
-		}
+	/** Stops the minute updates when the plugin is turned off, whichever map is on screen. */
+	fun stopLiveUpdates() {
+		mapVisible = false
+		handler.removeCallbacks(liveUpdate)
 	}
 
 	companion object {

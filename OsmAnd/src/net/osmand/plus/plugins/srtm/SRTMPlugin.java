@@ -13,6 +13,7 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
 
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
@@ -207,7 +208,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		settings.CAST_SHADOWS.addListener(castShadowsListener);
 
 		sunLightModeListener = change -> app.runInUIThread(() -> {
-			sunLight.updateLiveUpdates();
+			// A turned off plugin gets no car session stop that would end the updates
+			if (isEnabled()) {
+				sunLight.updateLiveUpdates();
+			}
 			updateElevationConfiguration();
 		});
 		SUN_LIGHT_MODE.addListener(sunLightModeListener);
@@ -229,6 +233,16 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityPause(@NonNull MapActivity activity) {
 		sunLight.setMapVisible(false);
+	}
+
+	@Override
+	public void onCarNavigationSessionStart() {
+		sunLight.updateLiveUpdates();
+	}
+
+	@Override
+	public void onCarNavigationSessionStop() {
+		sunLight.updateLiveUpdates();
 	}
 
 	public void updateElevationConfiguration() {
@@ -327,13 +341,20 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		}
 		NativeCoreContext.updateContourLinesDirectory(app, true);
+		// Turned on while a map is on screen: no resume or car session start will follow
+		if (activity instanceof MapActivity mapActivity
+				&& AndroidUtils.isStateAtLeast(mapActivity, Lifecycle.State.RESUMED)) {
+			sunLight.setMapVisible(true);
+		} else {
+			sunLight.updateLiveUpdates();
+		}
 		return true;
 	}
 
 	@Override
 	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
-		sunLight.setMapVisible(false);
+		sunLight.stopLiveUpdates();
 		NativeCoreContext.updateContourLinesDirectory(app, false);
 	}
 

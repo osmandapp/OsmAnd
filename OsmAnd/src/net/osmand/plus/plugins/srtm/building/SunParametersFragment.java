@@ -21,8 +21,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
@@ -343,7 +343,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 	@NonNull
 	private String formatAzimuth(int value) {
-		String cardinalDirection = RadiusRulerControlLayer.getCardinalDirectionForDegrees(value);
+		String cardinalDirection = OsmAndFormatter.getLocalizedCardinalDirection(requireContext(), value);
 		return String.format(Locale.getDefault(), "%d°, %s", value, cardinalDirection);
 	}
 

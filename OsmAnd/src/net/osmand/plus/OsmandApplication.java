@@ -863,10 +863,16 @@ public class OsmandApplication extends MultiDexApplication {
 	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = true;
 		routingHelper.onCarNavigationStart();
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
+			plugin.onCarNavigationSessionStart();
+		}
 	}
 
 	public void onCarNavigationSessionStop(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = false;
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
+			plugin.onCarNavigationSessionStop();
+		}
 	}
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
