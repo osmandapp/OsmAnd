@@ -123,7 +123,7 @@ public class RoutingHelper {
 		routeWasFinished = false;
 	}
 
-	void setRoute(RouteCalculationResult route) {
+	synchronized void setRoute(RouteCalculationResult route) {
 		this.route = route;
 	}
 
