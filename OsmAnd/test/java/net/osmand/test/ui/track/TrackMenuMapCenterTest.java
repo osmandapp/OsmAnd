@@ -1,7 +1,9 @@
 package net.osmand.test.ui.track;
 
+import static net.osmand.plus.simulation.SimulationProvider.SIMULATED_PROVIDER;
 import static net.osmand.test.common.OsmAndDialogInteractions.clickViewWithId;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
+import static net.osmand.test.common.OsmAndDialogInteractions.skipSpeedCamerasBottomSheet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -36,6 +38,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -47,17 +50,24 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.WidgetUtils;
+import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Track;
@@ -79,6 +89,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /**
@@ -92,6 +103,10 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 
 	private static final String SELECTED_GPX_NAME = "gpx_recalc_test.gpx";
 	private static final String TALL_GPX_NAME = "track_menu_chart_point_test.gpx";
+	// the start of gpx_recalc_test.gpx, as in RouteRecalculationFromBeginningTest
+	private static final LatLon TRACK_START = new LatLon(50.17356, 18.51406);
+	private static final long ROUTE_TIMEOUT_MS = 30_000;
+	private static final String BOTTOM_WIDGET_ID = WidgetType.CURRENT_TIME.id + MapWidgetInfo.DELIMITER + "bottom_panel_test";
 	private static final float RATIO_TOLERANCE = 0.05f;
 	private static final float TRACK_CENTER_TOLERANCE = 0.03f;
 	private static final int ZOOM_INTO_TRACK = 18;
@@ -317,6 +332,144 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			setTopPanelWidget(widgetEnabled);
 			setSuggestMapEnabled(suggestMapEnabled);
 		}
+	}
+
+	/**
+	 * The return from the background (Home or the lock screen) recreates the map widgets, so both panels are hidden
+	 * and shown again, the top one first. The map center must stay where it was, above the bottom panel (#27180).
+	 */
+	@Test
+	public void testMapCenterKeptAboveBottomPanelAfterReturnFromBackground() throws Throwable {
+		skipAppStartDialogs(app);
+		boolean suggestMapEnabled = setSuggestMapEnabled(false);
+		boolean widgetEnabled = setTopPanelWidget(true);
+		setBottomPanelWidget(true);
+		try {
+			assertMapCenterKeptBetweenPanelsAfterReturnFromBackground();
+		} finally {
+			setBottomPanelWidget(false);
+			setTopPanelWidget(widgetEnabled);
+			setSuggestMapEnabled(suggestMapEnabled);
+		}
+	}
+
+	/**
+	 * The same in navigation, where the map center is the location marker: it went under the bottom panel (#27180).
+	 */
+	@Test
+	public void testLocationMarkerKeptAboveBottomPanelAfterReturnFromBackgroundInNavigation() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		boolean suggestMapEnabled = setSuggestMapEnabled(false);
+		startNavigationAlongTrack();
+		// navigation switches to its own profile, so the widgets are shown in that one
+		boolean widgetEnabled = setTopPanelWidget(true);
+		setBottomPanelWidget(true);
+		try {
+			assertMapCenterKeptBetweenPanelsAfterReturnFromBackground();
+			assertTrackStartInVisibleMapRect();
+		} finally {
+			setBottomPanelWidget(false);
+			setTopPanelWidget(widgetEnabled);
+			app.stopNavigation();
+			setSuggestMapEnabled(suggestMapEnabled);
+		}
+	}
+
+	private void assertMapCenterKeptBetweenPanelsAfterReturnFromBackground() {
+		awaitTrackMenuSettled();
+		assumeTrue("A top toolbar hides the top panel", isTopPanelShown());
+		assertTrue("Bottom panel is not shown", isBottomPanelShown());
+		assertVisibleMapRectFreeOfPanels("Before the return from the background");
+		float ratioBefore = getMapRatio().y;
+
+		scenarioRule.getScenario().moveToState(Lifecycle.State.CREATED);
+		scenarioRule.getScenario().moveToState(Lifecycle.State.RESUMED);
+		awaitTrackMenuSettled();
+		assertVisibleMapRectFreeOfPanels("After the return from the background");
+		assertEquals("Map center after the return from the background", ratioBefore, getMapRatio().y, 0.005f);
+	}
+
+	/**
+	 * The map center is placed in the visible part of the map, so that part must not reach under a shown panel.
+	 */
+	private void assertVisibleMapRectFreeOfPanels(@NonNull String when) {
+		scenarioRule.getScenario().onActivity(activity -> {
+			Rect visibleRect = getDisplayPositionManager().getVisibleMapRect();
+			assertNotNull("No visible map part", visibleRect);
+			int[] mapOnScreen = AndroidUtils.getLocationOnScreen(app.getOsmandMap().getMapView().getView());
+			for (int panelId : new int[] {R.id.top_widgets_panel, R.id.map_bottom_widgets_panel}) {
+				View panel = activity.findViewById(panelId);
+				if (panel.isShown()) {
+					Rect panelRect = AndroidUtils.getViewBoundOnScreen(panel);
+					panelRect.offset(-mapOnScreen[0], -mapOnScreen[1]);
+					assertFalse(when + ": the visible map part " + visibleRect + " reaches under "
+							+ activity.getResources().getResourceEntryName(panelId) + " " + panelRect,
+							Rect.intersects(visibleRect, panelRect));
+				}
+			}
+		});
+	}
+
+	private void assertTrackStartInVisibleMapRect() {
+		scenarioRule.getScenario().onActivity(activity -> {
+			RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
+			int x = (int) tileBox.getPixXFromLatLon(TRACK_START.getLatitude(), TRACK_START.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(TRACK_START.getLatitude(), TRACK_START.getLongitude());
+			Rect visibleRect = getDisplayPositionManager().getVisibleMapRect();
+			assertTrue("The location marker at " + x + "," + y + " is out of the visible map part " + visibleRect,
+					visibleRect != null && visibleRect.contains(x, y));
+		});
+	}
+
+	/**
+	 * Starts navigation along the selected track from its start. It does not go through the route screen, whose
+	 * button may be hidden on the map.
+	 */
+	private void startNavigationAlongTrack() {
+		scenarioRule.getScenario().onActivity(activity -> {
+			// without it the device's own position is used, and the route is calculated from there
+			app.getLocationProvider().setCustomLocation(new Location(SIMULATED_PROVIDER,
+					TRACK_START.getLatitude(), TRACK_START.getLongitude()), TimeUnit.MINUTES.toMillis(5));
+			MapActions mapActions = app.getOsmandMap().getMapActions();
+			mapActions.enterRoutePlanningModeGivenGpx(selectedGpxFile.getGpxFile(), TRACK_START, null, false, false);
+			mapActions.startNavigation();
+		});
+		skipSpeedCamerasBottomSheet();
+		long deadline = SystemClock.elapsedRealtime() + ROUTE_TIMEOUT_MS;
+		while (!app.getRoutingHelper().isRouteCalculated() && SystemClock.elapsedRealtime() < deadline) {
+			SystemClock.sleep(200);
+		}
+		assertTrue("The route along the track is not calculated", app.getRoutingHelper().isRouteCalculated());
+		assertTrue("Navigation is not started", app.getRoutingHelper().isFollowingMode());
+	}
+
+	private boolean isBottomPanelShown() {
+		boolean[] shown = new boolean[1];
+		scenarioRule.getScenario().onActivity(activity -> shown[0] = activity.findViewById(R.id.map_bottom_widgets_panel).isShown());
+		return shown[0];
+	}
+
+	/**
+	 * Adds the widget to the bottom panel or removes it, as the Configure screen does.
+	 */
+	private void setBottomPanelWidget(boolean enabled) {
+		scenarioRule.getScenario().onActivity(activity -> {
+			ApplicationMode appMode = app.getSettings().getApplicationMode();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+			MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+			if (enabled) {
+				WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode, layoutMode);
+				MapWidgetInfo widgetInfo = creator.createWidgetInfo(new MapWidgetsFactory(activity), BOTTOM_WIDGET_ID, WidgetType.CURRENT_TIME);
+				assertNotNull(widgetInfo);
+				WidgetUtils.createNewWidget(activity, widgetInfo, WidgetsPanel.BOTTOM, appMode, layoutMode, true);
+			} else {
+				MapWidgetInfo widgetInfo = registry.getWidgetInfoById(BOTTOM_WIDGET_ID);
+				if (widgetInfo != null) {
+					registry.removeWidget(activity, appMode, widgetInfo, layoutMode);
+				}
+			}
+		});
 	}
 
 	/**
