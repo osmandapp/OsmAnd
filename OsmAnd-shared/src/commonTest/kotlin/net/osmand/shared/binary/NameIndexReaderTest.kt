@@ -10,6 +10,7 @@ import net.osmand.shared.util.dumpUnhex
 import net.osmand.shared.util.openJavaDump
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.test.fail
 
@@ -25,6 +26,14 @@ import kotlin.test.fail
  * holds it to java exactly.
  */
 class NameIndexReaderTest {
+
+	@Test
+	fun matchesHyphenatedKeysAndIncompleteQueries() {
+		assertTrue(NameIndexReader.NameIndexReaderMatcher("42").matchKey("NC-42"))
+		assertTrue(NameIndexReader.NameIndexReaderMatcher("2xyz").matchKey("2-x"))
+		assertTrue(NameIndexReader.NameIndexReaderMatcher("lod.").matchKey("lodz"))
+		assertFalse(NameIndexReader.NameIndexReaderMatcher("lod").matchKey("lodz"))
+	}
 
 	@Test
 	fun sameAsJava() {

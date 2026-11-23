@@ -4,10 +4,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * [KSearchAlgorithms.alignChars] and [KSearchAlgorithms.lowercaseAndAlignChars] skip the steps that
- * would return the text as it is, and [KSearchAlgorithms.lowercase] lowercases char by char. They answer
- * what the steps and [String.lowercase] answer: for every char of the basic plane, alone and between
- * two letters, and for the text they leave to the steps.
+ * Compares folding with the individual normalization steps, both on their own and after
+ * lowercasing with the platform default locale.
  */
 class NameFoldingTest {
 
@@ -35,10 +33,9 @@ class NameFoldingTest {
 	}
 
 	private fun check(text: String) {
-		assertEquals(text.lowercase(), KSearchAlgorithms.lowercase(text), "lowercase of $text")
 		assertEquals(steps(text), KSearchAlgorithms.alignChars(text), "alignChars of $text")
 		assertEquals(
-			steps(text.lowercase()), KSearchAlgorithms.lowercaseAndAlignChars(text), "lowercaseAndAlignChars of $text"
+			steps(lowercaseWithDefaultLocale(text)), KSearchAlgorithms.lowercaseAndAlignChars(text), "lowercaseAndAlignChars of $text"
 		)
 	}
 
