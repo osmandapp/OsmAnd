@@ -13,6 +13,7 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
 
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
@@ -340,6 +341,13 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		}
 		NativeCoreContext.updateContourLinesDirectory(app, true);
+		// Turned on while a map is on screen: no resume or car session start will follow
+		if (activity instanceof MapActivity mapActivity
+				&& AndroidUtils.isStateAtLeast(mapActivity, Lifecycle.State.RESUMED)) {
+			sunLight.setMapVisible(true);
+		} else {
+			sunLight.updateLiveUpdates();
+		}
 		return true;
 	}
 
