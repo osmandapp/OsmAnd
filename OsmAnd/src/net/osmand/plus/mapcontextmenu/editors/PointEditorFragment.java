@@ -1,7 +1,9 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.myplaces.favorites.FavoriteGroup.isPersonalCategoryDisplayName;
+import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.utils.InsetTarget;
@@ -394,11 +397,12 @@ public abstract class PointEditorFragment extends EditorFragment {
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		this.selectedGroup = group;
 		if (updateAppearance) {
-			setColor(group.getColor());
-			setColorSelected(false);
+			setColor(manualChanges.colorOnFolderChange(getColor(), group.getColor()));
 			selectColorInPalette();
-			setIconName(group.getIconName());
-			setBackgroundType(group.getBackgroundType());
+			String groupIconName = group.getIconName() != null ? group.getIconName() : DEFAULT_ICON_NAME;
+			setIconName(manualChanges.iconOnFolderChange(getIconName(), groupIconName));
+			BackgroundType groupShape = BackgroundType.getByTypeName(group.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+			setBackgroundType(manualChanges.shapeOnFolderChange(getBackgroundType(), groupShape));
 			updateContent();
 		}
 		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.getName()));

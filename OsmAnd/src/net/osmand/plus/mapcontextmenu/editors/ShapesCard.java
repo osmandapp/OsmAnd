@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.BackgroundType;
@@ -17,6 +19,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
 public class ShapesCard extends BaseCard {
@@ -77,11 +80,15 @@ public class ShapesCard extends BaseCard {
 	}
 
 	protected Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
+		int iconRes = getShapeVariantId(shapeIconId, "_contour");
+		return getColoredIcon(iconRes, ColorUtilities.getActiveColorId(nightMode));
+	}
+
+	@DrawableRes
+	private int getShapeVariantId(@DrawableRes int shapeIconId, @NonNull String suffix) {
 		Resources resources = app.getResources();
 		String shapeIconName = resources.getResourceName(shapeIconId);
-		String shapeBackgroundIconName = shapeIconName + "_contour";
-		int iconRes = resources.getIdentifier(shapeBackgroundIconName, "drawable", app.getPackageName());
-		return getColoredIcon(iconRes, ColorUtilities.getStrokedButtonsOutlineColorId(nightMode));
+		return resources.getIdentifier(shapeIconName + suffix, "drawable", app.getPackageName());
 	}
 
 	private void reselectShape(@NonNull BackgroundType shape, boolean notifyListener) {
@@ -107,8 +114,22 @@ public class ShapesCard extends BaseCard {
 		if (newShapeView != null) {
 			newShapeView.findViewById(R.id.outline).setVisibility(View.VISIBLE);
 			ImageView background = newShapeView.findViewById(R.id.background);
-			background.setImageDrawable(getPaintedIcon(newShape.getIconId(), selectedColor));
+			background.setImageDrawable(getSelectedShapeDrawable(newShape));
 		}
+	}
+
+	/**
+	 * The selected shape in the point colour with a border, so that a dark colour
+	 * stays visible on the dark background.
+	 */
+	@NonNull
+	private Drawable getSelectedShapeDrawable(@NonNull BackgroundType shape) {
+		int borderColor = ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode);
+		int borderId = getShapeVariantId(shape.getIconId(), "_border");
+		// own copies: the layer drawable sets their bounds, cached icons are shared
+		Drawable solid = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, shape.getIconId()), selectedColor);
+		Drawable border = UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, borderId), borderColor);
+		return new LayerDrawable(new Drawable[] {solid, border});
 	}
 
 	protected void setUnselectedBackground(@NonNull BackgroundType backgroundType, @NonNull ImageView background) {

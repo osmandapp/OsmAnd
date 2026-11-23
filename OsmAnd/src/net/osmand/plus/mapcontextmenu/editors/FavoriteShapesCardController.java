@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -20,7 +19,6 @@ import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -97,15 +95,6 @@ public class FavoriteShapesCardController extends BaseMultiStateCardController {
 			BackgroundType type = (BackgroundType) selectedState.getTag();
 			if (type != null) {
 				shapesCard = new ShapesCard(activity, type, centralController.requireColor()){
-
-					@Override
-					protected Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
-						Resources resources = app.getResources();
-						String shapeIconName = resources.getResourceName(shapeIconId);
-						String shapeBackgroundIconName = shapeIconName + "_contour";
-						int iconRes = resources.getIdentifier(shapeBackgroundIconName, "drawable", app.getPackageName());
-						return getColoredIcon(iconRes, ColorUtilities.getActiveColorId(nightMode));
-					}
 
 					@Override
 					public void setUnselectedBackground(@NonNull BackgroundType backgroundType, @NonNull ImageView background) {

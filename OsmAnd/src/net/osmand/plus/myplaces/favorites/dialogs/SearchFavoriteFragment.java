@@ -586,8 +586,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 					}
 					selectionHelper.clearSelectedItems();
 				} else if (pointToMove != null) {
-					helper.editFavouriteName(pointToMove, pointToMove.getName(), category,
-							pointToMove.getDescription(), pointToMove.getAddress());
+					helper.editFavouritesGroup(Collections.singletonList(pointToMove), category);
 				}
 				updateAfterMove();
 			}
