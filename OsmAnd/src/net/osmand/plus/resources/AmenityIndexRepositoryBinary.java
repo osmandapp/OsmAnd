@@ -45,6 +45,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	private final MapPoiTypes poiTypes;
 	private final File file;
 	private Map<String, List<String>> deltaPoiCategories = new HashMap<>();
+	private final Map<String, List<PoiSubType>> poiSubTypesByPrefix = new HashMap<>();
 
 	public AmenityIndexRepositoryBinary(@NonNull File file,
 	                                    @NonNull BinaryMapReaderResource resource,
@@ -149,11 +150,16 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@NonNull
 	public synchronized List<PoiSubType> searchPoiSubTypesByPrefix(@NonNull String query) {
+		List<PoiSubType> cached = poiSubTypesByPrefix.get(query);
+		if (cached != null) {
+			return new ArrayList<>(cached);
+		}
 		List<PoiSubType> poiSubTypes = new ArrayList<>();
 		try {
 			BinaryMapIndexReader reader = getOpenReader();
 			if (reader != null) {
 				poiSubTypes.addAll(reader.searchPoiSubTypesByPrefix(query));
+				poiSubTypesByPrefix.put(query, new ArrayList<>(poiSubTypes));
 			}
 		} catch (Exception e) {
 			log.error("Error searching poiSubTypes", e);

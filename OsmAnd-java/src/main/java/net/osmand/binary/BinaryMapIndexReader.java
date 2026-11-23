@@ -1587,9 +1587,16 @@ public class BinaryMapIndexReader {
 		}
 		List<PoiSubType> list = new ArrayList<>();
 		for (PoiRegion poiIndex : poiIndexes) {
-			poiAdapter.initCategories(poiIndex);
-			for (int i = 0; i < poiIndex.subTypes.size(); i++) {
-				PoiSubType subType = poiIndex.subTypes.get(i);
+			PoiRegion region = poiIndex;
+			if (region.categories.isEmpty()) {
+				// read the tables into a copy: a scan of every installed map must not keep all their tables in memory
+				region = new PoiRegion();
+				region.filePointer = poiIndex.filePointer;
+				region.length = poiIndex.length;
+				poiAdapter.initCategories(region);
+			}
+			for (int i = 0; i < region.subTypes.size(); i++) {
+				PoiSubType subType = region.subTypes.get(i);
 				if (subType.name.startsWith(query)) {
 					list.add(subType);
 				}
