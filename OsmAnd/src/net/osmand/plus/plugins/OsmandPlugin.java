@@ -575,6 +575,16 @@ public abstract class OsmandPlugin {
 
 	}
 
+	/** The Android Auto screen of the app became visible in the car. */
+	public void onCarNavigationSessionStart() {
+
+	}
+
+	/** The Android Auto screen of the app is no longer visible in the car. */
+	public void onCarNavigationSessionStop() {
+
+	}
+
 	public void newRouteIsCalculated(boolean newRoute) {
 	}
 }

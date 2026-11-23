@@ -87,6 +87,7 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 		return Angles(horizontal.azimuth, horizontal.altitude)
 	}
 
+	/** The map of MapActivity is on the phone screen. */
 	fun setMapVisible(visible: Boolean) {
 		mapVisible = visible
 		updateLiveUpdates()
@@ -95,9 +96,17 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 	/** Starts or stops the minute updates after the mode or the visibility of the map changed. */
 	fun updateLiveUpdates() {
 		handler.removeCallbacks(liveUpdate)
-		if (mapVisible && plugin.SUN_LIGHT_MODE.get() != SunLightMode.MANUAL) {
+		// The Android Auto map stays on the car screen also while the phone is locked
+		val mapOnScreen = mapVisible || app.isAppInForegroundOnAndroidAuto
+		if (mapOnScreen && plugin.SUN_LIGHT_MODE.get() != SunLightMode.MANUAL) {
 			liveUpdate.run()
 		}
+	}
+
+	/** Stops the minute updates when the plugin is turned off, whichever map is on screen. */
+	fun stopLiveUpdates() {
+		mapVisible = false
+		handler.removeCallbacks(liveUpdate)
 	}
 
 	companion object {
