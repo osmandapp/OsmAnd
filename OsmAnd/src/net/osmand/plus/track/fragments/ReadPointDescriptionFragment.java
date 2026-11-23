@@ -60,9 +60,7 @@ public class ReadPointDescriptionFragment extends ReadDescriptionFragment {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ReadPointDescriptionFragment fragment = new ReadPointDescriptionFragment();
-			Bundle args = new Bundle();
-			args.putString(CONTENT_KEY, description);
-			fragment.setArguments(args);
+			fragment.setContent(description);
 			fragment.show(manager, ReadDescriptionFragment.TAG);
 		}
 	}

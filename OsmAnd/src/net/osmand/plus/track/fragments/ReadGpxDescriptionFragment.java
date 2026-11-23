@@ -74,11 +74,9 @@ public class ReadGpxDescriptionFragment extends ReadDescriptionFragment {
 		return mImageUrl;
 	}
 
-	private void writeBundle(@NonNull Bundle bundle, @NonNull String title,
-	                         @Nullable String imageUrl, @NonNull String description) {
+	private void writeBundle(@NonNull Bundle bundle, @NonNull String title, @Nullable String imageUrl) {
 		bundle.putString(TITLE_KEY, title);
 		bundle.putString(IMAGE_URL_KEY, imageUrl);
-		bundle.putString(CONTENT_KEY, description);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
@@ -90,8 +88,9 @@ public class ReadGpxDescriptionFragment extends ReadDescriptionFragment {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ReadGpxDescriptionFragment fragment = new ReadGpxDescriptionFragment();
 			Bundle args = new Bundle();
-			fragment.writeBundle(args, title, imageUrl, description);
+			fragment.writeBundle(args, title, imageUrl);
 			fragment.setArguments(args);
+			fragment.setContent(description);
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.show(manager, ReadGpxDescriptionFragment.TAG);
 		}
