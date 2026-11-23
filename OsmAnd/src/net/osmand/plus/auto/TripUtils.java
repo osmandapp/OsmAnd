@@ -125,7 +125,32 @@ public class TripUtils {
 		return Distance.UNIT_METERS;
 	}
 
-	public static int getManeuverType(@NonNull TurnType turnType) {
+	@NonNull
+	public static Maneuver.Builder createManeuverBuilder(@NonNull TurnType turnType) {
+		Maneuver.Builder builder = new Maneuver.Builder(getManeuverType(turnType));
+		if (turnType.isRoundAbout()) {
+			builder.setRoundaboutExitNumber(turnType.getExitOut());
+			builder.setRoundaboutExitAngle(getRoundaboutExitAngle(turnType));
+		}
+		return builder;
+	}
+
+	/**
+	 * Converts OsmAnd's signed turn angle (positive to the right) into the Car App Library
+	 * exit angle: degrees travelled along the circle from the entrance to the exit, 1..360.
+	 */
+	public static int getRoundaboutExitAngle(@NonNull TurnType turnType) {
+		float turnAngle = turnType.getTurnAngle();
+		float travelledAngle = turnType.isLeftSide() ? 180 + turnAngle : 180 - turnAngle;
+		int exitAngle = Math.floorMod(Math.round(travelledAngle), 360);
+		if (exitAngle == 0) {
+			boolean fullCircle = turnType.getExitOut() > 1;
+			return fullCircle ? 360 : 1;
+		}
+		return exitAngle;
+	}
+
+	private static int getManeuverType(@NonNull TurnType turnType) {
 		return switch (turnType.getValue()) {
 			case TurnType.C -> Maneuver.TYPE_STRAIGHT; // continue (go straight)
 			case TurnType.TL -> Maneuver.TYPE_TURN_NORMAL_LEFT; // turn left
@@ -139,8 +164,8 @@ public class TripUtils {
 			case TurnType.TU -> Maneuver.TYPE_U_TURN_LEFT; // U-turn
 			case TurnType.TRU -> Maneuver.TYPE_U_TURN_RIGHT; // Right U-turn
 			case TurnType.OFFR -> Maneuver.TYPE_UNKNOWN; // Off route
-			case TurnType.RNDB -> Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW; // Roundabout
-			case TurnType.RNLB -> Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW; // Roundabout left
+			case TurnType.RNDB -> Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW_WITH_ANGLE; // Roundabout
+			case TurnType.RNLB -> Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW_WITH_ANGLE; // Roundabout left
 			default -> Maneuver.TYPE_UNKNOWN;
 		};
 	}
