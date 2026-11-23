@@ -24,8 +24,8 @@ import kotlin.math.roundToInt
  * In [SunLightMode.MANUAL] it is the stored azimuth and altitude. In the other modes it is the
  * real sun above the centre of the map - now ([SunLightMode.LIVE]) or at the stored date and time
  * ([SunLightMode.DATE]). Those two follow the map, and live mode also the clock: the light is
- * recalculated every minute while the map is on screen, and the renderer is told only when a whole
- * degree changes.
+ * recalculated every minute while the map is on screen. The renderer gets whole degrees and skips
+ * a configuration that did not change.
  */
 class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugin) {
 
@@ -34,12 +34,10 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 
 	private val handler = Handler(Looper.getMainLooper())
 	private var mapVisible = false
-	private var appliedAzimuth = Int.MIN_VALUE
-	private var appliedAltitude = Int.MIN_VALUE
 
 	private val liveUpdate = object : Runnable {
 		override fun run() {
-			applyIfChanged()
+			plugin.updateElevationConfiguration()
 			handler.postDelayed(this, LIVE_UPDATE_INTERVAL_MS)
 		}
 	}
@@ -99,16 +97,6 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 		handler.removeCallbacks(liveUpdate)
 		if (mapVisible && plugin.SUN_LIGHT_MODE.get() != SunLightMode.MANUAL) {
 			liveUpdate.run()
-		}
-	}
-
-	private fun applyIfChanged() {
-		val azimuth = getLightAzimuth()
-		val altitude = getLightAltitude()
-		if (azimuth != appliedAzimuth || altitude != appliedAltitude) {
-			appliedAzimuth = azimuth
-			appliedAltitude = altitude
-			plugin.updateElevationConfiguration()
 		}
 	}
 
