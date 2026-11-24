@@ -477,7 +477,12 @@ public class ColorUtilities {
 
 	@ColorInt
 	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
-		return getColor(ctx, nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light);
+		return getColor(ctx, getMapButtonIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getMapButtonIconColorId(boolean nightMode) {
+		return nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light;
 	}
 
 	@ColorInt

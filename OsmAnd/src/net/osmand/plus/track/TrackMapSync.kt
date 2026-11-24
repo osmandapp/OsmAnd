@@ -123,7 +123,7 @@ class TrackMapSync @JvmOverloads constructor(
 		val iconColorId = if (isInSync) {
 			R.color.color_myloc_distance
 		} else {
-			ColorUtilities.getDefaultIconColorId(nightMode)
+			ColorUtilities.getMapButtonIconColorId(nightMode)
 		}
 		val icon = app.uiUtilities.getIcon(R.drawable.ic_action_center_on_track, iconColorId)
 		button.setImageDrawable(AndroidUtils.getDrawableForDirection(app, icon))
