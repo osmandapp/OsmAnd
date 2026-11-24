@@ -5429,4 +5429,8 @@
     <string name="terrain_shadows_relief_3d_footer">A 3D-domborzat automatikusan lett engedélyezve, mivel ez szükséges a terepárnyékok megjelenítéséhez.</string>
     <string name="attach_to_track">Mellékelés nyomvonalhoz</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Szaggatott és pontozott vonalstílusok nem érhetők el a 3D nyomvonalakhoz.</string>
+    <string name="shadows_on_description">Árnyékok be: az épületek árnyékot vetnek a nap fényében.</string>
+    <string name="shadows_off_description">Árnyékok ki: az épületek árnyék nélkül jelennek meg.</string>
+    <string name="shared_string_new">Új</string>
+    <string name="sun_light_live">Élő</string>
 </resources>
