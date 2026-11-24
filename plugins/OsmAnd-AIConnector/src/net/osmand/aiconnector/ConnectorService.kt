@@ -136,7 +136,9 @@ class ConnectorService : Service() {
 	}
 
 	private fun buildNotification(): Notification {
-		val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java),
+		val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java).putExtra(MainActivity.EXTRA_COMPUTER, true)
+			// the open screen switches to the computer connection instead of a second screen on top of it
+			.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP),
 			PendingIntent.FLAG_IMMUTABLE)
 		val address = runningUrl?.removePrefix("http://")?.removeSuffix("/mcp")
 		return Notification.Builder(this, CHANNEL)
