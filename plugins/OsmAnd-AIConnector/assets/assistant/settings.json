@@ -1,0 +1,740 @@
+[
+{
+"id": "nrenderer_transportStops",
+"title": "Transport stops",
+"ru": "Остановки транспорта",
+"about": "Public transport stops",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showBusRoutes",
+"title": "Bus routes",
+"ru": "Автобусные маршруты",
+"about": "Show bus routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showTrolleybusRoutes",
+"title": "Trolleybus routes",
+"ru": "Троллейбусные маршруты",
+"about": "Show trolleybus routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showShareTaxiRoutes",
+"title": "Shuttle routes",
+"ru": "Маршрутные такси",
+"about": "Show share taxi routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showTramRoutes",
+"title": "Tram routes",
+"ru": "Трамвайные маршруты",
+"about": "Show tram routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showTrainRoutes",
+"title": "Train routes",
+"ru": "Железнодорожные маршруты",
+"about": "Show train routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showLightRailRoutes",
+"title": "Light rail routes",
+"ru": "Маршруты легкорельсового транспорта",
+"about": "Show light rail routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showMonorailRoutes",
+"title": "Monorail routes",
+"ru": "Монорельсовые маршруты",
+"about": "Show monorail routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showFunicularRoutes",
+"title": "Funicular routes",
+"ru": "Фуникулерные маршруты",
+"about": "Show funicular routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_subwayMode",
+"title": "Subway routes",
+"ru": "Линии метро",
+"about": "Subway rendering mode",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_moreDetailed",
+"title": "More details",
+"ru": "Повышенная детализация детали детальнее",
+"about": "More details on map",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showSurfaces",
+"title": "Show road surface",
+"ru": "Тип дорожного покрытия",
+"about": "Show road surfaces",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showSurfaceGrade",
+"title": "Show road quality",
+"ru": "Качество дорог",
+"about": "Show road quality",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showToll",
+"title": "Show toll restrictions",
+"ru": "Показывать ограничения платного проезда",
+"about": "Show toll restrictions on roads",
+"ru_about": "Показывать ограничения платного проезда на дорогах",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showLez",
+"title": "Show Low Emission Zones",
+"ru": "Зоны с низким уровнем выбросов",
+"about": "Show Low Emission Zones on the map. Does not affect routing.",
+"ru_about": "Показывать на карте зоны с низким уровнем выбросов. Не влияет на навигацию.",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_coloredBuildings",
+"title": "Color-code buildings by type",
+"ru": "Цветовая маркировка зданий по типу",
+"about": "Buildings colored by type",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_streetLighting",
+"title": "Street lighting",
+"ru": "Уличное освещение",
+"about": "Show street lighting",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_streetLightingNight",
+"title": "Show only at night",
+"ru": "Показывать только ночью",
+"about": "Show street lighting only at night",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showWaterwayTunnels",
+"title": "Increase visibility for waterway tunnels",
+"ru": "Повысить видимость водных туннелей",
+"about": "Increase visibility for waterway tunnels",
+"ru_about": "Отображение водных туннелей на меньших уровнях масштабирования",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_natureReserves",
+"title": "Nature reserve and Protected areas",
+"ru": "Природные заповедники и охраняемые территории",
+"about": "Show nature reserve, protected areas, and national parks.",
+"ru_about": "Показать заповедники, особо охраняемые природные территории и национальные парки.",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_horseScale",
+"title": "Difficulty of horse trails",
+"ru": "Сложность конных маршрутов",
+"about": "Render paths according to difficulty of horse trails",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showProposed",
+"title": "Proposed objects",
+"ru": "Планируемые объекты",
+"about": "Show proposed objects",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showAccess",
+"title": "Show access restrictions",
+"ru": "Показывать ограничения доступа",
+"about": "Show access type",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_whiteWaterSports",
+"title": "Whitewater sports",
+"ru": "Спортивные сплавы",
+"about": "Whitewater sports",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showClimbingRoutes",
+"title": "Climbing routes",
+"ru": "Скалолазные маршруты",
+"about": "Show climbing routes",
+"ru_about": "Показать скалолазные маршруты",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_noAdminboundaries",
+"title": "Boundaries",
+"ru": "Границы",
+"about": "Suppress display of regional boundaries (admin levels 5–9).",
+"ru_about": "Скрыть региональные границы (admin levels 5-9).",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_noPolygons",
+"title": "Polygons",
+"ru": "Полигоны",
+"about": "Make all areal land features on map transparent.",
+"ru_about": "Показывать только контуры, без заливки.",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hideBuildings",
+"title": "Buildings",
+"ru": "Строения здания дома",
+"about": "Hide buildings",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hideWaterPolygons",
+"title": "Water",
+"ru": "Водные объекты",
+"about": "Hide water",
+"ru_about": "Скрыть водные объекты",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hideHouseNumbers",
+"title": "House numbers",
+"ru": "Номера домов номера домов",
+"about": "Hide house numbers",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hideIcons",
+"title": "POI icons",
+"ru": "Значки POI значки иконки POI icons",
+"about": "Hide map icons",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hidePOILabels",
+"title": "POI labels",
+"ru": "Названия POI",
+"about": "Hide POI labels",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hideUnderground",
+"title": "Underground objects",
+"ru": "Подземные объекты",
+"about": "Hide underground objects",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hideOverground",
+"title": "Overground objects",
+"ru": "Надземные объекты",
+"about": "Hide overground objects",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hideMilitaryAreas",
+"title": "Military areas",
+"ru": "Военные районы",
+"about": "Hide military areas",
+"ru_about": "Скрыть военные зоны",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_alpineHiking",
+"title": "Hiking trails difficulty grade",
+"ru": "Уровень сложности пешеходных маршрутов",
+"about": "Difficulty classification types for the routes.",
+"ru_about": "Классификация сложности маршрутов.",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_alpineHikingScaleScheme",
+"title": "Alpine hiking scale scheme",
+"ru": "",
+"about": "Render paths according to SAC/CAI scale",
+"ru_about": "",
+"values": "sacScale, caiScale",
+"group": "map style"
+},
+{
+"id": "nrenderer_roadStyle",
+"title": "Road style",
+"ru": "Стиль дорог дороги roads",
+"about": "Road style",
+"ru_about": "Стиль отображения дорог",
+"values": "germanRoadAtlas, americanRoadAtlas, highContrastRoads, boldOutline, pale",
+"group": "map style"
+},
+{
+"id": "nrenderer_show3DbuildingParts",
+"title": "Building parts",
+"ru": "",
+"about": "Show building parts",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_contourLines",
+"title": "Show contour lines",
+"ru": "Показывать изолинии горизонтали высоты рельеф",
+"about": "Display from zoom level (requires contour line data):",
+"ru_about": "Показывать, начиная с уровня масштабирования (требуются данные изолиний):",
+"values": "--, 11, 12, 13, 14, 15, 16",
+"group": "map style"
+},
+{
+"id": "nrenderer_contourColorScheme",
+"title": "Contour lines color scheme",
+"ru": "Цветовая схема изолинии горизонтали цвет",
+"about": "Contour lines color scheme",
+"ru_about": "Цветовая гамма изолиний",
+"values": "white, yellow, green, light_brown, brown, dark_brown, dark_orange, red, purple",
+"group": "map style"
+},
+{
+"id": "nrenderer_contourWidth",
+"title": "Contour line width",
+"ru": "Толщина изолинии горизонтали толщина",
+"about": "Contour line width",
+"ru_about": "Толщина изолинии",
+"values": "thin, medium, thick",
+"group": "map style"
+},
+{
+"id": "nrenderer_contourDensity",
+"title": "Contour line density",
+"ru": "Плотность изолинии",
+"about": "Contour line density",
+"ru_about": "Плотность изолинии",
+"values": "low, medium_w, high",
+"group": "map style"
+},
+{
+"id": "nrenderer_showCycleRoutes",
+"title": "Cycle routes",
+"ru": "Велосипедные маршруты велосипедные велодорожки bicycle bike",
+"about": "Show long distance cycle routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showCycleNodeNetworkRoutes",
+"title": "Show node network cycle routes",
+"ru": "Узловые сети велосипедных маршрутов",
+"about": "Show node network cycle routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showMtbRoutes",
+"title": "Mountain bike routes",
+"ru": "Маршруты для MTB",
+"about": "Show mountain bike routes (*cn_networks)",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showMtbScale",
+"title": "Show MTB scale",
+"ru": "Показать MTB-сложность",
+"about": "Display trails according to their MTB scale.",
+"ru_about": "Показать MTB-трассы в соответствии с их сложностью.",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showMtbScaleIMBATrails",
+"title": "Show MTB IMBA trails",
+"ru": "Показать маршруты MTB IMBA",
+"about": "Show dedicated mountain biking trails.",
+"ru_about": "Показать выделенные трассы для горных велосипедов.",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showDirtbikeTrails",
+"title": "Dirt bike trails",
+"ru": "Трассы для мотокросса",
+"about": "Show dirt bike trails",
+"ru_about": "Показывает трассы для мотокросса",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_hikingRoutesOSMC",
+"title": "Hiking routes",
+"ru": "Пешеходные маршруты пешие туристические hiking trails",
+"about": "Render paths according to OSMC traces.",
+"ru_about": "Отрисовка дорог в соответствии с трассировкой OSMC.",
+"values": "walkingRoutesOSMC, walkingRoutesScopeOSMC, walkingRoutesOSMCNodes",
+"group": "map style"
+},
+{
+"id": "nrenderer_horseRoutes",
+"title": "Horse routes",
+"ru": "Конные маршруты",
+"about": "Horse routes",
+"ru_about": "",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showFitnessTrails",
+"title": "Fitness trails",
+"ru": "Фитнес-маршруты",
+"about": "Show fitness trails",
+"ru_about": "Показать фитнес-маршруты",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "nrenderer_showRunningRoutes",
+"title": "Running routes",
+"ru": "Беговые маршруты",
+"about": "Show running routes",
+"ru_about": "Показать беговые маршруты",
+"values": "true, false",
+"group": "map style"
+},
+{
+"id": "daynight_mode",
+"title": "Day / night mode, map theme, dark map",
+"ru": "Ночной режим, дневной режим, тёмная карта, тема",
+"about": "",
+"ru_about": "",
+"values": "DAY, NIGHT, AUTO (sunrise/sunset), SENSOR (light sensor), APP_THEME",
+"group": "app"
+},
+{
+"id": "renderer",
+"title": "Map style",
+"ru": "Стиль карты, вид карты",
+"about": "",
+"ru_about": "",
+"values": "OsmAnd, Touring view (contrast and details), Topo, UniRS, LightRS, Nautical, Ski map, Winter and ski, Offroad, Desert, OSM-carto",
+"group": "app"
+},
+{
+"id": "map_preferred_locale",
+"title": "Map language, language of names on the map",
+"ru": "Язык карты, язык названий на карте",
+"about": "",
+"ru_about": "",
+"values": "language code such as en, de, ru; empty = local names",
+"group": "app"
+},
+{
+"id": "preferred_locale",
+"title": "App language, interface language",
+"ru": "Язык приложения, язык интерфейса",
+"about": "",
+"ru_about": "",
+"values": "language code; empty = system",
+"group": "app"
+},
+{
+"id": "rotate_map",
+"title": "Map orientation, rotate map by direction or compass",
+"ru": "Ориентация карты, вращение карты, север вверху",
+"about": "",
+"ru_about": "",
+"values": "0 north is up, 1 movement direction, 2 compass, 3 manual",
+"group": "app"
+},
+{
+"id": "auto_zoom_map_on_off",
+"title": "Auto zoom map while navigating",
+"ru": "Автомасштаб карты",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "voice_mute",
+"title": "Mute voice guidance, sound of navigation prompts",
+"ru": "Выключить голос, голосовые подсказки, звук навигации",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "default_metric_system",
+"title": "Units of length and distance: kilometers, miles",
+"ru": "Единицы длины и расстояния: километры, мили",
+"about": "",
+"ru_about": "",
+"values": "KILOMETERS_AND_METERS, MILES_AND_FEET, MILES_AND_METERS, MILES_AND_YARDS, NAUTICAL_MILES_AND_METERS, NAUTICAL_MILES_AND_FEET",
+"group": "app"
+},
+{
+"id": "default_speed_system",
+"title": "Units of speed",
+"ru": "Единицы скорости",
+"about": "",
+"ru_about": "",
+"values": "KILOMETERS_PER_HOUR, MILES_PER_HOUR, METERS_PER_SECOND, MINUTES_PER_MILE, MINUTES_PER_KILOMETER, NAUTICALMILES_PER_HOUR",
+"group": "app"
+},
+{
+"id": "altitude_metrics",
+"title": "Units of altitude, elevation in feet or meters",
+"ru": "Единицы высоты, высота в футах или метрах",
+"about": "",
+"ru_about": "",
+"values": "METERS, FEET",
+"group": "app"
+},
+{
+"id": "text_scale",
+"title": "Text size on the map, font size of labels",
+"ru": "Размер текста на карте, шрифт подписей",
+"about": "",
+"ru_about": "",
+"values": "0.75 to 3, 1 = normal",
+"group": "app"
+},
+{
+"id": "map_density_n",
+"title": "Map magnifier, size of map details",
+"ru": "Лупа карты, увеличение деталей",
+"about": "",
+"ru_about": "",
+"values": "0.25 to 4, 1 = normal",
+"group": "app"
+},
+{
+"id": "show_routing_alarms",
+"title": "Navigation warnings and alerts",
+"ru": "Предупреждения в навигации",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "show_speed_limit_warnings",
+"title": "Speed limit warning",
+"ru": "Предупреждение об ограничении скорости",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "show_cameras",
+"title": "Speed cameras warnings",
+"ru": "Камеры контроля скорости",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "show_traffic_warnings",
+"title": "Traffic warnings: speed bumps, crossings",
+"ru": "Дорожные предупреждения: лежачие полицейские, переходы",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "speed_limit_exceed",
+"title": "Speed limit tolerance before warning, km/h",
+"ru": "Допустимое превышение скорости",
+"about": "",
+"ru_about": "",
+"values": "number, e.g. 5",
+"group": "app"
+},
+{
+"id": "keep_informing",
+"title": "Repeat navigation instructions every N minutes",
+"ru": "Повторять навигационные инструкции",
+"about": "",
+"ru_about": "",
+"values": "minutes, 0 = only when needed",
+"group": "app"
+},
+{
+"id": "turn_screen_on_time_int",
+"title": "Turn the screen on for navigation instructions, seconds",
+"ru": "Включать экран при подсказке",
+"about": "",
+"ru_about": "",
+"values": "seconds, 0 = off",
+"group": "app"
+},
+{
+"id": "speak_street_names",
+"title": "Announce street names",
+"ru": "Произносить названия улиц",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "announce_wpt",
+"title": "Announce waypoints along the route",
+"ru": "Объявлять путевые точки",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "snap_to_road",
+"title": "Snap position to road while navigating",
+"ru": "Привязка позиции к дороге",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "enable_3d_maps",
+"title": "3D view of the map, tilt",
+"ru": "3D вид карты, наклон",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "enable_3d_map_objects",
+"title": "3D buildings",
+"ru": "3D здания, объёмные дома",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "terrain_layer",
+"title": "Terrain: hillshade, slope, relief shading",
+"ru": "Рельеф, затенение рельефа, склоны",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "show_favorites",
+"title": "Show favorites on the map",
+"ru": "Показывать избранное на карте",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "show_coordinates_grid",
+"title": "Coordinates grid on the map",
+"ru": "Сетка координат на карте",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+},
+{
+"id": "position_placement_on_map",
+"title": "Position of my location on the screen",
+"ru": "Положение моей позиции на экране",
+"about": "",
+"ru_about": "",
+"values": "0 automatic, 1 center, 2 bottom",
+"group": "app"
+},
+{
+"id": "animate_my_location",
+"title": "Animate my position",
+"ru": "Анимация моей позиции",
+"about": "",
+"ru_about": "",
+"values": "true, false",
+"group": "app"
+}
+]

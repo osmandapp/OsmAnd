@@ -5,14 +5,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/colorSurface"
-	android:fitsSystemWindows="true"
 	android:orientation="vertical">
 
-	<com.google.android.material.appbar.MaterialToolbar
-		android:id="@+id/toolbar"
-		android:layout_width="match_parent"
-		android:layout_height="?attr/actionBarSize"
-		app:title="@string/app_name" />
 
 	<ScrollView
 		android:layout_width="match_parent"
@@ -172,96 +166,7 @@
 					android:textColor="?attr/colorOnTertiaryContainer" />
 			</com.google.android.material.card.MaterialCardView>
 
-			<!-- 1. OsmAnd -->
-			<TextView
-				style="@style/TextAppearance.Material3.TitleSmall"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:paddingTop="@dimen/group_gap"
-				android:paddingBottom="8dp"
-				android:text="@string/step_osmand"
-				android:textColor="?attr/colorPrimary" />
-
-			<com.google.android.material.card.MaterialCardView
-				style="@style/Widget.Material3.CardView.Filled"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				app:cardBackgroundColor="?attr/colorSurfaceContainerLow">
-
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:orientation="vertical"
-					android:padding="@dimen/card_padding">
-
-					<LinearLayout
-						android:id="@+id/osmand_row"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:background="?attr/selectableItemBackground"
-						android:orientation="vertical">
-
-						<TextView
-							style="@style/TextAppearance.Material3.BodyLarge"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:text="@string/osmand_app" />
-
-						<TextView
-							android:id="@+id/osmand_name"
-							style="@style/TextAppearance.Material3.BodyMedium"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="?attr/colorOnSurfaceVariant" />
-					</LinearLayout>
-
-					<TextView
-						style="@style/TextAppearance.Material3.BodyLarge"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginTop="@dimen/gutter"
-						android:text="@string/access_title" />
-
-					<TextView
-						android:id="@+id/access_status"
-						style="@style/TextAppearance.Material3.BodyMedium"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:textColor="?attr/colorOnSurfaceVariant" />
-
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginTop="12dp"
-						android:orientation="horizontal">
-
-						<Button
-							android:id="@+id/allow_access"
-							style="@style/Widget.Material3.Button"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:text="@string/allow_access" />
-
-						<Button
-							android:id="@+id/check"
-							style="@style/Widget.Material3.Button.TextButton"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginStart="8dp"
-							android:text="@string/check_connection" />
-					</LinearLayout>
-				</LinearLayout>
-			</com.google.android.material.card.MaterialCardView>
-
-			<TextView
-				style="@style/TextAppearance.Material3.BodySmall"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:paddingTop="8dp"
-				android:text="@string/osmand_footer"
-				android:textColor="?attr/colorOnSurfaceVariant" />
-
-			<!-- 2. Connection -->
+			<!-- 1. Connection -->
 			<TextView
 				style="@style/TextAppearance.Material3.TitleSmall"
 				android:layout_width="match_parent"
@@ -373,7 +278,7 @@
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 
-			<!-- 3. Assistant -->
+			<!-- 2. Assistant -->
 			<TextView
 				style="@style/TextAppearance.Material3.TitleSmall"
 				android:layout_width="match_parent"
@@ -436,7 +341,7 @@
 				</LinearLayout>
 			</com.google.android.material.card.MaterialCardView>
 
-			<!-- 4. Example -->
+			<!-- 3. Example -->
 			<TextView
 				style="@style/TextAppearance.Material3.TitleSmall"
 				android:layout_width="match_parent"

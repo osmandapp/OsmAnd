@@ -136,7 +136,7 @@ class ConnectorService : Service() {
 	}
 
 	private fun buildNotification(): Notification {
-		val open = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java),
+		val open = PendingIntent.getActivity(this, 0, Intent(this, ChatActivity::class.java).putExtra(ChatActivity.EXTRA_COMPUTER, true),
 			PendingIntent.FLAG_IMMUTABLE)
 		val address = runningUrl?.removePrefix("http://")?.removeSuffix("/mcp")
 		return Notification.Builder(this, CHANNEL)
