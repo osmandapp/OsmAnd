@@ -27,7 +27,9 @@ class ModelInfo(
 	/** the model sees pictures: it gets screenshots of OsmAnd */
 	val vision: Boolean = false,
 	/** the best model in our tests: shown first and marked */
-	val recommended: Boolean = false
+	val recommended: Boolean = false,
+	/** the conversation's length in tokens: instructions, tools, questions, results and answers */
+	val contextTokens: Int = 4096
 ) {
 	val fileName: String? get() = url?.substringAfterLast('/')
 }
@@ -45,7 +47,7 @@ class LocalModels(private val ctx: Context) {
 	val all = listOf(
 		ModelInfo("gemma-4-e2b-litert", "Gemma 4 E2B", R.string.model_gemma4_litert, ModelEngine.LITERT,
 			"https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/main/gemma-4-E2B-it-gpu.litertlm",
-			2_340_870_772, gpu = true, vision = true, recommended = true),
+			2_340_870_772, gpu = true, vision = true, recommended = true, contextTokens = 8192),
 		ModelInfo("qwen3-1.7b-litert", "Qwen3 1.7B", R.string.model_qwen3_litert, ModelEngine.LITERT,
 			"https://huggingface.co/litert-community/Qwen3-1.7B/resolve/main/Qwen3-1.7B_dynamic_wi4b32_afp32.litertlm",
 			977_184_032, gpu = true),
