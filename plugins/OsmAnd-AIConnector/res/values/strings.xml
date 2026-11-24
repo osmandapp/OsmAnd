@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">OsmAnd AI Connector</string>
+	<string name="app_name">OsmAnd AI Assistant</string>
 	<string name="notification_channel">AI Connector</string>
 	<string name="notification_title">AI Connector is on</string>
 	<string name="notification_text">Your AI assistant can use OsmAnd · %1$s</string>
@@ -30,7 +30,7 @@
 	<string name="check_failed">No connection: %1$s</string>
 	<string name="osmand_footer">OsmAnd asks what the assistant may do: map, search, navigation, favorites, tracks. You can change it later in OsmAnd › Menu › Plugins.</string>
 
-	<string name="step_connection">2. How the computer connects</string>
+	<string name="step_connection">1. How the computer connects</string>
 	<string name="access_wifi">Wi-Fi</string>
 	<string name="access_usb">USB (adb)</string>
 	<string name="keep_screen_on_title">Keep the screen on while the assistant works</string>
@@ -41,7 +41,7 @@
 	<string name="wifi_direct_footer">The computer and the phone are on the same Wi-Fi. Nothing to run: the settings in step 3 hold the phone\'s address. If the router gives the phone a new address, copy them again. Tip: reserve the address in your router.</string>
 	<string name="usb_footer">The phone is connected with a USB cable and USB debugging is on. Run this on the computer once per connection:</string>
 
-	<string name="step_assistant">3. Add to your AI assistant</string>
+	<string name="step_assistant">2. Add to your AI assistant</string>
 	<string name="client_claude_code">Claude Code</string>
 	<string name="client_codex">Codex</string>
 	<string name="client_cursor">Cursor</string>
@@ -54,7 +54,7 @@
 	<string name="client_other_where">Any app that supports MCP servers over HTTP:</string>
 	<string name="copy">Copy</string>
 	<string name="copied">Copied</string>
-	<string name="step_try">4. Try it</string>
+	<string name="step_try">3. Try it</string>
 	<string name="try_where">Start a new chat in your assistant and ask, for example:</string>
 	<string name="try_example">Show Amsterdam Centraal in OsmAnd and build a cycling route to the Rijksmuseum.</string>
 
@@ -63,4 +63,56 @@
 	<string name="reset">Reset</string>
 	<string name="cancel">Cancel</string>
 	<string name="choose_osmand">OsmAnd app</string>
+	<!-- the assistant on the phone -->
+	<string name="connect_computer">Connect a computer</string>
+	<string name="ask_hint">Ask OsmAnd…</string>
+	<string name="send">Send</string>
+	<string name="stop">Stop</string>
+	<string name="no_model">No model chosen</string>
+	<string name="model_on_phone">%1$s · on this phone</string>
+	<string name="model_not_downloaded">%1$s · not downloaded</string>
+	<string name="chat_empty">Ask to change the map, find a place, start navigation or look at your tracks.</string>
+	<string name="chat_choose_model">The assistant runs a language model on this phone. Choose and download one first.</string>
+	<string name="choose_model">Choose a model</string>
+	<string-array name="chat_examples">
+		<item>Turn on night mode</item>
+		<item>Find the nearest pharmacy</item>
+		<item>Switch to the bicycle profile</item>
+		<item>Show my tracks longer than 20 km</item>
+		<item>Is trip recording on?</item>
+	</string-array>
+
+	<string name="models_title">Model</string>
+	<string name="models_description">The model runs on this phone: after the download it needs no internet and nothing leaves the phone. Bigger models answer better but slower and need more memory.</string>
+	<string name="model_gemini_nano">Google\'s model built into the phone (Android AICore). Nothing to download in this app. Only on supported phones, such as Pixel 9 and newer.</string>
+	<string name="model_qwen3_litert">Qwen3 1.7B on the phone\'s GPU, 1 GB. Smaller download, but in multi-step requests it often stops halfway or guesses settings.</string>
+	<string name="model_gemma4_litert">Google Gemma 4 E2B on the phone\'s GPU, 2.3 GB. The best in our tests: 18 of 20 commands and 6 of 7 multi-step requests right. It finds map style settings and can look at the OsmAnd screen.</string>
+	<string name="recommended">Recommended</string>
+	<string name="download">Download</string>
+	<string name="delete">Delete</string>
+	<string name="use_model">Use</string>
+	<string name="model_in_use">In use</string>
+	<string name="downloading_bytes">Downloading: %1$s</string>
+	<string name="state_not_downloaded">Not downloaded · %1$s</string>
+	<string name="state_failed">Download failed (%1$s)</string>
+	<string name="state_downloading">Downloading %1$s of %2$s</string>
+	<string name="state_ready">Downloaded · %1$s</string>
+	<string name="nano_checking">Checking the phone…</string>
+	<string name="nano_ready">Ready on this phone</string>
+	<string name="nano_downloadable">The phone can download it (Android AICore)</string>
+	<string name="nano_downloading">The phone is downloading it</string>
+	<string name="nano_unavailable">Not available on this phone</string>
+	<string name="mode_phone">On this phone</string>
+	<string name="mode_computer">Computer</string>
+	<string name="model_ready">Ready · runs on this phone, offline</string>
+	<string name="model_downloading">Downloading · %1$d%%</string>
+	<string name="model_failed">Download failed · tap to retry</string>
+	<string name="model_not_downloaded_hint">Not downloaded · tap to download</string>
+	<string name="model_choose_hint">Tap to choose a model</string>
+	<string name="open_osmand">Open</string>
+	<string name="chats">Chats</string>
+	<string name="new_chat">New session</string>
+	<string name="delete_chat">Delete chat</string>
+	<string name="no_chats">No saved chats yet</string>
+	<string name="current_chat">%1$s · open now</string>
 </resources>
