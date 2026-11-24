@@ -6,6 +6,7 @@ import net.osmand.shared.data.Amenity.Companion.DEFAULT_ELO
 import net.osmand.shared.data.Amenity.Companion.WIKIDATA
 import net.osmand.shared.map.WorldRegion
 import net.osmand.shared.osm.MapPoiTypes
+import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.osm.PoiType
 import net.osmand.shared.search.core.SearchResult.SearchResultResource
 import net.osmand.shared.util.KAlgorithms
@@ -217,11 +218,15 @@ open class BaseDetailsObject(private val lang: String?) {
 					syntheticAmenity.setId(objectId)
 				}
 			}
-			if (syntheticAmenity.getType() == null) {
-				val amenity = convertRenderedObjectToAmenity(obj, MapPoiTypes.getDefault())
-				syntheticAmenity.setType(amenity.getType())
-				syntheticAmenity.setSubType(amenity.getSubType())
-				syntheticAmenity.copyAdditionalInfo(obj.getTags(), false)
+			val poiTypes = MapPoiTypes.getDefault()
+			val currentType = syntheticAmenity.getType()
+			if (currentType == null || poiTypes.isOtherCategory(currentType)) {
+				val amenity = convertRenderedObjectToAmenity(obj, poiTypes)
+				if (shouldTakeType(currentType, amenity.getType(), poiTypes)) {
+					syntheticAmenity.setType(amenity.getType())
+					syntheticAmenity.setSubType(amenity.getSubType())
+					syntheticAmenity.copyAdditionalInfo(obj.getTags(), false)
+				}
 			}
 			syntheticAmenity.copyNames(obj)
 			if (syntheticAmenity.getLocation() == null) {
@@ -397,12 +402,9 @@ open class BaseDetailsObject(private val lang: String?) {
 		}
 
 		private fun updateAmenitySubTypes(amenity: Amenity, subTypesToAdd: String?) {
-			if (KAlgorithms.isEmpty(subTypesToAdd)) {
-				return
-			}
-			if (amenity.getSubType() == null) {
+			if (KAlgorithms.isEmpty(amenity.getSubType())) {
 				amenity.setSubType(subTypesToAdd)
-			} else {
+			} else if (!KAlgorithms.isEmpty(subTypesToAdd)) {
 				for (subType in WorldRegion.splitLikeJava(subTypesToAdd!!, ";")) {
 					var isSubTypeUnique = true
 					for (s in WorldRegion.splitLikeJava(amenity.getSubType()!!, ";")) {
@@ -418,6 +420,12 @@ open class BaseDetailsObject(private val lang: String?) {
 			}
 		}
 
+		// a placeholder, e.g. a marker of an address result, must not shadow a real category
+		private fun shouldTakeType(currentType: PoiCategory?, type: PoiCategory?, poiTypes: MapPoiTypes): Boolean {
+			return type != null && (currentType == null
+					|| (poiTypes.isOtherCategory(currentType) && !poiTypes.isOtherCategory(type)))
+		}
+
 		fun mergeAmenityData(syntheticAmenity: Amenity, amenity: Amenity, lang: String?, isSingleObject: Boolean) {
 			processId(syntheticAmenity, amenity)
 
@@ -427,10 +435,7 @@ open class BaseDetailsObject(private val lang: String?) {
 			}
 			val type = amenity.getType()
 			val poiTypes = MapPoiTypes.getDefault()
-			if (type != null && (syntheticAmenity.getType() == null
-						|| (poiTypes.isOtherCategory(syntheticAmenity.getType()) && !poiTypes.isOtherCategory(type)))
-			) {
-				// a placeholder, e.g. a marker of an address result, must not shadow a real category
+			if (shouldTakeType(syntheticAmenity.getType(), type, poiTypes)) {
 				syntheticAmenity.setType(type)
 			}
 			val subType = amenity.getSubType()
