@@ -77,6 +77,7 @@ import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
 import net.osmand.plus.search.listitems.QuickSearchSimpleButtonListItem;
@@ -654,6 +655,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		spatialSearchMapObjectsApplied = true;
 	}
 
+	private void restoreSpatialSearchMapObjects(@NonNull MapActivity activity,
+	                                            @NonNull List<QuickSearchListItem> searchItems) {
+		applySpatialSearchMapObjects(activity, searchItems);
+		ExplorePlacesFragment fragment = activity.getFragmentsHelper().getExplorePlacesFragment();
+		if (fragment != null) {
+			fragment.setSearchItems(searchItems);
+		}
+	}
+
 	@Nullable
 	private Amenity createSpatialSearchMapAmenity(@NonNull SearchResult searchResult,
 	                                              @NonNull MapObject mapObject) {
@@ -791,10 +801,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			TopToolbarController controller = mapActivity.getTopToolbarController(toolbarController.getType());
 			if (controller == null) {
 				PoiUIFilter filter = toolbarController.getSelectedFilter();
-				if (toolbarTitle != null) {
-					showToolbar(filter, toolbarTitle);
-				} else {
-					showToolbar(filter);
+				String title = toolbarTitle != null ? toolbarTitle : getText();
+				List<QuickSearchListItem> searchItems = getExploreSpatialSearchItems();
+				showToolbar(filter, title, searchItems == null);
+				if (searchItems != null) {
+					restoreSpatialSearchMapObjects(mapActivity, searchItems);
 				}
 			}
 		}
@@ -3270,10 +3281,36 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void updateShowOnMapFab() {
 		if (showOnMapFab != null && buttonToolbarView != null) {
-			boolean visible = buttonToolbarView.getVisibility() == View.VISIBLE && isSearchViewVisible();
-			showOnMapFab.setVisibility(visible ? View.VISIBLE : View.GONE);
-			updateFabMargins();
+			boolean visible = buttonToolbarView.getVisibility() == View.VISIBLE
+					&& isSearchViewVisible() && hasShowOnMapContent();
+			int visibility = visible ? View.VISIBLE : View.GONE;
+			if (showOnMapFab.getVisibility() != visibility) {
+				showOnMapFab.setVisibility(visibility);
+				updateFabMargins();
+			}
 		}
+	}
+
+	private boolean hasShowOnMapContent() {
+		SearchPhrase phrase = searchUICore.getPhrase();
+		boolean showsListResults = phrase.isNoSelectedType() || phrase.isLastWord(POI_TYPE);
+		return !showsListResults || hasMainListResults();
+	}
+
+	private boolean hasMainListResults() {
+		QuickSearchListAdapter adapter = mainSearchFragment != null ? mainSearchFragment.getListAdapter() : null;
+		if (adapter != null) {
+			for (int i = 0; i < adapter.getCount(); i++) {
+				if (adapter.getItem(i).getType() == QuickSearchListItemType.SEARCH_RESULT) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	void onMainListChanged() {
+		updateShowOnMapFab();
 	}
 
 	private void updateFabMargins() {
