@@ -5337,4 +5337,9 @@
     <string name="rendering_attr_hideNoLNAM_description">Απόκρυψη θαλάσσιων σημάνσεων OSM (μερικών)</string>
     <string name="attach_to_track">Προσκόλληση σε ίχνος</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Τα στυλ γραμμών με παύλες και με τελείες δεν είναι διαθέσιμα για ένα 3D ίχνος.</string>
+    <string name="shared_string_new">Νέο</string>
+    <string name="sun_light_live">Ζωντανά</string>
+    <string name="shadows_on_description">Σκιές ενεργές: τα κτίρια κάνουν σκιές από τον ήλιο.</string>
+    <string name="shadows_off_description">Σκιές ανενεργές: τα κτίρια σχεδιάζονται χωρίς σκιές.</string>
+    <string name="required_maps_calculate_online_summary">Η λίστα των χαρτών που λείπουν βασίζεται στη διαδρομή σε ευθεία γραμμή. Για να λάβετε μια ακριβή λίστα χαρτών, το OsmAnd μπορεί να προϋπολογίσει διαδικτυακά τη διαδρομή σας.</string>
 </resources>
