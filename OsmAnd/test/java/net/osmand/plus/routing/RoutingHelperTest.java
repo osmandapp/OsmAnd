@@ -2,6 +2,9 @@ package net.osmand.plus.routing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -11,8 +14,11 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.MapUtils;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,41 +30,75 @@ public class RoutingHelperTest {
 
 	private static final LatLon START = new LatLon(52.52, 13.42);
 	private static final double NODE_STEP = 20;
-	private static final long ROUTE_SET_WAIT_MS = 500;
+	private static final long ROUTE_CALCULATION_TIMEOUT_MS = 5000;
+
+	private OsmandApplication app;
+	private RoutingHelper helper;
+	private RouteCalculationResult oldRoute;
+
+	@Before
+	public void setUp() {
+		app = (OsmandApplication) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
+		helper = new RoutingHelper(app);
+		helper.setAppMode(ApplicationMode.CAR);
+		helper.setFinalAndCurrentLocation(node(39), null, null);
+		oldRoute = route(40);
+		helper.setRoute(oldRoute, new RouteCalculationProgress());
+	}
+
+	@After
+	public void tearDown() {
+		app.getTransportRoutingHelper().setRoutingHelper(app.getRoutingHelper());
+	}
 
 	@Test
-	public void routeSetDuringLocationUpdateKeepsItsStart() {
-		OsmandApplication app = (OsmandApplication) InstrumentationRegistry.getInstrumentation()
-				.getTargetContext().getApplicationContext();
-		RoutingHelper helper = new RoutingHelper(app);
+	public void routeSetDuringLocationUpdateKeepsItsStart() throws InterruptedException {
 		RouteCalculationResult newRoute = route(6);
-		Thread routeCalculation = new Thread(() -> helper.setRoute(newRoute));
-		// a route calculation finishes while the location update moves along the old route
+		setRouteDuringLocationUpdate(newRoute, new RouteCalculationProgress(), () -> {});
+
+		assertSame(newRoute, helper.getRoute());
+		assertEquals(0, newRoute.getCurrentRoute());
+	}
+
+	@Test
+	public void routeStoppedDuringLocationUpdateIsNotSet() throws InterruptedException {
+		RouteCalculationProgress progress = new RouteCalculationProgress();
+		// as stopCalculation() does when the location update reaches the destination
+		setRouteDuringLocationUpdate(route(6), progress, () -> progress.isCancelled = true);
+
+		assertSame(oldRoute, helper.getRoute());
+	}
+
+	/**
+	 * A route calculation finishes while the location update moves along the old route: the location is
+	 * 30 nodes ahead, so the old route moves forward twice, and the new route is set after the first step.
+	 */
+	private void setRouteDuringLocationUpdate(@NonNull RouteCalculationResult newRoute,
+	                                          @NonNull RouteCalculationProgress progress,
+	                                          @NonNull Runnable whileSetting) throws InterruptedException {
+		Thread routeCalculation = new Thread(() -> helper.setRoute(newRoute, progress));
 		IRoutingDataUpdateListener listener = () -> {
 			if (routeCalculation.getState() == Thread.State.NEW) {
 				routeCalculation.start();
-				try {
-					routeCalculation.join(ROUTE_SET_WAIT_MS);
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-				}
+				awaitBlockedOrFinished(routeCalculation);
+				whileSetting.run();
 			}
 		};
+		helper.addRouteDataListener(listener);
 		try {
-			helper.setFinalAndCurrentLocation(node(39), null, null);
-			helper.setRoute(route(40));
-			helper.addRouteDataListener(listener);
-			// 30 nodes ahead: the old route moves forward twice, the new route is set after the first step
 			helper.setCurrentLocation(location(node(30)), false);
-			routeCalculation.join();
-		} catch (InterruptedException e) {
-			throw new AssertionError(e);
 		} finally {
 			helper.removeRouteDataListener(listener);
-			app.getTransportRoutingHelper().setRoutingHelper(app.getRoutingHelper());
 		}
-		assertSame(newRoute, helper.getRoute());
-		assertEquals(0, newRoute.getCurrentRoute());
+		routeCalculation.join(ROUTE_CALCULATION_TIMEOUT_MS);
+	}
+
+	private static void awaitBlockedOrFinished(@NonNull Thread thread) {
+		long deadline = SystemClock.uptimeMillis() + ROUTE_CALCULATION_TIMEOUT_MS;
+		while (thread.isAlive() && thread.getState() != Thread.State.BLOCKED) {
+			assertTrue("the route was neither set nor waiting for the lock", SystemClock.uptimeMillis() < deadline);
+			SystemClock.sleep(1);
+		}
 	}
 
 	@NonNull
