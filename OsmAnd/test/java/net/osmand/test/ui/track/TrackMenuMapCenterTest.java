@@ -60,6 +60,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.WidgetUtils;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
+import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
@@ -145,6 +148,22 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 				+ headerOnlyMenuTop + " to " + expandedMenuTop, expandedMenuTop < headerOnlyMenuTop);
 		assertMapCenteredAboveMenu(expandedMenuTop);
 		assertZoomButtonsKeepMapCenter();
+	}
+
+	@Test
+	public void testOnlyTrackMenuZoomButtonsShownInPortrait() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		assumeTrue("The track menu has its own zoom buttons in portrait only", isPortrait());
+		scenarioRule.getScenario().onActivity(activity ->
+				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		onTrackMenu(fragment -> assertEquals("Menu state", MenuState.HEADER_ONLY, fragment.getCurrentMenuState()));
+
+		assertEquals("Shown zoom in buttons", 1, countShownMapButtons(ZoomInButton.class));
+		assertEquals("Shown zoom out buttons", 1, countShownMapButtons(ZoomOutButton.class));
+		assertEquals("Shown zoom in buttons of the main map", 0, countShownMainMapButtons(ZoomInButton.class));
+		assertEquals("Shown zoom out buttons of the main map", 0, countShownMainMapButtons(ZoomOutButton.class));
 	}
 
 	/**
@@ -866,6 +885,31 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 	private float getZoom() {
 		RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
 		return (float) (tileBox.getZoom() + tileBox.getZoomFloatPart());
+	}
+
+	private int countShownMapButtons(@NonNull Class<? extends MapButton> buttonClass) {
+		int[] count = new int[1];
+		scenarioRule.getScenario().onActivity(activity ->
+				count[0] = countShownViews(activity.getWindow().getDecorView(), buttonClass));
+		return count[0];
+	}
+
+	private int countShownMainMapButtons(@NonNull Class<? extends MapButton> buttonClass) {
+		int[] count = new int[1];
+		scenarioRule.getScenario().onActivity(activity ->
+				count[0] = countShownViews(activity.findViewById(R.id.map_hud_layout), buttonClass));
+		return count[0];
+	}
+
+	private static int countShownViews(@NonNull View view, @NonNull Class<? extends View> viewClass) {
+		int count = viewClass.isInstance(view) && view.isShown() ? 1 : 0;
+		if (view instanceof ViewGroup) {
+			ViewGroup group = (ViewGroup) view;
+			for (int i = 0; i < group.getChildCount(); i++) {
+				count += countShownViews(group.getChildAt(i), viewClass);
+			}
+		}
+		return count;
 	}
 
 	private void onTrackMenu(@NonNull Consumer<TrackMenuFragment> action) {
