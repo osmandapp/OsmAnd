@@ -135,6 +135,8 @@ class FreeRegionReplaceTest {
 	@Test
 	fun downloadNotInstalledLeavesOldMapsDeactivated() {
 		val maltaMap = createMap(mapsDir, "Malta_europe.obf")
+		// the test deletes the deactivated copy: never a map of the device itself
+		assumeTrue("Malta_europe.obf is on this device", maltaMap in createdFiles)
 		val deactivatedAndorraRoads = createMap(backupDir, "Andorra_europe.road.obf")
 		setFreeRegion("Malta_europe_2.obf.zip")
 		val newMap = createIndexItem("Andorra_europe_2.obf.zip")
