@@ -85,6 +85,16 @@ public class MovingSpeedWindowTest {
 	}
 
 	@Test
+	public void longIntervalUsesTheMeasuredSpeedAfterFifteenMinutesOfMovement() {
+		// Interval 60 min, 2 min driving and 1 min standing: the route estimate stayed blended in for good
+		interval = 60 * 60_000L;
+		for (int minute = 1; minute <= 45; minute++) {
+			drive(minute % 3 == 0 ? 0 : 30, 60);
+		}
+		assertTimeAtSpeed(30);
+	}
+
+	@Test
 	public void gapWithoutFixesCountsAtMostFiveSeconds() {
 		drive(30, 30);
 		gap(30, 60);
