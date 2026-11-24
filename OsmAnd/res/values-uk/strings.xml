@@ -5380,7 +5380,7 @@
     <string name="contour_labels">Мітки</string>
     <string name="contour_label_direction_descr">Напрямок угору: верхня частина кожної цифри, що позначає висоту, спрямована в бік підвищення рельєфу — так само, як на паперових топографічних картах. Короткі штрихи на лініях вказують напрямок униз.</string>
     <string name="rendering_attr_contourLabelDirection_name">Орієнтація позначки</string>
-    <string name="rendering_value_upright_name">Вертикальний</string>
+    <string name="rendering_value_upright_name">Вертикально</string>
     <string name="rendering_value_uphill_name">Угору</string>
     <string name="shared_string_visibility">Видимість</string>
     <string name="ais_connection_not_set_up">Не налаштовано</string>
