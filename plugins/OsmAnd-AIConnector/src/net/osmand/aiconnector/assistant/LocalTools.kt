@@ -29,8 +29,9 @@ class LocalTools(private val tools: OsmAndTools, private val settings: SettingsC
 		"osmand_navigate" to Entry("Navigate to coordinates, e.g. a result of osmand_search."),
 		"osmand_stop_navigation" to Entry(null),
 		"osmand_add_favorite" to Entry("Save a point as a favorite.", listOf("lat", "lon", "name", "category")),
-		"osmand_list_tracks" to Entry("Find the user's tracks. Filters: min_km, max_km, from, to (YYYY-MM-DD).",
-			listOf("query", "from", "to", "min_km", "max_km")),
+		"osmand_list_tracks" to Entry("Find the user's tracks. Filters: activity (e.g. skiing, hiking, road_cycling), " +
+				"min_km, max_km, from, to (YYYY-MM-DD); sort: newest, oldest, longest. Replies how many match and lists the first.",
+			listOf("query", "activity", "from", "to", "min_km", "max_km", "sort")),
 		"osmand_show_gpx" to Entry("Show a track file on the map."),
 		"osmand_track_stats" to Entry("Distance, time, speed and elevation of a track file."),
 		"osmand_start_recording" to Entry(null),
@@ -130,7 +131,7 @@ class LocalTools(private val tools: OsmAndTools, private val settings: SettingsC
 			.filter { it.optString("type") == "text" }
 			.joinToString("\n") { it.optString("text") }
 		// long results (track lists, search) would crowd out the small context window
-		return ToolResult(text.take(maxResultChars), result.optBoolean("isError"))
+		return ToolResult(compact(name, text).take(maxResultChars), result.optBoolean("isError"))
 	}
 
 	/**
@@ -188,5 +189,54 @@ class LocalTools(private val tools: OsmAndTools, private val settings: SettingsC
 		return ToolResult(content.optJSONObject(0)?.optString("text") ?: "No picture", true)
 	}
 
+	/**
+	 * A result as the model reads it: JSON without indentation and long lists cut to their first items.
+	 * Pretty JSON of 284 tracks filled the model's 4096-token context in three questions.
+	 */
+	private fun compact(tool: String, text: String): String = try {
+		when {
+			tool == "osmand_list_tracks" -> trackList(JSONObject(text))
+			text.trimStart().startsWith("{") -> shorten(JSONObject(text)).toString()
+			text.trimStart().startsWith("[") -> shorten(JSONArray(text)).toString()
+			else -> text
+		}
+	} catch (e: Exception) {
+		text
+	}
+
+	/**
+	 * A track list as text: small models count the items they see instead of reading "found" from JSON,
+	 * and miss the activity filter unless the reply names it.
+	 */
+	private fun trackList(o: JSONObject): String {
+		val tracks = o.optJSONArray("tracks") ?: JSONArray()
+		val shown = minOf(tracks.length(), maxListItems)
+		val sb = StringBuilder("Found ${o.optInt("found")} matching tracks of ${o.optInt("total")} in all.")
+		val activities = o.optJSONArray("activities")
+		if (activities != null && activities.length() > 0) {
+			sb.append(" Activities: ").append((0 until activities.length()).joinToString { activities.getString(it) })
+				.append(" (filter with activity).")
+		}
+		if (shown > 0) sb.append(" The first $shown:")
+		for (i in 0 until shown) {
+			val t = tracks.getJSONObject(i)
+			sb.append("\n- ").append(t.optString("start").take(10)).append(", ").append(t.optDouble("distance_km")).append(" km")
+			t.optString("activity").takeIf { it.isNotEmpty() }?.let { sb.append(", ").append(it) }
+			t.optString("city").takeIf { it.isNotEmpty() }?.let { sb.append(", ").append(it) }
+			sb.append(", file ").append(t.optString("file"))
+		}
+		return sb.toString()
+	}
+
+	private fun shorten(v: Any?): Any? = when (v) {
+		is JSONObject -> JSONObject().also { o -> v.keys().forEach { k -> o.put(k, shorten(v.opt(k))) } }
+		is JSONArray -> JSONArray().also { a ->
+			for (i in 0 until minOf(v.length(), maxListItems)) a.put(shorten(v.opt(i)))
+			if (v.length() > maxListItems) a.put("${v.length() - maxListItems} more")
+		}
+		else -> v
+	}
+
+	private val maxListItems = 10
 	private val maxResultChars = 1500
 }

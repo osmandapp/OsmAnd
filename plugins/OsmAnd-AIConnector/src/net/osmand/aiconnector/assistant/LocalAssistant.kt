@@ -172,15 +172,9 @@ class LocalAssistant(private val ctx: Context) {
 		Log.i(TAG, "CONTEXT $context")
 		val message = if (context.isEmpty()) text else "$context\n\n$text"
 		history.add(ChatMessage(Role.USER, message))
-		var reply = try {
-			m.send(message)
-		} catch (e: Exception) {
-			// the context (4096 tokens) is full: go on with a conversation of the last turns only
-			Log.w(TAG, "Restarting the conversation: $e")
-			m.start(INSTRUCTIONS, t.declarations(), lastTurns().dropLast(1))
-			m.send(message)
-		}
+		var reply = withRoom(m, t, { m.send(message) }) { m.send(message) }
 		var previous: String? = null
+		var repeated = 0
 		repeat(maxSteps) {
 			if (stopped()) return
 			val call = reply.calls.firstOrNull()
@@ -191,8 +185,14 @@ class LocalAssistant(private val ctx: Context) {
 			}
 			val key = call.name + call.args
 			if (key == previous) {
-				post(ChatEvent.Answer("Done.", reply.stats))
-				return
+				// the same call again: point the model at the result it has, once, before giving up
+				if (repeated++ > 0) {
+					post(ChatEvent.Answer("Done.", reply.stats))
+					return
+				}
+				reply = m.sendToolResult(call.name, "You made this call already, its result is above. " +
+						"Answer the user with it now: \"$text\".")
+				return@repeat
 			}
 			previous = key
 			val event = ChatEvent.Tool(call.name.removePrefix("osmand_"), call.args.toString())
@@ -209,10 +209,28 @@ class LocalAssistant(private val ctx: Context) {
 			history.add(ChatMessage(Role.TOOL, r.text))
 			val forModel = if (remind) "${r.text}\n\n(The user asked: \"$text\". If a part of it is not done yet, " +
 					"call the tool for it now. If everything is done, answer the user.)" else r.text
-			reply = m.sendToolResult(call.name, forModel, r.image)
+			// on a full context the tool is not run again: the new conversation gets the request and its result
+			reply = withRoom(m, t, { m.sendToolResult(call.name, forModel, r.image) }) {
+				m.send("$message\n\nResult of ${call.name}:\n$forModel")
+			}
 		}
 		post(ChatEvent.Error("Stopped after $maxSteps tool calls"))
 	}
+
+	/**
+	 * Sends to the model. When its context is full, the conversation starts again with the
+	 * last questions and answers before this request, and [again] sends what is needed to go on.
+	 */
+	private fun withRoom(m: ConversationModel, t: LocalTools, send: () -> ModelReply, again: () -> ModelReply): ModelReply =
+		try {
+			send()
+		} catch (e: Exception) {
+			if (e.message?.contains("RESOURCE_EXHAUSTED") != true) throw e
+			Log.w(TAG, "The context is full, starting the conversation again: ${e.message}")
+			// the last entry of the history is this request: it goes into again()
+			m.start(INSTRUCTIONS, t.declarations(), lastTurns().dropLast(1))
+			again()
+		}
 
 	/** The questions and answers a model gets again: the last few, so they fit into its context. */
 	private fun lastTurns() = history.filter { it.role != Role.TOOL }.takeLast(maxReplayed)
@@ -222,7 +240,7 @@ class LocalAssistant(private val ctx: Context) {
 		closeModels()
 		post(ChatEvent.Info("Loading ${info.title} (${if (info.gpu) "GPU" else "CPU"})…"))
 		val start = System.currentTimeMillis()
-		val m = LiteRtModel(models.file(info), ctx.cacheDir, info.gpu && !forceCpu, info.vision)
+		val m = LiteRtModel(models.file(info), ctx.cacheDir, info.gpu && !forceCpu, info.vision, info.contextTokens)
 		conversationModel = m
 		loadedId = info.id
 		post(ChatEvent.Info("${info.title} loaded in ${System.currentTimeMillis() - start} ms"))
