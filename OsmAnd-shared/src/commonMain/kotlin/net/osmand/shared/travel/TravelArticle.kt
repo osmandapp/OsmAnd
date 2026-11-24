@@ -151,7 +151,7 @@ open class TravelArticle {
 	}
 
 	/** What the article is saved as; never empty, never a path. */
-	fun getGpxFileName(): String {
+	open fun getGpxFileName(): String {
 		val gpxFileName = if (!KAlgorithms.isEmpty(title)) title else routeId
 		if (gpxFileName != null) {
 			return KAlgorithms.sanitizeFileName(gpxFileName)

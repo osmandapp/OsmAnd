@@ -1,76 +1,22 @@
 package net.osmand.router.network;
 
 
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.util.Algorithms;
-import net.osmand.util.TransliterationHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class NetworkRouteSelector {
 
 	public static final String ROUTE_KEY_VALUE_SEPARATOR = "__";
 	public static final String NETWORK_ROUTE_TYPE = "type";
-
-	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(RouteDataObject obj) {
-		Map<String, String> tags = new TreeMap<>();
-		for (int i = 0; obj.nameIds != null && i < obj.nameIds.length; i++) {
-			int nameId = obj.nameIds[i];
-			String value = obj.names.get(nameId);
-			BinaryMapRouteReaderAdapter.RouteTypeRule rt = obj.region.quickGetEncodingRule(nameId);
-			if (rt != null) {
-				tags.put(rt.getTag(), value);
-			}
-		}
-		for (int i = 0; obj.types != null && i < obj.types.length; i++) {
-			BinaryMapRouteReaderAdapter.RouteTypeRule rt = obj.region.quickGetEncodingRule(obj.types[i]);
-			if (rt != null) {
-				tags.put(rt.getTag(), rt.getValue());
-			}
-		}
-		return getRouteKeys(tags);
-	}
-
-	public static List<NetworkRouteSelector.RouteKey> getRouteKeys(BinaryMapDataObject bMdo) {
-		Map<String, String> tags = new TreeMap<>();
-		for (int i = 0; i < bMdo.getObjectNames().keys().length; i++) {
-			int keyInd = bMdo.getObjectNames().keys()[i];
-			BinaryMapIndexReader.TagValuePair tp = bMdo.getMapIndex().decodeType(keyInd);
-			String value = bMdo.getObjectNames().get(keyInd);
-			if (tp != null) {
-				tags.put(tp.tag, value);
-			}
-		}
-		int[] tps = bMdo.getAdditionalTypes();
-		for (int i = 0; i < tps.length; i++) {
-			BinaryMapIndexReader.TagValuePair tp = bMdo.getMapIndex().decodeType(tps[i]);
-			if (tp != null) {
-				tags.put(tp.tag, tp.value);
-			}
-		}
-		tps = bMdo.getTypes();
-		for (int i = 0; i < tps.length; i++) {
-			BinaryMapIndexReader.TagValuePair tp = bMdo.getMapIndex().decodeType(tps[i]);
-			if (tp != null) {
-				tags.put(tp.tag, tp.value);
-			}
-		}
-		return getRouteKeys(tags);
-	}
 
 	private static int getRouteQuantity(Map<String, String> tags, OsmRouteType rType) {
 		int q = 0;
@@ -149,78 +95,6 @@ public class NetworkRouteSelector {
 			tags.add("route_" + type.getName() + ROUTE_KEY_VALUE_SEPARATOR + key + value);
 		}
 
-		public String getRouteName() {
-			return getRouteName(null);
-		}
-
-		public String getRouteName(String localeId) {
-			return getRouteName(localeId, false);
-		}
-
-		public String getRouteName(String localeId, boolean transliteration) {
-			String name;
-			if (localeId != null) {
-				name = getValue("name:" + localeId);
-				if (!name.isEmpty()) {
-					return name;
-				}
-			}
-			name = getValue("name");
-			if (!name.isEmpty()) {
-				return transliteration ? TransliterationHelper.transliterate(name) : name;
-			}
-			name = getValue("ref");
-			if (!name.isEmpty()) {
-				return name;
-			}
-			name = getFromTo();
-			if (!name.isEmpty()) {
-				return name;
-			}
-			name = getRelationID();
-			if (!name.isEmpty()) {
-				return name;
-			}
-			return this.type.getName(); // avoid emptiness
-		}
-
-		public String getRelationID() {
-			return getValue("relation_id");
-		}
-
-		public String getNetwork() {
-			return getValue("network");
-		}
-
-		public String getOperator() {
-			return getValue("operator");
-		}
-
-		public String getSymbol() {
-			return getValue("symbol");
-		}
-
-		public String getWebsite() {
-			return getValue("website");
-		}
-
-		public String getWikipedia() {
-			return getValue("wikipedia");
-		}
-
-		public String getRef() {
-			return getValue("ref");
-		}
-
-		public String getFromTo() {
-			String from = getValue("from");
-			String to = getValue("to");
-			if (!Algorithms.isEmpty(from) && !Algorithms.isEmpty(to)) {
-				return from + " - " + to;
-			}
-			return "";
-		}
-
 		public static RouteKey fromGpxFile(GpxFile gpxFile) {
 			Map<String, String> networkRouteKeyTags = gpxFile.getNetworkRouteKeyTags();
 			String type = networkRouteKeyTags.get(NETWORK_ROUTE_TYPE);
@@ -274,19 +148,6 @@ public class NetworkRouteSelector {
 			return null;
 		}
 
-		public Map<String, String> tagsToGpx() {
-			Map<String, String> networkRouteKey = new HashMap<>();
-			networkRouteKey.put(NETWORK_ROUTE_TYPE, type.getName());
-			for (String tag : tags) {
-				String key = getKeyFromTag(tag);
-				String value = getValue(key);
-				if (!Algorithms.isEmpty(value)) {
-					networkRouteKey.put(key, value);
-				}
-			}
-			return networkRouteKey;
-		}
-
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -317,32 +178,7 @@ public class NetworkRouteSelector {
 	 }
 
 	public static class NetworkRouteSelectorFilter {
-		public Set<RouteKey> keyFilter = null; // null - all
 		public Set<OsmRouteType> typeFilter = null; // null - all
-
-		public List<RouteKey> convert(BinaryMapDataObject obj) {
-			return filterKeys(getRouteKeys(obj));
-		}
-
-		public List<RouteKey> convert(RouteDataObject obj) {
-			return filterKeys(getRouteKeys(obj));
-		}
-
-		private List<RouteKey> filterKeys(List<RouteKey> keys) {
-			if (keyFilter == null && typeFilter == null) {
-				return keys;
-			}
-			Iterator<RouteKey> it = keys.iterator();
-			while (it.hasNext()) {
-				RouteKey key = it.next();
-				if (keyFilter != null && !keyFilter.contains(key)) {
-					it.remove();
-				} else if (typeFilter != null && !typeFilter.contains(key.type)) {
-					it.remove();
-				}
-			}
-			return keys;
-		}
 	}
 
 }
