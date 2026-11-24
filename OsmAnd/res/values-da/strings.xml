@@ -87,7 +87,7 @@
     <string name="map_widget_config">Konfigurer skærm</string>
     <string name="map_widget_back_to_loc">Hvor er jeg</string>
     <string name="map_widget_compass">Kompas</string>
-    <string name="download_hillshade_maps">Terrænskygge</string>
+    <string name="download_hillshade_maps">Reliefskygge</string>
     <string name="map_widget_parking">Parkering</string>
     <string name="map_widget_time">Resterende tid</string>
     <string name="map_widget_next_turn">Næste sving</string>
@@ -150,11 +150,7 @@
     <string name="map_online_data">Onlinekort og kortfliser</string>
     <string name="shared_string_online_maps">Onlinekort</string>
     <string name="osmand_accessibility_description">Gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter f.eks. justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, f.eks. automatisk at meddele din position.</string>
-    <string name="osmand_rastermaps_plugin_description">Adgang til mange typer af online (såkaldte kortfliser eller raster) kort, som forbehandlede OSM-kortfliser, satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiske kort og terrænskygger osv.
-\n
-\nEthvert af disse kort kan vises som det vigtigste (basis) kort, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt.
-\n
-\nDu kan downloade kortfliser direkte eller kopiere dem som SQLite-databasefiler til OsmAnd\'s datamappe ved hjælp af et af de mange tredjeparts værktøjer til kortforberedelse.</string>
+    <string name="osmand_rastermaps_plugin_description">Adgang til mange typer af online (såkaldte kortfliser eller raster) kort, som forbehandlede OSM-kortfliser, satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiske kort og reliefskygger osv. \n \nEthvert af disse kort kan vises som det vigtigste (basis) kort, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt. \n \nDu kan downloade kortfliser direkte eller kopiere dem som SQLite-databasefiler til OsmAnd\'s datamappe ved hjælp af et af de mange tredjeparts værktøjer til kortforberedelse.</string>
     <string name="osmand_development_plugin_description">Giver funktionalitet til at teste og fejlfinde OsmAnd: simulere navigationsruter, overvåge skærmgengivelse, kontrollere ydeevne osv. Denne udvidelse er ikke påkrævet for normal brug af appen.</string>
     <string name="plugins_screen">Udvidelser</string>
     <string name="prefs_plugins">Udvidelser</string>
@@ -278,31 +274,8 @@
     <string name="shared_string_name">Navn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej tak</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
-\n
-\nOsmAnd er en open source-navigationsapp med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving tale vejledning.
-\n
-\n Nogle af hovedfunktionerne:
-\n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortfliser i enhedens lager)
-\n - Kompakte offlinevektorkort for hele verden er tilgængelige
-\n - Kort for enkelte lande eller områder kan hentes direkte fra OsmAnd
-\n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationspor, interessepunkter (IP), favoritter, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed, topografiske elementer som højdekurver/terrænskygge/hældninger
-\n - Offlinesøgning efter adresser og steder (interessepunkter, IP)
-\n - Offlineruteplanlægning for mellemlange afstande
-\n - Bil-, cykel- og fodgængertilstand med:
-\n - valgfri automatisk dag/nat-tilstandsskift
-\n - valgfri automatisk zoom efter hastighed
-\n - valgfri automatisk kortrotation efter kompas eller bevægelsesretning
-\n - valgfri vognbaneassistent
-\n - visning af hastighedsgrænse
-\n - optagede stemmer og talesyntese stemmer (tekst-til-tale)
-\n
-\n Begrænsninger i den gratis version af OsmAnd:
-\n - Antallet af kort der kan hentes er begrænset
-\n - Ingen adgang til Wikipedia-interessepunkter offline
-\n
-\n OsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ er en open source-navigationsapp med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning. \n \nOsmAnd+ er den betalte appversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. \n \nNogle af hovedfunktionerne: \n - Komplet offline-funktionalitet (gem hentede vektorkort eller kortfliser på enhedens hukommelsseskort) \n - Kompakte offline vektorkort for hele verden \n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd \n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing \n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed, topografiske elementer som højdekurver/terrænskygge/hælning \n \n - Offline-søgning efter adresser og steder (IP) \n - Offline-ruteberegning til mediumafstande \n - Bil-, cykel- og fodgængertilstande med: \n - valgfri automatisk dag/nat-visning \n - valgfri hastighedsafhængig kortzoom \n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning \n - valgfri vognbanevejledning, visning af hastighedsgrænser, optagede stemmer eller TTS-stemmer</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) \n \nOsmAnd er en open source-navigationsapp med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving tale vejledning. \n \n Nogle af hovedfunktionerne: \n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortfliser i enhedens lager) \n - Kompakte offlinevektorkort for hele verden er tilgængelige \n - Kort for enkelte lande eller områder kan hentes direkte fra OsmAnd \n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationspor, interessepunkter (IP), favoritter, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed, topografiske elementer som højdekurver/reliefskygge/hældninger \n - Offlinesøgning efter adresser og steder (interessepunkter, IP) \n - Offlineruteplanlægning for mellemlange afstande \n - Bil-, cykel- og fodgængertilstand med: \n - valgfri automatisk dag/nat-tilstandsskift \n - valgfri automatisk zoom efter hastighed \n - valgfri automatisk kortrotation efter kompas eller bevægelsesretning \n - valgfri vognbaneassistent \n - visning af hastighedsgrænse \n - optagede stemmer og talesyntese stemmer (tekst-til-tale) \n \n Begrænsninger i den gratis version af OsmAnd: \n - Antallet af kort der kan hentes er begrænset \n - Ingen adgang til Wikipedia-interessepunkter offline \n \n OsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på https://osmand.net.</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ er en open source-navigationsapp med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning. \n \nOsmAnd+ er den betalte appversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. \n \nNogle af hovedfunktionerne: \n - Komplet offline-funktionalitet (gem hentede vektorkort eller kortfliser på enhedens hukommelsseskort) \n - Kompakte offline vektorkort for hele verden \n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd \n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing \n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed, topografiske elementer som højdekurver/reliefskygge/hælning \n \n - Offline-søgning efter adresser og steder (IP) \n - Offline-ruteberegning til mediumafstande \n - Bil-, cykel- og fodgængertilstande med: \n - valgfri automatisk dag/nat-visning \n - valgfri hastighedsafhængig kortzoom \n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning \n - valgfri vognbanevejledning, visning af hastighedsgrænser, optagede stemmer eller TTS-stemmer</string>
     <string name="city_type_hamlet">lille landsby</string>
     <string name="city_type_town">By</string>
     <string name="city_type_city">Stor by</string>
@@ -1556,12 +1529,7 @@
     <string name="osmand_extended_description_part3">Kort \n • Viser IP\'er (interessepunkter) i nærheden \n • Justerer kortet til bevægelsesretning (eller kompas) \n • Viser hvor man er og hvad der kigges på \n • Del placering, så andre kan finde dig \n • Gem vigtige steder i \'Favoritter\' \n • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde . \n• Viser specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed</string>
     <string name="osmand_extended_description_part4">Skikort 
 \nUdvidelsen viser skiløjper med angivelse af sværhedsgrad og yderligere oplysninger, såsom placering af lifte og andre faciliteter.</string>
-    <string name="osmand_extended_description_part5">Cykling
-\n • Find cykelstier på kortet
-\n • GPS-navigation i cykeltilstand laver ruten ved hjælp af cykelstier
-\n • Se hastighed og højde
-\n • GPX optagelse kan optage turen og dele den
-\n • Via ekstra udvidelser kan der aktiveres højdekurver og terrænskygger</string>
+    <string name="osmand_extended_description_part5">Cykling \n • Find cykelstier på kortet \n • GPS-navigation i cykeltilstand laver ruten ved hjælp af cykelstier \n • Se hastighed og højde \n • GPX optagelse kan optage turen og dele den \n • Via ekstra udvidelser kan der aktiveres højdekurver og reliefskygger</string>
     <string name="osmand_extended_description_part6">Gåture, vandring, byrundtur \n • Kortet viser gang- og vandrestier \n • Wikipedia på det foretrukne sprog kan fortælle en masse i løbet af en byrundtur \n • Offentlig transport (busser, sporvogne, tog), herunder linjenavne, hjælper til at navigere i en ny by \n • GPS-navigation i fodgængertilstand laver ruten ved hjælp af gangstier \n • Overfør og følg en GPX-rute eller optag og del egne ruter</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er en kort- og navigationsapp med adgang til gratis, verdensomspændende, og højkvalitet data fra OpenStreetMap (OSM).
 \n Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og topografi, vælg mellem bilkørsel, cykling, fodgænger tilstand, OSM redigering og meget mere.
@@ -2491,15 +2459,15 @@
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem min placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem min placering og den beregnede rute vises, indtil ruten er genberegnet</string>
     <string name="shared_string_terrain">Terræn</string>
-    <string name="hillshade_description">Terrænskyggekort viser hældning, toppe og lavland ved hjælp af mørke skygger.</string>
+    <string name="hillshade_description">Reliefskyggekort viser hældning, toppe og lavland ved hjælp af mørke skygger.</string>
     <string name="terrain_slider_description">Angiv de min. og max. zoomniveauer, som laget vil blive vist på.</string>
-    <string name="hillshade_download_description">Yderligere kort er nødvendige for at se terrænskygge på kortet.</string>
+    <string name="hillshade_download_description">Yderligere kort er nødvendige for at se reliefskygge på kortet.</string>
     <string name="slope_download_description">Yderligere kort er nødvendige for at se hældning på kortet.</string>
     <string name="shared_string_transparency">Gennemsigtighed</string>
     <string name="shared_string_zoom_levels">Zoomniveauer</string>
     <string name="shared_string_legend">Tegnforklaring</string>
-    <string name="terrain_empty_state_text">Viser terrænskygge eller hældning på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
-    <string name="shared_string_hillshade">Terrænskygge</string>
+    <string name="terrain_empty_state_text">Viser reliefskygge eller hældning på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
+    <string name="shared_string_hillshade">Reliefskygge</string>
     <string name="import_complete_description">Alle data fra %1$s er importeret. Brug knapperne nedenfor til at åbne den nødvendige del af appen for at håndtere det.</string>
     <string name="items_added">Poster tilføjet</string>
     <string name="app_mode_ski_touring">Ski touring</string>
@@ -2956,7 +2924,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ugyldig eller udløbet token</string>
     <string name="backup_error_user_is_not_registered">Ingen bruger registreret med den e-mailadresse</string>
     <string name="backup_error_no_valid_subscription">Mangler gyldigt abonnement</string>
-    <string name="contour_lines_hillshade_slope">Højdekurver, terrænskygger, hældning</string>
+    <string name="contour_lines_hillshade_slope">Højdekurver, reliefskygge, hældning</string>
     <string name="duration_moment_ago">for et øjeblik siden</string>
     <string name="logout_from_osmand_cloud">Log af OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Log ud\?
@@ -3044,7 +3012,7 @@
     <string name="backup_promocode">Kampagnekode</string>
     <string name="send_crash_log">Send logfiler om app-nedbrud</string>
     <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
-    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, gråtonede terrænskygger og hældningsangivelse med farveskala for at vise toppe og lavlandsområder.</string>
+    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, gråtonede reliefskygger og hældningsangivelse med farveskala for at vise toppe og lavlandsområder.</string>
     <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
     <string name="purchases_feature_desc_wikipedia">Giver dig alle stedrelaterede Wikipedia-artikler offline, så du kan lære mere om de steder, du besøger på din rejse, ved blot at trykke på kortet. Glem ikke at downloade Wikipedia-kortfilerne for de respektive regioner.</string>
     <string name="purchases_feature_desc_combined_wiki">Udforsk Wikipedia-artikler på farten uden internetforbindelse. Offline-data opdelt efter lande og tilgængelig på alle sprog.</string>
@@ -3955,7 +3923,7 @@
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort (3D)</string>
     <string name="relief_3d_description">Ej og se skalamodellen af dit nabolag eller hele kontinentet.</string>
-    <string name="terrain_category_description">Terrænkonturlinjer, gråtonede terrænskygger og hældningsangivelse med farveskala for at vise toppe og lavland.</string>
+    <string name="terrain_category_description">Terrænkonturlinjer, gråtonede reliefskygger og hældningsangivelse med farveskala for at vise toppe og lavland.</string>
     <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældning i %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">I løbet af få øjeblikke vil alle dine data og din konto blive slettet fra OsmAnd Cloud.
 \n
@@ -3988,7 +3956,7 @@
     <string name="folder_export_empty_error">Intet at eksportere, mappe er tom</string>
     <string name="routing_attr_allow_via_ferrata_description">En bjergrute udstyret med fastmonterede kabler, trin, stiger og broer.</string>
     <string name="routing_attr_allow_via_ferrata_name">Bjergside-rute (Via ferrata)</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Brug raster sqlitedb til terrænskygge / hældning</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Brug raster sqlitedb til reliefskygge / hældning</string>
     <string name="cache_size">Cache-størrelse</string>
     <string name="shared_string_avoid">Undgå</string>
     <string name="may_be_used_if_there_is_shortcut">Kan bruges, hvis der er en genvej</string>
@@ -5557,4 +5525,9 @@
     <string name="terrain_shadows_relief_3d_footer">3D-relief aktiveres automatisk, da det er nødvendigt for at gengive terrænskygger.</string>
     <string name="attach_to_track">Vedhæft til spor</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Streg- og priklinjetyper kan ikke anvendes på et 3D-spor.</string>
+    <string name="terrain_shadows_hillshade_footer">Terrænskygger er slået fra, når Terræn viser reliefskygge: Reliefskyggen skyggelægger allerede terrænet.</string>
+    <string name="shadows_on_description">Skygger slået til: Bygninger kaster skygger fra solen.</string>
+    <string name="shadows_off_description">Skygger slået fra: Bygninger tegnes uden skygger.</string>
+    <string name="shared_string_new">Ny</string>
+    <string name="sun_light_live">Live</string>
 </resources>
