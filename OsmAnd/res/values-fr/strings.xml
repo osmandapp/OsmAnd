@@ -5431,4 +5431,6 @@
     <string name="visualization">Visualisation</string>
     <string name="attach_to_track">Déplacer sur la trace</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Les styles de lignes tirets et pointillés ne sont pas disponibles pour une trace 3D.</string>
+    <string name="shared_string_new">Nouveau</string>
+    <string name="sun_light_live">En direct</string>
 </resources>
