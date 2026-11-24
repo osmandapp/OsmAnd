@@ -41,6 +41,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
+import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
 import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.PointBitmapDrawer;
@@ -401,11 +403,31 @@ public abstract class PointEditorFragment extends EditorFragment {
 			selectColorInPalette();
 			String groupIconName = group.getIconName() != null ? group.getIconName() : DEFAULT_ICON_NAME;
 			setIconName(manualChanges.iconOnFolderChange(getIconName(), groupIconName));
+			selectIconInController();
 			BackgroundType groupShape = BackgroundType.getByTypeName(group.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
 			setBackgroundType(manualChanges.shapeOnFolderChange(getBackgroundType(), groupShape));
 			updateContent();
 		}
 		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.getName()));
+	}
+
+	protected void selectIconInController() {
+		selectIconInPalette(getIconCategoryKey(getIconController(), getIconName()));
+	}
+
+	@Nullable
+	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
+		String originalKey = null;
+		for (IconsCategory category : controller.getCategories()) {
+			if (category.containsIcon(iconName)) {
+				if (!category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
+					return category.getKey();
+				}
+				// the POI icon that is in no other category is shown in "Original"
+				originalKey = category.getKey();
+			}
+		}
+		return originalKey;
 	}
 
 	private boolean shouldUpdateAppearance() {

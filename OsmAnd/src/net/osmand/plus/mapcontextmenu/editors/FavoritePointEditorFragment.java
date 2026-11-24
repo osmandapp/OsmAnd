@@ -36,7 +36,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
-import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -243,25 +242,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	protected String getDefaultIconName() {
 		String iconName = getPreselectedIconName();
 		return !Algorithms.isEmpty(iconName) ? iconName : DEFAULT_ICON_NAME;
-	}
-
-	private void selectIconInController() {
-		selectIconInPalette(getIconCategoryKey(getIconController(), getIconName()));
-	}
-
-	@Nullable
-	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
-		String originalKey = null;
-		for (IconsCategory category : controller.getCategories()) {
-			if (category.containsIcon(iconName)) {
-				if (!category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
-					return category.getKey();
-				}
-				// the POI icon that is in no other category is shown in "Original"
-				originalKey = category.getKey();
-			}
-		}
-		return originalKey;
 	}
 
 	@Override
