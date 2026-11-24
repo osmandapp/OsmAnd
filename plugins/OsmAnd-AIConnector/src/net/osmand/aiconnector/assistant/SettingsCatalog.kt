@@ -6,8 +6,8 @@ import org.json.JSONObject
 import java.util.Locale
 
 /**
- * OsmAnd settings and map style properties with their names in English and Russian (assets/assistant/
- * settings.json, built from the style files and OsmAnd's strings). A small model does not know setting
+ * OsmAnd settings and map style properties with their names (assets/assistant/settings.json, built by
+ * scripts/build_settings_catalog.py from the style files and OsmAnd's strings). A small model does not know setting
  * ids; it finds them here by the words of the request.
  */
 class SettingsCatalog(ctx: Context) {
@@ -19,7 +19,7 @@ class SettingsCatalog(ctx: Context) {
 		(0 until all.length()).map { i ->
 			val o = all.getJSONObject(i)
 			// values too: "high contrast" finds roadStyle by its value highContrastRoads
-			val text = listOf("id", "title", "ru", "about", "ru_about", "values").joinToString(" ") { o.optString(it) }
+			val text = listOf("id", "title", "words", "about", "values").joinToString(" ") { o.optString(it) }
 			Entry(o, words(splitCamel(text)))
 		}
 	}
@@ -44,17 +44,17 @@ class SettingsCatalog(ctx: Context) {
 			.map { it.first.json }
 	}
 
-	/** Russian and English words change their endings: compare the first letters only. */
+	/** Words change their endings (contour, contours): compare the first letters only. */
 	private fun matches(queryWord: String, word: String): Boolean {
 		val n = minOf(5, queryWord.length)
 		return word.length >= n && word.regionMatches(0, queryWord, 0, n)
 	}
 
-	private fun words(text: String) = text.lowercase(Locale.ROOT).split(Regex("[^\\p{L}\\p{N}]+")).filter { it.length >= 3 }
+	/** Short words carry no meaning, except ones like 3d. */
+	private fun words(text: String) = text.lowercase(Locale.ROOT).split(Regex("[^\\p{L}\\p{N}]+")).filter { it.length >= 3 || it.any(Char::isDigit) }
 
 	private fun splitCamel(text: String) = text.replace(Regex("([a-z])([A-Z])"), "$1 $2").replace('_', ' ')
 
-	private val stopWords = setOf("show", "hide", "the", "map", "turn", "set", "change", "make", "and", "with", "setting",
-		"settings", "карта", "карте", "карту", "включи", "выключи", "показать", "покажи", "скрой", "убери", "настройка",
-		"настройку", "nrenderer", "true", "false", "enable", "disable", "how", "where", "что", "как", "где")
+	private val stopWords = setOf("show", "hide", "the", "map", "turn", "set", "change", "make", "and", "with",
+		"setting", "settings", "nrenderer", "true", "false", "enable", "disable", "how", "where", "what")
 }
