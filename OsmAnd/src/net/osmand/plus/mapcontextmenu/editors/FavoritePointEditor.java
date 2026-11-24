@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.shared.gpx.GpxUtilities.OSM_URL_EXTENSION;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -32,6 +34,7 @@ public class FavoritePointEditor extends PointEditor {
 	public static final String TAG = FavoritePointEditor.class.getSimpleName();
 
 	private FavouritePoint favorite;
+	private boolean iconPreset;
 
 	public FavoritePointEditor(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -61,6 +64,10 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
+	public boolean isIconPreset() {
+		return iconPreset;
+	}
+
 	public void add(LatLon latLon, String title, String address, Object object) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
@@ -68,6 +75,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 
 		isNew = true;
+		iconPreset = false;
 		String lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
 		if (!Algorithms.isEmpty(lastCategory) && !app.getFavoritesHelper().groupExists(lastCategory)) {
 			lastCategory = "";
@@ -129,14 +137,16 @@ public class FavoritePointEditor extends PointEditor {
 		}
 	}
 
-	public void add(LatLon latLon, String title, String categoryName, int categoryColor, boolean autoFill) {
+	public void add(LatLon latLon, String title, String categoryName, int categoryColor,
+	                @Nullable String iconName, @Nullable String backgroundType, boolean autoFill) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
 		}
 		isNew = true;
+		FavoriteGroup category = null;
 		if (categoryName != null && !categoryName.isEmpty()) {
-			FavoriteGroup category = mapActivity.getApp().getFavoritesHelper()
+			category = mapActivity.getApp().getFavoritesHelper()
 					.getGroup(categoryName);
 			if (category == null) {
 				mapActivity.getApp().getFavoritesHelper().addFavoriteGroup(categoryName, categoryColor);
@@ -148,6 +158,16 @@ public class FavoritePointEditor extends PointEditor {
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
 		favorite.setAddress("");
+		if (categoryColor != 0 && (category == null || category.getColor() != categoryColor)) {
+			favorite.setColor(categoryColor);
+		}
+		iconPreset = !Algorithms.isEmpty(iconName) && RenderingIcons.getBigIconResourceId(iconName) != 0;
+		if (iconPreset) {
+			favorite.setIconIdFromName(iconName);
+		}
+		if (!Algorithms.isEmpty(backgroundType)) {
+			favorite.setBackgroundType(BackgroundType.getByTypeName(backgroundType, DEFAULT_BACKGROUND_TYPE));
+		}
 		FavoritePointEditorFragment.showInstance(mapActivity, autoFill);
 	}
 
@@ -157,6 +177,7 @@ public class FavoritePointEditor extends PointEditor {
 			return;
 		}
 		isNew = false;
+		iconPreset = false;
 		this.favorite = favorite;
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
@@ -166,6 +187,7 @@ public class FavoritePointEditor extends PointEditor {
 			return;
 		}
 		isNew = false;
+		iconPreset = false;
 		this.favorite = favorite;
 		FavoritePointEditorFragment.showInstance(this, activity, targetFragment, false);
 	}
