@@ -336,7 +336,7 @@ class LocalAssistant(private val ctx: Context) {
 		tools?.let { return it }
 		val b = OsmAndBridge(ctx, ConnectorSettings.osmandPackage(ctx))
 		bridge = b
-		return LocalTools(OsmAndTools(b, ctx.assets), SettingsCatalog(ctx)).also {
+		return LocalTools(OsmAndTools(b, ctx.assets), SettingsCatalog(ctx, ConnectorSettings.osmandPackage(ctx))).also {
 			it.showOsmAnd = {
 				ctx.packageManager.getLaunchIntentForPackage(ConnectorSettings.osmandPackage(ctx))?.let { launch ->
 					ctx.startActivity(launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
