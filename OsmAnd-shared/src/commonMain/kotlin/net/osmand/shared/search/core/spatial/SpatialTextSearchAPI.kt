@@ -271,7 +271,7 @@ open class SpatialTextSearchAPI(
 		val lang = searchSettings.getLang()
 		val transliterate = searchSettings.isTransliterate()
 
-		if (convertSpatialSearchResult(ssr, result, context.poiSearch, location, lang, transliterate) == null) {
+		if (convertSpatialSearchResult(ssr, result, context, location, lang, transliterate) == null) {
 			return null
 		}
 
@@ -281,7 +281,7 @@ open class SpatialTextSearchAPI(
 
 	fun convertSpatialSearchResult(
 		ssr: SpatialSearchResult, result: SearchResult,
-		poiTypeSearch: SpatialPoiSearch, location: KLatLon?,
+		context: SpatialSearchContext, location: KLatLon?,
 		lang: String?, transliterate: Boolean
 	): SearchResult? {
 		val objs = ssr.getObjects()
@@ -291,7 +291,7 @@ open class SpatialTextSearchAPI(
 		result.spatialSearchVisibleLevel = ssr.visibleLevel()
 
 		if (ssr.isPoiCategory()) {
-			return convertPoiType(ssr, result, poiTypeSearch)
+			return convertPoiType(ssr, result, context)
 		} else if (objs.isNotEmpty()) {
 			return convertMapObjects(ssr, objs, result, lang, transliterate)
 		}
@@ -370,8 +370,8 @@ open class SpatialTextSearchAPI(
 		return result
 	}
 
-	private fun convertPoiType(ssr: SpatialSearchResult, result: SearchResult, poiTypeSearch: SpatialPoiSearch): SearchResult? {
-		val spatialPoiType = ssr.getPoiCategory(poiTypeSearch) ?: return null
+	private fun convertPoiType(ssr: SpatialSearchResult, result: SearchResult, context: SpatialSearchContext): SearchResult? {
+		val spatialPoiType = ssr.getPoiCategory(context.poiSearch) ?: return null
 		val obj: Any
 		val localeName: String
 		val poiType = spatialPoiType.singleType
@@ -380,12 +380,12 @@ open class SpatialTextSearchAPI(
 			obj = poiType
 			localeName = PoiAdditionalLabels.getSearchName(poiType)
 		} else if (poiSubType != null) {
-			val local = spatialPoiType.getLocalType(poiTypeSearch)
+			val local = spatialPoiType.getLocalType(context)
 			obj = TopIndexFilter(local.poiSubType!!, poiTypes, local.poiAdditional!!)
 			localeName = local.poiAdditional!!
 			val settings = result.requiredSearchPhrase.getSettings()
 			val lang = settings?.getLang().takeUnless { it.isNullOrEmpty() } ?: settings?.getAppLang()
-			result.alternateName = spatialPoiType.getAltName(poiTypeSearch, lang)
+			result.alternateName = spatialPoiType.getAltName(context, lang)
 		} else {
 			return null
 		}

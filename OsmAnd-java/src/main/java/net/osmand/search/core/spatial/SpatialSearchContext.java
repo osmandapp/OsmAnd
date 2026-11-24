@@ -60,7 +60,7 @@ public class SpatialSearchContext {
 	final LatLon location; // could be null
 	final int[][] limitLocationBboxes;
 	
-	final SpatialPoiSearch poiSearch;
+	public final SpatialPoiSearch poiSearch;
 	final SpatialTextSearchSettings settings;
 	final SpatialSearchStats stats = new SpatialSearchStats();
 	final SpatialTypoSuggestions typos = new SpatialTypoSuggestions(this);
