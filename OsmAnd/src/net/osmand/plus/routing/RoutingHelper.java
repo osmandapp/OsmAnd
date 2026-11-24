@@ -28,6 +28,7 @@ import net.osmand.router.FastRoutingState;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MovingSpeedWindow;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
@@ -123,8 +124,12 @@ public class RoutingHelper {
 		routeWasFinished = false;
 	}
 
-	void setRoute(RouteCalculationResult route) {
+	synchronized boolean setRoute(@NonNull RouteCalculationResult route, @NonNull RouteCalculationProgress progress) {
+		if (progress.isCancelled && !progress.memoryLimitExceeded) {
+			return false; // checked under the lock that stopCalculation() holds
+		}
 		this.route = route;
+		return true;
 	}
 
 	long getDeviateFromRouteDetected() {
