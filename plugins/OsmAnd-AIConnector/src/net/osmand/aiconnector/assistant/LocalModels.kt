@@ -59,8 +59,6 @@ class LocalModels(private val ctx: Context) {
 		get() = all.firstOrNull { it.id == prefs.getString("model", null) }
 		set(value) = prefs.edit().putString("model", value?.id).apply()
 
-	fun get(id: String) = all.first { it.id == id }
-
 	/** Model files live in the app's external files dir: no permission needed, removed with the app. */
 	fun file(model: ModelInfo): File = File(ctx.getExternalFilesDir("models"), model.fileName!!)
 
@@ -74,7 +72,8 @@ class LocalModels(private val ctx: Context) {
 					val done = c.getLong(c.getColumnIndexOrThrow(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR))
 					val total = c.getLong(c.getColumnIndexOrThrow(DownloadManager.COLUMN_TOTAL_SIZE_BYTES))
 					when (status) {
-						DownloadManager.STATUS_SUCCESSFUL -> prefs.edit().remove(downloadKey(model)).apply()
+						DownloadManager.STATUS_SUCCESSFUL ->
+							prefs.edit().remove(downloadKey(model)).putBoolean(completeKey(model), true).apply()
 						DownloadManager.STATUS_FAILED -> {
 							prefs.edit().remove(downloadKey(model)).apply()
 							file(model).delete()
@@ -90,11 +89,14 @@ class LocalModels(private val ctx: Context) {
 		}
 		// a file copied by hand (adb push) counts too, as long as it is complete
 		val f = file(model)
-		return if (f.exists() && f.length() == model.sizeBytes) ModelState.Ready else ModelState.NotDownloaded
+		// the size in the code is only a check for files copied by hand: the server may have a newer file
+		val complete = f.exists() && (f.length() == model.sizeBytes || prefs.getBoolean(completeKey(model), false))
+		return if (complete) ModelState.Ready else ModelState.NotDownloaded
 	}
 
 	fun download(model: ModelInfo) {
 		file(model).delete()
+		prefs.edit().remove(completeKey(model)).apply()
 		val request = DownloadManager.Request(Uri.parse(model.url))
 			.setTitle(model.title)
 			.setDescription(ctx.getString(R.string.app_name))
@@ -106,10 +108,12 @@ class LocalModels(private val ctx: Context) {
 	fun delete(model: ModelInfo) {
 		val id = prefs.getLong(downloadKey(model), -1)
 		if (id >= 0) downloads.remove(id)
-		prefs.edit().remove(downloadKey(model)).apply()
+		prefs.edit().remove(downloadKey(model)).remove(completeKey(model)).apply()
 		file(model).delete()
 		if (selected?.id == model.id) selected = null
 	}
 
 	private fun downloadKey(model: ModelInfo) = "download_${model.id}"
+
+	private fun completeKey(model: ModelInfo) = "complete_${model.id}"
 }

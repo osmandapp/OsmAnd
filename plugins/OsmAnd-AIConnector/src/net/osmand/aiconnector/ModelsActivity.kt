@@ -74,6 +74,11 @@ class ModelsActivity : AppCompatActivity() {
 		handler.post(poll)
 	}
 
+	override fun onDestroy() {
+		super.onDestroy()
+		worker.shutdown()
+	}
+
 	override fun onPause() {
 		super.onPause()
 		handler.removeCallbacks(poll)
@@ -93,6 +98,11 @@ class ModelsActivity : AppCompatActivity() {
 	}
 
 	private fun downloadNano() = worker.execute {
+		// the Download button goes away at once, a second tap would start a second download
+		handler.post {
+			nanoStatus = FeatureStatus.DOWNLOADING
+			refresh()
+		}
 		try {
 			GeminiNanoModel().download({ done ->
 				handler.post { nanoMessage = getString(R.string.downloading_bytes, Formatter.formatShortFileSize(this, done)) }

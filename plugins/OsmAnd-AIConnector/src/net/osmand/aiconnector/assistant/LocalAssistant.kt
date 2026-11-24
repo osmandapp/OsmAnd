@@ -9,7 +9,7 @@ import android.location.LocationManager
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import net.osmand.aiconnector.ChatActivity
+import net.osmand.aiconnector.MainActivity
 import net.osmand.aiconnector.ConnectorSettings
 import net.osmand.aiconnector.OsmAndBridge
 import net.osmand.aiconnector.OsmAndTools
@@ -48,6 +48,13 @@ class LocalAssistant(private val ctx: Context) {
 	 * kept for the whole app it silently turned the user's own requests into dry runs.
 	 */
 	private var dryRun = false
+
+	/**
+	 * Stop was tapped: no more tool calls for this request. LiteRT-LM 0.19 cannot interrupt a generation,
+	 * so the model finishes the answer it is writing, but nothing more is done in OsmAnd.
+	 */
+	@Volatile
+	private var cancelled = false
 
 	/** Repeat the user's request after each tool result: small models forget the rest of a request with several steps. */
 	var remind = true
@@ -88,6 +95,7 @@ class LocalAssistant(private val ctx: Context) {
 			return
 		}
 		busy = true
+		cancelled = false
 		post(ChatEvent.User(text))
 		worker.execute {
 			try {
@@ -120,6 +128,7 @@ class LocalAssistant(private val ctx: Context) {
 	private fun runTurn(m: ChatModel, t: LocalTools, prompt: ChatPrompt) {
 		var previous: String? = null
 		repeat(maxSteps) {
+			if (stopped()) return
 			val c = m.complete(prompt.prefix, prompt.render(history), maxAnswerTokens, prompt.stops)
 			val call = prompt.parseToolCall(c.text)
 			if (call == null) {
@@ -160,16 +169,24 @@ class LocalAssistant(private val ctx: Context) {
 		t.vision = info.vision
 		if (!started) {
 			// a chat opened from the list: the model gets its earlier questions and answers
-			m.start(INSTRUCTIONS, t.declarations(), history.filter { it.role != Role.TOOL })
+			m.start(INSTRUCTIONS, t.declarations(), lastTurns())
 			started = true
 		}
 		val context = context(t)
 		Log.i(TAG, "CONTEXT $context")
 		val message = if (context.isEmpty()) text else "$context\n\n$text"
 		history.add(ChatMessage(Role.USER, message))
-		var reply = m.send(message)
+		var reply = try {
+			m.send(message)
+		} catch (e: Exception) {
+			// the context (4096 tokens) is full: go on with a conversation of the last turns only
+			Log.w(TAG, "Restarting the conversation: $e")
+			m.start(INSTRUCTIONS, t.declarations(), lastTurns().dropLast(1))
+			m.send(message)
+		}
 		var previous: String? = null
 		repeat(maxSteps) {
+			if (stopped()) return
 			val call = reply.calls.firstOrNull()
 			if (call == null) {
 				history.add(ChatMessage(Role.ASSISTANT, reply.text))
@@ -200,6 +217,9 @@ class LocalAssistant(private val ctx: Context) {
 		}
 		post(ChatEvent.Error("Stopped after $maxSteps tool calls"))
 	}
+
+	/** The questions and answers a model gets again: the last few, so they fit into its context. */
+	private fun lastTurns() = history.filter { it.role != Role.TOOL }.takeLast(maxReplayed)
 
 	private fun loadConversationModel(info: ModelInfo): ConversationModel {
 		conversationModel?.takeIf { loadedId == info.id }?.let { return it }
@@ -271,10 +291,19 @@ class LocalAssistant(private val ctx: Context) {
 		if (saveChat) store.save(chatId, events)
 	}
 
-	fun cancel() = model?.cancel()
+	fun cancel() {
+		cancelled = true
+		model?.cancel()
+	}
+
+	private fun stopped(): Boolean {
+		if (cancelled) post(ChatEvent.Info("Stopped"))
+		return cancelled
+	}
 
 	/** Another OsmAnd app was chosen: the next tool call connects to it. */
 	fun osmandChanged() = worker.execute {
+		bridge?.disconnect()
 		bridge = null
 		tools = null
 	}
@@ -317,9 +346,8 @@ class LocalAssistant(private val ctx: Context) {
 	/** The model is loaded once and kept; choosing another model frees the old one. */
 	private fun loadModel(info: ModelInfo): ChatModel {
 		model?.takeIf { loadedId == info.id }?.let { return it }
-		model?.close()
-		model = null
-		chatPrompt = null
+		// frees a LiteRT engine too: two models do not fit in memory
+		closeModels()
 		post(ChatEvent.Info("Loading ${info.title}…"))
 		val start = System.currentTimeMillis()
 		val m = when (info.engine) {
@@ -345,7 +373,7 @@ class LocalAssistant(private val ctx: Context) {
 				}
 			}
 			it.showChat = {
-				ctx.startActivity(Intent(ctx, ChatActivity::class.java)
+				ctx.startActivity(Intent(ctx, MainActivity::class.java)
 					.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
 			}
 			tools = it
@@ -425,5 +453,6 @@ class LocalAssistant(private val ctx: Context) {
 			"first, then call osmand_set_preference with that pref_id and one of its values. Do every part of the request, one tool call at a time. " +
 			"When all is done, tell the user in one short sentence what was done."
 	private val maxSteps = 8
+	private val maxReplayed = 6
 	private val maxAnswerTokens = 256
 }

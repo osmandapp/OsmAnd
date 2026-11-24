@@ -28,10 +28,6 @@ android {
 		targetSdkVersion osmand_targetSdk
 		versionCode 3
 		versionName "0.5"
-		ndk {
-			// the on-device models (LiteRT-LM) run on 64-bit ARM phones only
-			abiFilters "arm64-v8a"
-		}
 	}
 
 	packaging {

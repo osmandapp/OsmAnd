@@ -41,7 +41,7 @@ import java.util.Date
  * The main screen. On top: which OsmAnd app is used and who uses it, the model on this phone (a chat
  * below, with the model to choose) or an AI assistant on a computer (the connection settings below).
  */
-class ChatActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
 	companion object {
 		/** Opens the screen on the computer connection, e.g. from the connector's notification. */
@@ -88,11 +88,11 @@ class ChatActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_chat)
+		setContentView(R.layout.activity_main)
 		assistant = (application as AssistantApplication).assistant
 
 		toolbar = findViewById(R.id.toolbar)
-		toolbar.inflateMenu(R.menu.chat)
+		toolbar.inflateMenu(R.menu.main)
 		toolbar.setOnMenuItemClickListener {
 			when (it.itemId) {
 				R.id.reset_token -> computerFragment()?.confirmResetToken()
@@ -106,6 +106,8 @@ class ChatActivity : AppCompatActivity() {
 		findViewById<View>(R.id.open_osmand).setOnClickListener { openOsmand() }
 
 		modeToggle = findViewById(R.id.mode_toggle)
+		// the saved choice is the only state: restoring the buttons' own state would undo the notification's "Computer"
+		modeToggle.isSaveEnabled = false
 		if (intent.getBooleanExtra(EXTRA_COMPUTER, false)) prefs().edit().putBoolean(MODE, true).apply()
 		modeToggle.check(if (isComputerMode()) R.id.mode_computer else R.id.mode_phone)
 		modeToggle.addOnButtonCheckedListener { _, id, checked ->
@@ -163,6 +165,12 @@ class ChatActivity : AppCompatActivity() {
 		showMode()
 	}
 
+	/** The connector's notification opens the screen on the computer connection, also when it is open already. */
+	override fun onNewIntent(intent: Intent) {
+		super.onNewIntent(intent)
+		if (intent.getBooleanExtra(EXTRA_COMPUTER, false)) modeToggle.check(R.id.mode_computer)
+	}
+
 	override fun onResume() {
 		super.onResume()
 		assistant.listener = { refresh() }
@@ -209,7 +217,8 @@ class ChatActivity : AppCompatActivity() {
 				ConnectorSettings.setOsmandPackage(this, installed[which])
 				setAccessStatus(getString(R.string.access_not_checked))
 				assistant.osmandChanged()
-				computerFragment()?.restartServer()
+				// the computer connection serves the chosen app too, whichever tab is shown
+				if (ConnectorSettings.isEnabled(this)) ConnectorService.start(this)
 				refresh()
 			}
 			d.dismiss()
@@ -250,7 +259,9 @@ class ChatActivity : AppCompatActivity() {
 				assistant.openChat(c.id)
 				sheet.dismiss()
 			}
-			row.findViewById<View>(R.id.chat_delete).setOnClickListener {
+			val delete = row.findViewById<View>(R.id.chat_delete)
+			delete.isEnabled = !assistant.busy
+			delete.setOnClickListener {
 				assistant.deleteChat(c.id)
 				list.removeView(row)
 			}
