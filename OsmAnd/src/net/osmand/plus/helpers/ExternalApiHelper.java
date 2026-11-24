@@ -742,10 +742,10 @@ public class ExternalApiHelper {
 			updateTurnInfo("next_", bundle, ni);
 			ni = routingHelper.getNextRouteDirectionInfoAfter(ni, new NextDirectionInfo(), true);
 			if (ni.distanceTo > 0) {
-				updateTurnInfo("after_next", bundle, ni);
+				updateTurnInfo("after_next_", bundle, ni);
 			}
 		}
-		routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+		ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 		if (ni.distanceTo > 0) {
 			updateTurnInfo("no_speak_next_", bundle, ni);
 		}
