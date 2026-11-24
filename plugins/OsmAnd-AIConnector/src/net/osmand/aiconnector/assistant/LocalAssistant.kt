@@ -1,11 +1,7 @@
 package net.osmand.aiconnector.assistant
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.LocationManager
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -388,25 +384,17 @@ class LocalAssistant(private val ctx: Context) {
 			null
 		}
 		val lines = mutableListOf<String>()
-		// OsmAnd knows the location only while it runs; the phone's last fix is the fallback
-		val me = info?.lastKnownLocation?.let { it.latitude to it.longitude } ?: phoneLocation()
-		me?.let { lines.add("My location: lat ${fmt(it.first)}, lon ${fmt(it.second)}.") }
+		// the location comes from OsmAnd only (the assistant has no location permission of its own);
+		// while OsmAnd does not know it, the map center stands in for "near me"
+		info?.lastKnownLocation?.let {
+			lines.add("My location: lat ${fmt(it.latitude)}, lon ${fmt(it.longitude)}.")
+		}
 		val map = info?.mapLocation?.let { it.latitude to it.longitude } ?: savedMapCenter(t)
 		map?.let { lines.add("Map center: lat ${fmt(it.first)}, lon ${fmt(it.second)}.") }
 		t.read("osmand_status")?.optString("current_profile")?.takeIf { it.isNotEmpty() }?.let {
 			lines.add("Current profile: $it.")
 		}
 		return if (lines.isEmpty()) "" else "[${lines.joinToString(" ")}]"
-	}
-
-	@SuppressLint("MissingPermission")
-	private fun phoneLocation(): Pair<Double, Double>? {
-		if (ctx.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			return null
-		}
-		val lm = ctx.getSystemService(LocationManager::class.java)
-		return lm.getProviders(true).mapNotNull { lm.getLastKnownLocation(it) }.maxByOrNull { it.time }
-			?.let { it.latitude to it.longitude }
 	}
 
 	/** Where the map was when OsmAnd closed (its settings keep it). */
@@ -448,7 +436,7 @@ class LocalAssistant(private val ctx: Context) {
 	private val INSTRUCTIONS = "You are the OsmAnd map assistant on the user's phone. You control the OsmAnd app " +
 			"with tools. Call a tool when the request needs one, otherwise answer briefly in the user's language. " +
 			"A user message may start with [my location, map center, current profile] in brackets: use it for " +
-			"\"near me\" and \"here\". Never invent coordinates: find a place with osmand_search first and use the " +
+			"\"near me\" and \"here\"; without my location use the map center. Never invent coordinates: find a place with osmand_search first and use the " +
 			"coordinates it returns. To change a setting or the map style, find its pref_id with osmand_find_setting " +
 			"first, then call osmand_set_preference with that pref_id and one of its values. Do every part of the request, one tool call at a time. " +
 			"When all is done, tell the user in one short sentence what was done."

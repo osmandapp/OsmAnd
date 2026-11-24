@@ -150,14 +150,9 @@ class MainActivity : AppCompatActivity() {
 			if (assistant.busy) assistant.cancel() else submit(input.text.toString())
 		}
 
-		val wanted = mutableListOf<String>()
-		if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			wanted += listOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-		}
 		if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-			wanted += Manifest.permission.POST_NOTIFICATIONS
+			requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 2)
 		}
-		if (wanted.isNotEmpty()) requestPermissions(wanted.toTypedArray(), 2)
 		// the computer connection keeps working as before when it runs in the background
 		if (ConnectorSettings.isEnabled(this) && ConnectorSettings.runMode(this) == RunMode.BACKGROUND) {
 			ConnectorService.start(this)
