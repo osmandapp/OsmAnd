@@ -5360,4 +5360,9 @@
     <string name="file_name_containes_illegal_char">名稱不能包含：%1$s</string>
     <string name="attach_to_track">附加至軌跡</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">3D 軌跡不支援虛線與點線樣式。</string>
+    <string name="terrain_shadows_hillshade_footer">當「地形」顯示「地形陰影」時，將會關閉原有的地形功能，因為「地形陰影」已對地形起伏繪製陰影。</string>
+    <string name="shadows_on_description">「陰影」功能開啟：建築物會因陽光而投射陰影。</string>
+    <string name="shadows_off_description">「陰影」功能關閉：建築物將以無陰影的樣式繪製。</string>
+    <string name="shared_string_new">新</string>
+    <string name="sun_light_live">即時</string>
 </resources>
