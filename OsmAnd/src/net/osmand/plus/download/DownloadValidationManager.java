@@ -84,24 +84,26 @@ public class DownloadValidationManager {
 		if (isAllAssets(items)) {
 			copyVoiceAssetsWithoutInternet(context, items);
 		} else {
-			downloadFilesWithAllChecks(context, items, downloadThread::runDownloadFiles);
+			downloadFilesWithAllChecks(context, items, Collections.emptyList(), downloadThread::runDownloadFiles);
 		}
 	}
 
 	public void startReplacementDownload(@NonNull FragmentActivity context, @NonNull IndexItem item,
 	                                     @NonNull File fileToDelete) {
-		downloadFilesWithAllChecks(context, new IndexItem[] {item}, validatedItems ->
-				downloadThread.runDownloadFilesWithPendingCleanup(
-						Collections.singletonList(fileToDelete), validatedItems[0]));
+		List<File> filesToDelete = Collections.singletonList(fileToDelete);
+		downloadFilesWithAllChecks(context, new IndexItem[] {item}, filesToDelete, validatedItems ->
+				downloadThread.runDownloadFilesWithPendingCleanup(filesToDelete, validatedItems[0]));
 	}
 
 	/**
 	 * The server allowed replacing the free region with the region of the items. Nothing changes until
 	 * the download passes the internet and space checks: only then the region becomes free and the maps
 	 * of other regions are deactivated, to be deleted once a new map is installed.
+	 *
+	 * @param filesToDelete deleted after the install too, e.g. the copy the duplicate map warning replaces
 	 */
 	public void startFreeRegionReplace(@NonNull FragmentActivity activity, @NonNull WorldRegion region,
-	                                   @NonNull IndexItem... items) {
+	                                   @NonNull List<File> filesToDelete, @NonNull IndexItem... items) {
 		FreeVersionMapDownloads freeMaps = downloadThread.getFreeVersionMapDownloads();
 		FreeRegionCheck check = freeMaps.check(items, region);
 		IndexItem[] regionItems = check.isAllFree() ? items : skipOtherRegions(check);
@@ -110,11 +112,14 @@ public class DownloadValidationManager {
 				if (freeMaps.isFreeVersion()) {
 					// the download could not be queued: keep the free region and the maps
 					if (!downloadThread.checkReloadRunning()) {
-						freeMaps.replaceFreeRegion(region, filesToDelete ->
-								downloadThread.runDownloadFilesWithPendingCleanup(filesToDelete, validatedItems));
+						freeMaps.replaceFreeRegion(region, deactivatedFiles -> {
+							List<File> files = new ArrayList<>(deactivatedFiles);
+							files.addAll(filesToDelete);
+							downloadThread.runDownloadFilesWithPendingCleanup(files, validatedItems);
+						});
 					}
 				} else {
-					downloadThread.runDownloadFiles(validatedItems);
+					downloadThread.runDownloadFilesWithPendingCleanup(filesToDelete, validatedItems);
 				}
 			});
 		}
@@ -134,8 +139,8 @@ public class DownloadValidationManager {
 	}
 
 	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
-	                                        @NonNull DownloadValidatedCallback callback) {
-		IndexItem[] freeItems = downloadFilesCheck_1_FreeRegion(activity, items);
+	                                        @NonNull List<File> filesToDelete, @NonNull DownloadValidatedCallback callback) {
+		IndexItem[] freeItems = downloadFilesCheck_1_FreeRegion(activity, items, filesToDelete);
 		if (freeItems != null) {
 			downloadFilesCheck_2_Internet(activity, freeItems, callback);
 		}
@@ -150,14 +155,15 @@ public class DownloadValidationManager {
 	 * @return the items to download now, or null when nothing is left or the replace sheet takes over
 	 */
 	@Nullable
-	private IndexItem[] downloadFilesCheck_1_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items) {
+	private IndexItem[] downloadFilesCheck_1_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
+	                                                    @NonNull List<File> filesToDelete) {
 		FreeRegionCheck check = downloadThread.getFreeVersionMapDownloads().check(items);
 		if (check.isAllFree()) {
 			return items;
 		}
 		if (check.getFreeItems().isEmpty() && check.getFreeRegion() != null) {
 			WorldRegion region = check.getOtherRegions().iterator().next();
-			FreeRegionBottomSheet.showInstance(activity, check.getFreeRegion(), region, items);
+			FreeRegionBottomSheet.showInstance(activity, check.getFreeRegion(), region, items, filesToDelete);
 			return null;
 		}
 		return skipOtherRegions(check);

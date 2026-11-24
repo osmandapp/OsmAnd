@@ -30,6 +30,7 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
+import java.io.File
 
 /**
  * Free version: a map of another region. One sheet goes through the steps - replace, then what the
@@ -243,10 +244,11 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		val activity = requireActivity()
 		val indexes = app.downloadThread.indexes
 		val items = requireArguments().getStringArrayList(ITEMS_KEY).orEmpty().mapNotNull { indexes.getIndexItem(it) }
+		val filesToDelete = requireArguments().getStringArrayList(FILES_TO_DELETE_KEY).orEmpty().map { File(it) }
 		// the server may answer after the app went to the background
 		dismissAllowingStateLoss()
 		if (items.isNotEmpty()) {
-			DownloadValidationManager(app).startFreeRegionReplace(activity, region, *items.toTypedArray())
+			DownloadValidationManager(app).startFreeRegionReplace(activity, region, filesToDelete, *items.toTypedArray())
 		}
 	}
 
@@ -281,12 +283,16 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		private const val FREE_REGION_KEY = "free_region"
 		private const val REGION_KEY = "region"
 		private const val ITEMS_KEY = "items"
+		private const val FILES_TO_DELETE_KEY = "files_to_delete"
 		private const val STEP_KEY = "step"
 
-		/** @param items the download that opened the sheet, started after the replace */
+		/**
+		 * @param items the download that opened the sheet, started after the replace
+		 * @param filesToDelete deleted once that download is installed (the duplicate map warning)
+		 */
 		@JvmStatic
 		fun showInstance(activity: FragmentActivity, freeRegion: WorldRegion, region: WorldRegion,
-		                 items: Array<IndexItem>) {
+		                 items: Array<IndexItem>, filesToDelete: List<File>) {
 			val manager = activity.supportFragmentManager
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 				val fragment = FreeRegionBottomSheet()
@@ -294,6 +300,7 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 					putString(FREE_REGION_KEY, freeRegion.regionId)
 					putString(REGION_KEY, region.regionId)
 					putStringArrayList(ITEMS_KEY, ArrayList(items.map { it.fileName }))
+					putStringArrayList(FILES_TO_DELETE_KEY, ArrayList(filesToDelete.map { it.absolutePath }))
 				}
 				fragment.show(manager, TAG)
 			}
