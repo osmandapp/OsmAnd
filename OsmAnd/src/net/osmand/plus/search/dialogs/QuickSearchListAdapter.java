@@ -131,7 +131,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public void setUseMapCenter(boolean useMapCenter) {
-		this.useMapCenter = useMapCenter;
+		if (this.useMapCenter != useMapCenter) {
+			this.useMapCenter = useMapCenter;
+			notifyDataSetChanged();
+		}
 	}
 
 	public void setExploreHistoryCard(boolean exploreHistoryCard) {
