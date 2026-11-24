@@ -34,13 +34,14 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.controls.MapHudLayout;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
 import java.util.List;
 
 public class TrackDetailsMenuFragment extends BaseFullScreenFragment
-		implements OsmAndLocationListener, ICoveredScreenRectProvider {
+		implements OsmAndLocationListener, ICoveredScreenRectProvider, MapControlsThemeProvider {
 
 	public static final String TAG = "TrackDetailsMenuFragment";
 
@@ -198,6 +199,10 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		if (mapHudLayout != null && syncButtonContainer != null) {
 			mapHudLayout.addWidget(syncButtonContainer);
 		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
+		}
 	}
 
 	@Override
@@ -208,6 +213,15 @@ public class TrackDetailsMenuFragment extends BaseFullScreenFragment
 		if (mapHudLayout != null && syncButtonContainer != null) {
 			mapHudLayout.removeWidget(syncButtonContainer);
 		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapLayers().getMapControlsLayer().removeThemeInfoProviderTag(TAG);
+		}
+	}
+
+	@Override
+	public boolean isNightModeForMapControls() {
+		return nightMode;
 	}
 
 	private void updateBoundsChangeListener(boolean listen) {
