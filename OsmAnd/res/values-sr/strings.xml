@@ -5501,4 +5501,7 @@
     <string name="shadows_off_description">Сенке искључене: зграде су нацртане без сенки.</string>
     <string name="shared_string_new">Ново</string>
     <string name="sun_light_live">Директно</string>
+    <string name="free_region_maps_deactivated">Мапе за %2$s су деактивиране. %1$s није преузето.</string>
+    <string name="free_region_activate_title">Да ли желите да промените свој бесплатни регион?</string>
+    <string name="free_region_activate_descr">Бесплатна верзија укључује мапе једног региона. %1$s ће постати ваш бесплатни регион, а мапе %2$s ће бити деактивиране.</string>
 </resources>
