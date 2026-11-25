@@ -43,8 +43,20 @@ public class ProfileSettingsItemReader<T extends ProfileSettingsItem> extends Os
 	@Override
 	protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference,
 			@NonNull JSONObject json) throws JSONException {
+		forgetRemovedInputDevices(preference, json);
 		if (!appModeBeanPrefsIds.contains(preference.getId())) {
 			preference.readFromJson(json, settingsItem.getAppMode());
+		}
+	}
+
+	private void forgetRemovedInputDevices(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) {
+		String prefId = settingsItem.getSettings().LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.getId();
+		if (!settingsItem.isReadFromFileImport() || !prefId.equals(preference.getId())) {
+			return;
+		}
+		String value = json.optString(prefId);
+		if (!Algorithms.isEmpty(value)) {
+			settingsItem.getApp().getInputDeviceHelper().forgetRemovedMergedDevices(value);
 		}
 	}
 

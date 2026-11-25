@@ -13,6 +13,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OsmandSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -112,7 +113,11 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				return selectedItems;
 			case IMPORT:
 				if (!Algorithms.isEmpty(items)) {
-					app.getInputDeviceHelper().forgetRemovedMergedDevices();
+					for (SettingsItem item : items) {
+						if (item instanceof OsmandSettingsItem settingsItem) {
+							settingsItem.markReadFromFileImport();
+						}
+					}
 					for (SettingsItem item : items) {
 						item.apply();
 					}
