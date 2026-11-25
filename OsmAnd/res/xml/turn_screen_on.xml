@@ -19,6 +19,13 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/wake_time" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="keep_screen_on_during_turns"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/keep_screen_on_during_turns" />
+
 	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
@@ -52,7 +59,6 @@
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="turn_screen_on_power_button"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:persistent="false"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/turn_screen_on_power_button" />
