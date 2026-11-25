@@ -245,18 +245,14 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private void onTopWidgetPanelChanged(boolean isVisible) {
 		if (topWidgetsVisibleForSystemBars != isVisible) {
 			topWidgetsVisibleForSystemBars = isVisible;
-			updateSystemBarsForPanelVisibilityChange();
-			if (isVisible) {
-				// shown again with the bounds it had before, so topPanelBoundsChangeListener reports no change
-				mapDisplayPositionManager.updateMapDisplayPosition(true);
-			}
+			onWidgetPanelVisibilityChanged(isVisible);
 		}
 	}
 
 	private void onBottomWidgetPanelChanged(boolean isVisible) {
 		if (bottomWidgetsVisibleForSystemBars != isVisible) {
 			bottomWidgetsVisibleForSystemBars = isVisible;
-			updateSystemBarsForPanelVisibilityChange();
+			onWidgetPanelVisibilityChanged(isVisible);
 		}
 		if (bottomFragmentContainer != null) {
 			boolean bottomFragmentVisible = bottomFragmentContainer.getChildCount() > 0;
@@ -265,6 +261,15 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 		}
 		updateLayerInsets(isVisible, false);
+	}
+
+	private void onWidgetPanelVisibilityChanged(boolean isVisible) {
+		updateSystemBarsForPanelVisibilityChange();
+		if (isVisible) {
+			// A panel shown again has the bounds it had before, so its BoundsChangeListener reports no change.
+			// The panels come back one after the other, so the last one recalculates with both in place.
+			mapDisplayPositionManager.updateMapDisplayPosition(true);
+		}
 	}
 
 	private void updateSystemBarsForPanelVisibilityChange() {
