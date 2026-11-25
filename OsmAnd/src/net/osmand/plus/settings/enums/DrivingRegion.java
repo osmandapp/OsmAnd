@@ -62,6 +62,10 @@ public enum DrivingRegion {
 			return UK_AND_OTHERS;
 		} else if (df.getCountry().equalsIgnoreCase("in")) {
 			return INDIA;
+		} else if (df.getCountry().equalsIgnoreCase("my")) {
+			// Malaysia: left-hand traffic, metric units, litres, European-style signs.
+			// Same attributes as map-based auto-detection resolves for Malaysia (first match is JAPAN).
+			return JAPAN;
 		}
 		return EUROPE_ASIA;
 	}
