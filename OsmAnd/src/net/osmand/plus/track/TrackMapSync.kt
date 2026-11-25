@@ -108,7 +108,7 @@ class TrackMapSync @JvmOverloads constructor(
 		fitTrack.run()
 	}
 
-	private fun fitIfInSync() {
+	fun fitIfInSync() {
 		if (button?.isShown == true && isInSync && hasTrack.asBoolean) {
 			fitTrack.run()
 		}

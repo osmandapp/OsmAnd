@@ -418,6 +418,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		upDownRow.setOnClickListener(v -> {
 			if (infoExpanded) {
 				collapseInfoView();
+				fitTrackAfterLayoutIfInSync();
 			} else if (setInfoType(InfoType.POINTS)) {
 				infoTypeBtn.setSelectedItem(pointsBtn);
 			}
@@ -506,6 +507,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		});
 
 		measurementLayer.setOnEnterMovePointModeListener(() -> {
+			setMapInSync(false);
 			collapseInfoViewIfExpanded();
 			switchMovePointMode(true);
 		});
@@ -635,6 +637,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		return (radioItem, view) -> {
 			if (isCurrentInfoType(type)) {
 				collapseInfoView();
+				fitTrackAfterLayoutIfInSync();
 				return false;
 			}
 			return setInfoType(type);
@@ -670,6 +673,17 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		updateMapDisplayPosition();
 		AndroidUiHelper.updateVisibility(cardsContainer, true);
 		updateUpDownBtn();
+		fitTrackAfterLayoutIfInSync();
+	}
+
+	private void fitTrackAfterLayoutIfInSync() {
+		if (mapSync != null && mapSync.isInSync() && mainView != null) {
+			ScrollUtils.addOnGlobalLayoutListener(mainView, () -> {
+				if (mapSync != null) {
+					mapSync.fitIfInSync();
+				}
+			});
+		}
 	}
 
 	private void collapseInfoViewIfExpanded() {
@@ -1257,6 +1271,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void onMovePoint() {
+		setMapInSync(false);
 		getMeasurementLayer().enterMovingPointMode();
 		switchMovePointMode(true);
 	}
@@ -1269,6 +1284,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void onAddPointAfter() {
+		setMapInSync(false);
 		getMeasurementLayer().moveMapToPoint(editingCtx.getSelectedPointPosition());
 		editingCtx.setInAddPointMode(true, false);
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
@@ -1280,6 +1296,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void onAddPointBefore() {
+		setMapInSync(false);
 		getMeasurementLayer().moveMapToPoint(editingCtx.getSelectedPointPosition());
 		editingCtx.setInAddPointMode(true, true);
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
@@ -1569,6 +1586,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			@Override
 			public void onItemClick(int position) {
 				if (mapActivity != null) {
+					setMapInSync(false);
 					collapseInfoViewIfExpanded();
 					updateMapDisplayPosition();
 					measurementLayer.moveMapToPoint(position);
@@ -2226,6 +2244,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		callMapActivity(mapActivity -> {
 			if (infoExpanded && hideInfoViewFirst) {
 				collapseInfoView();
+				fitTrackAfterLayoutIfInSync();
 				return;
 			}
 			if (!editingCtx.hasChanges()) {
