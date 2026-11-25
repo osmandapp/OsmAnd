@@ -46,6 +46,7 @@ import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.bottomsheets.FullscreenModeBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
@@ -512,6 +513,15 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		if (settings.MAP_EMPTY_STATE_ALLOWED.getId().equals(preference.getKey())) {
+			FullscreenModeBottomSheet.showInstance(getParentFragmentManager(), getSelectedAppMode(), this);
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
 	}
 
 	private void updateDialogControllerCallbacks() {
