@@ -134,7 +134,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		isStandardFilter = true;
 		standardIconId = topIndexFilter.getIconResource();
 		filterId = topIndexFilter.getFilterId();
-		this.name = topIndexFilter.getName();
+		// the brand itself (e.g. "McDonald's"), not its type "Brand": Filters title, query, map toolbar
+		this.name = topIndexFilter.getValue();
 		poiTypes = app.getPoiTypes();
 		additionalFilter = topIndexFilter;
 

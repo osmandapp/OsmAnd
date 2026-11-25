@@ -434,7 +434,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		TopIndexFilter topIndexFilter = filter.getTopIndexFilter();
 		EditText editText = new EditText(getContext());
 		editText.setHint(R.string.new_filter);
-		editText.setText(topIndexFilter != null ? topIndexFilter.getValue() : filter.getName());
+		editText.setText(filter.getName());
 
 		TextView textView = new TextView(getContext());
 		textView.setText(getString(R.string.new_filter_desc));

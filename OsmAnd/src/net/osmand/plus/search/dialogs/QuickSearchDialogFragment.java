@@ -1415,7 +1415,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.FILTER);
 				if (poiUIFilter != null) {
 					filterId = poiUIFilter.getFilterId();
-					filterByName = topIndexFilter.getValue();
 				}
 			}
 		}
