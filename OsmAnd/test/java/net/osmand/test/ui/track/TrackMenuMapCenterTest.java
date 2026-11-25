@@ -49,6 +49,7 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
@@ -360,17 +361,22 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		boolean suggestMapEnabled = setSuggestMapEnabled(false);
-		startNavigationAlongTrack();
-		// navigation switches to its own profile, so the widgets are shown in that one
-		boolean widgetEnabled = setTopPanelWidget(true);
-		setBottomPanelWidget(true);
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		boolean mapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		try {
-			assertMapCenterKeptBetweenPanelsAfterReturnFromBackground();
-			assertTrackStartInVisibleMapRect();
+			startNavigationAlongTrack();
+			// navigation switches to its own profile, so the widgets are shown in that one
+			boolean widgetEnabled = setTopPanelWidget(true);
+			setBottomPanelWidget(true);
+			try {
+				assertMapCenterKeptBetweenPanelsAfterReturnFromBackground();
+				assertTrackStartInVisibleMapRect();
+			} finally {
+				setBottomPanelWidget(false);
+				setTopPanelWidget(widgetEnabled);
+			}
 		} finally {
-			setBottomPanelWidget(false);
-			setTopPanelWidget(widgetEnabled);
-			app.stopNavigation();
+			stopNavigationAlongTrack(appMode, mapLinkedToLocation);
 			setSuggestMapEnabled(suggestMapEnabled);
 		}
 	}
@@ -385,6 +391,8 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		scenarioRule.getScenario().moveToState(Lifecycle.State.CREATED);
 		scenarioRule.getScenario().moveToState(Lifecycle.State.RESUMED);
 		awaitTrackMenuSettled();
+		assertTrue("Top panel is not shown after the return from the background", isTopPanelShown());
+		assertTrue("Bottom panel is not shown after the return from the background", isBottomPanelShown());
 		assertVisibleMapRectFreeOfPanels("After the return from the background");
 		assertEquals("Map center after the return from the background", ratioBefore, getMapRatio().y, 0.005f);
 	}
@@ -431,7 +439,9 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			app.getLocationProvider().setCustomLocation(new Location(SIMULATED_PROVIDER,
 					TRACK_START.getLatitude(), TRACK_START.getLongitude()), TimeUnit.MINUTES.toMillis(5));
 			MapActions mapActions = app.getOsmandMap().getMapActions();
-			mapActions.enterRoutePlanningModeGivenGpx(selectedGpxFile.getGpxFile(), TRACK_START, null, false, false);
+			// the profile in use may be public transport, which calculates no route along a track
+			mapActions.enterRoutePlanningModeGivenGpx(selectedGpxFile.getGpxFile(), ApplicationMode.CAR, TRACK_START, null,
+					false, false, MapRouteInfoMenu.DEFAULT_MENU_STATE, null);
 			mapActions.startNavigation();
 		});
 		skipSpeedCamerasBottomSheet();
@@ -441,6 +451,19 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		}
 		assertTrue("The route along the track is not calculated", app.getRoutingHelper().isRouteCalculated());
 		assertTrue("Navigation is not started", app.getRoutingHelper().isFollowingMode());
+	}
+
+	/**
+	 * Stops navigation and puts back what it changed, so that the tests that follow do not start with them.
+	 */
+	private void stopNavigationAlongTrack(@NonNull ApplicationMode appMode, boolean mapLinkedToLocation) {
+		scenarioRule.getScenario().onActivity(activity -> {
+			app.stopNavigation();
+			app.getSettings().setApplicationMode(appMode);
+			// navigation makes the map follow the location: left on, the map moves to the device's own position
+			app.getMapViewTrackingUtilities().setMapLinkedToLocation(mapLinkedToLocation);
+			app.getLocationProvider().setCustomLocation(null, 0);
+		});
 	}
 
 	private boolean isBottomPanelShown() {
