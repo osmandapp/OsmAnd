@@ -13,7 +13,6 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Lifecycle;
 
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
@@ -193,10 +192,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		};
 		settings.ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
 
-		hillshadeSunAngleListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		hillshadeSunAngleListener = change -> app.runInUIThread(this::updateSunPosition);
 		HILLSHADE_SUN_ANGLE.addListener(hillshadeSunAngleListener);
 
-		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateSunPosition);
 		HILLSHADE_SUN_AZIMUTH.addListener(hillshadeSunAzimuthListener);
 
 		castShadowsListener = change -> app.runInUIThread(() -> {
@@ -207,16 +206,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		});
 		settings.CAST_SHADOWS.addListener(castShadowsListener);
 
-		sunLightModeListener = change -> app.runInUIThread(() -> {
-			// A turned off plugin gets no car session stop that would end the updates
-			if (isEnabled()) {
-				sunLight.updateLiveUpdates();
-			}
-			updateElevationConfiguration();
-		});
+		sunLightModeListener = change -> app.runInUIThread(this::updateSunPosition);
 		SUN_LIGHT_MODE.addListener(sunLightModeListener);
 
-		sunLightTimeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		sunLightTimeListener = change -> app.runInUIThread(this::updateSunPosition);
 		SUN_LIGHT_TIME.addListener(sunLightTimeListener);
 	}
 
@@ -225,24 +218,11 @@ public class SRTMPlugin extends OsmandPlugin {
 		return sunLight;
 	}
 
-	@Override
-	public void mapActivityResume(@NonNull MapActivity activity) {
-		sunLight.setMapVisible(true);
-	}
-
-	@Override
-	public void mapActivityPause(@NonNull MapActivity activity) {
-		sunLight.setMapVisible(false);
-	}
-
-	@Override
-	public void onCarNavigationSessionStart() {
-		sunLight.updateLiveUpdates();
-	}
-
-	@Override
-	public void onCarNavigationSessionStop() {
-		sunLight.updateLiveUpdates();
+	private void updateSunPosition() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateSunPosition();
+		}
 	}
 
 	public void updateElevationConfiguration() {
@@ -334,6 +314,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		settings.getCustomRenderProperty(CONTOUR_LINES_ATTR).setDefaultValue("13");
 		MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
 		if (ctx != null) {
+			ctx.updateSunPosition();
 			if (Boolean.TRUE.equals(settings.ENABLE_3D_MAP_OBJECTS.get())) {
 				ctx.recreate3DObjectsProvider();
 			} else {
@@ -341,20 +322,12 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		}
 		NativeCoreContext.updateContourLinesDirectory(app, true);
-		// Turned on while a map is on screen: no resume or car session start will follow
-		if (activity instanceof MapActivity mapActivity
-				&& AndroidUtils.isStateAtLeast(mapActivity, Lifecycle.State.RESUMED)) {
-			sunLight.setMapVisible(true);
-		} else {
-			sunLight.updateLiveUpdates();
-		}
 		return true;
 	}
 
 	@Override
 	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
-		sunLight.stopLiveUpdates();
 		NativeCoreContext.updateContourLinesDirectory(app, false);
 	}
 

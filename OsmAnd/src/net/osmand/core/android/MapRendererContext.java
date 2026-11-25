@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.core.jni.*;
-import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
 import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
 import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -31,7 +30,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.plugins.srtm.building.SunLight;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -526,6 +524,7 @@ public class MapRendererContext {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 		updateElevationConfiguration();
+		updateSunPosition();
 		updateShadows();
 
 		if (obfMapRasterLayerProvider != null) {
@@ -617,6 +616,23 @@ public class MapRendererContext {
 		}
 	}
 
+	public void updateSunPosition() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		if (mapRendererView == null || plugin == null) {
+			return;
+		}
+		switch (plugin.SUN_LIGHT_MODE.get()) {
+			case LIVE -> mapRendererView.setSunTime(0L);
+			case DATE -> mapRendererView.setSunTime(plugin.getSunLight().getDateTime());
+			case MANUAL -> {
+				mapRendererView.setSunTime(-1L);
+				mapRendererView.setSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
+				mapRendererView.setSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+			}
+		}
+	}
+
 	public void updateElevationConfiguration() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView == null) {
@@ -628,14 +644,10 @@ public class MapRendererContext {
 		if (plugin != null && plugin.isTerrainShadowsEnabled()) {
 			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainShadowsIntensity() / 100f);
 		} else {
-			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
 		if (plugin != null) {
 			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
-			SunLight sunLight = plugin.getSunLight();
-			elevationConfiguration.setHillshadeSunAngle(sunLight.getLightAltitude());
-			elevationConfiguration.setHillshadeSunAzimuth(sunLight.getLightAzimuth());
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}

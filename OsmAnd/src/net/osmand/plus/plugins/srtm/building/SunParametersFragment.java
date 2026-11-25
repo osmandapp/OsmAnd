@@ -231,9 +231,14 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	}
 
 	private void updateLiveRows() {
-		SunLight.Angles angles = controller.getSunAngles();
-		liveAzimuthValue.setText(formatAzimuth((int) Math.round(angles.getAzimuth()) % 360));
-		liveAltitudeValue.setText(formatAltitude((int) Math.round(angles.getAltitude())));
+		SunLight.Angles angles = controller.getLiveSunAngles();
+		if (angles == null) {
+			liveAzimuthValue.setText(R.string.n_a);
+			liveAltitudeValue.setText(R.string.n_a);
+		} else {
+			liveAzimuthValue.setText(formatAzimuth((int) Math.round(angles.getAzimuth()) % 360));
+			liveAltitudeValue.setText(formatAltitude((int) Math.round(angles.getAltitude())));
+		}
 	}
 
 	private void bindDate() {
