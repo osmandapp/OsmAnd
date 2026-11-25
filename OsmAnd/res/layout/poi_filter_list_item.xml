@@ -12,7 +12,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_row_min_height"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/card_row_min_height"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingEnd="@dimen/content_padding">
@@ -51,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/TextAppearance.ListItemTitle"
+            android:paddingVertical="@dimen/content_padding_half"
             android:visibility="gone"
             tools:text="Live updates"/>
 
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/TextAppearance.ListItemCategoryTitle"
+            android:paddingVertical="@dimen/content_padding_half"
             android:textSize="@dimen/default_desc_text_size"
             android:visibility="gone"
             tools:text="Live updates"/>
