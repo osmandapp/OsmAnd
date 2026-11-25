@@ -13,6 +13,7 @@ public class MovingSpeedWindow {
 	private static final float MIN_MOVING_SPEED = 0.5f; // m/s in every speed unit, slower counts as standing still
 	private static final long MAX_POINT_DURATION_MILLIS = 5000; // a longer gap without fixes is not counted as moving
 	private static final long MAX_SPEED_UP_MILLIS = 10_000; // a car gets back to city speed after a stop in about 10 s
+	private static final long MAX_BLEND_MILLIS = 15 * 60_000; // the route estimate is blended in for at most 15 min of movement
 	private static final long FIRST_POINT_DURATION_MILLIS = 1000;
 
 	private final long movingInterval;
@@ -69,13 +70,15 @@ public class MovingSpeedWindow {
 	/**
 	 * The route's time left, in seconds, adapted to the measured speed. Until the interval of
 	 * movement is filled the route estimate is blended in, so the first seconds can't swing the
-	 * arrival time. The route estimate stays while there is no movement.
+	 * arrival time. The route estimate stays while there is no movement. The blend lasts at most
+	 * 15 min of movement: points are kept for 60 min, so with stops a longer interval of movement
+	 * may never be collected.
 	 */
 	public int adaptTime(int routeTime, int distance) {
 		if (movingInterval <= 0 || Float.isNaN(averageSpeed)) {
 			return routeTime;
 		}
-		float filled = Math.min(1f, (float) movingTime / movingInterval);
+		float filled = Math.min(1f, (float) movingTime / Math.min(movingInterval, MAX_BLEND_MILLIS));
 		return Math.round(routeTime + (distance / averageSpeed - routeTime) * filled);
 	}
 
