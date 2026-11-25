@@ -61,6 +61,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.slider.Slider;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -147,6 +148,7 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapTransparencyHelper;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.shared.data.KQuadRect;
@@ -1119,9 +1121,23 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			boolean topControlsVisible = shouldShowTopControls(menuVisible);
 			boolean bottomControlsVisible = shouldShowBottomControls(menuVisible);
 			mapActivity.getWidgetsVisibilityHelper().updateControlsVisibility(topControlsVisible, bottomControlsVisible);
+			updateTransparencySlider(mapActivity, !bottomControlsVisible);
 			// show or hide the top widgets panel before the map center is placed beside the menu, not on the next redraw
 			mapActivity.getMapLayers().getMapInfoLayer().updateVerticalPanels();
 			mapActivity.refreshMap();
+		}
+	}
+
+	private void updateTransparencySlider(@NonNull MapActivity mapActivity, boolean hudSliderHidden) {
+		View mapControls = getMapBottomHudButtons();
+		Slider slider = mapControls != null ? mapControls.findViewById(R.id.map_controls_transparency_slider) : null;
+		if (slider != null) {
+			MapTransparencyHelper helper = mapActivity.getMapLayers().getMapControlsLayer().getMapTransparencyHelper();
+			boolean visible = hudSliderHidden && helper.isTransparencyBarActive();
+			if (visible) {
+				helper.setupMirrorSlider(slider);
+			}
+			AndroidUiHelper.updateVisibility(slider, visible);
 		}
 	}
 

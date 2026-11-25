@@ -132,11 +132,35 @@ public class MapTransparencyHelper {
 		updateTransparencySliderUi();
 	}
 
+	public boolean isTransparencyBarActive() {
+		return transparencySetting != null && transparencySlider != null;
+	}
+
+	/**
+	 * Sets up a slider for a screen that keeps the map visible but hides the one on the map HUD.
+	 * Changes go through the HUD slider, so it stays in sync and remains the only writer of the setting.
+	 */
+	public void setupMirrorSlider(@NonNull Slider mirrorSlider) {
+		mirrorSlider.clearOnChangeListeners();
+		mirrorSlider.setValueTo(transparencySlider.getValueTo());
+		mirrorSlider.setValue(transparencySetting.get());
+		mirrorSlider.addOnChangeListener((slider, value, fromUser) -> {
+			if (fromUser && isTransparencyBarActive()) {
+				transparencySlider.setValue(value);
+			}
+		});
+		updateSliderUi(mirrorSlider);
+	}
+
 	protected void updateTransparencySliderUi() {
+		updateSliderUi(transparencySlider);
+	}
+
+	private void updateSliderUi(@NonNull Slider slider) {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int selectedModeColor = appMode.getProfileColor(nightMode);
-		UiUtilities.setupSlider(transparencySlider, nightMode, selectedModeColor);
+		UiUtilities.setupSlider(slider, nightMode, selectedModeColor);
 	}
 
 	public void hideTransparencyBar() {

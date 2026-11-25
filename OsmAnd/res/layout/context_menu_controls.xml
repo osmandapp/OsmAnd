@@ -17,6 +17,15 @@
 		android:layout_marginEnd="@dimen/fab_margin_right"
 		android:layout_marginRight="@dimen/fab_margin_right" />
 
+	<com.google.android.material.slider.Slider
+		android:id="@+id/map_controls_transparency_slider"
+		android:layout_width="@dimen/map_trans_seek_size"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|center_horizontal"
+		android:layout_marginBottom="@dimen/map_button_size"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
 	<include
 		layout="@layout/map_hud_controls"
 		android:layout_width="wrap_content"
