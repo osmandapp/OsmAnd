@@ -43,6 +43,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.history.SearchHistoryHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
@@ -97,6 +98,7 @@ public class QuickSearchHelper implements ResourceListener {
 	private final OsmandApplication app;
 	private final SearchUICore core;
 	private SearchResultCollection resultCollection;
+	private List<QuickSearchListItem> spatialItemsOnMap;
 	private boolean mapsIndexed;
 	private boolean spatialSearch;
 	private List<String> mapsWithoutSpatialSearch = Collections.emptyList();
@@ -124,6 +126,15 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public void setResultCollection(SearchResultCollection resultCollection) {
 		this.resultCollection = resultCollection;
+	}
+
+	@Nullable
+	public List<QuickSearchListItem> getSpatialItemsOnMap() {
+		return spatialItemsOnMap;
+	}
+
+	public void setSpatialItemsOnMap(@Nullable List<QuickSearchListItem> spatialItemsOnMap) {
+		this.spatialItemsOnMap = spatialItemsOnMap;
 	}
 
 	public void initSearchUICore() {

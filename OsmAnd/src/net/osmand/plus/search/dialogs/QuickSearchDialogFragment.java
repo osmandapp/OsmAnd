@@ -589,6 +589,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			contextMenu.closeActiveToolbar();
 
 			List<QuickSearchListItem> searchItems = getExploreSpatialSearchItems();
+			searchHelper.setSpatialItemsOnMap(searchItems);
 			showToolbar(filter, title, searchItems == null);
 			if (searchItems != null) {
 				applySpatialSearchMapObjects(activity, searchItems);
@@ -802,7 +803,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			if (controller == null) {
 				PoiUIFilter filter = toolbarController.getSelectedFilter();
 				String title = toolbarTitle != null ? toolbarTitle : getText();
-				List<QuickSearchListItem> searchItems = getExploreSpatialSearchItems();
+				List<QuickSearchListItem> searchItems = searchHelper.getSpatialItemsOnMap();
 				showToolbar(filter, title, searchItems == null);
 				if (searchItems != null) {
 					restoreSpatialSearchMapObjects(mapActivity, searchItems);
@@ -3301,12 +3302,20 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		QuickSearchListAdapter adapter = mainSearchFragment != null ? mainSearchFragment.getListAdapter() : null;
 		if (adapter != null) {
 			for (int i = 0; i < adapter.getCount(); i++) {
-				if (adapter.getItem(i).getType() == QuickSearchListItemType.SEARCH_RESULT) {
+				if (isShownOnMap(adapter.getItem(i))) {
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+
+	private boolean isShownOnMap(@NonNull QuickSearchListItem item) {
+		if (item.getType() != QuickSearchListItemType.SEARCH_RESULT) {
+			return false;
+		}
+		SearchResult searchResult = item.getSearchResult();
+		return searchResult == null || searchResult.objectType != ObjectType.SUGGESTION;
 	}
 
 	void onMainListChanged() {
