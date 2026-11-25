@@ -25,6 +25,7 @@ public class CurrentStreetName {
 	public String exitRef;
 
 	private boolean useDestination = false;
+	private boolean prioritizeDestination = false;
 
 	public CurrentStreetName() {
 	}
@@ -40,11 +41,17 @@ public class CurrentStreetName {
 
 	public CurrentStreetName(@NonNull RoutingHelper routingHelper,
 	                         @NonNull NextDirectionInfo info, boolean showNextTurn) {
-		setupCurrentName(routingHelper, info, showNextTurn);
+		setupCurrentName(routingHelper, info, showNextTurn, false);
+	}
+
+	public CurrentStreetName(@NonNull RoutingHelper routingHelper,
+	                         @NonNull NextDirectionInfo info, boolean showNextTurn, boolean prioritizeDestination) {
+		this.prioritizeDestination = prioritizeDestination;
+		setupCurrentName(routingHelper, info, showNextTurn, prioritizeDestination);
 	}
 
 	private void setupCurrentName(@NonNull RoutingHelper helper,
-	                              @NonNull NextDirectionInfo info, boolean showNextTurn) {
+	                              @NonNull NextDirectionInfo info, boolean showNextTurn, boolean prioritizeDestination) {
 		boolean isSet = false;
 		// 1. display next turn and turn is imminent
 		if (showNextTurn && isTurnIsImminent(helper, info)) {
@@ -96,7 +103,7 @@ public class CurrentStreetName {
 			if (shields.isEmpty()) {
 				destinationName = info.directionInfo.getDestinationRefAndName();
 			}
-			text = RoutingHelperUtils.formatStreetName(name, ref, destinationName, "", shields);
+			text = RoutingHelperUtils.formatStreetName(name, ref, destinationName, "", shields, prioritizeDestination);
 			turnType = info.directionInfo.getTurnType();
 			if (turnType == null) {
 				turnType = TurnType.valueOf(TurnType.C, false);
@@ -117,11 +124,11 @@ public class CurrentStreetName {
 	private boolean setupCurrentRoadStreetName(@NonNull RoutingHelper helper) {
 		RouteSegmentResult rs = helper.getCurrentSegmentResult();
 		if (rs != null) {
-			text = getRouteSegmentStreetName(helper, rs, false);
+			text = getRouteSegmentStreetName(helper, rs, false, prioritizeDestination);
 			showMarker = true;
 			shields = RoadShield.create(rs.getObject());
 			if (Algorithms.isEmpty(text) && shields.isEmpty()) {
-				text = getRouteSegmentStreetName(helper, rs, true);
+				text = getRouteSegmentStreetName(helper, rs, true, prioritizeDestination);
 			}
 			return !Algorithms.isEmpty(text) || !shields.isEmpty();
 		}
@@ -131,7 +138,7 @@ public class CurrentStreetName {
 	private void setupNextRoadStreetName(@NonNull RoutingHelper helper) {
 		RouteSegmentResult rs = helper.getNextStreetSegmentResult();
 		if (rs != null) {
-			text = getRouteSegmentStreetName(helper, rs, false);
+			text = getRouteSegmentStreetName(helper, rs, false, prioritizeDestination);
 			turnType = TurnType.valueOf(TurnType.C, false);
 			shields = RoadShield.create(rs.getObject());
 		}
@@ -139,7 +146,7 @@ public class CurrentStreetName {
 
 	@NonNull
 	private String getRouteSegmentStreetName(@NonNull RoutingHelper routingHelper,
-	                                         @NonNull RouteSegmentResult rs, boolean includeRef) {
+	                                         @NonNull RouteSegmentResult rs, boolean includeRef, boolean prioritizeDestination) {
 		OsmandSettings settings = routingHelper.getSettings();
 		String lang = settings.MAP_PREFERRED_LOCALE.get();
 		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
@@ -148,6 +155,6 @@ public class CurrentStreetName {
 		String name = object.getName(lang, transliterate);
 		String ref = object.getRef(lang, transliterate, rs.isForwardDirection());
 		String destinationName = object.getDestinationName(lang, transliterate, rs.isForwardDirection());
-		return RoutingHelperUtils.formatStreetName(name, includeRef ? ref : null, destinationName, "»");
+		return RoutingHelperUtils.formatStreetName(name, includeRef ? ref : null, destinationName, "»", null, prioritizeDestination);
 	}
 }
