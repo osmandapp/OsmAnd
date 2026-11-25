@@ -5370,4 +5370,13 @@
     <string name="terrain_shadows_description">Scáthú dinimiciúil fíor-ama do thírraon 3D. Leagann sé béim ar gheiméadracht an tírdhreacha, agus tionchar íosta aige ar fheidhmíocht.</string>
     <string name="terrain_shadows_relief_3d_footer">Cumasaítear faoiseamh 3D go huathoibríoch, ós rud é go bhfuil gá leis chun scáthanna ar an tír-raon a rindreáil.</string>
     <string name="attach_to_track">Ceangail leis an rian</string>
+    <string name="free_region_maps_deactivated">Coinnítear léarscáileanna de %2$s díghníomhachtaithe. Níor íoslódáladh %1$s.</string>
+    <string name="free_region_activate_title">Athraigh do réigiún saor in aisce?</string>
+    <string name="free_region_activate_descr">Áirítear léarscáileanna de réigiún amháin sa leagan saor in aisce. Beidh %1$s mar réigiún saor in aisce agat, agus díghníomhachtófar léarscáileanna de %2$s.</string>
+    <string name="terrain_shadows_hillshade_footer">Tá scáthanna tír-raoin múchta agus taispeánann Tír-raon Scáth Cnoic: Tá scáth cnoic ag an bhfaoiseamh cheana féin.</string>
+    <string name="shadows_on_description">Scáthanna i láthair: caitheann foirgnimh scáthanna ón ngrian.</string>
+    <string name="shadows_off_description">Scáthanna múchta: tarraingítear foirgnimh gan scáthanna.</string>
+    <string name="shared_string_new">Nua</string>
+    <string name="sun_light_live">Beo</string>
+    <string name="gpx_line_style_desc_unavailable_for_3d">Níl stíleanna línte briste ná poncacha ar fáil do rian 3T.</string>
 </resources>
