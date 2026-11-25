@@ -749,6 +749,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		Set<String> distinctAmenities = new TreeSet<>();
 
 		PoiFilterUtils.AmenityNameFilter nm = getNameFilter();
+		// the category search reads only the types, so a brand / operator filter is checked here
+		TopIndexFilter topIndexFilter = getTopIndexFilter();
 
 		return new PoiUIFilterResultMatcher<Amenity>() {
 
@@ -761,7 +763,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 			@Override
 			public boolean publish(Amenity a) {
-				if (nm.accept(a)) {
+				if (nm.accept(a) && (topIndexFilter == null || topIndexFilter.getValue().equalsIgnoreCase(
+						a.getAdditionalInfo(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX + topIndexFilter.getTag())))) {
 					if (matcher == null || matcher.publish(a)) {
 						String amenityDistinctId = a.getType().getKeyName() + a.getId();
 						if (!distinctAmenities.add(amenityDistinctId)) {
