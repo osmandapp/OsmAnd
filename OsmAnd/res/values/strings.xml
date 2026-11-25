@@ -11,6 +11,12 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="fullscreen_mode_also_hide">Also hide</string>
+	<string name="fullscreen_mode_status_bar">Status bar</string>
+	<string name="fullscreen_mode_status_bar_descr">Clock, notifications, battery</string>
+	<string name="fullscreen_mode_navigation_bar">Navigation bar</string>
+	<string name="fullscreen_mode_navigation_bar_descr">Back, Home, Recents</string>
+	<string name="fullscreen_mode_bars_footer">Swipe from the edge of the screen to show hidden bars for a moment. A tap on the map brings everything back.</string>
 	<string name="free_region_maps_deactivated">Maps of %2$s are kept deactivated. %1$s was not downloaded.</string>
 	<string name="free_region_activate_title">Change your free region?</string>
 	<string name="free_region_activate_descr">The free version includes maps of one region. %1$s will become your free region, and maps of %2$s will be deactivated.</string>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding">
+
+	<net.osmand.plus.widgets.ui.ScreenDescriptionView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:screenDescriptionText="@string/tap_on_map_to_hide_interface_descr" />
+
+	<net.osmand.plus.widgets.ui.MainSwitchView
+		android:id="@+id/main_switch"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:mainSwitchLabel="@string/tap_on_map_to_hide_interface"
+		app:mainSwitchUseStateLabel="true" />
+
+	<LinearLayout
+		android:id="@+id/enabled_content"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/ui_group_gap"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.ui.GroupHeaderView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:groupHeaderTitle="@string/fullscreen_mode_also_hide" />
+
+		<LinearLayout
+			android:id="@+id/bars_group"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<include
+				android:id="@+id/status_bar_row"
+				layout="@layout/item_ui_setting_row" />
+
+			<include
+				android:id="@+id/navigation_bar_row"
+				layout="@layout/item_ui_setting_row" />
+		</LinearLayout>
+
+		<net.osmand.plus.widgets.ui.GroupFooterView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:groupFooterText="@string/fullscreen_mode_bars_footer" />
+	</LinearLayout>
+</LinearLayout>
