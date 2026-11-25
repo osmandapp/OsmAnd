@@ -44,6 +44,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -197,7 +198,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assumeTrue("The menu covers the lower part of the map only in portrait", isPortrait());
 
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 
 		float headerOnlyMenuTop = getMenuTopRatio();
@@ -239,7 +240,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertNotNull(selectedGpxFile);
 		assumeTrue("The menu covers the lower part of the map only in portrait", isPortrait());
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 
 		for (int tabId : new int[] {R.id.action_track, R.id.action_points, R.id.action_options, R.id.action_overview}) {
@@ -281,7 +282,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertNotNull(selectedGpxFile);
 		assumeTrue("Only the menu at the bottom of the screen is dragged", isPortrait());
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		clickViewWithId(R.id.action_track);
 		awaitTrackMenuSettled();
@@ -309,7 +310,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		clickViewWithId(R.id.action_track);
 		awaitTrackMenuSettled();
@@ -399,7 +400,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			float ratioBeforeMenu = getMapRatio().y;
 
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			clickViewWithId(R.id.action_track);
 			awaitTrackMenuSettled();
@@ -593,7 +594,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			assumeTrue("A top toolbar hides the top panel", isTopPanelShown());
 
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			assertFalse("The track menu is expected to hide the top panel", isTopPanelShown());
 			assertEquals("Map center with the top panel hidden", 0.5f, getMapRatio().y, 0.005f);
@@ -655,7 +656,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		try {
 			turnToLandscape(rotation);
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			scenarioRule.getScenario().onActivity(open::accept);
 			awaitTrackMenuSettled();
@@ -826,7 +827,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assumeTrue("The menu has its half screen and header states only in portrait", portrait[0]);
 
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 
 		for (int state : new int[] {MenuState.HALF_SCREEN, MenuState.HEADER_ONLY, MenuState.HALF_SCREEN}) {
@@ -892,7 +893,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		float elevationBefore = mapView.getElevationAngle();
 		try {
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			scenarioRule.getScenario().onActivity(activity -> mapView.setElevationAngle(45));
 			zoomIntoTrack();
@@ -972,7 +973,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 
 	private void assertMapStaysAfterManualMoveUntilSyncButtonTapped() throws Throwable {
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		onView(allOf(withId(R.id.map_center_on_track), isDisplayed())).check(matches(isSelected()));
 
@@ -1006,7 +1007,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		onView(allOf(withId(R.id.map_center_on_track), isDisplayed())).check(matches(isSelected()));
 
@@ -1077,7 +1078,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 
 		zoomIntoTrack();
@@ -1105,7 +1106,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertNotNull(selectedGpxFile);
 		assumeTrue(app.getOsmandMap().getMapView().getMapRenderer() != null);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 
 		zoomTwoLevelsIntoFittedTrack();
@@ -1144,7 +1145,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertNotNull(selectedGpxFile);
 		assumeTrue(app.getOsmandMap().getMapView().getMapRenderer() != null);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 
 		zoomIntoTrack();
@@ -1186,7 +1187,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assumeTrue(app.getOsmandMap().getMapView().getMapRenderer() != null);
 		assumeTrue("The menu covers the lower part of the map only in portrait", isPortrait());
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		clickViewWithId(R.id.map_center_on_track);
 		awaitTrackMenuSettled();
@@ -1236,7 +1237,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertNotNull(selectedGpxFile);
 		assumeTrue(app.getOsmandMap().getMapView().getMapRenderer() != null);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 
 		zoomTwoLevelsIntoFittedTrack();
@@ -1274,7 +1275,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		float width = app.getOsmandMap().getMapView().getRotatedTileBox().getPixWidth();
 		float height = app.getOsmandMap().getMapView().getRotatedTileBox().getPixHeight();
@@ -1356,17 +1357,18 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 	public void testQuickTapsAtDifferentPlacesKeepSync() throws Throwable {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
-		assumeTrue("In landscape a tap on the map closes the track menu", isPortrait());
-		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		assumeTrue("The taps are placed on the map above the panel", isPortrait());
+		scenarioRule.getScenario().onActivity(this::showTrackMenu);
 		awaitTrackMenuSettled();
-		assertTrue(isTrackMenuInSync());
+		scenarioRule.getScenario().onActivity(this::openGpsFilter);
+		awaitTrackMenuSettled();
+		assertTrue("GPS filter has to start in sync", isTopSyncButtonSelected());
 		float width = app.getOsmandMap().getMapView().getRotatedTileBox().getPixWidth();
 		float height = app.getOsmandMap().getMapView().getRotatedTileBox().getPixHeight();
 		float x = getMapTouchX(width);
 		tapTwiceOnScreen(x - width * 0.15f, height * 0.15f, x + width * 0.15f, height * 0.35f);
 		awaitTrackMenuSettled();
-		assertTrue("Two quick taps at different places are not a double tap", isTrackMenuInSync());
+		assertTrue("Two quick taps at different places are not a double tap", isTopSyncButtonSelected());
 	}
 
 	@Test
@@ -1376,7 +1378,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assumeTrue(app.getOsmandMap().getMapView().getMapRenderer() != null);
 		assumeTrue("In landscape a tap on the map closes the track menu", isPortrait());
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		zoomTwoLevelsIntoFittedTrack();
 		PointF tap = getMapTouchPointBesideTrack();
@@ -1399,8 +1401,6 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		} finally {
 			noAnimations.set(noAnimationsBefore);
 		}
-		// The stopped startMoving completes its zoom at once, so the confirmed single tap may then land on the track
-		// line and open its menu again, in sync. The sync is checked right after the tap, before that.
 		assertFalse("A tap that stops the fit on the way has to turn the sync off", inSyncAfterTap);
 	}
 
@@ -1509,12 +1509,113 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertSyncButtonOnScreen("analyze", this::openAnalyze, true, true);
 	}
 
+	private void showTrackMenu(@NonNull MapActivity activity) {
+		showTrackMenu(activity, selectedGpxFile);
+	}
+
+	private void showTrackMenu(@NonNull MapActivity activity, @NonNull SelectedGpxFile track) {
+		TrackMenuFragment.showInstance(activity, track, null, null, null, new Bundle());
+	}
+
+	@Test
+	public void testTrackMenuOpenedFromMapStartsOutOfSync() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		awaitTrackMenuSettled();
+		LatLon target = getMapTarget();
+		float zoom = app.getOsmandMap().getMapView().getZoom();
+		scenarioRule.getScenario().onActivity(activity ->
+				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+
+		assertFalse("A track opened by a tap on the map has to start with the sync off", isTrackMenuInSync());
+		assertFalse("The sync button has to be off", isTopSyncButtonSelected());
+		assertTrue("Opening the menu from the map must not move the map", MapUtils.getDistance(target, getMapTarget()) < 1);
+		assertEquals("Opening the menu from the map must not zoom", zoom, app.getOsmandMap().getMapView().getZoom(), 0.01f);
+
+		clickViewWithId(R.id.action_track);
+		awaitTrackMenuSettled();
+
+		assertTrue("The track tab must not move the map while the sync is off", MapUtils.getDistance(target, getMapTarget()) < 1);
+		assertEquals("The track tab must not zoom while the sync is off", zoom, app.getOsmandMap().getMapView().getZoom(), 0.01f);
+	}
+
+	@Test
+	public void testPlanRouteSyncFollowsPointsPanel() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		assumeTrue("The points panel is below the map only in portrait", isPortrait());
+		assertPlanRouteSyncFollowsPointsPanel();
+	}
+
+	@Test
+	public void testPlanRouteSyncFollowsPointsPanelInLandscape() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		int rotation = getRotation();
+		try {
+			turnToLandscape(rotation);
+			assertPlanRouteSyncFollowsPointsPanel();
+		} finally {
+			setRotation(rotation);
+		}
+	}
+
+	private void openPlanRoutePointsPanelInSync() {
+		scenarioRule.getScenario().onActivity(this::showTrackMenu);
+		awaitTrackMenuSettled();
+		scenarioRule.getScenario().onActivity(this::openPlanRoute);
+		awaitTrackMenuSettled();
+		zoomIntoTrack();
+		scenarioRule.getScenario().onActivity(activity -> getTopSyncButton(activity).performClick());
+		awaitTrackMenuSettled();
+		clickPlanRouteUpDownRow();
+		awaitTrackMenuSettled();
+	}
+
+	private void clickPlanRouteUpDownRow() {
+		scenarioRule.getScenario().onActivity(activity -> activity.getFragmentsHelper().getMeasurementToolFragment()
+				.requireView().findViewById(R.id.up_down_row).performClick());
+	}
+
+	private void assertPlanRouteSyncFollowsPointsPanel() {
+		openPlanRoutePointsPanelInSync();
+		assertTrue("The sync button has to stay on with the points panel open", isTopSyncButtonSelected());
+		assertPlanRouteTrackInsideMapPart(true);
+
+		clickPlanRouteUpDownRow();
+		awaitTrackMenuSettled();
+		assertTrue("The sync button has to stay on with the points panel closed", isTopSyncButtonSelected());
+		assertPlanRouteTrackInsideMapPart(false);
+	}
+
+	@Test
+	public void testPlanRoutePointFromListTurnsSyncOff() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		openPlanRoutePointsPanelInSync();
+		assertTrue("The sync button has to be on before a point is opened", isTopSyncButtonSelected());
+
+		scenarioRule.getScenario().onActivity(activity -> {
+			View panel = AndroidUiHelper.isOrientationPortrait(activity)
+					? activity.getFragmentsHelper().getMeasurementToolFragment().requireView().findViewById(R.id.cards_container)
+					: activity.findViewById(R.id.left_side_menu);
+			RecyclerView list = panel.findViewById(R.id.measure_points_recycler_view);
+			RecyclerView.ViewHolder holder = list.findViewHolderForAdapterPosition(0);
+			assertNotNull("The first point is not in the list", holder);
+			holder.itemView.performClick();
+		});
+		awaitTrackMenuSettled();
+
+		assertFalse("A point opened from the list has to turn the sync off", isTopSyncButtonSelected());
+	}
+
 	@Test
 	public void testGpsFilterKeepsSyncOffFromTrackMenu() throws Throwable {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		zoomIntoTrack();
 		onTrackMenu(fragment -> fragment.setMapInSync(false));
@@ -1534,7 +1635,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		scenarioRule.getScenario().onActivity(this::openPlanRoute);
 		awaitTrackMenuSettled();
@@ -1636,7 +1737,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		xAxis.set(GPXDataSetAxisType.DISTANCE);
 		try {
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			clickViewWithId(R.id.action_track);
 			awaitTrackMenuSettled();
@@ -1724,7 +1825,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		clickViewWithId(R.id.action_track);
 		awaitTrackMenuSettled();
@@ -1755,7 +1856,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		SelectedGpxFile track = app.getSelectedGpxHelper().selectGpxFile(gpxFile, GpxSelectionParams.getDefaultSelectionParams());
 		try {
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, track, null));
+					showTrackMenu(activity, track));
 			awaitTrackMenuSettled();
 			onView(allOf(withId(R.id.map_center_on_track), isDisplayed())).check(matches(isSelected()));
 			clickViewWithId(R.id.action_points);
@@ -1782,7 +1883,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		onTrackMenu(fragment -> fragment.openPlanRoute(0, MeasurementToolFragment.FOLLOW_TRACK_MODE));
 		awaitTrackMenuSettled();
@@ -1799,7 +1900,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		onTrackMenu(fragment -> fragment.openPlanRoute(0, MeasurementToolFragment.PLAN_ROUTE_MODE));
 		awaitTrackMenuSettled();
@@ -1821,7 +1922,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		int rotation = getRotation();
 		try {
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			onTrackMenu(fragment -> fragment.openPlanRoute(0, MeasurementToolFragment.PLAN_ROUTE_MODE));
 			awaitTrackMenuSettled();
@@ -1845,7 +1946,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		int rotation = getRotation();
 		try {
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			turnToLandscape(rotation);
 			awaitTrackMenuSettled();
@@ -1873,7 +1974,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		int rotation = getRotation();
 		try {
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			scenarioRule.getScenario().onActivity(this::openPlanRoute);
 			awaitTrackMenuSettled();
@@ -2142,7 +2243,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		int rotation = getRotation();
 		try {
 			scenarioRule.getScenario().onActivity(activity ->
-					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+					showTrackMenu(activity));
 			awaitTrackMenuSettled();
 			scenarioRule.getScenario().onActivity(open::accept);
 			awaitTrackMenuSettled();
@@ -2190,19 +2291,20 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 	}
 
 	private void assertPlanRouteTrackFittedWithPointsPanel() {
-		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		scenarioRule.getScenario().onActivity(this::showTrackMenu);
 		awaitTrackMenuSettled();
 		scenarioRule.getScenario().onActivity(this::openPlanRoute);
 		awaitTrackMenuSettled();
-		scenarioRule.getScenario().onActivity(activity -> activity.getFragmentsHelper().getMeasurementToolFragment()
-				.requireView().findViewById(R.id.up_down_row).performClick());
+		clickPlanRouteUpDownRow();
 		awaitTrackMenuSettled();
 		zoomIntoTrack();
 		scenarioRule.getScenario().onActivity(activity -> getTopSyncButton(activity).performClick());
 		awaitTrackMenuSettled();
+		assertPlanRouteTrackInsideMapPart(true);
+	}
 
-		Rect part = getMapPartBesidePlanRoutePanels();
+	private void assertPlanRouteTrackInsideMapPart(boolean panelOpen) {
+		Rect part = getMapPartBesidePlanRoutePanels(panelOpen);
 		RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
 		KQuadRect rect = selectedGpxFile.getGpxFile().getRect();
 		float left = tileBox.getPixXFromLatLon(rect.centerY(), rect.getLeft());
@@ -2212,10 +2314,14 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertTrue("The track is at " + left + ".." + right + " x " + top + ".." + bottom
 						+ " px, the map beside the Plan route panels " + part.toShortString(),
 				left >= part.left - 2 && right <= part.right + 2 && top >= part.top - 2 && bottom <= part.bottom + 2);
+		String message = "The track at " + left + ".." + right + " x " + top + ".." + bottom
+				+ " px is not centered in the map beside the Plan route panels " + part.toShortString();
+		assertEquals(message, part.exactCenterX(), (left + right) / 2, TRACK_CENTER_TOLERANCE * tileBox.getPixWidth());
+		assertEquals(message, part.exactCenterY(), (top + bottom) / 2, TRACK_CENTER_TOLERANCE * tileBox.getPixHeight());
 	}
 
 	@NonNull
-	private Rect getMapPartBesidePlanRoutePanels() {
+	private Rect getMapPartBesidePlanRoutePanels(boolean panelOpen) {
 		Rect[] part = new Rect[1];
 		scenarioRule.getScenario().onActivity(activity -> {
 			OsmandMapTileView mapView = activity.getMapView();
@@ -2231,8 +2337,10 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			}
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(activity);
 			View panel = portrait ? fragmentView.findViewById(R.id.cards_container) : activity.findViewById(R.id.left_side_menu);
-			assertTrue("The points panel is not open", panel != null && panel.isShown());
-			if (!portrait) {
+			if (panelOpen) {
+				assertTrue("The points panel is not open", panel != null && panel.isShown());
+			}
+			if (panelOpen && !portrait) {
 				Rect panelRect = AndroidUtils.getViewBoundOnScreen(panel);
 				panelRect.offset(-mapLocation[0], -mapLocation[1]);
 				if (panelRect.centerX() < free.centerX()) {
@@ -2370,7 +2478,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		skipAppStartDialogs(app);
 		assertNotNull(selectedGpxFile);
 		scenarioRule.getScenario().onActivity(activity ->
-				TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+				showTrackMenu(activity));
 		awaitTrackMenuSettled();
 		scenarioRule.getScenario().onActivity(open::accept);
 		awaitTrackMenuSettled();
@@ -2515,10 +2623,6 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 				tileBox.getPixYFromLatLon(rect.getBottom(), rect.centerX())};
 	}
 
-	/**
-	 * A tap on the track line selects the track and replaces the track menu, so the tap goes to the point of the
-	 * upper map part that is the farthest from the track line.
-	 */
 	@NonNull
 	private PointF getMapTouchPointBesideTrack() {
 		RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
@@ -2568,10 +2672,6 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		awaitTrackMenuSettled();
 	}
 
-	/**
-	 * Fits the track with the sync button, turns the sync off and zooms two levels in, so that the next fit
-	 * changes the zoom by less than AnimateDraggingMapThread.ZOOM_DIFF_SKIP_ANIMATION and is animated.
-	 */
 	private float zoomTwoLevelsIntoFittedTrack() throws Throwable {
 		onTrackMenu(fragment -> fragment.setMapInSync(false));
 		clickViewWithId(R.id.map_center_on_track);
@@ -2671,6 +2771,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 			awaitTrackMenuSettled();
 			onTrackMenu(fragment -> assertEquals("Menu state", MenuState.HALF_SCREEN, fragment.getCurrentMenuState()));
 			assertTrue("Opening the Track tab has to keep the track centered", MapUtils.getDistance(target, getMapTarget()) < 1);
+			onTrackMenu(fragment -> fragment.setMapInSync(true));
 			scenarioRule.getScenario().onActivity(activity -> activity.getMapView().setIntZoom(ZOOM_INTO_TRACK));
 			awaitTrackMenuSettled();
 			boolean[] chartShown = new boolean[1];

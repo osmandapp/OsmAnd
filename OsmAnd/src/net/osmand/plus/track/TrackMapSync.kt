@@ -31,8 +31,6 @@ class TrackMapSync @JvmOverloads constructor(
 
 	private val linkedListener = Runnable { disable() }
 
-	// the map view can get its new size after the screen fitted the track for the new window size;
-	// a screen hidden under another one keeps the map as it is
 	private val viewportListener = OsmandMapTileView.ViewportListener {
 		if (isInSync) {
 			app.runInUIThread { fitIfInSync() }
