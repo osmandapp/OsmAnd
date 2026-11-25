@@ -6,6 +6,10 @@
 	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
+	<include
+		android:id="@+id/standalone_mtb_trails"
+		layout="@layout/bottom_sheet_item_with_switch_no_icon" />
+
 	<net.osmand.plus.widgets.TextViewEx
 		style="@style/TitleStyle.Medium"
 		android:layout_width="match_parent"

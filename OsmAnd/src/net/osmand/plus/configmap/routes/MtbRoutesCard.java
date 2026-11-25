@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.routes;
 
+import static net.osmand.plus.configmap.routes.RouteUtils.HIDE_STANDALONE_MTB_TRAILS;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
@@ -35,6 +38,18 @@ public class MtbRoutesCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
+		View trailsView = view.findViewById(R.id.standalone_mtb_trails);
+		TextView title = trailsView.findViewById(R.id.title);
+		title.setText(R.string.show_standalone_mtb_trails);
+		CommonPreference<Boolean> hideTrails = settings.getCustomRenderBooleanProperty(HIDE_STANDALONE_MTB_TRAILS);
+		CompoundButton trailsSwitch = trailsView.findViewById(R.id.compound_button);
+		trailsSwitch.setChecked(!hideTrails.get());
+		UiUtilities.setupCompoundButton(nightMode, settings.getApplicationMode().getProfileColor(nightMode), trailsSwitch);
+		trailsView.setOnClickListener(v -> {
+			hideTrails.set(!hideTrails.get());
+			notifyCardPressed();
+		});
+
 		container = view.findViewById(R.id.classification_properties);
 		container.removeAllViews();
 
