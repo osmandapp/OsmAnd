@@ -8,8 +8,10 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_T
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
+import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.SoundPool;
 
 import androidx.annotation.NonNull;
@@ -64,6 +66,8 @@ public class VoiceRouter {
 	public static final String FROM_DEST = "fromDest";
 
 	protected CommandPlayer player;
+	// See requestCarFocusCycle()
+	private volatile boolean carFocusCyclePending;
 
 	protected final OsmandApplication app;
 	protected final RoutingHelper router;
@@ -150,6 +154,31 @@ public class VoiceRouter {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * #26847: on some head units (Skoda MIB3) the prompts of a whole Android Auto connection stay silent until Android
+	 * Auto itself loses and regains the audio focus once. A new car connection asks the next prompt to take the focus
+	 * with AUDIOFOCUS_GAIN_TRANSIENT, which does that, but only when no music plays on the phone, so nothing is paused.
+	 */
+	public void requestCarFocusCycle() {
+		carFocusCyclePending = true;
+	}
+
+	/**
+	 * @return true once, for the first prompt of a car connection that starts while nothing plays on the phone
+	 */
+	public boolean consumeCarFocusCycle() {
+		if (!carFocusCyclePending || app.getCarNavigationSession() == null) {
+			return false;
+		}
+		AudioManager audioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		if (audioManager == null || audioManager.isMusicActive()) {
+			// Music plays: keep the prompt ducking as set and try again at the next prompt
+			return false;
+		}
+		carFocusCyclePending = false;
+		return true;
 	}
 
 	public void setPlayer(CommandPlayer player) {

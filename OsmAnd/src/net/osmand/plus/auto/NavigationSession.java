@@ -244,6 +244,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		routingHelper.addListener(suggestionsRouteListener);
 
 		app.setCarNavigationSession(this);
+		routingHelper.getVoiceRouter().requestCarFocusCycle();
 		app.getLocationProvider().addLocationListener(this);
 		setCarContext(getCarContext());
 		requestLocationUpdates();

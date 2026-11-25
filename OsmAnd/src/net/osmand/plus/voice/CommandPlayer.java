@@ -155,7 +155,7 @@ public abstract class CommandPlayer {
 		updateAudioStream(streamType);
 		focusHelper = createAudioFocusHelper();
 		if (focusHelper != null && app != null) {
-			boolean audioFocusGranted = focusHelper.requestAudFocus(app);
+			boolean audioFocusGranted = focusHelper.requestAudFocus(app, voiceRouter.consumeCarFocusCycle());
 			if (audioFocusGranted && streamType == 0) {
 				startBluetoothSco();
 			}
