@@ -5265,8 +5265,6 @@
     <string name="aidl_group_recording">旅程錄製</string>
     <string name="visualization">視覺化</string>
     <string name="terrain_shadows">地形陰影</string>
-    <string name="terrain_shadows_description">套用到 3D 地形的即時動態陰影，在最小的效能影響下突顯地景地理形狀。</string>
-    <string name="terrain_shadows_relief_3d_footer">3D 浮雕功能會自動啟用，因為這是顯示地形陰影所必需的。</string>
     <string name="update_maps_to_use_new_search">更新地圖以使用新的搜尋功能 (%1$s)</string>
     <string name="free_region_not_chosen_descr">您首次下載的地圖所對應的區域，即成為您的免費區域。</string>
     <string name="free_region_banner_descr">%1$s 的所有地圖均為免費。</string>

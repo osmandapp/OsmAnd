@@ -5367,7 +5367,5 @@
     <string name="free_region_other_regions_need_maps_plus">Tá Léarscáileanna+ ag teastáil ó réigiúin eile: %1$s</string>
     <string name="visualization">Amharcléiriú</string>
     <string name="terrain_shadows">Scáthanna an tírdhreacha</string>
-    <string name="terrain_shadows_description">Scáthú dinimiciúil fíor-ama do thírraon 3D. Leagann sé béim ar gheiméadracht an tírdhreacha, agus tionchar íosta aige ar fheidhmíocht.</string>
-    <string name="terrain_shadows_relief_3d_footer">Cumasaítear faoiseamh 3D go huathoibríoch, ós rud é go bhfuil gá leis chun scáthanna ar an tír-raon a rindreáil.</string>
     <string name="attach_to_track">Ceangail leis an rian</string>
 </resources>

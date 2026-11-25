@@ -77,6 +77,7 @@ import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
 import net.osmand.plus.search.listitems.QuickSearchSimpleButtonListItem;
@@ -588,6 +589,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			contextMenu.closeActiveToolbar();
 
 			List<QuickSearchListItem> searchItems = getExploreSpatialSearchItems();
+			searchHelper.setSpatialItemsOnMap(searchItems);
 			showToolbar(filter, title, searchItems == null);
 			if (searchItems != null) {
 				applySpatialSearchMapObjects(activity, searchItems);
@@ -652,6 +654,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		activity.getMapLayers().getPoiMapLayer().setCustomMapObjects(amenities);
 		spatialSearchMapObjectsApplied = true;
+	}
+
+	private void restoreSpatialSearchMapObjects(@NonNull MapActivity activity,
+	                                            @NonNull List<QuickSearchListItem> searchItems) {
+		applySpatialSearchMapObjects(activity, searchItems);
+		ExplorePlacesFragment fragment = activity.getFragmentsHelper().getExplorePlacesFragment();
+		if (fragment != null) {
+			fragment.setSearchItems(searchItems);
+		}
 	}
 
 	@Nullable
@@ -791,10 +802,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			TopToolbarController controller = mapActivity.getTopToolbarController(toolbarController.getType());
 			if (controller == null) {
 				PoiUIFilter filter = toolbarController.getSelectedFilter();
-				if (toolbarTitle != null) {
-					showToolbar(filter, toolbarTitle);
-				} else {
-					showToolbar(filter);
+				String title = toolbarTitle != null ? toolbarTitle : getText();
+				List<QuickSearchListItem> searchItems = searchHelper.getSpatialItemsOnMap();
+				showToolbar(filter, title, searchItems == null);
+				if (searchItems != null) {
+					restoreSpatialSearchMapObjects(mapActivity, searchItems);
 				}
 			}
 		}
@@ -923,6 +935,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		useMapCenter = !isMapCenterAtMyLocation(mapCenter);
 		updateSearchAroundLocation(useMapCenter ? mapCenter : new LatLon(location.getLatitude(), location.getLongitude()));
 		updateUseMapCenterUI();
+		// history rows measure from the search location they were loaded with
+		reloadHistory();
 		updateContent(null);
 	}
 
@@ -2020,8 +2034,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				}
 				break;
 		}
+		updateUseMapCenterUI();
 		if (useMapCenter) {
-			updateUseMapCenterUI();
 			searchListFragment.updateLocation(null);
 		}
 	}
@@ -2984,6 +2998,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				}
 				updateSendEmptySearchBottomBar(false);
 			}
+			updateResultsUseMapCenter(res);
 			mainSearchFragment.updateListAdapter(rows, append, false);
 			addUpdateMapsForNewSearchRow();
 			updateTopFilterChips();
@@ -3140,10 +3155,24 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 	}
 
+	// Results keep the distances of the place they were found from, so only results found from
+	// the current search location are shown as measured from the map center
+	private void updateResultsUseMapCenter(@Nullable SearchResultCollection res) {
+		QuickSearchListAdapter adapter = mainSearchFragment.getListAdapter();
+		if (adapter != null) {
+			SearchPhrase phrase = res != null ? res.getPhrase() : null;
+			boolean foundFromSearchLocation = phrase == null || Algorithms.objectEquals(
+					phrase.getSettings().getOriginalLocation(), searchUICore.getSearchSettings().getOriginalLocation());
+			adapter.setUseMapCenter(useMapCenter && foundFromSearchLocation);
+		}
+	}
+
 	private void updateUseMapCenterUI() {
-		if (!paused && !cancelPrev) {
+		// not skipped while cancelPrev is set: a cleared query keeps it set until the next search starts
+		if (!paused) {
 			if (mainSearchFragment != null) {
-				mainSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
+				updateResultsUseMapCenter(unfilteredResultCollection != null
+						? unfilteredResultCollection : getResultCollection());
 			}
 			if (historySearchFragment != null) {
 				historySearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
@@ -3270,10 +3299,44 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void updateShowOnMapFab() {
 		if (showOnMapFab != null && buttonToolbarView != null) {
-			boolean visible = buttonToolbarView.getVisibility() == View.VISIBLE && isSearchViewVisible();
-			showOnMapFab.setVisibility(visible ? View.VISIBLE : View.GONE);
-			updateFabMargins();
+			boolean visible = buttonToolbarView.getVisibility() == View.VISIBLE
+					&& isSearchViewVisible() && hasShowOnMapContent();
+			int visibility = visible ? View.VISIBLE : View.GONE;
+			if (showOnMapFab.getVisibility() != visibility) {
+				showOnMapFab.setVisibility(visibility);
+				updateFabMargins();
+			}
 		}
+	}
+
+	private boolean hasShowOnMapContent() {
+		SearchPhrase phrase = searchUICore.getPhrase();
+		boolean showsListResults = phrase.isNoSelectedType() || phrase.isLastWord(POI_TYPE);
+		return !showsListResults || hasMainListResults();
+	}
+
+	private boolean hasMainListResults() {
+		QuickSearchListAdapter adapter = mainSearchFragment != null ? mainSearchFragment.getListAdapter() : null;
+		if (adapter != null) {
+			for (int i = 0; i < adapter.getCount(); i++) {
+				if (isShownOnMap(adapter.getItem(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isShownOnMap(@NonNull QuickSearchListItem item) {
+		if (item.getType() != QuickSearchListItemType.SEARCH_RESULT) {
+			return false;
+		}
+		SearchResult searchResult = item.getSearchResult();
+		return searchResult == null || searchResult.objectType != ObjectType.SUGGESTION;
+	}
+
+	void onMainListChanged() {
+		updateShowOnMapFab();
 	}
 
 	private void updateFabMargins() {

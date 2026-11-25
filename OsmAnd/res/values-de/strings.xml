@@ -5296,8 +5296,6 @@
     <string name="delete_media_title">Medien löschen?</string>
     <string name="visualization">Visualisierung</string>
     <string name="terrain_shadows">Geländeschatten</string>
-    <string name="terrain_shadows_description">Dynamische Echtzeit-Schattierung für 3D-Gelände. Hebt die Geometrie der Landschaft hervor, ohne die Leistung nennenswert zu beeinträchtigen.</string>
-    <string name="terrain_shadows_relief_3d_footer">3D-Relief wird automatisch aktiviert, da es für die Darstellung von Geländeschatten erforderlich ist.</string>
     <string name="update_maps_to_use_new_search">Karten aktualisieren, um die neue Suche zu nutzen (%1$s)</string>
     <string name="free_region_not_chosen_descr">Die Region Ihrer ersten heruntergeladenen Karte wird zu Ihrer kostenlosen Region.</string>
     <string name="free_region_banner_descr">Alle Karten von %1$s sind kostenlos.</string>

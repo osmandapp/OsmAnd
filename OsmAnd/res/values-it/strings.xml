@@ -5441,8 +5441,6 @@
     <string name="attach_to_track">Collega al percorso</string>
     <string name="visualization">Visualizzazione</string>
     <string name="terrain_shadows">Ombre del terreno</string>
-    <string name="terrain_shadows_description">Ombreggiatura dinamica in tempo reale per il terreno 3D. Evidenzia la geometria del paesaggio con un impatto minimo sulle prestazioni.</string>
-    <string name="terrain_shadows_relief_3d_footer">Il rilievo 3D è abilitato automaticamente, in quanto necessario per la resa delle ombre del terreno.</string>
     <string name="free_region_other_title">%1$s non è la tua regione gratuita</string>
     <string name="free_region_other_descr">La versione gratuita include le mappe di una sola regione. Scaricando %1$s, le mappe delle altre regioni verranno eliminate.</string>
 </resources>

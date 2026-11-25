@@ -5492,8 +5492,6 @@
     <string name="free_region_other_regions_need_maps_plus">Осталим регионима су потребне Мапе+: %1$s</string>
     <string name="visualization">Визуелизација</string>
     <string name="terrain_shadows">Сенке терена</string>
-    <string name="terrain_shadows_description">Динамичко сенчење у реалном времену за 3Д терен. Истиче геометрију пејзажа уз минималан утицај на перформансе.</string>
-    <string name="terrain_shadows_relief_3d_footer">3Д рељеф је аутоматски омогућен, јер је потребан за рендеровање сенки терена.</string>
     <string name="attach_to_track">Причврсти на стазу</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Стилови испрекиданих и тачкастих линија нису доступни за 3Д путању.</string>
     <string name="terrain_shadows_hillshade_footer">Сенке терена су искључене док терен приказује сенку брда: Сенка брда већ сенкира рељеф.</string>

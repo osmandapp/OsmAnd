@@ -5521,8 +5521,6 @@
     <string name="free_region_other_regions_need_maps_plus">Andre regioner skal bruge Maps+: %1$s</string>
     <string name="visualization">Visualisering</string>
     <string name="terrain_shadows">Terrænskygger</string>
-    <string name="terrain_shadows_description">Dynamisk skyggeeffekt i realtid til 3D-terræn. Fremhæver landskabets geometri med minimal indvirkning på ydeevnen.</string>
-    <string name="terrain_shadows_relief_3d_footer">3D-relief aktiveres automatisk, da det er nødvendigt for at gengive terrænskygger.</string>
     <string name="attach_to_track">Vedhæft til spor</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Streg- og priklinjetyper kan ikke anvendes på et 3D-spor.</string>
     <string name="terrain_shadows_hillshade_footer">Terrænskygger er slået fra, når Terræn viser reliefskygge: Reliefskyggen skyggelægger allerede terrænet.</string>

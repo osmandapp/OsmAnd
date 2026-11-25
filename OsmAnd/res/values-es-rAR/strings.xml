@@ -5086,8 +5086,6 @@
     <string name="attach_to_track">Adjuntar al camino</string>
     <string name="visualization">Visualización</string>
     <string name="terrain_shadows">Sombras del terreno</string>
-    <string name="terrain_shadows_description">Sombreado dinámico en tiempo real para terrenos en 3D. Resalta la geometría del paisaje con un impacto mínimo en el rendimiento.</string>
-    <string name="terrain_shadows_relief_3d_footer">El relieve 3D se habilita automáticamente, ya que es necesario para renderizar las sombras del terreno.</string>
     <string name="update_maps_to_use_new_search">Actualizá los mapas para usar la búsqueda nueva (%1$s)</string>
     <string name="free_region_not_chosen_descr">La región del primer mapa descargado, se vuelve una región gratuita.</string>
     <string name="free_region_banner_descr">Todos los mapas de %1$s son gratuitos.</string>

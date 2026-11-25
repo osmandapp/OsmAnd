@@ -5425,8 +5425,6 @@
     <string name="free_region_email_maps_deleted">Mapoj de %1$s (%2$s) estos forigitaj.</string>
     <string name="visualization">Bildigo</string>
     <string name="terrain_shadows">Ombroj de tereno</string>
-    <string name="terrain_shadows_description">Realtempa dinamika ombrado de 3-dimensia tereno. Emfazas geometrion de tereno kun minimuma influo sur rendimento.</string>
-    <string name="terrain_shadows_relief_3d_footer">Aŭtomate aktivigas 3-dimensian map-reliefon, ĉar ĝi estas necesa por bildigi ombrojn de tereno.</string>
     <string name="free_region_send_and_replace">Sendi kaj anstataŭigi</string>
     <string name="free_region_not_eligible_buy_descr">Via senpaga regiono estas %1$s. Por elŝuti mapojn de %2$s kaj teni viajn estantajn mapojn, akiru senlimajn elŝutojn de mapoj.</string>
     <string name="outdated_maps_warning_title">Ĝisdatigu viajn mapojn</string>
