@@ -55,6 +55,7 @@ import net.osmand.plus.views.controls.StableArrayAdapter;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.DismissCallbacks;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.util.Algorithms;
@@ -66,7 +67,7 @@ import java.util.List;
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
 public class WaypointsFragment extends BaseFullScreenFragment implements IContextDialog, ObservableScrollViewCallbacks,
-		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {
+		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener, SideWidgetsHider {
 
 	public static final String TAG = "WaypointsFragment";
 
@@ -463,18 +464,18 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 		return listAdapter;
 	}
 
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
+	}
+
 	public void updateControlsVisibility(boolean visible, boolean openingRouteInfo) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
-			AndroidUiHelper.setVisibility(mapActivity, visibility,
-					R.id.map_center_info,
-					R.id.map_left_widgets_panel);
-			if (!openingRouteInfo) {
-				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
-				if (!portrait) {
-					mapActivity.getMapPositionManager().setMapPositionShiftedX(!visible);
-				}
+			AndroidUiHelper.setVisibility(mapActivity, visibility, R.id.map_center_info);
+			if (!openingRouteInfo && !portrait) {
+				mapActivity.getMapPositionManager().setMapPositionShiftedX(!visible);
 			}
 			mapActivity.refreshMap();
 		}

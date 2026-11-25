@@ -43,6 +43,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
@@ -52,7 +53,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 
 public class GpsFilterFragment extends ContextMenuScrollFragment implements SaveAsNewTrackFragmentListener,
-		SaveIntoFileListener, GpsFilterListener {
+		SaveIntoFileListener, GpsFilterListener, SideWidgetsHider {
 
 	public static final String TAG = GpsFilterFragment.class.getName();
 
@@ -319,13 +320,16 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		app.getGpsFilterHelper().removeListener(this);
 	}
 
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
+	}
+
 	private void enterGpsFilterMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
 		}
 	}
@@ -334,8 +338,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
 					R.id.map_center_info,
 					R.id.map_search_button);
 		}

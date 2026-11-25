@@ -79,6 +79,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.data.KQuadRect;
@@ -97,7 +98,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener,
-		IColorCardControllerListener, ITrackWidthSelectedListener, MapOptionSliderListener {
+		IColorCardControllerListener, ITrackWidthSelectedListener, MapOptionSliderListener, SideWidgetsHider {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
 
@@ -366,13 +367,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		getWidthCardController().onDestroy(activity);
 	}
 
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
+	}
+
 	private void enterTrackAppearanceMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
 		}
 	}
@@ -381,8 +385,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
 					R.id.map_center_info,
 					R.id.map_search_button);
 		}

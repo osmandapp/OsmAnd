@@ -59,6 +59,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapMarkersLayer;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -68,7 +69,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndLocationListener, IMapDisplayPositionProvider {
+public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndLocationListener, IMapDisplayPositionProvider,
+		SideWidgetsHider {
 
 	public static final String TAG = PlanRouteFragment.class.getSimpleName();
 	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
@@ -634,6 +636,11 @@ public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndL
 		}
 	}
 
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
+	}
+
 	private void enterPlanRouteMode() {
 		MapActivity mapActivity = getMapActivity();
 		MapMarkersLayer markersLayer = getMapMarkersLayer();
@@ -642,8 +649,6 @@ public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndL
 			mapActivity.disableDrawer();
 
 			AndroidUiHelper.setVisibility(mapActivity, portrait ? View.INVISIBLE : View.GONE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE,
 					R.id.map_route_info_button,
@@ -678,8 +683,7 @@ public class PlanRouteFragment extends BaseFullScreenFragment implements OsmAndL
 			}
 
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-					R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info,
-					R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button,
+					R.id.map_center_info, R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button,
 					R.id.map_layers_button, R.id.map_search_button, R.id.map_quick_actions_button);
 
 			snapToRoadButton.setVisibility(View.GONE);

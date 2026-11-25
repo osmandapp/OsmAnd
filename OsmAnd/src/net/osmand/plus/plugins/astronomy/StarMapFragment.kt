@@ -78,6 +78,7 @@ import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.utils.NativeUtilities
 import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.util.MapUtils
@@ -94,7 +95,7 @@ import kotlin.math.min
 
 
 class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLocationListener,
-	OsmAndCompassListener, DownloadEvents {
+	OsmAndCompassListener, DownloadEvents, SideWidgetsHider {
 
 	private val REGULAR_MAP_HEIGHT = 300f
 	private val REGULAR_MAP_HEIGHT_LANDSCAPE = 110f
@@ -1242,9 +1243,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
+	override fun shouldHideSideWidgets() = true
+
 	private fun updateWidgetsVisibility(activity: MapActivity, visibility: Int) {
-		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_left_widgets_panel,
-			R.id.map_right_widgets_panel, R.id.map_center_info)
+		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_center_info)
 	}
 
 	fun apply2DMode(is2D: Boolean) {

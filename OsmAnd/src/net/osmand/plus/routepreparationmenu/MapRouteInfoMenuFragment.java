@@ -29,11 +29,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.shared.gpx.GpxFile;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
-		implements OnSegmentSelectedListener, DownloadEvents {
+		implements OnSegmentSelectedListener, DownloadEvents, SideWidgetsHider {
 	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
 	@Nullable
@@ -178,6 +179,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 			mapActivity.getWidgetsVisibilityHelper().hideWidgets();
 		}
 		menu.onResume();
+	}
+
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
 	}
 
 	@Override

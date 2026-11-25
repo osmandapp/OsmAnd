@@ -147,6 +147,7 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.shared.data.KQuadRect;
@@ -170,7 +171,8 @@ import java.util.List;
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback, MapDisplayPositionManager.ICoveredScreenRectProvider, MapDisplayPositionManager.IMapDisplayPositionProvider {
+		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback, MapDisplayPositionManager.ICoveredScreenRectProvider, MapDisplayPositionManager.IMapDisplayPositionProvider,
+		SideWidgetsHider {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 
@@ -1127,6 +1129,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public boolean shouldShowTopControls() {
 		return shouldShowTopControls(isVisible());
+	}
+
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return !shouldShowTopControls(true);
 	}
 
 	public boolean shouldShowTopControls(boolean menuVisible) {

@@ -75,6 +75,7 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -93,7 +94,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ChooseRouteFragment extends BaseFullScreenFragment implements ContextMenuFragmentListener,
-		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
+		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener, SideWidgetsHider {
 
 	public static final String TAG = "ChooseRouteFragment";
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
@@ -803,19 +804,18 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 		}
 	}
 
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
+	}
+
 	public void updateControlsVisibility(boolean visible) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
-			AndroidUiHelper.setVisibility(mapActivity, visibility,
-					R.id.map_center_info,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel);
-			if (!visible) {
-				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
-				if (!portrait) {
-					mapActivity.getMapPositionManager().setMapPositionShiftedX(true);
-				}
+			AndroidUiHelper.setVisibility(mapActivity, visibility, R.id.map_center_info);
+			if (!visible && !portrait) {
+				mapActivity.getMapPositionManager().setMapPositionShiftedX(true);
 			}
 			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();

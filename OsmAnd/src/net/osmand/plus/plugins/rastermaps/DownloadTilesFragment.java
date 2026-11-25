@@ -54,13 +54,14 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.TouchListener;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.text.MessageFormat;
 import java.util.List;
 
-public class DownloadTilesFragment extends BaseFullScreenFragment implements IMapLocationListener {
+public class DownloadTilesFragment extends BaseFullScreenFragment implements IMapLocationListener, SideWidgetsHider {
 
 	public static final String TAG = DownloadTilesFragment.class.getSimpleName();
 
@@ -631,6 +632,11 @@ public class DownloadTilesFragment extends BaseFullScreenFragment implements IMa
 		double bottomLat = tileBox.getLatFromPixel(right, bottom);
 
 		return new QuadRect(leftLon, topLat, rightLon, bottomLat);
+	}
+
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
 	}
 
 	private void showHideMapControls(boolean show) {
