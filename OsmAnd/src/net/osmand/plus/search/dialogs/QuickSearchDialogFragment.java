@@ -1415,6 +1415,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			} else if (object instanceof TopIndexFilter topIndexFilter) {
 				PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.FILTER);
 				if (poiUIFilter != null) {
+					// Show on map leaves the brand as a key / name filter on this cached filter
+					poiUIFilter.setFilterByKey(null);
+					poiUIFilter.setFilterByName(null);
 					filterId = poiUIFilter.getFilterId();
 				}
 			}
