@@ -127,7 +127,7 @@ public class PoiFilterDbHelper {
 
 	private SQLiteConnection openConnection(boolean readonly) {
 		conn = app.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, readonly);
-		if (conn != null && conn.getVersion() < DATABASE_VERSION) {
+		if (conn != null && (conn.getVersion() < DATABASE_VERSION || isTopIndexColumnMissing(conn))) {
 			if (readonly) {
 				conn.close();
 				conn = app.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, false);
@@ -167,14 +167,46 @@ public class PoiFilterDbHelper {
 			conn.execSQL(POI_CACHE_TABLE_CREATE);
 			upgraded = true;
 		}
-		if (oldVersion < 8) {
-			conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_TOP_INDEX_TAG + " text");
-			conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_TOP_INDEX_VALUE + " text");
+		// also on a v8 database without them: the version is written before onUpgrade(), an app stop in between leaves it so
+		if (addMissingTopIndexColumns(conn)) {
 			upgraded = true;
 		}
 		if (upgraded) {
 			updateLastModifiedTime();
 		}
+	}
+
+	private boolean isTopIndexColumnMissing(@NonNull SQLiteConnection conn) {
+		List<String> columns = getFilterColumns(conn);
+		return !columns.isEmpty() && (!columns.contains(FILTER_COL_TOP_INDEX_TAG) || !columns.contains(FILTER_COL_TOP_INDEX_VALUE));
+	}
+
+	private boolean addMissingTopIndexColumns(@NonNull SQLiteConnection conn) {
+		List<String> columns = getFilterColumns(conn);
+		boolean added = false;
+		for (String column : new String[] {FILTER_COL_TOP_INDEX_TAG, FILTER_COL_TOP_INDEX_VALUE}) {
+			if (!columns.isEmpty() && !columns.contains(column)) {
+				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + column + " text");
+				added = true;
+			}
+		}
+		return added;
+	}
+
+	// empty when the table does not exist
+	@NonNull
+	private List<String> getFilterColumns(@NonNull SQLiteConnection conn) {
+		List<String> columns = new ArrayList<>();
+		SQLiteCursor cursor = conn.rawQuery("PRAGMA table_info(" + FILTER_NAME + ")", null);
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				do {
+					columns.add(cursor.getString(1));
+				} while (cursor.moveToNext());
+			}
+			cursor.close();
+		}
+		return columns;
 	}
 
 	public long getLastModifiedTime() {
