@@ -628,7 +628,7 @@ public class BinaryRoutePlanner {
 
 
 
-	private boolean checkViaRestrictions(RouteSegment from, RouteSegment to) {
+	private boolean checkViaRestrictions(RoutingContext ctx, RouteSegment from, RouteSegment to, long viaId, boolean reverseWay) {
 		if (from != null && to != null) {
 			long fid = to.getRoad().getId();
 			for (int i = 0; i < from.getRoad().getRestrictionLength(); i++) {
@@ -643,12 +643,35 @@ public class BinaryRoutePlanner {
 					}
 					break;
 				}
-				if (tp == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+				if (from.getRoad().getRestrictionVia(i) == viaId && isViaOnlyRestriction(ctx, tp, id, to, reverseWay)) {
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * A relation with several via ways is stored as via1 + the final "to", so left / right count only if "to"
+	 * leaves the end of the via way: otherwise the way after via1 is the legal continuation.
+	 */
+	private boolean isViaOnlyRestriction(RoutingContext ctx, int type, long to, RouteSegment viaEnd, boolean reverseWay) {
+		if (type == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+			return true;
+		}
+		if (type != MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN && type != MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN) {
+			return false;
+		}
+		int x = viaEnd.getRoad().getPoint31XTile(viaEnd.getSegmentEnd());
+		int y = viaEnd.getRoad().getPoint31YTile(viaEnd.getSegmentEnd());
+		RouteSegment road = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead, reverseWay);
+		while (road != null) {
+			if (road.getRoad().getId() == to) {
+				return true;
+			}
+			road = road.next;
+		}
+		return false;
 	}
 
 	private RouteSegment getParentDiffId(RouteSegment s) {
@@ -677,7 +700,7 @@ public class BinaryRoutePlanner {
 			RouteSegment oppParent = getParentDiffId(opposite);
 			RouteSegment to = reverseWaySearch ? curParent : oppParent;
 			RouteSegment from = !reverseWaySearch ? curParent : oppParent;
-			if (checkViaRestrictions(from, to)) {
+			if (checkViaRestrictions(ctx, from, to, currentSegment.getRoad().getId(), reverseWaySearch)) {
 				FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
 						currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
 				frs.setParentRoute(currentSegment.getParentRoute());
@@ -736,16 +759,16 @@ public class BinaryRoutePlanner {
 		}
 		ctx.segmentsToVisitPrescripted.clear();
 		ctx.segmentsToVisitNotForbidden.clear();
-		processRestriction(ctx, inputNext, reverseWay, 0, road);
+		processRestriction(ctx, inputNext, reverseWay, 0, road, null);
 		if (parent != null) {
-			processRestriction(ctx, inputNext, reverseWay, road.id, parent.getRoad());
+			processRestriction(ctx, inputNext, reverseWay, road.id, parent.getRoad(), reverseWay ? parent : segment);
 		}
 		return true;
 	}
 
 
 	protected void processRestriction(RoutingContext ctx, RouteSegment inputNext, boolean reverseWay, long viaId,
-			RouteDataObject road) {
+			RouteDataObject road, RouteSegment viaEnd) {
 		boolean via = viaId != 0;
 		RouteSegment next = inputNext;
 		boolean exclusiveRestriction = false;
@@ -761,7 +784,7 @@ public class BinaryRoutePlanner {
 							break;
 						}
 					}
-					if (rv == viaId && via && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isViaOnlyRestriction(ctx, rt, road.getRestrictionId(i), viaEnd, reverseWay)) {
 						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
 						break;
 					}
@@ -778,7 +801,7 @@ public class BinaryRoutePlanner {
 						}
 					}
 
-					if (rv == viaId && via && rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+					if (rv == viaId && via && isViaOnlyRestriction(ctx, rt, restrictedTo, viaEnd, reverseWay)) {
 						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
 						break;
 					}
