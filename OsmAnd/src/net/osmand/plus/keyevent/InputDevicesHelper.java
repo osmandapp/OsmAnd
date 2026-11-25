@@ -42,6 +42,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class InputDevicesHelper {
 
@@ -569,43 +572,57 @@ public class InputDevicesHelper {
 			}
 			String selectedId = settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
 			List<InputDeviceProfile> mergeCandidates = new ArrayList<>(devices);
-			boolean selectedDeviceRemoved = false;
-			boolean selectedDeviceMerged = false;
-			for (InputDeviceProfile device : readCustomDevices(legacyPreference.getModeValue(appMode))) {
-				String fingerprint = getFingerprint(device);
-				String storedId = fingerprint != null ? mergedFingerprints.get(fingerprint) : null;
-				String knownId = getMergedTargetId(storedId);
-				String mergedId;
-				boolean removedMark = isRemovedMark(storedId);
-				boolean knownIdExists = knownId != null
-						&& (removedMark ? globalIds.contains(knownId) : hasDeviceId(devices, knownId));
-				if (removedMark && !knownIdExists) {
-					if (Objects.equals(device.getId(), selectedId)) {
-						selectedDeviceRemoved = true;
-					}
-					continue;
-				} else if (knownIdExists) {
-					mergedId = knownId;
-					for (int i = 0; i < mergeCandidates.size(); i++) {
-						if (Objects.equals(mergeCandidates.get(i).getId(), knownId)) {
-							mergeCandidates.remove(i);
-							break;
-						}
-					}
-				} else {
-					mergedId = mergeLegacyDevice(appMode, devices, mergeCandidates, globalIds, removedTargetIds, device);
+			List<InputDeviceProfile> pending = readCustomDevices(legacyPreference.getModeValue(appMode));
+			Collections.sort(pending, (first, second) -> {
+				int byId = first.getId().compareTo(second.getId());
+				if (byId != 0) {
+					return byId;
 				}
+				int byContent = Objects.toString(getDeviceContent(first), "")
+						.compareTo(Objects.toString(getDeviceContent(second), ""));
+				if (byContent != 0) {
+					return byContent;
+				}
+				return first.toHumanString(app).compareTo(second.toHumanString(app));
+			});
+			boolean selectedDeviceRemoved = false;
+			boolean selectedDeviceKept = false;
+			for (Iterator<InputDeviceProfile> iterator = pending.iterator(); iterator.hasNext(); ) {
+				InputDeviceProfile device = iterator.next();
+				String storedId = getKnownMergedId(mergedFingerprints, device);
+				String targetId = getMergedTargetId(storedId);
+				boolean removed = isRemovedMark(storedId) && (targetId == null || !globalIds.contains(targetId));
+				if (Objects.equals(device.getId(), selectedId)) {
+					if (removed) {
+						selectedDeviceRemoved = true;
+					} else {
+						selectedDeviceKept = true;
+					}
+				}
+				if (removed) {
+					iterator.remove();
+				}
+			}
+			BiConsumer<InputDeviceProfile, String> recorder = (device, mergedId) -> {
+				String fingerprint = getFingerprint(device);
 				if (fingerprint != null) {
 					plan.mergedFingerprints.put(fingerprint, mergedId);
 				}
-				if (Objects.equals(device.getId(), selectedId)) {
-					selectedDeviceMerged = true;
-					if (!Objects.equals(device.getId(), mergedId)) {
-						plan.selections.put(appMode, mergedId);
-					}
+				if (Objects.equals(device.getId(), selectedId) && !Objects.equals(device.getId(), mergedId)) {
+					plan.selections.put(appMode, mergedId);
 				}
-			}
-			if (selectedDeviceRemoved && !selectedDeviceMerged) {
+			};
+			mergeTier(pending, recorder, device -> takeFreeCandidate(mergeCandidates, device,
+					candidate -> Objects.equals(candidate.getId(), device.getId())));
+			mergeTier(pending, recorder, device ->
+					takeKnownCandidate(mergeCandidates, mergedFingerprints, device, true));
+			mergeTier(pending, recorder, device ->
+					takeKnownCandidate(mergeCandidates, mergedFingerprints, device, false));
+			mergeTier(pending, recorder, device -> takeFreeCandidate(mergeCandidates, device,
+					candidate -> candidate.getId().startsWith(device.getId() + "_")));
+			mergeTier(pending, recorder, device ->
+					mergeLegacyDevice(appMode, devices, mergeCandidates, globalIds, removedTargetIds, device));
+			if (selectedDeviceRemoved && !selectedDeviceKept) {
 				plan.selections.put(appMode, KEYBOARD.getId());
 			}
 			plan.legacyClears.add(appMode);
@@ -626,6 +643,60 @@ public class InputDevicesHelper {
 			return storedId.substring(REMOVED_MERGED_DEVICE_PREFIX.length());
 		}
 		return storedId;
+	}
+
+	@Nullable
+	private String getKnownMergedId(@NonNull Map<String, String> mergedFingerprints,
+	                                @NonNull InputDeviceProfile device) {
+		String fingerprint = getFingerprint(device);
+		return fingerprint != null ? mergedFingerprints.get(fingerprint) : null;
+	}
+
+	@Nullable
+	private String takeKnownCandidate(@NonNull List<InputDeviceProfile> mergeCandidates,
+	                                  @NonNull Map<String, String> mergedFingerprints,
+	                                  @NonNull InputDeviceProfile device, boolean ownIdOnly) {
+		String knownId = getMergedTargetId(getKnownMergedId(mergedFingerprints, device));
+		if (knownId == null || ownIdOnly && !knownId.equals(device.getId())) {
+			return null;
+		}
+		for (InputDeviceProfile candidate : mergeCandidates) {
+			if (Objects.equals(candidate.getId(), knownId)) {
+				mergeCandidates.remove(candidate);
+				return knownId;
+			}
+		}
+		return null;
+	}
+
+	private void mergeTier(@NonNull List<InputDeviceProfile> pending,
+	                       @NonNull BiConsumer<InputDeviceProfile, String> recorder,
+	                       @NonNull Function<InputDeviceProfile, String> matcher) {
+		for (Iterator<InputDeviceProfile> iterator = pending.iterator(); iterator.hasNext(); ) {
+			InputDeviceProfile device = iterator.next();
+			String mergedId = matcher.apply(device);
+			if (mergedId != null) {
+				recorder.accept(device, mergedId);
+				iterator.remove();
+			}
+		}
+	}
+
+	@Nullable
+	private String takeFreeCandidate(@NonNull List<InputDeviceProfile> mergeCandidates,
+	                                 @NonNull InputDeviceProfile device,
+	                                 @NonNull Predicate<InputDeviceProfile> idMatches) {
+		String content = getDeviceContent(device);
+		if (content == null) {
+			return null;
+		}
+		for (InputDeviceProfile candidate : mergeCandidates) {
+			if (idMatches.test(candidate) && content.equals(getDeviceContent(candidate))) {
+				mergeCandidates.remove(candidate);
+				return candidate.getId();
+			}
+		}
+		return null;
 	}
 
 	/**
