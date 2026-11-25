@@ -1,14 +1,18 @@
 package net.osmand.plus.avoidroads;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_BLOCKED_ROAD;
+
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -32,6 +36,8 @@ import java.util.Set;
 public class AvoidRoadsHelper {
 
 	private static final float MAX_AVOID_ROUTE_SEARCH_RADIUS_DP = 32f;
+	// the avoided-road icons are drawn from this zoom
+	private static final int SHOW_ON_MAP_MIN_ZOOM = 15;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -129,6 +135,13 @@ public class AvoidRoadsHelper {
 		removeImpassableRoadFromList(roadInfo);
 		removeFromRoutingConfigs(roadInfo.getId());
 		settings.removeImpassableRoad(roadInfo.getLatLon());
+	}
+
+	public void showOnMap(@NonNull MapActivity activity, @NonNull AvoidRoadInfo roadInfo) {
+		int zoom = Math.max(activity.getMapView().getZoom(), SHOW_ON_MAP_MIN_ZOOM);
+		PointDescription description = new PointDescription(POINT_TYPE_BLOCKED_ROAD, roadInfo.getName(app));
+		settings.setMapLocationToShow(roadInfo.getLatitude(), roadInfo.getLongitude(), zoom, description, false, roadInfo);
+		MapActivity.launchMapActivityMoveToTop(activity);
 	}
 
 	public void selectFromMap(@NonNull MapActivity activity, @Nullable ApplicationMode mode) {
@@ -352,7 +365,28 @@ public class AvoidRoadsHelper {
 			if (!TextUtils.isEmpty(name)) {
 				return name;
 			}
+			return app.getString(getRoadTypeNameId(obj.getHighway()));
 		}
 		return app.getString(R.string.shared_string_road);
+	}
+
+	@StringRes
+	private int getRoadTypeNameId(@Nullable String highway) {
+		if (highway == null) {
+			return R.string.shared_string_road;
+		}
+		return switch (highway) {
+			case "motorway", "motorway_link", "trunk", "trunk_link" -> R.string.rendering_attr_highway_class_motorway_name;
+			case "primary", "primary_link", "secondary", "secondary_link" -> R.string.rendering_attr_highway_class_state_road_name;
+			case "residential", "living_street" -> R.string.rendering_attr_highway_class_street_name;
+			case "service" -> R.string.rendering_attr_highway_class_service_name;
+			case "track" -> R.string.rendering_attr_highway_class_track_name;
+			case "footway", "pedestrian" -> R.string.rendering_attr_highway_class_footway_name;
+			case "path" -> R.string.rendering_attr_highway_class_path_name;
+			case "cycleway" -> R.string.rendering_attr_highway_class_cycleway_name;
+			case "bridleway" -> R.string.rendering_attr_highway_class_bridleway_name;
+			case "steps" -> R.string.rendering_attr_highway_class_steps_name;
+			default -> R.string.shared_string_road;
+		};
 	}
 }
