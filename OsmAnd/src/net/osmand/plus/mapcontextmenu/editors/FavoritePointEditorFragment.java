@@ -29,6 +29,7 @@ import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,6 +38,7 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -464,18 +466,23 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public Map<String, PointsGroup> getPointsGroups() {
 		Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
 		if (editor != null) {
-			FavoriteGroup lastUsedGroup = favouritesHelper.getGroup(getLastUsedGroup());
-			if (lastUsedGroup != null) {
-				pointsGroups.put(lastUsedGroup.getDisplayName(app), lastUsedGroup.toPointsGroup(app));
-			}
+			String selectedPath = selectedGroup != null
+					? FavoriteGroup.convertDisplayNameToGroupIdName(app, selectedGroup.getName())
+					: getLastUsedGroup();
 			Set<PointsGroup> hiddenCategories = new LinkedHashSet<>();
-			for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
-				if (!group.equals(lastUsedGroup)) {
-					if (group.isVisible()) {
-						pointsGroups.put(group.getDisplayName(app), group.toPointsGroup(app));
-					} else {
-						hiddenCategories.add(group.toPointsGroup(app));
-					}
+			for (FavoriteFolder folder : favouritesHelper.getFlattenedFavoriteFolders(true)) {
+				FavoriteGroup group = folder.getGroup();
+				if ((folder.isRoot() && group == null)
+						|| !FavoriteFolderPath.isDescendantOrSelf(selectedPath, FavoriteFolderPath.parentPath(folder.getFullPath()))) {
+					continue;
+				}
+				if (group == null) {
+					pointsGroups.put(folder.getFullPath(), new PointsGroup(folder.getFullPath(), DEFAULT_ICON_NAME,
+							DEFAULT_BACKGROUND_TYPE.getTypeName(), 0));
+				} else if (group.isVisible()) {
+					pointsGroups.put(group.getDisplayName(app), group.toPointsGroup(app));
+				} else {
+					hiddenCategories.add(group.toPointsGroup(app));
 				}
 			}
 			for (PointsGroup group : hiddenCategories) {
@@ -633,6 +640,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	protected void restoreEditorState(@NonNull Bundle savedInstanceState) {
+		String groupName = savedInstanceState.getString(SELECTED_GROUP_KEY);
+		if (groupName != null) {
+			selectedGroup = new PointsGroup(groupName, DEFAULT_ICON_NAME, DEFAULT_BACKGROUND_TYPE.getTypeName(), 0);
+		}
 		super.restoreEditorState(savedInstanceState);
 		if (selectedGroup != null) {
 			group = favouritesHelper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, selectedGroup.getName()));
