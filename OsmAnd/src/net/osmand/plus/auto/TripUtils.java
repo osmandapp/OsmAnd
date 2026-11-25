@@ -27,6 +27,8 @@ import net.osmand.util.Algorithms;
 
 public class TripUtils {
 
+	private static final int AMBIGUOUS_EXIT_ANGLE = 30;
+
 	public static boolean shouldKeepLeft(@Nullable TurnType type) {
 		return type != null && TurnType.isLeftTurn(type.getValue());
 	}
@@ -127,9 +129,12 @@ public class TripUtils {
 
 	@NonNull
 	public static Maneuver.Builder createManeuverBuilder(@NonNull TurnType turnType) {
-		Maneuver.Builder builder = new Maneuver.Builder(getManeuverType(turnType));
+		boolean withExitAngle = turnType.isRoundAbout() && !turnType.isExitAngleUnknown();
+		Maneuver.Builder builder = new Maneuver.Builder(getManeuverType(turnType, withExitAngle));
 		if (turnType.isRoundAbout()) {
 			builder.setRoundaboutExitNumber(turnType.getExitOut());
+		}
+		if (withExitAngle) {
 			builder.setRoundaboutExitAngle(getRoundaboutExitAngle(turnType));
 		}
 		return builder;
@@ -138,19 +143,26 @@ public class TripUtils {
 	/**
 	 * Converts OsmAnd's signed turn angle (positive to the right) into the Car App Library
 	 * exit angle: degrees travelled along the circle from the entrance to the exit, 1..360.
+	 * Near the entrance the sign of a ~180° turn angle is unreliable, so the exit number decides
+	 * between an exit right after the entrance and a U-turn, like the on-screen icon does.
 	 */
 	public static int getRoundaboutExitAngle(@NonNull TurnType turnType) {
 		float turnAngle = turnType.getTurnAngle();
 		float travelledAngle = turnType.isLeftSide() ? 180 + turnAngle : 180 - turnAngle;
 		int exitAngle = Math.floorMod(Math.round(travelledAngle), 360);
+		int exit = turnType.getExitOut();
+		boolean nearEntrance = exitAngle < AMBIGUOUS_EXIT_ANGLE;
+		boolean nearFullCircle = exitAngle > 360 - AMBIGUOUS_EXIT_ANGLE;
+		if ((nearEntrance && exit > 2) || (nearFullCircle && exit < 2)) {
+			exitAngle = 360 - exitAngle;
+		}
 		if (exitAngle == 0) {
-			boolean fullCircle = turnType.getExitOut() > 1;
-			return fullCircle ? 360 : 1;
+			return exit > 1 ? 360 : 1;
 		}
 		return exitAngle;
 	}
 
-	private static int getManeuverType(@NonNull TurnType turnType) {
+	private static int getManeuverType(@NonNull TurnType turnType, boolean withExitAngle) {
 		return switch (turnType.getValue()) {
 			case TurnType.C -> Maneuver.TYPE_STRAIGHT; // continue (go straight)
 			case TurnType.TL -> Maneuver.TYPE_TURN_NORMAL_LEFT; // turn left
@@ -164,8 +176,12 @@ public class TripUtils {
 			case TurnType.TU -> Maneuver.TYPE_U_TURN_LEFT; // U-turn
 			case TurnType.TRU -> Maneuver.TYPE_U_TURN_RIGHT; // Right U-turn
 			case TurnType.OFFR -> Maneuver.TYPE_UNKNOWN; // Off route
-			case TurnType.RNDB -> Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW_WITH_ANGLE; // Roundabout
-			case TurnType.RNLB -> Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW_WITH_ANGLE; // Roundabout left
+			case TurnType.RNDB -> withExitAngle // Roundabout
+					? Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW_WITH_ANGLE
+					: Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW;
+			case TurnType.RNLB -> withExitAngle // Roundabout left
+					? Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW_WITH_ANGLE
+					: Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW;
 			default -> Maneuver.TYPE_UNKNOWN;
 		};
 	}
