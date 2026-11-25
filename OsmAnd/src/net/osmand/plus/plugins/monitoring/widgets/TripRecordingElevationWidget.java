@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.monitoring.widgets;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_DOWNHILL;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRIP_RECORDING_UPHILL;
 
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -149,7 +150,8 @@ public abstract class TripRecordingElevationWidget extends BaseRecordingWidget {
 	}
 
 	public static void showOnMap(@NonNull MapActivity mapActivity) {
-		TrackMenuFragment.showInstance(mapActivity, mapActivity.getApp().getSavingTrackHelper().getCurrentTrack(), null);
+		TrackMenuFragment.showInstance(mapActivity, mapActivity.getApp().getSavingTrackHelper().getCurrentTrack(), null,
+				null, null, new Bundle());
 	}
 
 	protected abstract double getElevationDiff();

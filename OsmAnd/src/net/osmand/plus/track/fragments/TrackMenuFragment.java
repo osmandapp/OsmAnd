@@ -961,7 +961,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.setupControlButtons(view);
 		if (mapSync == null) {
 			boolean trackLoaded = displayHelper.getGpxFileToDisplay() != null;
-			boolean syncOnStart = !restoredOutOfSync && !app.getMapViewTrackingUtilities().isMapLinkedToLocation()
+			boolean syncOnStart = !restoredOutOfSync && adjustMapPosition && !app.getMapViewTrackingUtilities().isMapLinkedToLocation()
 					&& (!trackLoaded || hasTrackToFit());
 			mapSync = new TrackMapSync(app, this::fitTrackOnMap, syncOnStart, this::hasTrackToFit);
 		}
