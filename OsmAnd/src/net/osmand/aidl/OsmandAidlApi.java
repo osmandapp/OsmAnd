@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.pm.PackageInfoCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -62,6 +64,7 @@ import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.aidlapi.customization.AProfile;
 import net.osmand.aidlapi.customization.PreferenceParams;
 import net.osmand.aidlapi.exit.ExitAppParams;
+import net.osmand.aidlapi.info.AApiAccess;
 import net.osmand.aidlapi.info.AppInfoParams;
 import net.osmand.aidlapi.info.GetTextParams;
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
@@ -166,6 +169,9 @@ import org.json.JSONObject;
 import java.io.*;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
@@ -254,6 +260,7 @@ public class OsmandAidlApi {
 	private static final String CONNECTED_APPS_KEY = "connected_apps";
 
 	private final Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
+	private final Object saveConnectedAppsLock = new Object();
 	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private final Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
@@ -2605,15 +2612,20 @@ public class OsmandAidlApi {
 	 * @return true if the app is enabled and the method's permission group is granted to it
 	 */
 	public boolean isMethodAllowed(@NonNull String pack, @NonNull String method) {
-		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
-		return connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+		ConnectedApp connectedApp = getCallerApp(pack);
+		boolean allowed = connectedApp.isEnabled() && connectedApp.isMethodAllowed(method);
+		// called on every AIDL call: the time is saved only now and then
+		if (allowed && connectedApp.updateLastUseTime(System.currentTimeMillis())) {
+			saveConnectedApps();
+		}
+		return allowed;
 	}
 
 	/**
 	 * @return true if the app is enabled and the group is granted to it
 	 */
 	public boolean isGroupAllowed(@NonNull String pack, @NonNull AidlPermissionGroup group) {
-		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		ConnectedApp connectedApp = getCallerApp(pack);
 		return connectedApp.isEnabled() && connectedApp.isGroupGranted(group);
 	}
 
@@ -2621,11 +2633,43 @@ public class OsmandAidlApi {
 	public ConnectedApp getOrCreateConnectedApp(@NonNull String pack) {
 		ConnectedApp connectedApp = connectedApps.get(pack);
 		if (connectedApp == null) {
-			connectedApp = new ConnectedApp(app, pack, false, AidlPermissionGroup.getDefaultGroups());
+			connectedApp = new ConnectedApp(app, pack, false, AidlPermissionGroup.getDefaultGroups(), 0);
 			connectedApps.put(pack, connectedApp);
 			saveConnectedApps();
 		}
 		return connectedApp;
+	}
+
+	// an app installed under the same package name with another key (after an uninstall) is a new app;
+	// a connection saved before the keys were kept takes the key of its first call
+	@NonNull
+	ConnectedApp getCallerApp(@NonNull String pack) {
+		ConnectedApp connectedApp = getOrCreateConnectedApp(pack);
+		String signature = getSignature(pack);
+		if (!Algorithms.objectEquals(signature, connectedApp.getSignature())) {
+			if (connectedApp.getSignature() != null) {
+				connectedApp.setEnabled(false);
+				connectedApp.setGroups(AidlPermissionGroup.getDefaultGroups());
+			}
+			connectedApp.setSignature(signature);
+			saveConnectedApps();
+		}
+		return connectedApp;
+	}
+
+	// SHA-256 of the first signing certificate, which stays first after a key rotation
+	@Nullable
+	private String getSignature(@NonNull String pack) {
+		try {
+			List<Signature> signatures = PackageInfoCompat.getSignatures(app.getPackageManager(), pack);
+			if (!signatures.isEmpty()) {
+				byte[] digest = MessageDigest.getInstance("SHA-256").digest(signatures.get(0).toByteArray());
+				return String.format(Locale.US, "%064x", new BigInteger(1, digest));
+			}
+		} catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+			LOG.error(e);
+		}
+		return null;
 	}
 
 	public boolean setGroupGranted(@NonNull ConnectedApp connectedApp, @NonNull AidlPermissionGroup group,
@@ -2637,6 +2681,11 @@ public class OsmandAidlApi {
 			groups.remove(group);
 		}
 		connectedApp.setGroups(groups);
+		return saveConnectedApps();
+	}
+
+	public boolean revokeAllGroups(@NonNull ConnectedApp connectedApp) {
+		connectedApp.setGroups(Collections.emptySet());
 		return saveConnectedApps();
 	}
 
@@ -2658,31 +2707,47 @@ public class OsmandAidlApi {
 		return saveConnectedApps();
 	}
 
+	@NonNull
+	public AApiAccess getApiAccess(@NonNull String pack) {
+		ConnectedApp connectedApp = getCallerApp(pack);
+		ArrayList<String> groups = new ArrayList<>();
+		for (AidlPermissionGroup group : connectedApp.getGroups()) {
+			groups.add(group.getId());
+		}
+		return new AApiAccess(connectedApp.isEnabled(), groups);
+	}
+
 	// connections are kept in their own preferences file: not in the backups (Android backup agent, Cloud, export)
 	@NonNull
 	private SharedPreferences getConnectionsPreferences() {
 		return app.getSharedPreferences(CONNECTIONS_PREFS, Context.MODE_PRIVATE);
 	}
 
+	// also called from the binder threads: one snapshot at a time, so an older one is never committed last.
+	// Its own lock: the main thread must not wait for other synchronized work here (getFilePoints parses a GPX)
 	private boolean saveConnectedApps() {
-		try {
-			JSONArray array = new JSONArray();
-			for (ConnectedApp connectedApp : connectedApps.values()) {
-				JSONObject obj = new JSONObject();
-				obj.put(ConnectedApp.ENABLED_KEY, connectedApp.isEnabled());
-				obj.put(ConnectedApp.PACK_KEY, connectedApp.getPack());
-				JSONArray groups = new JSONArray();
-				for (AidlPermissionGroup group : connectedApp.getGroups()) {
-					groups.put(group.getId());
+		synchronized (saveConnectedAppsLock) {
+			try {
+				JSONArray array = new JSONArray();
+				for (ConnectedApp connectedApp : connectedApps.values()) {
+					JSONObject obj = new JSONObject();
+					obj.put(ConnectedApp.ENABLED_KEY, connectedApp.isEnabled());
+					obj.put(ConnectedApp.PACK_KEY, connectedApp.getPack());
+					JSONArray groups = new JSONArray();
+					for (AidlPermissionGroup group : connectedApp.getGroups()) {
+						groups.put(group.getId());
+					}
+					obj.put(ConnectedApp.GROUPS_KEY, groups);
+					obj.put(ConnectedApp.LAST_USE_KEY, connectedApp.getLastUseTime());
+					obj.put(ConnectedApp.SIGNATURE_KEY, connectedApp.getSignature());
+					array.put(obj);
 				}
-				obj.put(ConnectedApp.GROUPS_KEY, groups);
-				array.put(obj);
+				return getConnectionsPreferences().edit().putString(CONNECTED_APPS_KEY, array.toString()).commit();
+			} catch (JSONException e) {
+				LOG.error(e);
 			}
-			return getConnectionsPreferences().edit().putString(CONNECTED_APPS_KEY, array.toString()).commit();
-		} catch (JSONException e) {
-			LOG.error(e);
+			return false;
 		}
-		return false;
 	}
 
 	public void loadConnectedApps() {
@@ -2710,7 +2775,9 @@ public class OsmandAidlApi {
 						}
 					}
 				}
-				connectedApps.put(pack, new ConnectedApp(app, pack, enabled, groups));
+				ConnectedApp connectedApp = new ConnectedApp(app, pack, enabled, groups, obj.optLong(ConnectedApp.LAST_USE_KEY));
+				connectedApp.setSignature(obj.optString(ConnectedApp.SIGNATURE_KEY, null));
+				connectedApps.put(pack, connectedApp);
 			}
 			if (legacy) {
 				saveConnectedApps();
