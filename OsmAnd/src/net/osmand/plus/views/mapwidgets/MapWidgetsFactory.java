@@ -108,6 +108,8 @@ public class MapWidgetsFactory {
 				return new GlideAverageWidget(mapActivity, glideAverageWidgetState, customId, panel);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity, customId, panel);
+			case IF:
+				return new IFWidget(mapActivity, customId, panel);
 			case AIDL_WIDGET:
 				return app.getAidlApi().askCreateExternalWidget(mapActivity, customId, panel);
 			default:
