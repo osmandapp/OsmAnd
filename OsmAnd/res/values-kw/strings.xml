@@ -3,7 +3,6 @@
     <string name="attach_to_track">Staga dhe lergh</string>
     <string name="visualization">Gwelesekheans</string>
     <string name="terrain_shadows">Skeusow tir</string>
-    <string name="terrain_shadows_description">Skeusow dynamek rag tirwedh 3D. Y golowboyntir mynsonieth an dirwedh gans effeyth tooth ispoyntel.</string>
     <string name="update_maps_to_use_new_search">Nowedhi mappow rag devnydhya an hwithrans nowydh (%1$s)</string>
     <string name="free_region_not_chosen_descr">An rannvro a\'gas mappa iskergys kynsa a dheu ha bos agas rannvro heb kost.</string>
     <string name="free_region_banner_descr">Oll mappow a %1$s yw heb kost.</string>
