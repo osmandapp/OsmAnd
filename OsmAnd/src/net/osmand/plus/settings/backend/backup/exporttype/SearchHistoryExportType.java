@@ -51,6 +51,11 @@ class SearchHistoryExportType extends AbstractExportType {
 		return object instanceof HistoryEntry;
 	}
 
+	@Override
+	public boolean isAvailableInFreeVersion() {
+		return true;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {

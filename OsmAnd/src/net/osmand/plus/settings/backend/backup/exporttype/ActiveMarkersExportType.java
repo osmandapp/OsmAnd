@@ -60,6 +60,11 @@ class ActiveMarkersExportType extends AbstractExportType {
 		return false;
 	}
 
+	@Override
+	public boolean isAvailableInFreeVersion() {
+		return true;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {
