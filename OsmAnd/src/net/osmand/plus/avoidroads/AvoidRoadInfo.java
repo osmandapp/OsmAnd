@@ -63,6 +63,13 @@ public class AvoidRoadInfo implements Serializable {
 		return appModeKey;
 	}
 
+	// the same avoided point of the same road, whatever its name or profile
+	public boolean isSameRoad(@NonNull AvoidRoadInfo other) {
+		return id == other.id
+				&& Math.abs(latitude - other.latitude) < 0.00001
+				&& Math.abs(longitude - other.longitude) < 0.00001;
+	}
+
 	@Override
 	public int hashCode() {
 		return Algorithms.hash(id, latitude, longitude, name, appModeKey);

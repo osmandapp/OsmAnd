@@ -17,6 +17,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
+import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
@@ -179,6 +180,11 @@ class BackupImporter {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
 						}
+						if (item instanceof AvoidRoadsSettingsItem avoidRoadsItem) {
+							// the downloaded list replaces the local one, so roads removed on
+							// another device are removed here too
+							avoidRoadsItem.setReplaceAll(true);
+						}
 						item.apply();
 						applied = item.isAppliedLocally();
 					}
@@ -186,6 +192,7 @@ class BackupImporter {
 						updateFileM5Digest(remoteFile, item, file);
 						updateFileUploadTime(remoteFile, item);
 						FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+						backupHelper.getAvoidRoadsMerger().onDownloadSuccess(item, remoteFile);
 					} else {
 						// Leaving the upload time unrecorded makes the next sync download the file
 						// again, instead of reading the missing local file as a local deletion.
