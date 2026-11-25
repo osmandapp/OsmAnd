@@ -84,9 +84,9 @@ public class AvoidRoadsHelper {
 			long id = roadInfo.getId();
 			if (id != 0) {
 				if (force) {
-					removeFromRoutingConfigs(id);
+					removeFromRoutingConfigs(roadInfo);
 				} else {
-					addToRoutingConfigs(id);
+					addToRoutingConfigs(roadInfo);
 				}
 			}
 			if (id == 0) {
@@ -95,9 +95,9 @@ public class AvoidRoadsHelper {
 				AvoidRoadsCallback callback = new AvoidRoadsCallback() {
 					@Override
 					public void onAddImpassableRoad(boolean success,
-							@Nullable AvoidRoadInfo roadInfo) {
+							@Nullable AvoidRoadInfo newRoadInfo) {
 						if (!success) {
-							addToRoutingConfigs(id);
+							addToRoutingConfigs(roadInfo);
 						}
 					}
 
@@ -127,7 +127,7 @@ public class AvoidRoadsHelper {
 
 	public void removeImpassableRoad(@NonNull AvoidRoadInfo roadInfo) {
 		removeImpassableRoadFromList(roadInfo);
-		removeFromRoutingConfigs(roadInfo.getId());
+		removeFromRoutingConfigs(roadInfo);
 		settings.removeImpassableRoad(roadInfo.getLatLon());
 	}
 
@@ -218,7 +218,7 @@ public class AvoidRoadsHelper {
 						settings.moveImpassableRoad(oldLoc, newLoc);
 					}
 					removeImpassableRoadFromList(currentObject);
-					removeFromRoutingConfigs(currentObject.getId());
+					removeFromRoutingConfigs(currentObject);
 
 					AvoidRoadInfo roadInfo = getOrCreateAvoidRoadInfo(newLoc, appMode.getStringKey(), object);
 					addImpassableRoadInternal(roadInfo, showDialog, activity);
@@ -238,7 +238,7 @@ public class AvoidRoadsHelper {
 
 	private void addImpassableRoadInternal(@NonNull AvoidRoadInfo roadInfo, boolean showDialog,
 			@Nullable MapActivity activity) {
-		boolean roadAdded = addToRoutingConfigs(roadInfo.getId());
+		boolean roadAdded = addToRoutingConfigs(roadInfo);
 		if (roadAdded) {
 			settings.updateImpassableRoadInfo(roadInfo);
 			addImpassableRoadToList(roadInfo);
@@ -267,20 +267,23 @@ public class AvoidRoadsHelper {
 		return mode != null ? mode : app.getRoutingHelper().getAppMode();
 	}
 
-	private boolean addToRoutingConfigs(long id) {
+	private boolean addToRoutingConfigs(@NonNull AvoidRoadInfo roadInfo) {
 		boolean added = false;
+		LatLon latLon = roadInfo.getLatLon();
+		int x31 = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(latLon.getLatitude());
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-			if (!builder.getImpassableRoadLocations().contains(id)) {
-				builder.addImpassableRoad(id);
-				added = true;
-			}
+			added |= builder.addImpassableRoad(roadInfo.getId(), x31, y31);
 		}
 		return added;
 	}
 
-	private void removeFromRoutingConfigs(long id) {
+	private void removeFromRoutingConfigs(@NonNull AvoidRoadInfo roadInfo) {
+		LatLon latLon = roadInfo.getLatLon();
+		int x31 = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(latLon.getLatitude());
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-			builder.removeImpassableRoad(id);
+			builder.removeImpassableRoad(roadInfo.getId(), x31, y31);
 		}
 	}
 
