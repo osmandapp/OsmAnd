@@ -2021,6 +2021,11 @@
 
 
 	<string name="poi_public_bath">Public bath</string>
+	<string name="poi_kneipp_water_cure">Kneipp water cure;foot bath;kneipp</string>
+	<string name="poi_kneipp_water_cure_foot_yes">Foot bath: yes</string>
+	<string name="poi_kneipp_water_cure_foot_no">Foot bath: no</string>
+	<string name="poi_kneipp_water_cure_arm_yes">Arm bath: yes</string>
+	<string name="poi_kneipp_water_cure_arm_no">Arm bath: no</string>
 
 	<string name="poi_male_yes">Male: yes</string>
 	<string name="poi_male_no">Male: no</string>
