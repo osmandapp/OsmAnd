@@ -24,6 +24,7 @@ public abstract class AndroidTest {
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected AppInitIdlingResource appInitIdlingResource;
+	private boolean simulationEnabled;
 
 	@Before
 	public void setup() {
@@ -52,6 +53,11 @@ public abstract class AndroidTest {
 		if (appInitIdlingResource != null) {
 			appInitIdlingResource.unregisterListener();
 		}
+		// the flag lives in memory, so the tests that follow in the process would navigate simulated
+		if (simulationEnabled) {
+			settings.simulateNavigation = false;
+			simulationEnabled = false;
+		}
 	}
 
 	protected void registerIdlingResources(@NonNull IdlingResource... idlingResources) {
@@ -63,6 +69,7 @@ public abstract class AndroidTest {
 	}
 
 	protected void enableSimulation(float kmPerHour) {
+		simulationEnabled = true;
 		settings.simulateNavigation = true;
 		settings.simulateNavigationMode = SimulationMode.CONSTANT.getKey();
 		settings.simulateNavigationSpeed = kmPerHour / 3.6f;

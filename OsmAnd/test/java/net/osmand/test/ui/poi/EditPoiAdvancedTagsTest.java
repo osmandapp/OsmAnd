@@ -5,6 +5,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.hasFocus;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
@@ -78,6 +79,9 @@ public class EditPoiAdvancedTagsTest extends AndroidTest {
 		onDialogView(isRoot()).perform(closeSoftKeyboard());
 
 		addTagAndWaitForFocus();
+		// the list scrolls to the new tag, which can take the description item with the name off the screen
+		onDialogView(allOf(withId(R.id.content_recycler_view), isDisplayed()))
+				.perform(scrollToPosition(0));
 		onDialogView(allOf(withId(R.id.nameTextView), isDisplayed())).check(matches(withText(NAME)));
 	}
 
