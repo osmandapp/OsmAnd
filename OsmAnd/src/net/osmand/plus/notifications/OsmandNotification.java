@@ -7,6 +7,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -52,6 +54,15 @@ public abstract class OsmandNotification {
 	private final String groupName;
 
 	private Notification currentNotification;
+	private String lastWearableContent;
+	/**
+	 * Set by buildNotification when it builds a wearable copy, to say what that copy should be
+	 * re-posted for. Null falls back to any visible change in its title or text.
+	 */
+	protected String wearableUpdateKey;
+	/** Extra diagnostics for the wearable log line; not part of the update decision. */
+	protected String wearableUpdateDetail;
+	private int wearableSkipped;
 	protected boolean stateChanged;
 
 	private final NotificationManagerCompat notificationManager;
@@ -90,6 +101,11 @@ public abstract class OsmandNotification {
 		this.top = top;
 	}
 
+	@NonNull
+	protected String getChannelId() {
+		return NOTIFICATION_CHANEL_ID;
+	}
+
 	@SuppressLint("InlinedApi")
 	protected Builder createBuilder(boolean wearable) {
 		Intent contentIntent = getContentIntent();
@@ -98,11 +114,15 @@ public abstract class OsmandNotification {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.getNotificationHelper().createNotificationChannel();
 		}
-		Builder builder = new Builder(app, NOTIFICATION_CHANEL_ID)
+		Builder builder = new Builder(app, getChannelId())
 				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 //				.setLocalOnly(true) // Probably should be deleted to not limit notifications
-				.setOnlyAlertOnce(true) // Many devices still don't treat that flag correct and keep spamming
+				// The phone copy alerts once and then updates quietly. The wearable copy is
+				// allowed to alert again: it is posted only when the manoeuvre band changes, and
+				// a watch that does not re-alert never lights its screen for the new instruction.
+//				.setOnlyAlertOnce(true)
+				.setOnlyAlertOnce(!wearable)
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)
 				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()))
@@ -150,11 +170,47 @@ public abstract class OsmandNotification {
 		Builder wearNotificationBuilder = buildNotification(null, true);
 		if (wearNotificationBuilder != null) {
 			Notification wearNotification = wearNotificationBuilder.build();
+			// Garmin and Samsung watches re-deliver rather than update, so every post buzzes (#16310).
+			String content = wearableUpdateKey != null
+					? wearableUpdateKey : getWearableContent(wearNotification);
+			android.util.Log.d("Corwin", "notifyWearable: try to notify");
+			if (!stateChanged && content != null && Algorithms.objectEquals(content, lastWearableContent)) {
+				wearableSkipped++;
+				return;
+			}
+			String previous = lastWearableContent;
+			String reason = previous == null ? "first post"
+					: stateChanged ? "state changed" : "key changed";
+			lastWearableContent = content;
 			if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
 				notificationManager.cancel(getOsmandWearableNotificationId());
 			}
+			android.util.Log.d("Corwin", "notifyWearable: actually notify"
+					+ " | why=" + reason
+					+ " | skipped=" + wearableSkipped
+					+ " | " + wearableUpdateDetail
+					+ "\n  key: " + previous + "  ->  " + content
+					+ "\n  text: " + getWearableContent(wearNotification));
+			wearableSkipped = 0;
 			notifySafely(notificationManager, wearNotification, getOsmandWearableNotificationId());
 		}
+	}
+
+	@Nullable
+	private static String getWearableContent(@NonNull Notification notification) {
+		Bundle extras = notification.extras;
+		if (extras == null) {
+			return null;
+		}
+		CharSequence title = extras.getCharSequence(Notification.EXTRA_TITLE);
+		CharSequence text = extras.getCharSequence(Notification.EXTRA_BIG_TEXT);
+		if (text == null) {
+			text = extras.getCharSequence(Notification.EXTRA_TEXT);
+		}
+		if (title == null && text == null) {
+			return null;
+		}
+		return title + "\n" + text;
 	}
 
 	public boolean showNotification() {
@@ -222,6 +278,7 @@ public abstract class OsmandNotification {
 
 	public void removeNotification() {
 		currentNotification = null;
+		lastWearableContent = null;
 		notificationManager.cancel(getOsmandNotificationId());
 		notificationManager.cancel(getOsmandWearableNotificationId());
 	}

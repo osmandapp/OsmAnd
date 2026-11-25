@@ -110,6 +110,15 @@ public class NativeCoreContext {
 		return mapRendererContext;
 	}
 
+	/**
+	 * The loaded map data, shared by every renderer context: a context is built around a display
+	 * density and keeps its own providers, but the obf collections underneath are the same files.
+	 */
+	@Nullable
+	public static Map<ProviderType, ObfsCollection> getObfsCollections() {
+		return obfsCollectionsByProviderType;
+	}
+
 	public static void setMapRendererContext(@NonNull OsmandApplication app, float density) {
 		if (mapRendererContext != null && mapRendererContext.getDensity() == density) {
 			return;

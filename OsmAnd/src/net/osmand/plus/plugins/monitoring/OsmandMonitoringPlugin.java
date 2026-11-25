@@ -312,6 +312,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public void saveCurrentTrack(@Nullable Runnable onComplete, @Nullable FragmentActivity activity,
 	                             boolean stopRecording, boolean openTrack) {
+		saveCurrentTrack(onComplete, activity, stopRecording, openTrack, true);
+	}
+
+	/**
+	 * @param showSaveDialog whether to offer the sheet that renames the saved track. A save that
+	 *                       the user started somewhere else — from a paired watch, say — must not
+	 *                       raise a dialog on the phone, and passing a null activity is not enough
+	 *                       to prevent that, because this falls back to mapActivity below.
+	 */
+	public void saveCurrentTrack(@Nullable Runnable onComplete, @Nullable FragmentActivity activity,
+	                             boolean stopRecording, boolean openTrack, boolean showSaveDialog) {
 		if (stopRecording) {
 			stopRecording();
 		}
@@ -364,8 +375,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 							if (showOnMap) {
 								app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 							}
-							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
-							SaveGPXBottomSheet.showInstance(fragmentManager, file);
+							if (showSaveDialog) {
+								FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+								SaveGPXBottomSheet.showInstance(fragmentManager, file);
+							}
 						}
 					}
 				}

@@ -1,0 +1,20 @@
+// Protocol types shared between the phone app (:OsmAnd) and the watch app (:OsmAnd-wear).
+// Deliberately a plain Kotlin/JVM module: it must stay tiny, because everything here
+// is also shipped to the watch. Do not add Android or OsmAnd dependencies.
+apply plugin: 'org.jetbrains.kotlin.jvm'
+apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+	compilerOptions {
+		jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+	}
+}
+
+dependencies {
+	api "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
+}

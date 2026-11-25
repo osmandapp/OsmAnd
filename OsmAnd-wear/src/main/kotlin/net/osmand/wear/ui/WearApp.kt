@@ -1,0 +1,250 @@
+package net.osmand.wear.ui
+
+import androidx.compose.runtime.Composable
+import net.osmand.wear.api.DestinationInfo
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.wear.compose.material3.AppScaffold
+import androidx.wear.compose.navigation.SwipeDismissableNavHost
+import androidx.wear.compose.navigation.composable
+import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
+
+import kotlinx.coroutines.launch
+
+import net.osmand.wear.R
+import net.osmand.wear.api.WearCommand
+import net.osmand.wear.data.PhoneConnector
+import net.osmand.wear.data.PhoneLink
+import net.osmand.wear.data.PhoneStateRepository
+import net.osmand.wear.data.Snapshot
+import net.osmand.wear.ui.screens.ConnectionScreen
+import net.osmand.wear.ui.screens.DestinationsScreen
+import net.osmand.wear.ui.screens.FinishRecordingDialog
+import net.osmand.wear.ui.screens.HomeScreen
+import net.osmand.wear.ui.screens.MapScreen
+import net.osmand.wear.ui.screens.MarkersPager
+import net.osmand.wear.ui.screens.MessageScreen
+import net.osmand.wear.ui.screens.NavigationScreen
+import net.osmand.wear.ui.screens.ProfilePickerScreen
+import net.osmand.wear.ui.screens.RecordingPager
+import net.osmand.wear.ui.screens.RecordingStartScreen
+import net.osmand.wear.ui.screens.RoutePreviewScreen
+import net.osmand.wear.ui.screens.SettingsScreen
+import net.osmand.wear.ui.screens.isSessionOpen
+import net.osmand.wear.ui.theme.OsmAndWearTheme
+
+object Routes {
+	const val HOME = "home"
+	const val NAVIGATION = "navigation"
+	const val RECORDING = "recording"
+	const val MAP = "map"
+	const val MARKERS = "markers"
+	const val DESTINATIONS = "destinations"
+	const val ROUTE_PREVIEW = "route_preview"
+	const val PROFILES = "profiles"
+	const val SETTINGS = "settings"
+}
+
+@Composable
+fun WearApp(connector: PhoneConnector) {
+	OsmAndWearTheme {
+		val navController = rememberSwipeDismissableNavController()
+		val scope = rememberCoroutineScope()
+
+		// Fire and forget: the phone answers every command with a fresh snapshot, and that echo —
+		// not the call itself — is what moves the screen.
+		val send: (WearCommand) -> Unit = { command -> scope.launch { connector.sendCommand(command) } }
+
+		// Ask the phone again whenever a screen is opened. The phone publishes on its own for
+		// route and recording changes, but plenty of state has no event to hang off — a plugin
+		// being switched on, for one — and resuming the activity is otherwise the only moment
+		// the watch ever re-asks.
+		val destination by navController.currentBackStackEntryFlow.collectAsStateWithLifecycle(null)
+		LaunchedEffect(destination?.destination?.route) {
+			connector.refresh()
+		}
+
+		// Held here rather than passed through the graph: the picker is shared with the
+		// recording screen, which chooses a profile and nothing more, and a destination is not
+		// something the route of a screen should have to carry.
+		var pendingDestination by remember { mutableStateOf<DestinationInfo?>(null) }
+
+		AppScaffold {
+			SwipeDismissableNavHost(
+				navController = navController,
+				startDestination = Routes.HOME
+			) {
+				composable(Routes.HOME) {
+					// Collected inside the destination, not in the enclosing scope: the nav graph
+					// builder runs once, so anything derived outside stays frozen at its first
+					// value while the screen keeps recomposing around it.
+					val link by PhoneStateRepository.link.collectAsStateWithLifecycle()
+
+					when (val current = link) {
+						is PhoneLink.Connected -> HomeScreen(
+							state = current.snapshot.state,
+							onOpen = { route -> navController.navigate(route) }
+						)
+
+						else -> ConnectionScreen(link = current, connector = connector)
+					}
+				}
+				composable(Routes.NAVIGATION) {
+					val snapshot = currentSnapshot()
+					NavigationScreen(
+						navigation = snapshot?.state?.navigation,
+						icons = snapshot?.icons.orEmpty(),
+						onStop = {
+							send(WearCommand.StopNavigation)
+							navController.popBackStack()
+						}
+					)
+				}
+				composable(Routes.RECORDING) {
+					val snapshot = currentSnapshot()
+					val recording = snapshot?.state?.recording
+					var confirmFinish by remember { mutableStateOf(false) }
+
+					if (recording == null) {
+						// A null recording state means the monitoring plugin is off on the phone,
+						// which is not something the watch can switch on for the user.
+						MessageScreen(
+							title = stringResource(R.string.wear_recording_off),
+							hint = stringResource(R.string.wear_recording_off_hint)
+						)
+					} else if (recording.isSessionOpen()) {
+						RecordingPager(
+							recording = recording,
+							onPause = { send(WearCommand.PauseRecording) },
+							onResume = { send(WearCommand.ResumeRecording) },
+							onFinish = { confirmFinish = true },
+							onSaveAndContinue = { send(WearCommand.SaveAndContinueRecording) }
+						)
+						FinishRecordingDialog(
+							visible = confirmFinish,
+							onDismiss = { confirmFinish = false },
+							onConfirm = {
+								confirmFinish = false
+								send(WearCommand.FinishRecording)
+							}
+						)
+					} else {
+						val profiles = snapshot?.state?.profiles.orEmpty()
+						val selected = profiles.firstOrNull { it.selected }
+						RecordingStartScreen(
+							profile = selected,
+							profileIcon = selected?.iconKey?.let { snapshot?.icons?.get(it) },
+							onPickProfile = { navController.navigate(Routes.PROFILES) },
+							onStart = { send(WearCommand.StartRecording) }
+						)
+					}
+				}
+				composable(Routes.MAP) {
+					val state = currentSnapshot()?.state
+					MapScreen(
+						carConnected = state?.carConnected == true,
+						openglMissing = state != null
+								&& !state.legacyMapRenderer && !state.openglAvailable,
+						onStart = { w, h, d -> send(WearCommand.StartMapStream(w, h, d)) },
+						onStop = { send(WearCommand.StopMapStream) },
+						onPause = { paused -> send(WearCommand.PauseMapStream(paused)) },
+						onZoom = { factor, seq -> send(WearCommand.ZoomMap(factor, seq)) },
+						onPan = { dx, dy, seq -> send(WearCommand.PanMap(dx, dy, seq)) },
+						onRecenter = { seq -> send(WearCommand.RecenterMap(seq)) }
+					)
+				}
+				composable(Routes.MARKERS) {
+					val state = currentSnapshot()?.state
+					MarkersPager(
+						markers = state?.markers.orEmpty(),
+						location = state?.location,
+						phoneHeading = state?.headingDegrees,
+						onPassed = { id -> send(WearCommand.MarkMarkerPassed(id)) },
+						onMoveToTop = { id -> send(WearCommand.MoveMarkerToTop(id)) },
+						onAddHere = { send(WearCommand.AddMarkerHere) }
+					)
+				}
+				composable(Routes.PROFILES) {
+					val snapshot = currentSnapshot()
+					ProfilePickerScreen(
+						profiles = snapshot?.state?.profiles.orEmpty(),
+						icons = snapshot?.icons.orEmpty(),
+						onSelect = { key ->
+							send(WearCommand.SelectProfile(key))
+							val destination = pendingDestination
+							if (destination == null) {
+								navController.popBackStack()
+							} else {
+								// The profile decides how the route is worked out, so it has to
+								// be set before asking for one.
+								pendingDestination = null
+								send(WearCommand.PreviewRoute(
+									destination.latitude, destination.longitude,
+									destination.name))
+								navController.popBackStack()
+								navController.navigate(Routes.ROUTE_PREVIEW)
+							}
+						}
+					)
+				}
+				composable(Routes.DESTINATIONS) {
+					DestinationsScreen(
+						destinations = currentSnapshot()?.state?.destinations.orEmpty(),
+						onSelect = { destination ->
+							pendingDestination = destination
+							navController.navigate(Routes.PROFILES)
+						}
+					)
+				}
+				composable(Routes.ROUTE_PREVIEW) {
+					// Leaving the screen drops the route rather than keeping it in planning
+					// mode on the phone: the watch asked for it only to look at it. Setting
+					// off also leaves the screen, and must not take the route with it.
+					var setOff by remember { mutableStateOf(false) }
+					DisposableEffect(Unit) {
+						onDispose {
+							if (!setOff) {
+								send(WearCommand.CancelRoutePreview)
+							}
+						}
+					}
+					RoutePreviewScreen(
+						preview = currentSnapshot()?.state?.routePreview,
+						onStart = {
+							setOff = true
+							send(WearCommand.StartNavigation)
+							navController.popBackStack(Routes.HOME, false)
+							navController.navigate(Routes.NAVIGATION)
+						},
+						onStartStream = { w, h, d -> send(WearCommand.StartMapStream(w, h, d)) },
+						onStopStream = { send(WearCommand.StopMapStream) },
+						onStillWatching = { send(WearCommand.PauseMapStream(false)) }
+					)
+				}
+				composable(Routes.SETTINGS) {
+					val snapshot = currentSnapshot()
+					SettingsScreen(
+						legacyMapRenderer = snapshot?.state?.legacyMapRenderer ?: true,
+						openglAvailable = snapshot?.state?.openglAvailable == true,
+						onSelectMapRenderer = { legacy ->
+							send(WearCommand.SetMapRenderer(legacy))
+						}
+					)
+				}
+			}
+		}
+	}
+}
+
+@Composable
+private fun currentSnapshot(): Snapshot? {
+	val link by PhoneStateRepository.link.collectAsStateWithLifecycle()
+	return (link as? PhoneLink.Connected)?.snapshot
+}
