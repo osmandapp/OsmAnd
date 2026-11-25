@@ -6,20 +6,26 @@ import net.osmand.IndexConstants
 import net.osmand.PlatformUtil
 import net.osmand.data.LatLon
 import net.osmand.map.WorldRegion
+import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
 import net.osmand.plus.Version
 import net.osmand.plus.download.DownloadActivityType
 import net.osmand.plus.download.IndexItem
 import net.osmand.plus.download.local.LocalItem
 import net.osmand.plus.download.local.LocalItemType
 import net.osmand.plus.download.local.LocalItemUtils
+import net.osmand.plus.download.local.LocalOperationTask
+import net.osmand.plus.download.local.OperationType
 import net.osmand.plus.helpers.FileNameTranslationHelper
 import net.osmand.plus.inapp.InstallReferrer
 import net.osmand.plus.utils.AndroidNetworkUtils
 import net.osmand.util.Algorithms
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 import java.io.IOException
+import java.util.function.Consumer
 
 /**
  * Map downloads of the free version: all maps of one region - the free region - and their updates are
@@ -75,25 +81,106 @@ class FreeVersionMapDownloads(private val app: OsmandApplication) {
 		}
 	}
 
-	/** The server allowed a replace: the region becomes free and the replace is counted. */
+	/**
+	 * The server allowed a replace and the download passed its checks (internet, space): the region
+	 * becomes free, the replace is counted and the maps of other regions are deactivated. They are
+	 * deleted only when a new map is installed - a download that fails or is cancelled leaves them
+	 * deactivated, see [onMapsNotReplaced].
+	 *
+	 * @param onDeactivated gets the deactivated map files, to delete once a new map is installed
+	 */
+	fun replaceFreeRegion(region: WorldRegion, onDeactivated: Consumer<List<File>>) {
+		val maps = synchronized(this) {
+			preferences.edit()
+				.putString(REGION, region.regionId)
+				.putInt(REPLACES, replacesCount + 1)
+				.apply()
+			collectMapsToDelete(region).values.flatten()
+		}
+		val backupDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR)
+		val deactivatedFiles = maps.map { File(backupDir, it.fileName) }
+		val listener = object : LocalOperationTask.OperationListener {
+			override fun onOperationFinished(type: OperationType, result: String) {
+				onDeactivated.accept(deactivatedFiles)
+			}
+		}
+		OsmAndTaskManager.executeTask(LocalOperationTask(app, OperationType.BACKUP_OPERATION, listener),
+			*maps.toTypedArray())
+	}
+
+	/**
+	 * A download that was to delete the maps deactivated by a replace was not installed (failed,
+	 * cancelled, no space): those maps stay deactivated and the user is told so. The duplicate map
+	 * warning hands over a map of the item's own region, which is not mentioned.
+	 *
+	 * @return the regions whose maps stay deactivated
+	 */
+	fun onMapsNotReplaced(item: IndexItem, files: List<File>?): List<WorldRegion> {
+		if (!isFreeVersion) {
+			return emptyList()
+		}
+		val backupDir = app.getAppPath(IndexConstants.BACKUP_INDEX_DIR).absolutePath
+		val itemRegion = getItemRegion(item)
+		val regions = files.orEmpty()
+			.filter { it.parentFile?.absolutePath == backupDir && it.exists() }
+			.mapNotNull { getRegionByDownloadName(getDownloadName(it.name)) }
+			.filter { it != itemRegion }
+			.distinct()
+		if (regions.isNotEmpty()) {
+			app.showToastMessage(R.string.free_region_maps_deactivated,
+				item.getVisibleName(app, app.regions, false), regions.joinToString { it.localeName })
+		}
+		return regions
+	}
+
+	/**
+	 * Activating deactivated maps keeps the maps of one region active: maps of a region other than the
+	 * free one make it the free region, see [activateFreeRegion]. Items that are active already are
+	 * left out.
+	 *
+	 * @return that region, or null when the items don't change the free region
+	 */
+	fun getActivatedRegion(items: List<LocalItem>): WorldRegion? {
+		if (!isFreeVersion || !isRegionsLoaded) {
+			return null
+		}
+		val freeRegion = freeRegion
+		return items.firstNotNullOfOrNull { item ->
+			val type = item.type
+			if ((type == LocalItemType.MAP_DATA || type == LocalItemType.ROAD_DATA) && item.isBackuped(app)) {
+				getRegionByDownloadName(getDownloadName(item.fileName))?.takeIf { it != freeRegion }
+			} else {
+				null
+			}
+		}
+	}
+
+	/**
+	 * Its maps are on the device already, so the region becomes free with no server call and no replace
+	 * counted.
+	 *
+	 * @return the maps of other regions, to deactivate
+	 */
 	@Synchronized
-	fun replaceFreeRegion(region: WorldRegion) {
-		preferences.edit()
-			.putString(REGION, region.regionId)
-			.putInt(REPLACES, replacesCount + 1)
-			.apply()
+	fun activateFreeRegion(region: WorldRegion): List<LocalItem> {
+		storeFreeRegion(region)
+		return collectMapsToDelete(region).values.flatten()
 	}
 
 	/**
 	 * Splits a download request into the maps free now and the regions that need a replace. Before the
 	 * first map the region of the first counted item is the free one - it is stored only when its
 	 * download starts, see [canDownload].
+	 *
+	 * @param newFreeRegion checks the items as if it were the free region: a replace the server
+	 * allowed, not applied yet
 	 */
-	fun check(items: Array<IndexItem>): FreeRegionCheck {
+	@JvmOverloads
+	fun check(items: Array<IndexItem>, newFreeRegion: WorldRegion? = null): FreeRegionCheck {
 		if (!isFreeVersion || !isRegionsLoaded) {
 			return FreeRegionCheck(null, items.toList(), emptySet())
 		}
-		var freeRegion = freeRegion
+		var freeRegion = newFreeRegion ?: freeRegion
 		val freeItems = mutableListOf<IndexItem>()
 		val otherRegions = linkedSetOf<WorldRegion>()
 		for (item in items) {
