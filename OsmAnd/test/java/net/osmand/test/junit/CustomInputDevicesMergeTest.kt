@@ -7,6 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.StateChangedListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.keyevent.InputDevicesHelper
+import net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsController
 import net.osmand.plus.keyevent.assignment.KeyAssignment
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile
@@ -794,6 +795,62 @@ class CustomInputDevicesMergeTest {
 		helper.releaseCustomizationCollection()
 
 		assertEquals(listOf("custom_1", "custom_2"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun saveKeepsEditsOnTheDeviceOpenedForEditing() {
+		val keyboardX = device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A, "assignment_a")
+		keyboardX.getJSONArray("assignments").put(JSONObject()
+			.put("id", "assignment_c")
+			.put("commandId", "zoom_in")
+			.put("keycodes", JSONArray().put(JSONObject().put("keycode", KeyEvent.KEYCODE_C))))
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+				keyboardX,
+				device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B, "assignment_b")))
+			settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		}
+		instrumentation.waitForIdleSync()
+
+		val controller = KeyAssignmentsController(app, ApplicationMode.CAR, false)
+		instrumentation.runOnMainSync {
+			controller.enterEditMode()
+			val assignmentC = helper.getDeviceById(ApplicationMode.CAR, "custom_1")!!
+				.assignmentsCopy.first { it.keyCodes.contains(KeyEvent.KEYCODE_C) }
+			controller.askRemoveAssignment(assignmentC)
+			settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_2")
+			controller.askSaveChanges()
+		}
+		instrumentation.waitForIdleSync()
+
+		val devices = customDevices(ApplicationMode.CAR)
+		assertEquals(listOf("custom_1", "custom_2"), devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_A),
+			devices.first { it.id == "custom_1" }.assignmentsCopy.flatMap { it.keyCodes })
+		assertEquals(listOf(KeyEvent.KEYCODE_B),
+			devices.first { it.id == "custom_2" }.assignmentsCopy.flatMap { it.keyCodes })
+	}
+
+	@Test
+	fun isDeviceTypeEditableFollowsTheDeviceOpenedForEditing() {
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+			settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		}
+		instrumentation.waitForIdleSync()
+		val controller = KeyAssignmentsController(app, ApplicationMode.CAR, false)
+		instrumentation.runOnMainSync { controller.enterEditMode() }
+		assertTrue(controller.isDeviceTypeEditable)
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, KeyboardDeviceProfile.ID)
+		assertTrue(controller.isDeviceTypeEditable)
+		assertNotNull(controller.deviceOpenedForEditing)
+
+		instrumentation.runOnMainSync { helper.removeCustomDevice(ApplicationMode.CAR, "custom_1") }
+		assertNull(controller.deviceOpenedForEditing)
+		assertFalse(controller.isDeviceTypeEditable)
 	}
 
 	private fun exportProfileFile(shared: Boolean, global: Boolean = false): File {

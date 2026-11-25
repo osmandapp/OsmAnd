@@ -102,7 +102,10 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 
 	@Override
 	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
-		if (event.isAssignmentRelated()) {
+		if (event == EventType.CUSTOM_DEVICES_CHANGED && controller.isInEditMode()
+				&& controller.getDeviceOpenedForEditing() == null) {
+			controller.exitEditMode();
+		} else if (event.isAssignmentRelated()) {
 			askUpdateScreen();
 		}
 	}
@@ -174,6 +177,11 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 			controller.setActivity(mapActivity);
 		}
 		deviceHelper.addListener(this);
+		if (controller.isInEditMode() && controller.getDeviceOpenedForEditing() == null) {
+			controller.exitEditMode();
+		} else {
+			askUpdateScreen();
+		}
 	}
 
 	@Override
