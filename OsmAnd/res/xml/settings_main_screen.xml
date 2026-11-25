@@ -37,6 +37,15 @@
 		tools:icon="@drawable/ic_action_purchases" />
 
 	<Preference
+		android:key="training_settings"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/training"
+		android:summary="@string/training_settings_descr"
+		app:fragment="net.osmand.plus.settings.fragments.TrainingSettingsFragment"
+		tools:icon="@drawable/ic_action_training" />
+
+	<Preference
 		android:layout="@layout/list_item_divider"
 		android:selectable="false" />
 
