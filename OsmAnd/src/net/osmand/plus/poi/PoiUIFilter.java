@@ -474,6 +474,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public PoiFilterUtils.AmenityNameFilter getNameFilter() {
+		return getNameFilter(filterByName);
+	}
+
+	@NonNull
+	public PoiFilterUtils.AmenityNameFilter getNameFilter(@Nullable String filterByName) {
 		if (Algorithms.isEmpty(filterByName)) {
 			return a -> true;
 		}

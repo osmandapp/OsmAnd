@@ -313,7 +313,9 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 		Map<String, Integer> counts = new HashMap<>();
 		Map<String, Integer> categoryCounts = new HashMap<>();
 		int generation = ++countGeneration;
-		AmenityNameFilter nameFilter = filter.getNameTextFilter(nameFilterText);
+		// as the list: Apply puts the name of a standard filter into the query, a saved filter keeps it in its own name filter
+		AmenityNameFilter nameFilter = filter.isStandardFilter()
+				? filter.getNameTextFilter(nameFilterText) : filter.getNameFilter(nameFilterText);
 		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, Integer>() {
 			@Override
 			protected Integer doInBackground(Void... params) {
