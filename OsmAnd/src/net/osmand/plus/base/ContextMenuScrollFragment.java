@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.WindowInsetsCompat;
 
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
@@ -148,14 +147,6 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	protected void setupMapRulerWidget(@NonNull View view, @NonNull MapLayers mapLayers) {
 		MapInfoLayer layer = mapLayers.getMapInfoLayer();
 		rulerWidget = layer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
-	}
-
-	@Override
-	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
-		super.onApplyInsets(insets);
-		if (!isPortrait() && getView() != null && hasMapControlsBesideMenuInLandscape()) {
-			updateMapControlsPos(this, getViewY(), false);
-		}
 	}
 
 	protected boolean hasMapControlsBesideMenuInLandscape() {
