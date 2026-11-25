@@ -549,6 +549,21 @@ class CustomInputDevicesMergeTest {
 	}
 
 	@Test
+	fun sameContentCopyIsMatchedWhenEarlierCandidateIsRejected() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_3", "Keyboard Z", KeyEvent.KEYCODE_B),
+			device("custom_1_car", "Keyboard Y", KeyEvent.KEYCODE_B)))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+
+		val devices = customDevices(ApplicationMode.CAR)
+
+		assertEquals(listOf("custom_1", "custom_3", "custom_1_car"), devices.map { it.id })
+		assertEquals("custom_1_car", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
 	fun knownMergedDeviceIsNotReusedForItsDuplicateInSameList() {
 		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
 		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))

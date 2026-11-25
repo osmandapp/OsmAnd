@@ -576,21 +576,22 @@ public class InputDevicesHelper {
 	                                 @NonNull Set<String> globalIds,
 	                                 @NonNull InputDeviceProfile device) {
 		String content = getDeviceContent(device);
-		InputDeviceProfile sameContentDevice = null;
+		InputDeviceProfile acceptedDevice = null;
 		for (InputDeviceProfile existing : mergeCandidates) {
-			if (content != null && content.equals(getDeviceContent(existing))) {
+			if (content != null && content.equals(getDeviceContent(existing))
+					&& isContentMatchAccepted(device, existing, globalIds)) {
 				if (Objects.equals(existing.getId(), device.getId())) {
-					sameContentDevice = existing;
+					acceptedDevice = existing;
 					break;
 				}
-				if (sameContentDevice == null) {
-					sameContentDevice = existing;
+				if (acceptedDevice == null) {
+					acceptedDevice = existing;
 				}
 			}
 		}
-		if (sameContentDevice != null && isContentMatchAccepted(device, sameContentDevice, globalIds)) {
-			mergeCandidates.remove(sameContentDevice);
-			return sameContentDevice.getId();
+		if (acceptedDevice != null) {
+			mergeCandidates.remove(acceptedDevice);
+			return acceptedDevice.getId();
 		}
 		boolean idTaken = hasDeviceId(devices, device.getId());
 		String name = device.toHumanString(app);
