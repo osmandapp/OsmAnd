@@ -41,6 +41,7 @@ import net.osmand.plus.views.layers.TransportStopHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.search.core.ObjectType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -178,7 +179,23 @@ public class AmenityMenuController extends MenuController {
 				iconName = RenderingIcons.getBigIconNameForAmenity(ctx, amenity);
 			}
 		}
-		return iconName == null ? 0 : RenderingIcons.getBigIconResourceId(iconName);
+		if (iconName == null) {
+			return 0;
+		}
+		int iconId = RenderingIcons.getBigIconResourceId(iconName);
+		// a search result marker uses app icon names, e.g. ic_action_street_name
+		if (iconId == 0 && !isSettlementSearchResult(amenity)) {
+			iconId = RenderingIcons.getResIdOrDefault(ctx, iconName, 0);
+		}
+		return iconId;
+	}
+
+	private static boolean isSettlementSearchResult(@NonNull Amenity amenity) {
+		if (amenity instanceof SearchResultAmenity searchResultAmenity) {
+			ObjectType type = searchResultAmenity.getSearchResult().objectType;
+			return type == ObjectType.CITY || type == ObjectType.VILLAGE || type == ObjectType.BOUNDARY;
+		}
+		return false;
 	}
 
 	@Override
