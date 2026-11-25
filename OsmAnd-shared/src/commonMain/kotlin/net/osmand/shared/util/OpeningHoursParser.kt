@@ -61,6 +61,7 @@ object OpeningHoursParser {
 	private const val LAST_NTH_WEEKDAY = 5
 	private const val DAYS_IN_WEEK = 7
 	private const val NTH_WEEKDAY_FROM_END_OFFSET = LAST_NTH_WEEKDAY
+	private const val CONDITION_AND = "and"
 
 	private var twelveHourFormatting = false
 	private var twelveHourLanguageTag: String? = null
@@ -117,6 +118,7 @@ object OpeningHoursParser {
 		private val rules: MutableList<OpeningHoursRule>
 		private var original: String? = null
 		private var sequenceCount = 0
+		internal var unknownCondition = false
 
 		constructor(rules: MutableList<OpeningHoursRule>) {
 			this.rules = rules
@@ -230,6 +232,12 @@ object OpeningHoursParser {
 		fun addRules(rules: List<OpeningHoursRule>) {
 			this.rules.addAll(rules)
 		}
+
+		/**
+		 * True when the original string also requires a condition that is not opening hours,
+		 * for example "Mo-Fr 06:00-20:00 AND weight>7.5", so these hours alone don't describe it.
+		 */
+		fun hasUnknownCondition(): Boolean = unknownCondition
 
 		fun getSequenceCount(): Int = sequenceCount
 
@@ -1604,8 +1612,12 @@ object OpeningHoursParser {
 		}
 	}
 
+	/**
+	 * Returns true when the rule is joined by AND with a condition that is not opening hours, for
+	 * example "Mo-Fr 06:00-20:00 AND weight>7.5". The parsed rule keeps only the opening hours.
+	 */
 	@JvmStatic
-	fun parseRuleV2(rule: String, sequenceIndex: Int, rules: MutableList<OpeningHoursRule>) {
+	fun parseRuleV2(rule: String, sequenceIndex: Int, rules: MutableList<OpeningHoursRule>): Boolean {
 		var r = rule.trim()
 
 		val daysStr = arrayOf("mo", "tu", "we", "th", "fr", "sa", "su")
@@ -1632,7 +1644,7 @@ object OpeningHoursParser {
 			months.fill(true)
 			basic.addTimeRange(0, 24 * 60)
 			rules.add(basic)
-			return
+			return false
 		}
 		val tokens = ArrayList<Token>()
 		var startWord = 0
@@ -1743,7 +1755,19 @@ object OpeningHoursParser {
 				}
 			}
 		}
+		var hasAnd = false
+		var hasUnknownToken = false
+		for (t in tokens) {
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
+				if (t.text == CONDITION_AND) {
+					hasAnd = true
+				} else {
+					hasUnknownToken = true
+				}
+			}
+		}
 		buildRule(basic, tokens, rules)
+		return hasAnd && hasUnknownToken
 	}
 
 	private fun buildRule(basic: BasicOpeningHourRule, allTokens: List<Token>, rules: MutableList<OpeningHoursRule>) {
@@ -2144,8 +2168,8 @@ object OpeningHoursParser {
 	}
 
 	@JvmStatic
-	fun parseRules(r: String, sequenceIndex: Int, rules: MutableList<OpeningHoursRule>) {
-		parseRuleV2(r, sequenceIndex, rules)
+	fun parseRules(r: String, sequenceIndex: Int, rules: MutableList<OpeningHoursRule>): Boolean {
+		return parseRuleV2(r, sequenceIndex, rules)
 	}
 
 	/**
@@ -2163,7 +2187,9 @@ object OpeningHoursParser {
 			val basicRules = ArrayList<BasicOpeningHourRule>()
 			for (r in sequences[i]) {
 				val rList = ArrayList<OpeningHoursRule>()
-				parseRules(r, i, rList)
+				if (parseRules(r, i, rList)) {
+					rs.unknownCondition = true
+				}
 				for (rule in rList) {
 					if (rule is BasicOpeningHourRule) {
 						basicRules.add(rule)

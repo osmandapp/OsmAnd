@@ -272,7 +272,9 @@ public class BinaryMapRouteReaderAdapter {
 						if(cond.condition.endsWith(")")) {
 							cond.condition = cond.condition.substring(0, cond.condition.length() - 1).trim();
 						}
-						cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
+						OpeningHoursParser.OpeningHours hours = OpeningHoursParser.parseOpenedHours(cond.condition);
+						// "Mo-Fr AND weight>7.5" can't be checked, the same as "weight>7.5" alone
+						cond.hours = hours == null || hours.hasUnknownCondition() ? null : hours;
 						conditions.add(cond);
 					}
 				}

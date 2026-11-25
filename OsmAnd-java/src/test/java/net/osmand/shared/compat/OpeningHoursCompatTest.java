@@ -64,6 +64,7 @@ public class OpeningHoursCompatTest {
 			if (j != null) {
 				assertEquals(rule, j.toString(), k.toString());
 				assertEquals(rule, j.getRules().size(), k.getRules().size());
+				assertEquals(rule, j.hasUnknownCondition(), k.hasUnknownCondition());
 			}
 		}
 	}
