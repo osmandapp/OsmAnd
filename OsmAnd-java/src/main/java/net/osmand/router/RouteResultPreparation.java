@@ -267,8 +267,9 @@ public class RouteResultPreparation {
 	}
 
 	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {
+		boolean footOrBicycle = isFootOrBicycle(ctx);
 		for (int i = 0; i < result.size(); i ++) {
-			TurnType turnType = getTurnInfo(result, i, ctx.leftSideNavigation);
+			TurnType turnType = getTurnInfo(result, i, ctx.leftSideNavigation, footOrBicycle);
 			result.get(i).setTurnType(turnType);
 		}
 		
@@ -1308,6 +1309,23 @@ public class RouteResultPreparation {
 	}
 
 	private static final int MAX_SPEAK_PRIORITY = 5;
+
+	private static boolean isFootOrBicycle(RoutingContext ctx) {
+		GeneralRouterProfile profile = ((GeneralRouter) ctx.getRouter()).getProfile();
+		return profile == GeneralRouterProfile.BICYCLE || profile == GeneralRouterProfile.PEDESTRIAN;
+	}
+
+	// A bicycle or foot route on a cycleway or a footway is on a minor way itself, like on a path or a track, so a track
+	// or a path forking off it is a real choice and is spoken (#27188). Only the route's own ways are judged so:
+	// the roads attached to it keep their priority, and car routes keep the old order.
+	private int highwaySpeakPriority(String highway, boolean footOrBicycle) {
+		if (footOrBicycle && highway != null && (highway.endsWith("cycleway") || highway.endsWith("footway")
+				|| highway.endsWith("pedestrian") || highway.endsWith("bridleway") || highway.endsWith("steps"))) {
+			return MAX_SPEAK_PRIORITY;
+		}
+		return highwaySpeakPriority(highway);
+	}
+
 	private int highwaySpeakPriority(String highway) {
 		if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
 				|| highway.endsWith("path")) {
@@ -1327,7 +1345,7 @@ public class RouteResultPreparation {
 	}
 
 
-	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
+	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide, boolean footOrBicycle) {
 		if (i == 0) {
 			return TurnType.valueOf(TurnType.C, false);
 		}
@@ -1357,7 +1375,7 @@ public class RouteResultPreparation {
 					t = getActiveTurnType(lanes, leftSide, t);
 					t.setLanes(lanes);
 				} else if (fromTag != TurnType.C) {
-					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist));
+					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist), footOrBicycle);
 					if (t != null) {
 						TurnType mainTurnType = TurnType.valueOf(fromTag, leftSide);
 						int[] lanes = t.getLanes();
@@ -1399,7 +1417,7 @@ public class RouteResultPreparation {
 				t = getActiveTurnType(lanes, leftSide, t);
 				t.setLanes(lanes);
 			} else {
-				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist));
+				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, getBearingEndExtended(result, i, bearingDist), footOrBicycle);
 			}
 			if (t != null) {
 				t.setTurnAngle((float) - mpi);
@@ -1491,14 +1509,14 @@ public class RouteResultPreparation {
 	}
 
 	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
-			boolean twiceRoadPresent, float prevBearingEnd) {
+			boolean twiceRoadPresent, float prevBearingEnd, boolean footOrBicycle) {
 		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
 		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
 		String turnLanesPrevSegm = twiceRoadPresent ? null : getTurnLanesString(prevSegm);
 		// keep left/right
-		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd);
+		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd, footOrBicycle);
 		if (rs.roadsOnLeft + rs.roadsOnRight == 0) {
 			return null;
 		}
@@ -1507,7 +1525,7 @@ public class RouteResultPreparation {
 			String converted = convertNoneLanes(turnLanesPrevSegm, rs, getTurnLanesString(currentSegm));
 			if (!converted.equals(turnLanesPrevSegm)) {
 				turnLanesPrevSegm = converted;
-				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd);
+				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd, footOrBicycle);
 			}
 		}
 
@@ -1677,9 +1695,15 @@ public class RouteResultPreparation {
 
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
 			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm, float prevBearingEnd) {
+		return calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd, false);
+	}
+
+	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
+			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm, float prevBearingEnd, boolean footOrBicycle) {
 		RoadSplitStructure rs = new RoadSplitStructure();
 		rs.currentDeviation = MapUtils.degreesDiff(prevBearingEnd, currentSegm.getBearingBegin());
-		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
+		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway(), footOrBicycle),
+				highwaySpeakPriority(currentSegm.getObject().getHighway(), footOrBicycle));
 		double currentAngle = MapUtils.normalizeDegrees360(currentSegm.getBearingBegin());
 		double prevAngle = MapUtils.normalizeDegrees360(prevSegm.getBearingBegin() - 180);
 		boolean hasSharpOrReverseLane = hasSharpOrReverseTurnLane(turnLanesPrevSegm);

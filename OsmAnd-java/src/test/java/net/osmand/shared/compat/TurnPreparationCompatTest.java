@@ -122,7 +122,7 @@ public class TurnPreparationCompatTest {
 		if (lanes) {
 			params.put("car", "true");
 		}
-		String vehicle = lanes ? "car" : params.getOrDefault("vehicle", "car");
+		String vehicle = params.getOrDefault("vehicle", "car");
 		RoutingMemoryLimits limits = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
 				RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
 
