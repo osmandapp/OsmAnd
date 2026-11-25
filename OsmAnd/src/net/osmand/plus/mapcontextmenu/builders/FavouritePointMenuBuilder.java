@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
@@ -123,12 +122,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	@Override
 	protected void buildDescription(View view) {
 		buildFavoriteDescription(view);
-		AmenityDescriptionBuilder descriptionBuilder = createSourceAmenityDescriptionBuilder();
-		if (descriptionBuilder == null) {
-			return;
-		}
-		if (descriptionBuilder.buildDescription(view)) {
-			mergedAmenityInfoBundle.setCustomHiddenExtensions(Collections.singletonList(DESCRIPTION));
+		AmenityDescriptionBuilder descriptionBuilder = new AmenityDescriptionBuilder(
+				this, amenity, mergedAmenityInfoBundle, isLightContent());
+		if (!descriptionBuilder.buildShortWikiDescription(view,
+				mergedAmenityInfoBundle.getFilteredLocalizedInfo(), false)) {
+			descriptionBuilder.buildDescription(view);
 		}
 		if (isCustomOnlinePhotosPosition()) {
 			buildPhotosRow((ViewGroup) view, amenity);
@@ -140,15 +138,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		if (!Algorithms.isEmpty(description)) {
 			buildDescriptionRow(view, description);
 		}
-	}
-
-	@Nullable
-	private AmenityDescriptionBuilder createSourceAmenityDescriptionBuilder() {
-		if (amenity != null) {
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), sourceAmenityExtensions);
-			return new AmenityDescriptionBuilder(this, amenity, bundle, isLightContent());
-		}
-		return null;
 	}
 
 	@Override
