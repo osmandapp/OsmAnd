@@ -85,18 +85,6 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 		});
 		toolbar.findViewById(R.id.toolbar_subtitle).setVisibility(View.GONE);
 
-		View actionButton = toolbar.findViewById(R.id.action_button);
-		if (controller.isDeviceTypeEditable()) {
-			actionButton.setOnClickListener(v -> {
-				if (controller.isInEditMode()) {
-					controller.askRemoveAllAssignments();
-				} else {
-					controller.enterEditMode();
-				}
-			});
-		} else {
-			actionButton.setVisibility(View.GONE);
-		}
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 	}
 
@@ -141,6 +129,18 @@ public class KeyAssignmentsFragment extends BaseFullScreenFragment
 		title.setText(editMode ? R.string.shared_string_edit : R.string.key_assignments);
 
 		View actionButton = toolbar.findViewById(R.id.action_button);
+		if (controller.isDeviceTypeEditable()) {
+			actionButton.setVisibility(View.VISIBLE);
+			actionButton.setOnClickListener(v -> {
+				if (controller.isInEditMode()) {
+					controller.askRemoveAllAssignments();
+				} else {
+					controller.enterEditMode();
+				}
+			});
+		} else {
+			actionButton.setVisibility(View.GONE);
+		}
 		ImageButton ivActionButton = actionButton.findViewById(R.id.action_button_icon);
 
 		boolean enabled = controller.hasAssignments() || editMode;
