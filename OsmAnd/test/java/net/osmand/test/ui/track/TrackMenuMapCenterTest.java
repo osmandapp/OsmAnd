@@ -26,6 +26,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.espresso.Espresso;
@@ -55,6 +57,8 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.fragments.GpsFilterFragment;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -567,6 +571,48 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		} finally {
 			setRotation(rotation);
 			setSuggestMapEnabled(suggestMapEnabled);
+		}
+	}
+
+	@Test
+	public void testGpsFilterMapControlsAboveSystemBarsInLandscape() throws Throwable {
+		assertMapControlsAboveSystemBarsInLandscape(GpsFilterFragment.TAG, activity ->
+				GpsFilterFragment.showInstance(activity.getSupportFragmentManager(), selectedGpxFile,
+						activity.getFragmentsHelper().getTrackMenuFragment()));
+	}
+
+	@Test
+	public void testAppearanceMapControlsAboveSystemBarsInLandscape() throws Throwable {
+		assertMapControlsAboveSystemBarsInLandscape(TrackAppearanceFragment.TAG, activity ->
+				TrackAppearanceFragment.showInstance(activity, selectedGpxFile,
+						activity.getFragmentsHelper().getTrackMenuFragment()));
+	}
+
+	private void assertMapControlsAboveSystemBarsInLandscape(@NonNull String tag, @NonNull Consumer<MapActivity> open) {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		int rotation = getRotation();
+		try {
+			turnToLandscape(rotation);
+			scenarioRule.getScenario().onActivity(activity ->
+					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(open::accept);
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity -> {
+				Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(tag);
+				assertNotNull(tag + " is not shown", fragment);
+				View controls = fragment.requireView().findViewById(R.id.map_controls_container);
+				assertNotNull("No map controls on " + tag, controls);
+				WindowInsetsCompat insets = ViewCompat.getRootWindowInsets(controls);
+				int bottomInset = insets != null ? insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom : 0;
+				int freeBottom = activity.getWindow().getDecorView().getHeight() - bottomInset;
+				int contentBottom = AndroidUtils.getViewBoundOnScreen(controls).bottom - controls.getPaddingBottom();
+				assertTrue("The map controls of " + tag + " end at " + contentBottom + " px, below the system bars at "
+						+ freeBottom + " px", contentBottom <= freeBottom);
+			});
+		} finally {
+			setRotation(rotation);
 		}
 	}
 
