@@ -36,7 +36,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
-import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -53,8 +52,6 @@ import java.util.Set;
 
 public class FavoritePointEditorFragment extends PointEditorFragment {
 
-	private static final String ICON_SELECTED_BY_USER_KEY = "editor_icon_selected_by_user";
-
 	private FavouritesHelper favouritesHelper;
 
 	@Nullable
@@ -67,8 +64,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private String originalIconKey;
 
 	private boolean saved;
-	private boolean iconSelectedByUser;
-	private boolean selectingIconForGroup;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -84,8 +79,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
 			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
-			// an existing favorite keeps its icon when it is moved to another folder
-			this.iconSelectedByUser = !editor.isNew();
 			this.originalIconKey = retrieveOriginalIconKey();
 
 			setColor(getInitialColor());
@@ -100,12 +93,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Nullable
 	protected String retrieveOriginalIconKey() {
 		FavoritePointEditor editor = getFavoritePointEditor();
-		if (editor == null || !editor.isNew()) {
+		FavouritePoint favorite = getFavorite();
+		if (editor == null || favorite == null) {
 			return null;
 		}
-		FavouritePoint favorite = getFavorite();
-		if (favorite == null) {
-			return null;
+		if (!editor.isNew()) {
+			return editor.getPoiIconName(favorite);
 		}
 		int iconId = favorite.getIconId();
 		if (iconId == 0) {
@@ -196,21 +189,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (ctx != null) {
 			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.getName());
 			this.group = favouritesHelper.getGroup(groupIdName);
-			String iconName = getIconName();
 			super.setPointsGroup(group, true);
-			// an icon picked by the user is kept, otherwise the icon follows the folder
-			setIconName(iconSelectedByUser ? iconName : getIconNameForGroup());
+			setIconName(manualChanges.iconOnFolderChange(getIconName(), getIconNameForGroup()));
 			selectIconInController();
 			updateContent();
 		}
-	}
-
-	@Override
-	public void onIconSelectedFromPalette(@Nullable String icon) {
-		if (!selectingIconForGroup) {
-			iconSelectedByUser = true;
-		}
-		super.onIconSelectedFromPalette(icon);
 	}
 
 	/**
@@ -234,7 +217,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			return iconName;
 		}
 
-		// the POI icon that the editor set for a new point
+		// the point's own icon: the POI icon, as on Add, or the saved icon of a point not from a POI
+		if (!Algorithms.isEmpty(originalIconKey)) {
+			return originalIconKey;
+		}
 		FavouritePoint favorite = getFavorite();
 		iconName = favorite != null ? RenderingIcons.getBigIconName(favorite.getIconId()) : null;
 		if (!Algorithms.isEmpty(iconName)) {
@@ -256,31 +242,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	protected String getDefaultIconName() {
 		String iconName = getPreselectedIconName();
 		return !Algorithms.isEmpty(iconName) ? iconName : DEFAULT_ICON_NAME;
-	}
-
-	private void selectIconInController() {
-		EditorIconController controller = getIconController();
-		selectingIconForGroup = true;
-		try {
-			controller.onIconSelectedFromPalette(getIconName(), getIconCategoryKey(controller, getIconName()));
-		} finally {
-			selectingIconForGroup = false;
-		}
-	}
-
-	@Nullable
-	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
-		String originalKey = null;
-		for (IconsCategory category : controller.getCategories()) {
-			if (category.containsIcon(iconName)) {
-				if (!category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
-					return category.getKey();
-				}
-				// the POI icon that is in no other category is shown in "Original"
-				originalKey = category.getKey();
-			}
-		}
-		return originalKey;
 	}
 
 	@Override
@@ -626,18 +587,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(ICON_SELECTED_BY_USER_KEY, iconSelectedByUser);
-	}
-
-	@Override
 	protected void restoreEditorState(@NonNull Bundle savedInstanceState) {
 		super.restoreEditorState(savedInstanceState);
 		if (selectedGroup != null) {
 			group = favouritesHelper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, selectedGroup.getName()));
 		}
-		iconSelectedByUser = savedInstanceState.getBoolean(ICON_SELECTED_BY_USER_KEY, iconSelectedByUser);
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {

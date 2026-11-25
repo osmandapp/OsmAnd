@@ -2704,7 +2704,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		LatLon location = referenceObject != null ? referenceObject.getLocation() : null;
 		if (location != null) {
 			spatialSearchLocation = new LatLon(location.getLatitude(), location.getLongitude());
-			spatialSearchScopeName = referenceObject.getName();
+			spatialSearchScopeName = referenceObject.getName(searchSettings.getLang(), searchSettings.isTransliterate());
 			spatialSearchBBox31 = getSpatialCategoryBBox31(referenceObject);
 			useSpatialSearchLocation = true;
 			useMapCenter = false;
@@ -2991,10 +2991,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void addUpdateMapsForNewSearchRow() {
+		// null until the list fragment's onActivityCreated, e.g. while the view pager restores its page
+		QuickSearchListAdapter adapter = mainSearchFragment.getListAdapter();
 		int maps = searchHelper.getMapsWithoutSpatialSearch().size();
-		if (maps > 0 && !isTextEmpty()) {
+		if (adapter != null && maps > 0 && !isTextEmpty()) {
 			String title = getString(R.string.update_maps_to_use_new_search, String.valueOf(maps));
-			mainSearchFragment.getListAdapter().insertListItem(new QuickSearchButtonListItem(app, R.drawable.ic_action_update, title, v -> {
+			adapter.insertListItem(new QuickSearchButtonListItem(app, R.drawable.ic_action_update, title, v -> {
 				Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB);
 				startActivity(intent);

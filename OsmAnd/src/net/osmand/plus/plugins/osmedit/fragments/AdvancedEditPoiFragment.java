@@ -291,11 +291,20 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 	}
 
 	private void updateName() {
-		contentAdapter.notifyItemChanged(contentAdapter.getItems().indexOf(TYPE_DESCRIPTION_ITEM), PAYLOAD_NAME);
+		updateDescriptionItem(PAYLOAD_NAME);
 	}
 
 	private void updatePoiType() {
-		contentAdapter.notifyItemChanged(contentAdapter.getItems().indexOf(TYPE_DESCRIPTION_ITEM), PAYLOAD_AMENITY);
+		updateDescriptionItem(PAYLOAD_AMENITY);
+	}
+
+	private void updateDescriptionItem(int payload) {
+		// A tag field loses focus and applies its tag while the list lays out a rebound item
+		if (recyclerView.isComputingLayout()) {
+			recyclerView.post(() -> updateDescriptionItem(payload));
+		} else {
+			contentAdapter.notifyItemChanged(contentAdapter.getItems().indexOf(TYPE_DESCRIPTION_ITEM), payload);
+		}
 	}
 
 	@Override

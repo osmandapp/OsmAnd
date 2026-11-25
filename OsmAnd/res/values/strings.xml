@@ -11,6 +11,9 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="free_region_maps_deactivated">Maps of %2$s are kept deactivated. %1$s was not downloaded.</string>
+	<string name="free_region_activate_title">Change your free region?</string>
+	<string name="free_region_activate_descr">The free version includes maps of one region. %1$s will become your free region, and maps of %2$s will be deactivated.</string>
 	<string name="terrain_shadows_hillshade_footer">Terrain shadows are off while Terrain shows Hillshade: Hillshade already shades the relief.</string>
 	<string name="shadows_on_description">Shadows on: buildings cast shadows from the sun.</string>
 	<string name="shadows_off_description">Shadows off: buildings are drawn without shadows.</string>
