@@ -124,10 +124,7 @@ public class TripHelper {
 			int width = (int) (TURN_IMAGE_SIZE_DP * density);
 			Bitmap bitmap = createTurnBitmap(turnType, deviatedFromRoute, turnImminent, width, height);
 
-			turnBuilder = new Maneuver.Builder(TripUtils.getManeuverType(turnType));
-			if (turnType.isRoundAbout()) {
-				turnBuilder.setRoundaboutExitNumber(turnType.getExitOut());
-			}
+			turnBuilder = TripUtils.createManeuverBuilder(turnType);
 			turnBuilder.setIcon(new CarIcon.Builder(IconCompat.createWithBitmap(bitmap)).build());
 		} else {
 			turnBuilder = new Maneuver.Builder(Maneuver.TYPE_UNKNOWN);
@@ -202,10 +199,7 @@ public class TripHelper {
 				int height = (int) (NEXT_TURN_IMAGE_SIZE_DP * density);
 				Bitmap turnBitmap = createTurnBitmap(nextTurnType, deviatedFromRoute, nextNextDirInfo.imminent, width, height);
 
-				nextTurnBuilder = new Maneuver.Builder(TripUtils.getManeuverType(nextTurnType));
-				if (nextTurnType.isRoundAbout()) {
-					nextTurnBuilder.setRoundaboutExitNumber(nextTurnType.getExitOut());
-				}
+				nextTurnBuilder = TripUtils.createManeuverBuilder(nextTurnType);
 				nextTurnBuilder.setIcon(new CarIcon.Builder(IconCompat.createWithBitmap(turnBitmap)).build());
 			} else {
 				nextTurnBuilder = new Maneuver.Builder(Maneuver.TYPE_UNKNOWN);
