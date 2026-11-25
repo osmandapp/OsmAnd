@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -129,7 +130,8 @@ public class FavoritePointEditor extends PointEditor {
 		}
 	}
 
-	public void add(LatLon latLon, String title, String categoryName, int categoryColor, boolean autoFill) {
+	public void add(LatLon latLon, String title, String categoryName, int categoryColor,
+	                String iconName, String backgroundType, boolean autoFill) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -148,6 +150,10 @@ public class FavoritePointEditor extends PointEditor {
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
 		favorite.setAddress("");
+		if (!Algorithms.isEmpty(iconName)) {
+			favorite.setIconIdFromName(iconName);
+		}
+		favorite.setBackgroundType(BackgroundType.getByTypeName(backgroundType, null));
 		FavoritePointEditorFragment.showInstance(mapActivity, autoFill);
 	}
 

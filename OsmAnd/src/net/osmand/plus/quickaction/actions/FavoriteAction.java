@@ -49,6 +49,8 @@ public class FavoriteAction extends SelectMapLocationAction {
 	public static final String KEY_DIALOG = "dialog";
 	public static final String KEY_CATEGORY_NAME = "category_name";
 	public static final String KEY_CATEGORY_COLOR = "category_color";
+	public static final String KEY_CATEGORY_ICON = "category_icon";
+	public static final String KEY_CATEGORY_BACKGROUND_ICON = "category_background_icon";
 
 	private transient AddressLookupRequest lookupRequest;
 	private transient ProgressDialog progressDialog;
@@ -83,7 +85,8 @@ public class FavoriteAction extends SelectMapLocationAction {
 	private void addFavorite(MapActivity mapActivity, LatLon latLon, String title, boolean autoFill) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		if (editor != null) {
-			editor.add(latLon, title, getCategoryName(), getCategoryColor(), autoFill);
+			editor.add(latLon, title, getCategoryName(), getCategoryColor(),
+					getParams().get(KEY_CATEGORY_ICON), getParams().get(KEY_CATEGORY_BACKGROUND_ICON), autoFill);
 		}
 	}
 

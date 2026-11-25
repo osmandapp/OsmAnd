@@ -591,8 +591,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavoriteGroup group = getGroup();
 		FavoritePointEditor editor = getFavoritePointEditor();
 		int iconId = 0;
-		// a new point (its POI icon was not picked by the user) follows the icon chosen for the folder
-		String groupIconName = editor != null && editor.isNew() ? getChosenGroupIconName(group) : null;
+		// a new point from a POI follows the icon chosen for the folder, an icon from the quick action is kept
+		boolean fromPoi = favorite != null && favorite.getAmenityOriginName() != null;
+		String groupIconName = editor != null && editor.isNew() && fromPoi ? getChosenGroupIconName(group) : null;
 		if (groupIconName != null) {
 			iconId = RenderingIcons.getBigIconResourceId(groupIconName);
 		}
