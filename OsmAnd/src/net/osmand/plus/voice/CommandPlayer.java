@@ -52,6 +52,7 @@ public abstract class CommandPlayer {
 	protected final VoiceRouter voiceRouter;
 
 	private AudioFocusHelper focusHelper;
+	private boolean pauseMusicOnNextPrompt;
 
 	protected final File voiceProviderDir;
 	protected final String language;
@@ -149,13 +150,18 @@ public abstract class CommandPlayer {
 		this.streamType = streamType;
 	}
 
+	public void pauseMusicOnNextPrompt() {
+		pauseMusicOnNextPrompt = true;
+	}
+
 	protected synchronized void requestAudioFocus() {
 		log.debug("requestAudioFocus");
 		streamType = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
 		updateAudioStream(streamType);
 		focusHelper = createAudioFocusHelper();
 		if (focusHelper != null && app != null) {
-			boolean audioFocusGranted = focusHelper.requestAudFocus(app);
+			boolean audioFocusGranted = focusHelper.requestAudFocus(app, pauseMusicOnNextPrompt);
+			pauseMusicOnNextPrompt = false;
 			if (audioFocusGranted && streamType == 0) {
 				startBluetoothSco();
 			}

@@ -4,7 +4,7 @@ import android.content.Context;
 
 public interface AudioFocusHelper {
 
-	boolean requestAudFocus(Context context);
+	boolean requestAudFocus(Context context, boolean pauseMusic);
 
 	void onAudioFocusChange(int focusChange);
 
