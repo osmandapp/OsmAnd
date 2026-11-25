@@ -548,6 +548,19 @@ class CustomInputDevicesMergeTest {
 		assertFalse(exportProfileJson(true).has(key))
 	}
 
+	@Test
+	fun knownMergedDeviceIsNotReusedForItsDuplicateInSameList() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+
+		setLegacyDevices(ApplicationMode.CAR,
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1", "custom_2"), customDeviceIds(ApplicationMode.CAR))
+	}
+
 	private fun exportProfileFileText(shared: Boolean): String {
 		val dir = app.cacheDir
 		val name = "input_devices_export_" + shared

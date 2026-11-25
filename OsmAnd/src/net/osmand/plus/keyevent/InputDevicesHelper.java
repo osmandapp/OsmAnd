@@ -545,6 +545,12 @@ public class InputDevicesHelper {
 					continue;
 				} else if (knownId != null && hasDeviceId(devices, knownId)) {
 					mergedId = knownId;
+					for (int i = 0; i < mergeCandidates.size(); i++) {
+						if (Objects.equals(mergeCandidates.get(i).getId(), knownId)) {
+							mergeCandidates.remove(i);
+							break;
+						}
+					}
 				} else {
 					mergedId = mergeLegacyDevice(appMode, devices, mergeCandidates, globalIds, device);
 				}
