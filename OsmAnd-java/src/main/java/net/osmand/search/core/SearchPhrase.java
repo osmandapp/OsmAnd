@@ -192,7 +192,7 @@ public class SearchPhrase {
 		if (langs != null) {
 			String[] langArr = langs.split(",");
 			for (String lang : langArr) {
-				if (lang.equals("en")) {
+				if (lang.equals("en") || lang.equals("ms")) {
 					return true;
 				}
 			}
