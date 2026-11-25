@@ -329,7 +329,7 @@ public class QuickSearchHelper implements ResourceListener {
 			String baseGroupName = app.getString(R.string.shared_string_favorites);
 			List<FavoriteGroup> groups = app.getFavoritesHelper().getFavoriteGroups();
 			for (FavoriteGroup group : groups) {
-				if (group.isVisible()) {
+				if (app.getFavoritesHelper().isFolderVisible(group.getName())) {
 					SearchResult sr = new SearchResult(phrase);
 					sr.localeName = Algorithms.isEmpty(group.getName()) ? baseGroupName : group.getName();
 					sr.object = group;

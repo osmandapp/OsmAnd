@@ -119,13 +119,13 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		items.add(changeColorItem);
 
 		BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(group.isVisible())
+				.setChecked(helper.isFolderVisible(group.getName()))
 				.setIcon(getContentIcon(R.drawable.ic_map))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
 				.setOnClickListener(v -> {
-					boolean visible = !group.isVisible();
-					helper.updateGroupVisibility(group, visible, true);
+					boolean visible = !helper.isFolderVisible(group.getName());
+					helper.updateFolderVisibility(group.getName(), visible, true);
 					updateParentFragment();
 					dismiss();
 				})

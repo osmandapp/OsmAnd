@@ -731,7 +731,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					this.favoriteGroups.put(group, list);
 				}
 				if (!empty) {
-					if (group.isVisible()) {
+					if (helper.isFolderVisible(group.getName())) {
 						groups.add(group);
 					} else {
 						disablesGroups.add(group);
@@ -797,7 +797,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				fixBackgroundRepeat(row);
 			}
 			FavoriteGroup model = getGroup(groupPosition);
-			boolean visible = model.isVisible();
+			boolean visible = helper.isFolderVisible(model.getName());
 			int enabledColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);

@@ -163,7 +163,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
-			color = favoriteGroup.isVisible() ? (color | 0xff000000) : getColor(disabledColor);
+			color = app.getFavoritesHelper().isFolderVisible(favoriteGroup.getName()) ? (color | 0xff000000) : getColor(disabledColor);
 			Context context = view.getContext();
 			String name = context.getString(R.string.context_menu_points_of_group);
 			Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color);

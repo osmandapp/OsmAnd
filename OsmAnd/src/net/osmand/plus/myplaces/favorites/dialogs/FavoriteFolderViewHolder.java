@@ -76,7 +76,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 
 		title.setText(FavoriteFolderFormatter.getDisplayName(app, group.getName()));
 		description.setText(GpxUiHelper.getFavoriteFolderDescription(app, group));
-		bindAppearance(group);
+		bindAppearance(group, app.getFavoritesHelper().isFolderVisible(group.getName()));
 		AndroidUiHelper.updateVisibility(divider, showDivider);
 		AndroidUiHelper.updateVisibility(fullDivider, showFullDivider);
 
@@ -94,15 +94,18 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 
 		title.setText(FavoriteFolderFormatter.getDisplayName(app, folder.getFullPath()));
 		description.setText(getFolderDescription(folder));
-		bindAppearance(folder.getGroup());
+		bindAppearance(folder);
 		AndroidUiHelper.updateVisibility(divider, showDivider);
 		AndroidUiHelper.updateVisibility(fullDivider, showFullDivider);
 
 		bindSelectionMode(selectionMode, listener, folder);
 	}
 
-	private void bindAppearance(@Nullable FavoriteGroup group) {
-		boolean visible = group == null || group.isVisible();
+	private void bindAppearance(@NonNull FavoriteFolder folder) {
+		bindAppearance(folder.getGroup(), app.getFavoritesHelper().isFolderVisible(folder.getFullPath()));
+	}
+
+	private void bindAppearance(@Nullable FavoriteGroup group, boolean visible) {
 		title.setMaxLines(2);
 		if (visible) {
 			title.setTypeface(FontCache.getNormalFont());
@@ -112,7 +115,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		int color = group == null || group.getColor() == 0 ? getColor(app, R.color.color_favorite) : group.getColor();
 		int hiddenColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		if (group != null && group.isPinned()) {
-			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin, group.isVisible() ? color : hiddenColor));
+			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin, visible ? color : hiddenColor));
 		} else if (visible) {
 			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color));
 		} else {
@@ -122,7 +125,6 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 
 	@NonNull
 	private String getFolderDescription(@NonNull FavoriteFolder folder) {
-		FavoriteGroup group = folder.getGroup();
 		long lastModified = folder.getSubtreeLastModified();
 		int pointsCount = folder.getSubtreePointsCount();
 
@@ -137,7 +139,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		} else {
 			description = numberOfPoints;
 		}
-		if (group != null && !group.isVisible()) {
+		if (!app.getFavoritesHelper().isFolderVisible(folder.getFullPath())) {
 			String hidden = app.getString(R.string.shared_string_hidden);
 			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, hidden, description);
 		}
