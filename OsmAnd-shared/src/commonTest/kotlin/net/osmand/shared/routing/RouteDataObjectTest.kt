@@ -1,6 +1,7 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.util.KMapUtils
+import net.osmand.shared.util.KTransliterationHelper
 import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -120,6 +121,19 @@ class RouteDataObjectTest {
 		assertEquals("Main street", road.getName("fr"))
 		assertEquals("A1", road.getRef("", false, true))
 		assertEquals(3, road.getNames()?.size)
+	}
+
+	@Test
+	fun testTransliteratedNamePrefersEnglish() {
+		// #26647: German map language, Kyoto street with name:en but no name:de
+		val region = region("name" to null, "name:en" to null, "name:ja" to null)
+		val road = RouteDataObject(region, intArrayOf(1, 2, 3), arrayOf("河原町通", "Kawaramachi Street", "河原町通"))
+		assertEquals("Kawaramachi Street", road.getName("de", true))
+		assertEquals("河原町通", road.getName("de", false))
+		assertEquals("Kawaramachi Street", road.getName("en", true))
+		assertEquals("河原町通", road.getName("ja", true))
+		val noEn = RouteDataObject(region("name" to null), intArrayOf(1), arrayOf("Улица Ленина"))
+		assertEquals(KTransliterationHelper.transliterate("Улица Ленина"), noEn.getName("de", true))
 	}
 
 	@Test
