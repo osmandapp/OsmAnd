@@ -5497,4 +5497,9 @@
     <string name="terrain_shadows_relief_3d_footer">3D reljef je automatski omogućen, jer je potreban za renderovanje senki terena.</string>
     <string name="attach_to_track">Pričvrsti na stazu</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Stilovi isprekidanih i tačkastih linija nisu dostupni za 3D putanju.</string>
+    <string name="terrain_shadows_hillshade_footer">Senke terena su isključene dok teren prikazuje senku brda: Senka brda već senkira reljef.</string>
+    <string name="shadows_on_description">Senke na: zgrade bacaju senke od sunca.</string>
+    <string name="shadows_off_description">Senke isključene: zgrade su nacrtane bez senki.</string>
+    <string name="shared_string_new">Novo</string>
+    <string name="sun_light_live">Direktno</string>
 </resources>
