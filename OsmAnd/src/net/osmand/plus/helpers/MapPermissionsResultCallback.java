@@ -2,8 +2,10 @@ package net.osmand.plus.helpers;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 
 import net.osmand.data.LatLon;
@@ -14,6 +16,8 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 
 public class MapPermissionsResultCallback implements OnRequestPermissionsResultCallback {
 
@@ -25,6 +29,24 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 
 	public MapPermissionsResultCallback(@NonNull MapActivity activity) {
 		this.activity = activity;
+	}
+
+	/** Android 10 uses legacy external storage for the main data folder (see the manifest). */
+	public boolean requestStoragePermissionIfNeeded() {
+		OsmandApplication app = activity.getApp();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R || permissionDone
+				|| !app.isExternalStorageDirectoryReadOnly() || app.getAppInitializer().isFirstTime()
+				|| AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+			return false;
+		}
+		int storageType = app.getSettings().getExternalStorageDirectoryTypeV19();
+		if (storageType != -1 && storageType != OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT
+				&& storageType != OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED) {
+			return false;
+		}
+		ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+				DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+		return true;
 	}
 
 	@Override

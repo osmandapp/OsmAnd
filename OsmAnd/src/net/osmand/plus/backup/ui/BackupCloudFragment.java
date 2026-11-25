@@ -184,7 +184,7 @@ public class BackupCloudFragment extends BaseFullScreenFragment implements InApp
 		boolean showIntroductionItem = info != null && dialogType == LoginDialogType.SIGN_UP && !backupSaved
 				|| (dialogType == LoginDialogType.SIGN_IN && (backupSaved || !Algorithms.isEmpty(backup.getLocalFiles())));
 
-		if (showIntroductionItem) {
+		if (showIntroductionItem && status != BackupStatus.STORAGE_UNAVAILABLE) {
 			IntroductionCard introductionCard = new IntroductionCard(activity, dialogType);
 			introductionCard.setListener(this);
 			container.addView(introductionCard.build(view.getContext()));

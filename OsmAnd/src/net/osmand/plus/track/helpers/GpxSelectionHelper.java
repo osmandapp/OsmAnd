@@ -441,7 +441,7 @@ public class GpxSelectionHelper {
 			pendingRestoreRunning.set(false);
 			log.info("Restored selected GPX geometry in "
 					+ (System.currentTimeMillis() - pendingRestoreStartTime) + " ms");
-			app.getGpxDbHelper().startFilesystemReconciliation(!app.isExternalStorageDirectoryReadOnly());
+			app.getGpxDbHelper().startFilesystemReconciliation(app.getUnavailableStorageDirectoryAtStartup() == null);
 			return;
 		}
 

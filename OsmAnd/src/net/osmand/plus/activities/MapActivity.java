@@ -9,7 +9,6 @@ import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.settings.enums.ThemeUsageContext.MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,7 +29,6 @@ import android.widget.ProgressBar;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -66,7 +64,6 @@ import net.osmand.plus.chooseplan.TripltekPromoFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
@@ -109,6 +106,7 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.settings.datastorage.StorageUnavailableBottomSheet;
 import net.osmand.plus.settings.enums.PanelBackgroundMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -292,7 +290,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		InsetsUtils.processInsets(this, findViewById(R.id.drawer_layout), null, false);
 
-		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
+		if (app.getUnavailableStorageDirectoryAtStartup() == null && WhatsNewDialogFragment.shouldShowDialog(app)) {
 			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager(), app);
 			if (showed) {
 				SecondSplashScreenFragment.SHOW = false;
@@ -729,7 +727,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		dashboardOnMap.updateLocation(true, true, false);
 
-		if (!dashboardOnMap.isVisible()) {
+		boolean storageUnavailable = app.getUnavailableStorageDirectoryAtStartup() != null;
+		if (storageUnavailable) {
+			SecondSplashScreenFragment.SHOW = false;
+			if (fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null
+					&& (MapPermissionsResultCallback.permissionDone || !permissionsResultCallback.permissionAsked)
+					&& !permissionsResultCallback.requestStoragePermissionIfNeeded()) {
+				StorageUnavailableBottomSheet.showIfNeeded(fragmentManager);
+			}
+		} else if (!dashboardOnMap.isVisible()) {
 			if (RenderInitErrorBottomSheet.shouldShow(app)) {
 				SecondSplashScreenFragment.SHOW = false;
 				RenderInitErrorBottomSheet.showInstance(fragmentManager);
@@ -845,37 +851,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (intent != null && intent.hasExtra(FirstUsageWizardFragment.SHOW_OSMAND_WELCOME_SCREEN)) {
 			showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWizardFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
 		}
-		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
+		boolean showWelcomeScreen = !storageUnavailable && ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
 				&& settings.SHOW_OSMAND_WELCOME_SCREEN.get()
 				&& showOsmAndWelcomeScreen && !showStorageMigrationScreen;
 
-		if (!showWelcomeScreen && !MapPermissionsResultCallback.permissionDone && !app.getAppInitializer().isFirstTime()) {
-			if (!permissionsResultCallback.permissionAsked) {
-				if (app.isExternalStorageDirectoryReadOnly() && !showStorageMigrationScreen
-						&& fragmentManager.findFragmentByTag(SharedStorageWarningFragment.TAG) == null
-						&& fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
-					if (AndroidUtils.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-						Bundle args = new Bundle();
-						args.putBoolean(FIRST_USAGE, true);
-						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
-					} else {
-						ActivityCompat.requestPermissions(this,
-								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
-								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-					}
+		if (!showWelcomeScreen && !app.getAppInitializer().isFirstTime()
+				&& !MapPermissionsResultCallback.permissionDone && permissionsResultCallback.permissionAsked) {
+			if (permissionsResultCallback.permissionGranted) {
+				if (storageUnavailable) {
+					StorageUnavailableBottomSheet.acknowledgeForSession();
 				}
-			} else {
-				if (permissionsResultCallback.permissionGranted) {
-					RestartActivity.doRestart(this, getString(R.string.storage_permission_restart_is_required));
-				} else if (fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
-					Bundle args = new Bundle();
-					args.putBoolean(FIRST_USAGE, true);
-					BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
-				}
-				permissionsResultCallback.permissionAsked = false;
-				permissionsResultCallback.permissionGranted = false;
-				MapPermissionsResultCallback.permissionDone = true;
+				RestartActivity.doRestart(this, getString(R.string.storage_permission_restart_is_required));
+			} else if (fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null) {
+				Bundle args = new Bundle();
+				args.putBoolean(FIRST_USAGE, true);
+				BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 			}
+			permissionsResultCallback.permissionAsked = false;
+			permissionsResultCallback.permissionGranted = false;
+			MapPermissionsResultCallback.permissionDone = true;
 		}
 		if (isDrawerAvailable()) {
 			enableDrawer();
@@ -885,7 +879,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (showWelcomeScreen && FirstUsageWizardFragment.showInstance(this)) {
 			SecondSplashScreenFragment.SHOW = false;
-		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
+		} else if (!storageUnavailable && SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
 		}
 		if (fragmentsHelper.isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {

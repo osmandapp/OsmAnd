@@ -11,6 +11,9 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="storage_unavailable_title">Data folder unavailable</string>
+	<string name="storage_unavailable_description">OsmAnd could not access %1$s at startup and is using internal storage temporarily. Cloud sync is paused. Restore access to the folder and restart OsmAnd.</string>
+	<string name="storage_unavailable_cloud_description">Cloud sync is paused because your data folder was unavailable at startup. Restore access and restart OsmAnd.</string>
 	<string name="fullscreen_mode_also_hide">Also hide</string>
 	<string name="fullscreen_mode_status_bar">Status bar</string>
 	<string name="fullscreen_mode_status_bar_descr">Clock, notifications, battery</string>
