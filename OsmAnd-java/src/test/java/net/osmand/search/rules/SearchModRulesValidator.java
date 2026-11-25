@@ -239,17 +239,19 @@ final class SearchModRulesValidator {
 		private void parsePoiService(XmlPullParser parser) throws Exception {
 		String word = parser.getAttributeValue(null, "word");
 		String where = " (<service word=\"" + word + "\"> of " + file + ")";
-		checkAttributes(parser, Set.of("word", "tags", "name", "enabled"), "<service>", where);
+		checkAttributes(parser, Set.of("word", "tags", "name", "operator", "enabled"), "<service>", where);
 		if (word == null || word.isBlank()) {
 			throw new IllegalArgumentException("Missing word" + where);
 		}
 		checkTagSets(parser.getAttributeValue(null, "tags"), false, where);
-		String name = parser.getAttributeValue(null, "name");
-		if (name != null) {
-			try {
-				Pattern.compile(name);
-			} catch (PatternSyntaxException e) {
-				throw new IllegalArgumentException("Invalid name regexp '" + name + "'" + where, e);
+		for (String attribute : new String[] {"name", "operator"}) {
+			String regexp = parser.getAttributeValue(null, attribute);
+			if (regexp != null) {
+				try {
+					Pattern.compile(regexp);
+				} catch (PatternSyntaxException e) {
+					throw new IllegalArgumentException("Invalid " + attribute + " regexp '" + regexp + "'" + where, e);
+				}
 			}
 		}
 	}

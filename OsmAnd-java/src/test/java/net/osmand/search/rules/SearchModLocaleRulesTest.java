@@ -457,6 +457,23 @@ public class SearchModLocaleRulesTest {
 	}
 
 	@Test
+	public void poiServiceMatchesNameOrOperator() {
+		// the operator of a place is the service people know by the word, its name often is not (NJ MVC, NHS)
+		SearchModLocaleRules rules = of("<poi><service word=\"DMV\" tags=\"office=government\""
+				+ " name=\"\\bDMV\\b\" operator=\"motor vehicle\"/></poi>");
+		SearchModLocaleRules.PoiService dmv = rules.services().get(0);
+		assertTrue(dmv.matches(Map.of("office", "government"), "DMV Ridgewood Road Test Site"));
+		assertTrue(dmv.matches(Map.of("office", "government", "operator", "New Jersey Motor Vehicle Commission"),
+				"Lodi Licensing Center"));
+		assertTrue(dmv.matches(Map.of("office", "government", "operator", "Maryland Motor Vehicle Administration"), null));
+		assertFalse(dmv.matches(Map.of("office", "government", "operator", "City of Newark"), "Lodi Licensing Center"));
+		assertFalse(dmv.matches(Map.of("amenity", "townhall", "operator", "New Jersey Motor Vehicle Commission"), "DMV"));
+		assertTrue(dmv.matchesByName(Map.of("office", "government"), "DMV Ridgewood Road Test Site"));
+		assertFalse(dmv.matchesByName(Map.of("office", "government", "operator", "New Jersey Motor Vehicle Commission"),
+				"Lodi Licensing Center"));
+	}
+
+	@Test
 	public void mirrorPairWorksOnBothSides() {
 		SearchModLocaleRules rules = of("<rule object=\"street\" from=\"blvd\" to=\"Boulevard\"/>"
 				+ "<rule from=\"dr\" to=\"Doktor\"/>");

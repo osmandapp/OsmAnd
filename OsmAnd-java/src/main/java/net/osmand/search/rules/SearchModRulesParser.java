@@ -153,7 +153,8 @@ final class SearchModRulesParser {
 						parsePoiAbbreviation(parser);
 					} else if ("service".equals(tag) && enabled(parser)) {
 						PoiService service = PoiService.of(parser.getAttributeValue(null, "word"),
-								parser.getAttributeValue(null, "tags"), parser.getAttributeValue(null, "name"), file);
+								parser.getAttributeValue(null, "tags"), parser.getAttributeValue(null, "name"),
+								parser.getAttributeValue(null, "operator"), file);
 						layer.services.put(service.key(), service);
 					}
 				} else if (depth == 3 && "locales".equals(section) && locales != null) {
