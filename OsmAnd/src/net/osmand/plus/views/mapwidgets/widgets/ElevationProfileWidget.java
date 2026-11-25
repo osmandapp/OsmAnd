@@ -191,6 +191,8 @@ public class ElevationProfileWidget extends MapWidget {
 		updateVisibility(visible);
 		if (visible) {
 			updateInfoImpl();
+		} else {
+			clearTrackChartPoints();
 		}
 	}
 
@@ -254,7 +256,16 @@ public class ElevationProfileWidget extends MapWidget {
 		return routeChanged || slopesChanged;
 	}
 
+	private void clearTrackChartPoints() {
+		if (trackChartPoints != null) {
+			mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(null);
+			trackChartPoints = null;
+			mapActivity.refreshMap();
+		}
+	}
+
 	private void setupChart() {
+		clearTrackChartPoints();
 		gpx = GpxUiHelper.makeGpxFromLocations(route.getImmutableAllLocations(), app);
 		GpxTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
