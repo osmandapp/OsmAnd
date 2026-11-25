@@ -229,6 +229,7 @@ class AdditionalInfoBundleTest {
 			"wikipedia" to "en:City",
 			"wikipedia:en" to "en:Richmond",
 			"route:ref" to "A1",
+			"route_ref:de_lijn" to "1;2",
 			"operator:route_id" to "2",
 			"osm_tag_vendor:content_id" to "OSM",
 			"osmand:route_id" to "service",

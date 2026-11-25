@@ -106,16 +106,20 @@ class AdditionalInfoBundle(
 				continue
 			}
 			val strValue = value as? String
+			val isStoredKey = key in genericRowKeys
+			val matchesReservedKey = RESERVED_POI_KEYS.any { it in key }
+			if (matchesReservedKey && (!isStoredKey || !hasCustomNamespace(key))) {
+				continue
+			}
 
 			val resolvedType = resolvePoiType(category, key, strValue)
 			val additionalType = resolvedType.additionalType
 			val categoryType = resolvedType.categoryType
 			val hasPoiType = additionalType != null || categoryType != null
-			val useGenericFallback = !hasPoiType && key in genericRowKeys
-			val matchesReservedKey = RESERVED_POI_KEYS.any { it in key }
-			if (matchesReservedKey && (!useGenericFallback || !hasCustomNamespace(key))) {
+			if (matchesReservedKey && hasPoiType) {
 				continue
 			}
+			val useGenericFallback = !hasPoiType && isStoredKey
 			val isDescription = !matchesReservedKey && key.contains(Amenity.DESCRIPTION)
 			if (isDescription && MapPoiTypes.ROUTE_ARTICLE == get(SUBTYPE)) {
 				continue
@@ -351,7 +355,7 @@ class AdditionalInfoBundle(
 
 	private fun hasCustomNamespace(key: String): Boolean {
 		val prefix = key.substringBefore(':', "")
-		return prefix.isNotEmpty() && prefix !in RESERVED_POI_KEYS && getPoiAdditionalType(prefix, null) == null
+		return prefix.isNotEmpty() && RESERVED_POI_KEYS.none { it in prefix } && getPoiAdditionalType(prefix, null) == null
 	}
 
 	companion object {
