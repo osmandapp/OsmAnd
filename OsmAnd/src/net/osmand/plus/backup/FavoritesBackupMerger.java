@@ -330,8 +330,7 @@ final class FavoritesBackupMerger {
 				&& first.getCalendarEvent() == second.getCalendarEvent()
 				&& sameColor(first.getColor(), second.getColor(), defaultColor)
 				&& Objects.equals(first.getIconName(), second.getIconName())
-				&& first.getBackgroundType() == second.getBackgroundType()
-				&& first.isVisible() == second.isVisible();
+				&& first.getBackgroundType() == second.getBackgroundType();
 	}
 
 	private static boolean sameText(@Nullable String first, @Nullable String second) {

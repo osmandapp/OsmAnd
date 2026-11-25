@@ -253,9 +253,6 @@ public class FavoriteGroup {
 		for (WptPt point : pointsGroup.getPoints()) {
 			favoriteGroup.points.add(FavouritePoint.fromWpt(point));
 		}
-		if (!Algorithms.isEmpty(favoriteGroup.points)) {
-			favoriteGroup.visible = favoriteGroup.points.get(0).isVisible();
-		}
 		return favoriteGroup;
 	}
 

@@ -1036,6 +1036,7 @@ public class OsmandAidlApi {
 		}
 		FavoriteGroup group = favoritesHelper.addFavoriteGroup(name, color);
 		group.setVisible(visible);
+		favoritesHelper.applyFolderVisibility(group.getName());
 
 		return true;
 	}
