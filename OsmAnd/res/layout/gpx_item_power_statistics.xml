@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/top_line_blocks"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="13dp"
+		android:paddingBottom="11dp">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/average_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/average_power"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/average_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					app:typefaceWeight="medium"
+					tools:text="150 W" />
+
+			</LinearLayout>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/average_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="2dp"
+				app:srcCompat="@drawable/ic_action_sensor_bicycle_power_outlined" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_weight="1"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/max_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/max_power"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/max_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					app:typefaceWeight="medium"
+					tools:text="450 W" />
+
+			</LinearLayout>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/max_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="2dp"
+				app:srcCompat="@drawable/ic_action_sensor_bicycle_power_outlined" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/list_divider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_marginLeft="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_marginRight="@dimen/content_padding_small"
+			android:background="?attr/dashboard_divider" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/bottom_line_blocks"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="13dp"
+		android:paddingBottom="11dp">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/intensity_factor_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/intensity_factor"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/intensity_factor_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					app:typefaceWeight="medium"
+					tools:text="0.85" />
+
+			</LinearLayout>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/intensity_factor_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="2dp"
+				app:srcCompat="@drawable/ic_action_sensor_bicycle_power_outlined" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding_small"
+			android:layout_weight="1"
+			android:orientation="horizontal">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/tss_desc"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:text="@string/training_stress_score"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/tss_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:textColor="?android:attr/textColorPrimary"
+					android:textSize="@dimen/default_desc_text_size"
+					app:typefaceWeight="medium"
+					tools:text="150" />
+
+			</LinearLayout>
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/tss_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/poi_icon_size"
+				android:layout_marginTop="2dp"
+				app:srcCompat="@drawable/ic_action_sensor_bicycle_power_outlined" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

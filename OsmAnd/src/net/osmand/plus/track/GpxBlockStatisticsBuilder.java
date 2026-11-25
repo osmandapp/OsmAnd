@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.charts.GPXDataSetType.SENSOR_BIKE_POWER;
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.GPX;
 
 import android.graphics.drawable.Drawable;
@@ -27,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
+import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -264,6 +266,17 @@ public class GpxBlockStatisticsBuilder {
 						prepareDataDistanceCorrected(totalDistanceMoving);
 						break;
 					}
+					case GPX_TAB_ITEM_POWER: {
+						double avgPower = analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.AVG_SENSOR_POWER) != null ?
+								(Double) analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.AVG_SENSOR_POWER) : 0.0;
+						int maxPower = analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.MAX_SENSOR_POWER) != null ?
+								(Integer) analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.MAX_SENSOR_POWER) : 0;
+						String avg = OsmAndFormatter.getFormattedPower((float) avgPower, app);
+						String max = OsmAndFormatter.getFormattedPower((float) maxPower, app);
+						prepareDataAveragePower(avg);
+						prepareDataMaximumPower(max);
+						break;
+					}
 				}
 			}
 		}
@@ -305,6 +318,16 @@ public class GpxBlockStatisticsBuilder {
 	public void prepareDataMaximumSpeed(String max) {
 		prepareData(app.getString(R.string.max_speed), max,
 				R.drawable.ic_action_max_speed_16, GPXDataSetType.SPEED, null, ItemType.ITEM_SPEED);
+	}
+
+	public void prepareDataAveragePower(String avg) {
+		prepareData(app.getString(R.string.average_power), avg,
+				R.drawable.ic_action_sensor_bicycle_power_outlined, GPXDataSetType.SENSOR_BIKE_POWER, null, ItemType.ITEM_SPEED);
+	}
+
+	public void prepareDataMaximumPower(String max) {
+		prepareData(app.getString(R.string.max_power), max,
+				R.drawable.ic_action_sensor_bicycle_power_outlined, GPXDataSetType.SENSOR_BIKE_POWER, null, ItemType.ITEM_SPEED);
 	}
 
 	public void prepareDataTimeMoving(long timeMoving) {

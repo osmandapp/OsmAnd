@@ -2,12 +2,14 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
+import static net.osmand.plus.charts.GPXDataSetType.SENSOR_BIKE_POWER;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.GPX;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
+import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_POWER;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getDefaultTypes;
 import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getSavedSupportedTypes;
@@ -71,6 +73,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -89,6 +92,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private static final int[] SINGLE_TAB_LAYOUT_ID = {R.layout.center_button_container};
 	private static final int[] DOUBLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.right_button_container};
 	private static final int[] TRIPLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.center_button_container, R.layout.right_button_container};
+	private static final int[] QUADRUPLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.center_button_container, R.layout.center_button_container, R.layout.right_button_container};
 
 	private final OsmandApplication app;
 	private final MapActivity mapActivity;
@@ -222,6 +226,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			if (analysis.isSpeedSpecified()) {
 				tabTypeList.add(GPX_TAB_ITEM_SPEED);
 			}
+			if (analysis.hasData(PointAttributes.SENSOR_TAG_BIKE_POWER)) {
+				tabTypeList.add(GPX_TAB_ITEM_POWER);
+			}
 		}
 		tabTypes = tabTypeList.toArray(new GPXTabItemType[0]);
 	}
@@ -313,6 +320,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				case GPX_TAB_ITEM_SPEED:
 					setupSpeedTab(view, chart, position);
 					break;
+				case GPX_TAB_ITEM_POWER:
+					setupPowerTab(view, chart, position);
+					break;
 				case GPX_TAB_ITEM_NO_ALTITUDE:
 					setupNoAltitudeTab(view);
 					break;
@@ -377,6 +387,43 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
 		((ImageView) container.findViewById(R.id.distance_icon))
 				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
+	}
+
+	private void setupPowerTab(View view, com.github.mikephil.charting.charts.ElevationChart chart, int position) {
+		if (analysis != null && analysis.hasData(PointAttributes.SENSOR_TAG_BIKE_POWER)) {
+			if (analysis.hasData(PointAttributes.SENSOR_TAG_BIKE_POWER)) {
+				setupChartWithAppearance(chart);
+				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_POWER, SENSOR_BIKE_POWER, null)));
+				updateChart(chart);
+				chart.setVisibility(View.VISIBLE);
+			} else {
+				chart.setVisibility(View.GONE);
+			}
+			if (!hideStatistics) {
+				setupPowerStatisticsIcons(view, iconsCache);
+				setupJoinGapsInfo(view);
+			}
+		} else {
+			chart.setVisibility(View.GONE);
+			view.findViewById(R.id.top_line_blocks).setVisibility(View.GONE);
+			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
+			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
+		}
+		if (!hideStatistics) {
+			updateJoinGapsInfo(view, position);
+			updateActionButtonsRow(view, GPX_TAB_ITEM_POWER, false);
+		}
+	}
+
+	public static void setupPowerStatisticsIcons(@NonNull View container, @NonNull UiUtilities iconsCache) {
+		((ImageView) container.findViewById(R.id.average_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_sensor_bicycle_power_outlined));
+		((ImageView) container.findViewById(R.id.max_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_sensor_bicycle_power_outlined));
+		((ImageView) container.findViewById(R.id.intensity_factor_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_sensor_bicycle_power_outlined));
+		((ImageView) container.findViewById(R.id.tss_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_sensor_bicycle_power_outlined));
 	}
 
 	private void setupOptionsPopupMenu(TextView overflowMenu, boolean confirmDeletion) {
@@ -742,8 +789,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			layoutId = SINGLE_TAB_LAYOUT_ID[position];
 		} else if (count == 2) {
 			layoutId = DOUBLE_TABS_LAYOUT_IDS[position];
-		} else {
+		} else if (count == 3) {
 			layoutId = TRIPLE_TABS_LAYOUT_IDS[position];
+		} else {
+			layoutId = QUADRUPLE_TABS_LAYOUT_IDS[position];
 		}
 		ViewGroup tab = (ViewGroup) UiUtilities.getInflater(parent.getContext(), nightMode).inflate(layoutId, parent, false);
 		tab.setTag(tabTypes[position].name());
@@ -787,6 +836,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			if (index == 0) {
 				type = CustomRadioButtonType.START;
 			} else if (index == 2) {
+				type = CustomRadioButtonType.END;
+			}
+		} else if (count == 4) {
+			if (index == 0) {
+				type = CustomRadioButtonType.START;
+			} else if (index == 3) {
 				type = CustomRadioButtonType.END;
 			}
 		}
@@ -850,6 +905,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					updateAltitudeTabInfo(view, app, analysis);
 				} else if (tabType == GPX_TAB_ITEM_SPEED) {
 					updateSpeedTabInfo(view, app, analysis, joinSegments, generalTrack);
+				} else if (tabType == GPX_TAB_ITEM_POWER) {
+					updatePowerTabInfo(view, app, analysis);
 				}
 			}
 		}
@@ -903,6 +960,35 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		maxSpeedText.setText(OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app));
 		timeMovingText.setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
 		distanceText.setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
+	}
+
+	public static void updatePowerTabInfo(@NonNull View container, @NonNull OsmandApplication app,
+	                                      @NonNull GpxTrackAnalysis analysis) {
+		double avgPower = analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.AVG_SENSOR_POWER) != null ?
+				(Double) analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.AVG_SENSOR_POWER) : 0.0;
+		int maxPower = analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.MAX_SENSOR_POWER) != null ?
+				(Integer) analysis.getGpxParameter(net.osmand.shared.gpx.GpxParameter.MAX_SENSOR_POWER) : 0;
+		long timeSpan = analysis.getTimeSpan();
+
+		TextView averagePowerText = container.findViewById(R.id.average_text);
+		TextView maxPowerText = container.findViewById(R.id.max_text);
+		TextView intensityFactorText = container.findViewById(R.id.intensity_factor_text);
+		TextView tssText = container.findViewById(R.id.tss_text);
+
+		averagePowerText.setText(OsmAndFormatter.getFormattedPower((float) avgPower, app));
+		maxPowerText.setText(OsmAndFormatter.getFormattedPower((float) maxPower, app));
+
+		// Calculate Intensity Factor (assuming FTP of 250W as default)
+		float ftp = 250f; // Default FTP value
+		float intensityFactor = avgPower > 0 ? (float) (avgPower / ftp) : 0f;
+		intensityFactorText.setText(String.format("%.2f", intensityFactor));
+
+		// Calculate TSS (Training Stress Score)
+		// TSS = (time in seconds * Normalized Power * Intensity Factor) / (FTP * 3600) * 100
+		// For simplicity, we use avgPower as approximation for NP
+		float normalizedPower = (float) avgPower; // Simplified: using avg power as NP
+		float tss = (timeSpan / 1000f) * normalizedPower * intensityFactor / (ftp * 3600f) * 100f;
+		tssText.setText(String.format("%.0f", tss));
 	}
 
 	private void updateChart(LineChart chart) {
@@ -963,7 +1049,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				secondType = selectedMainSetTypes.get(1);
 			}
 		} else {
-			firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
+			firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : (tabTypes[position] == GPX_TAB_ITEM_POWER ? SENSOR_BIKE_POWER : ALTITUDE);
 			if (tabTypes[position] == GPX_TAB_ITEM_ALTITUDE) {
 				secondType = SLOPE;
 			} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {
