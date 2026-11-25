@@ -118,6 +118,7 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldHideVerticalWidgets() {
 		return isMapRouteInfoMenuVisible()
+				|| isInChoosingRoutesMode()
 				|| isExplorePlacesMode()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()

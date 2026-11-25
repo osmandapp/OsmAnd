@@ -305,7 +305,7 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
-			updateControlsVisibility(true, controller.isUseRouteInfoMenu());
+			updateControlsVisibility(true, isReturningToRouteInfo());
 		}
 	}
 
@@ -732,7 +732,7 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 
 	private void onDismiss() {
 		try {
-			if (controller != null && controller.isUseRouteInfoMenu() && !showWaypointOnMap) {
+			if (isReturningToRouteInfo()) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
 					mapActivity.getMapActions().showRouteInfoControlDialog();
@@ -741,6 +741,10 @@ public class WaypointsFragment extends BaseFullScreenFragment implements IContex
 		} catch (Exception e) {
 			//
 		}
+	}
+
+	private boolean isReturningToRouteInfo() {
+		return controller != null && controller.isUseRouteInfoMenu() && !showWaypointOnMap;
 	}
 
 	private void dismiss() {
