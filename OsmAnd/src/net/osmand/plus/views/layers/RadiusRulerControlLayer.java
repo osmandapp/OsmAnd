@@ -60,6 +60,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private static final float CIRCLE_ANGLE_STEP = 5;
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
 	private static final long COMPASS_REFRESH_INTERVAL_MS = 100L;
+	private static final long SAVED_WIDGETS_CHECK_INTERVAL_MS = 1000L;
+	private static final int CIRCLE_SAMPLES_COUNT = (int) (360 / CIRCLE_ANGLE_STEP);
 	private static final double CIRCLE_ANGLE_STEP_RADIANS = Math.toRadians(CIRCLE_ANGLE_STEP);
 	private static final double MAX_GLOBE_DISTANCE = Math.PI * MapUtils.HAVERSINE_EARTH_RADIUS_METERS;
 	private static final double MAX_VISIBLE_GLOBE_DISTANCE = MAX_GLOBE_DISTANCE / 2;
@@ -123,13 +125,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	private PointI location31;
 	private PointI screenPoint31;
-	private PointI elevatedLocation31;
 	private boolean heightmapsActive;
-	private boolean hasElevatedPoint;
-	private final PointF elevatedPixel = new PointF();
-	private boolean elevationShiftValid;
-	private float elevationShiftX;
-	private float elevationShiftY;
+	private final RulerTerrainShifts terrainShifts = new RulerTerrainShifts(CIRCLE_SAMPLES_COUNT);
+	private final LatLon[] circleLatLons = new LatLon[CIRCLE_SAMPLES_COUNT];
+
+	private ApplicationMode savedWidgetsAppMode;
+	private ScreenLayoutMode savedWidgetsLayoutMode;
+	private long savedWidgetsCheckTime;
+	private boolean savedRulerWidgetEnabled;
 
 	private long lastCompassRefreshTime;
 	@Nullable
@@ -305,7 +308,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			OsmandSettings settings = app.getSettings();
 			sphericalMap = hasMapRenderer() && settings.SPHERICAL_MAP.get();
 			currentCenterLatLon = getCenterLatLon(tb);
-			startElevationFallback(tb);
+			updateHeightmapsActive();
 			circleAttrs.updatePaints(app, drawSettings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
@@ -349,8 +352,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		MapActivity activity = getMapActivity();
 		if (activity == null) {
 			// Android Auto can show the map before the phone activity and its widgets exist
-			return isRulerWidgetEnabled();
+			return isSavedRulerWidgetEnabled();
 		}
+		savedWidgetsAppMode = null;
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
 
@@ -366,10 +370,23 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		return on;
 	}
 
-	private boolean isRulerWidgetEnabled() {
+	private boolean isSavedRulerWidgetEnabled() {
 		OsmandSettings settings = app.getSettings();
 		ApplicationMode appMode = settings.getApplicationMode();
 		ScreenLayoutMode layoutMode = getPhoneLayoutMode(settings);
+		long time = SystemClock.elapsedRealtime();
+		if (appMode != savedWidgetsAppMode || layoutMode != savedWidgetsLayoutMode
+				|| time - savedWidgetsCheckTime >= SAVED_WIDGETS_CHECK_INTERVAL_MS) {
+			savedWidgetsAppMode = appMode;
+			savedWidgetsLayoutMode = layoutMode;
+			savedWidgetsCheckTime = time;
+			savedRulerWidgetEnabled = isRulerWidgetSaved(settings, appMode, layoutMode);
+		}
+		return savedRulerWidgetEnabled;
+	}
+
+	private boolean isRulerWidgetSaved(@NonNull OsmandSettings settings, @NonNull ApplicationMode appMode,
+	                                   @Nullable ScreenLayoutMode layoutMode) {
 		List<String> visibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 		if (MapWidgetInfo.isEnabledForAppMode(app, RADIUS_RULER.id, appMode, visibility)) {
 			return true;
@@ -580,7 +597,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		int samplesCount = 0;
 		for (int bearing = -90; bearing <= 90; bearing += 180) {
 			LatLon latLon = calculateDestinationPoint(centerLatLon, distance, bearing, true);
-			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon, true);
+			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon, bearing, true);
 			if (screenPoint != null) {
 				radiusSum += MapUtils.getSqrtDistance(center.x, center.y, screenPoint.x, screenPoint.y);
 				samplesCount++;
@@ -632,9 +649,11 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		if (sphericalMap && !isVisibleGlobeDistance(distance)) {
 			return;
 		}
-		for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
-			LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, a, sphericalMap);
-			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon);
+		sampleCircle(distance);
+		for (int i = 0; i <= CIRCLE_SAMPLES_COUNT; i++) {
+			double bearing = getSampleBearing(i);
+			LatLon latLon = circleLatLons[i % CIRCLE_SAMPLES_COUNT];
+			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon, bearing);
 			if (screenPoint == null) {
 				drawCircleLines(canvas, attrs);
 				previousPoint = null;
@@ -654,6 +673,26 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			previousPoint = screenPoint;
 		}
 		drawCircleLines(canvas, attrs);
+	}
+
+	private void sampleCircle(double distance) {
+		MapRendererView mapRenderer = getMapRenderer();
+		boolean sampleTerrain = heightmapsActive && mapRenderer != null;
+		if (sampleTerrain) {
+			terrainShifts.startCircle(mapRenderer);
+		}
+		for (int i = 0; i < CIRCLE_SAMPLES_COUNT; i++) {
+			LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, getSampleBearing(i), sphericalMap);
+			circleLatLons[i] = latLon;
+			if (sampleTerrain && Math.abs(latLon.getLatitude()) <= MapUtils.MAX_LATITUDE) {
+				terrainShifts.setSample(i, MapUtils.get31TileNumberX(latLon.getLongitude()),
+						MapUtils.get31TileNumberY(latLon.getLatitude()));
+			}
+		}
+	}
+
+	private static double getSampleBearing(int sampleIndex) {
+		return -180 + sampleIndex * CIRCLE_ANGLE_STEP;
 	}
 
 	// Separate segments instead of a Path: the UI renderer rasterizes an antialiased stroked
@@ -822,7 +861,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		PointF previousPoint = null;
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, a, sphericalMap);
-			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon);
+			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon, a);
 			if (screenPoint == null) {
 				drawArrowArcPath(canvas);
 				arrowArc.reset();
@@ -927,7 +966,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			return null;
 		}
 		LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, angle, sphericalMap);
-		return getRulerPixelFromLatLon(tb, latLon);
+		return getRulerPixelFromLatLon(tb, latLon, angle);
 	}
 
 	private double getDistanceForPixelRadius(double pixelRadius, @NonNull RotatedTileBox tb) {
@@ -937,8 +976,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	}
 
 	@Nullable
-	private PointF getRulerPixelFromLatLon(@NonNull RotatedTileBox tb, @NonNull LatLon latLon) {
-		return getRulerPixelFromLatLon(tb, latLon, true);
+	private PointF getRulerPixelFromLatLon(@NonNull RotatedTileBox tb, @NonNull LatLon latLon, double bearing) {
+		return getRulerPixelFromLatLon(tb, latLon, bearing, true);
 	}
 
 	private boolean isProjectionDiscontinuity(@NonNull PointF previousPoint, @NonNull PointF currentPoint,
@@ -960,7 +999,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	@Nullable
 	private PointF getRulerPixelFromLatLon(@NonNull RotatedTileBox tb, @NonNull LatLon latLon,
-	                                      boolean allowOffscreen) {
+	                                      double bearing, boolean allowOffscreen) {
 		// Flat maps have no drawable surface beyond the Web Mercator latitude boundary.
 		double maxLatitude = sphericalMap ? 90 : MapUtils.MAX_LATITUDE;
 		if (Math.abs(latLon.getLatitude()) > maxLatitude) {
@@ -978,27 +1017,24 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		int x31 = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int y31 = MapUtils.get31TileNumberY(latLon.getLatitude());
 		if (sphericalMap) {
-			return getElevatedPixel(mapRenderer, x31, y31, allowOffscreen);
+			return getElevatedPixel(mapRenderer, x31, y31, bearing, allowOffscreen);
 		}
-		PointF pixel = getElevatedPixel(mapRenderer, x31, y31, true);
+		PointF pixel = getElevatedPixel(mapRenderer, x31, y31, bearing, true);
 		return pixel != null ? pixel : new PointF(tb.getPixXFrom31(x31, y31), tb.getPixYFrom31(x31, y31));
 	}
 
-	private void startElevationFallback(@NonNull RotatedTileBox tb) {
+	private void updateHeightmapsActive() {
 		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 		heightmapsActive = hasMapRenderer() && mapRendererContext != null && mapRendererContext.isHeightmapsActive();
-		hasElevatedPoint = false;
-		if (heightmapsActive) {
-			getRulerPixelFromLatLon(tb, currentCenterLatLon);
-		}
+		terrainShifts.reset();
 	}
 
 	@Nullable
-	private PointF getElevatedPixel(@NonNull MapRendererView mapRenderer, int x31, int y31, boolean allowOffscreen) {
+	private PointF getElevatedPixel(@NonNull MapRendererView mapRenderer, int x31, int y31, double bearing,
+	                                boolean allowOffscreen) {
 		if (location31 == null) { // PointI needs the native library, which loads after the layer is created
 			location31 = new PointI();
 			screenPoint31 = new PointI();
-			elevatedLocation31 = new PointI();
 		}
 		location31.setX(x31);
 		location31.setY(y31);
@@ -1007,27 +1043,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		}
 		PointF pixel = new PointF(screenPoint31.getX(), screenPoint31.getY());
 		if (heightmapsActive) {
-			if (mapRenderer.getLocationHeightInMeters(location31) > NativeUtilities.MIN_ALTITUDE_VALUE) {
-				hasElevatedPoint = true;
-				elevationShiftValid = false;
-				elevatedLocation31.setX(x31);
-				elevatedLocation31.setY(y31);
-				elevatedPixel.set(pixel);
-			} else if (hasElevatedPoint && calculateElevationShift(mapRenderer)) {
-				pixel.offset(elevationShiftX, elevationShiftY);
-			}
+			terrainShifts.applyShift(x31, y31, bearing, pixel);
 		}
 		return pixel;
-	}
-
-	private boolean calculateElevationShift(@NonNull MapRendererView mapRenderer) {
-		if (!elevationShiftValid
-				&& mapRenderer.getScreenPointFromLocation(elevatedLocation31, screenPoint31, true)) {
-			elevationShiftX = elevatedPixel.x - screenPoint31.getX();
-			elevationShiftY = elevatedPixel.y - screenPoint31.getY();
-			elevationShiftValid = true;
-		}
-		return elevationShiftValid;
 	}
 
 	@NonNull
