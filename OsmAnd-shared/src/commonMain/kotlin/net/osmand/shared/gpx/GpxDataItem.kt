@@ -43,7 +43,7 @@ class GpxDataItem private constructor(
 	}
 
 	fun copyData(item: GpxDataItem) {
-		for (entry in item.map.entries) {
+		for (entry in item.map.block { it.toMap() }.entries) {
 			val parameter = entry.key
 			if (parameter !in listOf(
 					GpxParameter.FILE_NAME,
