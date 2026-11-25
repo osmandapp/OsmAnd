@@ -77,7 +77,9 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	fun isFilesystemReconciliationComplete() = reconciliationComplete.value
 
-	fun startFilesystemReconciliation() {
+	fun startFilesystemReconciliation() = startFilesystemReconciliation(true)
+
+	fun startFilesystemReconciliation(storageAvailable: Boolean) {
 		if (!initialized.value || reconciliationAttempted.value ||
 				!reconciliationRunning.compareAndSet(expected = false, new = true)) {
 			return
@@ -85,8 +87,12 @@ object GpxDbHelper : GpxReaderAdapter {
 		reconciliationAttempted.value = true
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
-				reconcileFilesystem()
-				reconciliationComplete.value = true
+				if (storageAvailable) {
+					reconcileFilesystem()
+					reconciliationComplete.value = true
+				} else {
+					log.warn("Skip GPX filesystem reconciliation: data folder is not available")
+				}
 			} catch (error: Throwable) {
 				log.error("Failed to reconcile GPX database with filesystem", error)
 			} finally {
@@ -118,6 +124,12 @@ object GpxDbHelper : GpxReaderAdapter {
 			}
 		}
 
+		val mostFilesMissing = missingFiles.size * 2 > dataSnapshot.size
+		if (mostFilesMissing) {
+			log.warn("Keep GPX rows: ${missingFiles.size} of ${dataSnapshot.size} files not found, " +
+					"data folder looks unavailable")
+			missingFiles.clear()
+		}
 		val filesToRemove = missingFiles.filterTo(mutableSetOf()) { file ->
 			val snapshotItem = dataSnapshot[file]
 			dataItems[file] === snapshotItem &&
@@ -135,7 +147,7 @@ object GpxDbHelper : GpxReaderAdapter {
 
 		var removedDirRows = 0
 		dirSnapshot.forEach { (file, snapshotItem) ->
-			if (dirItems[file] === snapshotItem &&
+			if (!mostFilesMissing && dirItems[file] === snapshotItem &&
 					(!isInsideGpxRoot(file, gpxRoot) || !file.exists())) {
 				if (database.remove(file)) {
 					removeFromCache(file)
