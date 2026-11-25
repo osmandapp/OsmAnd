@@ -147,6 +147,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_VEHICLE_METRICS = "osmand.vehicle.metrics";
 	String PLUGIN_WEATHER = "osmand.weather";
 	String PLUGIN_ASTRONOMY = "osmand.astronomy";
+	String PLUGIN_FUEL_PRICES = "osmand.fuel_prices";
 
 	//Settings:
 	String SETTINGS_ID = "settings.";
