@@ -124,12 +124,6 @@ object GpxDbHelper : GpxReaderAdapter {
 			}
 		}
 
-		val mostFilesMissing = missingFiles.size * 2 > dataSnapshot.size
-		if (mostFilesMissing) {
-			log.warn("Keep GPX rows: ${missingFiles.size} of ${dataSnapshot.size} files not found, " +
-					"data folder looks unavailable")
-			missingFiles.clear()
-		}
 		val filesToRemove = missingFiles.filterTo(mutableSetOf()) { file ->
 			val snapshotItem = dataSnapshot[file]
 			dataItems[file] === snapshotItem &&
@@ -147,7 +141,7 @@ object GpxDbHelper : GpxReaderAdapter {
 
 		var removedDirRows = 0
 		dirSnapshot.forEach { (file, snapshotItem) ->
-			if (!mostFilesMissing && dirItems[file] === snapshotItem &&
+			if (dirItems[file] === snapshotItem &&
 					(!isInsideGpxRoot(file, gpxRoot) || !file.exists())) {
 				if (database.remove(file)) {
 					removeFromCache(file)
