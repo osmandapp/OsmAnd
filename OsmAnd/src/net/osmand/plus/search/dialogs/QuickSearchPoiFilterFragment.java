@@ -64,6 +64,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -106,6 +107,8 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	private final ArrayList<String> collapsedCategories = new ArrayList<>();
 	private final ArrayList<String> showAllCategories = new ArrayList<>();
 	private final Set<String> showAllCountedCategories = new TreeSet<>();
+	// Groups a count collapsed for having no places: expanded again when a recount (another typed name) finds places
+	private final Set<String> countCollapsedCategories = new HashSet<>();
 	private final Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 	// Places around with a value (by key name) and with any value of a category, null until counted
 	private Map<String, Integer> placesCounts;
@@ -368,12 +371,20 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 					categoryPlacesCounts = categoryCounts;
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						String category = entry.getKey();
-						if (!category.isEmpty() && getCategoryPlacesCount(category) == 0 && getPoiAdditionalsWithPlaces(entry.getValue()).isEmpty()
-								&& !collapsedCategories.contains(category)) {
-							collapsedCategories.add(category);
+						if (category.isEmpty()) {
+							continue;
+						}
+						if (getCategoryPlacesCount(category) == 0 && getPoiAdditionalsWithPlaces(entry.getValue()).isEmpty()) {
+							if (!countCollapsedCategories.contains(category) && !collapsedCategories.contains(category)) {
+								collapsedCategories.add(category);
+								countCollapsedCategories.add(category);
+							}
+						} else if (countCollapsedCategories.remove(category)) {
+							collapsedCategories.remove(category);
 						}
 					}
-					if (!collapsedCategories.contains(OTHER_CATEGORIES)) {
+					// Other starts collapsed, a recount keeps it as the user left it
+					if (countCollapsedCategories.add(OTHER_CATEGORIES) && !collapsedCategories.contains(OTHER_CATEGORIES)) {
 						collapsedCategories.add(OTHER_CATEGORIES);
 					}
 					String places = getString(R.string.ltr_or_rtl_combine_via_colon,
