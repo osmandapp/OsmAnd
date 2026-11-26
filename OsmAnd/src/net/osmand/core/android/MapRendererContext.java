@@ -467,7 +467,13 @@ public class MapRendererContext {
 		if (showDebugPrimivitisationTiles) {
 			obfMapRasterLayerProvider = new MapPrimitivesMetricsLayerProvider(mapPrimitivesProvider);
 		} else {
-			obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground, false, true);
+			MapRasterLayerProvider_Software rasterLayerProvider = new MapRasterLayerProvider_Software(
+					mapPrimitivesProvider, providerType.fillBackground, false, true);
+			if (providerType == ProviderType.MAIN) {
+				File cacheFile = new File(app.getCacheDir(), "obf_raster_cache.sqlite");
+				rasterLayerProvider.setLocalCache(cacheFile.getAbsolutePath());
+			}
+			obfMapRasterLayerProvider = rasterLayerProvider;
 		}
 		// In case there's bound view and configured layer, perform setup
 		MapRendererView mapRendererView = this.mapRendererView;
