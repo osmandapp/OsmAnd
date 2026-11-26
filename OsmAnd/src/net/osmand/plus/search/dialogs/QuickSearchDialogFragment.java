@@ -3332,7 +3332,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			return false;
 		}
 		SearchResult searchResult = item.getSearchResult();
-		return searchResult == null || searchResult.objectType != ObjectType.SUGGESTION;
+		return searchResult != null && searchResult.object instanceof MapObject;
 	}
 
 	void onMainListChanged() {
