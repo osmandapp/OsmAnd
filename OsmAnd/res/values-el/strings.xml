@@ -5331,8 +5331,6 @@
     <string name="free_region_other_regions_need_maps_plus">Άλλες περιοχές χρειάζονται το Maps+: %1$s</string>
     <string name="visualization">Οπτικοποίηση</string>
     <string name="terrain_shadows">Σκιές εδάφους</string>
-    <string name="terrain_shadows_description">Δυναμική σκίαση για το 3D έδαφος σε πραγματικό χρόνο. Επισημαίνει τη γεωμετρία του τοπίου με ελάχιστο αντίκτυπο στην απόδοση.</string>
-    <string name="terrain_shadows_relief_3d_footer">Το 3D Ανάγλυφο έχει ενεργοποιηθεί αυτομάτως, αφού απαιτείται για την απεικόνιση των Σκιών εδάφους.</string>
     <string name="rendering_attr_hideNoLNAM_name">Θαλάσσιες σημάνσεις OSM (μερικές)</string>
     <string name="rendering_attr_hideNoLNAM_description">Απόκρυψη θαλάσσιων σημάνσεων OSM (μερικών)</string>
     <string name="attach_to_track">Προσκόλληση σε ίχνος</string>

@@ -5493,7 +5493,5 @@
     <string name="free_region_other_regions_need_maps_plus">Ostalim regionima su potrebne Mape+: %1$s</string>
     <string name="visualization">Vizuelizacija</string>
     <string name="terrain_shadows">Senke terena</string>
-    <string name="terrain_shadows_description">Dinamičko senčenje u realnom vremenu za 3D teren. Ističe geometriju pejzaža uz minimalan uticaj na performanse.</string>
-    <string name="terrain_shadows_relief_3d_footer">3D reljef je automatski omogućen, jer je potreban za renderovanje senki terena.</string>
     <string name="attach_to_track">Pričvrsti na stazu</string>
 </resources>

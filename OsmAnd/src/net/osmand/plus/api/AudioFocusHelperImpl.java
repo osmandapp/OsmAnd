@@ -31,19 +31,20 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		OsmandApplication application = (OsmandApplication) context.getApplicationContext();
 		ApplicationMode routingAppMode = application.getRoutingHelper().getAppMode();
+		// #26847: on some head units the prompts of an Android Auto connection stay silent until Android Auto itself
+		// loses and regains the audio focus. A transient request does that; with no music on the phone it pauses nothing.
+		boolean carWithoutMusic = application.getCarNavigationSession() != null && !mAudioManager.isMusicActive();
+		int focusGain = carWithoutMusic || application.getSettings().INTERRUPT_MUSIC.getModeValue(routingAppMode)
+				? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK;
 		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
 			playbackAuthorized = AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this,
-					application.getSettings().AUDIO_MANAGER_STREAM.getModeValue(routingAppMode),
-					application.getSettings().INTERRUPT_MUSIC.getModeValue(routingAppMode)
-					? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
+					application.getSettings().AUDIO_MANAGER_STREAM.getModeValue(routingAppMode), focusGain);
 		} else {
 			AudioAttributes mAudioAttributes = new AudioAttributes.Builder()
 					.setUsage(application.getSettings().AUDIO_USAGE[application.getSettings().AUDIO_MANAGER_STREAM.getModeValue(routingAppMode)].get())
 					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 					.build();
-			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(
-					application.getSettings().INTERRUPT_MUSIC.getModeValue(routingAppMode)
-					? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
+			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(focusGain)
 					.setAudioAttributes(mAudioAttributes)
 					.setAcceptsDelayedFocusGain(false)
 					.setOnAudioFocusChangeListener(this)

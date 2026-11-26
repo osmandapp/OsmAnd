@@ -20,6 +20,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -61,11 +62,13 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	private View liveRows;
 	private TextView liveAzimuthValue;
 	private TextView liveAltitudeValue;
+	private TextView liveTimeValue;
 
 	private View dateRows;
 	private TextView dateValue;
 	private TextView timeValue;
 	private Slider timeSlider;
+	private TextView dateAnglesValue;
 
 	private View manualRows;
 	private TextView azimuthValue;
@@ -73,13 +76,14 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	private TextView altitudeValue;
 	private Slider altitudeSlider;
 
-	/* Live shows the sun of the current minute */
+	/* Live shows the sun and the date and time of the current minute; the next refresh comes
+	   when the minute changes, so the time row follows the clock */
 	private final Runnable liveRefresh = new Runnable() {
 		@Override
 		public void run() {
 			if (content != null && isAdded() && controller.getMode() == SunLightMode.LIVE) {
 				updateLiveRows();
-				content.postDelayed(this, LIVE_REFRESH_INTERVAL_MS);
+				content.postDelayed(this, LIVE_REFRESH_INTERVAL_MS - System.currentTimeMillis() % LIVE_REFRESH_INTERVAL_MS);
 			}
 		}
 	};
@@ -120,11 +124,18 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		liveRows = content.findViewById(R.id.live_rows);
 		liveAzimuthValue = content.findViewById(R.id.live_azimuth_value);
 		liveAltitudeValue = content.findViewById(R.id.live_altitude_value);
+		liveTimeValue = content.findViewById(R.id.live_time_value);
 
 		dateRows = content.findViewById(R.id.date_rows);
 		dateValue = content.findViewById(R.id.date_value);
 		timeValue = content.findViewById(R.id.time_value);
 		timeSlider = content.findViewById(R.id.time_slider);
+		dateAnglesValue = content.findViewById(R.id.date_angles_value);
+		/* a landscape phone has no height for the time row and the angles caption, the panel stays as without them */
+		if (!AndroidUiHelper.isPortrait(requireActivity()) && !AndroidUiHelper.isTablet(requireActivity())) {
+			AndroidUiHelper.updateVisibility(content.findViewById(R.id.live_time_row), false);
+			AndroidUiHelper.updateVisibility(dateAnglesValue, false);
+		}
 
 		manualRows = content.findViewById(R.id.manual_rows);
 		azimuthValue = content.findViewById(R.id.azimuth_value_tv);
@@ -178,6 +189,7 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 				ZonedDateTime changed = current.with(LocalTime.of(minutes / 60, minutes % 60));
 				controller.setTime(changed.toInstant().toEpochMilli());
 				timeValue.setText(formatMinutes(value));
+				updateDateAngles();
 				onChanged();
 			}
 		});
@@ -232,8 +244,11 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 
 	private void updateLiveRows() {
 		SunLight.Angles angles = controller.getSunAngles();
-		liveAzimuthValue.setText(formatAzimuth((int) Math.round(angles.getAzimuth()) % 360));
-		liveAltitudeValue.setText(formatAltitude((int) Math.round(angles.getAltitude())));
+		liveAzimuthValue.setText(formatSunAzimuth(angles));
+		liveAltitudeValue.setText(formatSunAltitude(angles));
+		Date now = new Date();
+		liveTimeValue.setText(getString(R.string.ltr_or_rtl_combine_via_comma,
+				OsmAndFormatter.getDateFormat(requireContext()).format(now), DateFormat.getTimeFormat(requireContext()).format(now)));
 	}
 
 	private void bindDate() {
@@ -242,6 +257,15 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		int minutes = time.getHour() * 60 + time.getMinute();
 		timeSlider.setValue(minutes);
 		timeValue.setText(formatMinutes(minutes));
+		updateDateAngles();
+	}
+
+	/* one line under the time slider: the sun at the chosen date and time */
+	private void updateDateAngles() {
+		SunLight.Angles angles = controller.getSunAngles();
+		String azimuth = getString(R.string.ltr_or_rtl_combine_via_space, getString(R.string.shared_string_azimuth), formatSunAzimuth(angles));
+		String altitude = getString(R.string.ltr_or_rtl_combine_via_space, getString(R.string.altitude), formatSunAltitude(angles));
+		dateAnglesValue.setText(getString(R.string.ltr_or_rtl_combine_via_bold_point, azimuth, altitude));
 	}
 
 	private void bindManual() {
@@ -334,6 +358,16 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		int value = Math.round(minutes);
 		ZonedDateTime time = ZonedDateTime.now().with(LocalTime.of(value / 60, value % 60));
 		return DateFormat.getTimeFormat(requireContext()).format(Date.from(time.toInstant()));
+	}
+
+	@NonNull
+	private String formatSunAzimuth(@NonNull SunLight.Angles angles) {
+		return formatAzimuth((int) Math.round(angles.getAzimuth()) % 360);
+	}
+
+	@NonNull
+	private String formatSunAltitude(@NonNull SunLight.Angles angles) {
+		return formatAltitude((int) Math.round(angles.getAltitude()));
 	}
 
 	@NonNull

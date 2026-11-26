@@ -22,7 +22,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/content_padding_small">
 
-			<!-- Live: the sun of this minute, nothing to change -->
+			<!-- Live: the sun of this minute, nothing to change; the time comes last, as the angles caption in Date -->
 			<LinearLayout
 				android:id="@+id/live_rows"
 				android:layout_width="match_parent"
@@ -78,6 +78,33 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_list_text_size"
 						tools:text="24°" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/live_time_row"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:minHeight="@dimen/context_menu_action_buttons_h"
+					android:orientation="horizontal"
+					android:paddingHorizontal="@dimen/content_padding">
+
+					<TextView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:text="@string/shared_string_time"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size" />
+
+					<TextView
+						android:id="@+id/live_time_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_list_text_size"
+						tools:text="11/23/26, 10:51 AM" />
 
 				</LinearLayout>
 
@@ -155,6 +182,16 @@
 						android:layout_marginHorizontal="@dimen/content_padding"
 						android:saveEnabled="false"
 						android:stepSize="1.0" />
+
+					<!-- The sun at the chosen time, the same angles as the Live rows -->
+					<TextView
+						android:id="@+id/date_angles_value"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						tools:text="Azimuth 157°, SE • Altitude 14°" />
 
 				</LinearLayout>
 

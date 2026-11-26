@@ -5870,7 +5870,5 @@
     <string name="duplicate_map_standard_exists_desc">Você já possui o mapa padrão para %1$s. Baixar o mapa apenas de estradas resultará na duplicação de dados e poderá prejudicar o desempenho.\n\nA substituição removerá os dados de pesquisa de endereços e de pontos de interesse (POI) incluídos no mapa padrão.</string>
     <string name="visualization">Visualização</string>
     <string name="terrain_shadows">Sombras do terreno</string>
-    <string name="terrain_shadows_description">Sombreamento dinâmico em tempo real para terrenos 3D. Realça a geometria da paisagem com impacto mínimo no desempenho.</string>
     <string name="cast_shadows">Sombras</string>
-    <string name="terrain_shadows_relief_3d_footer">O relevo 3D é ativado automaticamente, pois é necessário para renderizar as sombras do terreno.</string>
 </resources>
