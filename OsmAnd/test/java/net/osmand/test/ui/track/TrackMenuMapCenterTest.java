@@ -32,6 +32,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -54,6 +56,8 @@ import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.search.ShowQuickSearchMode;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
@@ -815,6 +819,138 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		} finally {
 			setRotation(rotation);
 		}
+	}
+
+	@Test
+	public void testBackFromAddWaypointHidesTemporarilySelectedTrack() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		assertBackFromAddWaypointHidesTemporarilySelectedTrack();
+	}
+
+	@Test
+	public void testBackFromAddWaypointHidesTrackWhileSearchIsHidden() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		scenarioRule.getScenario().onActivity(activity ->
+				activity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW, false));
+		awaitTrackMenuSettled();
+		scenarioRule.getScenario().onActivity(activity -> {
+			QuickSearchDialogFragment search = activity.getFragmentsHelper().getQuickSearchDialogFragment();
+			assertNotNull("Search is not open", search);
+			search.hide();
+		});
+		awaitTrackMenuSettled();
+		try {
+			assertBackFromAddWaypointHidesTemporarilySelectedTrack();
+		} finally {
+			scenarioRule.getScenario().onActivity(activity -> activity.getFragmentsHelper().closeQuickSearch());
+		}
+	}
+
+	private void assertBackFromAddWaypointHidesTemporarilySelectedTrack() throws Throwable {
+		scenarioRule.getScenario().onActivity(activity -> TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		onTrackMenu(fragment -> fragment.setTemporarySelected(true));
+		try {
+			clickViewWithId(R.id.action_points);
+			awaitTrackMenuSettled();
+			Espresso.onView(ViewMatchers.withId(R.id.add_waypoint_button)).perform(ViewActions.scrollTo(), ViewActions.click());
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity ->
+					assertTrue("Add Waypoint mode is not on", activity.getMapLayers().getContextMenuLayer().isInAddGpxPointMode()));
+			onTrackMenu(fragment -> assertTrue("The track menu is not hidden in Add Waypoint mode", fragment.isHidden()));
+			String path = selectedGpxFile.getGpxFile().getPath();
+			Espresso.pressBackUnconditionally();
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity ->
+					assertFalse("Back did not quit Add Waypoint mode", activity.getMapLayers().getContextMenuLayer().isInAddGpxPointMode()));
+			Fragment[] trackMenuCheck = new Fragment[1];
+			scenarioRule.getScenario().onActivity(activity ->
+					trackMenuCheck[0] = activity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG));
+			if (trackMenuCheck[0] != null) {
+				Espresso.pressBackUnconditionally();
+				awaitTrackMenuSettled();
+			}
+			scenarioRule.getScenario().onActivity(activity -> {
+				FragmentManager manager = activity.getSupportFragmentManager();
+				assertNull("Back did not close the track menu, fragments " + manager.getFragments(),
+						manager.findFragmentByTag(TrackMenuFragment.TAG));
+				assertNull("Back did not hide the track that was not shown on the map",
+						app.getSelectedGpxHelper().getSelectedFileByPath(path));
+			});
+		} finally {
+			scenarioRule.getScenario().onActivity(activity -> {
+				if (activity.getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
+					activity.getMapLayers().getContextMenuLayer().getAddGpxPointBottomSheetHelper().hide();
+					activity.getMapLayers().getContextMenuLayer().quitAddGpxPoint();
+				}
+			});
+		}
+	}
+
+	@Test
+	public void testBackAfterPlanRouteDoneHidesTemporarilySelectedTrack() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		scenarioRule.getScenario().onActivity(activity -> TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		onTrackMenu(fragment -> fragment.setTemporarySelected(true));
+		onTrackMenu(fragment -> fragment.openPlanRoute(0, MeasurementToolFragment.PLAN_ROUTE_MODE));
+		awaitTrackMenuSettled();
+		String path = selectedGpxFile.getGpxFile().getPath();
+		boolean[] doneShown = new boolean[1];
+		scenarioRule.getScenario().onActivity(activity -> doneShown[0] = activity.findViewById(R.id.widget_top_bar_save).isShown());
+		assumeTrue("Plan route shows its Done button in the top toolbar", doneShown[0]);
+		clickViewWithId(R.id.widget_top_bar_save);
+		awaitTrackMenuSettled();
+		scenarioRule.getScenario().onActivity(activity ->
+				assertNull("Done did not close Plan route", activity.getFragmentsHelper().getMeasurementToolFragment()));
+		onTrackMenu(fragment -> assertTrue("Done showed the hidden track menu", fragment.isHidden()));
+		Espresso.pressBackUnconditionally();
+		awaitTrackMenuSettled();
+		Fragment[] trackMenuCheck = new Fragment[1];
+		scenarioRule.getScenario().onActivity(activity ->
+				trackMenuCheck[0] = activity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG));
+		if (trackMenuCheck[0] != null) {
+			Espresso.pressBackUnconditionally();
+			awaitTrackMenuSettled();
+		}
+		scenarioRule.getScenario().onActivity(activity -> {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			assertNull("Back did not close the track menu, fragments " + manager.getFragments(),
+					manager.findFragmentByTag(TrackMenuFragment.TAG));
+			assertNull("Back did not hide the track that was not shown on the map",
+					app.getSelectedGpxHelper().getSelectedFileByPath(path));
+		});
+	}
+
+	@Test
+	public void testBackInPlanRouteAfterGpsFilterClosesPlanRoute() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		scenarioRule.getScenario().onActivity(activity -> TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		onTrackMenu(fragment -> fragment.openPlanRoute(0, MeasurementToolFragment.PLAN_ROUTE_MODE));
+		awaitTrackMenuSettled();
+		scenarioRule.getScenario().onActivity(activity ->
+				activity.getFragmentsHelper().getMeasurementToolFragment().gpsFilterOnClick());
+		awaitTrackMenuSettled();
+		Espresso.pressBackUnconditionally();
+		awaitTrackMenuSettled();
+		scenarioRule.getScenario().onActivity(activity -> {
+			assertNull("Back did not close GPS filter", activity.getSupportFragmentManager().findFragmentByTag(GpsFilterFragment.TAG));
+			assertNotNull("Back from GPS filter closed Plan route", activity.getFragmentsHelper().getMeasurementToolFragment());
+		});
+		boolean[] planRouteOpen = {true};
+		for (int i = 0; i < 2 && planRouteOpen[0]; i++) {
+			Espresso.pressBackUnconditionally();
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity ->
+					planRouteOpen[0] = activity.getFragmentsHelper().getMeasurementToolFragment() != null);
+		}
+		assertFalse("Back in Plan route after GPS filter did not close Plan route", planRouteOpen[0]);
+		onTrackMenu(fragment -> assertFalse("Plan route closed without showing the hidden track menu", fragment.isHidden()));
 	}
 
 	private void openPlanRoute(@NonNull MapActivity activity) {

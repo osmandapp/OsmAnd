@@ -57,6 +57,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -236,7 +237,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
-	private OnBackPressedCallback backPressedCallback;
 	private boolean menuTypeChanged;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
@@ -441,8 +441,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		backPressedCallback = new OnBackPressedCallback(!isHidden()) {
+		OnBackPressedCallback backPressedCallback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
+				if (isHidden() && isOtherFragmentVisible()) {
+					setEnabled(false);
+					requireMyActivity().getOnBackPressedDispatcher().onBackPressed();
+					setEnabled(true);
+					return;
+				}
 				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
 					openMenuHeaderOnly();
 				} else {
@@ -466,6 +472,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			}
 		};
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
+	}
+
+	private boolean isOtherFragmentVisible() {
+		for (Fragment fragment : getParentFragmentManager().getFragments()) {
+			View view = fragment.getView();
+			if (fragment != this && fragment.isVisible() && view != null && view.isShown()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -984,9 +1000,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onHiddenChanged(boolean hidden) {
 		super.onHiddenChanged(hidden);
-		if (backPressedCallback != null) {
-			backPressedCallback.setEnabled(!hidden);
-		}
 		if (isResumed()) {
 			updateTrackMenuVisibilityState(hidden);
 		}
