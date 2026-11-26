@@ -303,7 +303,9 @@ public class ResourceManager {
 
 	@NonNull
 	public DateFormat getDateFormat() {
-		return new SimpleDateFormat(DATE_TIME_PATTERN, Locale.US);
+		SimpleDateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format;
 	}
 
 	@NonNull
