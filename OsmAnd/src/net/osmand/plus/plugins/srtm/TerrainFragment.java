@@ -15,6 +15,7 @@ import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -208,10 +209,21 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 				if (existing == null) {
 					reliefBuildingsRows.addView(view);
 					AndroidUtils.setBackground(view, UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f));
+					alignToScreenKeyline(view);
 				}
 				view.setOnClickListener(v -> onReliefOrBuildingsRowClick(v, item));
 			}
 		});
+	}
+
+	/* the Configure map row puts its text and divider at 56 dp, the rest of this screen at 72 dp */
+	private void alignToScreenKeyline(@NonNull View row) {
+		int keyline = getDimensionPixelSize(R.dimen.divider_color_light_margin_start);
+		int iconEnd = getDimensionPixelSize(R.dimen.content_padding) + getDimensionPixelSize(R.dimen.standard_icon_size);
+		View textWrapper = row.findViewById(R.id.text_wrapper);
+		((MarginLayoutParams) textWrapper.getLayoutParams()).setMarginStart(keyline - iconEnd);
+		View divider = row.findViewById(R.id.divider);
+		((MarginLayoutParams) divider.getLayoutParams()).setMarginStart(keyline);
 	}
 
 	private void onReliefOrBuildingsRowClick(@NonNull View view, @NonNull ContextMenuItem item) {

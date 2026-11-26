@@ -256,6 +256,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateElevationConfiguration();
+			mapContext.updateShadows();
 			if (mapContext.isHeightmapsActive() != is3DMapsEnabled()) {
 				mapContext.recreateHeightmapProvider();
 				// 3D tracks take their heights from the heightmaps, as on an ENABLE_3D_MAPS change in MapLayers
