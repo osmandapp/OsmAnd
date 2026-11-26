@@ -8,6 +8,7 @@ import net.osmand.Location;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TrackStartPointFinderTest {
@@ -161,6 +162,23 @@ public class TrackStartPointFinderTest {
 		assertEquals(50, find(t, 500, 6));
 	}
 
+	// #15013 A-TC-04: a route has points only at turns, so near a turn the nearest point of both passes of a shared
+	// road is the turn itself; the direction of a pass is that of the road the position is on, not of the next one
+	@Test
+	public void sharedRoadNextToTurnFollowsDirectionOfMovement15013() {
+		List<Location> t = new ArrayList<>();
+		// south along x=0 to the turn, WNW, a loop, back WNW to the turn, north along x=0
+		double[] corners = {0, 200, 0, 0, -300, 100, -300, -400, 300, -400, 300, -100, 0, 0, 0, 250};
+		for (int c = 0; c < corners.length; c += 2) {
+			t.add(xy(corners[c], corners[c + 1]));
+		}
+		assertEquals(6, new TrackStartPointFinder(t).findStartIndex(moving(3, 30, 0), -1));
+		assertEquals(1, new TrackStartPointFinder(t).findStartIndex(moving(3, 30, 180), -1));
+		// at the turn itself
+		assertEquals(6, new TrackStartPointFinder(t).findStartIndex(moving(0, 0, 0), -1));
+		assertEquals(1, find(t, 3, 30));
+	}
+
 	// #25428 on an out-and-back and on a lollipop: the tail passes the start too, but whichever way the position
 	// moves there, the whole track is followed
 	@Test
@@ -210,6 +228,76 @@ public class TrackStartPointFinderTest {
 		}
 		assertTrue(new TrackStartPointFinder(t).findStartIndex(moving(500, 5, 90), -1) <= 500);
 		assertTrue(new TrackStartPointFinder(t).findStartIndex(moving(500, 5, 270), -1) > 500);
+	}
+
+	// #15013: nothing of the track is ahead of its end, which does not make the end fit every heading; the end goes
+	// the way of its last segment, also when the last point is repeated
+	@Test
+	public void trackEndNextToEarlierPassGoesTheWayOfItsLastSegment15013() {
+		// north through the crossing (0, 0), a loop, back west along y=0, ending 3 m east of the crossing
+		List<Location> t = track(0, -500, 0, 500, 500, 500, 500, 0, 3, 0);
+		List<Location> repeatedEnd = new ArrayList<>(t);
+		repeatedEnd.add(t.get(t.size() - 1));
+		for (List<Location> track : Arrays.asList(t, repeatedEnd)) {
+			for (int bearing = 0; bearing < 360; bearing += 15) {
+				int i = new TrackStartPointFinder(track).findStartIndex(moving(-2, 3, bearing), -1);
+				int fromEnd = Math.abs(bearing - 270);
+				if (Math.min(fromEnd, 360 - fromEnd) > 90) {
+					assertTrue("bearing " + bearing + ": index " + i, distanceToFinish(track, i) > 1000);
+				}
+			}
+			// 20 m before the end, moving the way the track ends: the last pass
+			int i = new TrackStartPointFinder(track).findStartIndex(moving(23, 3, 270), -1);
+			assertTrue("index " + i, distanceToFinish(track, i) < 30);
+		}
+	}
+
+	// #15013 on a serpentine driven up and down the same road: the other leg of a hairpin is 8 m away and goes the
+	// way the position moves, but it is another visit of the pass, behind the bend
+	@Test
+	public void hairpinUpAndDownFollowsDirectionOfMovement15013() {
+		// up: east along y=0, a hairpin, west along y=10, north to the top; then the same way down
+		double[] up = {-300, 0, 200, 0, 205, 2, 205, 8, 200, 10, 0, 10, 0, 600};
+		double[] upAndDown = new double[up.length * 2 - 2];
+		System.arraycopy(up, 0, upAndDown, 0, up.length);
+		for (int c = up.length - 4; c >= 0; c -= 2) {
+			upAndDown[up.length + (up.length - 4 - c)] = up[c];
+			upAndDown[up.length + (up.length - 4 - c) + 1] = up[c + 1];
+		}
+		List<Location> t = track(upAndDown);
+		int top = t.size() / 2;
+		// on the upper leg, 2 m from it
+		int down = new TrackStartPointFinder(t).findStartIndex(moving(100, 8, 90), -1);
+		assertTrue("down: index " + down, down > top);
+		int upIndex = new TrackStartPointFinder(t).findStartIndex(moving(100, 8, 270), -1);
+		assertTrue("up: index " + upIndex, upIndex < top);
+	}
+
+	// #15013 with #4303: two laps of a loop recorded the same way jitter differently; moving along it starts the
+	// first lap, the second one only seems to fit the heading better
+	@Test
+	public void lapsOfJitteryRecordedLoopStartFromTheFirstLap15013() {
+		List<Location> t = new ArrayList<>();
+		t.add(xy(-500, -500));
+		for (int lap = 0; lap < 2; lap++) {
+			// 600 x 400 m counter-clockwise, a point every 5 m, up to 3 m off the road
+			List<Location> loop = track(0, 0, 600, 0, 600, 400, 0, 400, 0, 0);
+			for (int k = 0; k < loop.size(); k++) {
+				double off = 3 * Math.sin(k * (lap == 0 ? 2.1 : 1.3));
+				Location p = loop.get(k);
+				for (int h = 0; h < 2; h++) {
+					t.add(new Location("", p.getLatitude() + off * (h == 0 ? 1 : -1) / M_PER_DEG_LAT,
+							p.getLongitude() + off / M_PER_DEG_LON));
+				}
+			}
+		}
+		int secondLap = (t.size() - 1) / 2 + 1;
+		for (int y = 60; y <= 340; y += 4) {
+			for (int bearing = -15; bearing <= 15; bearing += 5) {
+				int i = new TrackStartPointFinder(t).findStartIndex(moving(600, y, bearing), -1);
+				assertTrue("y " + y + ", bearing " + bearing + ": index " + i, i < secondLap);
+			}
+		}
 	}
 
 	// #4303: a figure-eight crosses itself; a recalculation on the second pass must not go back to the first
