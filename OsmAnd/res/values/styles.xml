@@ -504,6 +504,15 @@
 		<item name="trackDecorationTint">@color/switch_track_decoration_tint</item>
 	</style>
 
+	<!-- Default switch of the Material 3 themes: the native M3 switch with the colours of the
+	     UI Library - the off track and the disabled states are opaque theme colours -->
+	<style name="Widget.OsmAnd.Material3.Switch"
+		parent="Widget.Material3.CompoundButton.MaterialSwitch">
+		<item name="thumbTint">@color/ui_switch_thumb</item>
+		<item name="trackTint">@color/ui_switch_track</item>
+		<item name="trackDecorationTint">@color/ui_switch_track_decoration</item>
+	</style>
+
 
     <!--******************************** Basic text styles ********************************-->
 
