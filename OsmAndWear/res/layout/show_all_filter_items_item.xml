@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:minHeight="@dimen/card_row_min_height"
+	android:paddingStart="@dimen/content_padding_extra_large"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="center_vertical|start"
+		android:gravity="center_vertical|start"
+		android:text="@string/shared_string_show_all"
+		android:textColor="?attr/color_dialog_buttons"
+		android:textSize="16sp"
+		android:textStyle="normal"
+		tools:text="Show all" />
+
+</FrameLayout>

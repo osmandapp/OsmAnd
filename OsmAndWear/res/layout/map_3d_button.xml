@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.views.controls.maphudbuttons.Map3DButton xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_3d_button"
+	android:layout_width="@dimen/map_button_size"
+	android:layout_height="@dimen/map_button_size"
+	android:clickable="true"
+	android:focusable="true"
+	tools:background="@drawable/btn_circle_night"
+	tools:contentDescription="@string/map_3d_mode_action"
+	tools:src="@drawable/ic_action_3d" />

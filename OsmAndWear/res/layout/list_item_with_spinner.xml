@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:gravity="start"
+			android:letterSpacing="0.01"
+			android:lineSpacingExtra="5sp"
+			android:textSize="16sp"
+			tools:text="@string/visualized_by" />
+
+		<LinearLayout
+			android:id="@+id/button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:padding="@dimen/list_item_button_padding">
+
+			<TextView
+				android:id="@+id/description"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:textColor="?android:textColorSecondary"
+				tools:text="@string/track_coloring_solid" />
+
+			<androidx.appcompat.widget.AppCompatImageButton
+				android:id="@+id/selector"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_margin="@dimen/content_padding_small"
+				android:clickable="false"
+				android:duplicateParentState="true"
+				android:scaleType="center"
+				android:src="@drawable/ic_action_arrow_down"
+				android:tint="?attr/default_icon_color" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/divider"
+		layout="@layout/divider" />
+
+</LinearLayout>
