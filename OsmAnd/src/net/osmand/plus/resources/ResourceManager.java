@@ -435,7 +435,7 @@ public class ResourceManager {
 			contourLinesReloadPending = true;
 			reloadIndexesAsync(IProgress.EMPTY_PROGRESS, warnings -> {
 				contourLinesReloadPending = false;
-				app.getOsmandMap().refreshMap();
+				app.getOsmandMap().refreshMap(true);
 				updateContourLinesIndexes();
 			});
 		}
