@@ -30,6 +30,7 @@ class AisSliderCard<T>(
 		slider.valueFrom = 0f
 		slider.valueTo = (values.size - 1).toFloat()
 		slider.stepSize = 1f
+		slider.isSaveEnabled = false
 		slider.addOnChangeListener { _, value, fromUser ->
 			val selected = values[value.toInt()]
 			updateLabels(selected)
