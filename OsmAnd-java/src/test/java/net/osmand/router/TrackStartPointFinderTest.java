@@ -114,6 +114,48 @@ public class TrackStartPointFinderTest {
 		assertEquals(0, new TrackStartPointFinder(t).findStartIndex(xy(4, -12), whole));
 	}
 
+	// #27061: a 3.8 km loop whose last leg comes back up a street 100 m beside the start
+	private List<Location> loopReturningBesideStart() {
+		return track(0, 0, 1000, 0, 1000, -800, -100, -800, -100, 0, 0, 0);
+	}
+
+	// 10 m from the last leg and 108 m from the start: only the last pass is near, and it leaves 160 m of the loop
+	@Test
+	public void firstStartNextToLastLegOfLoopFollowsWholeLoop27061() {
+		assertEquals(0, find(loopReturningBesideStart(), -90, -60));
+	}
+
+	// riding the last leg towards the finish is finishing the loop, not starting it
+	@Test
+	public void movingAlongLastLegOfLoopKeepsTheTail27061() {
+		List<Location> t = loopReturningBesideStart();
+		int i = new TrackStartPointFinder(t).findStartIndex(moving(-90, -60, 0), -1);
+		assertTrue(distanceToFinish(t, i) < 200);
+	}
+
+	// anywhere within 300 m of where the loop closes, standing still before setting off, most of the loop is followed
+	@Test
+	public void firstStartAroundLoopClosureNeverJoinsTheTail27061() {
+		List<Location> t = loopReturningBesideStart();
+		float whole = distanceToFinish(t, 0);
+		for (int x = -300; x <= 300; x += 10) {
+			for (int y = -300; y <= 300; y += 10) {
+				if (Math.hypot(x, y) > 300) {
+					continue;
+				}
+				float left = distanceToFinish(t, find(t, x, y));
+				assertTrue("at " + x + "," + y + " left " + left, left > whole * 0.75f);
+			}
+		}
+	}
+
+	@Test
+	public void recalculationNextToLastLegOfLoopKeepsTheTail27061() {
+		List<Location> t = loopReturningBesideStart();
+		int i = new TrackStartPointFinder(t).findStartIndex(xy(-90, -60), 200);
+		assertTrue(distanceToFinish(t, i) < 200);
+	}
+
 	@Test
 	public void emptyTrackOrNoPosition() {
 		assertEquals(0, new TrackStartPointFinder(new ArrayList<>()).findStartIndex(xy(0, 0), -1));
