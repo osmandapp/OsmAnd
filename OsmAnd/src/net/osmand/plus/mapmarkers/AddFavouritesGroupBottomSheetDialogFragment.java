@@ -51,8 +51,8 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 	@Override
 	protected void onItemClick(int position) {
 		FavoriteGroup favoriteGroup = favouritesHelper.getFavoriteGroups().get(position - 1);
-		if (!favoriteGroup.isVisible()) {
-			favouritesHelper.updateGroupVisibility(favoriteGroup, true, true);
+		if (!favouritesHelper.isFolderVisible(favoriteGroup.getName())) {
+			favouritesHelper.updateFolderVisibility(favoriteGroup.getName(), true, true);
 		}
 		app.getMapMarkersHelper().addOrEnableGroup(favoriteGroup);
 		dismiss();

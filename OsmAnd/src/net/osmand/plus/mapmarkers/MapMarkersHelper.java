@@ -1034,7 +1034,7 @@ public class MapMarkersHelper {
 			removeFromGroupsList(group);
 			return;
 		}
-		group.setVisible(favGroup.isVisible());
+		group.setVisible(ctx.getFavoritesHelper().isFolderVisible(favGroup.getName()));
 		if (!group.isVisible() || group.isDisabled()) {
 			removeGroupActiveMarkers(group, true);
 			return;

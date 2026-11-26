@@ -229,7 +229,19 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 	// FavouritePoint.equals() ignores links, so attaching or detaching media alone would never reach the group file
 	static boolean isGroupChanged(@NonNull FavoriteGroup localGroup, @Nullable FavoriteGroup fileGroup) {
-		return !localGroup.equals(fileGroup) || !linksEqual(localGroup, fileGroup);
+		return !localGroup.equals(fileGroup) || !linksEqual(localGroup, fileGroup)
+				|| !visibilityEqual(localGroup, fileGroup);
+	}
+
+	private static boolean visibilityEqual(@NonNull FavoriteGroup localGroup, @NonNull FavoriteGroup fileGroup) {
+		List<FavouritePoint> localPoints = localGroup.getPoints();
+		List<FavouritePoint> filePoints = fileGroup.getPoints();
+		for (int i = 0; i < localPoints.size(); i++) {
+			if (localPoints.get(i).isVisible() != filePoints.get(i).isVisible()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	// Called for equal groups only: same points in the same order

@@ -213,6 +213,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					localGroup = favoritesHelper.addFavoriteGroup(group.getName(), group.getColor(),
 							group.getIconName(), group.getBackgroundType());
 				}
+				boolean wasVisible = localGroup.isVisible();
 				localGroup.copyAppearance(group);
 				// addFavoriteGroup() may resolve the name, so collect it from the local group.
 				appliedGroupNames.add(localGroup.getName());
@@ -220,6 +221,9 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				PointsGroup pointsGroup = group.toPointsGroup(app);
 				for (FavouritePoint point : group.getPoints()) {
 					favoritesHelper.addFavourite(point, pointsGroup, new AddFavoriteOptions());
+				}
+				if (wasVisible != localGroup.isVisible()) {
+					favoritesHelper.applyFolderVisibility(localGroup.getName());
 				}
 			}
 			journalRemovedPoints(replacedPoints);

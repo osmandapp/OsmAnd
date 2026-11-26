@@ -149,6 +149,24 @@ public class FavoritesBackupMergerTest {
 		assertEquals(movedPoint.getLatitude(), merged.getPoints().get(0).getLatitude(), 0);
 	}
 
+	@Test
+	public void mergesWhenRemoteOnlyChangedPointVisibility() {
+		FavoriteGroup base = group(point("A", 1), point("B", 2));
+		FavouritePoint editedA = point("A", 1);
+		editedA.setDescription("edited");
+		FavoriteGroup local = group(editedA, point("B", 2));
+		FavouritePoint hiddenA = point("A", 1);
+		hiddenA.setVisible(false);
+		FavouritePoint hiddenB = point("B", 2);
+		hiddenB.setVisible(false);
+		FavoriteGroup remote = group(hiddenA, hiddenB);
+
+		FavoriteGroup merged = FavoritesBackupMerger.mergeGroups(base, local, remote, DEFAULT_COLOR);
+
+		assertNotNull(merged);
+		assertEquals("edited", merged.getPoints().get(0).getDescription());
+	}
+
 	private static FavouritePoint point(String name, int coordinate) {
 		FavouritePoint point = new FavouritePoint(coordinate, coordinate, name, "group");
 		point.setTimestamp(coordinate * 1_000L);

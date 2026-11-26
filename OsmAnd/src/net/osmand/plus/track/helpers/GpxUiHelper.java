@@ -316,7 +316,7 @@ public class GpxUiHelper {
 			description = numberOfPoints;
 		}
 
-		if (!group.isVisible()) {
+		if (!app.getFavoritesHelper().isFolderVisible(group.getName())) {
 			String hidden = app.getString(R.string.shared_string_hidden);
 			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, hidden, description);
 		}

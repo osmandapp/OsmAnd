@@ -432,7 +432,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			Set<PointsGroup> hiddenCategories = new LinkedHashSet<>();
 			for (FavoriteGroup group : favouritesHelper.getFavoriteGroups()) {
 				if (!group.equals(lastUsedGroup)) {
-					if (group.isVisible()) {
+					if (favouritesHelper.isFolderVisible(group.getName())) {
 						pointsGroups.put(group.getDisplayName(app), group.toPointsGroup(app));
 					} else {
 						hiddenCategories.add(group.toPointsGroup(app));

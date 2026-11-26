@@ -157,8 +157,12 @@ public class FavoriteComparator implements Comparator<Object> {
 	}
 
 	private boolean isVisibleFolder(@NonNull Object object) {
-		FavoriteGroup group = getFavoriteGroup(object);
-		return group == null || group.isVisible();
+		if (object instanceof FavoriteGroup group) {
+			return app.getFavoritesHelper().isFolderVisible(group.getName());
+		} else if (object instanceof FavoriteFolder folder) {
+			return app.getFavoritesHelper().isFolderVisible(folder.getFullPath());
+		}
+		return true;
 	}
 
 	@Nullable

@@ -113,8 +113,8 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 
 		for (PointsGroup pointsGroup : pointsGroups.values()) {
 			FavoriteFolder folder = favoriteFolders.get(pointsGroup.getName());
-			FavoriteGroup favoriteGroup = folder != null ? folder.getGroup() : null;
-			container.addView(createCategoryItem(pointsGroup, favoriteGroup != null && !favoriteGroup.isVisible()));
+			boolean hidden = folder != null && !app.getFavoritesHelper().isFolderVisible(folder.getFullPath());
+			container.addView(createCategoryItem(pointsGroup, hidden));
 		}
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(view)

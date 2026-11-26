@@ -106,13 +106,13 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		View checkboxContainer = groupView.findViewById(R.id.checkbox_container);
 		View menuButton = groupView.findViewById(R.id.menu_button);
 		View divider = groupView.findViewById(R.id.divider);
-		boolean visible = group == null || group.isVisible();
+		boolean visible = helper.isFolderVisible(folderPath);
 
 		title.setText(FavoriteFolderFormatter.getDisplayName(app, folderPath));
 		title.setMaxLines(2);
-		description.setText(group != null
+		description.setText(group != null && (!group.getPoints().isEmpty() || folder.getSubFolders().isEmpty())
 				? GpxUiHelper.getFavoriteFolderDescription(app, group)
-				: getVirtualFolderDescription(folder));
+				: getVirtualFolderDescription(folder, visible));
 		if (visible) {
 			title.setTypeface(FontCache.getNormalFont());
 		} else {
@@ -122,7 +122,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		int hiddenColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		if (group != null && group.isPinned()) {
 			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin,
-					group.isVisible() ? color : hiddenColor));
+					visible ? color : hiddenColor));
 		} else if (visible) {
 			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color));
 		} else {
@@ -142,21 +142,26 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		items.add(groupItem);
 		items.add(new DividerItem(app));
 
-		if (group != null) {
+		if (helper.canChangeFolderVisibility(folderPath)) {
+			String path = folderPath;
 			BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(group.isVisible())
+					.setChecked(visible)
 					.setIcon(getContentIcon(R.drawable.ic_map))
 					.setTitle(getString(R.string.shared_string_show_on_map))
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch)
 					.setOnClickListener(v -> {
-						boolean shouldShowOnMap = !group.isVisible();
-						helper.updateGroupVisibility(group, shouldShowOnMap, true);
+						helper.updateFolderVisibility(path, !visible, true);
 						updateAll();
 						dismiss();
 					})
 					.create();
 			items.add(showOnMapItem);
+			if (group == null) {
+				items.add(new DividerHalfItem(getContext()));
+			}
+		}
 
+		if (group != null) {
 			BaseBottomSheetItem pinItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(group.isPinned() ? R.drawable.ic_action_drawing_pin_disable : R.drawable.ic_action_drawing_pin))
 					.setTitle(getString(group.isPinned() ? R.string.unpin_folder : R.string.pin_folder))
@@ -401,11 +406,15 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 	}
 
 	@NonNull
-	private String getVirtualFolderDescription(@Nullable FavoriteFolder folder) {
+	private String getVirtualFolderDescription(@Nullable FavoriteFolder folder, boolean visible) {
 		int pointsCount = folder != null ? folder.getSubtreePointsCount() : 0;
-		return pointsCount > 0
+		String description = pointsCount > 0
 				? getString(R.string.gpx_selection_number_of_points, String.valueOf(pointsCount))
 				: getString(R.string.shared_string_empty);
+		if (!visible) {
+			return getString(R.string.ltr_or_rtl_combine_via_bold_point, getString(R.string.shared_string_hidden), description);
+		}
+		return description;
 	}
 
 	private void showMoveDialog() {

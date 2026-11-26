@@ -45,8 +45,10 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -69,6 +71,7 @@ public class FavouritesHelper {
 	// Replaced, never mutated in place - volatile publishes the new instance to other threads.
 	private volatile List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 	private volatile Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
+	private volatile FolderGroups folderGroupsIndex;
 	private volatile List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
 	@Nullable
 	private volatile FavoriteFolderSnapshot favoriteFolderSnapshot;
@@ -294,6 +297,7 @@ public class FavouritesHelper {
 
 		boolean changed = merge(extGroups, groups);
 
+		resolveLoadedGroupVisibility(groups);
 		flatGroups = groups;
 		favoriteGroups = new ArrayList<>(groups.values());
 
@@ -508,6 +512,9 @@ public class FavouritesHelper {
 			flatGroups = tmpFlatGroups;
 			favoriteGroups = tmpFavoriteGroups;
 			invalidateFavoriteFolderCache();
+			for (FavoriteGroup g : groupsToDelete) {
+				applyFolderVisibility(g.getName());
+			}
 		}
 		saveCurrentPointsIntoFile(true);
 	}
@@ -649,7 +656,7 @@ public class FavouritesHelper {
 
 		FavoriteGroup group = getOrCreateGroup(point, pointsGroup);
 		if (!pointName.isEmpty()) {
-			point.setVisible(group.isVisible());
+			point.setVisible(isFolderVisible(group.getName()));
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
 				point.setColor(getParkingIconColor());
 			} else if (point.getColor() == 0) {
@@ -716,8 +723,8 @@ public class FavouritesHelper {
 			if (old != null) {
 				old.getPoints().remove(p);
 			}
-			FavoriteGroup pg = getOrCreateGroup(p);
-			p.setVisible(pg.isVisible());
+			FavoriteGroup pg = getOrCreateMoveTargetGroup(p, old);
+			p.setVisible(isFolderVisible(pg.getName()));
 			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
 			} else {
@@ -747,9 +754,9 @@ public class FavouritesHelper {
 					old.getPoints().remove(point);
 				}
 				point.setCategory(newCategory);
-				FavoriteGroup pg = getOrCreateGroup(point);
+				FavoriteGroup pg = getOrCreateMoveTargetGroup(point, old);
 				// IMPORTANT: Move may change colour and shape, never the icon (#16507)
-				point.setVisible(pg.isVisible());
+				point.setVisible(isFolderVisible(pg.getName()));
 				if (SpecialPointType.PARKING == point.getSpecialPointType()) {
 					point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
 				} else {
@@ -844,6 +851,7 @@ public class FavouritesHelper {
 			tmpFlatGroups.remove(group.getName());
 			flatGroups = tmpFlatGroups;
 			invalidateFavoriteFolderCache();
+			applyFolderVisibility(group.getName());
 			if (saveImmediately) {
 				saveCurrentPointsIntoFile(true);
 			}
@@ -979,10 +987,10 @@ public class FavouritesHelper {
 		for (Map.Entry<String, FavoriteGroup> entry : flatGroups.entrySet()) {
 			String groupName = entry.getKey();
 			if (groupName.toLowerCase().equals(nameLowercase) || FavoriteGroup.getDisplayName(app, groupName).equals(name)) {
-				return entry.getValue().isVisible();
+				return isFolderVisible(entry.getKey());
 			}
 		}
-		return false;
+		return isFolderVisible(FavoriteGroup.convertDisplayNameToGroupIdName(app, name));
 	}
 
 	public boolean groupExists(String name) {
@@ -1126,14 +1134,149 @@ public class FavouritesHelper {
 
 	public void updateGroupVisibility(@NonNull FavoriteGroup group, boolean visible, boolean saveImmediately) {
 		if (group.isVisible() != visible) {
-			for (FavouritePoint point : group.getPoints()) {
-				point.setVisible(visible);
-			}
-			group.setVisible(visible);
-			runSyncWithMarkers(group);
+			updateFolderVisibility(group.getName(), visible, false);
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);
+		}
+	}
+
+	public boolean isFolderVisible(@NonNull String fullPath) {
+		Map<String, FavoriteGroup> folderGroups = getFolderGroups();
+		FavoriteGroup group = findFolderGroup(folderGroups, fullPath);
+		if (group != null && !group.isVisible()) {
+			return false;
+		}
+		return !hasHiddenAncestor(folderGroups, fullPath);
+	}
+
+	@NonNull
+	private Map<String, FavoriteGroup> getFolderGroups() {
+		Map<String, FavoriteGroup> groups = flatGroups;
+		FolderGroups index = folderGroupsIndex;
+		if (index == null || index.source() != groups) {
+			index = new FolderGroups(groups, buildFolderGroups(groups));
+			folderGroupsIndex = index;
+		}
+		return index.byPath();
+	}
+
+	@NonNull
+	private static Map<String, FavoriteGroup> buildFolderGroups(@NonNull Map<String, FavoriteGroup> groups) {
+		Map<String, FavoriteGroup> byPath = new HashMap<>();
+		for (Map.Entry<String, FavoriteGroup> entry : groups.entrySet()) {
+			String path = normalizeFolderPath(entry.getKey());
+			if (path.equals(entry.getKey()) || !byPath.containsKey(path)) {
+				byPath.put(path, entry.getValue());
+			}
+		}
+		return byPath;
+	}
+
+	@Nullable
+	private FavoriteGroup findFolderGroup(@NonNull Map<String, FavoriteGroup> folderGroups, @NonNull String fullPath) {
+		FavoriteGroup group = flatGroups.get(fullPath);
+		return group != null ? group : folderGroups.get(normalizeFolderPath(fullPath));
+	}
+
+	private static boolean hasHiddenAncestor(@NonNull Map<String, FavoriteGroup> folderGroups, @NonNull String fullPath) {
+		for (String path = FavoriteFolderPath.parentPath(fullPath); !Algorithms.isEmpty(path);
+		     path = FavoriteFolderPath.parentPath(path)) {
+			FavoriteGroup ancestor = folderGroups.get(path);
+			if (ancestor != null && !ancestor.isVisible()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	private static String normalizeFolderPath(@NonNull String fullPath) {
+		return FavoriteFolderPath.join(FavoriteFolderPath.split(fullPath));
+	}
+
+	private record FolderGroups(Map<String, FavoriteGroup> source, Map<String, FavoriteGroup> byPath) {
+	}
+
+	public void updateFolderVisibility(@NonNull String fullPath, boolean visible, boolean saveImmediately) {
+		String recalculationRoot = fullPath;
+		Map<String, FavoriteGroup> folderGroups = getFolderGroups();
+		FavoriteGroup group = findFolderGroup(folderGroups, fullPath);
+		if (visible) {
+			if (group != null && !group.isVisible()) {
+				group.setVisible(true);
+			}
+			for (String path = FavoriteFolderPath.parentPath(fullPath); !Algorithms.isEmpty(path);
+			     path = FavoriteFolderPath.parentPath(path)) {
+				FavoriteGroup ancestor = folderGroups.get(path);
+				if (ancestor != null && !ancestor.isVisible()) {
+					ancestor.setVisible(true);
+					recalculationRoot = path;
+				}
+			}
+		} else {
+			if (group == null && canCreateFolderGroup(fullPath)) {
+				group = ensureFavoriteGroup(fullPath);
+			}
+			if (group != null && group.isVisible()) {
+				group.setVisible(false);
+			}
+		}
+		applyFolderVisibility(recalculationRoot);
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile(true);
+		}
+	}
+
+	public boolean canChangeFolderVisibility(@NonNull String fullPath) {
+		return findFolderGroup(getFolderGroups(), fullPath) != null || canCreateFolderGroup(fullPath);
+	}
+
+	private boolean canCreateFolderGroup(@NonNull String fullPath) {
+		return !Algorithms.isEmpty(fullPath) && FavoriteFolderPath.isValidFullPath(fullPath)
+				&& fullPath.equals(FavoriteGroup.convertDisplayNameToGroupIdName(app, fullPath));
+	}
+
+	public void applyFolderVisibility(@NonNull String rootPath) {
+		String normalizedRoot = normalizeFolderPath(rootPath);
+		List<FavoriteGroup> groups = new ArrayList<>();
+		for (FavoriteGroup group : favoriteGroups) {
+			if (FavoriteFolderPath.isDescendantOrSelf(normalizeFolderPath(group.getName()), normalizedRoot)) {
+				groups.add(group);
+			}
+		}
+		applyEffectiveVisibility(groups);
+	}
+
+	private void applyEffectiveVisibility(@NonNull Collection<FavoriteGroup> groups) {
+		for (FavoriteGroup group : groups) {
+			if (setPointsVisible(group, isFolderVisible(group.getName()))) {
+				runSyncWithMarkers(group);
+			}
+		}
+	}
+
+	private static boolean setPointsVisible(@NonNull FavoriteGroup group, boolean visible) {
+		boolean changed = false;
+		for (FavouritePoint point : group.getPoints()) {
+			if (point.isVisible() != visible) {
+				point.setVisible(visible);
+				changed = true;
+			}
+		}
+		return changed;
+	}
+
+	private void resolveLoadedGroupVisibility(@NonNull Map<String, FavoriteGroup> groups) {
+		Map<String, FavoriteGroup> folderGroups = buildFolderGroups(groups);
+		List<FavoriteGroup> sortedGroups = new ArrayList<>(groups.values());
+		sortedGroups.sort(Comparator.comparingInt(group -> FavoriteFolderPath.split(group.getName()).size()));
+		for (FavoriteGroup group : sortedGroups) {
+			if (hasHiddenAncestor(folderGroups, group.getName())) {
+				setPointsVisible(group, false);
+			} else if (!Algorithms.isEmpty(group.getPoints())) {
+				group.setVisible(group.getPoints().get(0).isVisible());
+			}
 		}
 	}
 
@@ -1151,7 +1294,10 @@ public class FavouritesHelper {
 			if (flatGroups.containsKey(newName)) {
 				return;
 			}
-			flatGroups.remove(group.getName());
+			String oldName = group.getName();
+			Map<String, FavoriteGroup> groupsWithoutOld = new LinkedHashMap<>(flatGroups);
+			groupsWithoutOld.remove(oldName);
+			flatGroups = groupsWithoutOld;
 			boolean isInMarkers = removeFromMarkers(group);
 
 			group.setName(newName);
@@ -1175,6 +1321,8 @@ public class FavouritesHelper {
 				addToMarkers(renamedGroup);
 			}
 			invalidateFavoriteFolderCache();
+			applyFolderVisibility(oldName);
+			applyFolderVisibility(renamedGroup.getName());
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);
@@ -1251,6 +1399,7 @@ public class FavouritesHelper {
 			tmpFlatGroups.put(newName, group);
 		}
 		flatGroups = tmpFlatGroups;
+		applyEffectiveVisibility(groupsToRename);
 		for (FavoriteGroup group : groupsInMarkers) {
 			addToMarkers(group);
 		}
@@ -1360,6 +1509,7 @@ public class FavouritesHelper {
 				changedGroups, updatedFlatGroups, groupsInMarkers);
 		applyFavoriteGroupNameChanges(groupNameChanges, updatedFlatGroups);
 		flatGroups = updatedFlatGroups;
+		applyEffectiveVisibility(changedGroups);
 		restoreFavoriteGroupsInMarkers(groupsInMarkers);
 		if (updateLauncherShortcuts) {
 			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
@@ -1447,8 +1597,26 @@ public class FavouritesHelper {
 	}
 
 	@NonNull
+	private FavoriteGroup getOrCreateMoveTargetGroup(@NonNull FavouritePoint point, @Nullable FavoriteGroup source) {
+		String category = point.getCategory();
+		if (!flatGroups.containsKey(category)) {
+			String path = normalizeFolderPath(category);
+			FavoriteGroup variant = getFolderGroups().get(path);
+			if (variant != null) {
+				point.setVisible(variant.isVisible());
+			} else if (!path.isEmpty() && getFavoriteFolder(path) != null) {
+				point.setVisible(true);
+			} else {
+				point.setVisible(source == null || source.isVisible());
+			}
+		}
+		return getOrCreateGroup(point);
+	}
+
+	@NonNull
 	private FavoriteGroup getOrCreateGroup(@NonNull FavouritePoint point, @Nullable PointsGroup pointsGroup) {
 		FavoriteGroup favoriteGroup = flatGroups.get(point.getCategory());
+		boolean wasVisible = favoriteGroup == null || favoriteGroup.isVisible();
 		if (favoriteGroup == null) {
 			favoriteGroup = new FavoriteGroup(point);
 			Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
@@ -1458,6 +1626,9 @@ public class FavouritesHelper {
 			invalidateFavoriteFolderCache();
 		}
 		updateGroupAppearance(favoriteGroup, pointsGroup);
+		if (wasVisible != favoriteGroup.isVisible()) {
+			applyFolderVisibility(favoriteGroup.getName());
+		}
 
 		return favoriteGroup;
 	}
