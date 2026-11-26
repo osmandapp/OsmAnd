@@ -34,23 +34,17 @@
 
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/protocol_tcp"
-					style="@style/Widget.Material3Expressive.Button"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:text="@string/ais_protocol_tcp"
-					android:textColor="@color/ui_toggle_button_text"
-					app:backgroundTint="@color/ui_toggle_button_background" />
+					android:text="@string/ais_protocol_tcp" />
 
 				<com.google.android.material.button.MaterialButton
 					android:id="@+id/protocol_udp"
-					style="@style/Widget.Material3Expressive.Button"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
-					android:text="@string/ais_protocol_udp"
-					android:textColor="@color/ui_toggle_button_text"
-					app:backgroundTint="@color/ui_toggle_button_background" />
+					android:text="@string/ais_protocol_udp" />
 			</com.google.android.material.button.MaterialButtonToggleGroup>
 
 			<net.osmand.plus.widgets.ui.ScreenDescriptionView
