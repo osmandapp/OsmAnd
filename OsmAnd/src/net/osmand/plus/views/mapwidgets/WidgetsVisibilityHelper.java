@@ -150,7 +150,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowZoomButtons() {
-		if (isInAppearancePreviewMode()) {
+		if (isInAppearancePreviewMode() || (isInTrackMenuMode() && isPortrait())) {
 			return false;
 		}
 		boolean screensAllowed = shouldShowElementOnActiveScreen(ZOOM_BUTTONS);

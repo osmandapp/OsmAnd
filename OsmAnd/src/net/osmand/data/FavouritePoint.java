@@ -12,11 +12,11 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
@@ -151,10 +151,6 @@ public class FavouritePoint implements LocationPoint, Linkable {
 	}
 
 	public int getIconIdOrDefault(@NonNull Context ctx) {
-		if(iconId == 0 && !Algorithms.isEmpty(getCategory())) {
-			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			iconId = app.getFavoritesHelper().getOriginalIconId(this);
-		}
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -205,7 +201,22 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
+		if (iconId == 0) {
+			int groupIconId = getGroupIconId(ctx);
+			if (groupIconId != 0) {
+				return groupIconId;
+			}
+		}
 		return getIconIdOrDefault(ctx);
+	}
+
+	private int getGroupIconId(@NonNull Context ctx) {
+		if (ctx.getApplicationContext() instanceof OsmandApplication app) {
+			FavoriteGroup group = app.getFavoritesHelper().getGroup(this);
+			String iconName = group != null ? group.getIconName() : null;
+			return Algorithms.isEmpty(iconName) ? 0 : RenderingIcons.getBigIconResourceId(iconName);
+		}
+		return 0;
 	}
 
 	public double getLatitude() {

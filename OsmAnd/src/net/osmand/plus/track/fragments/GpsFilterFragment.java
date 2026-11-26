@@ -25,7 +25,6 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
@@ -243,13 +242,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	@Override
 	protected void setupControlButtons(@NonNull View view) {
-		if (isPortrait()) {
-			super.setupControlButtons(view);
-		} else {
-			View mapHudControls = view.findViewById(R.id.map_hud_controls);
-			AndroidUiHelper.updateVisibility(mapHudControls, false);
-			setupMapRulerWidget(view, requireMapActivity().getMapLayers());
-		}
+		super.setupControlButtons(view);
 		setupCenterOnTrackButton(view.findViewById(R.id.map_center_on_track));
 	}
 
@@ -274,17 +267,8 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	}
 
 	@Override
-	public void updateMapControlsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
-		if (isPortrait()) {
-			super.updateMapControlsPos(fragment, y, animated);
-		} else {
-			View mainView = getMainView();
-			View mapBottomHudButtons = getMapBottomHudButtons();
-			if (mainView != null && mapBottomHudButtons != null) {
-				int bottomPadding = getResources().getDimensionPixelSize(R.dimen.map_button_margin);
-				AndroidUtils.setPadding(mapBottomHudButtons, mainView.getWidth(), 0, 0, bottomPadding);
-			}
-		}
+	protected boolean hasMapControlsBesideMenuInLandscape() {
+		return true;
 	}
 
 	@Override

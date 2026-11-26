@@ -170,15 +170,25 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 				int exit = instruction.getInt("exit_number");
 				turnType.setExitOut(exit);
 			}
-			if (instruction.has("turn_angle")) {
-				float angle = (float) instruction.getDouble("turn_angle");
-				turnType.setTurnAngle(angle);
+			if (instruction.isNull("turn_angle")) {
+				turnType.setExitAngleUnknown(true);
+			} else {
+				turnType.setTurnAngle(getRoundaboutTurnAngle(instruction.getDouble("turn_angle"), leftSide));
 			}
 		} else {
 			// TODO turnType.setTurnAngle()
 		}
 
 		return turnType;
+	}
+
+	/**
+	 * GraphHopper sends the arc travelled within the roundabout in radians, signed by the
+	 * direction of rotation. OsmAnd keeps the heading change in degrees, positive to the right.
+	 */
+	public static float getRoundaboutTurnAngle(double travelledRadians, boolean leftSide) {
+		double travelledDegrees = Math.toDegrees(Math.abs(travelledRadians));
+		return (float) (leftSide ? travelledDegrees - 180 : 180 - travelledDegrees);
 	}
 
 	@Nullable

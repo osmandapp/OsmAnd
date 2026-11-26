@@ -749,8 +749,13 @@ public class SQLiteTileSource implements ITileSource {
 		String sql = "DELETE FROM tiles WHERE time < "+
 				(System.currentTimeMillis() - expiration);
 		LOG.debug(sql);
-		db.execSQL(sql);
-		db.execSQL("VACUUM");
+		try {
+			db.execSQL(sql);
+			db.execSQL("VACUUM");
+		} catch (SQLException e) {
+			// Removing expired tiles is only a cleanup, a failed one must not crash the app
+			LOG.error("Failed to clear expired tiles in " + file, e);
+		}
 	}
 
 	@Override

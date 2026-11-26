@@ -132,19 +132,13 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 		}
 		val lst = lstMap.keys()
 		lst.sort() // sort is not correct for file ind last bits >>> 12
-		val wanted = KTLongHashSet(lst.size)
-		var i = 0
-		while (type == SpatialSearchToken.POI_TYPE && i < lst.size) {
-			wanted.add(SpatialSearchContext.poiObjectId(lst[i]))
-			i++
-		}
 		for (id in lst) {
 			if (ctx.isCancelled()) {
 				return
 			}
 			// java puts null for an object that could not be read: the same as no object in the cache
 			val obj = if (type == SpatialSearchToken.POI_TYPE) {
-				ctx.readPoiObject(id, cache, wanted)
+				ctx.readPoiObject(id, cache)
 			} else {
 				ctx.readAddrObject(id, lstMap[id]!!, cache)
 			}

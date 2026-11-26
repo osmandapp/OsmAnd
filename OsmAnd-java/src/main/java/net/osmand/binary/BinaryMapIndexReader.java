@@ -793,16 +793,17 @@ public class BinaryMapIndexReader {
 		
 		return true;
 	}
-	public List<Amenity> readAmenityBlock(PoiRegion pr, long offset, int index) throws IOException {
+	public Amenity readAmenity(PoiRegion pr, long offset, int index) throws IOException {
 		poiAdapter.initCategories(pr);
 		codedIS.seek(pr.filePointer + offset);
 		long len = readInt(); 
 		long oldLim = codedIS.pushLimitLong((long) len);
 		SearchRequest<Amenity> sr = new SearchRequest<Amenity>();
-		poiAdapter.readPoiData(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 
+		boolean read = poiAdapter.readPoiData(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 
 				sr, pr, index, null, 0);
 		codedIS.popLimit(oldLim);
-		return sr.getSearchResults();
+		List<Amenity> res = sr.getSearchResults();
+		return read ? res.get(res.size() - 1) : null;
 	}
 	
 	public City readCityObject(AddressRegion r, long offset) throws IOException {

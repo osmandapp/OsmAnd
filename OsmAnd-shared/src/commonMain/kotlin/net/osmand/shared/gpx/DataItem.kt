@@ -1,8 +1,7 @@
 package net.osmand.shared.gpx
 
+import co.touchlab.stately.collections.ConcurrentMutableMap
 import co.touchlab.stately.concurrency.AtomicLong
-import kotlin.collections.MutableMap
-import kotlin.collections.HashMap
 import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.io.KFile
 
@@ -10,7 +9,7 @@ abstract class DataItem protected constructor(
 	val file: KFile,
 	initializeFileParameters: Boolean
 ) {
-	protected val map: MutableMap<GpxParameter, Any?> = HashMap()
+	protected val map = ConcurrentMutableMap<GpxParameter, Any?>()
 	private var analysisParametersVersion = AtomicLong(0)
 
 	init {
@@ -67,7 +66,8 @@ abstract class DataItem protected constructor(
 		}
 	}
 
-	fun getAnalysisCalculationParameters() = map.filter { it.key.isAnalysisRecalculationNeeded() }
+	fun getAnalysisCalculationParameters(): Map<GpxParameter, Any?> =
+		map.block { parameters -> parameters.filter { it.key.isAnalysisRecalculationNeeded() } }
 
 	fun getAnalysisParametersVersion() = analysisParametersVersion.get()
 

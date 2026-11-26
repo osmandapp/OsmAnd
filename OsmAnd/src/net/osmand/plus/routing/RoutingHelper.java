@@ -27,6 +27,8 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.FastRoutingState;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.MissingMapsCalculationResult;
+import net.osmand.router.MovingSpeedWindow;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
@@ -54,7 +56,6 @@ public class RoutingHelper {
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
 	private static final int MAX_POSSIBLE_SPEED = 340; // ~ 1 Mach
 	private static final boolean ENABLE_LOG_POS_PROCESSED = false;
-	private static final float MIN_AVERAGE_SPEED_FOR_ETA = 0.5f; // m/s, slower counts as standing still
 	private static final int STOP_NAVIGATION_ON_AA_DISCONNECT_DISTANCE_THRESHOLD = 100;
 	private static final int PAUSE_NAVIGATION_ON_AA_DISCONNECT_SPEED_THRESHOLD = 1;
 
@@ -123,8 +124,12 @@ public class RoutingHelper {
 		routeWasFinished = false;
 	}
 
-	void setRoute(RouteCalculationResult route) {
+	synchronized boolean setRoute(@NonNull RouteCalculationResult route, @NonNull RouteCalculationProgress progress) {
+		if (progress.isCancelled && !progress.memoryLimitExceeded) {
+			return false; // checked under the lock that stopCalculation() holds
+		}
 		this.route = route;
+		return true;
 	}
 
 	long getDeviateFromRouteDetected() {
@@ -838,10 +843,10 @@ public class RoutingHelper {
 	}
 
 	/**
-	 * With "Adapt to my speed" the time left follows the moving speed measured during navigation
-	 * over the profile's interval. Stops are skipped, so standing still doesn't drive the average
-	 * towards zero. Until the interval is filled the route estimate is blended in, so the first
-	 * seconds can't swing the arrival time. The route estimate stays while there is no data.
+	 * With "Adapt to my speed" the time left follows the speed measured during navigation over
+	 * the profile's interval of movement. Stops don't use up the interval, so after a stop the
+	 * speed before it still counts. Until the interval of movement is filled the route estimate
+	 * is blended in, so the first seconds can't swing the arrival time.
 	 */
 	private int applyAverageSpeed(int routeTime, int distance) {
 		ApplicationMode mode = getAppMode();
@@ -849,12 +854,8 @@ public class RoutingHelper {
 			return routeTime;
 		}
 		long interval = settings.ETA_AVERAGE_SPEED_INTERVAL.getModeValue(mode);
-		float speed = app.getAverageSpeedComputer().getAverageSpeed(etaSpeedStartTime, interval, true);
-		if (interval <= 0 || Float.isNaN(speed) || speed < MIN_AVERAGE_SPEED_FOR_ETA) {
-			return routeTime;
-		}
-		float filled = Math.min(1f, (float) (System.currentTimeMillis() - etaSpeedStartTime) / interval);
-		return Math.round(routeTime + (distance / speed - routeTime) * filled);
+		MovingSpeedWindow window = app.getAverageSpeedComputer().getMovingSpeedWindow(etaSpeedStartTime, interval);
+		return window.adaptTime(routeTime, distance);
 	}
 
 	public OsmandSettings getSettings() {

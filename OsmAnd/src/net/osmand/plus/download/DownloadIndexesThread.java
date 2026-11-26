@@ -15,6 +15,7 @@ import android.os.Build;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -257,8 +258,13 @@ public class DownloadIndexesThread {
 		enqueueDownloadFiles(Collections.emptyList(), items);
 	}
 
-	public void runDownloadFileWithPendingCleanup(@NonNull IndexItem item, @NonNull List<File> filesToDelete) {
-		enqueueDownloadFiles(filesToDelete, item);
+	public void runDownloadFilesWithPendingCleanup(@NonNull List<File> filesToDelete, @NonNull IndexItem... items) {
+		enqueueDownloadFiles(filesToDelete, items);
+	}
+
+	/** @return true while the list of maps reloads: nothing can be queued now, the user is asked to wait */
+	public boolean checkReloadRunning() {
+		return getCurrentRunningTask() instanceof ReloadIndexesTask && checkRunning(false);
 	}
 
 	private void enqueueDownloadFiles(@NonNull List<File> filesToDelete, IndexItem... items) {
@@ -679,7 +685,8 @@ public class DownloadIndexesThread {
 				clearPendingFilesToDelete(item);
 				return false;
 			}
-			de.filesToDeleteAfterSuccessfulInstall = pendingFilesToDelete.remove(getTargetFileKey(de.targetFile));
+			// stays pending until the download ends: other items of the same request see it
+			de.filesToDeleteAfterSuccessfulInstall = pendingFilesToDelete.get(getTargetFileKey(de.targetFile));
 			if (de.isAsset) {
 				try {
 					if (ctx != null) {
@@ -712,6 +719,11 @@ public class DownloadIndexesThread {
 					app.logMapDownloadEvent("failed", item, time, details);
 				}
 			}
+			if (result) {
+				pendingFilesToDelete.remove(getTargetFileKey(de.targetFile));
+			} else {
+				clearPendingFilesToDelete(item);
+			}
 			return result;
 		}
 
@@ -733,7 +745,20 @@ public class DownloadIndexesThread {
 	}
 
 	private void clearPendingFilesToDelete(@NonNull IndexItem item) {
-		pendingFilesToDelete.remove(getTargetFileKey(item.getTargetFile(app)));
+		onPendingFilesDropped(item, pendingFilesToDelete.remove(getTargetFileKey(item.getTargetFile(app))));
+	}
+
+	/** The item was not installed; another queued item of the same request may still delete the files. */
+	private void onPendingFilesDropped(@NonNull IndexItem item, @Nullable List<File> files) {
+		if (files == null) {
+			return;
+		}
+		for (List<File> pendingFiles : pendingFilesToDelete.values()) {
+			if (!Collections.disjoint(pendingFiles, files)) {
+				return;
+			}
+		}
+		freeVersionMapDownloads.onMapsNotReplaced(item, files);
 	}
 
 	@NonNull

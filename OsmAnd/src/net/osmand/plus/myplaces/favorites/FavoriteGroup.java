@@ -259,6 +259,21 @@ public class FavoriteGroup {
 		return favoriteGroup;
 	}
 
+	/**
+	 * The name for a point moved into this folder: "Name 2", "Name 3"... when the folder has the name already.
+	 */
+	@NonNull
+	public String getUniquePointName(@NonNull String name) {
+		if (!containsPointByName(name)) {
+			return name;
+		}
+		int number = 2;
+		while (containsPointByName(name + " " + number)) {
+			number++;
+		}
+		return name + " " + number;
+	}
+
 	public boolean containsPointByName(@NonNull String name) {
 		if (!name.isEmpty()) {
 			for (FavouritePoint p : points) {

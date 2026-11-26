@@ -977,6 +977,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
 			List<LatLon> smallObjectsLatLon = new ArrayList<>();
 			Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
+			Map<WptPt, MapMarker> wptMarkers = null;
 			// request to load
 			QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (SelectedGpxFile g : selectedGPXFiles) {
@@ -991,7 +992,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
 						if (synced) {
-							marker = mapMarkersHelper.getMapMarker(wpt);
+							if (wptMarkers == null) {
+								wptMarkers = mapMarkersHelper.getWptPtMarkers();
+							}
+							marker = wptMarkers.get(wpt);
 							if (marker == null || marker.history && !settings.KEEP_PASSED_MARKERS_ON_MAP.get()) {
 								continue;
 							}
@@ -1083,6 +1087,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			float textScale = getTextScale();
 			Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
+			Map<WptPt, MapMarker> wptMarkers = null;
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				int fileColor = getFileColor(g);
 				boolean synced = isSynced(g.getGpxFile());
@@ -1092,7 +1097,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
 						if (synced) {
-							marker = mapMarkersHelper.getMapMarker(wpt);
+							if (wptMarkers == null) {
+								wptMarkers = mapMarkersHelper.getWptPtMarkers();
+							}
+							marker = wptMarkers.get(wpt);
 							if (marker == null || marker.history && !settings.KEEP_PASSED_MARKERS_ON_MAP.get()) {
 								continue;
 							}

@@ -658,6 +658,10 @@ public class Amenity extends MapObject {
 		if (!Algorithms.isEmpty(gpxFileName)) {
 			return Algorithms.sanitizeFileName(gpxFileName);
 		}
+		String ref = getRef();
+		if (!Algorithms.isEmpty(ref)) {
+			return Algorithms.sanitizeFileName(ref);
+		}
 		if (!Algorithms.isEmpty(getRouteId())) {
 			return getRouteId();
 		}

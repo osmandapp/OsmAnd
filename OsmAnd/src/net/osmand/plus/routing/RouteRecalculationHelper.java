@@ -158,7 +158,6 @@ class RouteRecalculationHelper {
 	}
 
 	private void setNewRoute(RouteCalculationResult prevRoute, RouteCalculationResult res, Location start) {
-		routingHelper.setRoute(res);
 		boolean newRoute = !prevRoute.isCalculated();
 		if (isFollowingMode()) {
 			Location lastFixedLocation = getLastFixedLocation();
@@ -442,6 +441,9 @@ class RouteRecalculationHelper {
 				if (params.alternateResultListener != null) {
 					params.alternateResultListener.onRouteCalculated(res);
 				} else {
+					if (!routingHelper.setRoute(res, params.calculationProgress)) {
+						return; // stopped while waiting for a location update, e.g. one that reached the destination
+					}
 					routingThreadHelper.setNewRoute(prev, res, params.start);
 				}
 			} else {

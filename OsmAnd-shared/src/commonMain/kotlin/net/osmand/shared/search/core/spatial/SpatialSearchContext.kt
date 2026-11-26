@@ -617,9 +617,7 @@ class SpatialSearchContext(
 
 	fun getFileInd(id: Long): Int = (id and ((1L shl SHIFT_FILE_IND) - 1)).toInt()
 
-	fun readPoiObject(id: Long, cache: KTLongObjectMap<MapObject>?): MapObject? = readPoiObject(id, cache, null)
-
-	fun readPoiObject(objectId: Long, cache: KTLongObjectMap<MapObject>?, wanted: KTLongHashSet?): MapObject? {
+	fun readPoiObject(objectId: Long, cache: KTLongObjectMap<MapObject>?): MapObject? {
 		var id = objectId and ((1L shl SHIFT_ALT_NAME) - 1) // the alternative name variant reads the same object
 		if (cache != null) {
 			val mapObject = cache[id]
@@ -647,21 +645,10 @@ class SpatialSearchContext(
 		stats.sub2ReadObjTime.start()
 		val bmir = files[c!!.fileInd]
 		val bytesRead = bmir.getBytesRead()
-		val lst = bmir.readAmenityBlock(nameIndex!!.poiRegion!!, shift, poiInd)
-		if (cache != null) {
-			val ofirstid = oid - (poiInd shl SHIFT_FILE_IND)
-			for (i in lst.indices) {
-				val bid = ofirstid + (i shl SHIFT_FILE_IND)
-				if (wanted == null || wanted.contains(bid)) {
-					cache.put(bid, lst[i])
-				}
-			}
+		val amenity = bmir.readAmenity(nameIndex!!.poiRegion!!, shift, poiInd)
+		if (cache != null && amenity != null) {
+			cache.put(oid, amenity)
 		}
-		if (poiInd >= lst.size) {
-			LOG.error("Error reading $shift - $poiInd object from ${c.file} ")
-			return null
-		}
-		val amenity = lst[poiInd]
 		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead)
 		stats.sub2ReadObjTime.finish()
 		return amenity
@@ -1177,7 +1164,5 @@ class SpatialSearchContext(
 			}
 			return true
 		}
-
-		fun poiObjectId(id: Long): Long = id and ((1L shl SHIFT_ALT_NAME) - 1)
 	}
 }

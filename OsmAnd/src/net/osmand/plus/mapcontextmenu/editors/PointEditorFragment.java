@@ -1,7 +1,9 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
 import static net.osmand.plus.myplaces.favorites.FavoriteGroup.isPersonalCategoryDisplayName;
+import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.utils.InsetTarget;
@@ -38,6 +41,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
+import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
 import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.PointBitmapDrawer;
@@ -394,14 +399,35 @@ public abstract class PointEditorFragment extends EditorFragment {
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		this.selectedGroup = group;
 		if (updateAppearance) {
-			setColor(group.getColor());
-			setColorSelected(false);
+			setColor(manualChanges.colorOnFolderChange(getColor(), group.getColor()));
 			selectColorInPalette();
-			setIconName(group.getIconName());
-			setBackgroundType(group.getBackgroundType());
+			String groupIconName = group.getIconName() != null ? group.getIconName() : DEFAULT_ICON_NAME;
+			setIconName(manualChanges.iconOnFolderChange(getIconName(), groupIconName));
+			selectIconInController();
+			BackgroundType groupShape = BackgroundType.getByTypeName(group.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+			setBackgroundType(manualChanges.shapeOnFolderChange(getBackgroundType(), groupShape));
 			updateContent();
 		}
 		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.getName()));
+	}
+
+	protected void selectIconInController() {
+		selectIconInPalette(getIconCategoryKey(getIconController(), getIconName()));
+	}
+
+	@Nullable
+	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
+		String originalKey = null;
+		for (IconsCategory category : controller.getCategories()) {
+			if (category.containsIcon(iconName)) {
+				if (!category.getKey().equals(EditorIconController.ORIGINAL_KEY)) {
+					return category.getKey();
+				}
+				// the POI icon that is in no other category is shown in "Original"
+				originalKey = category.getKey();
+			}
+		}
+		return originalKey;
 	}
 
 	private boolean shouldUpdateAppearance() {

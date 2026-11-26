@@ -1532,6 +1532,8 @@ public class OsmandSettings {
 			Version.isGooglePlayEnabled() ? GOOGLE_PLAY_SERVICES : ANDROID_API, LocationSource.values()).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference(this, "map_empty_state_allowed", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> FULLSCREEN_HIDE_STATUS_BAR = new BooleanPreference(this, "fullscreen_hide_status_bar", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> FULLSCREEN_HIDE_NAVIGATION_BAR = new BooleanPreference(this, "fullscreen_hide_navigation_bar", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> FIXED_NORTH_MAP = new BooleanPreference(this, "fix_north_map", false).makeProfile().cache();
 

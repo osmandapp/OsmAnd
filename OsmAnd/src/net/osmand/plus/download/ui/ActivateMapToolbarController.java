@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.freeregion.FreeRegionActivationDialog;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.LocalOperationTask.OperationListener;
@@ -61,13 +62,16 @@ public class ActivateMapToolbarController extends SuggestMapToolbarController {
 
 	@Override
 	protected void onApply() {
-		LocalOperationTask task = new LocalOperationTask(app, RESTORE_OPERATION, new OperationListener() {
-			@Override
-			public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
-				app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> app.getOsmandMap().refreshMap());
-			}
+		// the free version asks first when the map makes another region free
+		new FreeRegionActivationDialog(app).activate(mapActivity, new LocalItem[] {localItem}, activated -> {
+			LocalOperationTask task = new LocalOperationTask(app, RESTORE_OPERATION, new OperationListener() {
+				@Override
+				public void onOperationFinished(@NonNull OperationType type, @NonNull String result) {
+					app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> app.getOsmandMap().refreshMap());
+				}
+			});
+			OsmAndTaskManager.executeTask(task, localItem);
+			dismiss();
 		});
-		OsmAndTaskManager.executeTask(task, localItem);
-		dismiss();
 	}
 }
