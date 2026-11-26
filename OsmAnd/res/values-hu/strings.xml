@@ -5429,4 +5429,6 @@
     <string name="fullscreen_mode_status_bar_descr">Óra, értesítések, akkumulátor</string>
     <string name="fullscreen_mode_navigation_bar">Navigációs sáv</string>
     <string name="fullscreen_mode_navigation_bar_descr">Vissza, Kezdőlap, Legutóbbiak</string>
+    <string name="fullscreen_mode_bars_footer">A képernyő szélétől húzva egy pillanatra megjelenítheti az elrejtett sávokat. A térképre koppintva minden visszaáll.</string>
+    <string name="fullscreen_mode_also_hide">Szintén elrejtés</string>
 </resources>
