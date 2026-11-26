@@ -1019,7 +1019,7 @@ public class RouteDataObject {
 	public void setRestrictionVia(int k, long viaWay) {
 		if (restrictionsVia != null) {
 			long[] nrestrictionsVia = new long[Math.max(k + 1, restrictions.length)];
-			System.arraycopy(restrictions, 0, nrestrictionsVia, 0, restrictions.length);
+			System.arraycopy(restrictionsVia, 0, nrestrictionsVia, 0, restrictionsVia.length);
 			restrictionsVia = nrestrictionsVia;
 		} else {
 			restrictionsVia = new long[k + 1];
