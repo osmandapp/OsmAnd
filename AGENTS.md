@@ -106,6 +106,7 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
 - **Follow existing style:** OsmAnd has a long history, so consistency with existing code is crucial.
 - **Resource handling:** Be aware that many resources are dynamically collected; check `OsmAnd/build-common.gradle` for details.
 - **Android API compatibility** The app must work on every supported Android version starting from minSdk. Do not call newer platform APIs unless they are guarded by an SDK-version check or accessed through a compatible AndroidX/helper API.
+- **Android Auto:** A car action that sends the driver to the phone (activity, permission, purchase, sign-in) must use `ParkedOnlyOnClickListener.create(...)`, or Google Play rejects the release ("Visual info on phone"). Check it in the Desktop Head Unit with `restrict all` (driving) and `restrict none` (parked).
 
 ## 8. Common Tasks for Agents
 - **Adding a new Setting:** Register it in `OsmandSettings` and add it to the relevant settings fragment.
