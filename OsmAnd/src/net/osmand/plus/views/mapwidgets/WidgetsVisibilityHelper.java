@@ -8,6 +8,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,6 +38,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -47,6 +50,7 @@ public class WidgetsVisibilityHelper {
 
 	private final MapActivity mapActivity;
 	private final MapLayers mapLayers;
+	private final Set<SideWidgetsHider> sideWidgetsHiders = new LinkedHashSet<>();
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -54,6 +58,38 @@ public class WidgetsVisibilityHelper {
 		routingHelper = app.getRoutingHelper();
 		mapLayers = app.getOsmandMap().getMapLayers();
 		fragmentsHelper = mapActivity.getFragmentsHelper();
+		mapActivity.getSupportFragmentManager().registerFragmentLifecycleCallbacks(new SideWidgetsHidersTracker(), true);
+	}
+
+	public boolean shouldHideSideWidgets() {
+		for (SideWidgetsHider hider : sideWidgetsHiders) {
+			boolean hidden = hider instanceof Fragment fragment && fragment.isHidden();
+			if (!hidden && hider.shouldHideSideWidgets()) {
+				return true;
+			}
+		}
+		return isInMovingMarkerMode();
+	}
+
+	private class SideWidgetsHidersTracker extends FragmentLifecycleCallbacks {
+
+		@Override
+		public void onFragmentStarted(@NonNull FragmentManager manager, @NonNull Fragment fragment) {
+			if (fragment instanceof SideWidgetsHider hider && sideWidgetsHiders.add(hider)) {
+				onSideWidgetsHidersChanged();
+			}
+		}
+
+		@Override
+		public void onFragmentStopped(@NonNull FragmentManager manager, @NonNull Fragment fragment) {
+			if (fragment instanceof SideWidgetsHider hider && sideWidgetsHiders.remove(hider)) {
+				onSideWidgetsHidersChanged();
+			}
+		}
+
+		private void onSideWidgetsHidersChanged() {
+			mapLayers.getMapInfoLayer().updateSideWidgets();
+		}
 	}
 
 	@Nullable
@@ -445,10 +481,7 @@ public class WidgetsVisibilityHelper {
 
 	public void updateWidgetsVisibility(boolean visible) {
 		int visibility = visible ? View.VISIBLE : View.GONE;
-		AndroidUiHelper.setVisibility(mapActivity, visibility,
-				R.id.map_center_info,
-				R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel);
+		AndroidUiHelper.setVisibility(mapActivity, visibility, R.id.map_center_info);
 	}
 
 	public void updateBottomControlsVisibility(boolean visible) {

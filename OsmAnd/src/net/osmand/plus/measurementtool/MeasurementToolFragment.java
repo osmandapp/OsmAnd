@@ -102,6 +102,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
@@ -137,7 +138,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
 		SaveAsNewTrackFragmentListener, MapControlsThemeProvider, GpsFilterFragmentLister,
 		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider,
-		ICoveredScreenRectProvider, CallbackWithObject<String> {
+		ICoveredScreenRectProvider, CallbackWithObject<String>, SideWidgetsHider {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -2056,6 +2057,11 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		});
 	}
 
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
+	}
+
 	private void enterMeasurementMode() {
 		callMapActivity(mapActivity -> {
 			MeasurementToolLayer measurementLayer = getMeasurementLayer();
@@ -2073,18 +2079,11 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private OnGlobalLayoutListener getWidgetsLayoutListener() {
 		if (widgetsLayoutListener == null) {
 			widgetsLayoutListener = () -> {
-				callMapActivity(mapActivity -> {
-					View rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
-					if (rightWidgetsPanel.getVisibility() != View.GONE) {
-						AndroidUiHelper.setVisibility(mapActivity, View.GONE,
-								R.id.map_left_widgets_panel,
-								R.id.map_right_widgets_panel,
-								R.id.map_center_info,
-								R.id.map_route_info_button,
-								R.id.map_menu_button,
-								R.id.map_quick_actions_button);
-					}
-				});
+				callMapActivity(mapActivity -> AndroidUiHelper.setVisibility(mapActivity, View.GONE,
+						R.id.map_center_info,
+						R.id.map_route_info_button,
+						R.id.map_menu_button,
+						R.id.map_quick_actions_button));
 			};
 		}
 		return widgetsLayoutListener;
@@ -2101,8 +2100,6 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			ViewTreeObserver observer = mainView.getViewTreeObserver();
 			observer.removeOnGlobalLayoutListener(getWidgetsLayoutListener());
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-					R.id.map_left_widgets_panel,
-					R.id.map_right_widgets_panel,
 					R.id.map_center_info,
 					R.id.map_route_info_button,
 					R.id.map_menu_button,

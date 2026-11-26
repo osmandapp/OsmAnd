@@ -50,6 +50,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
@@ -59,7 +60,8 @@ import org.apache.commons.logging.Log;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class WeatherForecastFragment extends BaseFullScreenFragment implements WeatherWebClientListener {
+public class WeatherForecastFragment extends BaseFullScreenFragment implements WeatherWebClientListener,
+		SideWidgetsHider {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
 	private final Log log = PlatformUtil.getLog(WeatherForecastFragment.class);
@@ -518,9 +520,13 @@ public class WeatherForecastFragment extends BaseFullScreenFragment implements W
 		}
 	}
 
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return true;
+	}
+
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
-		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_center_info);
 	}
 
 	@Override

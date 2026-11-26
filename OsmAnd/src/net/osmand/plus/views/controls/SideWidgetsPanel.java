@@ -61,8 +61,6 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	private boolean nightMode;
 	private boolean rightSide;
-	private boolean selfShowAllowed;
-	private boolean selfVisibilityChanging;
 	private boolean visibilityAllowed = true;
 	private final boolean layoutRtl;
 
@@ -191,18 +189,12 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	public void update(@Nullable DrawSettings drawSettings) {
 		adapter.updateIfNeeded();
-		boolean show = hasVisibleContent() && selfShowAllowed && visibilityAllowed;
-		selfVisibilityChanging = true;
+		boolean show = hasVisibleContent() && visibilityAllowed;
 		boolean visibilityChanged = AndroidUiHelper.updateVisibility(this, show);
-		if (visibilityChanged) {
-			if (show) {
-				schedulePageSizeUpdate();
-			} else {
-				selfShowAllowed = true;
-			}
+		if (visibilityChanged && show) {
+			schedulePageSizeUpdate();
 		}
 		wrapContentAroundPage(null);
-		selfVisibilityChanging = false;
 		updateDots();
 	}
 
@@ -325,9 +317,6 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 
 	@Override
 	public void setVisibility(int visibility) {
-		if (!selfVisibilityChanging) {
-			selfShowAllowed = visibility == VISIBLE;
-		}
 		if (visibility == VISIBLE && !hasVisibleContent()) {
 			return;
 		}

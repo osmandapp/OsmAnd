@@ -81,6 +81,7 @@ import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -96,7 +97,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MapContextMenuFragment extends BaseFullScreenFragment implements DownloadEvents,
-		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
+		ICoveredScreenRectProvider, IMapDisplayPositionProvider, SideWidgetsHider {
 	public static final String TAG = "MapContextMenuFragment";
 
 	public static final float MARKER_PADDING_DP = 20f;
@@ -1388,6 +1389,11 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			menu.onFragmentResume();
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 		}
+	}
+
+	@Override
+	public boolean shouldHideSideWidgets() {
+		return menu != null && !menu.shouldShowTopControls(true);
 	}
 
 	@Override

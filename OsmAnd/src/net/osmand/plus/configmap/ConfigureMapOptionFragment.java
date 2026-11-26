@@ -33,6 +33,7 @@ import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.SideWidgetsHider;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment {
+public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment implements SideWidgetsHider {
 
 	public static final String TAG = ConfigureMapOptionFragment.class.getSimpleName();
 
@@ -259,6 +260,11 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 	}
 
 	@Override
+	public boolean shouldHideSideWidgets() {
+		return !shouldShowMapWidgets();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 
@@ -338,8 +344,7 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
-		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel, R.id.map_center_info);
+		AndroidUiHelper.setVisibility(activity, visibility, R.id.map_center_info);
 	}
 
 	@Override

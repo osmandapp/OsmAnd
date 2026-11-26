@@ -50,6 +50,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettingsManager;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
@@ -389,6 +390,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	public void updateSideWidgets() {
+		updatePanelVisibilityPolicy();
 		if (leftWidgetsPanel != null) {
 			leftWidgetsPanel.update(drawSettings);
 		}
@@ -492,14 +494,14 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	private void updatePanelVisibilityPolicy() {
 		MapActivity activity = getMapActivity();
-		WidgetsPanel previewPanel = activity != null
-				? activity.getWidgetsVisibilityHelper().getAppearancePreviewPanel()
-				: null;
+		WidgetsVisibilityHelper visibilityHelper = activity != null ? activity.getWidgetsVisibilityHelper() : null;
+		WidgetsPanel previewPanel = visibilityHelper != null ? visibilityHelper.getAppearancePreviewPanel() : null;
+		boolean sideWidgetsHidden = visibilityHelper != null && visibilityHelper.shouldHideSideWidgets();
 		if (leftWidgetsPanel != null) {
-			leftWidgetsPanel.setVisibilityAllowed(previewPanel == null || previewPanel == WidgetsPanel.LEFT);
+			leftWidgetsPanel.setVisibilityAllowed(!sideWidgetsHidden && (previewPanel == null || previewPanel == WidgetsPanel.LEFT));
 		}
 		if (rightWidgetsPanel != null) {
-			rightWidgetsPanel.setVisibilityAllowed(previewPanel == null || previewPanel == WidgetsPanel.RIGHT);
+			rightWidgetsPanel.setVisibilityAllowed(!sideWidgetsHidden && (previewPanel == null || previewPanel == WidgetsPanel.RIGHT));
 		}
 		if (topWidgetsPanel != null) {
 			topWidgetsPanel.setVisibilityAllowed(previewPanel == null || previewPanel == WidgetsPanel.TOP);
