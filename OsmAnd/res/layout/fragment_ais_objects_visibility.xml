@@ -30,24 +30,34 @@
 				android:layout_height="wrap_content"
 				app:screenDescriptionText="@string/ais_objects_visibility_desc" />
 
-			<include
-				android:id="@+id/outdated_card"
+			<LinearLayout
+				android:id="@+id/outdated_rows"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/ui_group_gap"
-				layout="@layout/ui_slider_card" />
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/outdated_row"
+					layout="@layout/item_ui_slider_list_item" />
+			</LinearLayout>
 
 			<net.osmand.plus.widgets.ui.GroupFooterView
 				android:id="@+id/outdated_footer"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" />
 
-			<include
-				android:id="@+id/hide_after_card"
+			<LinearLayout
+				android:id="@+id/hide_after_rows"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/ui_group_gap"
-				layout="@layout/ui_slider_card" />
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/hide_after_row"
+					layout="@layout/item_ui_slider_list_item" />
+			</LinearLayout>
 
 			<net.osmand.plus.widgets.ui.GroupFooterView
 				android:id="@+id/hide_after_footer"

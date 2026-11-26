@@ -13,9 +13,11 @@
 	android:paddingTop="@dimen/content_padding"
 	android:paddingBottom="@dimen/content_padding_small">
 
+	<!-- hidden from TalkBack: the slider handle reads the title and the value itself -->
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:importantForAccessibility="noHideDescendants"
 		android:orientation="horizontal"
 		android:paddingStart="@dimen/content_padding"
 		android:paddingEnd="@dimen/content_padding">

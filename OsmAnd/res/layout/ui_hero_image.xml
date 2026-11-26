@@ -8,7 +8,7 @@
 	android:id="@+id/image_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="@drawable/bg_ui_card_16">
+	android:background="@drawable/bg_ui_card">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/image"

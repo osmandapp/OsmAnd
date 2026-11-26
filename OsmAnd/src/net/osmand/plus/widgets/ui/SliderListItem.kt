@@ -37,10 +37,12 @@ class SliderListItem(val view: View) {
 
 	fun setTitle(title: CharSequence?) {
 		titleView.text = title
+		/* the name TalkBack reads for the handle: without it two sliders of a screen sound alike */
+		slider.contentDescription = title
 	}
 
 	fun setTitle(@StringRes titleId: Int) {
-		titleView.setText(titleId)
+		setTitle(view.context.getText(titleId))
 	}
 
 	/**
