@@ -3683,7 +3683,7 @@
     <string name="add_waypoint">Dodadete patna točka</string>
     <string name="save_gpx_waypoint">Začuvaj GPX točka</string>
     <string name="import_track_desc">Datotekata %1$s ne sodrži točki, uvezete ja kako pesna\?</string>
-    <string name="routing_attr_avoid_sett_description">Izbegnuvaj kaldrma ili kameni kocki</string>
+    <string name="routing_attr_avoid_sett_description">Izbegnuvaj kameni kocki</string>
     <string name="quick_action_need_to_add_item_to_list">Dodadete barem edna stavka na spisokot vo postavkite za „Brzo dejstvo“</string>
     <string name="routing_attr_piste_type_downhill_name">Alpsko i spust skijanje</string>
     <string name="routing_attr_piste_type_downhill_description">Nagibi za alpsko ili spust skijanje i pristap do ski-liftovi.</string>
@@ -3692,7 +3692,7 @@
     <string name="download_wiki_region_placeholder">Ovoj region</string>
     <string name="routeInfo_smoothness_name">Maznost</string>
     <string name="routeInfo_steepness_name">Strmnost</string>
-    <string name="routing_attr_avoid_sett_name">Bez kaldrma ili kameni kocki</string>
+    <string name="routing_attr_avoid_sett_name">Bez kameni kocki</string>
     <string name="report">Izvestaj</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Prikazi gi posebno dizajniranite pateki za planinski velosipedizam</string>
     <string name="auto_25_chars_route_tl_kl">Svrtete levo i drzete levo</string>
@@ -3732,4 +3732,6 @@
     <string name="rendering_attr_depthContourColorScheme_description">Sema na boi na dlabinski konturni linii</string>
     <string name="rendering_attr_depthContourWidth_description">Sirina na konturnata linija na dlabocina</string>
     <string name="next_turn_widget_desc">Vidzetot prikazuva informacii za vaseto sledno vrtenje so slika na manevriranje i rastojanie do nego.</string>
+    <string name="routing_attr_avoid_cobblestone_name">Izbegnuvaj kaldrma</string>
+    <string name="routing_attr_avoid_cobblestone_description">Izbegnuvaj kaldrma</string>
 </resources>

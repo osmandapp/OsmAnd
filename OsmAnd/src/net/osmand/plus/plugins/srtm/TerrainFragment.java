@@ -15,6 +15,7 @@ import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +54,12 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -73,7 +80,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TerrainFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents {
+public class TerrainFragment extends BaseFullScreenFragment implements View.OnClickListener, DownloadEvents,
+		OnDataChangeUiAdapter {
 
 	public static final String TAG = TerrainFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
@@ -97,6 +105,8 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 	private LinearLayout emptyState;
 	private View emptyStateDivider;
 	private LinearLayout contentContainer;
+	private View contentContainerBottom;
+	private ViewGroup reliefBuildingsRows;
 	private View titleBottomDivider;
 	private GradientChart gradientChart;
 
@@ -135,6 +145,8 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		downloadDescriptionTv = root.findViewById(R.id.download_description_tv);
 		titleBottomDivider = root.findViewById(R.id.titleBottomDivider);
 		contentContainer = root.findViewById(R.id.content_container);
+		contentContainerBottom = root.findViewById(R.id.content_container_bottom);
+		reliefBuildingsRows = root.findViewById(R.id.relief_buildings_rows);
 		switchCompat = root.findViewById(R.id.switch_compat);
 		descriptionTv = root.findViewById(R.id.description);
 		emptyState = root.findViewById(R.id.empty_state);
@@ -154,6 +166,9 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		switchCompat.setChecked(terrainEnabled);
 		switchCompat.setOnClickListener(this);
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
+		View mainToggle = root.findViewById(R.id.main_toggle);
+		mainToggle.setOnClickListener(v -> switchCompat.performClick());
+		UiUtilities.setupListItemBackground(app, mainToggle, profileColor);
 
 		modifyButton.setOnClickListener(view -> callMapActivity(mapActivity -> {
 			if (isColoringTypeAvailable()) {
@@ -171,12 +186,76 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		return root;
 	}
 
+	/*
+	 * 3D Relief and 3D buildings: the rows of Configure map, built by the plugin and drawn the same way.
+	 * Rebuilt with the rest of the screen, as the 3D Relief row names what shades the relief.
+	 */
+	private void updateReliefAndBuildingsCard() {
+		callMapActivity(mapActivity -> {
+			ContextMenuAdapter adapter = new ContextMenuAdapter(app);
+			srtmPlugin.add3DItems(adapter, mapActivity);
+			List<ContextMenuItem> items = adapter.getItems();
+			/* the edge of the card replaces the divider of the last row */
+			items.get(items.size() - 1).setHideDivider(true);
+
+			ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
+			viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+			viewCreator.setCustomControlsColor(profileColor);
+			viewCreator.setUiAdapter(this);
+			for (int i = 0; i < items.size(); i++) {
+				ContextMenuItem item = items.get(i);
+				View existing = reliefBuildingsRows.getChildAt(i);
+				View view = viewCreator.getView(item, existing);
+				if (existing == null) {
+					reliefBuildingsRows.addView(view);
+					AndroidUtils.setBackground(view, UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f));
+					alignToScreenKeyline(view);
+				}
+				view.setOnClickListener(v -> onReliefOrBuildingsRowClick(v, item));
+			}
+		});
+	}
+
+	/* the Configure map row puts its text and divider at 56 dp, the rest of this screen at 72 dp */
+	private void alignToScreenKeyline(@NonNull View row) {
+		int keyline = getDimensionPixelSize(R.dimen.divider_color_light_margin_start);
+		int iconEnd = getDimensionPixelSize(R.dimen.content_padding) + getDimensionPixelSize(R.dimen.standard_icon_size);
+		View textWrapper = row.findViewById(R.id.text_wrapper);
+		((MarginLayoutParams) textWrapper.getLayoutParams()).setMarginStart(keyline - iconEnd);
+		View divider = row.findViewById(R.id.divider);
+		((MarginLayoutParams) divider.getLayoutParams()).setMarginStart(keyline);
+	}
+
+	private void onReliefOrBuildingsRowClick(@NonNull View view, @NonNull ContextMenuItem item) {
+		ItemClickListener click = item.getItemClickListener();
+		if (click instanceof OnRowItemClick) {
+			((OnRowItemClick) click).onRowItemClick(this, view, item);
+		} else if (click != null) {
+			click.onContextMenuClick(this, view, item, false);
+		}
+	}
+
+	@Override
+	public void onDataSetChanged() {
+		updateReliefAndBuildingsCard();
+	}
+
+	@Override
+	public void onDataSetInvalidated() {
+		updateReliefAndBuildingsCard();
+	}
+
+	@Override
+	public void onRefreshItem(@NonNull String itemId) {
+		updateReliefAndBuildingsCard();
+	}
+
 	private void updateChart() {
 		int labelsColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
-		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
 		TerrainMode mode = srtmPlugin.getTerrainMode();
+		ChartUtils.setupGradientChart(app, gradientChart, 9, 24, false, xAxisGridColor, labelsColor);
 		TerrainType type = mode.getType();
 
 		GradientPaletteCategory category = type.toPaletteCategory();
@@ -231,10 +310,12 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		View colorSchemeBtn = root.findViewById(R.id.color_scheme_button);
 		colorSchemeBtn.setOnClickListener(view -> {
 			List<PopUpMenuItem> menuItems = new ArrayList<>();
+			TerrainType selectedType = srtmPlugin.getTerrainMode().getType();
 			for (TerrainMode mode : TerrainMode.values(app)) {
 				if (mode.isDefaultMode()) {
 					menuItems.add(new PopUpMenuItem.Builder(app)
 							.setTitle(mode.getType().getName(app))
+							.setSelected(mode.getType() == selectedType)
 							.setOnClickListener(v -> setupTerrainMode(mode))
 							.create());
 				}
@@ -243,7 +324,6 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 			displayData.anchorView = view;
 			displayData.menuItems = menuItems;
 			displayData.nightMode = nightMode;
-			displayData.layoutId = R.layout.popup_menu_item_checkbox;
 			displayData.widthMode = PopUpMenuWidthMode.STANDARD;
 			PopUpMenu.show(displayData);
 		});
@@ -328,6 +408,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		adjustGlobalVisibility();
 		updateColorSchemeCard(mode);
 		updateChart();
+		updateReliefAndBuildingsCard();
 	}
 
 	private void adjustGlobalVisibility() {
@@ -335,6 +416,7 @@ public class TerrainFragment extends BaseFullScreenFragment implements View.OnCl
 		emptyStateDivider.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		titleBottomDivider.setVisibility(terrainEnabled ? View.GONE : View.VISIBLE);
 		contentContainer.setVisibility(terrainEnabled ? View.VISIBLE : View.GONE);
+		contentContainerBottom.setVisibility(terrainEnabled ? View.VISIBLE : View.GONE);
 	}
 
 	private void setupClickableText(TextView textView,

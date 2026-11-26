@@ -27,7 +27,7 @@ public class InstallReferrer {
 		if (Algorithms.isEmpty(referrer)) {
 			return "";
 		}
-		Uri uri = Uri.parse("?" + referrer);
+		Uri uri = parseQuery(referrer);
 		Uri.Builder builder = new Uri.Builder();
 		for (String key : CAMPAIGN_KEYS) {
 			String value = uri.getQueryParameter(key);
@@ -54,12 +54,18 @@ public class InstallReferrer {
 		if (Algorithms.isEmpty(referrer)) {
 			return;
 		}
-		Uri uri = Uri.parse("?" + referrer);
+		Uri uri = parseQuery(referrer);
 		for (String key : uri.getQueryParameterNames()) {
 			String value = uri.getQueryParameter(key);
 			if (!Algorithms.isEmpty(value)) {
 				params.put(key, value);
 			}
 		}
+	}
+
+	@NonNull
+	private static Uri parseQuery(@NonNull String query) {
+		// Not Uri.parse("?" + query): it takes the first ':' anywhere in the string for a scheme separator
+		return new Uri.Builder().encodedQuery(query).build();
 	}
 }

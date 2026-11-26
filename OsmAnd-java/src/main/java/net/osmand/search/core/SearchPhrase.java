@@ -497,6 +497,24 @@ public class SearchPhrase {
 		return settings.hasCustomSearchType(type);
 	}
 
+	// the address tab list opened by a city / postcode button, or the streets of a selected city / postcode:
+	// the typed text filters this list instead of starting a new full-text search
+	public boolean isAddressListFilter() {
+		ObjectType[] searchTypes = getSearchTypes();
+		if (searchTypes == null || searchTypes.length == 0) {
+			return false;
+		}
+		boolean cityOrPostcodeList = true;
+		for (ObjectType type : searchTypes) {
+			if (type != ObjectType.CITY && type != ObjectType.VILLAGE && type != ObjectType.POSTCODE) {
+				cityOrPostcodeList = false;
+				break;
+			}
+		}
+		return cityOrPostcodeList
+				|| isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE);
+	}
+
 	public boolean isSearchTypeAllowed(ObjectType searchType) {
 		return isSearchTypeAllowed(searchType, false);
 	}

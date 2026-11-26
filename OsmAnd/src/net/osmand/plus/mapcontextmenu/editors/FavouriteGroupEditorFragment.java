@@ -6,6 +6,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
@@ -42,6 +43,16 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 			return activity.getContextMenu().getFavoritePointEditor();
 		}
 		return null;
+	}
+
+	@Override
+	protected void applyToPointEditor(@NonNull PointsGroup pointsGroup) {
+		FragmentActivity activity = getActivity();
+		if (activity == null || activity instanceof MapActivity) {
+			super.applyToPointEditor(pointsGroup);
+		} else {
+			FavoritePointEditorFragment.setPointsGroupOutsideMap(activity, pointsGroup);
+		}
 	}
 
 	@Override

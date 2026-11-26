@@ -5,7 +5,7 @@ import net.osmand.shared.util.KAlgorithms
 /**
  * One row of the travel search: enough to draw it and to fetch the article behind it.
  *
- * A copy of `WikivoyageSearchResult` in the android app, which stays there; this copy is for iOS.
+ * Based on `WikivoyageSearchResult` from the Android app.
  */
 class WikivoyageSearchResult {
 

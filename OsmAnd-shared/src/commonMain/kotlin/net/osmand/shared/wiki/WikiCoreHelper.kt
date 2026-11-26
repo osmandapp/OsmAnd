@@ -78,13 +78,19 @@ object WikiCoreHelper {
 	fun getWikiImageList(
 		tags: Map<String, String>,
 		listener: NetworkResponseListener? = null
-	): List<WikiImage> {
+	): List<WikiImage> = loadWikiImages(tags, listener).images
+
+	fun loadWikiImages(
+		tags: Map<String, String>,
+		listener: NetworkResponseListener? = null
+	): WikiImagesResult {
 		val wikiTagData = WikiHelper.extractWikiTagData(tags)
 		val wikidataId = wikiTagData.wikidataId
 		val wikiCategory = wikiTagData.wikiCategory
 		val wikiTitle = wikiTagData.wikiTitle
 
 		val wikiImages = wikiTagData.wikiImages
+		var failed = false
 		if (USE_OSMAND_WIKI_API) {
 			val params = mutableListOf<String>()
 
@@ -103,14 +109,14 @@ object WikiCoreHelper {
 			if (params.isNotEmpty()) {
 				val urlParams = params.joinToString("&")
 				val finalUrl = "$OSMAND_API_ENDPOINT$WIKI_PLACE_ACTION$urlParams&addMetaData=true"
-				getImagesOsmAndAPIRequestV2(finalUrl, wikiImages, listener)
+				failed = !getImagesOsmAndAPIRequestV2(finalUrl, wikiImages, listener)
 			}
 		} else {
 			wikidataId?.takeIf { it.isNotEmpty() }?.let { getWikidataImageWikidata(it, wikiImages) }
 			wikiCategory?.takeIf { it.isNotEmpty() }
 				?.let { getWikimediaImageCategory(it, wikiImages, 0) }
 		}
-		return wikiImages
+		return WikiImagesResult(wikiImages, failed)
 	}
 
 	fun getAstroImageList(
@@ -207,10 +213,11 @@ object WikiCoreHelper {
 		url: String,
 		wikiImages: MutableList<WikiImage>,
 		listener: NetworkResponseListener?
-	): List<WikiImage> {
+	): Boolean {
 		val response =
 			sendWikipediaApiRequest<OsmandAPIResponseV2>(url, useGzip = false, listener = listener)
-		return createWikiImages(response, wikiImages)
+		createWikiImages(response, wikiImages)
+		return response != null
 	}
 
 	private fun createWikiImages(
@@ -437,6 +444,8 @@ object WikiCoreHelper {
 
 	@Serializable
 	data class Categorymember(val title: String? = null)
+
+	data class WikiImagesResult(val images: List<WikiImage>, val failed: Boolean)
 
 	fun interface NetworkResponseListener {
 		fun onGetRawResponse(response: String)

@@ -59,7 +59,7 @@ public class SearchApisBenchmarkTest {
 		Assume.assumeTrue("set OSMAND_SEARCH_APIS_BENCHMARK to run", System.getenv("OSMAND_SEARCH_APIS_BENCHMARK") != null);
 		Assume.assumeTrue("run SearchApisCompatTest first", DUMP.exists());
 		PlatformUtil.setOsmandRegions(new OsmandRegions(REGIONS.getPath()));
-		net.osmand.shared.binary.CommonWords.Companion.setOsmandRegions(
+		net.osmand.shared.map.OsmandRegions.setDefault(
 				new net.osmand.shared.map.OsmandRegions(REGIONS.getPath()));
 		List<Case> cases = new ArrayList<>();
 		try (BufferedReader in = Files.newBufferedReader(DUMP.toPath(), StandardCharsets.UTF_8)) {

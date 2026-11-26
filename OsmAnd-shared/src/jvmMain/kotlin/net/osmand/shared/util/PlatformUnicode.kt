@@ -18,3 +18,8 @@ internal actual fun platformStripDiacritics(value: String): String {
 
 internal actual fun platformNormalizeNFC(value: String): String =
 	Normalizer.normalize(value, Normalizer.Form.NFC)
+
+internal actual fun platformNormalizeNFD(value: String): String =
+	Normalizer.normalize(value, Normalizer.Form.NFD)
+
+internal actual val searchWordSeparators = Regex("\\s|,")

@@ -16,8 +16,8 @@ import kotlin.jvm.JvmStatic
  *
  * The C++ core reads the same eight fields off the java original and runs the same estimate itself.
  *
- * A copy of `net.osmand.router.PrecalculatedRouteDirection`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical.
+ * Based on `net.osmand.router.PrecalculatedRouteDirection` from OsmAnd-java. Keep behavior
+ * compatible with the original.
  */
 class PrecalculatedRouteDirection {
 
@@ -244,8 +244,8 @@ class PrecalculatedRouteDirection {
 	 * Cuts the part of this route between the two points out, and measures how far the real start
 	 * and target sit from it.
 	 *
-	 * Takes the points and the router rather than a routing context: the context holds an open obf
-	 * reader and stays in OsmAnd-java, and this is all of it that was ever read here.
+	 * Delegates to the overload that takes the start and target coordinates and the vehicle
+	 * router; these are the only parts of [RoutingContext] this calculation needs.
 	 */
 	fun adopt(ctx: RoutingContext): PrecalculatedRouteDirection? =
 		adopt(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY, ctx.getRouter())

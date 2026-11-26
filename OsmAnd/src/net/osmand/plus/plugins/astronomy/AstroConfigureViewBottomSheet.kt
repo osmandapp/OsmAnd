@@ -111,6 +111,7 @@ class AstroConfigureViewBottomSheet :
 			redFilterTarget = target
 		}
 		StarMapFragment.applyRedFilterToViews(enabled, target)
+		StarMapFragment.setSystemBarsHidden(dialog?.window, enabled)
 	}
 
 	private fun bindMapActions(root: View) {

@@ -118,6 +118,8 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 		/* the app bar has to sit below the status bar, and the content has to scroll under the
 		 * navigation bar instead of ending above it */
 		collection.add(InsetTarget.createRootInset())
+		/* in landscape the back and reset buttons stay clear of the navigation bar and the cutout */
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.toolbar))
 		collection.add(InsetTarget.createScrollable(R.id.scroll_view))
 		return collection
 	}

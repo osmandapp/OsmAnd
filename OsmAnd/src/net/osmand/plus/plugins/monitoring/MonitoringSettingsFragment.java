@@ -369,21 +369,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		if (plugin != null) {
 			ApplicationMode appMode = getSelectedAppMode();
 			for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
-				CommonPreference<String> pref = plugin.getWriteToTrackDeviceIdPref(dataType);
-
-				String deviceId = pref.getModeValue(appMode);
-				if (!Algorithms.isEmpty(deviceId)) {
-					boolean sensorLinked = false;
-					if (!plugin.isAnyConnectedDeviceId(deviceId)) {
-						if (plugin.getDevice(deviceId) != null) {
-							sensorLinked = true;
-						}
-					} else if (plugin.getAnyDevice(dataType.getSensorType()) != null) {
-						sensorLinked = true;
-					}
-					if (sensorLinked) {
-						names.add(getString(dataType.getTitleId()));
-					}
+				if (plugin.getWriteToTrackDevice(dataType, appMode) != null) {
+					names.add(getString(dataType.getTitleId()));
 				}
 			}
 		}

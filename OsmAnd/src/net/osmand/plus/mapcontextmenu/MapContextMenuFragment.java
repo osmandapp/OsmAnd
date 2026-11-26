@@ -193,9 +193,11 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         Bundle savedInstanceState) {
-		if (menu.getLatLon() == null) {
+		// A restored fragment gets a null container when its container view is gone;
+		// without a view onResume() dismisses the menu.
+		if (menu.getLatLon() == null || container == null) {
 			return null;
 		}
 

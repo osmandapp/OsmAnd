@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -17,7 +18,9 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -337,6 +340,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y = "starview_active_camera_pan_y"
 		private const val STATE_STARVIEW_ACTIVE_CAMERA_ROLL = "starview_active_camera_roll"
 
+		/**
+		 * A dialog has its own window, so the bars hidden for the activity come back while it is shown.
+		 * Sheets opened over the star map call this for their window too.
+		 */
+		@JvmStatic
+		fun setSystemBarsHidden(window: Window?, hidden: Boolean) {
+			window ?: return
+			val controller = WindowCompat.getInsetsController(window, window.decorView)
+			if (hidden) {
+				controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+				controller.hide(WindowInsetsCompat.Type.systemBars())
+			} else {
+				controller.show(WindowInsetsCompat.Type.systemBars())
+			}
+		}
+
 		@JvmStatic
 		fun applyRedFilterToViews(enabled: Boolean, vararg views: View?) {
 			val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
@@ -362,6 +381,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		// Map compass resets made before the star map was opened must not drop the restored azimuth
+		lastResetRotationToNorth = app.mapViewTrackingUtilities.lastResetRotationToNorth
 		if (savedInstanceState?.getBoolean(STATE_ECLIPSE_ACTIVE) == true) {
 			activeEclipseType = savedInstanceState.getString(STATE_ECLIPSE_TYPE)
 				?.let { runCatching { EclipseExplorerType.valueOf(it) }.getOrNull() }
@@ -677,7 +698,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		eclipseTimeline.setOnTimeChangedListener { millis, fromUser ->
 			if (fromUser) scheduleEclipseSliderTime(millis)
 		}
-		val rtl = view.layoutDirection == View.LAYOUT_DIRECTION_RTL
+		val rtl = AndroidUtils.isLayoutRtl(view.context)
 		eclipsePrevious.scaleX = if (rtl) 1f else -1f
 		eclipseNext.scaleX = if (rtl) -1f else 1f
 
@@ -766,17 +787,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		systemLeftInset = maxOf(sysBars?.left ?: 0, cutout.left)
 		systemRightInset = maxOf(sysBars?.right ?: 0, cutout.right)
 
+		updateMapControlsContainerMargins()
+		updateEclipseModeOffsets()
+	}
+
+	private fun updateMapControlsContainerMargins() {
 		mapControlsContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> {
 			rightMargin = systemRightInset
 			leftMargin = systemLeftInset
 			topMargin = systemTopInset
-			bottomMargin = systemBottomInset
+			// The regular map covers the bottom of the screen, including the navigation bar
+			bottomMargin = if (regularMapVisible) 0 else systemBottomInset
 		}
-		updateEclipseModeOffsets()
 	}
 
 	private fun updateEclipseModeOffsets() {
-		if (::eclipseCard.isInitialized) applyBottomWindowInsets(eclipseCard, regularMapVisible)
+		if (::eclipseCard.isInitialized) setExtraBottomMargin(eclipseCard, 0)
 		val eclipseOffset = if (::eclipseCard.isInitialized && eclipseCard.isVisible) {
 			eclipseCard.height + resources.getDimensionPixelSize(R.dimen.content_padding)
 		} else 0
@@ -827,16 +853,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		existingDialog?.dismissAllowingStateLoss()
 	}
 
-	private fun applyBottomWindowInsets(view: View, reset: Boolean = false, extraBottom: Int = 0) {
-		val baseMarginBottom = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		val bottomMargin = baseMarginBottom + extraBottom + if (reset) 0 else systemBottomInset
-		val layoutParams = view.layoutParams as? ViewGroup.MarginLayoutParams ?: return
-		if (layoutParams.bottomMargin == bottomMargin) return
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			this.bottomMargin = bottomMargin
-		}
-	}
-
 	private fun updateArModeUI(enabled: Boolean) {
 		if (enabled) {
 			arModeButton.setColorFilter(Color.BLUE)
@@ -879,6 +895,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
 		updateWidgetsVisibility(mapActivity, View.GONE)
+		updateSystemBars()
 		if (regularMapVisible) updateRegularMapVisibility(true)
 		mapActivity.refreshMap()
 		updateBackPressedCallback()
@@ -887,6 +904,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			lastStarCameraState?.let { state ->
 				apply2DMode(state.is2DMode)
 				starView.restoreCameraState(state)
+				if (!state.is2DMode) compassButton.update(-state.azimuth.toFloat())
 			}
 		}
 		restoredActiveEclipseCameraState?.let { state ->
@@ -947,6 +965,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.resetMapViewPaddings()
 		eclipseRestoreState?.let { restoreEclipseMapDisplayRatio(it) }
 		mapActivity.enableDrawer()
+		setSystemBarsHidden(false)
 		updateWidgetsVisibility(mapActivity, View.VISIBLE)
 		mapActivity.refreshMap()
 	}
@@ -1073,6 +1092,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				)
 			}
 		}
+		updateMapControlsContainerMargins()
 		updateEclipseModeOffsets()
 		if (isEclipseModeActive() && ::eclipseCard.isInitialized) {
 			eclipseCard.post { centerEclipseTargetAtSelectedTime() }
@@ -2459,6 +2479,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			?.applyRedFilter(enabled)
 		(childFragmentManager.findFragmentByTag(StarMapSearchDialogFragment.TAG) as? StarMapSearchDialogFragment)
 			?.applyRedFilter(enabled)
+		updateSystemBars()
+	}
+
+	// The red filter only recolours our own views: the status bar and the navigation bar stay white,
+	// so hide them while it is on. A swipe from the edge shows them for a moment (transient bars).
+	private fun updateSystemBars() {
+		if (isResumed && ::starView.isInitialized) {
+			setSystemBarsHidden(starView.showRedFilter)
+		}
+	}
+
+	private fun setSystemBarsHidden(hidden: Boolean) {
+		setSystemBarsHidden(activity?.window, hidden)
 	}
 
 	override fun getAnalyticsScreen() = "star_map"

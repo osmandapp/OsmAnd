@@ -64,8 +64,16 @@ public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 	@NonNull
 	private String getSubTitleText(@NonNull ScreenType screenType, @NonNull FragmentActivity activity, @NonNull ApplicationMode appMode) {
 		if (activity instanceof MapActivity) {
-			int allCount = getCustomizableItems(screenType, activity).size();
-			int hiddenCount = ContextMenuUtils.getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds().size();
+			List<ContextMenuItem> items = getCustomizableItems(screenType, activity);
+			List<String> hiddenIds = ContextMenuUtils.getSettingForScreen(app, screenType).getModeValue(appMode).getHiddenIds();
+			int allCount = items.size();
+			int hiddenCount = 0;
+			for (ContextMenuItem item : items) {
+				// Hidden ids of items that no longer exist (removed or from disabled plugins) are not counted
+				if (hiddenIds.contains(item.getId())) {
+					hiddenCount++;
+				}
+			}
 			String amount = app.getString(R.string.n_items_of_z, String.valueOf(allCount - hiddenCount), String.valueOf(allCount));
 			return app.getString(R.string.shared_string_items) + " : " + amount;
 		}

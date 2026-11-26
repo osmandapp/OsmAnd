@@ -951,7 +951,7 @@
     <string name="poi_recycling_cars">Аўтамабілі</string>
     <string name="poi_recycling_bicycles">Ровары</string>
     <string name="poi_drinking_water_yes">Пітная вада: так</string>
-    <string name="poi_drinking_water_no">Не</string>
+    <string name="poi_drinking_water_no">Пітная вада: не</string>
     <string name="poi_supervised_yes">Кантралюемы аб\'ект</string>
     <string name="poi_supervised_no">Некантралюемы аб\'ект</string>
     <string name="poi_seasonal_yes">Сезоннасць: так</string>
@@ -1922,7 +1922,7 @@
     <string name="poi_openfire_yes">Развядзенне адкрытага агню дазволена</string>
     <string name="poi_openfire_no">Развядзенне адкрытага агню забаронена</string>
     <string name="poi_backcountry_yes">Месца для лагера на прыродзе без выгод: так</string>
-    <string name="poi_backcountry_no">Не</string>
+    <string name="poi_backcountry_no">Месца для лагера на прыродзе без выгод: не</string>
     <string name="poi_scout_yes">Скаўцкі лагер: так</string>
     <string name="poi_scout_no">Лагер скаўтаў: не</string>
     <string name="poi_group_only_yes">Даступна толькі для груп: так</string>
@@ -2693,7 +2693,7 @@
     <string name="poi_aquaculture_mussels">Гадоўля малюскаў</string>
     <string name="poi_min_age">Мінімальны ўзрост</string>
     <string name="poi_organic_yes">Арганічныя прадукты: так</string>
-    <string name="poi_organic_no">Не</string>
+    <string name="poi_organic_no">Арганічныя прадукты: не</string>
     <string name="poi_organic_only">Арганічныя прадукты: толькі</string>
     <string name="poi_traffic_mirror">Дарожнае люстэрка</string>
     <string name="poi_diplomatic_consulate">Консульства</string>
@@ -4367,7 +4367,7 @@
     <string name="poi_playground_exercise">Трэнажорная зала на адкрытым паветры</string>
     <string name="poi_dog">Сабакі</string>
     <string name="poi_climbing_grade_super_elite">Узровень для супер элітных альпіністаў</string>
-    <string name="poi_climbing_bolts_yes">Так</string>
+    <string name="poi_climbing_bolts_yes">Альпінісцкія шрубы: так</string>
     <string name="poi_trampoline_park">Батутны парк</string>
     <string name="poi_climbing_grade_filter">Ступень складанасці ўзыходжання</string>
     <string name="poi_climbing_bolt">Альпінісцкая шруба</string>
@@ -4396,7 +4396,7 @@
     <string name="poi_climbing_grade_aliens">Узровень для прышэльцаў</string>
     <string name="poi_climbing_bolt_abseil">Спуск па канаце</string>
     <string name="poi_climbing_bolt_anchor">Страхоўка</string>
-    <string name="poi_climbing_bolts_no">Не</string>
+    <string name="poi_climbing_bolts_no">Альпінісцкія шрубы: не</string>
     <string name="poi_climbing_bolts">Альпінісцкія шрубы</string>
     <string name="poi_climbing_quality_medium">Сярэдні</string>
     <string name="poi_socket_type2_voltage_filter">Напружанне раздыма тыпу 2</string>

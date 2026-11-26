@@ -5651,4 +5651,5 @@
     <string name="rendering_attr_surface_clay_name">Klei</string>
     <string name="rendering_attr_surface_laterite_name">Lateriet</string>
     <string name="astro_eclipse_column_below_horizon">Onder de horizon</string>
+    <string name="astro_ar_mode">AR-modus</string>
 </resources>

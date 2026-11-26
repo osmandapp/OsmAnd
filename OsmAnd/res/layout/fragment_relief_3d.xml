@@ -21,7 +21,16 @@
 			android:background="?attr/activity_background_basic"
 			android:orientation="vertical">
 
-			<include layout="@layout/item_title_with_description_icon_switch" />
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/bg_color">
+
+				<include
+					android:id="@+id/main_toggle"
+					layout="@layout/item_title_with_description_icon_switch" />
+
+			</FrameLayout>
 
 			<include
 				android:id="@+id/titleBottomDivider"
@@ -38,6 +47,7 @@
 
 				<include layout="@layout/card_top_divider" />
 
+				<!-- The two settings open a panel with one slider each, as Terrain - Visibility does -->
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -57,7 +67,7 @@
 							android:layout_height="wrap_content"
 							android:layout_margin="@dimen/content_padding"
 							android:src="@drawable/ic_action_terrain_scale"
-							android:tint="?attr/default_icon_color" />
+							app:tint="?attr/default_icon_color" />
 
 						<TextView
 							android:layout_width="wrap_content"
@@ -81,7 +91,77 @@
 
 					</LinearLayout>
 
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:layout_marginStart="@dimen/divider_color_light_margin_start"
+						android:background="?attr/dashboard_divider"
+						android:focusable="false" />
+
+					<LinearLayout
+						android:id="@+id/terrain_shadows_button"
+						android:layout_width="match_parent"
+						android:layout_height="@dimen/setting_list_item_large_height"
+						android:background="?attr/selectableItemBackground"
+						android:gravity="center_vertical"
+						android:orientation="horizontal">
+
+						<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_margin="@dimen/content_padding"
+							android:src="@drawable/ic_action_hillshade_dark"
+							app:tint="?attr/default_icon_color" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:paddingHorizontal="@dimen/content_padding"
+							android:text="@string/terrain_shadows"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_list_text_size"
+							android:textStyle="normal" />
+
+						<TextView
+							android:id="@+id/terrain_shadows_value"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="end"
+							android:paddingHorizontal="@dimen/content_padding"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="40%" />
+
+					</LinearLayout>
+
 				</LinearLayout>
+
+				<include layout="@layout/card_bottom_divider" />
+
+				<!-- Says why Terrain shadows cannot be changed, right under their card -->
+				<TextView
+					android:id="@+id/terrain_shadows_footer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:lineSpacingExtra="@dimen/line_spacing_extra_description"
+					android:paddingHorizontal="@dimen/content_padding"
+					android:paddingVertical="@dimen/content_padding_small"
+					android:text="@string/terrain_shadows_hillshade_footer"
+					android:textColor="?android:textColorSecondary"
+					android:textSize="@dimen/default_desc_text_size"
+					android:visibility="gone" />
+
+				<include layout="@layout/card_top_divider" />
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/bg_color">
+
+					<include layout="@layout/sun_position_row" />
+
+				</FrameLayout>
 
 				<include layout="@layout/card_bottom_divider" />
 

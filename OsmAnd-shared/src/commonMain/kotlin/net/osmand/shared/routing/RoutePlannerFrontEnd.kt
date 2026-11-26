@@ -25,11 +25,10 @@ import kotlin.math.max
  * the detailed search as a [PrecalculatedRouteDirection]; a previous route can be reused past the
  * point the driver left it.
  *
- * A copy of `net.osmand.router.RoutePlannerFrontEnd`, which stays in OsmAnd-java for android and
- * tools; this copy is for iOS. It carries the search over the road graph, the HH search, the gpx
- * approximation and the preparation. Not copied: the missing maps check (`MissingMapsCalculator`
- * needs the world regions), and the native path, since on iOS this planner is what replaces the
- * C++ one; so there is no `useNativeApproximation` here either.
+ * Based on `net.osmand.router.RoutePlannerFrontEnd` from OsmAnd-java. It carries the search
+ * over the road graph, the HH search, the gpx approximation and the preparation. The missing
+ * maps check (`MissingMapsCalculator`) and delegation to the C++ router are not implemented
+ * here; `useNativeApproximation` is therefore also absent.
  */
 class RoutePlannerFrontEnd {
 

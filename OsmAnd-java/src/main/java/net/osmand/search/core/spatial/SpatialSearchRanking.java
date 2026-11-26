@@ -3,9 +3,11 @@ package net.osmand.search.core.spatial;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -40,8 +42,15 @@ public class SpatialSearchRanking {
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
+	/** "lidl espoo": a POI that the map places in another city than the one the query named. More than a POI can score
+	 *  (0.15 name + 1.6 landmark + 0.5 rating + 2 near + 1 exact), so however close it is, it stays below the named city */
+	public double wOutsideCity = 6.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
 	public double ratingSpan = 1200.0;
+
+	/** share of the way to the named city added to a POI's distance from the centre of the city: see distanceViaCity.
+	 *  Below 1, or the way via the centre is never shorter than the direct one */
+	private static final double WAY_TO_CITY_SHARE = 0.7;
 
 	// name
 	private static final double NAME_EXACT = 1.00;
@@ -128,10 +137,81 @@ public class SpatialSearchRanking {
 		if (head == null) {
 			return 0;
 		}
-		Double km = center == null ? null : SpatialSearchResult.getDistance(r, center) / 1000.0;
+		SpatialSearchResultRef city = matchedCity(r);
+		Double km = center == null ? null : distanceViaCity(r, city, center, SpatialSearchResult.getDistance(r, center) / 1000.0);
 		return score(nameScore(head), typeScore(head), subType(head.atom), head.atom, r.getTotalRating(),
 				r.parent.MIN_ELO_RATING, km, isNotable(r), queryIsKind(head), kindOnlyAddress(r))
-				- (head.atom.ruleSpelling ? wRuleSpelling : 0);
+				- (head.atom.ruleSpelling ? wRuleSpelling : 0)
+				- (outsideCity(head, city) ? wOutsideCity : 0);
+	}
+
+	/** the settlement the query named together with the object */
+	private static SpatialSearchResultRef matchedCity(SpatialSearchResult r) {
+		for (int i = 1; i < r.objs.size(); i++) {
+			if (r.objs.get(i).atom.object instanceof City c && c.getType() != null
+					&& c.getType().storedAsSeparateAdminEntity() && c.getType() != City.CityType.POSTCODE) {
+				return r.objs.get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * "lidl espoo" from Vantaa: by the distance from the person the first screen is the edge of Espoo next to Vantaa.
+	 * A POI of a category the query named is as far as from the city's centre plus WAY_TO_CITY_SHARE of the way to it,
+	 * when that is nearer; the farther the person is from the city's bbox, the more, at halfWeightKm by half.
+	 */
+	private double distanceViaCity(SpatialSearchResult r, SpatialSearchResultRef city, LatLon person, double direct) {
+		LatLon poi = r.getLatLon(), centre = city == null ? null : city.atom.object.getLocation();
+		int[] b = city == null || city.atom.coords == null ? null : city.atom.coords.bbox31;
+		if (centre == null || poi == null || b == null || !namedByKind(r.getFirstRef())) {
+			return direct;
+		}
+		int x = MapUtils.get31TileNumberX(person.getLongitude()), y = MapUtils.get31TileNumberY(person.getLatitude());
+		double outside = distKm(x, y, Math.min(b[0], b[2]), Math.min(b[1], b[3]), Math.max(b[0], b[2]), Math.max(b[1], b[3]));
+		double via = (MapUtils.getDistance(centre, poi) + WAY_TO_CITY_SHARE * MapUtils.getDistance(person, centre)) / 1000.0;
+		return Math.min(direct, direct + outside / (outside + halfWeightKm) * (via - direct));
+	}
+
+	/**
+	 * "lidl espoo": the bbox of Espoo covers Helsinki. A POI is outside the named city when its tag groups hold
+	 * a settlement of the same rank under another name; it loses wOutsideCity. No tag groups - nothing changes.
+	 */
+	private static boolean outsideCity(SpatialSearchResultRef head, SpatialSearchResultRef city) {
+		if (city == null || !(head.atom.object instanceof Amenity a) || Algorithms.isEmpty(a.getTagGroups())) {
+			return false;
+		}
+		City c = (City) city.atom.object;
+		// a town is of the rank of a city: the town Leonding borders the city Linz
+		String kind = c.getType() == City.CityType.TOWN ? "city" : c.getType().name().toLowerCase(Locale.ROOT);
+		boolean sameKind = false;
+		for (List<TagValuePair> group : a.getTagGroups().values()) {
+			boolean kindMatches = false, nameMatches = false;
+			for (TagValuePair p : group) {
+				if (p.tag.equals("place")) {
+					kindMatches = kind.equals("town".equals(p.value) ? "city" : p.value);
+				} else if (p.tag.equals("name") || p.tag.startsWith("name:")) {
+					nameMatches |= isNameOf(c, p.value);
+				}
+			}
+			if (kindMatches && nameMatches) {
+				return false;
+			}
+			sameKind |= kindMatches;
+		}
+		return sameKind;
+	}
+
+	private static boolean isNameOf(City c, String name) {
+		if (name.equalsIgnoreCase(c.getName())) {
+			return true;
+		}
+		for (String n : c.getNamesMap(true).values()) {
+			if (name.equalsIgnoreCase(n)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

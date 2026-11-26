@@ -88,6 +88,11 @@ public class MapPoiTypes {
 		String getSynonyms(String keyName);
 
 		String getAllLanguagesTranslationSuffix();
+
+		// the same names in another language, null if not available
+		default PoiTranslator getTranslator(String lang) {
+			return null;
+		}
 	}
 
 	public static MapPoiTypes getDefaultNoInit() {

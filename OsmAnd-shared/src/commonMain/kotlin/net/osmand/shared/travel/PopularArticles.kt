@@ -6,9 +6,9 @@ import net.osmand.shared.util.KAlgorithms
  * One page of the articles offered on the travel screen before anything is searched, filled a page
  * at a time as the search widens.
  *
- * A copy of `PopularArticles` in the android app, which stays there; this copy is for iOS. Note
- * that the copy constructor shares the list with the original rather than copying it, as java
- * does: that is how a page carries over what the previous one collected.
+ * Based on `PopularArticles` from the Android app. Note that the copy constructor shares the
+ * list with the original rather than copying it, as java does: that is how a page carries over
+ * what the previous one collected.
  */
 class PopularArticles {
 

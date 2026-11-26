@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/description"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingTop="@dimen/content_padding_small"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding"
+	android:textColor="?android:textColorSecondary"
+	android:textSize="@dimen/default_desc_text_size"
+	tools:text="Tap &quot;Allow&quot; if you agree with our Privacy Policy" />

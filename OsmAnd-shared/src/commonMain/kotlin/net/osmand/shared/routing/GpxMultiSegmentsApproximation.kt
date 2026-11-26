@@ -21,8 +21,7 @@ import kotlin.math.sqrt
  * continues, the route found is wrapped up and the walk starts again from the next track point a
  * road can be found for.
  *
- * A copy of `GpxMultiSegmentsApproximation` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS.
+ * Based on `GpxMultiSegmentsApproximation` from OsmAnd-java.
  */
 // TEST missing roads, performance, start-end points (precise)
 class GpxMultiSegmentsApproximation(

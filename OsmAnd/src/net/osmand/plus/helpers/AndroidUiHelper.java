@@ -273,9 +273,10 @@ public class AndroidUiHelper {
 	public static void processSystemBarScrims(@NonNull WindowInsetsCompat insets, @NonNull View view) {
 		View statusBarScrim = view.findViewById(R.id.status_bar_scrim);
 		if (statusBarScrim != null) {
-			Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars()
-					| WindowInsetsCompat.Type.displayCutout()
-			);
+			// a hidden status bar (fullscreen mode) leaves the cutout inset: the map has to show there, not the scrim
+			Insets statusBarInsets = insets.isVisible(WindowInsetsCompat.Type.statusBars())
+					? insets.getInsets(WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.displayCutout())
+					: Insets.NONE;
 			ViewGroup.LayoutParams params = statusBarScrim.getLayoutParams();
 			if (params.height != statusBarInsets.top) {
 				params.height = statusBarInsets.top;

@@ -138,6 +138,9 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		updateContent()
+		/* the view is already attached here, so the switches would animate from off to their
+		 * stored state every time the screen opens */
+		view.jumpDrawablesToCurrentState()
 	}
 
 	override fun onResume() {

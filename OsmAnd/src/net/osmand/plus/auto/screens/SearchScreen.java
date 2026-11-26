@@ -16,17 +16,15 @@ import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.CarSuggestionsHelper;
 import net.osmand.plus.auto.SearchHelper;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.search.history.SearchHistoryHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RoutingHelper;
@@ -235,32 +233,9 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 				}
 				*/
 				// Previous route card
-				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-				TargetPoint startPoint = targetPointsHelper.getPointToStartBackup();
-				boolean myLocation = false;
-				if (startPoint == null) {
-					myLocation = true;
-					startPoint = targetPointsHelper.getMyLocationToStart();
-				}
-				TargetPoint destinationPoint = targetPointsHelper.getPointToNavigateBackup();
-				if (startPoint != null && destinationPoint != null) {
-					StringBuilder startText = new StringBuilder(myLocation ? app.getText(R.string.my_location) : "");
-					String startDescr = getPointName(startPoint);
-					if (!Algorithms.isEmpty(startDescr)) {
-						if (startText.length() > 0) {
-							startText.append(" — ");
-						}
-						startText.append(startDescr);
-					}
-					String destDescr = getPointName(destinationPoint);
-					SearchResult result = new SearchResult();
-					result.location = new LatLon(destinationPoint.getLatitude(), destinationPoint.getLongitude());
-					result.objectType = ObjectType.ROUTE;
-					result.object = destinationPoint;
-					result.localeName = destDescr;
-					result.relatedObject = startPoint;
-					result.localeRelatedObjectName = startText.toString();
-					recentResults.add(result);
+				SearchResult previousRoute = CarSuggestionsHelper.createPreviousRouteResult(app);
+				if (previousRoute != null) {
+					recentResults.add(previousRoute);
 				}
 
 				// Map markers
@@ -295,22 +270,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 				app.showToastMessage(e.getMessage());
 			}
 		}
-	}
-
-	private String getPointName(TargetPoint targetPoint) {
-		OsmandApplication app = getApp();
-		String name = "";
-		if (targetPoint != null) {
-			PointDescription description = targetPoint.getOriginalPointDescription();
-			if (description != null && !Algorithms.isEmpty(description.getName()) &&
-					!description.getName().equals(app.getString(R.string.no_address_found))) {
-				name = description.getName();
-			} else {
-				name = PointDescription.getLocationName(app, targetPoint.getLatLon().getLatitude(),
-						targetPoint.getLatLon().getLongitude(), true).replace('\n', ' ');
-			}
-		}
-		return name;
 	}
 
 	private void showRecents() {

@@ -6,8 +6,7 @@ import kotlin.jvm.JvmField
  * What the HH search came back with: the hub-graph edges the route follows, each resolved to
  * detailed road segments.
  *
- * A copy of `HHRouteDataStructure.HHNetworkRouteRes` in OsmAnd-java, which stays there for
- * android and tools; this copy is for iOS.
+ * Based on `HHRouteDataStructure.HHNetworkRouteRes` from OsmAnd-java.
  */
 class HHNetworkRouteRes : RouteCalcResult {
 

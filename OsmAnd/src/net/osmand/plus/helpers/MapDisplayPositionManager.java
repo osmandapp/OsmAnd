@@ -52,6 +52,15 @@ public class MapDisplayPositionManager implements ViewportListener {
 		return actualMapRatio;
 	}
 
+	/**
+	 * @return the part of the map that the covered screen rects leave visible, in map view pixels, or null
+	 * when the map position is not projected into it.
+	 */
+	@Nullable
+	public Rect getVisibleMapRect() {
+		return visibleMapRect != null ? new Rect(visibleMapRect) : null;
+	}
+
 	public boolean hasCustomMapRatio() {
 		return customMapRatioX != 0 || customMapRatioY != 0;
 	}

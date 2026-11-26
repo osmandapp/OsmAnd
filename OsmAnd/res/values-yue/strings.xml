@@ -440,8 +440,8 @@
     <string name="show_debug_tile_description">顯示每個圖磚的地圖符號資訊</string>
     <string name="enable_msaa">啟用 MSAA</string>
     <string name="map_text">地圖呈現</string>
-    <string name="routing_attr_avoid_cobblestone_name">避免石板路</string>
-    <string name="routing_attr_avoid_cobblestone_description">避免鵝卵石路面</string>
+    <string name="routing_attr_avoid_cobblestone_name">避開鵝卵石路</string>
+    <string name="routing_attr_avoid_cobblestone_description">避開鵝卵石路面</string>
     <string name="release_4_8">• 新的地形著色選項「海拔」 \n \n • 地形、軌跡與路線的自訂調色板 \n \n • 位置圖示的 3D 變體 \n \n • 現在可以將快速動作分配給外接鍵盤 \n \n • 天氣：更新使用者介面，新增風的動畫 \n \n • 3D 軌跡改進：新的視覺化與著色選項 \n \n • 地圖上旅遊路線的更多選擇 \n \n • 新增應用程式佈景主題選項以遵循地圖模式 \n \n • 修復了軌跡統計、排序與搜尋 \n \n • OSM 編輯：已刪除帳號/密碼授權方法 \n \n • 從 Android 14 開始切換至系統 Sharesheet</string>
     <string name="track_vertical_exaggeration_description">調整比例值可以改變 3D 路線的垂直高度顯示。</string>
     <string name="visualized_by">視覺化方式</string>
@@ -4548,8 +4548,8 @@
     <string name="routeInfo_surface_name">路面類型</string>
     <string name="routeInfo_smoothness_name">路面平整度</string>
     <string name="routeInfo_steepness_name">路段坡度</string>
-    <string name="routing_attr_avoid_sett_name">避開鐵路路軌</string>
-    <string name="routing_attr_avoid_sett_description">避開鐵路路軌路段</string>
+    <string name="routing_attr_avoid_sett_name">避開方石路</string>
+    <string name="routing_attr_avoid_sett_description">避開方石路面</string>
     <string name="quick_action_need_to_add_item_to_list">至少在「快速動作」設定中新增一個項目</string>
     <string name="routing_attr_piste_type_downhill_name">高山下坡滑雪</string>
     <string name="routing_attr_piste_type_downhill_description">適合高山或下坡滑雪的斜坡及纜車路線。</string>

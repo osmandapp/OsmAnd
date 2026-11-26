@@ -44,6 +44,7 @@
 		android:layout_marginTop="@dimen/dialog_content_margin"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small"
 		android:text="@string/choose_data_to_share"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_desc_text_size"

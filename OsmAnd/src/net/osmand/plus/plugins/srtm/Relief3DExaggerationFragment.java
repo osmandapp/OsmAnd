@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.dashboard.DashboardType.RELIEF_3D;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.MAX_VERTICAL_EXAGGERATION;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.MIN_VERTICAL_EXAGGERATION;
 
@@ -11,16 +10,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.MapOptionSliderFragment;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class Relief3DExaggerationFragment extends MapOptionSliderFragment {
+
+	private static final String RETURN_DASHBOARD_KEY = "return_dashboard";
 
 	@Nullable
 	@Override
@@ -57,19 +58,31 @@ public class Relief3DExaggerationFragment extends MapOptionSliderFragment {
 	}
 
 	@Override
+	protected void onValueChanged(float value) {
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		if (plugin != null) {
+			plugin.setVerticalExaggerationScale(value);
+			refreshMap();
+		}
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 
 		MapActivity activity = getMapActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
-			activity.getDashboard().setDashboardVisibility(true, RELIEF_3D, false);
+			DashboardType returnTo = DashboardType.valueOf(requireArguments().getString(RETURN_DASHBOARD_KEY));
+			activity.getDashboard().setDashboardVisibility(true, returnTo, false);
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull DashboardType returnTo) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(RETURN_DASHBOARD_KEY, returnTo.name());
 			Relief3DExaggerationFragment fragment = new Relief3DExaggerationFragment();
-			fragment.setTargetFragment(target, 0);
+			fragment.setArguments(args);
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(null)

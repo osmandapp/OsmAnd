@@ -13,12 +13,13 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 public class AverageGlideWidgetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String KEY_TIME_INTERVAL = "time_interval";
 	private static final String KEY_VERTICAL_SPEED_MODE = "vertical_speed_mode";
+	private static final String MODE_REQUEST_KEY = "mode_request_key";
 
 	private GlideAverageWidget widget;
 
@@ -57,6 +58,10 @@ public class AverageGlideWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 		modeButton.setBackground(getPressedStateDrawable());
 		modeDescription = view.findViewById(R.id.mode_description);
 		updateModeDescription();
+		SingleSelectionDialogFragment.setResultListener(this, MODE_REQUEST_KEY, index -> {
+			verticalSpeedMode = index == 1;
+			updateModeDescription();
+		});
 
 		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), appMode, isUsedOnMap(), initialIntervalMillis);
 		ViewGroup cardContainer = view.findViewById(R.id.time_interval_card_container);
@@ -69,10 +74,7 @@ public class AverageGlideWidgetInfoFragment extends BaseSimpleWidgetInfoFragment
 				.setTitle(R.string.shared_string_mode)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, verticalSpeedMode ? 1 : 0, v -> {
-			verticalSpeedMode = (int) v.getTag() == 1;
-			updateModeDescription();
-		});
+		SingleSelectionDialogFragment.showInstance(this, MODE_REQUEST_KEY, dialogData, items, verticalSpeedMode ? 1 : 0);
 	}
 
 	private void updateModeDescription() {

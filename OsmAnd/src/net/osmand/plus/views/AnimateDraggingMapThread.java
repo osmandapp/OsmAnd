@@ -48,6 +48,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 	public static float SKIP_ANIMATION_TIMEOUT = 10000f;
 	public static float SKIP_ANIMATION_DP_THRESHOLD = 20f;
 	public static float TILT_ANIMATION_TIME = 400f;
+	public static float FOLLOW_SMOOTH_TIME = 800f;
 	public static int TARGET_NO_ROTATION = -720;
 	public static float TARGET_MOVE_VELOCITY_LIMIT = 4000f;
 	public static float TARGET_MOVE_DECELERATION = 6000f;
@@ -74,6 +75,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 	private boolean animatingMapRotation;
 	private boolean animatingMapTilt;
 	private boolean userAnimationsActive;
+	private volatile boolean following;
+	private volatile double followLatitude;
+	private volatile double followLongitude;
+	private volatile long followTargetTime;
 	private volatile boolean inconsistentMapTarget;
 	private volatile boolean targetChanged;
 	private volatile int targetPixelX;
@@ -264,7 +269,7 @@ public class AnimateDraggingMapThread implements TouchListener {
 			float duration = fullDuration - rotateDuration;
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
 			startThreadAnimating(() -> {
-				animator.animateAzimuthTo(finalRotation, rotateDuration, TimingFunction.Linear, userInteractionAnimationKey);
+				animator.animateAzimuthTo(-finalRotation, rotateDuration, TimingFunction.Linear, userInteractionAnimationKey);
 				animatingMapRotation = true;
 				animatingMapAnimator();
 				animatingMapRotation = false;
@@ -1019,6 +1024,62 @@ public class AnimateDraggingMapThread implements TouchListener {
 				pendingRotateAnimation();
 			}
 		});
+	}
+
+	public boolean isFollowing() {
+		return following && !stopped;
+	}
+
+	/**
+	 * Moves the map to a target that keeps changing. A new target does not start a new animation,
+	 * it only changes where the running one is heading, so the map keeps its position and speed.
+	 * The map falls behind a moving target by {@link #FOLLOW_SMOOTH_TIME}.
+	 */
+	public void followTarget(double latitude, double longitude) {
+		if (animationsDisabled || tileView.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			tileView.setLatLon(latitude, longitude, true);
+			return;
+		}
+		followLatitude = latitude;
+		followLongitude = longitude;
+		followTargetTime = SystemClock.uptimeMillis();
+		if (!isFollowing()) {
+			startThreadAnimating(this::animatingFollowInThread);
+		}
+	}
+
+	private void animatingFollowInThread() {
+		following = true;
+		animatingMapMove = true;
+		double[] x = {MapUtils.getTileNumberX(0, tileView.getLongitude()), 0};
+		double[] y = {MapUtils.getTileNumberY(0, tileView.getLatitude()), 0};
+		long time = SystemClock.uptimeMillis();
+		while (!stopped && time - followTargetTime < FOLLOW_SMOOTH_TIME * 5) {
+			sleepToRedraw(true);
+			long now = SystemClock.uptimeMillis();
+			float dt = (now - time) / 1000f;
+			time = now;
+			smoothDamp(x, MapUtils.getTileNumberX(0, followLongitude), dt);
+			smoothDamp(y, MapUtils.getTileNumberY(0, followLatitude), dt);
+			tileView.setLatLonAnimate(MapUtils.getLatitudeFromTile(0, y[0]), MapUtils.getLongitudeFromTile(0, x[0]), true);
+		}
+		animatingMapMove = false;
+		following = false;
+	}
+
+	/**
+	 * Critically damped spring: the speed stays continuous even if the target jumps.
+	 *
+	 * @param state position and speed, updated in place
+	 */
+	private void smoothDamp(double[] state, double target, float dt) {
+		double omega = 2000f / FOLLOW_SMOOTH_TIME;
+		double step = omega * dt;
+		double decay = 1 / (1 + step + 0.48 * step * step + 0.235 * step * step * step);
+		double offset = state[0] - target;
+		double change = (state[1] + omega * offset) * dt;
+		state[1] = (state[1] - omega * change) * decay;
+		state[0] = target + (offset + change) * decay;
 	}
 
 	public void startTilting(float elevationAngle, float elevationTime) {

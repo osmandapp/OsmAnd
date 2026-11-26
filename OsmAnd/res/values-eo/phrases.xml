@@ -1071,7 +1071,7 @@
     <string name="poi_wheelchair_no">Rulseĝo: ne</string>
     <string name="poi_wheelchair_limited">Rulseĝo: parta</string>
     <string name="poi_wholesale">Pogranda komerco</string>
-    <string name="poi_access_private">nur laŭ privata permeso</string>
+    <string name="poi_access_private">Aliro: nur laŭ privata permeso</string>
     <string name="poi_access_no">Aliro: ne</string>
     <string name="poi_access_customers">nur por klientoj</string>
     <string name="poi_access_destination">Aliro: nur al celo</string>
@@ -1503,7 +1503,7 @@
     <string name="poi_full_service_yes">Plena servo</string>
     <string name="poi_brushless_yes">Senbrosa: jes</string>
     <string name="poi_brushless_no">Senbrosa: ne</string>
-    <string name="poi_car_wash_no">Purigo de aŭtomobiloj: ne: ne</string>
+    <string name="poi_car_wash_no">Purigo de aŭtomobiloj: ne</string>
     <string name="poi_aeroway_fuel">Benzinejo por aviadiloj</string>
     <string name="poi_indoor_yes">Ene</string>
     <string name="poi_indoor_no">Ekstere</string>
@@ -3281,8 +3281,8 @@
     <string name="poi_scooter_yes">Skotero: jes</string>
     <string name="poi_scooter_no">Skotero: ne</string>
     <string name="poi_truck_no">Kamiono: ne</string>
-    <string name="poi_parking_fee_yes">jes</string>
-    <string name="poi_parking_fee_no">ne</string>
+    <string name="poi_parking_fee_yes">Parkumeja pago: jes</string>
+    <string name="poi_parking_fee_no">Parkumeja pago: ne</string>
     <string name="poi_parking_fee">Parkumeja pago</string>
     <string name="poi_amperage">Elektroforto</string>
     <string name="poi_charging_station_output">Povo de ŝargostacio</string>
@@ -3552,9 +3552,9 @@
     <string name="poi_hazard_additional_minefield">Minkampo</string>
     <string name="poi_hazard_additional_contamination">Poluo</string>
     <string name="poi_defibrillator_location">Loko</string>
-    <string name="poi_changing_table_yes">Tablo por ŝanĝi vindotukojn: jes: jes;vindotuko;bebo</string>
-    <string name="poi_changing_table_no">Tablo por ŝanĝi vindotukojn: ne: ne</string>
-    <string name="poi_changing_table_limited">Tablo por ŝanĝi vindotukojn: neoficiala: neoficiala;vindotuko;bebo</string>
+    <string name="poi_changing_table_yes">Tablo por ŝanĝi vindotukojn: jes;vindotuko;bebo</string>
+    <string name="poi_changing_table_no">Tablo por ŝanĝi vindotukojn: ne</string>
+    <string name="poi_changing_table_limited">Tablo por ŝanĝi vindotukojn: neoficiala;vindotuko;bebo</string>
     <string name="poi_changing_table_location_room">Tablo por ŝanĝi vindotukojn: aparta ĉambro</string>
     <string name="poi_changing_table_location_male_toilet">Loko de tablo: vira necesejo</string>
     <string name="poi_changing_table_location_female_toilet">Loko de tablo: ina necesejo</string>
@@ -3691,7 +3691,7 @@
     <string name="poi_pet_grooming">Hejmbesta beligejo</string>
     <string name="poi_atm_yes">Bankaŭtomato: jes</string>
     <string name="poi_cash_withdrawal_bank_card">Mon-elpago</string>
-    <string name="poi_cash_withdrawal_yes">jes</string>
+    <string name="poi_cash_withdrawal_yes">Mon-elpago: jes</string>
     <string name="poi_cash_withdrawal">Elpago de mono</string>
     <string name="poi_cash_withdrawal_operator">Peristo de mon‑elpago</string>
     <string name="poi_cash_withdrawal_type_checkout">Speco de mon‑elpago: per homo</string>

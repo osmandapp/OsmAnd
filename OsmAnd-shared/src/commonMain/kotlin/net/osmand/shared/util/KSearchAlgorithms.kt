@@ -1,5 +1,8 @@
 package net.osmand.shared.util
 
+import net.osmand.shared.util.collections.KTIntArrayList
+import net.osmand.shared.util.collections.KTreeSet
+
 /**
  * Copy of the part of `net.osmand.util.SearchAlgorithms` in OsmAnd-java that the obf reader and
  * the search words need: folding a name onto what a search can match, splitting a query into
@@ -9,15 +12,16 @@ package net.osmand.shared.util
  * What stayed in java is the search pipeline's own: encoding suffixes, dropping common words,
  * splitting a house number into its parts, and the reader helpers that take a protobuf stream.
  *
- * Two deliberate differences from the java original, both about the default locale:
- * - lowercasing here is locale independent. Java lowercases a name with the device's locale, which
- *   turns `I` into `ı` on a turkish phone and makes the same map read differently on two devices.
- *   Obj-C `-lowercaseString`, which iOS matches names with today, is locale independent too.
- * - code points above the basic plane count as letters. Common code cannot ask for the category of
- *   one, and the supplementary characters that appear in place names - the cjk extensions, the
- *   historic scripts - are letters; only a query holding an emoji would tokenize differently.
+ * Token splitting follows the platform default locale, as in Java.
+ *
+ * Code points above the basic plane count as letters. Common code cannot ask for the category of
+ * one, and the supplementary characters that appear in place names - the cjk extensions, the
+ * historic scripts - are letters; only a query holding an emoji would tokenize differently.
  */
 object KSearchAlgorithms {
+
+	fun lowercaseAndAlignChars(fullText: String): String =
+		alignChars(lowercaseWithDefaultLocale(fullText))
 
 	const val SUFFIX_DICT_MARKER_RAW_ESCAPE = ''
 	const val SUFFIX_DICT_MARKER_BASE = 0xE100
@@ -52,7 +56,7 @@ object KSearchAlgorithms {
 			}
 			if (!tokenCharacter) {
 				if (prev != -1) {
-					namesToAdd.add(name.substring(prev, i).lowercase())
+					namesToAdd.add(lowercaseWithDefaultLocale(name.substring(prev, i)))
 					prev = -1
 				}
 			} else {
@@ -264,6 +268,39 @@ object KSearchAlgorithms {
 		return res
 	}
 
+	/** The bbox field of an atom of a name index: its varints, decoded by [decodeBboxForNameAtoms] at zoom 31. */
+	fun decodeBboxForNameAtomsBytes(bbox: ByteArray?, x16: Int, y16: Int): IntArray? {
+		var dBbox: IntArray? = null
+		if (bbox != null) {
+			val lst = KTIntArrayList()
+			var pos = 0
+			while (pos < bbox.size) {
+				// as protobuf reads a varint from a stream: the bits past 32 are dropped, ten bytes at most
+				var n = 0
+				var shift = 0
+				while (true) {
+					if (pos >= bbox.size) {
+						throw IllegalStateException("truncated varint in a bbox")
+					}
+					val b = bbox[pos++].toInt()
+					if (shift < 32) {
+						n = n or ((b and 0x7f) shl shift)
+					}
+					if (b and 0x80 == 0) {
+						break
+					}
+					shift += 7
+					if (shift >= 64) {
+						throw IllegalStateException("malformed varint in a bbox")
+					}
+				}
+				lst.add(n)
+			}
+			dBbox = decodeBboxForNameAtoms(lst.toArray(), x16, y16, 31)
+		}
+		return dBbox
+	}
+
 	fun letters(s: String): Int {
 		var count = 0
 		for (c in s) {
@@ -306,6 +343,47 @@ object KSearchAlgorithms {
 			}
 		}
 		return false
+	}
+
+	/**
+	 * The runs of digits and of letters of a house number, lowercased and in order: "12B" gives "12" and "b".
+	 *
+	 * @param inCaseDuplicates gets the runs in the order of the name, a run met twice twice
+	 */
+	fun getBuildingCompareSet(name: String, inCaseDuplicates: MutableList<String>?): Set<String> {
+		inCaseDuplicates?.clear()
+		var resultSet: MutableSet<String>? = null
+		val currentToken = StringBuilder()
+		var lastType = 0
+		for (ch in name) {
+			val type = if (ch.isDigit()) 1 else if (ch.isLetter()) 2 else 0
+			val addToken = type != lastType
+			if (addToken && currentToken.isNotEmpty()) {
+				if (resultSet == null) {
+					resultSet = KTreeSet(naturalOrder())
+				}
+				val toAdd = currentToken.toString().lowercase()
+				inCaseDuplicates?.add(toAdd)
+				resultSet.add(toAdd)
+				currentToken.clear()
+			}
+			if (type > 0) {
+				currentToken.append(ch)
+			}
+			lastType = type
+		}
+		if (currentToken.isNotEmpty()) {
+			val toAdd = currentToken.toString().lowercase()
+			inCaseDuplicates?.add(toAdd)
+			if (resultSet == null) {
+				return setOf(toAdd)
+			}
+			resultSet.add(toAdd)
+		}
+		if (resultSet == null) {
+			return setOf(name.lowercase())
+		}
+		return resultSet
 	}
 
 	private fun isTokenCharacter(value: String, index: Int, tokenAlreadyStarted: Boolean): Boolean {

@@ -34,13 +34,14 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
 
 public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = SpeedometerSettingsFragment.class.getSimpleName();
+	private static final String SPEED_LIMIT_WARNING_REQUEST_KEY = "speed_limit_warning_request_key";
 
 	private ApplicationMode appMode;
 	private SpeedometerWidget widget;
@@ -76,6 +77,11 @@ public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 		setupToolbar(view);
 		setupToggleButtons(view);
 		setupSettingsCard(view);
+		SingleSelectionDialogFragment.setResultListener(this, SPEED_LIMIT_WARNING_REQUEST_KEY, index -> {
+			settings.SHOW_SPEED_LIMIT_WARNING.set(SpeedLimitWarningState.values()[index]);
+			setupSettingsCard(view);
+			widget.updatePreviewInfo(nightMode);
+		});
 
 		return view;
 	}
@@ -171,7 +177,7 @@ public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 		description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
 
 		View button = itemView.findViewById(R.id.button_container);
-		button.setOnClickListener(v -> showWidgetSizeDialog(view));
+		button.setOnClickListener(v -> showWidgetSizeDialog());
 
 		int color = appMode.getProfileColor(nightMode);
 		UiUtilities.setupListItemBackground(itemView.getContext(), button, color);
@@ -181,7 +187,7 @@ public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.short_divider), false);
 	}
 
-	private void showWidgetSizeDialog(@NonNull View view) {
+	private void showWidgetSizeDialog() {
 		String[] items = new String[SpeedLimitWarningState.values().length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = SpeedLimitWarningState.values()[i].toHumanString(app);
@@ -192,12 +198,7 @@ public class SpeedometerSettingsFragment extends BaseFullScreenFragment {
 				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
 
 		int selected = settings.SHOW_SPEED_LIMIT_WARNING.get().ordinal();
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			settings.SHOW_SPEED_LIMIT_WARNING.set(SpeedLimitWarningState.values()[which]);
-			setupSettingsCard(view);
-			widget.updatePreviewInfo(nightMode);
-		});
+		SingleSelectionDialogFragment.showInstance(this, SPEED_LIMIT_WARNING_REQUEST_KEY, dialogData, items, selected);
 	}
 
 	@Override

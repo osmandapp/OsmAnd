@@ -47,7 +47,6 @@ import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -357,12 +356,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public int getCurrentTab() {
 		return viewPager.getCurrentItem();
-	}
-
-	public static boolean isDownloadingPermitted(@NonNull OsmandSettings settings) {
-		Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-		int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
-		return Math.max(downloadsLeft, 0) > 0;
 	}
 
 	public static boolean shouldShowFreeVersionBanner(OsmandApplication application) {

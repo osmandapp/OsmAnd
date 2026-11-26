@@ -104,6 +104,51 @@ class CodedInputStreamTest {
 		assertEquals(List(BUFFER_SIZES.size) { "malformed varint at 11" }, inField)
 	}
 
+	/**
+	 * [CodedInputStream.readRawBytes] over runs that fit the rest of the buffer, outrun it by less
+	 * than a buffer and by more, with single bytes and seeks between them: the bytes, the position
+	 * after each run and the end of the file are the same at every buffer size.
+	 */
+	@Test
+	fun rawBytesReadTheSameAtEveryBufferBoundary() {
+		val random = Random(21102026)
+		val data = ByteArray(40_000) { random.nextInt().toByte() }
+		FileSystem.SYSTEM.write(file) { write(data) }
+		val sizes = listOf(0, 1, 2, 3, 5, 7, 8, 15, 16, 17, 31, 100, 1000, 4095, 4096, 5119, 5120, 5121, 9000, 12000)
+		for (bufferSize in BUFFER_SIZES + listOf(64, 1024)) {
+			read(bufferSize) { input ->
+				var at = 0
+				var step = 0
+				while (true) {
+					val size = sizes[step % sizes.size]
+					if (at + size > data.size) {
+						break
+					}
+					val m = "step $step size $size at $at, buffer $bufferSize"
+					assertEquals(data.copyOfRange(at, at + size).toList(), input.readRawBytes(size).toList(), m)
+					at += size
+					assertEquals(at.toLong(), input.getTotalBytesRead(), "position after $m")
+					if (step % 3 == 0 && at < data.size) {
+						assertEquals(data[at], input.readRawByte(), "byte after $m")
+						at++
+					}
+					if (step % 7 == 6) {
+						// back into what was read, and on
+						at = maxOf(0, at - 3 * size / 2)
+						input.seek(at.toLong())
+					}
+					step++
+				}
+				input.seek((data.size - 10).toLong())
+				assertFailsWith<IllegalStateException> { input.readRawBytes(11) }
+				input.seek((data.size - 10).toLong())
+				assertFailsWith<IllegalStateException> { input.readRawBytes(bufferSize + 20) }
+				input.seek((data.size - 10).toLong())
+				assertEquals(data.copyOfRange(data.size - 10, data.size).toList(), input.readRawBytes(10).toList())
+			}
+		}
+	}
+
 	private fun <T> read(bufferSize: Int, block: (CodedInputStream) -> T): T {
 		val handle = FileSystem.SYSTEM.openReadOnly(file)
 		try {

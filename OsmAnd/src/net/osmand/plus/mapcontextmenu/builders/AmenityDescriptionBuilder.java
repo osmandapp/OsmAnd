@@ -72,19 +72,38 @@ final class AmenityDescriptionBuilder {
 	boolean buildDescription(@NonNull View view) {
 		Map<String, Object> filteredInfo = infoBundle.getFilteredLocalizedInfo();
 
-		if (buildShortWikiDescription(view, filteredInfo, true)) {
-			return true;
-		}
-
 		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(
 				app, amenity, DESCRIPTION, filteredInfo);
+		boolean travelArticle = !Algorithms.isEmpty(amenity.getRouteId())
+				&& app.getResourceManager().hasTravelRepositories();
+		if ((pair == null || travelArticle) && buildShortWikiDescription(view, filteredInfo, true)) {
+			return true;
+		}
 		if (pair == null) {
 			return false;
 		}
 
-		menuBuilder.buildDescriptionRow(view, pair.first);
+		View.OnClickListener wikipediaClickListener = travelArticle ? null : getWikipediaClickListener(filteredInfo);
+		menuBuilder.buildDescriptionRow(view, pair.first, null, null, wikipediaClickListener);
 		infoBundle.setCustomHiddenExtensions(Collections.singletonList(DESCRIPTION));
 		return true;
+	}
+
+	/**
+	 * @return listener of the Wikipedia button next to the description: it opens the offline
+	 * article when the Wikipedia map is downloaded, otherwise the online article from the wikipedia tag.
+	 */
+	@Nullable
+	View.OnClickListener getWikipediaClickListener(@NonNull Map<String, Object> filteredInfo) {
+		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, SHORT_DESCRIPTION, filteredInfo);
+		if (pair != null && !Algorithms.isEmpty(pair.first)) {
+			return v -> WikipediaDialogFragment.showInstance(mapActivity, amenity, null);
+		}
+		String wikipediaUrl = amenity.getAdditionalInfo(WIKIPEDIA);
+		if (!Algorithms.isEmpty(wikipediaUrl)) {
+			return v -> showOnlineArticle(wikipediaUrl);
+		}
+		return null;
 	}
 
 	/**
@@ -159,13 +178,17 @@ final class AmenityDescriptionBuilder {
 					}
 				}
 				if (!Algorithms.isEmpty(wikipediaUrl)) {
-					LatLon location = amenity.getLocation() != null ? amenity.getLocation() : menuBuilder.getLatLon();
-					boolean nightMode = app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
-					WikiArticleHelper.askShowArticle(mapActivity, nightMode, location, wikipediaUrl);
+					showOnlineArticle(wikipediaUrl);
 				}
 			}
 		});
 		container.addView(button);
+	}
+
+	private void showOnlineArticle(@NonNull String wikipediaUrl) {
+		LatLon location = amenity.getLocation() != null ? amenity.getLocation() : menuBuilder.getLatLon();
+		boolean nightMode = app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
+		WikiArticleHelper.askShowArticle(mapActivity, nightMode, location, wikipediaUrl);
 	}
 
 	@Nullable

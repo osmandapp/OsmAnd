@@ -1512,7 +1512,7 @@
     <string name="poi_diaper_no">Ingen puslebord</string>
     <string name="poi_diaper_room">Puslerum</string>
     <string name="poi_events_venue">Selskabslokale</string>
-    <string name="poi_car_wash_no">Bilvask: nej: nej</string>
+    <string name="poi_car_wash_no">Bilvask: nej</string>
     <string name="poi_maxstay">Parkeringstidsgrænse</string>
     <string name="poi_vending_parking_tickets">Parkeringsbilletter</string>
     <string name="poi_vending_cigarettes">Cigaretter</string>
@@ -3281,8 +3281,8 @@
     <string name="poi_scooter_yes">Scooter: ja</string>
     <string name="poi_scooter_no">Scooter: nej</string>
     <string name="poi_truck_no">Lastbil: nej</string>
-    <string name="poi_parking_fee_yes">Ja</string>
-    <string name="poi_parking_fee_no">Nej</string>
+    <string name="poi_parking_fee_yes">Parkeringsafgift: ja</string>
+    <string name="poi_parking_fee_no">Parkeringsafgift: nej</string>
     <string name="poi_parking_fee">Parkeringsafgift</string>
     <string name="poi_amperage">Strømstyrke</string>
     <string name="poi_charging_station_output">Ladestation udgang</string>
@@ -3551,9 +3551,9 @@
     <string name="poi_hazard_additional_minefield">Minefelt</string>
     <string name="poi_hazard_additional_contamination">Kontaminering</string>
     <string name="poi_defibrillator_location">Placering</string>
-    <string name="poi_changing_table_yes">Puslebord: ja: ja</string>
-    <string name="poi_changing_table_no">Puslebord: nej: nej</string>
-    <string name="poi_changing_table_limited">Puslebord: begrænset: begrænset</string>
+    <string name="poi_changing_table_yes">Puslebord: ja</string>
+    <string name="poi_changing_table_no">Puslebord: nej</string>
+    <string name="poi_changing_table_limited">Puslebord: begrænset</string>
     <string name="poi_changing_table_location_room">Puslebordsplacering: værelse</string>
     <string name="poi_changing_table_location_male_toilet">Puslebordsplacering: herretoilet</string>
     <string name="poi_changing_table_location_female_toilet">Puslebordsplacering: dametoilet</string>
@@ -4704,8 +4704,8 @@
     <string name="poi_climbing_grade_aliens">Udenjordiske</string>
     <string name="poi_climbing_bolt_abseil">Nedfiring</string>
     <string name="poi_climbing_bolt_anchor">Anker</string>
-    <string name="poi_climbing_bolts_yes">Ja</string>
-    <string name="poi_climbing_bolts_no">Nej</string>
+    <string name="poi_climbing_bolts_yes">Klatrebolte: ja</string>
+    <string name="poi_climbing_bolts_no">Klatrebolte: nej</string>
     <string name="poi_climbing_bolts">Klatrehager</string>
     <string name="poi_climbing_quality_medium">Medium</string>
     <string name="poi_trampoline_park">Trampolinpark</string>
@@ -5185,4 +5185,5 @@
     <string name="poi_theme_filter">Tema</string>
     <string name="poi_disaster_help_point">Hjælpepunkt ved katastrofer</string>
     <string name="poi_couplings">Koblinger</string>
+    <string name="poi_check_date">Tjekdato</string>
 </resources>

@@ -2371,8 +2371,8 @@
     <string name="allow_display_on_top">Leisti rodyti viršuje</string>
     <string name="allow_display_on_top_description">Leisti rodyti žemėlapio tekstus vieną ant kito</string>
     <string name="map_text">Žemėlapio atvaizdavimas</string>
-    <string name="routing_attr_avoid_cobblestone_name">Vengti trinkelių</string>
-    <string name="routing_attr_avoid_cobblestone_description">Vengti trinkelių</string>
+    <string name="routing_attr_avoid_cobblestone_name">Vengti lauko akmenų grindinio</string>
+    <string name="routing_attr_avoid_cobblestone_description">Vengti lauko akmenų grindinio</string>
     <string name="shared_string_action">Veiksmas</string>
     <string name="use_nearby_roads_summary">Naudoja neprisijungus pasiekiamą žemėlapį, kad surastų netoliese esančius kelius ir aukščio duomenis. Galima koreguoti tako geometriją.</string>
     <string name="shared_string_osm_id">OSM ID</string>
@@ -2652,4 +2652,6 @@
     <string name="delete_widget_description">Šis valdiklis bus ištrintas. Galėsite vėliau jį atkurti Konfigūravimo ekrane.</string>
     <string name="popular_places">Populiarios vietos</string>
     <string name="weather_wind_kilimeters_per_hour">Kilometrai per valandą</string>
+    <string name="routing_attr_avoid_sett_name">Be akmens trinkelių</string>
+    <string name="routing_attr_avoid_sett_description">Vengia akmens trinkelių</string>
 </resources>

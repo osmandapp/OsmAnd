@@ -138,6 +138,7 @@ public class TurnType {
 	private int[] lanes;
 	private boolean possiblyLeftTurn;
 	private boolean possiblyRightTurn;
+	private boolean exitAngleUnknown;
 	private List<Float> otherTurnAngles;
 
 	public TurnType(int value, int exitOut, float turnAngle, boolean skipToSpeak, int[] lanes,
@@ -189,6 +190,14 @@ public class TurnType {
 
 	public void setTurnAngle(float turnAngle) {
 		this.turnAngle = turnAngle;
+	}
+
+	public boolean isExitAngleUnknown() {
+		return exitAngleUnknown;
+	}
+
+	public void setExitAngleUnknown(boolean exitAngleUnknown) {
+		this.exitAngleUnknown = exitAngleUnknown;
 	}
 
 	public int getValue() {

@@ -1917,7 +1917,7 @@
     <string name="poi_flare">Baklja na plin;Baklja</string>
     <string name="poi_shop_wholesale">Dućan veleprodaje</string>
     <string name="poi_hgv_private">Pristup kamionom: privatno</string>
-    <string name="poi_changing_table_yes">Komoda za mijenjanje pelena: da: da</string>
+    <string name="poi_changing_table_yes">Komoda za mijenjanje pelena: da</string>
     <string name="poi_changing_table_fee_no">Naknada za komodu za mijenjanje pelena: ne</string>
     <string name="poi_motor_vehicle_no">Pristup motornim vozilom: ne</string>
     <string name="poi_psv_designated">Pristup javnim prijevozom: označeno</string>
@@ -1932,8 +1932,8 @@
     <string name="poi_atoll">Atol</string>
     <string name="poi_rtsa_scale_nc">nekategorizirano</string>
     <string name="poi_rtsa_scale_nc_asterisk">nekategorizirano*</string>
-    <string name="poi_changing_table_no">Komoda za mijenjanje pelena: ne: ne</string>
-    <string name="poi_changing_table_limited">Komoda za mijenjanje pelena: ograničeno: ograničeno</string>
+    <string name="poi_changing_table_no">Komoda za mijenjanje pelena: ne</string>
+    <string name="poi_changing_table_limited">Komoda za mijenjanje pelena: ograničeno</string>
     <string name="poi_changing_table_location_male_toilet">Mjesto komode za mijenjanje pelena: muški WC</string>
     <string name="poi_hookah_lounge">Kafić s nargilom</string>
     <string name="poi_motor_vehicle_military">Pristup motornim vozilom: vojska</string>

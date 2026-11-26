@@ -30,7 +30,9 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	private var prevRotationAngle = 0f
 	private var prevZoom: Zoom? = null
 	private var prevMapLinkedToLocation = false
+	private var prevFollowingMode = false
 	private var prevStateSaved = false
+	private var prevSavedBeforeCarTilt = false
 	protected var firstTimeGetTemplate = true
 
 	protected val app: OsmandApplication
@@ -156,10 +158,11 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	}
 
 	override fun onDestroy(owner: LifecycleOwner) {
-		if (prevMapLinkedToLocation != app.mapViewTrackingUtilities.isMapLinkedToLocation) {
-			app.mapViewTrackingUtilities.isMapLinkedToLocation = prevMapLinkedToLocation
-		}
 		if (prevStateSaved) {
+			val mapLinkedToLocation = prevMapLinkedToLocation || app.routingHelper.isFollowingMode
+			if (mapLinkedToLocation != app.mapViewTrackingUtilities.isMapLinkedToLocation) {
+				app.mapViewTrackingUtilities.isMapLinkedToLocation = mapLinkedToLocation
+			}
 			restoreMapState()
 		}
 	}
@@ -173,9 +176,12 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	private fun saveMapState() {
 		val mapView = app.osmandMap.mapView
 		prevMapLinkedToLocation = app.mapViewTrackingUtilities.isMapLinkedToLocation
+		prevFollowingMode = app.routingHelper.isFollowingMode
 		prevZoom = mapView.currentZoom
 		prevRotationAngle = mapView.rotate
 		prevElevationAngle = mapView.normalizeElevationAngle(mapView.elevationAngle)
+		prevSavedBeforeCarTilt = app.useOpenGlRenderer()
+				&& app.carNavigationSession?.navigationCarSurface?.isCarTiltApplied != true
 		prevStateSaved = true
 	}
 
@@ -183,17 +189,31 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		val mapView = app.osmandMap.mapView
 		val locationProvider = app.locationProvider
 		val lastKnownLocation = locationProvider.lastKnownLocation
+		// navigation started on this screen goes to its own view, not to the one before the screen
+		val navigationStarted = app.routingHelper.isFollowingMode && !prevFollowingMode
+		val zoom = prevZoom ?: mapView.currentZoom
+		// a screen opened at session start saves the phone tilt: the car tilt is applied later, with the car surface
+		val elevation = if (navigationStarted || prevSavedBeforeCarTilt) {
+			app.settings.lastKnownMapElevation
+		} else {
+			prevElevationAngle
+		}
 		mapView.animateToState(
 			lastKnownLocation?.latitude ?: mapView.latitude,
 			lastKnownLocation?.longitude ?: mapView.longitude,
-			prevZoom ?: mapView.currentZoom,
+			if (navigationStarted && zoom.baseZoom < NAVIGATION_ZOOM) {
+				Zoom(NAVIGATION_ZOOM, 0f, mapView.minZoom, mapView.maxZoom)
+			} else {
+				zoom
+			},
 			prevRotationAngle,
-			prevElevationAngle,
+			elevation,
 			ANIMATION_RETURN_FROM_PREVIEW_TIME.toLong(),
 			false)
 	}
 
 	companion object {
 		private const val DEFAULT_CONTENT_LIMIT = 12
+		private const val NAVIGATION_ZOOM = 17
 	}
 }

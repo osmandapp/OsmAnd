@@ -4,8 +4,7 @@ package net.osmand.shared.osm
  * A group of poi types inside a category, as poi_types.xml nests them: "shop" holds "bakery",
  * "butcher" and the rest.
  *
- * A copy of `PoiFilter` in OsmAnd-java, which stays there for android and tools; this copy is for
- * iOS.
+ * Based on `PoiFilter` from OsmAnd-java.
  */
 open class PoiFilter(
 	registry: MapPoiTypes,

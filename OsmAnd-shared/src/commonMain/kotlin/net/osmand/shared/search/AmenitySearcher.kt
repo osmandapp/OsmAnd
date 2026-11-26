@@ -34,8 +34,8 @@ import net.osmand.shared.util.collections.KTIntArrayList
  * name, and the ones that stand for an object the map shows, found by its osm id, its wikidata or
  * its names and made into one [BaseDetailsObject].
  *
- * A copy of `AmenitySearcher` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. The public transport stops are left out, with the model of public transport.
+ * Based on `AmenitySearcher` from OsmAnd-java. The public transport stops are left out, with
+ * the model of public transport.
  */
 class AmenitySearcher(private val mapPoiTypes: MapPoiTypes?) {
 
@@ -94,6 +94,26 @@ class AmenitySearcher(private val mapPoiTypes: MapPoiTypes?) {
 			this.wikidata = wikiDataId
 			this.osmId = osmId
 			this.mainAmenityType = subType
+		}
+
+		/**
+		 * Builds a request from object attributes without requiring a [MapObject].
+		 * [osmId] is the unpacked OSM ID, or zero when unknown. [type] determines the search
+		 * radius; relations use a larger area. [tags] provide the location-and-type fallback,
+		 * and [checkOriginName] also matches the persisted [Amenity.toStringEn] name.
+		 */
+		constructor(
+			latLon: KLatLon?, osmId: Long, type: EntityType?, wikidata: String?,
+			names: List<String>?, tags: Map<String, String>?, mainAmenityType: String?, checkOriginName: Boolean
+		) {
+			this.latLon = latLon
+			this.osmId = osmId
+			this.type = type
+			this.wikidata = wikidata
+			this.names = names
+			this.tags = tags
+			this.mainAmenityType = mainAmenityType
+			this.checkOriginName = checkOriginName
 		}
 
 		fun getMainAmenityType(): String? = mainAmenityType

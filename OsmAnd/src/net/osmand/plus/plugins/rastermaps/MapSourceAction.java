@@ -165,7 +165,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 				LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
 
 				entriesMap.put(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
-				entriesMap.putAll(app.getSettings().getTileSourceEntries());
+				entriesMap.putAll(app.getSettings().getTileSourceEntriesSortedByTitle());
 
 				List<Map.Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 

@@ -126,10 +126,13 @@ public class NotificationHelper {
 	}
 
 	public void updateTopNotification() {
-		List<OsmandNotification> notifications = acquireTopNotifications(null);
-		if (!notifications.isEmpty()) {
-			setTopNotification(notifications.get(0));
+		for (OsmandNotification notification : acquireTopNotifications(null)) {
+			if (notification.isUsedByService(null)) {
+				setTopNotification(notification);
+				return;
+			}
 		}
+		resetTopNotification();
 	}
 
 	private void setTopNotification(OsmandNotification notification) {

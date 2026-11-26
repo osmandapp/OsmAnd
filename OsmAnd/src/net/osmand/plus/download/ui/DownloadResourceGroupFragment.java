@@ -4,10 +4,7 @@ import static net.osmand.plus.download.ui.DownloadItemFragment.updateActionButto
 import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription;
 import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,23 +14,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.download.*;
@@ -44,7 +37,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.plugins.custom.CustomIndexItem;
 import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
-import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -52,11 +44,7 @@ import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.util.Algorithms;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		implements DownloadEvents, InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
@@ -79,7 +67,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 	private Toolbar toolbar;
 	private View searchView;
 	private View restorePurchasesView;
-	private View subscribeEmailView;
 	private View freeMapsView;
 	private View descriptionView;
 
@@ -126,7 +113,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		listView.setHeaderDividersEnabled(false);
 		listView.setDivider(null);
 		addFreeVersionBannerHeader(view);
-		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();
 		addDescriptionRow();
@@ -160,19 +146,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		}
 		collection.add(InsetTarget.createScrollable(listView));
 		return collection;
-	}
-
-	private void addSubscribeEmailRow() {
-		if (DownloadActivity.shouldShowFreeVersionBanner(app) && !settings.EMAIL_SUBSCRIBED.get()) {
-			subscribeEmailView = inflate(R.layout.subscribe_email_header);
-			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(v -> subscribe());
-			listView.addHeaderView(subscribeEmailView);
-			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
-			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()
-					|| DownloadActivity.isDownloadingPermitted(settings)) {
-				subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
-			}
-		}
 	}
 
 	private void addRestorePurchasesRow() {
@@ -227,17 +200,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 				&& purchaseHelper != null && !purchaseHelper.hasInventory()) {
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				restorePurchasesView.findViewById(R.id.container).setVisibility(View.VISIBLE);
-			}
-		}
-	}
-
-	private void updateSubscribeEmailView() {
-		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.GONE
-				&& !DownloadActivity.isDownloadingPermitted(settings)
-				&& !settings.EMAIL_SUBSCRIBED.get()) {
-			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
-			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
-				subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 			}
 		}
 	}
@@ -314,108 +276,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		return null;
 	}
 
-	private void hideSubscribeEmailView() {
-		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
-			subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
-		}
-	}
-
-	private void subscribe() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle(R.string.shared_string_email_address);
-		int hPadding = AndroidUtils.dpToPx(activity, 24f);
-		int vPadding = AndroidUtils.dpToPx(activity, 4f);
-		FrameLayout container = new FrameLayout(activity);
-		container.setPadding(hPadding, vPadding, hPadding, vPadding);
-		EditText editText = new EditText(activity);
-		container.addView(editText);
-		builder.setView(container);
-		builder.setPositiveButton(R.string.shared_string_ok, null);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		AlertDialog alertDialog = builder.create();
-		alertDialog.setOnShowListener(dialog -> alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
-				v -> {
-					String email = editText.getText().toString().trim();
-					if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
-						app.showToastMessage(R.string.osm_live_enter_email);
-						return;
-					}
-					doSubscribe(email);
-					alertDialog.dismiss();
-				}));
-		alertDialog.show();
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	private void doSubscribe(String email) {
-		OsmAndTaskManager.executeTask(new AsyncTask<Void, Void, String>() {
-
-			ProgressDialog progress;
-
-			@Override
-			protected void onPreExecute() {
-				progress = new ProgressDialog(getActivity());
-				progress.setTitle("");
-				progress.setMessage(getString(R.string.wait_current_task_finished));
-				progress.setCancelable(false);
-				progress.show();
-			}
-
-			@Override
-			protected String doInBackground(Void... params) {
-				try {
-					Map<String, String> parameters = new HashMap<>();
-					if (app.isUserAndroidIdAllowed()) {
-						parameters.put("aid", app.getUserAndroidId());
-					}
-					parameters.put("email", email);
-
-					return AndroidNetworkUtils.sendRequest(app,
-							"https://osmand.net/subscription/register_email",
-							parameters, "Subscribing email...", true, true);
-
-				} catch (Exception e) {
-					return null;
-				}
-			}
-
-			@Override
-			protected void onPostExecute(String response) {
-				if (progress != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-					progress.dismiss();
-				}
-				if (response == null) {
-					app.showShortToastMessage(R.string.shared_string_unexpected_error);
-				} else {
-					try {
-						JSONObject obj = new JSONObject(response);
-						String responseEmail = obj.getString("email");
-						if (!email.equalsIgnoreCase(responseEmail)) {
-							app.showShortToastMessage(R.string.shared_string_unexpected_error);
-						} else {
-							int newDownloads = settings.NUMBER_OF_FREE_DOWNLOADS.get().intValue() - 3;
-							if (newDownloads < 0) {
-								newDownloads = 0;
-							} else if (newDownloads > DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3) {
-								newDownloads = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3;
-							}
-							settings.NUMBER_OF_FREE_DOWNLOADS.set(newDownloads);
-							settings.EMAIL_SUBSCRIBED.set(true);
-							hideSubscribeEmailView();
-							activity.updateBanner();
-							if (banner != null) {
-								banner.updateBannerInProgress();
-							}
-						}
-					} catch (JSONException e) {
-						String message = "JSON parsing error: " + (e.getMessage() == null ? "unknown" : e.getMessage());
-						app.showShortToastMessage(R.string.error_message_pattern, message);
-					}
-				}
-			}
-		});
-	}
-
 	@Override
 	public void onGetItems() {
 		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
@@ -474,7 +334,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 		if (!openAsDialog()) {
 			updateSearchView();
 		}
-		updateSubscribeEmailView();
 		updateDescriptionView();
 		updateFreeMapsView();
 
@@ -517,9 +376,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 	public void downloadHasFinished() {
 		if (banner != null) {
 			banner.updateBannerInProgress();
-		}
-		if (subscribeEmailView != null && !DownloadActivity.isDownloadingPermitted(settings) && !settings.EMAIL_SUBSCRIBED.get()) {
-			subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 		}
 		listAdapter.notifyDataSetChanged();
 	}

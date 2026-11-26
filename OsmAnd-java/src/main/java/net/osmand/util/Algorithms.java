@@ -1050,6 +1050,11 @@ public class Algorithms {
 		return (d == Math.floor(d)) && !Double.isInfinite(d);
 	}
 
+	public static int roundToStep(int value, int min, int max, int step) {
+		int rounded = min + Math.round((float) (value - min) / step) * step;
+		return Math.max(min, Math.min(max, rounded));
+	}
+
 	public static boolean isInt(String value) {
 		int length = value.length();
 		for (int i = 0; i < length; i++) {

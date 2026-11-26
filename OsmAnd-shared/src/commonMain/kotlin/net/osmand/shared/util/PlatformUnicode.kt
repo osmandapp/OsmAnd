@@ -10,3 +10,8 @@ internal expect fun platformStripDiacritics(value: String): String
 
 /** Canonical composition (NFC). Call [KUnicode.normalizeNFC], which skips ascii. */
 internal expect fun platformNormalizeNFC(value: String): String
+
+/** Canonical decomposition (NFD). Call [KUnicode.normalizeNFD], which skips ascii. */
+internal expect fun platformNormalizeNFD(value: String): String
+
+internal expect val searchWordSeparators: Regex

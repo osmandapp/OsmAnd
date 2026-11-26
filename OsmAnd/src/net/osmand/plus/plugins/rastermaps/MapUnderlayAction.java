@@ -171,7 +171,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 		return view -> {
 			OsmandApplication app = activity.getApp();
 
-			Map<String, String> entriesMap = app.getSettings().getTileSourceEntries();
+			Map<String, String> entriesMap = app.getSettings().getTileSourceEntriesSortedByTitle();
 			entriesMap.put(KEY_NO_UNDERLAY, activity.getString(R.string.no_underlay));
 
 			boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);

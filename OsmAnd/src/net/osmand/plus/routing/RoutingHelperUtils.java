@@ -107,6 +107,31 @@ public class RoutingHelperUtils {
 		return rect.left == 0 && rect.right == 0 ? null : rect;
 	}
 
+	/**
+	 * The points getRouteRect() bounds: the start, the route and the intermediate and target points.
+	 */
+	@NonNull
+	public static List<LatLon> getRoutePoints(@NonNull OsmandApplication app, @NonNull RouteCalculationResult result) {
+		List<LatLon> points = new ArrayList<>();
+		Location lt = app.getRoutingHelper().getLastProjection();
+		if (lt == null) {
+			lt = app.getTargetPointsHelper().getPointToStartLocation();
+		}
+		if (lt == null) {
+			lt = app.getLocationProvider().getLastKnownLocation();
+		}
+		if (lt != null) {
+			points.add(new LatLon(lt.getLatitude(), lt.getLongitude()));
+		}
+		for (Location l : result.getImmutableAllLocations()) {
+			points.add(new LatLon(l.getLatitude(), l.getLongitude()));
+		}
+		for (TargetPoint l : app.getTargetPointsHelper().getIntermediatePointsWithTarget()) {
+			points.add(new LatLon(l.getLatitude(), l.getLongitude()));
+		}
+		return points;
+	}
+
 	@NonNull
 	public static Location getProject(@NonNull Location loc, @NonNull Location from, @NonNull Location to) {
 		LatLon project = MapUtils.getProjection(loc.getLatitude(),

@@ -22,9 +22,9 @@ import kotlin.jvm.JvmStatic
  * the id of every vertex, so a detailed search on the roads stops where it reaches the hub graph.
  * The graph comes from the [regions], one per HH section of the selected files.
  *
- * A copy of `HHRouteDataStructure.HHRoutingContext` in OsmAnd-java, which stays there for android
- * and tools; this copy is for iOS. Java's `T extends NetworkDBPoint` is [NetworkDBPoint] here (the
- * subclasses are the tools'), and its `boundaries` map of nulls is a set of ids.
+ * Based on `HHRouteDataStructure.HHRoutingContext` from OsmAnd-java. Java's
+ * `T extends NetworkDBPoint` is [NetworkDBPoint] here (the subclasses are the tools'), and its
+ * `boundaries` map of nulls is a set of ids.
  */
 class HHRoutingContext {
 

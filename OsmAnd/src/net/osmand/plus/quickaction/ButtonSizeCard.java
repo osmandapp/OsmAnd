@@ -12,6 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,8 +56,13 @@ public class ButtonSizeCard extends SliderButtonsCard {
 		slider.setLabelFormatter(ButtonSizeCard.this::getFormattedValue);
 
 		if (!isOriginalValue()) {
-			slider.setValue(appearanceParams.getSize());
+			slider.setValue(getNearestSliderSize());
 		}
+	}
+
+	private int getNearestSliderSize() {
+		return Algorithms.roundToStep(appearanceParams.getSize(),
+				MIN_BUTTON_SIZE, MAX_BUTTON_SIZE, BUTTON_SIZE_STEP);
 	}
 
 	protected void onValueSelected(float value) {

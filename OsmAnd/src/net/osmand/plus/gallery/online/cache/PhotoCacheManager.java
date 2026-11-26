@@ -34,11 +34,11 @@ public class PhotoCacheManager {
 	}
 
 	public void save(@NonNull String keyRaw, @NonNull String json) {
-		String fileName = hashKey(keyRaw) + ".json";
+		String fileName = hashKey(keyRaw);
 		if (Algorithms.isEmpty(fileName)) {
 			return;
 		}
-		File file = new File(cacheDir, fileName);
+		File file = new File(cacheDir, fileName + ".json");
 		try (FileWriter writer = new FileWriter(file)) {
 			writer.write(json);
 			cleanupIfNeeded();
@@ -83,7 +83,10 @@ public class PhotoCacheManager {
 	}
 
 	@Nullable
-	private String hashKey(String key) {
+	private String hashKey(@Nullable String key) {
+		if (Algorithms.isEmpty(key)) {
+			return null;
+		}
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] messageDigest = md.digest(key.getBytes(StandardCharsets.UTF_8));
@@ -98,7 +101,7 @@ public class PhotoCacheManager {
 	}
 
 	@NonNull
-	public static String buildRawKey(String wikidataId, String wikiCategory, String wikiTitle) {
+	public static String buildRawKey(String wikidataId, String wikiCategory, String wikiTitle, String wikiFile) {
 		StringBuilder builder = new StringBuilder();
 		if (wikidataId != null && !wikidataId.isEmpty()) {
 			builder.append("article=").append(wikidataId).append("&");
@@ -108,6 +111,9 @@ public class PhotoCacheManager {
 		}
 		if (wikiTitle != null && !wikiTitle.isEmpty()) {
 			builder.append("wiki=").append(wikiTitle);
+		}
+		if (wikiFile != null && !wikiFile.isEmpty()) {
+			builder.append("&file=").append(wikiFile);
 		}
 		return builder.toString();
 	}

@@ -3,8 +3,7 @@ package net.osmand.shared.search.core
 /**
  * What a search collects besides its results, for the tests that are generated from it.
  *
- * A copy of `SearchExportSettings` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS.
+ * Based on `SearchExportSettings` from OsmAnd-java.
  */
 class SearchExportSettings {
 	private val exportEmptyCities: Boolean

@@ -308,7 +308,7 @@
 	<string name="poi_carpet">Carpet store;carpet shop</string>
 	<string name="poi_charity">Charity shop;charity</string>
 	<string name="poi_chemist">Drug store</string>
-	<string name="poi_clothes">Apparel store;clothing;garments;sarees;saree;readymades;readymade;clothes shop;baby clothes;bridal shop;children clothes;hat shop</string>
+	<string name="poi_clothes">Apparel store;clothing;garments;sarees;saree;clothes shop;baby clothes;bridal shop;children clothes;hat shop</string>
 	<string name="poi_clothes_children">Children\'s apparel</string>
 	<string name="poi_shoes">Shoe store;shoe;footwear;shoe shop</string>
 	<string name="poi_candles">Candles store</string>
@@ -333,7 +333,7 @@
 	<string name="poi_shop_yes">Shop</string>
 	<string name="poi_gift">Gift shop;gift;gifts;souvenirs;souvenir</string>
 	<string name="poi_glaziery">Glaziery</string>
-	<string name="poi_hardware">Hardware store;hardware;hardwares;home improvement</string>
+	<string name="poi_hardware">Hardware store;hardware;home improvement</string>
 	<string name="poi_hearing_aids">Hearing aids</string>
 	<string name="poi_herbalist">Herb store</string>
 	<string name="poi_hifi">HiFi store;hifi audio shop</string>
@@ -488,7 +488,7 @@
 	<string name="poi_subway_entrance">Subway entrance</string>
 	<string name="poi_subway_station">Subway station: yes;metro;tube</string>
 	<string name="poi_railway_buffer_stop">Railroad buffer stop</string>
-	<string name="poi_taxi">Taxi stand;taxi;bodaboda;autorickshaw;taxi rank</string>
+	<string name="poi_taxi">Taxi stand;taxi;taxi rank</string>
 
 	<string name="poi_aerodrome">Airport;Aerodrome</string>
 	<string name="poi_helipad">Helipad</string>
@@ -1107,7 +1107,7 @@
 	<string name="poi_piste_ice_skate">Ice skate</string>
 	<string name="poi_ski_rental">Ski rental</string>
 
-	<string name="poi_library">Library;vayanashala;vayanasala</string>
+	<string name="poi_library">Library</string>
 	<string name="poi_arts_centre">Arts center</string>
 	<string name="poi_cinema">Cinema;movies;Movie Theater</string>
 	<string name="poi_casino">Casino</string>
@@ -1199,7 +1199,7 @@
 	<string name="poi_craft_computer">Computer craft</string>
 	<string name="poi_beauty">Beauty salon;nail;beauty parlor;beauty shop;hair and nail salon;nail salon</string>
 	<string name="poi_beauty_salon_nails">Manicure</string>
-	<string name="poi_hairdresser">Hairdresser;barber;barbershop;barbers;hairdressing;haircuts;hairstyling;hairdressers;haircut;kinyozi;salon;hair salon</string>
+	<string name="poi_hairdresser">Hairdresser;barber;barbershop;barbers;hairdressing;haircuts;hairstyling;hairdressers;haircut;salon;hair salon</string>
 	<string name="poi_massage">Massage salon;massage center;massage parlour</string>
 	<string name="poi_tattoo">Tattoo salon;tattoos;tattoo studio;tattoo parlour</string>
 	<string name="poi_dry_cleaning">Dry cleaning;drycleaners;dry cleaner</string>
@@ -1251,7 +1251,7 @@
 	<string name="poi_wetland">Wetland</string>
 	<string name="poi_wood">Wood</string>
 	<string name="poi_tree">Tree</string>
-	<string name="poi_nature_reserve">Nature reserve;reserve;preserve;bushland;conservancy</string>
+	<string name="poi_nature_reserve">Nature reserve;reserve;preserve;conservancy</string>
 	<string name="poi_strait">Strait</string>
 	<string name="poi_island">Island</string>
 	<string name="poi_islet">Islet</string>
@@ -3848,6 +3848,7 @@
 	<string name="poi_socket_type1_combo_yes">Type 1 combo</string>
 	<string name="poi_socket_type2_yes">Type 2</string>
 	<string name="poi_socket_type2_combo_yes">Type 2 combo</string>
+	<string name="poi_socket_type2_cable_yes">Type 2 cable</string>
 	<string name="poi_socket_type3_yes">Type 3</string>
 	<string name="poi_socket_typee_yes">Type E</string>
 	<string name="poi_socket_chademo_yes">CHAdeMO</string>
@@ -3952,8 +3953,8 @@
 	<string name="poi_scooter_no">Scooter: no</string>
 	<string name="poi_truck_no">Truck: no</string>
 
-	<string name="poi_parking_fee_yes">Yes</string>
-	<string name="poi_parking_fee_no">No</string>
+	<string name="poi_parking_fee_yes">Parking fee: yes</string>
+	<string name="poi_parking_fee_no">Parking fee: no</string>
 	<string name="poi_parking_fee">Parking fee</string>
 
 	<string name="poi_amperage">Amperage</string>
@@ -4180,7 +4181,7 @@
 
 	<string name="poi_toll_gantry">Toll gantry</string>
 
-	<string name="poi_childcare">Childcare;anganavadi;anganvady;anganvadi;anganawadi;anganavady;playgroup;anganvaadi;anganawady</string>
+	<string name="poi_childcare">Childcare;playgroup</string>
 
 	<string name="poi_denotation_natural_monument">Natural monument</string>
 	<string name="poi_denotation_landmark">Landmark</string>
@@ -5157,8 +5158,8 @@
 	<string name="poi_climbing_bolt_abseil">Abseil</string>
 	<string name="poi_climbing_bolt_anchor">Anchor</string>
 
-	<string name="poi_climbing_bolts_yes">Yes</string>
-	<string name="poi_climbing_bolts_no">No</string>
+	<string name="poi_climbing_bolts_yes">Climbing bolts: yes</string>
+	<string name="poi_climbing_bolts_no">Climbing bolts: no</string>
 	<string name="poi_climbing_bolts">Climbing bolts</string>
 	<string name="poi_climbing_quality_medium">Medium</string>
 
@@ -5860,5 +5861,9 @@
 	<string name="poi_payment_contactless_xlt_eusk_yes">Contactless Eusko</string>
 	<string name="poi_payment_contactless_xlt_flor_yes">Contactless Florain</string>
 	<string name="poi_hitchhiking_stop">Slug line</string>
+
+	<string name="poi_zone">Zone</string>
+
+	<string name="poi_check_date">Check date</string>
 
 </resources>

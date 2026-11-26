@@ -9,7 +9,6 @@ public class GpxSelectionParams {
 	private boolean syncGroup;
 	private boolean notShowNavigationDialog;
 	private boolean selectedByUser;
-	private boolean addToHistory;
 	private boolean saveSelection;
 	private boolean updateVisibilityOnMap;
 	private boolean selectedByUserChanged;
@@ -43,10 +42,6 @@ public class GpxSelectionParams {
 
 	public boolean isSelectedByUser() {
 		return selectedByUser;
-	}
-
-	public boolean isAddToHistory() {
-		return addToHistory;
 	}
 
 	public boolean isSaveSelection() {
@@ -95,11 +90,6 @@ public class GpxSelectionParams {
 		return this;
 	}
 
-	public GpxSelectionParams addToHistory() {
-		addToHistory = true;
-		return this;
-	}
-
 	public GpxSelectionParams saveSelection() {
 		saveSelection = true;
 		return this;
@@ -112,6 +102,6 @@ public class GpxSelectionParams {
 
 	@NonNull
 	public static GpxSelectionParams getDefaultSelectionParams() {
-		return newInstance().showOnMap().selectedByUser().syncGroup().addToHistory().addToMarkers().saveSelection();
+		return newInstance().showOnMap().selectedByUser().syncGroup().addToMarkers().saveSelection();
 	}
 }

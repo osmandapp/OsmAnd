@@ -2,6 +2,7 @@ package net.osmand.shared.gpx.helper
 
 import net.osmand.shared.IndexConstants
 import net.osmand.shared.KException
+import net.osmand.shared.favorites.FavoriteFolderPath
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxUtilities.loadGpxFile
 import net.osmand.shared.xml.XmlPullParser
@@ -89,7 +90,19 @@ object ImportGpx {
 			setFeature(FEATURE_PROCESS_NAMESPACES, false)
 			setInput(inputStream, null)
 		}
+		try {
+			return parseKmlEvents(parser, serializer, sink, flushEvery)
+		} finally {
+			parser.close()
+		}
+	}
 
+	private fun parseKmlEvents(
+		parser: XmlPullParser,
+		serializer: XmlSerializer,
+		sink: Sink,
+		flushEvery: Int
+	): String? {
 		val folderNameStack = ArrayDeque<String>()
 		var documentName: String? = null
 		var currentPlacemarkName: String? = null
@@ -100,6 +113,7 @@ object ImportGpx {
 		val gxWhens = mutableListOf<String>()
 		var elementCount = 0
 		var isFolderName = false
+		var isDocumentName = false
 
 		while (true) {
 			when (parser.getEventType()) {
@@ -107,19 +121,24 @@ object ImportGpx {
 					TAG_FOLDER -> {
 						folderNameStack.addLast("")
 						isFolderName = true
+						isDocumentName = false
 					}
-					TAG_DOCUMENT -> documentName = ""
+					TAG_DOCUMENT -> isDocumentName = true
 					TAG_PLACEMARK -> {
 						currentPlacemarkName = null
 						currentPlacemarkDesc = null
 						currentCoordinates = null
 						isFolderName = false
+						isDocumentName = false
 					}
 					TAG_GX_TRACK -> isGxTrack = true
 					TAG_NAME -> {
 						val text = parser.nextText()
 						when {
-							documentName == "" -> documentName = text
+							isDocumentName -> {
+								documentName = text
+								isDocumentName = false
+							}
 							isFolderName -> {
 								if (folderNameStack.isNotEmpty()) {
 									folderNameStack[folderNameStack.lastIndex] = text
@@ -147,7 +166,7 @@ object ImportGpx {
 								currentPlacemarkName,
 								currentPlacemarkDesc,
 								currentCoordinates,
-								folderNameStack.lastOrNull() ?: documentName
+								getFolderPath(folderNameStack) ?: documentName
 							)
 							elementCount++
 						}
@@ -247,7 +266,7 @@ object ImportGpx {
 		times: List<String>
 	) {
 		val trackPoints = coords.mapIndexedNotNull { index, coordString ->
-			val parts = coordString.trim().split(" ")
+			val parts = splitByWhitespace(coordString)
 			if (parts.size >= 2) {
 				PointData(
 					lon = parts[0],
@@ -275,12 +294,43 @@ object ImportGpx {
 	}
 
 	private fun parseCoordinates(coords: String): List<PointData> =
-		coords.trim().split(" ").mapNotNull { pointString ->
+		splitByWhitespace(coords).mapNotNull { pointString ->
 			val parts = pointString.trim().split(",")
 			if (parts.size >= 2) {
 				PointData(lon = parts[0], lat = parts[1], ele = parts.getOrNull(2))
 			} else null
 		}
+
+	private fun splitByWhitespace(text: String): List<String> {
+		val parts = mutableListOf<String>()
+		var start = -1
+		for (i in text.indices) {
+			if (isXmlWhitespace(text[i])) {
+				if (start >= 0) {
+					parts.add(text.substring(start, i))
+					start = -1
+				}
+			} else if (start < 0) {
+				start = i
+			}
+		}
+		if (start >= 0) {
+			parts.add(text.substring(start))
+		}
+		return parts
+	}
+
+	// Nested KML folders become a nested favorites path; a "/" inside one folder name must not split it.
+	private fun getFolderPath(folderNames: Collection<String>): String? {
+		val segments = folderNames.map {
+			it.trim()
+				.replace(FavoriteFolderPath.DELIMITER, "-")
+				.replace(FavoriteFolderPath.SUBFOLDER_PLACEHOLDER, "-")
+		}
+		return FavoriteFolderPath.join(segments).ifEmpty { null }
+	}
+
+	private fun isXmlWhitespace(c: Char): Boolean = c == ' ' || c == '\n' || c == '\t' || c == '\r'
 
 	data class PointData(
 		val lon: String,

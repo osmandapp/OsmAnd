@@ -140,6 +140,9 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		}
 	}
 
+	public void destroyWidget() {
+	}
+
 	public boolean isNightMode() {
 		return nightMode;
 	}

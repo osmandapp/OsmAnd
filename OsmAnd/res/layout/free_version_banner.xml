@@ -56,15 +56,6 @@
 			android:visibility="gone"
 			tools:visibility="visible" />
 
-		<LinearLayout
-			android:id="@+id/marksLinearLayout"
-			android:layout_width="match_parent"
-			android:layout_height="24dp"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginTop="11dp"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:orientation="horizontal" />
-
 		<FrameLayout
 			android:id="@+id/freeVersionCtaContainer"
 			android:layout_width="match_parent"

@@ -206,7 +206,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.replace(InsetTarget.createBottomContainer(R.id.description_container));
+		collection.replace(InsetTarget.createBottomContainer(R.id.description_shadow));
 		collection.replace(InsetTarget.createScrollable(R.id.details_list));
 		collection.replace(InsetTarget.createHorizontalLandscape(R.id.toolbar, R.id.solid_app_bar));
 		collection.removeType(Type.ROOT_INSET);

@@ -7,6 +7,7 @@ import static net.osmand.plus.OsmAndLocationProvider.NOT_SWITCH_TO_NETWORK_WHEN_
 import static net.osmand.plus.OsmAndLocationProvider.isRunningOnEmulator;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.car.app.CarContext;
+import androidx.car.app.HostException;
 import androidx.car.app.Screen;
 import androidx.car.app.ScreenManager;
 import androidx.car.app.Session;
@@ -32,7 +34,6 @@ import androidx.car.app.navigation.model.Trip;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -70,6 +71,7 @@ import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.router.FastRoutingState;
@@ -80,9 +82,11 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -141,6 +145,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
 	private CarSuggestionsHelper suggestionsHelper;
+	// a suggestion card tap or a navigation intent, kept until the purchase or the location permission
 	@Nullable
 	private Intent pendingSuggestionIntent;
 	@Nullable
@@ -264,6 +269,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 
 		app.onCarNavigationSessionStart(this);
+		// A location that arrived before the session started must not be lost:
+		// OsmAndLocationProvider.setLocationFromService() stores one only while the session has started
+		app.getLocationProvider().ensureLatestLocation();
 		app.getOsmandMap().getMapView().setupRenderingView();
 
 		if (!app.isAppInForegroundOnRootDevice()) {
@@ -347,12 +355,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 
 	public boolean hasStarted() {
-		Lifecycle.State state = getLifecycle().getCurrentState();
-		return state == Lifecycle.State.STARTED || state == Lifecycle.State.RESUMED;
-	}
-
-	public boolean isStateAtLeast(@NonNull State state) {
-		return getLifecycle().getCurrentState().isAtLeast(state);
+		return AndroidUtils.isStateAtLeast(this, State.STARTED);
 	}
 
 	public boolean hasSurface() {
@@ -469,7 +472,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				if (GeoActionHelper.isGeoActionUri(uri)) {
 					processGeoActionIntent(uri);
 				} else if (ACTION_NAVIGATE.equals(intent.getAction())) {
-					processNavigationIntent(uri);
+					processNavigationIntent(intent);
 				} else {
 					processDeepLinkActions(uri);
 				}
@@ -489,7 +492,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	private void processNavigationIntent(@NonNull Uri uri) {
+	private void processNavigationIntent(@NonNull Intent intent) {
+		Uri uri = intent.getData();
+		if (uri == null || retainIntentUntilAccess(intent)) {
+			return;
+		}
 		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
 		if (point != null) {
 			CarContext context = getCarContext();
@@ -517,14 +524,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	private void processSuggestionIntent(@NonNull Intent intent) {
-		if (!isStateAtLeast(State.CREATED)) {
-			return;
-		}
+	private boolean retainIntentUntilAccess(@NonNull Intent intent) {
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			pendingSuggestionIntent = intent;
-			LOG.info("Retaining suggestion intent until purchase is completed");
+			LOG.info("Retaining intent until purchase is completed");
 			if (requestPurchaseScreen != null) {
 				requestPurchaseScreen.getLifecycle().addObserver(new DefaultLifecycleObserver() {
 					@Override
@@ -535,11 +539,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 				});
 			}
-			return;
+			return true;
 		}
 		if (!isLocationPermissionAvailable()) {
 			pendingSuggestionIntent = intent;
-			LOG.info("Retaining suggestion intent until permission is granted");
+			LOG.info("Retaining intent until permission is granted");
 			ScreenManager screenManager = getScreenManager();
 			Screen top = screenManager.getTop();
 			if (!(top instanceof RequestPermissionScreen)) {
@@ -552,9 +556,17 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					pendingSuggestionIntent = null;
 				}
 			});
-			return;
+			return true;
 		}
 		pendingSuggestionIntent = null;
+		return false;
+	}
+
+	private void processSuggestionIntent(@NonNull Intent intent) {
+		if (!AndroidUtils.isStateAtLeast(this, State.CREATED) || retainIntentUntilAccess(intent)) {
+			return;
+		}
+		OsmandApplication app = getApp();
 		if (isNavigationActive()) {
 			LOG.info("Ignoring suggestion intent: navigation is already active");
 			return;
@@ -565,6 +577,26 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			LOG.error("Invalid suggestion intent: " + intent);
 			return;
 		}
+		SearchResult result = null;
+		if (intent.getBooleanExtra(CarSuggestionsHelper.EXTRA_PREVIOUS_ROUTE, false)) {
+			SearchResult previousRoute = CarSuggestionsHelper.createPreviousRouteResult(app);
+			if (previousRoute != null && MapUtils.areLatLonEqual(previousRoute.location, latLon)) {
+				result = previousRoute;
+			}
+		}
+		if (result == null) {
+			result = createHistoryResult(serializedName, latLon);
+		}
+
+		showAppOnCarScreen();
+		ScreenManager screenManager = getScreenManager();
+		screenManager.popToRoot();
+		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, getCardCountdownMs()), this::onRoutePreviewResult);
+	}
+
+	@NonNull
+	private SearchResult createHistoryResult(@NonNull String serializedName, @NonNull LatLon latLon) {
+		OsmandApplication app = getApp();
 		PointDescription pointDescription = PointDescription.deserializeFromString(serializedName, latLon);
 		HistoryEntry entry = app.getSearchHistoryHelper().getEntryByName(pointDescription, HistorySource.NAVIGATION);
 		if (entry == null) {
@@ -575,17 +607,31 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (result.location == null) {
 			result.location = latLon;
 		}
+		return result;
+	}
 
-		ScreenManager screenManager = getScreenManager();
-		screenManager.popToRoot();
-		screenManager.pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, result, true, true), this::onRoutePreviewResult);
+	private void showAppOnCarScreen() {
+		try {
+			Intent intent = new Intent().setComponent(new ComponentName(getCarContext(), NavigationCarAppService.class));
+			getCarContext().startCarApp(intent);
+		} catch (HostException | SecurityException e) {
+			LOG.error("Failed to show the app on the car screen", e);
+		}
+	}
+
+	protected long getCardCountdownMs() {
+		return RoutePreviewScreen.CARD_COUNTDOWN_MS;
 	}
 
 	private void processPendingSuggestionIntent() {
 		if (pendingSuggestionIntent != null) {
 			Intent intent = pendingSuggestionIntent;
 			pendingSuggestionIntent = null;
-			processSuggestionIntent(intent);
+			if (intent.hasExtra(CarSuggestionsHelper.EXTRA_SUGGESTION_POINT)) {
+				processSuggestionIntent(intent);
+			} else {
+				processNavigationIntent(intent);
+			}
 		}
 	}
 
@@ -642,6 +688,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
+		closeRoutePreviews();
 		getScreenManager().push(navigationScreen);
 		// navigation already started
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
@@ -650,6 +697,20 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
+
+	/**
+	 * Navigation goes on top of the stack, so a preview under it would stay alive and fit the route to the map
+	 * on every recalculation. Closing it also returns the map to the state from before the preview.
+	 */
+	private void closeRoutePreviews() {
+		if (routingHelper.isFollowingMode()) {
+			for (Screen screen : new ArrayList<>(getScreenManager().getScreenStack())) {
+				if (screen instanceof RoutePreviewScreen) {
+					screen.finish();
+				}
+			}
+		}
+	}
 
 	@Override
 	public void stopNavigation() {
@@ -699,7 +760,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void updateSuggestions() {
-		if (suggestionsHelper != null && isStateAtLeast(State.CREATED)) {
+		if (suggestionsHelper != null && AndroidUtils.isStateAtLeast(this, State.CREATED)) {
 			suggestionsNavigationActive = isNavigationActive();
 			suggestionsHelper.update(getCarContext());
 		}
@@ -718,15 +779,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Collection<Screen> displayedScreens = screenManager.getScreenStack();
 		for (Screen screen : displayedScreens) {
 			if (screen instanceof RoutePreviewScreen) {
-				return screen.getLifecycle().getCurrentState().isAtLeast(State.INITIALIZED);
+				return AndroidUtils.isStateAtLeast(screen, State.INITIALIZED);
 			}
 		}
 		return false;
 	}
 
-	private boolean isAutoStartRoutePreviewPresent() {
+	private boolean isCardRoutePreviewPresent() {
 		for (Screen screen : getScreenManager().getScreenStack()) {
-			if (screen instanceof RoutePreviewScreen preview && preview.isStartNavigationOnRouteReady()) {
+			if (screen instanceof RoutePreviewScreen preview && preview.hasStartCountdown()) {
 				return true;
 			}
 		}
@@ -738,7 +799,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Collection<Screen> displayedScreens = screenManager.getScreenStack();
 		for (Screen screen : displayedScreens) {
 			if (screen instanceof PrivateAccessScreen) {
-				return screen.getLifecycle().getCurrentState() == State.RESUMED;
+				return AndroidUtils.isStateAtLeast(screen, State.RESUMED);
 			}
 		}
 		return false;
@@ -763,9 +824,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Screen top = !screenManager.getScreenStack().isEmpty() ? screenManager.getTop() : null;
 
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
-		// a card tap preview under another screen (e.g. Settings) must stay: it starts navigation when shown again
 		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
-				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen) && !isAutoStartRoutePreviewPresent()) {
+				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen) && !isCardRoutePreviewPresent()) {
 			SearchResult result = new SearchResult();
 			result.location = new LatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
 			GpxFile gpxFile = app.getRoutingHelper().getCurrentGPX();

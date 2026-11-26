@@ -1,16 +1,16 @@
 package net.osmand.shared.binary
 
 import net.osmand.shared.api.KStringMatcherMode
-import net.osmand.shared.util.KCollationKey
-import net.osmand.shared.util.KCollatorStringMatcher.Companion.cmatchesKey
+import net.osmand.shared.util.KSearchAlgorithms
+import net.osmand.shared.util.primaryCollator
+import net.osmand.shared.util.KCollatorStringMatcher.Companion.cmatchesAligned
 import net.osmand.shared.util.collections.KTIntArrayList
 
 /**
  * Copy of `net.osmand.binary.QueryToken` in OsmAnd-java: one word of the query, the prefixes of the
  * poi name index it could sit under, and which of that prefix's suffixes it can still match.
  *
- * The query is reduced to a [KCollationKey] once here, where java rebuilds the comparison from the
- * string on every suffix of every prefix.
+ * Align the query once and reuse its collator across suffixes.
  *
  * Internal like the java original, whose constructor is package private: it is scaffolding for
  * reading the name index, not something a caller outside the reader builds.
@@ -21,7 +21,8 @@ internal class QueryToken(
 	prefixes: List<Prefix>?
 ) {
 
-	private val queryKey: KCollationKey? = query?.let { KCollationKey.of(it) }
+	private val part = query?.let(KSearchAlgorithms::lowercaseAndAlignChars)
+	private val collator = primaryCollator()
 
 	/** Longest first, then alphabetically, so that the most specific prefix is tried first. */
 	val prefixes: List<Prefix> = if (prefixes.isNullOrEmpty()) {
@@ -35,8 +36,7 @@ internal class QueryToken(
 	fun matchFullPrefix(key: String): Boolean = matches(key)
 
 	private fun matches(fullName: String): Boolean {
-		val part = queryKey ?: return false
-		return cmatchesKey(fullName, part, alignFull = true, mode = matcherMode)
+		return part != null && cmatchesAligned(fullName, part, true, matcherMode, collator)
 	}
 
 	inner class SuffixMask(private val prefix: Prefix) {

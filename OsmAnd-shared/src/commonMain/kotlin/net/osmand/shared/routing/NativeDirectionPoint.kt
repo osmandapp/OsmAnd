@@ -6,9 +6,9 @@ import kotlin.jvm.JvmField
 /**
  * A [DirectionPoint] flattened for the C++ core, which does its own splicing.
  *
- * A copy of `RoutingConfiguration.NativeDirectionPoint`, which stays in OsmAnd-java where
- * `java_wrap.cpp` reads these three fields off it; this copy is for iOS. Nothing writes them after
- * construction.
+ * Based on `RoutingConfiguration.NativeDirectionPoint` from OsmAnd-java. `java_wrap.cpp` reads
+ * these three fields from the Java class; the shared model preserves their names. Nothing
+ * writes them after construction.
  */
 class NativeDirectionPoint(latitude: Double, longitude: Double, tags: Map<String, String>) {
 

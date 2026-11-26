@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -136,7 +137,12 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	@NonNull
 	public String getTitle(@NonNull Context ctx) {
 		String message = getMessage();
-		return message != null ? message : ctx.getString(getMessageId());
+		String title = message != null ? message : ctx.getString(getMessageId());
+		if (getWidgetType().getGroup() == WidgetGroup.TRIP_RECORDING) {
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_colon,
+					ctx.getString(R.string.map_widget_monitoring), title);
+		}
+		return title;
 	}
 
 	@NonNull
@@ -171,12 +177,23 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	}
 
 	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode, @NonNull List<String> widgetsVisibility) {
+		return isEnabledForAppMode(getApp(), key, collapsedKey, hiddenKey, appMode, widgetsVisibility);
+	}
+
+	public static boolean isEnabledForAppMode(@NonNull OsmandApplication app, @NonNull String key,
+	                                          @NonNull ApplicationMode appMode, @NonNull List<String> widgetsVisibility) {
+		return isEnabledForAppMode(app, key, COLLAPSED_PREFIX + key, HIDE_PREFIX + key, appMode, widgetsVisibility);
+	}
+
+	private static boolean isEnabledForAppMode(@NonNull OsmandApplication app, @NonNull String key,
+	                                           @NonNull String collapsedKey, @NonNull String hiddenKey,
+	                                           @NonNull ApplicationMode appMode, @NonNull List<String> widgetsVisibility) {
 		if (widgetsVisibility.contains(key) || widgetsVisibility.contains(collapsedKey)) {
 			return true;
 		} else if (widgetsVisibility.contains(hiddenKey)) {
 			return false;
 		}
-		return WidgetsAvailabilityHelper.isWidgetVisibleByDefault(getApp(), key, appMode);
+		return WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, key, appMode);
 	}
 
 	public void enableDisableForMode(@NonNull ApplicationMode appMode, @Nullable Boolean enabled, @Nullable ScreenLayoutMode layoutMode) {

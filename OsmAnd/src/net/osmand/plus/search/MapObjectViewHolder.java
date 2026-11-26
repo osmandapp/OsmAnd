@@ -101,7 +101,8 @@ public class MapObjectViewHolder extends RecyclerView.ViewHolder {
 			if (mapReaderResource != null) {
 				addressText = getRegionName(mapReaderResource);
 			} else if (item.getSearchResult().relatedObject instanceof City relatedCity &&
-					relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource) {
+					relatedCity.getReferenceFile() instanceof BinaryMapIndexReader relatedMapReaderResource &&
+					relatedMapReaderResource == item.getSearchResult().file) {
 				addressText = String.format("%s, %s", relatedCity.getName(), getRegionName(relatedMapReaderResource));
 			} else if (item.getSearchResult().file != null) {
 				addressText = getRegionName(item.getSearchResult().file);

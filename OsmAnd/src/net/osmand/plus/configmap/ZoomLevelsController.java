@@ -10,6 +10,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+
+import java.util.List;
 
 public abstract class ZoomLevelsController extends BaseDialogController {
 
@@ -46,6 +49,10 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 	public abstract void onApplyChanges();
 
 	public abstract void onResetToDefault();
+
+	/** The preferences the panel writes its preview into before Apply. */
+	@NonNull
+	public abstract List<OsmandPreference<?>> getPreviewPreferences();
 
 	public boolean hasChanges() {
 		return !selectedLimits.equals(initialLimits);

@@ -191,6 +191,8 @@ public class OsrmEngine extends JsonOnlineRoutingEngine {
 			if (maneuver.has("exit")) {
 				int exit = maneuver.getInt("exit");
 				turnType = TurnType.getExitTurn(exit, 0.0f, leftSide);
+				// bearings describe only the entrance, the exit direction is not in the response
+				turnType.setExitAngleUnknown(true);
 			} else if (modifier != null) {
 				// for simple roundabout turn without "exit" parameter
 				turnType = identifyTurnType(modifier, leftSide);

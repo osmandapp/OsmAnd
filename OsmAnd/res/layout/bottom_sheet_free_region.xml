@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Free version: a map of another region. One sheet for every step - replace, the server request,
+	email, Maps+ - only the visible parts change.
+-->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/bottomSheetRoot"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:overScrollMode="never">
+
+	<LinearLayout
+		android:id="@+id/bottomSheetContent"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingBottom="@dimen/dialog_content_margin">
+
+		<com.google.android.material.bottomsheet.BottomSheetDragHandleView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textAppearance="?attr/textAppearanceTitleLarge"
+			android:textColor="?attr/colorOnSurface"
+			tools:text="Andorra is not your free region" />
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:textAppearance="?attr/textAppearanceBodyMedium"
+			android:textColor="?attr/colorOnSurfaceVariant"
+			tools:text="The free version includes maps of one region. To download Andorra, maps of other regions will be deleted." />
+
+		<LinearLayout
+			android:id="@+id/maps_to_delete"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_half"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/free_region_will_be_deleted"
+					android:textAppearance="?attr/textAppearanceTitleSmall"
+					android:textColor="?attr/colorOnSurfaceVariant" />
+
+				<TextView
+					android:id="@+id/maps_to_delete_size"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?attr/textAppearanceTitleSmall"
+					android:textColor="?attr/colorOnSurfaceVariant"
+					tools:text="6.4 MB" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/maps_list"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_half"
+				android:text="@string/free_region_maps_stay"
+				android:textAppearance="?attr/textAppearanceBodyMedium"
+				android:textColor="?attr/colorOnSurfaceVariant" />
+		</LinearLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/email_layout"
+			style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/dialog_content_margin"
+			android:hint="@string/shared_string_email_address"
+			android:visibility="gone"
+			app:endIconDrawable="@drawable/ic_action_clear_field"
+			app:endIconMode="clear_text"
+			app:helperText="@string/free_region_email_helper"
+			tools:visibility="visible">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/email_edit"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:autofillHints="emailAddress"
+				android:importantForAutofill="yes"
+				android:inputType="textEmailAddress"
+				android:maxLines="1" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<TextView
+			android:id="@+id/email_maps_note"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding"
+			android:textAppearance="?attr/textAppearanceBodyMedium"
+			android:textColor="?attr/colorOnSurfaceVariant"
+			android:visibility="gone"
+			tools:text="Maps of Liechtenstein and Malta (6.4 MB) will be deleted."
+			tools:visibility="visible" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/get_maps_plus_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/dialog_content_margin"
+			android:text="@string/get_unlimited_downloads" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/replace_button"
+			style="?attr/materialButtonOutlinedStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			tools:text="@string/free_region_delete_and_download" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/cancel_button"
+			style="?attr/borderlessButtonStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:text="@string/shared_string_cancel"
+			android:visibility="gone" />
+	</LinearLayout>
+</androidx.core.widget.NestedScrollView>

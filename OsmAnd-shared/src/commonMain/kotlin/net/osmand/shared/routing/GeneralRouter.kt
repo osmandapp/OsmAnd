@@ -25,10 +25,9 @@ import kotlin.math.floor
  * parameters. The copy shares the parsed rule tables with the root and only re-filters the rules
  * the parameters select, which is why so many fields are handed over rather than copied.
  *
- * A copy of `net.osmand.router.GeneralRouter`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical, the names of the fields and of the
- * four nested classes included; `GeneralRouterCompatTest` checks that they behave
- * the same.
+ * Based on `net.osmand.router.GeneralRouter` from OsmAnd-java. Keep behavior, field names and
+ * the names of the four nested classes compatible with the original; `GeneralRouterCompatTest`
+ * checks that they behave the same.
  */
 class GeneralRouter : VehicleRouter {
 

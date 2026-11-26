@@ -17,6 +17,13 @@ public interface SegmentActionsListener {
 
 	void onPointSelected(TrkSegment segment, double lat, double lon);
 
+	/**
+	 * A point the user has picked on the chart, by tapping it or by dragging the highlight.
+	 */
+	default void onChartPointSelected(TrkSegment segment, double lat, double lon) {
+		onPointSelected(segment, lat, lon);
+	}
+
 	void openSplitInterval(GpxDisplayItem gpxItem, TrkSegment trkSegment);
 
 	void showOptionsPopupMenu(View view, TrkSegment trkSegment, boolean confirmDeletion, GpxDisplayItem gpxItem);

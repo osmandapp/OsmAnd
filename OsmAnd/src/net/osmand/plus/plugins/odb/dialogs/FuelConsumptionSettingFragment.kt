@@ -18,7 +18,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.views.mapwidgets.configure.settings.BaseSimpleWidgetInfoFragment
 import net.osmand.plus.widgets.alert.AlertDialogData
-import net.osmand.plus.widgets.alert.CustomAlert
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment
 
 class FuelConsumptionSettingFragment : BaseSimpleWidgetInfoFragment() {
 	private var selectedFuelConsumptionMode: Int = 0
@@ -32,6 +32,7 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetInfoFragment() {
 
 	companion object {
 		private const val FUEL_CONSUMPTION_MODE = "fuel_consumption_mode"
+		private const val MODE_REQUEST_KEY = "mode_request_key"
 	}
 
 	override fun initParams(bundle: Bundle) {
@@ -56,6 +57,10 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetInfoFragment() {
 		selectedAppMode = settings.applicationMode
 
 		setupConfigButtons()
+		SingleSelectionDialogFragment.setResultListener(this, MODE_REQUEST_KEY) { index ->
+			selectedFuelConsumptionMode = index
+			setupConfigButtons()
+		}
 	}
 
 	private fun setupConfigButtons() {
@@ -102,10 +107,7 @@ class FuelConsumptionSettingFragment : BaseSimpleWidgetInfoFragment() {
 			.setTitle(R.string.shared_string_mode)
 			.setControlsColor(ColorUtilities.getActiveColor(app, nightMode))
 
-		CustomAlert.showSingleSelection(dialogData, items, selectedFuelConsumptionMode) { v: View ->
-			selectedFuelConsumptionMode = v.tag as Int
-			setupConfigButtons()
-		}
+		SingleSelectionDialogFragment.showInstance(this, MODE_REQUEST_KEY, dialogData, items.requireNoNulls(), selectedFuelConsumptionMode)
 	}
 
 	private fun setupListItemBackground(view: View) {

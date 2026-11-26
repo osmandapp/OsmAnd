@@ -15,12 +15,10 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
 import androidx.core.view.MenuProvider;
 
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.LocalOperationTask;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.download.local.dialogs.LocalBaseFragment;
 import net.osmand.plus.utils.UiUtilities;
@@ -73,7 +71,7 @@ public abstract class AbstractBaseMenuProvider implements MenuProvider {
 
 	public void performOperation(@NonNull OperationType type, @NonNull LocalItem... localItems) {
 		if (fragment instanceof LocalBaseFragment localFragment) {
-			OsmAndTaskManager.executeTask(new LocalOperationTask(app, type, localFragment), localItems);
+			localFragment.performOperation(type, localItems);
 		}
 	}
 

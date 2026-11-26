@@ -68,7 +68,7 @@ import btools.routingapp.IBRouterService;
 public class RouteProvider {
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
-	private static final int MIN_STRAIGHT_DIST = 50000;
+	public static final int MIN_STRAIGHT_DIST = 50000;
 
 	private final GpxRouteHelper gpxRouteHelper = new GpxRouteHelper(this);
 

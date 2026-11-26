@@ -119,7 +119,9 @@ class StarCompassButton @JvmOverloads constructor(
 			) else 0
 		)
 
+		val mapRotation = (imageView.drawable as? CompassDrawable)?.mapRotation ?: 0f
 		super.updateIcon()
+		(imageView.drawable as? CompassDrawable)?.mapRotation = mapRotation
 	}
 
 	@SuppressLint("ClickableViewAccessibility")

@@ -69,8 +69,12 @@ abstract class GalleryRowController(
 
 	private fun loadIfNeeded(collapsed: Boolean) {
 		if (!collapsed && !loading && items.isEmpty()) {
-			app.galleryHelper.mediaLoader.load(key, loadListener)
+			loadMedia()
 		}
+	}
+
+	protected open fun loadMedia() {
+		app.galleryHelper.mediaLoader.load(key, loadListener)
 	}
 
 	override fun getGalleryItems(): List<GalleryItem> {

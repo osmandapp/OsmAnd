@@ -43,6 +43,7 @@
 				android:indeterminate="true"
 				android:visibility="gone"
 				app:indicatorColor="?attr/colorPrimary"
+				app:indicatorInset="0dp"
 				app:indicatorSize="@dimen/ui_icon_size"
 				app:trackThickness="2dp" />
 		</FrameLayout>

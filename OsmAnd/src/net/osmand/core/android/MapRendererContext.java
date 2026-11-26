@@ -31,6 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.plugins.srtm.building.SunLight;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -277,6 +278,7 @@ public class MapRendererContext {
 			setMapBackgroundColor();
 		}
 		setSkyAndFogColors();
+		updateShadows();
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
@@ -505,7 +507,7 @@ public class MapRendererContext {
 	}
 
 	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView, boolean MSAAEnabled) {
-		File shadersCache = new File(app.getCacheDir(), OPENGL_SHADERS_CACHE_DIR);
+		File shadersCache = new File(app.getNoBackupFilesDir(), OPENGL_SHADERS_CACHE_DIR);
 		if (!shadersCache.exists()) {
 			shadersCache.mkdir();
 		}
@@ -524,6 +526,7 @@ public class MapRendererContext {
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
 		updateElevationConfiguration();
+		updateShadows();
 
 		if (obfMapRasterLayerProvider != null) {
 			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
@@ -607,6 +610,16 @@ public class MapRendererContext {
 		}
 	}
 
+	public void updateShadows() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			// as Terrain shadows, sun shadows are off while the Hillshade layer shades the relief
+			SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+			boolean shadedByHillshade = plugin != null && plugin.isReliefShadedByHillshade();
+			mapRendererView.castShadows(app.getSettings().CAST_SHADOWS.get() && !shadedByHillshade);
+		}
+	}
+
 	public void updateElevationConfiguration() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView == null) {
@@ -614,15 +627,18 @@ public class MapRendererContext {
 		}
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		boolean disableVertexHillshade = plugin != null && plugin.isTerrainLayerEnabled() && plugin.isHillshadeMode();
-		if (disableVertexHillshade) {
+		// Terrain shadows are the vertex hillshade of the 3D relief
+		if (plugin != null && plugin.isTerrainShadowsEnabled()) {
+			elevationConfiguration.setVisualizationAlpha(plugin.getTerrainShadowsIntensity() / 100f);
+		} else {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
 		if (plugin != null) {
 			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
-			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
-			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+			SunLight sunLight = plugin.getSunLight();
+			elevationConfiguration.setHillshadeSunAngle(sunLight.getLightAltitude());
+			elevationConfiguration.setHillshadeSunAzimuth(sunLight.getLightAzimuth());
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}

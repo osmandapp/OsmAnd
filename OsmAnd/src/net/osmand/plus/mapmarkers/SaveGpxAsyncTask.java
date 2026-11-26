@@ -60,7 +60,7 @@ class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void aVoid) {
 		if (!gpxSelected) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
-					.showOnMap().syncGroup().selectedByUser().addToHistory().saveSelection();
+					.showOnMap().syncGroup().selectedByUser().saveSelection();
 			app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 		}
 	}

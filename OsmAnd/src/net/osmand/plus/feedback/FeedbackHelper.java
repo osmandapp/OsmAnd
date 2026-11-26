@@ -115,7 +115,7 @@ public class FeedbackHelper {
 			intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 		}
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		intent.setType("vnd.android.cursor.dir/email");
+		intent.setType("*/*");
 		intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug");
 		intent.putExtra(Intent.EXTRA_TEXT, deviceInfo);
 		Intent chooserIntent = Intent.createChooser(intent, app.getString(R.string.send_report));

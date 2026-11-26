@@ -7,9 +7,9 @@ import kotlin.jvm.JvmField
  * One node of the r-tree of a map section: a box in 31 coordinates, where its own bytes are, and
  * where the block of map objects hanging off it starts.
  *
- * A copy of `BinaryMapIndexReader.MapTree` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. Java can keep the class private because [MapRoot] is nested beside
- * it; here it has to be visible, since [MapRoot] extends it and is part of the reader's surface.
+ * Based on `BinaryMapIndexReader.MapTree` from OsmAnd-java. Java can keep the class private
+ * because [MapRoot] is nested beside it; here it has to be visible, since [MapRoot] extends it
+ * and is part of the reader's surface.
  */
 open class MapTree {
 

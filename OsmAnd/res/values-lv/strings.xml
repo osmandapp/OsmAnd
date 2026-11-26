@@ -2210,8 +2210,8 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="new_route_calculated_dist_dbg">Maršruts: distance %1$s, navigācijas laiks %2$s \nKopējais: %3$.1f sek, %4$d ceļi, %5$d flīzes)</string>
     <string name="lang_oc">Oksitāņu</string>
     <string name="app_mode_wagon">Wagon</string>
-    <string name="routing_attr_avoid_sett_name">Bez bruģētiem ceļiem</string>
-    <string name="routing_attr_avoid_sett_description">Bez bruģakmeņa</string>
+    <string name="routing_attr_avoid_sett_name">Bez šķelto akmeņu bruģa</string>
+    <string name="routing_attr_avoid_sett_description">Izvairīties no šķelto akmeņu bruģa</string>
     <string name="quick_action_need_to_add_item_to_list">Ir nepieciešams pievienot vismaz vienu vienību sarakstā \"Ātrās darbības\" iestatījumos</string>
     <string name="routing_attr_piste_type_downhill_name">Kalnu/nogāžu trases</string>
     <string name="routing_attr_piste_type_downhill_description">Slēpošanai paredzētās nobraucienu vietas un pacēlāji.</string>
@@ -2543,4 +2543,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="speed_cameras_legal_descr">"Dažās valstīs un reģionos brīdinājumi par ātruma kamerām ir aizliegti ar likumu.\n\n\n\nIzdariet izvēli, balstoties uz likuma prasībām jūs valstī..\n\n\n\nIzvēlieties %1$s un jūs saņemsiet brīdinājumus  par ātruma kamerām.\n\n\n\nIzvēlieties %2$s. Visi dati par ātruma kamerām: paziņojumi, brīdinājumi, POIs tiks izdzēsti līdz atkārtotai OsmAnd instalācijai."</string>
     <string name="speed_cameras_alert">Dažās valstīs brīdinājumi par ātruma kamerām ir aizliegti ar likumu.</string>
     <string name="speed_cameras_removed_descr">Šajā ierīcē nav ātruma kameru.</string>
+    <string name="routing_attr_avoid_cobblestone_name">Izvairīties no laukakmeņu bruģa</string>
+    <string name="routing_attr_avoid_cobblestone_description">Izvairīties no laukakmeņu bruģa</string>
 </resources>

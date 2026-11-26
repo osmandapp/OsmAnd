@@ -162,8 +162,9 @@ public class MediaStorageHelper {
 								String name = file.getName();
 								if (file.isFile() && name != null && MediaType.fromFileName(name) != MediaType.UNKNOWN) {
 									String href = file.getUri().toString();
+									String mimeType = MediaStorageUtils.getMimeType(file.getType(), name, dirType);
 									sources.put(href, new UriMediaSource(app, href, file.getUri(), name,
-											file.length(), file.getType(), dirType, location.getManualUri()));
+											file.length(), mimeType, dirType, location.getManualUri()));
 								}
 							}
 						}

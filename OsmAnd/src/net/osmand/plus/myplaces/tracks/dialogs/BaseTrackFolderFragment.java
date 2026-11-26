@@ -382,7 +382,10 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 			if (shouldShowFolderStats()) {
 				TracksGroup tracksGroup = getCurrentTrackGroup();
 				if (tracksGroup != null) {
-					items.add(new TrackFolderAnalysis(tracksGroup));
+					TrackFolderAnalysis analysis = new TrackFolderAnalysis(tracksGroup);
+					if (analysis.getTracksCount() > 0) {
+						items.add(analysis);
+					}
 				}
 			}
 		}

@@ -112,10 +112,11 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 
 	@Override
 	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
-		// If custom preference for current app mode was updated,
-		// We need to reload device from preferences to use it with actual customizations.
-		if (deviceHelper.getFunctionalityAppMode() == appMode && event.isCustomPreferenceRelated()) {
-			deviceHelper.reloadFunctionalityCollection(appMode);
+		// Custom devices are shared by all profiles, so a change made in any profile
+		// requires to reload devices from preferences to use them with actual customizations.
+		ApplicationMode functionalityAppMode = deviceHelper.getFunctionalityAppMode();
+		if (functionalityAppMode != null && event.isCustomPreferenceRelated()) {
+			deviceHelper.reloadFunctionalityCollection(functionalityAppMode);
 		}
 	}
 

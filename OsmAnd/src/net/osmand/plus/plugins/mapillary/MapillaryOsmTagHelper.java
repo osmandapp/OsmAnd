@@ -21,7 +21,7 @@ public class MapillaryOsmTagHelper {
 
 	private static final String GRAPH_URL_ENDPOINT = "https://graph.mapillary.com/";
 	private static final String PARAM_ACCESS_TOKEN = "access_token=" + MAPILLARY_ACCESS_TOKEN;
-	private static final String PARAM_FIELDS = "fields=id,geometry,compass_angle,captured_at,camera_type,thumb_256_url,thumb_1024_url";
+	private static final String PARAM_FIELDS = "fields=id,geometry,compass_angle,captured_at,camera_type,creator,thumb_256_url,thumb_1024_url";
 
 	private static final String ID = "id";
 	private static final String GEOMETRY = "geometry";
@@ -29,6 +29,8 @@ public class MapillaryOsmTagHelper {
 	private static final String COMPASS_ANGLE = "compass_angle";
 	private static final String CAPTURED_AT = "captured_at";
 	private static final String CAMERA_TYPE = "camera_type";
+	private static final String CREATOR = "creator";
+	private static final String USERNAME = "username";
 	private static final String THUMB_256_URL = "thumb_256_url";
 	private static final String THUMB_1024_URL = "thumb_1024_url";
 
@@ -92,6 +94,12 @@ public class MapillaryOsmTagHelper {
 				boolean is360 = Algorithms.stringsEqual(cameraType, "equirectangular")
 						|| Algorithms.stringsEqual(cameraType, "spherical");
 				result.put("360", is360);
+			}
+
+			JSONObject creator = response.optJSONObject(CREATOR);
+			String username = creator != null ? creator.optString(USERNAME) : null;
+			if (!Algorithms.isEmpty(username)) {
+				result.put("username", username);
 			}
 
 			if (response.has(THUMB_256_URL)) {

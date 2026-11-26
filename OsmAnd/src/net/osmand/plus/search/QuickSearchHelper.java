@@ -43,6 +43,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.history.SearchHistoryHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
@@ -91,11 +92,16 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 154;
 	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
 	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 500;
+	// maps around the search location the spatial search reads
+	private static final int SPATIAL_SEARCH_MAPS_RADIUS = 100_000;
 
 	private final OsmandApplication app;
 	private final SearchUICore core;
 	private SearchResultCollection resultCollection;
+	private List<QuickSearchListItem> spatialItemsOnMap;
 	private boolean mapsIndexed;
+	private boolean spatialSearch;
+	private List<String> mapsWithoutSpatialSearch = Collections.emptyList();
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
@@ -122,13 +128,23 @@ public class QuickSearchHelper implements ResourceListener {
 		this.resultCollection = resultCollection;
 	}
 
+	@Nullable
+	public List<QuickSearchListItem> getSpatialItemsOnMap() {
+		return spatialItemsOnMap;
+	}
+
+	public void setSpatialItemsOnMap(@Nullable List<QuickSearchListItem> spatialItemsOnMap) {
+		this.spatialItemsOnMap = spatialItemsOnMap;
+	}
+
 	public void initSearchUICore() {
 		mapsIndexed = false;
 		setRepositoriesForSearchUICore(app);
 		core.clearAPIs();
 		core.resetSearch();
 		resultCollection = null;
-		core.init(useSpatialTextSearch());
+		spatialSearch = useSpatialTextSearch();
+		core.init(spatialSearch);
 
 		registerNonMapSearchAPIs();
 		refreshCustomPoiFilters();
@@ -153,7 +169,29 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	private boolean useSpatialTextSearch() {
-		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get();
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get() && mapsWithoutSpatialSearch.isEmpty();
+	}
+
+	// the old search works while a map around the search location is older than the spatial search needs
+	public boolean updateSearchEngine(@Nullable LatLon location) {
+		mapsWithoutSpatialSearch = location == null ? Collections.emptyList()
+				: app.getResourceManager().getMapsWithoutSpatialSearch(location, SPATIAL_SEARCH_MAPS_RADIUS);
+		boolean spatial = useSpatialTextSearch();
+		if (spatialSearch != spatial) {
+			// as initSearchUICore, but keeps the search phrase; a running search keeps its copy of the apis
+			spatialSearch = spatial;
+			core.clearAPIs();
+			core.init(spatial);
+			registerNonMapSearchAPIs();
+			refreshCustomPoiFilters();
+			return true;
+		}
+		return false;
+	}
+
+	@NonNull
+	public List<String> getMapsWithoutSpatialSearch() {
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get() ? mapsWithoutSpatialSearch : Collections.emptyList();
 	}
 
 	public void refreshCustomPoiFilters() {
@@ -207,6 +245,13 @@ public class QuickSearchHelper implements ResourceListener {
 		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, Collections.singletonList(name));
 
 		return amenitySearch.searchDetailedAmenity(request, settings);
+	}
+
+	@Nullable
+	public Amenity findAmenity(@NonNull Amenity amenity) {
+		AmenitySearcher amenitySearch = app.getResourceManager().getAmenitySearcher();
+		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
+		return amenitySearch.searchDetailedAmenity(new AmenitySearcher.Request(amenity), settings);
 	}
 
 	@Nullable
@@ -360,18 +405,19 @@ public class QuickSearchHelper implements ResourceListener {
 				sr.objectType = ObjectType.FAVORITE;
 				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 				sr.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITE_ZOOM;
-				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)) {
+				boolean groupSelected = phrase.isLastWord(ObjectType.FAVORITE_GROUP);
+				if (groupSelected) {
 					FavoriteGroup group = (FavoriteGroup) phrase.getLastSelectedWord().getResult().object;
 					if (group != null && !point.getCategory().equals(group.getName())) {
 						continue;
 					}
 				}
-				if (phrase.getFullSearchPhrase().length() <= 1
-						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
+				// the selected group is part of the full phrase: only the text after it filters the points
+				String query = groupSelected ? phrase.getUnknownSearchPhrase().trim() : phrase.getFullSearchPhrase();
+				if (query.length() <= 1 && (phrase.isNoSelectedType() || groupSelected)) {
 					resultMatcher.publish(sr);
 				} else {
-					NameStringMatcher matcher = new NameStringMatcher(phrase.getFullSearchPhrase().trim(),
-							StringMatcherMode.CHECK_CONTAINS);
+					NameStringMatcher matcher = new NameStringMatcher(query.trim(), StringMatcherMode.CHECK_CONTAINS);
 					if (matcher.matches(sr.localeName)) {
 						resultMatcher.publish(sr);
 					}
@@ -608,7 +654,10 @@ public class QuickSearchHelper implements ResourceListener {
 					result.object = postcode;
 					return true;
 				case STREET:
-					City streetCity = createRelatedCity(entry, location);
+					String streetCityName = entry.getRelatedObjectName();
+					City streetCity = Algorithms.isEmpty(streetCityName)
+							? createRelatedCity(entry, location)
+							: createHistoryCity(CityType.CITY, streetCityName, location, null);
 					result.object = createHistoryStreet(streetCity, displayName, location, entry.getOsmId());
 					result.relatedObject = streetCity;
 					if (Algorithms.isEmpty(result.localeRelatedObjectName)) {
@@ -685,6 +734,12 @@ public class QuickSearchHelper implements ResourceListener {
 			}
 			if (Algorithms.isEmpty(streetName)) {
 				streetName = "";
+			}
+			// the stored type name of a building is "<street>, <city>"
+			String cityName = city.getName();
+			String streetPrefix = streetName + ", ";
+			if (!Algorithms.isEmpty(streetName) && cityName.startsWith(streetPrefix)) {
+				city = createHistoryCity(CityType.CITY, cityName.substring(streetPrefix.length()), location, null);
 			}
 			return createHistoryStreet(city, streetName, location, null);
 		}

@@ -7,7 +7,7 @@ import net.osmand.shared.util.collections.KTIntArrayList
  * it is parsed. The numbers only mean something through [index], which is the section they came
  * from.
  *
- * A copy of `BinaryMapIndexReader.SearchFilter`, which stays in OsmAnd-java.
+ * Based on `BinaryMapIndexReader.SearchFilter` from OsmAnd-java.
  */
 interface SearchFilter {
 

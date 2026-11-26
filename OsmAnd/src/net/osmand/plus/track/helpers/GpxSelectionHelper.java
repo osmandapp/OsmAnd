@@ -24,9 +24,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
-import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbUtils;
@@ -415,7 +413,6 @@ public class GpxSelectionHelper {
 					}
 				}
 			} catch (Exception e) {
-				app.getSettings().SELECTED_GPX.set("");
 				synchronized (pendingSelections) {
 					pendingSelections.clear();
 				}
@@ -444,14 +441,14 @@ public class GpxSelectionHelper {
 			pendingRestoreRunning.set(false);
 			log.info("Restored selected GPX geometry in "
 					+ (System.currentTimeMillis() - pendingRestoreStartTime) + " ms");
-			app.getGpxDbHelper().startFilesystemReconciliation();
+			app.getGpxDbHelper().startFilesystemReconciliation(!app.isExternalStorageDirectoryReadOnly());
 			return;
 		}
 
+		// The restore does not save the selection: a write of the shared preference marks Global Settings as changed.
 		File file = new File(selection.path);
 		if (!file.isFile()) {
 			removePendingSelection(selection);
-			saveCurrentSelections();
 			app.runInUIThread(() -> loadNextPendingSelection(generation));
 			return;
 		}
@@ -483,12 +480,10 @@ public class GpxSelectionHelper {
 					} else {
 						markPendingSelectionForRetry(selection);
 					}
-					saveCurrentSelections();
 				}
 			} catch (RuntimeException error) {
 				log.error("Failed to restore selected GPX " + selection.path, error);
 				// Keep the pending preference for a retry on the next process start.
-				saveCurrentSelections();
 			} finally {
 				loadNextPendingSelection(generation);
 			}
@@ -566,14 +561,6 @@ public class GpxSelectionHelper {
 		for (PointsGroup group : gpxFile.getPointsGroups().values()) {
 			String key = Algorithms.isEmpty(group.getName()) ? " " : group.getName();
 			group.setHidden(names.contains(key));
-		}
-	}
-
-	private void saveGpxToHistory(@NonNull GpxFile gpx) {
-		String relativePath = GpxUiHelper.getGpxFileRelativePath(app, gpx.getPath());
-		GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, relativePath);
-		if (gpxInfo != null) {
-			app.getSearchHistoryHelper().addNewItemToHistory(gpxInfo, HistorySource.SEARCH);
 		}
 	}
 
@@ -706,9 +693,6 @@ public class GpxSelectionHelper {
 		}
 		if (params.isSyncGroup()) {
 			syncGpxWithMarkers(gpx);
-		}
-		if (params.isAddToHistory()) {
-			saveGpxToHistory(gpx);
 		}
 		if (params.isSaveSelection()) {
 			saveCurrentSelections();

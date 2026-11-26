@@ -165,7 +165,8 @@ android {
 		}
 		release {
 			signingConfig signingConfigs.publishing
-			minifyEnabled true
+			// R8 stops on classes the HMS SDK references but does not ship, so huawei builds go without it, as before 5.4
+			minifyEnabled !gradle.startParameter.taskRequests.toString().toLowerCase().contains("huawei")
 			shrinkResources false
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
@@ -279,7 +280,7 @@ dependencies {
 }
 
 afterEvaluate {
-	def remoteAarSnapshot = "master-snapshot"
+	def remoteAarSnapshot = "5.5"
 	def localAarFile = file("../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar")
 
 	def requestedTasks = gradle.startParameter.taskNames.join(",").toLowerCase()

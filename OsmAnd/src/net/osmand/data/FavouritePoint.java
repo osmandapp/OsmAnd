@@ -12,11 +12,11 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
@@ -151,10 +151,6 @@ public class FavouritePoint implements LocationPoint, Linkable {
 	}
 
 	public int getIconIdOrDefault(@NonNull Context ctx) {
-		if(iconId == 0 && !Algorithms.isEmpty(getCategory())) {
-			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			iconId = app.getFavoritesHelper().getOriginalIconId(this);
-		}
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -205,7 +201,22 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
+		if (iconId == 0) {
+			int groupIconId = getGroupIconId(ctx);
+			if (groupIconId != 0) {
+				return groupIconId;
+			}
+		}
 		return getIconIdOrDefault(ctx);
+	}
+
+	private int getGroupIconId(@NonNull Context ctx) {
+		if (ctx.getApplicationContext() instanceof OsmandApplication app) {
+			FavoriteGroup group = app.getFavoritesHelper().getGroup(this);
+			String iconName = group != null ? group.getIconName() : null;
+			return Algorithms.isEmpty(iconName) ? 0 : RenderingIcons.getBigIconResourceId(iconName);
+		}
+		return 0;
 	}
 
 	public double getLatitude() {
@@ -424,6 +435,43 @@ public class FavouritePoint implements LocationPoint, Linkable {
 				&& (this.backgroundType == point.backgroundType);
 	}
 
+	/**
+	 * Compares links as they are written to GPX, so a point read back from its group file equals the saved one:
+	 * links with a blank href are not written, empty text or type is read back as null.
+	 */
+	public boolean linksEqual(@NonNull FavouritePoint point) {
+		int size = links != null ? links.size() : 0;
+		int otherSize = point.links != null ? point.links.size() : 0;
+		int i = nextSavedLink(links, 0);
+		int j = nextSavedLink(point.links, 0);
+		while (i < size && j < otherSize) {
+			Link link = links.get(i);
+			Link other = point.links.get(j);
+			if (!Algorithms.stringsEqual(link.getHref(), other.getHref())
+					|| !Algorithms.stringsEqual(emptyToNull(link.getText()), emptyToNull(other.getText()))
+					|| !Algorithms.stringsEqual(emptyToNull(link.getType()), emptyToNull(other.getType()))) {
+				return false;
+			}
+			i = nextSavedLink(links, i + 1);
+			j = nextSavedLink(point.links, j + 1);
+		}
+		return i >= size && j >= otherSize;
+	}
+
+	private static int nextSavedLink(@Nullable List<Link> links, int from) {
+		int size = links != null ? links.size() : 0;
+		int index = from;
+		while (index < size && (links.get(index) == null || Algorithms.isBlank(links.get(index).getHref()))) {
+			index++;
+		}
+		return index;
+	}
+
+	@Nullable
+	private static String emptyToNull(@Nullable String value) {
+		return Algorithms.isEmpty(value) ? null : value;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -527,9 +575,13 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		}
 		if (getPickupDate() > 0) {
 			extensions.put(PICKUP_DATE, GpxUtilities.INSTANCE.formatTime(getPickupDate()));
+		} else {
+			extensions.remove(PICKUP_DATE);
 		}
 		if (getCalendarEvent()) {
 			extensions.put(CALENDAR_EXTENSION, "true");
+		} else {
+			extensions.remove(CALENDAR_EXTENSION);
 		}
 		if (iconId != 0) {
 			point.setIconName(getIconEntryName(ctx).substring(3));
@@ -542,6 +594,9 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		}
 		if (getColor() != 0) {
 			point.setColor(getColor());
+		} else {
+			// the colour read from the file comes back with the amenity extensions
+			point.removeColor();
 		}
 		if (!Algorithms.isEmpty(amenityOriginName)) {
 			point.setAmenityOriginName(amenityOriginName);

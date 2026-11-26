@@ -1940,8 +1940,8 @@
     <string name="avoid_pt_types_descr">നാവിഗേഷനിൽ ഒഴിവാക്കേണ്ട പൊതു ഗതാഗത തരങ്ങൾ തിരഞ്ഞെടുക്കൂ:</string>
     <string name="avoid_pt_types">ഒഴിവാക്കണ്ട ട്രാൻസ്പോർട്ട് തരങ്ങൾ ...</string>
     <string name="quick_action_day_night_mode">%s മോഡ്</string>
-    <string name="routing_attr_avoid_sett_name">കല്ല് പാകിയത് ഒഴിവാക്കുക (cobblestone and sett)</string>
-    <string name="routing_attr_avoid_sett_description">കല്ല് പാകിയത് ഒഴിവാക്കുക (cobblestone and sett)</string>
+    <string name="routing_attr_avoid_sett_name">ചെത്തിയ കല്ല് പാകിയ വഴി ഒഴിവാക്കുക</string>
+    <string name="routing_attr_avoid_sett_description">ചെത്തിയ കല്ല് പാകിയ വഴി ഒഴിവാക്കുന്നു</string>
     <string name="shared_string_degrees">ഡിഗ്രി</string>
     <string name="shared_string_milliradians">മില്ലിറേഡിയൻസ്</string>
     <string name="routing_attr_avoid_tram_name">ട്രാം ഒഴിവാക്കുക</string>
@@ -1984,4 +1984,6 @@
     <string name="customize_grid_color">ഗ്രിഡിന്റെ കളർ കസ്റ്റമൈസ്</string>
     <string name="save_to_device">ഫോണിലേക്ക് സേവ് ചെയ്യാൻ</string>
     <string name="saved_to_device">ഫോണിൽ സേവ് ആയി</string>
+    <string name="routing_attr_avoid_cobblestone_name">ഉരുളൻ കല്ല് പാകിയ വഴി ഒഴിവാക്കുക</string>
+    <string name="routing_attr_avoid_cobblestone_description">ഉരുളൻ കല്ല് പാകിയ വഴി ഒഴിവാക്കുക</string>
 </resources>

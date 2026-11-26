@@ -5,8 +5,8 @@ import kotlin.jvm.JvmField
 /**
  * One node of the routing r-tree of a [RouteRegion]: a bounding box and where its bytes are.
  *
- * A copy of `BinaryMapRouteReaderAdapter.RouteSubregion`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical.
+ * Based on `BinaryMapRouteReaderAdapter.RouteSubregion` from OsmAnd-java. Keep behavior
+ * compatible with the original.
  */
 class RouteSubregion {
 
@@ -36,10 +36,6 @@ class RouteSubregion {
 
 	@JvmField
 	var subregions: MutableList<RouteSubregion>? = null
-
-	/** Objects of this node once it has been read, cleared as soon as they are handed out. */
-	@JvmField
-	var dataObjects: MutableList<RouteDataObject?>? = null
 
 	constructor(routeReg: RouteRegion) {
 		this.routeReg = routeReg

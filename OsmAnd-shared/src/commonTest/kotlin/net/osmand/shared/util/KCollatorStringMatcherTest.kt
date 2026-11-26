@@ -14,6 +14,151 @@ import kotlin.test.assertEquals
  */
 class KCollatorStringMatcherTest {
 
+	// Frozen Android answers remain the mobile regression oracle. Desktop runs the same cases
+	// against the literal Java algorithm with the real, unmodified JVM collator.
+	private val desktopSpaces = primaryCollator().equals(" ", "")
+
+	@Test
+	fun containsMatchesPlatformSpaceRules() {
+		val cases = listOf(
+			Triple("Four", "Grifo Uris Bell", false),
+			Triple("Four", "Shower at \"Grifo Uris Bell\"", false),
+			Triple("Grifo Uris Bell", "Shower at \"Grifo Uris Bell\"", true),
+			Triple("newyork", "New York", false),
+			Triple("fo ur", "four", false),
+			Triple("four ", "four square", true),
+			Triple("four ", "fourteen", false),
+			Triple("four  ", "four  square", true),
+			Triple("st john", "St  John", false),
+			Triple(" ", "Auhofstraße", false),
+			Triple(" ", " ", true),
+			Triple("", "New York", true)
+		)
+		for ((query, name, expected) in cases) {
+			assertContains(expected, query, name)
+		}
+	}
+
+	@Test
+	fun allModesMatchPlatformUnicodeSpaces() {
+		// Recorded from OsmAnd's Java matcher on Android API 37 in en-US/de-DE/ru-RU.
+		// Each answer string follows the explicit mode order below; 1 means a match.
+		val modes = listOf(
+			KStringMatcherMode.CHECK_ONLY_STARTS_WITH,
+			KStringMatcherMode.CHECK_STARTS_FROM_SPACE,
+			KStringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
+			KStringMatcherMode.CHECK_EQUALS_FROM_SPACE,
+			KStringMatcherMode.CHECK_CONTAINS,
+			KStringMatcherMode.CHECK_EQUALS,
+			KStringMatcherMode.MULTISEARCH
+		)
+		val spaces = " \u00A0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000"
+		for (space in spaces) {
+			val cases = listOf(
+				Triple("new york", "New${space}York", "1101111"),
+				Triple("newyork", "New${space}York", "0000000"),
+				Triple("new${space}york", "New York", "1101111"),
+				Triple("new york", "Café New${space}York Deli", "0111100"),
+				Triple("Four", "Grifo${space}Uris Bell", "0000000"),
+				Triple("york", "New${space}York", "0111100"),
+				Triple("four$space", "four square", "1100100"),
+				Triple("four$space", "fourteen", "0000000"),
+				Triple("four$space$space", "four  square", "1100100"),
+				Triple("st john", "St$space${space}John", "0000000"),
+				Triple("$space", "Auhofstraße", "0000000"),
+				Triple("$space", "$space", "1101111"),
+				Triple("", "New${space}York", "1111110"),
+				Triple("new york.", "New${space}York Deli", "1101110"),
+				Triple("new$space", "new york", "1100100"),
+				Triple("new york", "New${space}Yorker", "1100100")
+			)
+			for ((query, name, answers) in cases) {
+				for ((index, mode) in modes.withIndex()) {
+					val matcher = KCollatorStringMatcher(query, mode)
+					val expected = if (desktopSpaces)
+						KCollatorBenchmarkTest.LiteralCollatorMatcher(matcher.part, matcher.mode).matches(name)
+					else answers[index] == '1'
+					val label = "${mode.name}: '$query' in '$name'"
+					assertEquals(expected, matcher.matches(name), label)
+					// Java's instance path resolves an incomplete dot before its static matcher.
+					assertEquals(expected, KCollatorStringMatcher.cmatches(name, matcher.part, matcher.mode), label)
+					assertEquals(expected, KCollatorStringMatcher.cmatchesPrepared(
+						KCollatorStringMatcher.PreparedName(name), matcher.part, matcher.mode), label)
+				}
+			}
+		}
+	}
+
+	private fun assertContains(androidExpected: Boolean, query: String, name: String) {
+		val mode = KStringMatcherMode.CHECK_CONTAINS
+		val matcher = KCollatorStringMatcher(query, mode)
+		val expected = if (desktopSpaces)
+			KCollatorBenchmarkTest.LiteralCollatorMatcher(query, mode).matches(name) else androidExpected
+		val label = "'$query' in '$name'"
+		assertEquals(expected, matcher.matches(name), label)
+		assertEquals(expected, KCollatorStringMatcher.cmatches(name, query, mode), label)
+		assertEquals(expected, KCollatorStringMatcher.cmatchesPrepared(
+			KCollatorStringMatcher.PreparedName(name), matcher.part, mode), label)
+	}
+
+	@Test
+	fun matchesAndroidPrimaryFoldsAtSourceBoundaries() {
+		if (net.osmand.shared.routing.testPlatformName().startsWith("jvm")) return
+		// Android Java API 37, in KStringMatcherMode declaration order.
+		val cases = listOf(
+			Triple("Łódź", "Lodz", "1101111"),
+			Triple("Sø", "So", "1101111"),
+			Triple("Þingvellir", "Thingvellir", "0000000"),
+			Triple("A–B", "AB", "0000000"),
+			Triple("ＡＢ", "AB", "1101111"),
+			Triple("Grifo Uris Bell", "Four", "0000000"),
+			Triple("Straße", "strasse", "1101111"),
+			Triple("X ĳssel", "ij", "0000100"),
+			Triple("xĳy", "j", "0000000"),
+			Triple("xĳy", "ij", "0000100"),
+			Triple("xĳy", "i", "0000000"),
+			Triple("æx", "a", "0000000"),
+			Triple("foo-bar", "foobar", "1101111"),
+			Triple("가", "가", "0000100"),
+			Triple("New York", "new york", "1101111"),
+			Triple("a\tb", "ab", "0000000"),
+			Triple("ﷺ", "صلى الله عليه وسلم", "0000000"),
+			Triple("กำ", "กํา", "0000000"),
+			Triple("﷽", "بسم الله الرحمن الرحيم", "0000000"),
+		)
+		for ((name, query, answers) in cases) {
+			for ((index, mode) in KStringMatcherMode.entries.withIndex()) {
+				val matcher = KCollatorStringMatcher(query, mode)
+				val expected = answers[index] == '1'
+				assertEquals(expected, matcher.matches(name), "$name / $query / $mode")
+				assertEquals(expected, KCollatorStringMatcher.cmatchesPrepared(
+					KCollatorStringMatcher.PreparedName(name), matcher.part, matcher.mode))
+			}
+		}
+	}
+
+	@Test
+	fun containsMatchesLiteralCollatorOnPrintableCharacters() {
+		val mode = KStringMatcherMode.CHECK_CONTAINS
+		val alphabet = (' '..'~').joinToString("")
+		val collator = primaryCollator()
+		for (left in alphabet) {
+			for (right in alphabet) {
+				val base = left.toString()
+				val part = right.toString()
+				assertEquals(collator.equals(base, part), collator.contains(base, part), "'$left' / '$right'")
+			}
+		}
+		val queries = alphabet.map { it.toString() } + listOf("Aa", "A B", "vW", "aa", "ij", "ch", "01", "!~")
+		for (query in queries) {
+			val literal = KCollatorBenchmarkTest.LiteralCollatorMatcher(query, mode)
+			val matcher = KCollatorStringMatcher(query, mode)
+			for (name in listOf(query, "X${query}Y", query.lowercase(), "A bc-012!", "Z[~]az", "Sø", "X ĳssel")) {
+				assertEquals(literal.matches(name), matcher.matches(name), "'$query' in '$name'")
+			}
+		}
+	}
+
 	private val names = listOf(
 		"", "a", "b", "ab", "a-b", "a b", "-", "--", "-1", "1-", "12-3", "st.", "st", "St. Pölten",
 		"Sankt Pölten", "Auhofstraße", "auhofstrasse", "Straße", "strasse", "Ærø", "aero", "œuvre", "oeuvre",
@@ -29,11 +174,11 @@ class KCollatorStringMatcherTest {
 		for (full in names) {
 			val prepared = KCollatorStringMatcher.PreparedName(full)
 			for (part in names) {
-				val partKey = KCollationKey.of(part)
+				val alignedPart = KSearchAlgorithms.lowercaseAndAlignChars(part)
 				for (mode in KStringMatcherMode.entries) {
 					assertEquals(
 						KCollatorStringMatcher.cmatches(full, part, mode),
-						KCollatorStringMatcher.cmatchesPrepared(prepared, partKey, mode),
+						KCollatorStringMatcher.cmatchesPrepared(prepared, alignedPart, mode),
 						"'$full' '$part' $mode"
 					)
 					compared++
@@ -44,9 +189,9 @@ class KCollatorStringMatcherTest {
 	}
 
 	@Test
-	fun preparedKeyIsThePartKey() {
+	fun preparedNameUsesTheSameAlignmentAsTheQuery() {
 		for (name in names) {
-			assertEquals(KCollationKey.of(name).toString(), KCollatorStringMatcher.PreparedName(name).key.toString(), name)
+			assertEquals(KSearchAlgorithms.lowercaseAndAlignChars(name), KCollatorStringMatcher.PreparedName(name).text, name)
 		}
 	}
 

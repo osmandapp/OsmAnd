@@ -104,6 +104,8 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		sheetList = findViewById(R.id.details_list)
 		solidAppBar = findViewById(R.id.solid_app_bar)
 		(sheetList.layoutParams as MarginLayoutParams).bottomMargin = listInset
+		// Before edge-to-edge the top inset stays 0 and applyTopInset() returns early, so set the margin here
+		(sheet.layoutParams as LayoutParams).topMargin = fullTop.toInt()
 	}
 
 	override fun onAttachedToWindow() {

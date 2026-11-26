@@ -2,6 +2,7 @@ package net.osmand.shared.binary
 
 import net.osmand.shared.binary.GeocodingUtilities.GeocodingResult
 import net.osmand.shared.routing.RoutingContext
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testEnvironment
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.AmenitySearcherTest
@@ -59,16 +60,16 @@ class GeocodingBenchmarkTest {
 				val made = LongArray(KINDS.size)
 				var mark = TimeSource.Monotonic.markNow()
 				for (i in points.indices) {
-					made[0] += utils.reverseGeocodingSearch(contexts[fileOf[i]], points[i][0], points[i][1], false).size
+					made[0] += testAppCall { utils.reverseGeocodingSearch(contexts[fileOf[i]], points[i][0], points[i][1], false).size }
 				}
 				nanos[0] = mark.elapsedNow().inWholeNanoseconds
 				// sorting changes the results it sorts: fresh ones, found before the clock starts
 				val found: List<List<GeocodingResult>> = points.indices.map {
-					utils.reverseGeocodingSearch(contexts[fileOf[it]], points[it][0], points[it][1], false)
+					testAppCall { utils.reverseGeocodingSearch(contexts[fileOf[it]], points[it][0], points[it][1], false) }
 				}
 				mark = TimeSource.Monotonic.markNow()
 				for (i in points.indices) {
-					made[1] += utils.findAddresses(listOf(readers[fileOf[i]]), found[i]).size
+					made[1] += testAppCall { utils.findAddresses(listOf(readers[fileOf[i]]), found[i]).size }
 				}
 				nanos[1] = mark.elapsedNow().inWholeNanoseconds
 				if (round >= WARMUP_ROUNDS) {

@@ -16,9 +16,8 @@ import kotlin.native.ObjCName
  * ones a vehicle may take through [next]; [parentRoute] is how the search got here, and the two
  * distances are what A* orders the open set by, in seconds.
  *
- * A copy of `BinaryRoutePlanner.RouteSegment` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. It implements [RoadTraversal], which is all the vehicle router asks
- * of it.
+ * Based on `BinaryRoutePlanner.RouteSegment` from OsmAnd-java. It implements [RoadTraversal],
+ * which is all the vehicle router asks of it.
  */
 open class RouteSegment(road: RouteDataObject?, segmentStart: Int, segmentEnd: Int) : RoadTraversal {
 

@@ -108,7 +108,9 @@ public class NavigateGpxParams extends AidlParams {
 		bundle.putParcelable("uri", uri);
 		bundle.putBoolean("force", force);
 		bundle.putBoolean("needLocationPermission", needLocationPermission);
-		bundle.putBoolean("passWholeRoute", passWholeRoute);
+		if (passWholeRoute != null) {
+			bundle.putBoolean("passWholeRoute", passWholeRoute);
+		}
 		bundle.putBoolean("snapToRoad", snapToRoad);
 		bundle.putString("snapToRoadMode", snapToRoadMode);
 		bundle.putInt("snapToRoadThreshold", snapToRoadThreshold);
@@ -121,7 +123,7 @@ public class NavigateGpxParams extends AidlParams {
 		uri = bundle.getParcelable("uri");
 		force = bundle.getBoolean("force");
 		needLocationPermission = bundle.getBoolean("needLocationPermission");
-		passWholeRoute = bundle.getBoolean("passWholeRoute");
+		passWholeRoute = bundle.containsKey("passWholeRoute") ? bundle.getBoolean("passWholeRoute") : null;
 		snapToRoad = bundle.getBoolean("snapToRoad");
 		snapToRoadMode = bundle.getString("snapToRoadMode");
 		snapToRoadThreshold = bundle.getInt("snapToRoadThreshold");

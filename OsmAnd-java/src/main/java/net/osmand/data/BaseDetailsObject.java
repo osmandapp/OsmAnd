@@ -307,11 +307,15 @@ public class BaseDetailsObject {
 					syntheticAmenity.setId(objectId);
 				}
 			}
-			if (syntheticAmenity.getType() == null) {
-				Amenity amenity = convertRenderedObjectToAmenity(renderedObject, MapPoiTypes.getDefault());
-				syntheticAmenity.setType(amenity.getType());
-				syntheticAmenity.setSubType(amenity.getSubType());
-				syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
+			MapPoiTypes poiTypes = MapPoiTypes.getDefault();
+			PoiCategory currentType = syntheticAmenity.getType();
+			if (currentType == null || poiTypes.isOtherCategory(currentType)) {
+				Amenity amenity = convertRenderedObjectToAmenity(renderedObject, poiTypes);
+				if (shouldTakeType(currentType, amenity.getType(), poiTypes)) {
+					syntheticAmenity.setType(amenity.getType());
+					syntheticAmenity.setSubType(amenity.getSubType());
+					syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
+				}
 			}
 			syntheticAmenity.copyNames(renderedObject);
 			if (syntheticAmenity.getLocation() == null) {
@@ -335,12 +339,9 @@ public class BaseDetailsObject {
 	}
 
 	private static void updateAmenitySubTypes(Amenity amenity, String subTypesToAdd) {
-		if (Algorithms.isEmpty(subTypesToAdd)) {
-			return;
-		}
-		if (amenity.getSubType() == null) {
+		if (Algorithms.isEmpty(amenity.getSubType())) {
 			amenity.setSubType(subTypesToAdd);
-		} else {
+		} else if (!Algorithms.isEmpty(subTypesToAdd)) {
 			for (String subType : subTypesToAdd.split(";")) {
 				boolean isSubTypeUnique = true;
 				for (String s : amenity.getSubType().split(";")) {
@@ -360,6 +361,12 @@ public class BaseDetailsObject {
 		mergeAmenityData(syntheticAmenity, amenity, lang, isSingleObject);
 	}
 
+	// a placeholder, e.g. a marker of an address result, must not shadow a real category
+	private static boolean shouldTakeType(PoiCategory currentType, PoiCategory type, MapPoiTypes poiTypes) {
+		return type != null && (currentType == null
+				|| (poiTypes.isOtherCategory(currentType) && !poiTypes.isOtherCategory(type)));
+	}
+
 	public static void mergeAmenityData(Amenity syntheticAmenity, Amenity amenity, String lang, boolean isSingleObject) {
 		processId(syntheticAmenity, amenity);
 
@@ -369,9 +376,7 @@ public class BaseDetailsObject {
 		}
 		PoiCategory type = amenity.getType();
 		MapPoiTypes poiTypes = MapPoiTypes.getDefault();
-		if (type != null && (syntheticAmenity.getType() == null
-				|| (poiTypes.isOtherCategory(syntheticAmenity.getType()) && !poiTypes.isOtherCategory(type)))) {
-			// a placeholder, e.g. a marker of an address result, must not shadow a real category
+		if (shouldTakeType(syntheticAmenity.getType(), type, poiTypes)) {
 			syntheticAmenity.setType(type);
 		}
 		String subType = amenity.getSubType();

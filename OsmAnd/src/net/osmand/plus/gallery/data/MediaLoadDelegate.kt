@@ -12,4 +12,5 @@ interface MediaLoadDelegate {
 	)
 
 	fun cancel(key: GalleryKey) = Unit
+	fun canRefresh(): Boolean = true
 }

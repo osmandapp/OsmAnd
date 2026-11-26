@@ -7,10 +7,10 @@ import kotlin.jvm.JvmField
  * and where to report progress. Not how it is worked out - the search itself, its tile cache and its
  * graph nodes belong to whichever planner runs, and stay there.
  *
- * This is the request half of `net.osmand.router.RoutingContext`, which stays whole in OsmAnd-java
- * for android and tools. The copy exists for iOS: the shared turn preparation reads the profile, the
- * calculation mode and the side of the road off it, and iOS fills those in from its C++ context.
- * The field names are java's, so the two can be compared side by side.
+ * Based on the request fields of `net.osmand.router.RoutingContext` from OsmAnd-java. Shared
+ * turn preparation reads the profile, calculation mode and driving side from this request.
+ * Callers can populate it independently of the planner; [RoutingContext] extends it with the
+ * shared planner's state. Field names are preserved for compatibility.
  */
 open class RoutingRequest(
 	/** The profile and the limits this calculation runs under. */

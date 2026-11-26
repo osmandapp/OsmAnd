@@ -58,6 +58,11 @@ import kotlin.time.TimeSource
  * reducing it on every comparison. Opening is not a like for like: java
  * also reads the transport header, which the copy skips; the address header the copy reads too
  * since the address section was copied, at no cost `AddressReaderBenchmarkTest` could measure.
+ *
+ * The test files are 31 since. Over them, opening a second reader of each over the structure the
+ * first one walked - what each type of `BinaryMapReaderResource` costs - takes 0.4 ms on the jvm
+ * and 0.3 ms on Kotlin/Native, against 5.0-5.5 ms and 3.3-3.6 ms to open the files; on a 414 MB
+ * regional map, 0.1 ms against 9.3 ms on the jvm.
  */
 class ObfReaderBenchmarkTest {
 
@@ -89,6 +94,21 @@ class ObfReaderBenchmarkTest {
 			}
 		}
 		row("open the files", openMs, files.size, false)
+
+		// what each type of BinaryMapReaderResource costs once the file is open
+		var copyMs = Double.MAX_VALUE
+		val opened = files.map { BinaryMapIndexReader(it) }
+		repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
+			val mark = TimeSource.Monotonic.markNow()
+			val copies = opened.map { BinaryMapIndexReader(it) }
+			val ms = mark.elapsedNow().inWholeMicroseconds / 1000.0
+			copies.forEach { it.close() }
+			if (round >= WARMUP_ROUNDS && ms < copyMs) {
+				copyMs = ms
+			}
+		}
+		opened.forEach { it.close() }
+		row("open a second reader of each", copyMs, files.size, false)
 
 		var searchMs = Double.MAX_VALUE
 		var objects = 0

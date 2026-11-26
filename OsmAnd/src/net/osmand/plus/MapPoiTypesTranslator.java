@@ -111,6 +111,11 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 	}
 
 	@Override
+	public PoiTranslator getTranslator(String lang) {
+		return new MapPoiTypesTranslator(app, new Locale(lang));
+	}
+
+	@Override
 	public String getAllLanguagesTranslationSuffix() {
 		return localizedResources.getString(R.string.shared_string_all_languages).toLowerCase();
 	}

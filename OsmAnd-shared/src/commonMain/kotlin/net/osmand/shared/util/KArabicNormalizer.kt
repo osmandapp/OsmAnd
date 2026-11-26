@@ -31,7 +31,7 @@ object KArabicNormalizer {
 		if (text.isNullOrEmpty()) {
 			return false
 		}
-		if (!isArabicBlock(text[0])) {
+		if (!startsWithArabic(text)) {
 			return false
 		}
 		for (c in text) {
@@ -61,7 +61,7 @@ object KArabicNormalizer {
 		if (text.isEmpty()) {
 			return null
 		}
-		if (!isArabicBlock(text[0])) {
+		if (!startsWithArabic(text)) {
 			return text
 		}
 		val chars = text.toCharArray()
@@ -83,6 +83,10 @@ object KArabicNormalizer {
 			i += 2
 		}
 		return c
+	}
+
+	private fun startsWithArabic(text: String): Boolean {
+		return isArabicBlock(text[0]) || (text.length > 1 && isArabicBlock(text[1]))
 	}
 
 	private fun isArabicBlock(c: Char): Boolean = c in ARABIC_BLOCK_FIRST..ARABIC_BLOCK_LAST

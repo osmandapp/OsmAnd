@@ -52,7 +52,7 @@ public class TrackLineStyleController implements IHeadedCardController {
 	@NonNull
 	@Override
 	public String getCardSummary() {
-		return drawInfo.getLineStyleType().getDisplayName();
+		return getSelectedStyle().getDisplayName();
 	}
 
 	@NonNull
@@ -74,10 +74,11 @@ public class TrackLineStyleController implements IHeadedCardController {
 
 	private void setupDescription(@NonNull View view) {
 		TextView description = view.findViewById(R.id.description);
-		boolean solidColorSelected = isColorSolid();
-		AndroidUiHelper.updateVisibility(description, !solidColorSelected);
-		if (!solidColorSelected) {
+		AndroidUiHelper.updateVisibility(description, !drawInfo.isLineStyleAvailable());
+		if (!drawInfo.isColorSolid()) {
 			description.setText(R.string.gpx_line_style_desc_unavailable_for_color);
+		} else if (drawInfo.is3dTrack()) {
+			description.setText(R.string.gpx_line_style_desc_unavailable_for_3d);
 		}
 	}
 
@@ -96,11 +97,7 @@ public class TrackLineStyleController implements IHeadedCardController {
 	}
 
 	private boolean isStyleAvailable(@NonNull GpxLineStyleType style) {
-		return style == GpxLineStyleType.SOLID || isColorSolid();
-	}
-
-	private boolean isColorSolid() {
-		return drawInfo.getColoringStyle().getType().isTrackSolid();
+		return style == GpxLineStyleType.SOLID || drawInfo.isLineStyleAvailable();
 	}
 
 	private boolean onLineStyleSelected(@NonNull GpxLineStyleType style) {
@@ -121,7 +118,7 @@ public class TrackLineStyleController implements IHeadedCardController {
 
 	@NonNull
 	private GpxLineStyleType getSelectedStyle() {
-		return drawInfo.getLineStyleType();
+		return drawInfo.getDrawnLineStyleType();
 	}
 
 	public interface ITrackLineStyleSelectedListener {

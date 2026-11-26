@@ -2,16 +2,19 @@ package net.osmand.shared.osm
 
 import net.osmand.shared.map.WorldRegion
 import net.osmand.shared.util.KAlgorithms
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
 /**
  * Labels of additional property values written as "Name: value" in phrases.xml ("Fridge: yes",
  * "Smoking: not allowed", "Kayaks: yes"). A translation without the separator is shown as it is.
  *
- * A copy of `PoiAdditionalLabels` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS.
+ * Based on `PoiAdditionalLabels` from OsmAnd-java.
  */
 object PoiAdditionalLabels {
 
+	@OptIn(ExperimentalObjCName::class)
+	@ObjCName("yes")
 	const val YES = "yes"
 
 	// OSM values of a property state ("smoking=no"); a value outside it is an option ("diesel", "gynaecology")
@@ -82,12 +85,14 @@ object PoiAdditionalLabels {
 		return translation
 	}
 
-	fun getSearchName(poiType: AbstractPoiType): String {
+	fun getSearchName(poiType: AbstractPoiType): String = getSearchName(poiType, poiType.getTranslation())
+
+	fun getSearchName(poiType: AbstractPoiType, translation: String): String {
 		if (!poiType.isAdditional()) {
-			return poiType.getTranslation()
+			return translation
 		}
 		return getSearchName(
-			poiType.getTranslation(), poiType.getEnTranslation(), poiType.getSynonyms(),
+			translation, poiType.getEnTranslation(), poiType.getSynonyms(),
 			poiType.getPoiAdditionalCategoryTranslation()
 		)
 	}

@@ -21,8 +21,8 @@ import kotlin.math.min
  * search. Either way the parts of the track no road matches are kept as straight lines, and the
  * turns are prepared over the whole.
  *
- * A copy of `GpxRouteApproximation` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS. The path through the C++ library (`runNativeSearchGpxRoute`) is not copied.
+ * Based on `GpxRouteApproximation` from OsmAnd-java. The path through the C++ library
+ * (`runNativeSearchGpxRoute`) is not copied.
  */
 class GpxRouteApproximation(@JvmField val ctx: RoutingContext) {
 

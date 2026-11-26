@@ -103,6 +103,15 @@ public class TripRecordingDistanceWidget extends BaseRecordingWidget {
 		}
 	}
 
+	@DrawableRes
+	@Override
+	public int getMapIconId(boolean nightMode) {
+		TripRecordingDistanceMode mode = distanceWidgetState.getDistanceModePreference().get();
+		return mode == TripRecordingDistanceMode.TOTAL_DISTANCE
+				? distanceWidgetState.getSettingsIconId(nightMode)
+				: mode.getIcon(nightMode);
+	}
+
 	private void setLastSlopeDistance(@NonNull TripRecordingDistanceMode recordingDistanceMode) {
 		SlopeInfo lastSlope = getLastSlope(recordingDistanceMode == TripRecordingDistanceMode.LAST_UPHILL);
 		if (lastSlope != null) {

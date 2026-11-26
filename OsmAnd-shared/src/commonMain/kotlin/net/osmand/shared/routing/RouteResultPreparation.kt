@@ -11,12 +11,12 @@ import kotlin.math.abs
  * they run along one road, split where a turn is made in the middle of one, with the roads that
  * leave every junction attached, and then the manoeuvres and times from [TurnPreparation].
  *
- * A copy of the orchestration in `net.osmand.router.RouteResultPreparation`, which stays in
- * OsmAnd-java for android and tools; this copy is for iOS. The manoeuvres, lanes and times were
- * copied earlier into [TurnPreparation]; this is the part around them that needs the planner's
- * own segments and the routing context's tiles: `convertFinalSegmentToResults`, the area routing,
- * the split with the attached roads, and `prepareResult` that runs them in order. The debug
- * printing stays in java.
+ * Based on the orchestration in `net.osmand.router.RouteResultPreparation` from OsmAnd-java.
+ * The manoeuvres, lanes and times were copied earlier into [TurnPreparation]; this is the part
+ * around them that needs the planner's own segments and the routing context's tiles:
+ * `convertFinalSegmentToResults`, the area routing, the split with the attached roads, and
+ * `prepareResult` that runs them in order. The Java debug printing helpers are not implemented
+ * here.
  */
 object RouteResultPreparation {
 

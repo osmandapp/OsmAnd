@@ -820,7 +820,7 @@
     <string name="system_locale">System</string>
     <string name="buy">Prynu</string>
     <string name="weekly">Wythnosol</string>
-    <string name="routing_attr_avoid_sett_name">Dim wynebau cobls</string>
+    <string name="routing_attr_avoid_sett_name">Dim cerrig sets</string>
     <string name="routeInfo_steepness_name">Serthrwydd</string>
     <string name="routing_attr_piste_type_sled_name">Sled</string>
     <string name="app_mode_pedestrian">Cerdded</string>
@@ -1057,7 +1057,7 @@
     <string name="daynight_mode_night">Nos</string>
     <string name="daynight_mode_auto">Codiad/machlud haul</string>
     <string name="update_existing">Amnewid</string>
-    <string name="routing_attr_avoid_sett_description">Osgoi wynebau cobls</string>
+    <string name="routing_attr_avoid_sett_description">Osgoi cerrig sets</string>
     <string name="shared_string_size">Maint</string>
     <string name="created_on">Crëwyd ar</string>
     <string name="skip_confirmation">Ie, neidio</string>
@@ -3506,4 +3506,6 @@
     <string name="obd_not_connected_to_device">Wedi datgysylltu o %s</string>
     <string name="obd_connecting_to_device">Yn cysylltu â %s</string>
     <string name="bt_start_pair_failed">Methu cychwyn paru â dyfais</string>
+    <string name="routing_attr_avoid_cobblestone_name">Osgoi coblau</string>
+    <string name="routing_attr_avoid_cobblestone_description">Osgoi coblau</string>
 </resources>

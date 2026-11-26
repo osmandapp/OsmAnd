@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu.builders.rows.behaviour
 
+import net.osmand.data.Amenity
 import net.osmand.plus.R
+import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.shared.data.AmenityTagEntry
 import net.osmand.util.OpeningHoursParser
 import java.util.Calendar
@@ -14,7 +16,15 @@ object OpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
 		with(params) {
 		    var vl = value
 		    val formattedValue = vl.replace("; ", "\n").replace(",", ", ")
-		    builder.setCollapsableEntries(listOf(AmenityTagEntry.Builder(key).setText(formattedValue).build()))
+		    val entries = mutableListOf(AmenityTagEntry.Builder(key).setText(formattedValue).build())
+		    val checkDate = additionalInfo.getFilteredInfo()[Amenity.CHECK_DATE_OPENING_HOURS]
+		    if (key == Amenity.OPENING_HOURS && !checkDate.isNullOrEmpty()) {
+			    val checkDateText = app.getString(R.string.ltr_or_rtl_combine_via_colon,
+				    app.getString(R.string.poi_check_date), OsmAndFormatter.getFormattedIsoDate(app, checkDate))
+			    entries.add(AmenityTagEntry.Builder(Amenity.CHECK_DATE_OPENING_HOURS)
+				    .setValue(checkDate).setText(checkDateText).build())
+		    }
+		    builder.setCollapsableEntries(entries)
 		    builder.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.OPENING_HOURS)
 
 		    val openingHours = OpeningHoursParser.parseOpenedHours(vl)

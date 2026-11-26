@@ -77,6 +77,8 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements IOsmAndFragment,
@@ -552,11 +554,21 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			String appName = selectedAppMode.toHumanString();
 			profileTitle.setText(appName);
 		}
+		updateProfileSubtitle(view, selectedAppMode);
 		View toolbarDivider = view.findViewById(R.id.toolbar_divider);
 		if (toolbarDivider != null) {
 			toolbarDivider.setBackgroundColor(iconColor);
 		}
 		updateProfileButton();
+	}
+
+	private void updateProfileSubtitle(@NonNull View view, @NonNull ApplicationMode appMode) {
+		if (currentScreenType != null && currentScreenType.toolbarResId == R.layout.profile_preference_toolbar) {
+			TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
+			if (toolbarSubtitle != null) {
+				toolbarSubtitle.setText(appMode.toHumanString());
+			}
+		}
 	}
 
 	protected void updateProfileButton() {
@@ -937,13 +949,25 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected void applyPreferenceWithSnackBar(String prefId, Serializable newValue) {
 		onApplyPreferenceChange(prefId, false, newValue);
 		updateSetting(prefId);
+		showApplyToAllProfilesSnackBar(Collections.singletonMap(prefId, newValue));
+	}
+
+	/**
+	 * Tells that the changes went to the selected profile only and offers to apply them to all profiles.
+	 */
+	public void showApplyToAllProfilesSnackBar(@NonNull Map<String, ? extends Serializable> changes) {
 		View containerView = getView();
-		if (containerView != null) {
+		if (containerView != null && !changes.isEmpty()) {
 			String modeName = appMode.toHumanString();
 			String text = app.getString(R.string.changes_applied_to_profile, modeName);
 			SpannableString message = UiUtilities.createSpannableString(text, Typeface.BOLD, modeName);
 			Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
-					.setAction(R.string.apply_to_all_profiles, view -> onApplyPreferenceChange(prefId, true, newValue));
+					.setAction(R.string.apply_to_all_profiles, view -> {
+						for (Map.Entry<String, ? extends Serializable> change : changes.entrySet()) {
+							onApplyPreferenceChange(change.getKey(), true, change.getValue());
+						}
+						updateAllSettings();
+					});
 			UiUtilities.setupSnackbarVerticalLayout(snackbar);
 			UiUtilities.setupSnackbar(snackbar, nightMode);
 			snackbar.show();

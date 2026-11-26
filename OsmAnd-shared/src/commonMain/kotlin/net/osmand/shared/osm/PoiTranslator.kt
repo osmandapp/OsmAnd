@@ -22,4 +22,7 @@ interface PoiTranslator {
 	fun getSynonyms(keyName: String): String?
 
 	fun getAllLanguagesTranslationSuffix(): String?
+
+	// the same names in another language, null if not available
+	fun getTranslator(lang: String): PoiTranslator? = null
 }

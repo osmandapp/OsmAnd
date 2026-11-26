@@ -11,6 +11,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+
+import java.util.List;
 
 public class TerrainZoomLevelsController extends ZoomLevelsController {
 
@@ -41,6 +44,12 @@ public class TerrainZoomLevelsController extends ZoomLevelsController {
 	public void onApplyChanges() {
 		applyChanges = true;
 		selectedLimits = getSavedZoomLimits();
+	}
+
+	@NonNull
+	@Override
+	public List<OsmandPreference<?>> getPreviewPreferences() {
+		return plugin.getTerrainMode().getZoomPreferences();
 	}
 
 	@Override

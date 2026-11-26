@@ -218,6 +218,8 @@ public class MapLayers {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
 			if (mapRenderer != null) {
 				gpxLayer.setInvalidated(true);
+				// The track layer rebuilds its 3D lines only on a map refresh
+				mapView.refreshMap();
 				mapRenderer.requestRender();
 			}
 		});
@@ -487,7 +489,7 @@ public class MapLayers {
 		if (includeOfflineMaps) {
 			entriesMap.put(LAYER_OSM_VECTOR, app.getString(R.string.vector_data));
 		}
-		entriesMap.putAll(settings.getTileSourceEntries());
+		entriesMap.putAll(settings.getTileSourceEntriesSortedByTitle());
 		entriesMap.put(LAYER_INSTALL_MORE, app.getString(R.string.install_more));
 		entriesMap.put(LAYER_ADD, app.getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());

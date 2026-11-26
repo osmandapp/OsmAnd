@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+	<!-- Cleartext stays permitted: android:usesCleartextTraffic is ignored once this config exists -->
+	<base-config cleartextTrafficPermitted="true">
+		<trust-anchors>
+			<certificates src="system" />
+			<!-- ISRG Root X1 (Let's Encrypt) is in the system store only since Android 7.1.1 -->
+			<certificates src="@raw/isrg_root_x1" />
+		</trust-anchors>
+	</base-config>
+</network-security-config>

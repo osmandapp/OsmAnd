@@ -18,9 +18,8 @@ import kotlin.math.atan2
  *
  * The arrays are shared between copies of the same road and are meant to be read only.
  *
- * A copy of `net.osmand.binary.RouteDataObject`, which stays in OsmAnd-java: android, tools and the C++ core keep using
- * the original, and this copy is for iOS. Keep the two identical, field names included; `RouteDataObjectCompatTest` checks that they behave
- * the same.
+ * Based on `net.osmand.binary.RouteDataObject` from OsmAnd-java. Keep behavior and field names
+ * compatible with the original; `RouteDataObjectCompatTest` checks that they behave the same.
  */
 class RouteDataObject {
 

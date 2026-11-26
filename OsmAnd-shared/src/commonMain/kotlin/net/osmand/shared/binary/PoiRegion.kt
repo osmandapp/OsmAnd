@@ -2,16 +2,16 @@ package net.osmand.shared.binary
 
 import net.osmand.shared.osm.PoiCategory
 import net.osmand.shared.util.collections.KTIntArrayList
-import net.osmand.shared.util.collections.KTLongHashSet
 import kotlin.jvm.JvmField
 
 /**
- * A poi section of an obf file: the box it covers, the tables that decode the numbers an amenity
- * is stored as, and the tag groups of the administrative areas the amenities sit in.
+ * A poi section of an obf file: the box it covers and the tables that decode the numbers an amenity
+ * is stored as. The tag groups of the administrative areas the amenities sit in each reader of the
+ * file keeps itself, in [PoiTagGroups].
  *
- * A copy of `BinaryMapPoiReaderAdapter.PoiRegion` in OsmAnd-java, which stays there for android
- * and tools; this copy is for iOS. The tables are read lazily, the first time something is read
- * out of the section, so a file that is never searched never pays for them.
+ * Based on `BinaryMapPoiReaderAdapter.PoiRegion` from OsmAnd-java. The tables are read lazily,
+ * the first time something is read out of the section, so a file that is never searched never
+ * pays for them.
  */
 class PoiRegion : BinaryIndexPart() {
 
@@ -36,9 +36,6 @@ class PoiRegion : BinaryIndexPart() {
 	@JvmField
 	val topIndexSubTypes: MutableList<PoiSubType> = ArrayList()
 
-	// tag groups
-	private val tagGroups: MutableList<List<TagValuePair>?> = ArrayList()
-	private val tagGroupsRead = KTLongHashSet()
 
 	@JvmField
 	var left31: Int = 0
@@ -105,35 +102,15 @@ class PoiRegion : BinaryIndexPart() {
 		return null
 	}
 
-	fun getTagValues(id: Int): List<TagValuePair>? {
-		if (id >= tagGroups.size) {
-			return null
-		}
-		return tagGroups[id]
-	}
-
-	fun setTagGroups(id: Int, tagValuePairs: List<TagValuePair>) {
-		while (id >= tagGroups.size) {
-			tagGroups.add(null)
-		}
-		tagGroups[id] = tagValuePairs
-	}
-
-	fun updReadTagGroups(coordsTagGroups: KTLongHashSet) {
-		tagGroupsRead.addAll(coordsTagGroups)
-	}
-
-	/** Removes from [coordsTagGroups] the tiles whose tag groups this section has already read. */
-	fun checkMissingTagGroups(coordsTagGroups: KTLongHashSet): KTLongHashSet {
-		val remaining = KTLongHashSet()
-		for (id in coordsTagGroups.toArray()) {
-			if (!tagGroupsRead.contains(id)) {
-				remaining.add(id)
-			}
-		}
-		coordsTagGroups.clear()
-		coordsTagGroups.addAll(remaining.toArray())
-		return coordsTagGroups
+	/** Publishes complete tables while the file's structure lock is held. */
+	internal fun initCategoriesFrom(source: PoiRegion) {
+		categories.addAll(source.categories)
+		categoriesType.addAll(source.categoriesType)
+		subcategories.addAll(source.subcategories)
+		categoryFreqs.addAll(source.categoryFreqs)
+		subcategoryFreqs.addAll(source.subcategoryFreqs)
+		subTypes.addAll(source.subTypes)
+		topIndexSubTypes.addAll(source.topIndexSubTypes)
 	}
 
 	/** The category an encoded type stands for, with its subtype appended to [subtype]. */

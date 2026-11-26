@@ -14,6 +14,7 @@ import net.osmand.shared.osm.AbstractPoiType
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.osm.PoiTranslator
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore.SearchResultMatcher
 import net.osmand.shared.search.core.SearchCoreFactory.PoiAdditionalCustomFilter
@@ -112,7 +113,7 @@ class SearchCoreFactoryTest {
 								break
 							}
 						}
-						run!!.phrase(line, answers, stats)
+						testAppCall { run!!.phrase(line, answers, stats) }
 					}
 					'D' -> {
 						val f = line.substring(2).split("\t")
@@ -315,8 +316,14 @@ class SearchCoreFactoryTest {
 		}
 	}
 
-	/** The english names of the poi types, as `SearchUICoreTest` gives them. */
-	internal class Translator(val phrases: Map<String, String>) : PoiTranslator {
+	/**
+	 * The english names of the poi types, as `SearchUICoreTest` gives them, and those of the phrases of [langs]
+	 * by language for [getTranslator].
+	 */
+	internal class Translator(
+		val phrases: Map<String, String>,
+		private val langs: Map<String, Map<String, String>> = emptyMap()
+	) : PoiTranslator {
 		private fun translation(keyName: String): String? {
 			val v = phrases["poi_$keyName"] ?: return null
 			val ind = v.indexOf(';')
@@ -360,6 +367,8 @@ class SearchCoreFactoryTest {
 		override fun getSynonyms(keyName: String): String? = synonyms(keyName)
 
 		override fun getAllLanguagesTranslationSuffix(): String = "all languages"
+
+		override fun getTranslator(lang: String): PoiTranslator? = langs[lang]?.let { Translator(it) }
 	}
 
 	companion object {
@@ -593,7 +602,7 @@ class SearchCoreFactoryTest {
 			return SHIFTED
 		}
 
-		private fun nearlyEqual(a: String, b: String): Boolean {
+		internal fun nearlyEqual(a: String, b: String): Boolean {
 			if (ulps(a, b) <= 3) {
 				return true
 			}

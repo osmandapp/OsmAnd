@@ -4544,4 +4544,6 @@
     <string name="contour_label_direction_descr">Lên dốc: phía trên của mỗi con số độ cao hướng về phía địa hình cao hơn, giống như trên bản đồ địa hình giấy. Các vạch ngắn trên đường đồng mức chỉ về phía xuống dốc.</string>
     <string name="opening_hours_public_holiday">Ngày lễ</string>
     <string name="contour_labels">Nhãn</string>
+    <string name="routing_attr_avoid_sett_name">Tránh đường lát đá khối</string>
+    <string name="routing_attr_avoid_sett_description">Tránh đường lát đá khối</string>
 </resources>

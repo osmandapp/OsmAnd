@@ -41,6 +41,9 @@ import gnu.trove.procedure.TIntObjectProcedure;
 
 public class TextRenderer {
 
+	private static final String NAME_TAG = "name";
+	private static final String LOCALIZED_NAME_PREFIX = NAME_TAG + ":";
+
 	public static final String DROID_SERIF = "Droid Serif";
 
 	private final Context context;
@@ -177,7 +180,7 @@ public class TextRenderer {
 		cv.drawText(text, centerX, centerY, paint);
 	}
 
-	public void drawTextOverCanvas(RenderingContext rc, Canvas cv, String preferredLocale) {
+	public void drawTextOverCanvas(RenderingContext rc, Canvas cv) {
 		int size = rc.textToDraw.size();
 
 		// 1. Sort text using text order
@@ -194,9 +197,6 @@ public class TextRenderer {
 		for (int i = 0; i < size; i++) {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
-				if (preferredLocale.length() > 0) {
-					text.text = TransliterationHelper.transliterate(text.text);
-				}
 				updateTextPaint(text, rc);
 				// align center y
 				text.centerY += (-paintText.ascent());
@@ -336,20 +336,11 @@ public class TextRenderer {
 				TextDrawInfo text = new TextDrawInfo(name);
 				text.fillProperties(rc, render, xMid, yMid);
 				String tagName2 = render.getStringPropertyValue(render.ALL.R_NAME_TAG2);
-				if (!Algorithms.isEmpty(tagName2)) {
-					o.getObjectNames().forEachEntry(new TIntObjectProcedure<String>() {
-						@Override
-						public boolean execute(int tagid, String nname) {
-							String tagNameN2 = o.getMapIndex().decodeType(tagid).tag;
-							if (tagName2.equals(tagNameN2)) {
-								if (nname != null && nname.trim().length() > 0 && !nname.equals(text.text)) {
-									text.text += " (" + nname + ")";
-								}
-								return false;
-							}
-							return true;
-						}
-					});
+				if (!Algorithms.isBlank(tagName2)) {
+					String extraName = getPreferredName(o, rc, tagName2, getObjectName(o, tagName2));
+					if (extraName != null && !extraName.equals(text.text)) {
+						text.text += " (" + extraName + ")";
+					}
 				}
 				paintText.setTextSize(text.textSize);
 				Rect bs = new Rect();
@@ -384,23 +375,51 @@ public class TextRenderer {
 			map.forEachEntry(new TIntObjectProcedure<String>() {
 				@Override
 				public boolean execute(int tag, String name) {
-					if (name != null && name.trim().length() > 0) {
-						boolean isName = tag == obj.getMapIndex().nameEncodingType;
-						String nameTag = isName ? "" : obj.getMapIndex().decodeType(tag).tag;
-						boolean skip = isName && !rc.preferredLocale.isEmpty() &&
-								map.containsKey(obj.getMapIndex().nameEnEncodingType);
-						// not completely correct we should check "name"+rc.preferredLocale
-//						if (tag == obj.getMapIndex().nameEnEncodingType && !rc.useEnglishNames) {
-//							skip = true;
-//						}
-						if (!skip) {
-							createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name, nameTag);
+					String nameTag = obj.getMapIndex().decodeType(tag).tag;
+					if (!Algorithms.isBlank(name) && !nameTag.startsWith(LOCALIZED_NAME_PREFIX)) {
+						String text = getPreferredName(obj, rc, nameTag, name);
+						if (text != null) {
+							createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, text,
+									tag == obj.getMapIndex().nameEncodingType ? "" : nameTag);
 						}
 					}
 					return true;
 				}
 			});
+			if (Algorithms.isBlank(obj.getName())) {
+				String text = getPreferredName(obj, rc, NAME_TAG, null);
+				if (text != null) {
+					createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, text, "");
+				}
+			}
 		}
+	}
+
+	@Nullable
+	private String getPreferredName(BinaryMapDataObject obj, RenderingContext rc, String tag, @Nullable String name) {
+		if (!Algorithms.isEmpty(rc.preferredLocale)) {
+			String localizedName = getObjectName(obj, tag + ":" + rc.preferredLocale);
+			if (localizedName != null) {
+				return localizedName;
+			}
+			if (rc.transliterate) {
+				String enName = getObjectName(obj, tag + ":en");
+				if (enName != null) {
+					return enName;
+				}
+				if (!Algorithms.isBlank(name)) {
+					return TransliterationHelper.transliterate(name);
+				}
+			}
+		}
+		return Algorithms.isBlank(name) ? null : name;
+	}
+
+	@Nullable
+	private String getObjectName(BinaryMapDataObject obj, String tag) {
+		Integer type = obj.getMapIndex().getRule(tag, null);
+		String name = type != null ? obj.getNameByType(type) : null;
+		return Algorithms.isBlank(name) ? null : name;
 	}
 
 	boolean calculatePathToRotate(RenderingContext rc, TextDrawInfo p, PointF[] points, boolean drawOnPath) {

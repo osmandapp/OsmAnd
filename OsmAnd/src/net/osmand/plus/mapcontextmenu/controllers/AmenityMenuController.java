@@ -178,7 +178,15 @@ public class AmenityMenuController extends MenuController {
 				iconName = RenderingIcons.getBigIconNameForAmenity(ctx, amenity);
 			}
 		}
-		return iconName == null ? 0 : RenderingIcons.getBigIconResourceId(iconName);
+		if (iconName == null) {
+			return 0;
+		}
+		int iconId = RenderingIcons.getBigIconResourceId(iconName);
+		// a search result marker uses app icon names, e.g. ic_action_street_name
+		if (iconId == 0) {
+			iconId = RenderingIcons.getResIdOrDefault(ctx, iconName, 0);
+		}
+		return iconId;
 	}
 
 	@Override
@@ -209,8 +217,8 @@ public class AmenityMenuController extends MenuController {
 				getPreferredMapAppLang(), getPreferredMapLang());
 		String name = amenity.getName(preferredLang, isTransliterateNames());
 		String ref = amenity.getAdditionalInfo("ref");
-		if (!TextUtils.isEmpty(ref) && !ref.equals(name)) {
-			return name + " (" + ref + ")";
+		if (Algorithms.isNotEmpty(ref) && !ref.equals(name)) {
+			return Algorithms.isBlank(name) ? ref : name + " (" + ref + ")";
 		}
 		if (Algorithms.isEmpty(name) && amenity.getSubType().equalsIgnoreCase("atm")) {
 			String operator = amenity.getAdditionalInfo("operator");

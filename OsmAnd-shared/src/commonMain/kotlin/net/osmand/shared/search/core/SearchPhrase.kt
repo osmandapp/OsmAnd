@@ -1,5 +1,6 @@
 package net.osmand.shared.search.core
 
+import net.osmand.shared.util.searchWordSeparators
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.binary.Abbreviations
 import net.osmand.shared.binary.BinaryMapIndexReader
@@ -23,8 +24,8 @@ import kotlin.math.min
  * What was typed into the search: the words already selected as results, and the unknown words
  * after them that are still searched for. Immutable object!
  *
- * A copy of `SearchPhrase` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS. Java nests `NameStringMatcher` here; the copy has it in a file of its own.
+ * Based on `SearchPhrase` from OsmAnd-java. Java nests `NameStringMatcher` here; the copy has
+ * it in a file of its own.
  */
 class SearchPhrase private constructor(private val settings: SearchSettings?, private val clt: KCollator) {
 
@@ -346,6 +347,24 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 
 	fun hasCustomSearchType(type: ObjectType): Boolean = settings!!.hasCustomSearchType(type)
 
+	// the address tab list opened by a city / postcode button, or the streets of a selected city / postcode:
+	// the typed text filters this list instead of starting a new full-text search
+	fun isAddressListFilter(): Boolean {
+		val searchTypes = getSearchTypes()
+		if (searchTypes == null || searchTypes.isEmpty()) {
+			return false
+		}
+		var cityOrPostcodeList = true
+		for (type in searchTypes) {
+			if (type != ObjectType.CITY && type != ObjectType.VILLAGE && type != ObjectType.POSTCODE) {
+				cityOrPostcodeList = false
+				break
+			}
+		}
+		return cityOrPostcodeList ||
+				isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE)
+	}
+
 	fun isSearchTypeAllowed(searchType: ObjectType): Boolean = isSearchTypeAllowed(searchType, false)
 
 	fun isSearchTypeAllowed(searchType: ObjectType, exclusive: Boolean): Boolean {
@@ -566,32 +585,40 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 					return rc1
 				}
 			})
-			if (!diffsByRegion.isEmpty()) {
-				val finalSort: MutableList<BinaryMapIndexReader> = ArrayList()
-				for (i in indexes.indices) {
-					val currFile = indexes[i]
-					val diffs = diffsByRegion[currFile.getRegionName()]
-					if (diffs != null) {
-						finalSort.addAll(diffs)
-						finalSort.add(currFile)
-					} else {
-						finalSort.add(currFile)
-					}
+		}
+		// the live updates go back without a location too: java leaves them out of the search then
+		if (!diffsByRegion.isEmpty()) {
+			val finalSort: MutableList<BinaryMapIndexReader> = ArrayList()
+			for (i in indexes.indices) {
+				val currFile = indexes[i]
+				// once, before the first file of the region: java adds them again before its wiki file
+				val diffs = diffsByRegion.remove(currFile.getRegionName().lowercase())
+				if (diffs != null) {
+					finalSort.addAll(diffs)
+					finalSort.add(currFile)
+				} else {
+					finalSort.add(currFile)
 				}
-				indexes.clear()
-				indexes.addAll(finalSort)
 			}
+			// the updates of a region not searched, as when only the file of a selected result is: java drops them
+			for (diffs in diffsByRegion.values) {
+				finalSort.addAll(diffs)
+			}
+			indexes.clear()
+			indexes.addAll(finalSort)
 		}
 	}
 
-	private fun getDiffsByRegion(indexes: MutableList<BinaryMapIndexReader>): Map<String, MutableList<BinaryMapIndexReader>> {
-		val result = HashMap<String, MutableList<BinaryMapIndexReader>>()
+	private fun getDiffsByRegion(indexes: MutableList<BinaryMapIndexReader>): MutableMap<String, MutableList<BinaryMapIndexReader>> {
+		// in the order of the files, which the updates of regions not searched keep
+		val result = LinkedHashMap<String, MutableList<BinaryMapIndexReader>>()
 		val it = indexes.iterator()
 		while (it.hasNext()) {
 			val r = it.next()
 			val filename = r.getFile().name()
 			if (DIFF_FILE_NAME.matches(filename)) {
-				val currRegionName = r.getRegionName()
+				// iOS names its live updates in lower case, "germany_berlin_europe_25_10_28.live.obf"
+				val currRegionName = r.getRegionName().lowercase()
 				val list = result[currRegionName]
 				if (list != null) {
 					list.add(r)
@@ -735,8 +762,10 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		const val DELIMITER = " "
 		const val ALLDELIMITERS = "\\s|,"
 		const val ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-"
-		private val reg = Regex(ALLDELIMITERS)
-		private val DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")
+		// Android Pattern's whitespace class includes the Unicode separator categories and NEL.
+		private val reg = searchWordSeparators
+		private val unicodeSpaces = reg.matches("\u00A0")
+		private val DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+(\\.live)?\\.obf")
 
 		private val commonWordsComparator: Comparator<String> = object : Comparator<String> {
 			val instance = CommonWords.getInstance()
@@ -792,9 +821,11 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 			}
 		}
 
-		// `\s` is [ \t\n\x0B\f\r]
+		// Keep the allocation-free word scanner consistent with reg.
 		private fun isDelimiter(c: Char, hyphen: Boolean): Boolean =
-			c == ' ' || c == ',' || c in '\t'..'\r' || (hyphen && c == '-')
+			c == ' ' || c == ',' || c in '\t'..'\r' || (hyphen && c == '-') ||
+				(unicodeSpaces && c >= '\u0085' && (c == '\u0085' || c.category == CharCategory.SPACE_SEPARATOR ||
+					c.category == CharCategory.LINE_SEPARATOR || c.category == CharCategory.PARAGRAPH_SEPARATOR))
 
 		/** The part of [w] from [start] to [end], trimmed as java trims, when anything is left of it. */
 		private fun addWord(w: String, start: Int, end: Int, ws: MutableList<String>) {

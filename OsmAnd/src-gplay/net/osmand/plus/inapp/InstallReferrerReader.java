@@ -29,7 +29,8 @@ public class InstallReferrerReader {
 				@Override
 				public void onInstallReferrerSetupFinished(int responseCode) {
 					try {
-						if (responseCode == InstallReferrerResponse.OK) {
+						// The setting may have been switched off while the connection was being set up
+						if (responseCode == InstallReferrerResponse.OK && app.isUserAndroidIdAllowed()) {
 							String referrer = client.getInstallReferrer().getInstallReferrer();
 							settings.INSTALL_REFERRER.set(InstallReferrer.filter(referrer));
 							settings.INSTALL_REFERRER_CHECKED.set(true);

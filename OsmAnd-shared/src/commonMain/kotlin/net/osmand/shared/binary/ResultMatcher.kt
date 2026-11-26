@@ -3,7 +3,7 @@ package net.osmand.shared.binary
 /**
  * Where a search hands its results as it finds them, and how it learns it should stop.
  *
- * A copy of `net.osmand.ResultMatcher`, which stays in OsmAnd-java.
+ * Based on `net.osmand.ResultMatcher` from OsmAnd-java.
  */
 interface ResultMatcher<T> {
 

@@ -5,8 +5,7 @@ import kotlin.jvm.JvmStatic
 /**
  * What a search result is: an address, a poi, a location or an object of the app.
  *
- * A copy of `ObjectType` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS.
+ * Based on `ObjectType` from OsmAnd-java.
  */
 enum class ObjectType(private val hasLocation: Boolean) {
 	// ADDRESS

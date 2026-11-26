@@ -50,6 +50,8 @@ import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -238,6 +240,18 @@ public class OsmAndFormatter {
 
 	public static DateFormat getDateFormat(@NonNull Context context) {
 		return android.text.format.DateFormat.getDateFormat(context);
+	}
+
+	@NonNull
+	public static String getFormattedIsoDate(@NonNull Context context, @NonNull String isoDate) {
+		SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+		parser.setLenient(false);
+		ParsePosition position = new ParsePosition(0);
+		Date date = parser.parse(isoDate, position);
+		if (date == null || position.getIndex() != isoDate.length()) {
+			return isoDate;
+		}
+		return getDateFormat(context).format(date);
 	}
 
 	public static String getFormattedDate(Context context, long milliseconds) {

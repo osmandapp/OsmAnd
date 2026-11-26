@@ -15,6 +15,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.dialogs.LocationSourceBottomSheet;
@@ -140,6 +141,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			return false;
 		} else if (prefId.equals(settings.AUTO_BACKUP_ENABLED.getId())) {
 			BackupManager.dataChanged(app.getPackageName());
+		} else if (prefId.equals(settings.BATTERY_SAVING_MODE.getId()) && newValue instanceof Boolean) {
+			updateSymbolsFade((Boolean) newValue);
 		}
 		return super.onPreferenceChange(preference, newValue);
 	}
@@ -163,6 +166,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			setupLocationSourcePref();
 		} else if (prefId.equals(settings.AUTO_BACKUP_ENABLED.getId())) {
 			BackupManager.dataChanged(app.getPackageName());
+		} else if (prefId.equals(settings.BATTERY_SAVING_MODE.getId())) {
+			updateSymbolsFade(settings.BATTERY_SAVING_MODE.get());
 		}
 	}
 
@@ -267,6 +272,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		preference.setIcon(getContentIcon(R.drawable.ic_map));
 		preference.setSummary(settings.USE_OPENGL_RENDER.get() ? R.string.map_rendering_engine_v2 : R.string.map_rendering_engine_v1);
 		//preference.setVisible(Version.isOpenGlAvailable(app));
+	}
+
+	private void updateSymbolsFade(boolean batterySavingMode) {
+		MapRendererView mapRenderer = app.getOsmandMap().getMapView().getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.setSymbolsFade(batterySavingMode ? 0 : 300, -1);
+		}
 	}
 
 	private void setupBatterySavingModePref() {

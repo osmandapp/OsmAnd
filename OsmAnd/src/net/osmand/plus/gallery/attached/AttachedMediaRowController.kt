@@ -38,6 +38,12 @@ class AttachedMediaRowController @JvmOverloads constructor(
 
 	override fun requiresInternet() = false
 
+	// Links can change outside the gallery (My Places > A/V notes, OsmAnd Cloud sync),
+	// so build the list from the current links instead of the one cached earlier.
+	override fun loadMedia() {
+		app.galleryHelper.mediaLoader.reload(key, loadListener)
+	}
+
 	override fun detach() {
 		app.galleryHelper.removeAttachedMediaChangeListener(mediaChangeListener)
 		super.detach()

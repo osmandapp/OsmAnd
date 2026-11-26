@@ -352,6 +352,8 @@ public class QuickActionsWidget extends LinearLayout {
 					setVisibility(View.GONE);
 					setTranslationX(0);
 					setTranslationY(0);
+					setScaleX(1f);
+					setScaleY(1f);
 					if (visibilityApplied != null) {
 						visibilityApplied.run();
 					}

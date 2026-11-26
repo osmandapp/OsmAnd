@@ -128,11 +128,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	public void updateParkingPoint(@NonNull FavouritePoint point) {
 		if (point.getSpecialPointType() == SpecialPointType.PARKING) {
-			long timestamp = point.getTimestamp();
-			boolean timeRestricted = timestamp > 0;
+			// FavouritesHelper.setParkingPoint() keeps the pick-up time in pickupDate and the parking time in timestamp
+			long pickupTime = point.getPickupDate();
+			boolean timeRestricted = pickupTime > 0;
 			setParkingType(timeRestricted);
-			setParkingTime(timeRestricted ? timestamp : 0);
-			setParkingPickupDate(point.getPickupDate());
+			if (timeRestricted) {
+				setParkingTime(pickupTime);
+			}
+			setParkingPickupDate(point.getTimestamp());
 			setParkingPosition(point.getLatitude(), point.getLongitude());
 			addOrRemoveParkingEvent(point.getCalendarEvent());
 

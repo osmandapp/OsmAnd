@@ -39,6 +39,8 @@ class AmenityTagEntry private constructor(builder: Builder) {
 	@JvmField val matchWidthDivider: Boolean = builder.matchWidthDivider
 	@JvmField val textLinesLimit: Int = builder.textLinesLimit
 
+	fun getCollapsableEntryValue(key: String): String? = collapsableEntries?.firstOrNull { it.key == key }?.value
+
 	class Builder(private val key: String) {
 		private var value: String? = null
 		internal var resolvedType: AdditionalInfoBundle.ResolvedPoiType? = null

@@ -10,8 +10,8 @@ import net.osmand.shared.util.KAlgorithms
 /**
  * How an osm id is packed into an obf id, and which tags the indexer treats as names or as ids.
  *
- * A copy of the part of `ObfConstants` in OsmAnd-java that a device needs; the rest of it -
- * everything taking an `Entity` - belongs to the editing and indexing code and stays there.
+ * Based on the OBF ID and tag helpers of `ObfConstants` from OsmAnd-java. The editing and
+ * indexing helpers that take an `Entity` are not implemented here.
  *
  * The packing is what the map creator does on the way in: a node id is shifted left by one, a way
  * id by one with the low bit set, and a relation id is shifted further and marked with

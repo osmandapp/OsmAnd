@@ -13,8 +13,7 @@ import kotlin.jvm.JvmStatic
  * The apps use [astar] with [calcDetailed] of [CALCULATE_ALL_DETAILED]; the other factories are for
  * the tools that build and check the hub graph.
  *
- * A copy of `HHRouteDataStructure.HHRoutingConfig` in OsmAnd-java, which stays there for android
- * and tools; this copy is for iOS.
+ * Based on `HHRouteDataStructure.HHRoutingConfig` from OsmAnd-java.
  */
 class HHRoutingConfig {
 

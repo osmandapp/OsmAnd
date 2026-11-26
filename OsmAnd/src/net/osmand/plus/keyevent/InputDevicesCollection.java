@@ -34,7 +34,13 @@ class InputDevicesCollection {
 	}
 
 	public boolean hasDeviceNameDuplicate(@NonNull Context context, @NonNull String newName) {
-		for (InputDeviceProfile device : getAllDevices()) {
+		return hasDeviceNameDuplicate(context, getAllDevices(), newName);
+	}
+
+	public static boolean hasDeviceNameDuplicate(@NonNull Context context,
+	                                             @NonNull List<InputDeviceProfile> devices,
+	                                             @NonNull String newName) {
+		for (InputDeviceProfile device : devices) {
 			if (objectEquals(device.toHumanString(context).trim(), newName.trim())) {
 				return true;
 			}

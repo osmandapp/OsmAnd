@@ -3620,7 +3620,7 @@
     <string name="routing_attr_allow_skating_only_name">Skating만 노선을 허용</string>
     <string name="routing_attr_allow_intermediate_description">가파른 단면도를 가진 더 어려운 노선. 일반적으로 피해야 할 장애물.</string>
     <string name="quick_action_need_to_add_item_to_list">\'Quick action\' 설정에서 목록으로 적어도 하나의 항목을 추가하십시오</string>
-    <string name="routing_attr_avoid_sett_description">포석도로 우회</string>
+    <string name="routing_attr_avoid_sett_description">다듬은 돌 포장도로 우회</string>
     <string name="routeInfo_smoothness_name">부드럽게</string>
     <string name="download_wikipedia_description">다운로드 Wikipedia ꀰ사 - %1$s.</string>
     <string name="mtb_imba_full">국제 산악 자전거 협회</string>
@@ -3757,7 +3757,7 @@
     <string name="store_tracks_in_monthly_directories">녹음된 트랙을 월간 폴더에 저장</string>
     <string name="save_poi_without_poi_type_message">POI를 입력하지 않고 저장합니까?</string>
     <string name="routing_attr_allow_advanced_description">위험한 장애물과 가파른 부분과 더불어 Difficult 노선.</string>
-    <string name="routing_attr_avoid_sett_name">포석도로 없음</string>
+    <string name="routing_attr_avoid_sett_name">다듬은 돌 포장도로 없음</string>
     <string name="coordinates_widget_current_location_desc">현재 위치의 지리적 좌표 표시</string>
     <string name="osmand_plus_extended_description_part4">OSM 및 Wikipedia 데이터 사용
 \n• 세계 최고의 협업 프로젝트의 고품질 정보
@@ -4274,6 +4274,6 @@
     <string name="allow_display_on_top">상단에 표시 허용</string>
     <string name="allow_display_on_top_description">지도 텍스트를 서로 위에 표시할 수 있습니다.</string>
     <string name="map_text">지도 텍스트</string>
-    <string name="routing_attr_avoid_cobblestone_name">Cobblestone를 피하십시오</string>
-    <string name="routing_attr_avoid_cobblestone_description">Cobblestone를 피하십시오</string>
+    <string name="routing_attr_avoid_cobblestone_name">둥근 돌 포장도로 피하기</string>
+    <string name="routing_attr_avoid_cobblestone_description">둥근 돌 포장도로 피하기</string>
 </resources>

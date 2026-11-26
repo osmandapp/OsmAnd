@@ -1424,7 +1424,7 @@
     <string name="poi_automated_yes">Automatisiert: ja</string>
     <string name="poi_automated_no">Automatisiert: nein</string>
     <string name="poi_brushless_no">Bürstenlos: nein</string>
-    <string name="poi_car_wash_no">Autowaschanlage: nein: nein</string>
+    <string name="poi_car_wash_no">Autowaschanlage: nein</string>
     <string name="poi_male_yes">Männlich</string>
     <string name="poi_male_no">Für Männer verboten</string>
     <string name="poi_female_yes">Weiblich</string>
@@ -3277,8 +3277,8 @@
     <string name="poi_scooter_yes">Roller: ja</string>
     <string name="poi_scooter_no">Roller: nein</string>
     <string name="poi_truck_no">Lkw: nein</string>
-    <string name="poi_parking_fee_yes">Ja</string>
-    <string name="poi_parking_fee_no">Nein</string>
+    <string name="poi_parking_fee_yes">Parkgebühr: ja</string>
+    <string name="poi_parking_fee_no">Parkgebühr: nein</string>
     <string name="poi_parking_fee">Parkgebühr</string>
     <string name="poi_amperage">Stromstärke</string>
     <string name="poi_location_overhead">Lage: oben</string>
@@ -3555,9 +3555,9 @@
     <string name="poi_hazard_additional_minefield">Minenfeld</string>
     <string name="poi_hazard_additional_contamination">Kontamination</string>
     <string name="poi_defibrillator_location">Standort</string>
-    <string name="poi_changing_table_yes">Wickeltisch: ja: ja</string>
-    <string name="poi_changing_table_no">Wickeltisch: nein: nein</string>
-    <string name="poi_changing_table_limited">Wickeltisch: begrenzt: begrenzt</string>
+    <string name="poi_changing_table_yes">Wickeltisch: ja</string>
+    <string name="poi_changing_table_no">Wickeltisch: nein</string>
+    <string name="poi_changing_table_limited">Wickeltisch: begrenzt</string>
     <string name="poi_changing_table_location_room">Wickeltischposition: Raum</string>
     <string name="poi_changing_table_location_male_toilet">Wickeltischposition: Herrentoilette</string>
     <string name="poi_changing_table_location_female_toilet">Wickeltischposition: Damentoilette</string>
@@ -4383,7 +4383,7 @@
     <string name="poi_climbing_grade_super_elite">Super-Elite</string>
     <string name="poi_climbing_grade_aliens">Ausländer</string>
     <string name="poi_climbing_bolt_abseil">Abseilen</string>
-    <string name="poi_climbing_bolts_yes">Ja</string>
+    <string name="poi_climbing_bolts_yes">Kletterhaken: ja</string>
     <string name="poi_climbing_bolts">Kletterhaken</string>
     <string name="poi_climbing_quality_medium">Mittel</string>
     <string name="poi_climbing_bolts_filter">Kletterhaken</string>
@@ -4393,7 +4393,7 @@
     <string name="poi_climbing_grade_french_max">Schwierigste Route (französischer Grad)</string>
     <string name="poi_climbing_grade_novice">Anfänger</string>
     <string name="poi_climbing_grade_saxon">Sächsischer Klettergrad</string>
-    <string name="poi_climbing_bolts_no">Nein</string>
+    <string name="poi_climbing_bolts_no">Kletterhaken: nein</string>
     <string name="poi_climbing_bolt_anchor">Anker</string>
     <string name="poi_climbing_rock_gritstone">Klettergestein: Sandstein</string>
     <string name="poi_climbing_rock_conglomerate">Klettergestein: Konglomerat</string>

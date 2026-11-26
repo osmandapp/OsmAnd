@@ -10,8 +10,7 @@ import kotlin.jvm.JvmStatic
 /**
  * The pois of one value of a top index tag, such as one brand or one operator.
  *
- * A copy of `TopIndexFilter` in OsmAnd-java, which stays there for android and tools; this copy is
- * for iOS.
+ * Based on `TopIndexFilter` from OsmAnd-java.
  */
 class TopIndexFilter(
 	private val poiSubType: PoiSubType,

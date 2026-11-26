@@ -17,6 +17,8 @@ import net.osmand.plus.feedback.AnalyticsHelper
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
 import net.osmand.plus.settings.enums.ThemeUsageContext
+import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.utils.UiUtilities
 
@@ -68,6 +70,11 @@ open class BaseMaterialFragment : Fragment(), IOsmAndFragment, ISupportInsets {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		InsetsUtils.processInsets(this, view, null)
+		/* the insets are applied only from Android 15 - before it the full screen map activity
+		 * draws the screen under the status bar, so the root inset is added the old way */
+		if (getInsetTargets().getByType(InsetTarget.Type.ROOT_INSET).isNotEmpty()) {
+			AndroidUtils.addStatusBarPadding21v(requireActivity(), view)
+		}
 	}
 
 	override fun onResume() {

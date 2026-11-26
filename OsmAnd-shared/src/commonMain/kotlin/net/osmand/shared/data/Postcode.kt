@@ -3,9 +3,9 @@ package net.osmand.shared.data
 /**
  * Postcode formats by country, to bring what was typed to the form the address index stores.
  *
- * A copy of `net.osmand.data.Postcode` in OsmAnd-java, which stays there for android and tools.
- * The replacement is expanded here rather than handed to the regex engine, so that a group that did
- * not take part in the match gives nothing on every platform, as `java.util.regex` does.
+ * Based on `net.osmand.data.Postcode` from OsmAnd-java. The replacement is expanded here rather
+ * than handed to the regex engine, so that a group that did not take part in the match gives
+ * nothing on every platform, as `java.util.regex` does.
  */
 object Postcode {
 

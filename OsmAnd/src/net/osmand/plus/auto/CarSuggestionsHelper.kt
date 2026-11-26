@@ -22,32 +22,99 @@ import net.osmand.data.LatLon
 import net.osmand.data.PointDescription
 import net.osmand.plus.OsmAndLocationProvider
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
+import net.osmand.plus.helpers.TargetPoint
 import net.osmand.plus.inapp.InAppPurchaseUtils
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.history.HistoryEntry
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.settings.enums.HistorySource
+import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
+import net.osmand.util.Algorithms
 import net.osmand.util.GeoPointParserUtil
+import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 
 class CarSuggestionsHelper(private val app: OsmandApplication) {
 
 	companion object {
 		const val EXTRA_SUGGESTION_POINT = "net.osmand.plus.auto.EXTRA_SUGGESTION_POINT"
+		const val EXTRA_PREVIOUS_ROUTE = "net.osmand.plus.auto.EXTRA_PREVIOUS_ROUTE"
+		const val PREVIOUS_ROUTE_ID_PREFIX = "previous_route,"
 		private const val MAX_SUGGESTIONS = 5
 		private val LOG: Log = PlatformUtil.getLog(CarSuggestionsHelper::class.java)
 
 		@JvmStatic
 		fun createCardIntent(context: Context, entry: HistoryEntry): Intent {
-			val serializedName = PointDescription.serializeToString(entry.name)
-			val lat = BigDecimal.valueOf(entry.lat).toPlainString()
-			val lon = BigDecimal.valueOf(entry.lon).toPlainString()
+			return createCardIntent(context, entry.lat, entry.lon, entry.name)
+		}
+
+		@JvmStatic
+		fun createPreviousRouteCardIntent(context: Context, destination: TargetPoint): Intent {
+			val description = destination.originalPointDescription
+				?: PointDescription(PointDescription.POINT_TYPE_LOCATION, "")
+			return createCardIntent(context, destination.latitude, destination.longitude, description)
+				.putExtra(EXTRA_PREVIOUS_ROUTE, true)
+		}
+
+		private fun createCardIntent(context: Context, latitude: Double, longitude: Double, name: PointDescription): Intent {
+			val serializedName = PointDescription.serializeToString(name)
+			val lat = BigDecimal.valueOf(latitude).toPlainString()
+			val lon = BigDecimal.valueOf(longitude).toPlainString()
 			return Intent(CarContext.ACTION_NAVIGATE)
 				.setComponent(ComponentName(context, NavigationCarAppService::class.java))
 				.setData(Uri.parse("geo:$lat,$lon"))
 				.putExtra(EXTRA_SUGGESTION_POINT, serializedName)
+		}
+
+		@JvmStatic
+		fun createPreviousRouteResult(app: OsmandApplication): SearchResult? {
+			if (!app.settings.NAVIGATION_HISTORY.get()) {
+				return null
+			}
+			val targetPointsHelper = app.targetPointsHelper
+			var startPoint = targetPointsHelper.pointToStartBackup
+			val myLocation = startPoint == null
+			if (startPoint == null) {
+				startPoint = targetPointsHelper.myLocationToStart
+			}
+			val destinationPoint = targetPointsHelper.pointToNavigateBackup
+			if (startPoint == null || destinationPoint == null) {
+				return null
+			}
+			val startText = StringBuilder()
+			if (myLocation) {
+				startText.append(app.getString(R.string.my_location))
+			}
+			val startName = getPointName(app, startPoint)
+			if (!Algorithms.isEmpty(startName)) {
+				if (startText.isNotEmpty()) {
+					startText.append(" — ")
+				}
+				startText.append(startName)
+			}
+			val result = SearchResult()
+			result.location = LatLon(destinationPoint.latitude, destinationPoint.longitude)
+			result.objectType = ObjectType.ROUTE
+			result.`object` = destinationPoint
+			result.localeName = getPointName(app, destinationPoint)
+			result.relatedObject = startPoint
+			result.localeRelatedObjectName = startText.toString()
+			return result
+		}
+
+		private fun getPointName(app: OsmandApplication, targetPoint: TargetPoint): String {
+			val description = targetPoint.originalPointDescription
+			return if (description != null && !Algorithms.isEmpty(description.name)
+				&& description.name != app.getString(R.string.no_address_found)
+			) {
+				description.name
+			} else {
+				PointDescription.getLocationName(app, targetPoint.latLon.latitude, targetPoint.latLon.longitude, true)
+					.replace('\n', ' ')
+			}
 		}
 
 		@JvmStatic
@@ -104,10 +171,25 @@ class CarSuggestionsHelper(private val app: OsmandApplication) {
 	private fun buildCards(carContext: CarContext): List<Card> {
 		val visibleEntries = getSuggestionEntries()
 		val cards = ArrayList<Card>()
+		val previousRouteCard = try {
+			buildPreviousRouteCard(carContext)
+		} catch (e: Exception) {
+			LOG.error("Failed to build the previous route suggestion", e)
+			null
+		}
+		val previousRouteDestination = app.targetPointsHelper.pointToNavigateBackup
+		if (previousRouteCard != null) {
+			cards.add(previousRouteCard)
+		}
 		val phrase = SearchPhrase.emptyPhrase(app.searchUICore.core.searchSettings)
 		for (entry in visibleEntries) {
 			if (cards.size >= MAX_SUGGESTIONS) {
 				break
+			}
+			if (previousRouteCard != null && previousRouteDestination != null
+				&& MapUtils.areLatLonEqual(previousRouteDestination.latLon, entry.lat, entry.lon)
+			) {
+				continue
 			}
 			try {
 				val pointDescription = entry.name
@@ -141,6 +223,32 @@ class CarSuggestionsHelper(private val app: OsmandApplication) {
 			}
 		}
 		return cards
+	}
+
+	private fun buildPreviousRouteCard(carContext: CarContext): Card? {
+		val result = createPreviousRouteResult(app) ?: return null
+		val destination = result.`object` as TargetPoint
+		val startBackup = app.targetPointsHelper.pointToStartBackup
+		val startKey = if (startBackup != null) {
+			"${startBackup.latitude},${startBackup.longitude}"
+		} else {
+			"my_location"
+		}
+		val title = result.localeName
+		val subtitle = app.getString(R.string.previous_route)
+		val iconId = R.drawable.ic_action_previous_route
+		val icon = CarIcon.Builder(IconCompat.createWithResource(app, iconId)).build()
+		val id = "$PREVIOUS_ROUTE_ID_PREFIX${destination.latitude},${destination.longitude},$startKey"
+		val builder = Suggestion.Builder()
+			.setIdentifier(id)
+			.setTitle(title)
+			.setSubtitle(subtitle)
+			.setIcon(icon)
+		return Card("$id|$title|$subtitle|$iconId") {
+			val intent = createPreviousRouteCardIntent(app, destination)
+			val action = CarPendingIntent.getCarApp(carContext, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+			builder.setAction(action).build()
+		}
 	}
 
 	@DrawableRes

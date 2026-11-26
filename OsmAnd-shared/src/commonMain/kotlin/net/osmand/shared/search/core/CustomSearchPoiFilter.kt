@@ -8,8 +8,7 @@ import net.osmand.shared.osm.PoiCategory
 /**
  * A poi filter of the app that the search offers as a result, such as a saved filter.
  *
- * A copy of `CustomSearchPoiFilter` in OsmAnd-java, which stays there for android and tools; this
- * copy is for iOS.
+ * Based on `CustomSearchPoiFilter` from OsmAnd-java.
  */
 interface CustomSearchPoiFilter : SearchPoiTypeFilter {
 

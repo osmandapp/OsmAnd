@@ -68,4 +68,58 @@
 
 	</LinearLayout>
 
+	<View
+		android:id="@+id/shadows_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"
+		android:layout_marginStart="@dimen/content_padding"
+		android:focusable="false" />
+
+	<!-- Sun shadows of buildings and relief: off / on -->
+	<LinearLayout
+		android:id="@+id/shadows_container"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_medium_list_item_height"
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:text="@string/cast_shadows"
+			android:textColor="?android:textColorPrimary"
+			android:paddingStart="@dimen/content_padding"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<!-- Shown only in the release that added the setting -->
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/shadows_new_badge"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/content_padding_half"
+			android:background="@drawable/bg_popup_menu_trailing_badge"
+			android:paddingHorizontal="@dimen/text_margin_small"
+			android:text="@string/shared_string_new"
+			android:textAllCaps="true"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_sub_text_size"
+			android:visibility="gone"
+			app:typefaceWeight="medium" />
+
+		<Space
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+
+		<include
+			layout="@layout/custom_icon_radio_buttons"
+			android:layout_width="112dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding" />
+
+	</LinearLayout>
+
 </LinearLayout>

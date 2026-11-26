@@ -2461,8 +2461,8 @@
     <string name="rename_track">ტრეკის სახელის გადარქმევა</string>
     <string name="context_menu_item_edit_waypoint">GPX გზის წერტილის ჩასწორება</string>
     <string name="weather_wind_kn">კვნძ</string>
-    <string name="routing_attr_avoid_sett_name">კოჭის გარეშე</string>
-    <string name="routing_attr_avoid_sett_description">კოჭის აცილება</string>
+    <string name="routing_attr_avoid_sett_name">თლილი ქვის ქვაფენილის გარეშე</string>
+    <string name="routing_attr_avoid_sett_description">თლილი ქვის ქვაფენილის თავიდან არიდება</string>
     <string name="rendering_attr_whiteWaterSports_name">მდინარის სპორტები</string>
     <string name="rendering_attr_horse_scale_demanding_name">მოთხოვნადი</string>
     <string name="mapillary_menu_title_tile_cache">ფილების კეში</string>
@@ -2800,4 +2800,6 @@
     <string name="plugin_ski_descr">შექმნილია ზამთრის სპორტის ზონებში ნავიგაციისთვის: იხილეთ სათხილამურო ტრასები, საბაგიროები და სათხილამურო სარბენი ბილიკები. სირთულის დონეები მითითებულია ფერადი ხაზებით. გამოსაყენებლად გაააქტიურეთ ეს დამატება მენიუში „რუკის მორგება“ აირჩიეთ სტილი „ზამთარი და თხილამურები“.</string>
     <string name="select_base_profile_dialog_message">შექმენით თქვენი მორგებული პროფილი აპლიკაციის ერთ-ერთ სტანდარტულ პროფილზე დაყრდნობით. ეს განსაზღვრავს საბაზისო პარამეტრებს, როგორიცაა ვიჯეტების ხილვადობა, სიჩქარისა და მანძილის ერთეულები. ქვემოთ მოცემულია სტანდარტული პროფილები და მორგებული პროფილების მაგალითები, რომლებიც შეგიძლიათ მათ საფუძველზე შექმნათ:</string>
     <string name="srtm_plugin_description">უზრუნველყოფს რელიეფისა და დეტალური ტოპოგრაფიის ვიზუალურ აღქმას კონტურის ხაზების, დაჩრდილვის, დახრილობის შეფერილობისა და 3D ხედის მეშვეობით. ეს დაგეხმარებათ ლანდშაფტისა და გამავლობის შეფასებაში.\n\nამ ფუნქციების გასააქტიურებლად საჭიროა დამატებით გადმოწეროთ „კონტურის ხაზები“ ან „რელიეფის (3D)“ რუკა, რომელიც შედგენილია SRTM და ASTER მონაცემების საფუძველზე.\n\nდამატებითი ინფორმაცია: %1$s.</string>
+    <string name="routing_attr_avoid_cobblestone_name">რიყის ქვის ქვაფენილის თავიდან არიდება</string>
+    <string name="routing_attr_avoid_cobblestone_description">რიყის ქვის ქვაფენილის თავიდან არიდება</string>
 </resources>

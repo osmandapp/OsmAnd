@@ -1649,7 +1649,7 @@
     <string name="poi_diaper_yes">Mähkmevahetuslaud</string>
     <string name="poi_diaper_no">Mähkmevahetuslaud puudub</string>
     <string name="poi_diaper_room">Mähkmevahetustuba</string>
-    <string name="poi_car_wash_no">Autopesula: ei: ei</string>
+    <string name="poi_car_wash_no">Autopesula: ei</string>
     <string name="poi_maxstay">Parkimisaja piir</string>
     <string name="poi_vending_parking_tickets">Parkimispiletid;parkimispiletite automaat</string>
     <string name="poi_vending_cigarettes">Sigaretid;sigarettide müügiautomaat</string>
@@ -3314,8 +3314,8 @@
     <string name="poi_scooter_yes">Tõukeratas: jah</string>
     <string name="poi_scooter_no">Tõukeratas: ei</string>
     <string name="poi_truck_no">Veouauto: ei</string>
-    <string name="poi_parking_fee_yes">Jah</string>
-    <string name="poi_parking_fee_no">Ei</string>
+    <string name="poi_parking_fee_yes">Parkimistasu: jah</string>
+    <string name="poi_parking_fee_no">Parkimistasu: ei</string>
     <string name="poi_parking_fee">Parkimistasu</string>
     <string name="poi_amperage">Voolutugevus</string>
     <string name="poi_charging_station_output">Laadimisjaama väljund</string>
@@ -3565,9 +3565,9 @@
     <string name="poi_hazard_additional_minefield">Miiniväli</string>
     <string name="poi_hazard_additional_contamination">Saastumine</string>
     <string name="poi_defibrillator_location">Asukoht</string>
-    <string name="poi_changing_table_yes">Mähkimislaud: jah: jah</string>
-    <string name="poi_changing_table_no">Mähkimislaud: ei: ei</string>
-    <string name="poi_changing_table_limited">Mähkimislaud: piiratud: piiratud</string>
+    <string name="poi_changing_table_yes">Mähkimislaud: jah</string>
+    <string name="poi_changing_table_no">Mähkimislaud: ei</string>
+    <string name="poi_changing_table_limited">Mähkimislaud: piiratud</string>
     <string name="poi_changing_table_location_room">Mähkimislaua asukoht: tuba</string>
     <string name="poi_changing_table_location_male_toilet">Mähkimislaua asukoht: meeste wc</string>
     <string name="poi_changing_table_location_female_toilet">Mähkimislaua asukoht: naiste wc</string>
@@ -4523,7 +4523,7 @@
     <string name="poi_from">Sihtpunkt</string>
     <string name="poi_ascent">Tõus</string>
     <string name="poi_not_pt_shelter_yes">Varjualune (muu, kui ühistranspordi jaoks)</string>
-    <string name="poi_climbing_bolts_no">Ei</string>
+    <string name="poi_climbing_bolts_no">Ronimispoldid: ei</string>
     <string name="poi_roundtrip_no">Edasi-tagasi reis: ei</string>
     <string name="poi_roundtrip_yes">Edasi-tagasi reis: jah</string>
     <string name="poi_direction">Suund</string>
@@ -4551,7 +4551,7 @@
     <string name="poi_recycling_polystyrene_foam">Vahtpolüstüreen</string>
     <string name="poi_recycling_pmd">Isiklik liikumisvahend</string>
     <string name="poi_socket_typee_yes">Tüüp E</string>
-    <string name="poi_climbing_bolts_yes">Jah</string>
+    <string name="poi_climbing_bolts_yes">Ronimispoldid: jah</string>
     <string name="poi_climbing_quality_medium">Keskmine</string>
     <string name="poi_reservation">Broneerimine</string>
     <string name="poi_us_maps_recreation_area_facility">Puhkeala teenus</string>

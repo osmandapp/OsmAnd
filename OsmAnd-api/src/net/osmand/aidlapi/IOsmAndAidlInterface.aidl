@@ -39,6 +39,9 @@ import net.osmand.aidlapi.map.AFlyoverFile;
 import net.osmand.aidlapi.map.FlyoverFileParams;
 import net.osmand.aidlapi.map.AMapScreenshot;
 import net.osmand.aidlapi.info.AMapWidgetValue;
+import net.osmand.aidlapi.info.AMapWidgetsLayout;
+import net.osmand.aidlapi.info.MapWidgetsLayoutParams;
+import net.osmand.aidlapi.info.SetMapWidgetsPanelParams;
 import net.osmand.aidlapi.gpx.HideGpxParams;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 
@@ -1033,4 +1036,17 @@ interface IOsmAndAidlInterface {
      * or the app has no access
      */
     ParcelFileDescriptor openFlyoverFile(in FlyoverFileParams params);
+
+    /**
+     * Map widgets of a profile as in Configure screen: panel, page and order of each widget on the screen,
+     * and the widgets that can be added. Separate portrait/landscape layouts: the current orientation.
+     *
+     * @return AMapWidgetsLayout, or null if the map is not open or the app has no access
+     */
+    AMapWidgetsLayout getMapWidgetsLayout(in MapWidgetsLayoutParams params);
+
+    /**
+     * Replace the widgets of one panel: add, remove, reorder widgets and pages, as Configure screen does.
+     */
+    boolean setMapWidgetsPanel(in SetMapWidgetsPanelParams params);
 }

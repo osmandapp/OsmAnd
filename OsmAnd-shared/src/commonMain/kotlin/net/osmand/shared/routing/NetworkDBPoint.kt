@@ -15,10 +15,9 @@ import kotlin.jvm.JvmField
  * cleared by [clearRouting] between routes. [index] is a dense global id; [fileId] the id inside
  * the file's HH section and [mapId] which of the selected files that is.
  *
- * A copy of `HHRouteDataStructure.NetworkDBPoint` in OsmAnd-java, which stays there for android
- * and tools; this copy is for iOS. Java's `NetworkDBPointCh` and `NetworkDBPointMid` subclasses
- * belong to the tools' contraction and midpoint experiments and are not copied, so [chInd] and
- * [midPntDepth] here always answer 0.
+ * Based on `HHRouteDataStructure.NetworkDBPoint` from OsmAnd-java. Java's `NetworkDBPointCh`
+ * and `NetworkDBPointMid` subclasses belong to the tools' contraction and midpoint experiments
+ * and are not copied, so [chInd] and [midPntDepth] here always answer 0.
  */
 open class NetworkDBPoint {
 

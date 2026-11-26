@@ -86,7 +86,7 @@
     <string name="shared_string_authorization">Εξουσιοδότηση</string>
     <string name="turn_off_location_sharing">Απενεργοποίηση της κοινοποίησης τοποθεσίας</string>
     <string name="show_users_on_map">Εμφάνιση χρηστών στο χάρτη</string>
-    <string name="enter_authentication_code">Εισάγετε κωδικό εξουσιοδότησης</string>
+    <string name="enter_authentication_code">Εισάγετε κωδικό ταυτοποίησης</string>
     <string name="start_location_sharing">Κοινοποίηση τοποθεσίας</string>
     <string name="osmand_connect">Σύνδεση OsmAnd</string>
     <string name="shared_string_password">Κωδικός πρόσβασης</string>
@@ -118,7 +118,7 @@
     <string name="last_response">Τελευταία απόκριση</string>
     <string name="proxy_username">Όνομα χρήστη</string>
     <string name="proxy_key">Κλειδί</string>
-    <string name="authentication_code">Κωδικός εξουσιοδότησης</string>
+    <string name="authentication_code">Κωδικός ταυτοποίησης</string>
     <string name="share_location">Κοινοποίηση τοποθεσίας</string>
     <string name="sharing_time">Χρόνος κοινοποίησης</string>
     <string name="not_logged_in">Δεν είστε συνδεδεμένος</string>

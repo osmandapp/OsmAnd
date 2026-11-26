@@ -26,8 +26,7 @@ import kotlin.math.sqrt
  * Reverse geocoding: the roads near a point, by name, then the streets of those names in the
  * address section and the buildings on them.
  *
- * A copy of `GeocodingUtilities` in OsmAnd-java, which stays there for android and tools; this copy
- * is for iOS.
+ * Based on `GeocodingUtilities` from OsmAnd-java.
  */
 class GeocodingUtilities {
 

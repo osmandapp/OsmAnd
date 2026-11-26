@@ -34,6 +34,7 @@ public class MapColorPaletteFragment extends ConfigureMapOptionFragment implemen
 		super.onCreate(savedInstanceState);
 		controller = MapColorPaletteController.getExistedInstance(app);
 		if (controller != null) {
+			saveOriginalValues(savedInstanceState, controller.getPreviewPreferences());
 			MapActivity activity = requireMapActivity();
 			activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 				@Override
@@ -42,7 +43,7 @@ public class MapColorPaletteFragment extends ConfigureMapOptionFragment implemen
 				}
 			});
 		} else {
-			dismiss();
+			closeWithoutController(savedInstanceState);
 		}
 	}
 

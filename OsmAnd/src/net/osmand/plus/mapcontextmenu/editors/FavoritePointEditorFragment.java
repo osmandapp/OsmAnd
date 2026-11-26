@@ -36,7 +36,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
-import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -61,10 +60,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private FavouritePoint favorite;
 	@Nullable
 	private FavoriteGroup group;
+	@Nullable
+	private String originalIconKey;
 
 	private boolean saved;
-	private boolean iconSelectedByUser;
-	private boolean selectingIconForGroup;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,13 +79,32 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
 			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
-			// an existing favorite keeps its icon when it is moved to another folder
-			this.iconSelectedByUser = !editor.isNew();
+			this.originalIconKey = retrieveOriginalIconKey();
 
 			setColor(getInitialColor());
 			setIcon(getInitialIconId());
 			setBackgroundType(getInitialBackgroundType());
+			if (savedInstanceState != null) {
+				restoreEditorState(savedInstanceState);
+			}
 		}
+	}
+
+	@Nullable
+	protected String retrieveOriginalIconKey() {
+		FavoritePointEditor editor = getFavoritePointEditor();
+		FavouritePoint favorite = getFavorite();
+		if (editor == null || favorite == null) {
+			return null;
+		}
+		if (!editor.isNew()) {
+			return editor.getPoiIconName(favorite);
+		}
+		int iconId = favorite.getIconId();
+		if (iconId == 0) {
+			return null;
+		}
+		return RenderingIcons.getBigIconName(iconId);
 	}
 
 	private void setupEditor() {
@@ -117,6 +135,21 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	private void replacePressed() {
 		callActivity(activity -> SelectFavouriteToReplaceBottomSheet.showInstance(activity, this));
+	}
+
+	@NonNull
+	@Override
+	protected EditorIconController getIconController() {
+		return EditorIconController.getInstance(app, this, getIconName(), originalIconKey);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (originalIconKey != null && activity != null && !activity.isChangingConfigurations()) {
+			EditorIconController.onDestroy(app, originalIconKey);
+		}
 	}
 
 	@Nullable
@@ -156,21 +189,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (ctx != null) {
 			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.getName());
 			this.group = favouritesHelper.getGroup(groupIdName);
-			String iconName = getIconName();
 			super.setPointsGroup(group, true);
-			// an icon picked by the user is kept, otherwise the icon follows the folder
-			setIconName(iconSelectedByUser ? iconName : getIconNameForGroup());
+			setIconName(manualChanges.iconOnFolderChange(getIconName(), getIconNameForGroup()));
 			selectIconInController();
 			updateContent();
 		}
-	}
-
-	@Override
-	public void onIconSelectedFromPalette(@Nullable String icon) {
-		if (!selectingIconForGroup) {
-			iconSelectedByUser = true;
-		}
-		super.onIconSelectedFromPalette(icon);
 	}
 
 	/**
@@ -194,7 +217,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			return iconName;
 		}
 
-		// the POI icon that the editor set for a new point
+		// the point's own icon: the POI icon, as on Add, or the saved icon of a point not from a POI
+		if (!Algorithms.isEmpty(originalIconKey)) {
+			return originalIconKey;
+		}
 		FavouritePoint favorite = getFavorite();
 		iconName = favorite != null ? RenderingIcons.getBigIconName(favorite.getIconId()) : null;
 		if (!Algorithms.isEmpty(iconName)) {
@@ -208,24 +234,14 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return getDefaultIconName();
 	}
 
-	private void selectIconInController() {
-		EditorIconController controller = EditorIconController.getInstance(app, this, getIconName());
-		selectingIconForGroup = true;
-		try {
-			controller.onIconSelectedFromPalette(getIconName(), getIconCategoryKey(controller, getIconName()));
-		} finally {
-			selectingIconForGroup = false;
-		}
-	}
-
-	@Nullable
-	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
-		for (IconsCategory category : controller.getCategories()) {
-			if (category.containsIcon(iconName)) {
-				return category.getKey();
-			}
-		}
-		return null;
+	/**
+	 * A point without its own icon in a folder without an icon gets the star, not the last used icon.
+	 */
+	@NonNull
+	@Override
+	protected String getDefaultIconName() {
+		String iconName = getPreselectedIconName();
+		return !Algorithms.isEmpty(iconName) ? iconName : DEFAULT_ICON_NAME;
 	}
 
 	@Override
@@ -486,6 +502,18 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return null;
 	}
 
+	/**
+	 * The editor opened from My Places is not the one of the map context menu, so the folder sheets reach it here.
+	 */
+	static void setPointsGroupOutsideMap(@NonNull FragmentActivity activity, @NonNull PointsGroup pointsGroup) {
+		for (Fragment fragment : activity.getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof FavoritePointEditorFragment editorFragment) {
+				editorFragment.setPointsGroup(pointsGroup);
+				return;
+			}
+		}
+	}
+
 	@Override
 	protected void showSelectCategoryDialog() {
 		FragmentManager fragmentManager = getFragmentManager();
@@ -556,6 +584,14 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			backgroundType = DEFAULT_BACKGROUND_TYPE;
 		}
 		return backgroundType;
+	}
+
+	@Override
+	protected void restoreEditorState(@NonNull Bundle savedInstanceState) {
+		super.restoreEditorState(savedInstanceState);
+		if (selectedGroup != null) {
+			group = favouritesHelper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, selectedGroup.getName()));
+		}
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {

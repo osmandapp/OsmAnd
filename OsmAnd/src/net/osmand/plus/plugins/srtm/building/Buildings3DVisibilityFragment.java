@@ -36,9 +36,10 @@ public class Buildings3DVisibilityFragment extends ConfigureMapOptionFragment {
 
 		controller = Buildings3DVisibilityController.getExistedInstance(app);
 		if (controller == null) {
-			dismiss();
+			closeWithoutController(savedInstanceState);
 			return;
 		}
+		saveOriginalValues(savedInstanceState, controller.getPreviewPreferences());
 
 		MapActivity activity = requireMapActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {

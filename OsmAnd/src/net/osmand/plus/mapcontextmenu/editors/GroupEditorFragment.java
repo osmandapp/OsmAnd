@@ -190,10 +190,7 @@ public abstract class GroupEditorFragment extends EditorFragment {
 		if (pointsGroup == null) {
 			addNewGroup();
 		}
-		PointEditor editor = getEditor();
-		if (editor != null) {
-			editor.setPointsGroup(pointsGroup);
-		}
+		applyToPointEditor(pointsGroup);
 		if (listener != null) {
 			listener.onCategorySelected(pointsGroup);
 		}
@@ -201,6 +198,13 @@ public abstract class GroupEditorFragment extends EditorFragment {
 			dismiss();
 		}
 		saved = true;
+	}
+
+	protected void applyToPointEditor(@NonNull PointsGroup pointsGroup) {
+		PointEditor editor = getEditor();
+		if (editor != null) {
+			editor.setPointsGroup(pointsGroup);
+		}
 	}
 
 	@Override

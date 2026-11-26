@@ -26,7 +26,7 @@ import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayPriority;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.DisplayValue;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 import net.osmand.plus.widgets.alert.SelectionDialogItem;
 
 import java.util.Calendar;
@@ -39,6 +39,8 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 	private static final String KEY_DEFAULT_VIEW = "default_view";
 	private static final String KEY_PRIORITY_VALUE = "display_priority";
 	private static final String SHOW_EXPAND_BUTTON = "show_expand_button";
+	private static final String DEFAULT_VIEW_REQUEST_KEY = "default_view_request_key";
+	private static final String DISPLAY_PRIORITY_REQUEST_KEY = "display_priority_request_key";
 
 	private static final long HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 	private static final long ONE_HUNDRED_KM_IN_METERS = 100_000;
@@ -88,6 +90,15 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 		displayPriorityButton.setOnClickListener(v -> showDisplayPriorityDialog(container));
 		displayPriorityButton.setBackground(getPressedStateDrawable());
 		updateDisplayPriorityButton(displayPriorityButton);
+
+		SingleSelectionDialogFragment.setResultListener(this, DEFAULT_VIEW_REQUEST_KEY, index -> {
+			selectedDefaultView = DisplayValue.values()[index];
+			updateDefaultViewButton(container);
+		});
+		SingleSelectionDialogFragment.setResultListener(this, DISPLAY_PRIORITY_REQUEST_KEY, index -> {
+			selectedDisplayPriority = DisplayPriority.values()[index];
+			updateDisplayPriorityButton(container);
+		});
 	}
 
 	@Override
@@ -130,11 +141,7 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 				.setTitle(R.string.shared_string_default_view)
 				.setItemsLayoutRes(R.layout.dialog_list_item_with_compound_button_and_summary);
 
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			selectedDefaultView = displayValues[which];
-			updateDefaultViewButton(container);
-		});
+		SingleSelectionDialogFragment.showInstance(this, DEFAULT_VIEW_REQUEST_KEY, dialogData, items, selected);
 	}
 
 	private void updateDefaultViewButton(@NonNull View container) {
@@ -159,11 +166,7 @@ public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragm
 				.setTitle(R.string.display_priority)
 				.setItemsLayoutRes(R.layout.dialog_list_item_with_compound_button);
 
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			selectedDisplayPriority = priorities[which];
-			updateDisplayPriorityButton(container);
-		});
+		SingleSelectionDialogFragment.showInstance(this, DISPLAY_PRIORITY_REQUEST_KEY, dialogData, items, selected);
 	}
 
 	private void updateDisplayPriorityButton(@NonNull View container) {

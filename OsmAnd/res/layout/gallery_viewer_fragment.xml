@@ -69,6 +69,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:contentDescription="@string/shared_string_share"
 					tools:srcCompat="@drawable/ic_action_gshare_dark" />
 
 				<androidx.appcompat.widget.AppCompatImageView
@@ -84,13 +85,15 @@
 
 		</androidx.appcompat.widget.Toolbar>
 
-		<FrameLayout
+		<LinearLayout
 			android:id="@+id/description_shadow"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
 			android:background="@drawable/gallery_gradient"
-			android:minHeight="180dp">
+			android:gravity="bottom"
+			android:minHeight="180dp"
+			android:orientation="vertical">
 
 			<LinearLayout
 				android:id="@+id/description_container"
@@ -155,7 +158,15 @@
 
 			</LinearLayout>
 
-		</FrameLayout>
+			<View
+				android:layout_width="32dp"
+				android:layout_height="4dp"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginBottom="@dimen/content_padding"
+				android:background="@drawable/rectangle_rounded"
+				android:backgroundTint="@color/text_color_tertiary_light" />
+
+		</LinearLayout>
 
 	</FrameLayout>
 

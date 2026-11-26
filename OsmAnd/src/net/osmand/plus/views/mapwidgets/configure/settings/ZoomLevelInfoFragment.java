@@ -13,13 +13,14 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetstates.ZoomLevelWidgetState.ZoomLevelType;
 import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SingleSelectionDialogFragment;
 
 import androidx.annotation.NonNull;
 
 public class ZoomLevelInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String ZOOM_LEVEL_TYPE_KEY = "zoom_level_type";
+	private static final String ZOOM_LEVEL_TYPE_REQUEST_KEY = "zoom_level_type_request_key";
 
 	private OsmandPreference<ZoomLevelType> zoomLevelTypePref;
 	private ZoomLevelType zoomLevelType;
@@ -62,6 +63,10 @@ public class ZoomLevelInfoFragment extends BaseSimpleWidgetInfoFragment {
 		zoomLevelTypeContainer.setOnClickListener(v -> showZoomLevelTypeSelectionDialog());
 		zoomLevelTypeContainer.setBackground(getPressedStateDrawable());
 		updateSelectedZoomLevelTypeText();
+		SingleSelectionDialogFragment.setResultListener(this, ZOOM_LEVEL_TYPE_REQUEST_KEY, index -> {
+			zoomLevelType = ZoomLevelType.values()[index];
+			updateSelectedZoomLevelTypeText();
+		});
 	}
 
 	private void showZoomLevelTypeSelectionDialog() {
@@ -79,11 +84,7 @@ public class ZoomLevelInfoFragment extends BaseSimpleWidgetInfoFragment {
 				.setTitle(R.string.shared_string_show)
 				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
 
-		CustomAlert.showSingleSelection(dialogData, items, zoomLevelType.ordinal(), v -> {
-			int which = (int) v.getTag();
-			zoomLevelType = ZoomLevelType.values()[which];
-			updateSelectedZoomLevelTypeText();
-		});
+		SingleSelectionDialogFragment.showInstance(this, ZOOM_LEVEL_TYPE_REQUEST_KEY, dialogData, items, zoomLevelType.ordinal());
 	}
 
 	private void updateSelectedZoomLevelTypeText() {

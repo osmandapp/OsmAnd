@@ -97,7 +97,7 @@ public class TripRecordingMaxSpeedWidgetState extends WidgetState {
 		}
 
 		public int getIcon(boolean nightMode) {
-			return nightMode ? dayIcon : nightIcon;
+			return nightMode ? nightIcon : dayIcon;
 		}
 
 		@NonNull

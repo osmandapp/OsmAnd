@@ -16,10 +16,10 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -222,9 +222,8 @@ public class SearchHelper {
 					builder.setTitle(app.getString(R.string.increase_search_radius));
 					int minimalSearchRadius = searchUICore.getMinimalSearchRadius(phrase);
 					if (count == 0 && minimalSearchRadius != Integer.MAX_VALUE) {
-						double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 						builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
-								+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
+								+ QuickSearchListAdapter.getFormattedSearchRadius(app, phrase, minimalSearchRadius));
 					}
 					builder.setOnClickListener(this::onClickSearchMore);
 					builder.setBrowsable(true);

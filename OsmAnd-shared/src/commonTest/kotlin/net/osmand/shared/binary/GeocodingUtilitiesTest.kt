@@ -10,6 +10,7 @@ import net.osmand.shared.routing.RouteSegmentPoint
 import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits
 import net.osmand.shared.routing.RoutingContext
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.AmenitySearcherTest
 import net.osmand.shared.search.core.SearchCoreFactoryTest.Companion.v
@@ -77,7 +78,7 @@ class GeocodingUtilitiesTest {
 						val lat = Double.fromBits(f[3].toULong(16).toLong())
 						val lon = Double.fromBits(f[4].toULong(16).toLong())
 						val java = dumpUnhex(f[5])
-						val copy = outcome { namedRoad(utils, opened[0], name, lat, lon) }
+						val copy = testAppCall { outcome { namedRoad(utils, opened[0], name, lat, lon) } }
 						named++
 						if (java == copy) {
 							// the same
@@ -98,7 +99,7 @@ class GeocodingUtilitiesTest {
 						if (f[6] != "-") {
 							ordered++
 						}
-						val copy = outcome { answer(utils, contexts[c], readers, lat, lon, c == WITH_EMPTY_NAMES) }
+						val copy = testAppCall { outcome { answer(utils, contexts[c], readers, lat, lon, c == WITH_EMPTY_NAMES) } }
 						compared++
 						if (java == copy) {
 							// the same
@@ -111,7 +112,7 @@ class GeocodingUtilitiesTest {
 							if (first(java) != first(copy)) {
 								otherFirst++
 							}
-						} else if (!exact && sameRoads(java, copy) && aBuildingAtThePoint(utils, contexts[c], readers, lat, lon)) {
+						} else if (!exact && sameRoads(java, copy) && testAppCall { aBuildingAtThePoint(utils, contexts[c], readers, lat, lon) }) {
 							atThePoint++
 						} else if (differentCount++ < 10) {
 							val jl = java.split("\n")

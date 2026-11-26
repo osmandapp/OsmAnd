@@ -24,6 +24,7 @@ import net.osmand.shared.data.Street
 import net.osmand.shared.osm.MapPoiTypes
 import net.osmand.shared.routing.RoutingContext
 import net.osmand.shared.routing.RoutingTestFixtures
+import net.osmand.shared.routing.testAppCall
 import net.osmand.shared.routing.testPlatformName
 import net.osmand.shared.search.SearchUICore.SearchResultCollection
 import net.osmand.shared.search.SearchUICore.SearchResultMatcher
@@ -100,20 +101,22 @@ class SearchUICoreTest {
 			while (true) {
 				val line = source.readUtf8Line() ?: break
 				val f = line.substring(2).split("\t")
-				when (line[0]) {
-					'X' -> poiPhrases[dumpUnhex(f[0])] = dumpUnhex(f[1])
-					'C' -> {
-						val t = types ?: typesWith(poiPhrases).also { types = it }
-						val keys = source.readUtf8Line()!!
-						assertTrue(keys.startsWith("K "), "the keys of case ${f[0]}")
-						SearchCoreFactory.DISPLAY_DEFAULT_POI_TYPES = f[4] == "true"
-						run = CaseRun(dumpUnhex(f[1]), settings(f, readers), SearchPhraseTest.JavaCollator(keys.substring(2)), t)
+				testAppCall {
+					when (line[0]) {
+						'X' -> poiPhrases[dumpUnhex(f[0])] = dumpUnhex(f[1])
+						'C' -> {
+							val t = types ?: typesWith(poiPhrases).also { types = it }
+							val keys = source.readUtf8Line()!!
+							assertTrue(keys.startsWith("K "), "the keys of case ${f[0]}")
+							SearchCoreFactory.DISPLAY_DEFAULT_POI_TYPES = f[4] == "true"
+							run = CaseRun(dumpUnhex(f[1]), settings(f, readers), SearchPhraseTest.JavaCollator(keys.substring(2)), t)
+						}
+						'Q' -> run!!.phrase(f, stats)
+						'F', 'I', 'J', 'N' -> run!!.order(line[0], f, stats)
+						'R' -> run!!.result(f, stats)
+						'Y' -> run!!.same(f, stats)
+						'M' -> run!!.queries(f, stats)
 					}
-					'Q' -> run!!.phrase(f, stats)
-					'F', 'I', 'J', 'N' -> run!!.order(line[0], f, stats)
-					'R' -> run!!.result(f, stats)
-					'Y' -> run!!.same(f, stats)
-					'M' -> run!!.queries(f, stats)
 				}
 			}
 		} finally {
@@ -316,9 +319,11 @@ class SearchUICoreTest {
 					val json = Json.parseToJsonElement(dumpUnhex(f[5])).jsonObject
 					val files = if (f[3] == "-") emptyList() else f[3].split(",").map { dumpUnhex(it) }
 					val name = dumpUnhex(f[1])
-					compared += testCase(name, json, files, readers, SearchPhraseTest.JavaCollator(keys.substring(2)), mismatches, geocoded)
+					compared += testAppCall {
+						testCase(name, json, files, readers, SearchPhraseTest.JavaCollator(keys.substring(2)), mismatches, geocoded)
+					}
 					val platform = ArrayList<String>()
-					testCase(name, json, files, readers, null, platform, null)
+					testAppCall { testCase(name, json, files, readers, null, platform, null) }
 					orderedOtherwise += platform.size
 					cases++
 				}
@@ -366,10 +371,12 @@ class SearchUICoreTest {
 		}
 		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
 		core.init()
-		val emptyPhrase = if (collator == null) SearchPhrase.emptyPhrase(s) else SearchPhrase.emptyPhrase(s, collator)
 		var compared = 0
 		for (k in phrases.indices) {
 			val text = phrases[k]
+			val androidRows = if (testPlatformName().startsWith("jvm")) null else androidScenarioRows(name, text)
+			val expectedRows = androidRows ?: results[k]
+			val emptyPhrase = if (collator == null || androidRows != null) SearchPhrase.emptyPhrase(s) else SearchPhrase.emptyPhrase(s, collator)
 			var phrase: SearchPhrase
 			var searchResults: List<SearchResult>
 			val arr = text.split(Regex("[\\\\{}]"))
@@ -388,8 +395,8 @@ class SearchUICoreTest {
 				phrase = emptyPhrase.generateNewPhrase(text, s)
 				searchResults = searchResults(core, phrase)
 			}
-			for (i in results[k].indices) {
-				var expected = results[k][i]
+			for (i in expectedRows.indices) {
+				var expected = expectedRows[i]
 				if (expected.indexOf('[') != -1) {
 					expected = expected.substring(0, expected.indexOf('[')).trim { it <= ' ' }
 				}
@@ -525,6 +532,44 @@ class SearchUICoreTest {
 		assertSame(a1, cll.getCurrentSearchResults()[0])
 		assertSame(b1, cll.getCurrentSearchResults()[1])
 		assertSame(b2, cll.getCurrentSearchResults()[2])
+	}
+
+	/** What iOS does in place of [SearchUICore.shallowSearch] by class: finds the api among the registered ones. */
+	@Test
+	fun shallowSearchWithTheApiItself() {
+		SearchPhraseTest.setUp
+		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		core.init()
+		val api = OneResultApi()
+		core.registerAPI(api)
+		assertTrue(core.getApis().any { it is SearchCoreFactory.SearchAmenityTypesAPI })
+		assertSame(api, core.getApis().single { it is OneResultApi })
+
+		val byApi = core.shallowSearch(api, "cafe", null, true, true, core.getSearchSettings())
+		val byClass = core.shallowSearch(OneResultApi::class, "cafe", null, true, true, core.getSearchSettings())!!
+		assertEquals(listOf("cafe"), byApi.getCurrentSearchResults().map { it.localeName })
+		assertEquals(byClass.getCurrentSearchResults().map { it.localeName }, byApi.getCurrentSearchResults().map { it.localeName })
+		assertEquals(2, api.searches.get())
+	}
+
+	/** A file that fails to read halfway, as a damaged one does: Objective-C gets what was found before it. */
+	@Test
+	fun aShallowSearchThatFailsToReadReturnsWhatItFound() {
+		SearchPhraseTest.setUp
+		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		core.init()
+		val api = object : SearchCoreAPI by OneResultApi() {
+			override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean {
+				val sr = SearchResult(phrase)
+				sr.localeName = phrase.getUnknownSearchPhrase()
+				sr.objectType = ObjectType.POI
+				sr.location = KLatLon(0.0, 0.0)
+				resultMatcher.publish(sr)
+				throw IllegalStateException("read past the end of the file")
+			}
+		}
+		val found = core.shallowSearch(api, "cafe", null, true, true, core.getSearchSettings())
+		assertEquals(listOf("cafe"), found.getCurrentSearchResults().map { it.localeName })
 	}
 
 	private fun originPhrase(): SearchPhrase {
@@ -681,6 +726,60 @@ class SearchUICoreTest {
 		assertEquals(0, api.overlaps.get())
 	}
 
+	/** A cancelled search ends without a word; what runs after the search waits for it all the same. */
+	@Test
+	fun runAfterSearchWaitsForACancelledSearch() = runBlocking {
+		SearchPhraseTest.setUp
+		val core = SearchUICore(MapPoiTypes.getDefault(), "en", false)
+		val api = BlockingApi()
+		core.registerAPI(api)
+		val cancelled = AtomicInt(0)
+		core.search("cafe", false, object : ResultMatcher<SearchResult> {
+			override fun publish(obj: SearchResult): Boolean = true
+
+			override fun isCancelled(): Boolean = cancelled.get() == 1
+		})
+		try {
+			until { api.running.get() == 1 }
+			cancelled.set(1)
+			val searchesRunning = AtomicInt(-1)
+			core.runAfterSearch { searchesRunning.set(api.running.get()) }
+			delay(200)
+			assertEquals(-1, searchesRunning.get())
+			api.released.set(1)
+			until { searchesRunning.get() != -1 }
+			assertEquals(0, searchesRunning.get())
+		} finally {
+			// a failure above must not leave the search thread spinning
+			api.released.set(1)
+		}
+	}
+
+	/** An api that searches until it is let go. */
+	private class BlockingApi : SearchCoreAPI {
+		val running = AtomicInt(0)
+		val released = AtomicInt(0)
+
+		override fun getSearchPriority(p: SearchPhrase): Int = 1
+
+		override fun search(phrase: SearchPhrase, resultMatcher: SearchResultMatcher): Boolean {
+			running.incrementAndGet()
+			while (released.get() == 0) {
+				// searching
+			}
+			running.decrementAndGet()
+			return true
+		}
+
+		override fun isSearchMoreAvailable(phrase: SearchPhrase): Boolean = false
+
+		override fun isSearchAvailable(p: SearchPhrase): Boolean = true
+
+		override fun getMinimalSearchRadius(phrase: SearchPhrase): Int = 0
+
+		override fun getNextSearchRadius(phrase: SearchPhrase): Int = 0
+	}
+
 	private suspend fun until(condition: () -> Boolean) {
 		withTimeout(30_000) {
 			while (!condition()) {
@@ -692,6 +791,31 @@ class SearchUICoreTest {
 	companion object {
 		/** How far apart two results can be for the dump to say whether they are the same place. */
 		private const val SAME_DEPTH = 3
+
+		/** Ordered rows from Android Java API 37 for the three phrases where the desktop JSON differs. */
+		internal fun androidScenarioRows(file: String, query: String): List<String>? {
+			if (file == "saintLys.json" && query == "Saint-lys") {
+				return listOf(
+					"Saint-Lys, Lys", "Saint-Lys Assurances", "Saint-Lys Beauté", "Marché de Saint-Lys",
+					"Audioprothésiste Saint-Lys", "FIDSUD CDBA Saint-Lys", "Ancienne gare de Saint-Lys",
+					"MJC  Saint-Lys", "Gendarmerie nationale", "Centre d'incendie et de secours de Saint-Lys",
+					"Saint-Lys;La Banque Postale", "Église Saint-Lys", "Collège Saint-Lys", "Collège Saint-Lys",
+					"Sourdeval - Saint-Lys"
+				)
+			}
+			if (file != "Issue-16715-geo-NC-42.json") return null
+			// The leading @ keeps the fixture's reverse-geocoding assertion for each house.
+			val house = when (query) {
+				"2627 NC 42 Clayton" -> "@2627, NC-42 East, Clayton"
+				"2621 NC 42 Clayton" -> "@2621, NC-42 Hwy East, Clayton"
+				else -> return null
+			}
+			return listOf(house) + listOf(
+				"NC 42", "NC 42 (Country Estates)", "NC 42 Business East", "NC 42 East",
+				"NC 42 East (Country Estates)", "NC 42 Highway East", "NC 42 Highway West",
+				"NC 42 Highway West (Brigadoon)", "NC 42 West (Walden)"
+			).map { "$it, Clayton" }
+		}
 
 		private val ACCEPT_ALL = object : ResultMatcher<SearchResult> {
 			override fun publish(obj: SearchResult): Boolean = true

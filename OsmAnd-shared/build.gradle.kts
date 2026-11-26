@@ -54,7 +54,6 @@ kotlin {
 			defFile(project.file("src/nativeInterop/cinterop/sqlite3.def"))
 			packageName("sqlite3")
 		}
-		// sqlite3.def carries no linkerOpts, so the test binaries link sqlite themselves
 		iosTarget.binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.TestExecutable::class.java).configureEach {
 			linkerOpts("-lsqlite3")
 		}
@@ -135,7 +134,7 @@ android {
 	}
 }
 
-version = System.getenv("OSMAND_SHARED_ANDROID_BINARIES_IVY_REVISION") ?: "master-snapshot"
+version = System.getenv("OSMAND_SHARED_ANDROID_BINARIES_IVY_REVISION") ?: "5.5"
 publishing {
 	repositories {
 		ivy {

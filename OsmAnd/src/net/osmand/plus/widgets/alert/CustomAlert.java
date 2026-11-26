@@ -85,6 +85,14 @@ public class CustomAlert {
 
 	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull SelectionDialogItem[] items,
 	                                       int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
+		AlertDialog dialog = createSingleSelection(data, items, selectedEntryIndex, itemClickListener);
+		dialog.show();
+		applyAdditionalParameters(dialog, data);
+	}
+
+	@NonNull
+	static AlertDialog createSingleSelection(@NonNull AlertDialogData data, @NonNull SelectionDialogItem[] items,
+	                                         int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
 				data.getContext(), data.getItemsLayoutRes(), items, selectedEntryIndex, null,
@@ -92,9 +100,9 @@ public class CustomAlert {
 		);
 		builder.setAdapter(adapter, null);
 
-		AlertDialog dialog = builder.show();
-		applyAdditionalParameters(dialog, data);
+		AlertDialog dialog = builder.create();
 		adapter.setDialog(dialog);
+		return dialog;
 	}
 
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,

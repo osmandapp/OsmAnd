@@ -14,13 +14,13 @@ import net.osmand.shared.util.synchronized
 /**
  * An [AmenityIndexRepository] over one open obf file.
  *
- * A copy of `AmenityIndexRepositoryBinary` in the android app, which stays there; this copy is for
- * iOS. The reader is asked for on every call rather than held, because the platform closes and
- * reopens files as maps are enabled, downloaded or updated - see [ObfReaderSupplier]. While the
- * file is not open every method here is a no-op.
+ * Based on `AmenityIndexRepositoryBinary` from the Android app. The reader is asked for on
+ * every call rather than held, because the platform closes and reopens files as maps are
+ * enabled, downloaded or updated - see [ObfReaderSupplier]. While the file is not open every
+ * method here is a no-op.
  *
- * What is left behind in android: the poi-category cache that the app keeps per file in its own
- * database. [calculateDeltaSubcategories] - what would go into that cache - is here.
+ * The persistent per-file POI category cache used by the Android app is not implemented here.
+ * [calculateDeltaSubcategories] provides the data a caller can store in such a cache.
  */
 open class BinaryAmenityIndexRepository(
 	private val file: KFile,

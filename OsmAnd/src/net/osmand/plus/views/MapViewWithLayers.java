@@ -144,6 +144,7 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.setElevationAngle(elevationAngle);
 			mapView.setElevationAngle(elevationAngle);
 			atlasMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
+			atlasMapRendererView.setSymbolsFade(settings.BATTERY_SAVING_MODE.get() ? 0 : 300, -1);
 			mapRendererContext.setMapRendererView(atlasMapRendererView);
 			mapView.applyMaximumFrameRate(atlasMapRendererView);
 			mapView.applyDebugSettings(atlasMapRendererView);

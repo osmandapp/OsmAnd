@@ -10,6 +10,7 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center"
+		android:importantForAccessibility="no"
 		android:scaleType="centerCrop"
 		tools:src="@drawable/mm_tourism_museum" />
 

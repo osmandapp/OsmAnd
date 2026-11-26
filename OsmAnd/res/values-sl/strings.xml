@@ -2700,7 +2700,7 @@
     <string name="storage_copied_files_size">Obdelana(ih) %1$s datotek(a), %2$s</string>
     <string name="shared_storage_second_step">Klikni »Uporabi to mapo«.</string>
     <string name="map_markers_history">Zgodovina oznak zemljevida</string>
-    <string name="delete_history_items_descr">Izbrisati izbrane elemente zgodovine?</string>
+    <string name="delete_history_items_descr">Izbrani vnosi bodo odstranjeni s seznama.</string>
     <string name="delete_history_items">Brisati %1$s elementov zgodovine?</string>
     <string name="quick_action_toggle_preference">Stikalo za spremembo nastavitev.</string>
     <string name="display_route_tracks_as_poi">Prikaži sledi kot POI</string>
@@ -4409,4 +4409,26 @@
     <string name="share_favorites_points_only">Samo točke</string>
     <string name="share_favorites_share_failed">Datoteke ni bilo mogoče deliti.</string>
     <string name="astro_next_lunar_eclipse">Naslednji lunin mrk</string>
+    <string name="cast_shadows">Sence</string>
+    <string name="build_update_size">posod. %1$s</string>
+    <string name="build_update_size_estimated">posod. ~%1$s</string>
+    <string name="astro_ar_mode">Način obogatene resničnosti</string>
+    <string name="astro_camera_view">Pogled kamere</string>
+    <string name="astro_reset_field_of_view">Ponastavi območje pogleda</string>
+    <string name="cloud_file_name_too_long">Ime datoteke je predolgo za to napravo, preimenujte jo v OsmAnd Cloud</string>
+    <string name="average_vertical_speed">Povprečna navpična hitrost</string>
+    <string name="select_tracks">Izberi sledi</string>
+    <string name="storage_directory_visible_external">Viden zuananji pomnilnik</string>
+    <string name="eta_group_header">Ocenjen čas prihoda</string>
+    <string name="travel_speed">Potovalna hitrost</string>
+    <string name="default_speed_descr">Uporabljeno, ko ni podatka o hitrosti na cesti, ali medtem ko stojite pri miru.</string>
+    <string name="speed_range">Razpon hitrosti</string>
+    <string name="speed_range_descr">Uporabljano za izračun povezave in čas prihoda.</string>
+    <string name="eta_adapt_to_my_speed">Prilagodi moji hitrosti</string>
+    <string name="eta_adapt_to_my_speed_descr">Čas prihoda temelji na vaši hitrosti zadnjih %1$s.</string>
+    <string name="shared_string_file">Datoteka</string>
+    <string name="shared_string_format">Oblika</string>
+    <string name="shared_string_resolution">Ločljivost</string>
+    <string name="shared_string_attached_to">Pripeto k</string>
+    <string name="media_not_attached_title">K ničemur še ni pripeto</string>
 </resources>

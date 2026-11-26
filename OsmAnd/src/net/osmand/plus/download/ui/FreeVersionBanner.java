@@ -1,8 +1,6 @@
 package net.osmand.plus.download.ui;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
-import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 import static net.osmand.plus.utils.FontCache.FONT_WEIGHT_MEDIUM;
 
 import android.graphics.Typeface;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +16,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 
 import com.google.android.material.card.MaterialCardView;
 
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -99,25 +97,29 @@ public class FreeVersionBanner {
 			}
 			return;
 		}
-		updateBanner(getDownloadsLeft(true));
+		updateBanner();
 	}
 
-	private void updateBanner(int downloadsLeft) {
-		updateBannerState(downloadsLeft);
-		updateDownloadsProgress(downloadsLeft);
-		downloadsLeftTextView.setText(activity.getString(R.string.downloads_left_template, String.valueOf(downloadsLeft)));
-	}
-
-	private void updateBannerState(int downloadsLeft) {
-		boolean limitReached = downloadsLeft == 0;
+	/**
+	 * Free version: the free region - all its maps and every update are free. There is no limit to
+	 * reach, so the banner only changes with the region.
+	 */
+	private void updateBanner() {
 		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.APP);
 		updateBannerColors();
-		freeVersionTitleTextView.setText(limitReached ? R.string.free_download_limit_reached : R.string.free_version_title);
-		downloadsLeftTextView.setVisibility(limitReached ? View.GONE : View.VISIBLE);
-		freeVersionSubtitleTextView.setVisibility(limitReached ? View.VISIBLE : View.GONE);
+		WorldRegion region = app.getDownloadThread().getFreeVersionMapDownloads().getFreeRegion();
+		freeVersionTitleTextView.setText(R.string.free_version_title);
+		downloadsLeftTextView.setText(region != null ? region.getLocaleName() : "");
+		freeVersionSubtitleTextView.setVisibility(View.VISIBLE);
+		freeVersionSubtitleTextView.setText(region != null
+				? activity.getString(R.string.free_region_banner_descr, region.getLocaleName())
+				: activity.getString(R.string.free_region_not_chosen_descr));
 		freeVersionDescriptionTextView.setText(R.string.get_unlimited_downloads);
-		boolean hasDiscount = updateCtaDiscountBadge(nightMode);
-		boolean filledCta = limitReached || hasDiscount;
+		updateCtaButton(nightMode);
+	}
+
+	private void updateCtaButton(boolean nightMode) {
+		boolean filledCta = updateCtaDiscountBadge(nightMode);
 		int ctaBackgroundId = R.drawable.free_version_banner_cta_neutral_ripple;
 		int ctaHorizontalMargin = 0;
 		int ctaTopMargin = 0;
@@ -167,47 +169,7 @@ public class FreeVersionBanner {
 		return hasDiscount;
 	}
 
-	private void updateDownloadsProgress(int downloadsLeft) {
-		LinearLayout marksContainer = freeVersionBanner.findViewById(R.id.marksLinearLayout);
-		marksContainer.removeAllViews();
-		int markWidth = AndroidUtils.dpToPx(app, 2);
-		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.APP);
-		int colorUsed = app.getColor(nightMode ? R.color.banner_downloads_used_dark : R.color.banner_downloads_used_light);
-		int colorRemaining = app.getColor(nightMode ? R.color.banner_downloads_remaining_dark : R.color.banner_downloads_remaining_light);
-		int usedSegments = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - Math.min(downloadsLeft, MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
-		for (int i = 0; i < MAXIMUM_AVAILABLE_FREE_DOWNLOADS; i++) {
-			View markView = new View(activity);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, MATCH_PARENT, 1);
-			markView.setLayoutParams(params);
-			markView.setBackground(getColoredTickDrawable(i < usedSegments ? colorUsed : colorRemaining));
-			marksContainer.addView(markView);
-			Space spaceView = new Space(activity);
-			params = new LinearLayout.LayoutParams(markWidth, MATCH_PARENT);
-			spaceView.setLayoutParams(params);
-			marksContainer.addView(spaceView);
-		}
-	}
-
-	private Drawable getColoredTickDrawable(int color) {
-		Drawable drawable = activity.getDrawable(R.drawable.free_version_downloads_progress_tick);
-		if (drawable != null) {
-			drawable = drawable.mutate();
-			drawable.setTint(color);
-		}
-		return drawable;
-	}
-
 	protected void updateAvailableDownloads() {
-		updateBanner(getDownloadsLeft(true));
-	}
-
-	private int getDownloadsLeft(boolean includeActiveTasks) {
-		int mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-		if (includeActiveTasks) {
-			int activeTasks = activity.getDownloadThread().getCountedDownloads();
-			mapsDownloaded += activeTasks;
-		}
-		int downloadsLeft = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
-		return Math.max(downloadsLeft, 0);
+		updateBanner();
 	}
 }

@@ -5,8 +5,7 @@ import kotlin.jvm.JvmField
 /**
  * What a route calculation came back with: the segments, or the reason there are none.
  *
- * A copy of `RouteResultPreparation.RouteCalcResult` in OsmAnd-java, which stays there for
- * android and tools; this copy is for iOS.
+ * Based on `RouteResultPreparation.RouteCalcResult` from OsmAnd-java.
  */
 open class RouteCalcResult {
 

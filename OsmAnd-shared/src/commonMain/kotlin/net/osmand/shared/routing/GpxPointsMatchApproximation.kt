@@ -13,8 +13,7 @@ import net.osmand.shared.util.LoggerFactory
  * end. [GpxRouteApproximation.GPX_SEGMENT_ALGORITHM] selects it; the default is
  * [GpxMultiSegmentsApproximation].
  *
- * A copy of `GpxPointsMatchApproximation` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS.
+ * Based on `GpxPointsMatchApproximation` from OsmAnd-java.
  */
 // TO-THINK ? fix minor "Points are not connected" (~0.01m)
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts

@@ -4605,8 +4605,8 @@
     <string name="allow_display_on_top">Permite afișarea peste alte elemente</string>
     <string name="allow_display_on_top_description">Permite afișarea textelor de pe hartă unele peste altele</string>
     <string name="map_text">Texte pe hartă</string>
-    <string name="routing_attr_avoid_cobblestone_name">Evită piatra cubică</string>
-    <string name="routing_attr_avoid_cobblestone_description">Evită piatra cubică</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evită caldarâmul</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evită caldarâmul</string>
     <string name="fixed_height">Înălțime fixă</string>
     <string name="wall_height">Înălțimea peretelui</string>
     <string name="user_palette">Paleta utilizatorului</string>

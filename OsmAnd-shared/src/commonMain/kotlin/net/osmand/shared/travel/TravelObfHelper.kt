@@ -38,15 +38,15 @@ import net.osmand.shared.api.KStringMatcherMode
  * Everything the travel screens ask of the obf files: which articles to offer, what a search
  * matches, and how an article or a track is fetched back from a file by its route_id.
  *
- * A copy of `TravelObfHelper` in the android app, which stays there; this copy is for iOS. Where
- * java reaches into the app this takes a [TravelObfContext] - which files to search, the language
- * and where the map is looking - and a [TravelBookmarks] for what the user saved.
+ * Based on `TravelObfHelper` from the Android app. Where java reaches into the app this takes a
+ * [TravelObfContext] - which files to search, the language and where the map is looking - and a
+ * [TravelBookmarks] for what the user saved.
  *
  * Three things went a different way from java. Reading a gpx file was an `AsyncTask` and is a
  * plain call here, so the `GpxReadCallback` is gone and the caller picks the thread.
- * `openTrackMenu` was pure android UI and is not here. And [search] builds its matcher from
- * [KCollatorStringMatcher] rather than from a `SearchPhrase`, because the search core is not in
- * shared yet - pass your own matcher to get exactly what android does.
+ * `openTrackMenu` was pure android UI and is not here. The default [search] matcher uses
+ * [KCollatorStringMatcher]; callers can supply a matcher from `SearchPhrase` when they need
+ * matching based on a search phrase.
  */
 class TravelObfHelper(
 	private val context: TravelObfContext,

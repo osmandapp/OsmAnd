@@ -5,9 +5,8 @@ import kotlin.jvm.JvmField
 /**
  * The root of one zoom level of a map section: the box it covers and the zooms it is drawn at.
  *
- * A copy of `BinaryMapIndexReader.MapRoot` in OsmAnd-java, which stays there for android and
- * tools; this copy is for iOS. Java's `getMapZoom` is left out, as `MapZooms` belongs to the map
- * creator and never crosses to a device.
+ * Based on `BinaryMapIndexReader.MapRoot` from OsmAnd-java. `getMapZoom` is not implemented
+ * here; it depends on the map creator's `MapZooms` model, which has not been ported.
  */
 class MapRoot : MapTree() {
 

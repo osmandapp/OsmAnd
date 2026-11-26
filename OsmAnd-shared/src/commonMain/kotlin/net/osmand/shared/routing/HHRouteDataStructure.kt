@@ -11,9 +11,9 @@ import kotlin.jvm.JvmStatic
  * segment is known by throughout the hub graph, and the decoding of a vertex's edges from the
  * bytes the obf file stores them as.
  *
- * A copy of the statics of `HHRouteDataStructure` and `HHRoutePlanner` in OsmAnd-java, which stay
- * there for android and tools; this copy is for iOS. The id helpers sit on the planner in java;
- * they are here because a point computes its own id ([NetworkDBPoint.getGeoPntId]).
+ * Based on the statics of `HHRouteDataStructure` and `HHRoutePlanner` from OsmAnd-java. The id
+ * helpers sit on the planner in java; they are here because a point computes its own id
+ * ([NetworkDBPoint.getGeoPntId]).
  */
 object HHRouteDataStructure {
 
