@@ -2,12 +2,9 @@ package net.osmand.plus.settings.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.FragmentActivity
-import com.google.android.material.appbar.MaterialToolbar
 import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID
 import net.osmand.plus.R
 import net.osmand.plus.base.AppModeDependentComponent
@@ -51,7 +48,8 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_default_speed, container, false)
-		setupToolbar(view)
+		setupToolbar(view, R.string.travel_speed)
+		addResetAction(view) { resetToDefault() }
 
 		defaultSpeedRow = SliderListItem(view.findViewById(R.id.default_speed_row))
 		defaultSpeedRow.setTitle(R.string.default_speed_setting_title)
@@ -78,23 +76,6 @@ class DefaultSpeedFragment : BaseMaterialFragment() {
 		if (routingChanged) {
 			osmandApp.routingHelper.onSettingsChanged(appMode)
 			routingChanged = false
-		}
-	}
-
-	private fun setupToolbar(view: View) {
-		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
-		toolbar.setTitle(R.string.travel_speed)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
-		toolbar.menu.clear()
-		toolbar.menu.add(R.string.reset_to_default).apply {
-			val icon = AppCompatResources.getDrawable(view.context, R.drawable.ic_action_reset)?.mutate()
-			icon?.setTint(AndroidUtils.getColorFromAttr(view.context, R.attr.colorOnSurfaceVariant))
-			setIcon(icon)
-			setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-			setOnMenuItemClickListener {
-				resetToDefault()
-				true
-			}
 		}
 	}
 

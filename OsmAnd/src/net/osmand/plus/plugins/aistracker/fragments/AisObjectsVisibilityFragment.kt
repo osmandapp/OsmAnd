@@ -23,7 +23,8 @@ class AisObjectsVisibilityFragment : AisBaseFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_objects_visibility, container, false)
-		setupToolbar(view, R.string.ais_objects_visibility, R.string.reset_to_default) {
+		setupToolbar(view, R.string.ais_objects_visibility)
+		addResetAction(view) {
 			plugin.AIS_SHIP_LOST_TIMEOUT.resetModeToDefault(appMode)
 			plugin.AIS_OBJ_LOST_TIMEOUT.resetModeToDefault(appMode)
 			outdatedCard.setValue(plugin.AIS_SHIP_LOST_TIMEOUT.getModeValue(appMode))

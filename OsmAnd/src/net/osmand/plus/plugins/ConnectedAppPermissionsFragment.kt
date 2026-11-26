@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.appbar.MaterialToolbar
 import net.osmand.aidl.AidlPermissionGroup
 import net.osmand.aidl.ConnectedApp
 import net.osmand.plus.R
@@ -44,9 +43,7 @@ class ConnectedAppPermissionsFragment : BaseMaterialFragment() {
 		val view = inflater.inflate(R.layout.fragment_connected_app_permissions, container, false)
 		val name = connectedApp.name ?: connectedApp.pack
 
-		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
-		toolbar.title = name
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
+		setupToolbar(view, name)
 
 		view.findViewById<ScreenDescriptionView>(R.id.description)
 			.setText(getString(R.string.aidl_permissions_descr, name, connectedApp.pack))

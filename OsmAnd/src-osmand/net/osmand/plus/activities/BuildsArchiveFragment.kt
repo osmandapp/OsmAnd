@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.MaterialToolbar
 import net.osmand.plus.R
 import net.osmand.plus.activities.BuildsManager.ListState
 import net.osmand.plus.base.BaseMaterialFragment
@@ -33,9 +32,7 @@ class BuildsArchiveFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_builds_archive, container, false)
-		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
-		toolbar.setTitle(R.string.shared_string_archive)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
+		setupToolbar(view, R.string.shared_string_archive)
 
 		val recyclerView: RecyclerView = view.findViewById(R.id.scroll_view)
 		recyclerView.layoutManager = LinearLayoutManager(view.context)
