@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
@@ -42,6 +43,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -54,7 +56,9 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
@@ -68,6 +72,7 @@ import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.WidgetUtils;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -886,6 +891,94 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 					activity.getMapLayers().getContextMenuLayer().quitAddGpxPoint();
 				}
 			});
+		}
+	}
+
+	@Test
+	public void testCancelledSaveFromExitDialogKeepsTrackMenuHidden() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		boolean mapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		scenarioRule.getScenario().onActivity(activity -> TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		onTrackMenu(fragment -> fragment.openPlanRoute(0, MeasurementToolFragment.PLAN_ROUTE_MODE));
+		awaitTrackMenuSettled();
+		try {
+			scenarioRule.getScenario().onActivity(activity ->
+					assertNotNull("Plan route is not open", activity.getFragmentsHelper().getMeasurementToolFragment()));
+			onTrackMenu(fragment -> assertTrue("Plan route did not hide the track menu", fragment.isHidden()));
+			scenarioRule.getScenario().onActivity(activity ->
+					activity.getFragmentsHelper().getMeasurementToolFragment().onActivityResult(
+							ExitBottomSheetDialogFragment.REQUEST_CODE, ExitBottomSheetDialogFragment.SAVE_RESULT_CODE, null));
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity -> {
+				Fragment saveSheet = activity.getSupportFragmentManager()
+						.findFragmentByTag(SaveAsNewTrackBottomSheetDialogFragment.TAG);
+				if (saveSheet instanceof DialogFragment) {
+					((DialogFragment) saveSheet).dismiss();
+				}
+			});
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity ->
+					activity.getFragmentsHelper().getMeasurementToolFragment().directionsOnClick());
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity ->
+					assertNull("Navigation did not close Plan route", activity.getFragmentsHelper().getMeasurementToolFragment()));
+			onTrackMenu(fragment -> assertTrue("The cancelled save showed the hidden track menu when Plan route closed", fragment.isHidden()));
+		} finally {
+			scenarioRule.getScenario().onActivity(activity -> {
+				Fragment trackMenu = activity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG);
+				if (trackMenu instanceof TrackMenuFragment) {
+					((TrackMenuFragment) trackMenu).dismiss();
+				}
+			});
+			stopNavigationAlongTrack(appMode, mapLinkedToLocation);
+		}
+	}
+
+	@Test
+	public void testSaveFromExitDialogShowsHiddenTrackMenu() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		File savedFile = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), "track_menu_exit_save_test" + IndexConstants.GPX_FILE_EXT);
+		scenarioRule.getScenario().onActivity(activity -> TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+		awaitTrackMenuSettled();
+		onTrackMenu(fragment -> fragment.openPlanRoute(0, MeasurementToolFragment.PLAN_ROUTE_MODE));
+		awaitTrackMenuSettled();
+		try {
+			scenarioRule.getScenario().onActivity(activity -> {
+				MeasurementToolFragment planRoute = activity.getFragmentsHelper().getMeasurementToolFragment();
+				assertNotNull("Plan route is not open", planRoute);
+				planRoute.onActivityResult(ExitBottomSheetDialogFragment.REQUEST_CODE, ExitBottomSheetDialogFragment.SAVE_RESULT_CODE, null);
+			});
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity -> {
+				Fragment saveSheet = activity.getSupportFragmentManager()
+						.findFragmentByTag(SaveAsNewTrackBottomSheetDialogFragment.TAG);
+				assertTrue("Save in the exit sheet did not open the save sheet", saveSheet instanceof DialogFragment);
+				((DialogFragment) saveSheet).dismiss();
+				activity.getFragmentsHelper().getMeasurementToolFragment().onSaveAsNewTrack("", "track_menu_exit_save_test", false, false);
+			});
+			boolean[] planRouteOpen = {true};
+			for (int i = 0; i < 100 && planRouteOpen[0]; i++) {
+				SystemClock.sleep(100);
+				scenarioRule.getScenario().onActivity(activity ->
+						planRouteOpen[0] = activity.getFragmentsHelper().getMeasurementToolFragment() != null);
+			}
+			assertFalse("The save did not close Plan route", planRouteOpen[0]);
+			awaitTrackMenuSettled();
+			onTrackMenu(fragment -> assertFalse("The save chosen in the exit sheet did not show the hidden track menu", fragment.isHidden()));
+		} finally {
+			scenarioRule.getScenario().onActivity(activity -> {
+				Fragment trackMenu = activity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG);
+				if (trackMenu instanceof TrackMenuFragment) {
+					((TrackMenuFragment) trackMenu).dismiss();
+				}
+			});
+			if (savedFile.exists()) {
+				FileUtils.removeGpxFile(app, savedFile);
+			}
 		}
 	}
 

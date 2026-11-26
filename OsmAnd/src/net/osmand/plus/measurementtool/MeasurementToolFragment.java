@@ -200,7 +200,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	private boolean progressBarVisible;
 	private boolean infoExpanded;
-	private boolean showTrackMenuOnDismiss;
+	private boolean showTrackMenuAfterSave;
 
 	private int modes;
 
@@ -966,9 +966,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			if (editingCtx.getPointsCount() > 0) {
 				if (editingCtx.isNewData()) {
 					if (showDialog) {
-						openSaveAsNewTrackMenu(mapActivity);
+						openSaveAsNewTrackMenu(mapActivity, false);
 					} else {
-						saveNewGpx("", getSuggestedFileName(), true, false, finalSaveAction);
+						saveNewGpx("", getSuggestedFileName(), true, false, finalSaveAction, false);
 					}
 				} else {
 					addToGpx(finalSaveAction);
@@ -1032,8 +1032,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				showHiddenTrackMenu(mapActivity);
 				dismiss(mapActivity);
 			} else if (resultCode == ExitBottomSheetDialogFragment.SAVE_RESULT_CODE) {
-				showTrackMenuOnDismiss = true;
-				openSaveAsNewTrackMenu(mapActivity);
+				openSaveAsNewTrackMenu(mapActivity, true);
 			}
 		});
 	}
@@ -1123,7 +1122,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void saveAsNewTrackOnClick() {
-		callMapActivity(this::openSaveAsNewTrackMenu);
+		callMapActivity(mapActivity -> openSaveAsNewTrackMenu(mapActivity, false));
 	}
 
 	@Override
@@ -1479,7 +1478,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName, boolean showOnMap, boolean simplified) {
-		saveNewGpx(folderPath, fileName, showOnMap, simplified, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT);
+		boolean showTrackMenu = showTrackMenuAfterSave;
+		showTrackMenuAfterSave = false;
+		saveNewGpx(folderPath, fileName, showOnMap, simplified, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT, showTrackMenu);
 	}
 
 	MeasurementAdapterListener createMeasurementAdapterListener(ItemTouchHelper touchHelper) {
@@ -1590,7 +1591,8 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		SelectedPointBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 	}
 
-	private void openSaveAsNewTrackMenu(@NonNull MapActivity mapActivity) {
+	private void openSaveAsNewTrackMenu(@NonNull MapActivity mapActivity, boolean afterExitDialog) {
+		showTrackMenuAfterSave = afterExitDialog && editingCtx.getPointsCount() > 0;
 		if (editingCtx.getPointsCount() > 0) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			SaveAsNewTrackBottomSheetDialogFragment.showInstance(manager, getSuggestedFileName(), this, true, true);
@@ -1883,32 +1885,33 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	}
 
 	private void saveNewGpx(String folderPath, String fileName, boolean showOnMap,
-	                        boolean simplified, FinalSaveAction finalSaveAction) {
+	                        boolean simplified, FinalSaveAction finalSaveAction, boolean showTrackMenu) {
 		fileName += GPX_FILE_EXT;
 		File dir = Algorithms.isEmpty(folderPath) ? app.getAppPath(GPX_INDEX_DIR) : new File(folderPath);
-		saveNewGpx(dir, fileName, showOnMap, simplified, finalSaveAction);
+		saveNewGpx(dir, fileName, showOnMap, simplified, finalSaveAction, showTrackMenu);
 	}
 
 	private void saveNewGpx(@NonNull File dir, @NonNull String fileName, boolean showOnMap,
-	                        boolean simplified, FinalSaveAction finalSaveAction) {
-		saveGpx(new File(dir, fileName), null, simplified, false, finalSaveAction, showOnMap);
+	                        boolean simplified, FinalSaveAction finalSaveAction, boolean showTrackMenu) {
+		saveGpx(new File(dir, fileName), null, simplified, false, finalSaveAction, showOnMap, showTrackMenu);
 	}
 
 	private void saveExistingGpx(@NonNull GpxFile gpx, boolean showOnMap,
 	                             boolean simplified, boolean addToTrack, FinalSaveAction finalSaveAction) {
-		saveGpx(new File(gpx.getPath()), gpx, simplified, addToTrack, finalSaveAction, showOnMap);
+		saveGpx(new File(gpx.getPath()), gpx, simplified, addToTrack, finalSaveAction, showOnMap, false);
 	}
 
 	private void saveGpx(@NonNull File outFile, @Nullable GpxFile gpxFile, boolean simplified,
-	                     boolean addToTrack, FinalSaveAction finalSaveAction, boolean showOnMap) {
-		SaveGpxRouteListener listener = (warning, savedGpxFile, backupFile) -> onGpxSaved(warning, savedGpxFile, outFile, backupFile, finalSaveAction, showOnMap);
+	                     boolean addToTrack, FinalSaveAction finalSaveAction, boolean showOnMap, boolean showTrackMenu) {
+		SaveGpxRouteListener listener = (warning, savedGpxFile, backupFile) ->
+				onGpxSaved(warning, savedGpxFile, outFile, backupFile, finalSaveAction, showOnMap, showTrackMenu);
 		SaveGpxRouteAsyncTask saveTask = new SaveGpxRouteAsyncTask(this, outFile, gpxFile, simplified,
 				addToTrack, showOnMap, listener);
 		OsmAndTaskManager.executeTask(saveTask);
 	}
 
 	private void onGpxSaved(Exception warning, GpxFile savedGpxFile, File outFile, File backupFile,
-	                        FinalSaveAction finalSaveAction, boolean showOnMap) {
+	                        FinalSaveAction finalSaveAction, boolean showOnMap, boolean showTrackMenu) {
 		callMapActivity(mapActivity -> {
 			mapActivity.refreshMap();
 			if (warning == null) {
@@ -1919,6 +1922,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 				}
 				if (isInEditMode()) {
 					editingCtx.setChangesSaved();
+					if (showTrackMenu) {
+						showHiddenTrackMenu(mapActivity);
+					}
 					dismiss(mapActivity);
 				} else {
 					switch (finalSaveAction) {
@@ -1929,6 +1935,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 							editingCtx.setChangesSaved();
 							SavedTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 									outFile.getAbsolutePath(), true);
+							if (showTrackMenu) {
+								showHiddenTrackMenu(mapActivity);
+							}
 							dismiss(mapActivity);
 							break;
 						case SHOW_TOAST:
@@ -2172,9 +2181,6 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	private void dismiss(@NonNull MapActivity mapActivity, boolean clearContext) {
 		try {
-			if (showTrackMenuOnDismiss) {
-				showHiddenTrackMenu(mapActivity);
-			}
 			if (clearContext) {
 				editingCtx.clearSegments();
 			}
