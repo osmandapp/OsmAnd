@@ -63,7 +63,8 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_settings, container, false)
-		setupToolbar(view, R.string.plugin_ais_tracker_name, R.string.ais_reset_plugin_settings) {
+		setupToolbar(view, R.string.plugin_ais_tracker_name)
+		addResetAction(view, R.string.ais_reset_plugin_settings) {
 			confirmResetPluginSettings()
 		}
 		bindViews(view)

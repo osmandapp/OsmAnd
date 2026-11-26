@@ -3,12 +3,17 @@ package net.osmand.plus.base
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.MaterialToolbar
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -76,6 +81,46 @@ open class BaseMaterialFragment : Fragment(), IOsmAndFragment, ISupportInsets {
 			AndroidUtils.addStatusBarPadding21v(requireActivity(), view)
 		}
 	}
+
+	/**
+	 * Title and back navigation of the app bar ([R.layout.ui_material_app_bar]). Screens don't
+	 * set up the toolbar by hand.
+	 */
+	protected fun setupToolbar(view: View, title: CharSequence?) {
+		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
+		toolbar.title = title
+		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(view.context))
+		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
+		toolbar.menu.clear()
+	}
+
+	protected fun setupToolbar(view: View, @StringRes titleId: Int) = setupToolbar(view, getString(titleId))
+
+	/** Trailing icon action of the app bar. [titleId] is its content description. */
+	protected fun addToolbarAction(
+		view: View,
+		@StringRes titleId: Int,
+		@DrawableRes iconId: Int,
+		onClick: () -> Unit
+	) {
+		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
+		toolbar.menu.add(titleId).apply {
+			val icon = AppCompatResources.getDrawable(view.context, iconId)?.mutate()
+			icon?.setTint(AndroidUtils.getColorFromAttr(view.context, R.attr.colorOnSurfaceVariant))
+			setIcon(icon)
+			setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+			setOnMenuItemClickListener {
+				onClick()
+				true
+			}
+		}
+	}
+
+	protected fun addResetAction(
+		view: View,
+		@StringRes titleId: Int = R.string.reset_to_default,
+		onReset: () -> Unit
+	) = addToolbarAction(view, titleId, R.drawable.ic_action_reset, onReset)
 
 	override fun onResume() {
 		super.onResume()
