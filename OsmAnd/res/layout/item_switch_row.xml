@@ -39,6 +39,7 @@
 
 		<com.google.android.material.materialswitch.MaterialSwitch
 			android:id="@+id/switcher"
+			style="@style/Widget.App.Material.Switch"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:clickable="false"

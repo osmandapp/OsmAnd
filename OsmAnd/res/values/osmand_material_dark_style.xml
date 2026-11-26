@@ -3,7 +3,8 @@
 
 	<!-- Material 3 Expressive: the same colour system as Material 3 plus the component styles the
 	     Material 3 screens are designed with (connected button groups, sized sliders, expressive
-	     buttons and dialogs). Screens that need the stock M3 switch set its style explicitly. -->
+	     buttons and dialogs). The switch is the native M3 one; the legacy profile coloured switch
+	     (Widget.App.Material.Switch) has to be set explicitly. -->
 	<style name="OsmandMaterialDarkTheme" parent="Theme.Material3Expressive.Dark">
 
 		<item name="colorSurface">@color/surface_dark</item>
@@ -127,7 +128,7 @@
 
 		<item name="bottomSheetStyle">@style/Widget.App.Material.BottomSheet</item>
 
-		<item name="materialSwitchStyle">@style/Widget.App.Material.Switch</item>
+		<item name="materialSwitchStyle">@style/Widget.OsmAnd.Material3.Switch</item>
 		<item name="materialCardViewStyle">@style/Widget.App.Material.SectionCard</item>
 
 		<item name="android:windowAnimationStyle">@style/Animation.Material3.BottomSheetDialog
