@@ -939,14 +939,11 @@ class RouteDataObject {
 	}
 
 	fun setRestrictionVia(k: Int, viaWay: Long) {
-		// note: the copy below reads `restrictions`, not `restrictionsVia`. That looks wrong, but it
-		// is what the java original did and changing it would change which turns get restricted.
 		val via = restrictionsVia
 		val target: LongArray
 		if (via != null) {
-			val restrictions = this.restrictions!!
-			target = LongArray(maxOf(k + 1, restrictions.size))
-			restrictions.copyInto(target, 0, 0, restrictions.size)
+			target = LongArray(maxOf(k + 1, this.restrictions!!.size))
+			via.copyInto(target, 0, 0, via.size)
 		} else {
 			target = LongArray(k + 1)
 		}
