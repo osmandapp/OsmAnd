@@ -1046,7 +1046,7 @@
     <string name="download_live_updates">Élő frissítések</string>
     <string name="no_updates_available">Nem érhetők el frissítések</string>
     <string name="failed_to_upload">Nem sikerült feltölteni</string>
-    <string name="delete_change">Változtatás törlése</string>
+    <string name="delete_change">Módosítás törlése</string>
     <string name="successfully_uploaded_pattern">Feltöltve: {0}/{1}</string>
     <string name="try_again">Próbálja újra</string>
     <string name="error_message_pattern">Hiba: {0}</string>
@@ -1097,10 +1097,10 @@
     <string name="routing_attr_avoid_shuttle_train_description">Elkerüli az autószállító vonatok használatát</string>
     <string name="favourites_context_menu_add">Kedvenc hozzáadása</string>
     <string name="show_on_start">Megjelenítés indításkor</string>
-    <string name="poi_deleted_localy">A POI törölve lesz, amint feltölti a változtatásokat</string>
+    <string name="poi_deleted_localy">A POI törölve lesz, amint feltölti a módosításokat</string>
     <string name="count_of_lines">Vonalak száma</string>
     <string name="are_you_sure">Biztos benne\?</string>
-    <string name="unsaved_changes_will_be_lost">A nem mentett változtatások el fognak veszni. Folytatod?</string>
+    <string name="unsaved_changes_will_be_lost">A nem mentett módosítások el fognak veszni. Biztosan folytatja?</string>
     <string name="downloads_left_template">%1$s letöltés maradt</string>
     <string name="roads">Utak</string>
     <string name="show_free_version_banner">Ingyenes verzió plakátképének megjelenítése</string>
@@ -2108,7 +2108,7 @@
     <string name="routing_attr_freeride_policy_description">A „freeride” és a „pályán kívüli utak” nem hivatalos útvonalak és átjárók. Általában nem egyengetik el őket, nincsenek karbantartva, este pedig nem ellenőrzik őket. Belépés csak saját felelősségre.</string>
     <string name="configure_profile_info">Profil beállításai:</string>
     <string name="change_default_settings">Beállítás módosítása</string>
-    <string name="discard_changes">Változtatás elvetése</string>
+    <string name="discard_changes">Módosítás elvetése</string>
     <string name="apply_to_current_profile">Alkalmazás csak a következőre: „%1$s”</string>
     <string name="apply_to_all_profiles">Alkalmazás az összes profilra</string>
     <string name="start_up_message_pref">Indítási üzenet</string>
@@ -2931,7 +2931,7 @@
     <string name="backup_and_restore">Biztonsági mentés és visszaállítás</string>
     <string name="select_nav_profile_dialog_message">A „Navigáció típusával” jelölheti ki az útvonal tervezésének módját a rendelkezésre álló offline és online útvonaltervezők közül.</string>
     <string name="delete_all_confirmation">Igen, törlődjön mind</string>
-    <string name="backup_delete_old_data">Régi változatok eltávolítása</string>
+    <string name="backup_delete_old_data">Régi verziók eltávolítása</string>
     <string name="backup_delete_old_data_warning">Törölni készül a korábban betöltött adatok változáselőzményeit.
 \n
 \nAz adatok jelenlegi verziója el lesz mentve a kiszolgálón, de a korábbi változtatásokra nem térhet vissza.</string>
@@ -2946,7 +2946,7 @@
     <string name="backup_conflicts">Ütközések</string>
     <string name="backup_view_conflicts">Ütközések megtekintése</string>
     <string name="backup_no_internet_descr">Ellenőrizze az internetkapcsolatát, és töltse le újra.</string>
-    <string name="upload_local_version">Hely változat feltöltése</string>
+    <string name="upload_local_version">Helyi verzió feltöltése</string>
     <string name="shared_string_logout">Kijelentkezés</string>
     <string name="backup_delete_all_data">Összes adatom törlése</string>
     <string name="backup_delete_all_data_warning">Törölni készül minden olyan adatot, amelyet korábban feltöltött az OsmAnd Cloud szolgáltatásba, beleértve a verzióelőzményeket is.
@@ -3096,7 +3096,7 @@
     <string name="internal_app_storage_description">Belső tárhely, minden felhasználó és más alkalmazások elől elrejtve, így csak az OsmAnd férhet hozzá az adataihoz.</string>
     <string name="purchases_feature_desc_android_auto">Elhozza az OsmAnd offline térképeit és navigációját az autója képernyőjére, és integrálódik a jármű kezelőszerveivel.</string>
     <string name="shared_string_details">Részletek</string>
-    <string name="shared_app_storage_description">A megosztott memória már nem érhető el az Android tárhely-hozzáférés változásai miatt.</string>
+    <string name="shared_app_storage_description">A megosztott memória már nem érhető el az Android tárhelyelérési szabályainak miatt.</string>
     <string name="rendering_attr_natureReserves_name">Természetvédelmi és védett terület</string>
     <string name="shared_string_articles">Cikkek</string>
     <string name="included_categories">Tartalmazott kategóriák</string>
@@ -3176,7 +3176,7 @@
     <string name="memory_allocated_for_routing_ds">A nagyobb memóriakiosztás felgyorsítja a hosszú (500 km-nél hosszabb) útvonalak megtervezését, de hatással lehet más alkalmazások teljesítményére.
 \nRövid útvonalak kiszámításának sebességére nincs hatással.</string>
     <string name="display_groups_visibility_dialog_description">Beállíthatja a csoport láthatóságát a térképen. Ha a nyomvonal rejtett, az összes csoport rejtve lesz.</string>
-    <string name="not_enough_contributions_descr">Legalább %1$s változtatás szükséges az elmúlt két hónapos időszakban %2$s, hogy hozzáférést kapjon a korlátlan óránkénti térképfrissítéshez.</string>
+    <string name="not_enough_contributions_descr">Legalább %1$s módosítás szükséges az elmúlt két hónapos időszakban %2$s, hogy hozzáférést kapjon a korlátlan óránkénti térképfrissítéshez.</string>
     <string name="exit_without_saving_warning">Kilép mentés nélkül\?</string>
     <string name="shared_string_precision">Pontosság</string>
     <string name="shared_string_statistics">Statisztika</string>
@@ -3197,7 +3197,7 @@
     <string name="gps_filter_smoothing_desc">Állítsa be a pontok közti távolság korlátját.
 \nAzok a nyomvonalpontok, amelyek nincsenek legalább ekkora távolságra az előző látható ponttól, el lesznek rejtve.
 \nVegye figyelembe, hogy a túl magas korlát túlságosan leegyszerűsítheti a nyomvonalat.</string>
-    <string name="gps_filter_actions_description">Az OsmAnd a fájl frissítése nélkül fogja alkalmazni a nyomvonal változásait. Kézileg mentheti a módosításokat.</string>
+    <string name="gps_filter_actions_description">Az OsmAnd a fájl frissítése nélkül fogja alkalmazni a nyomvonalmódosításait. Kézileg mentheti a módosításokat.</string>
     <string name="storage_migration_wrong_folder_warning">Nem találhatók OsmAnd-adatok a kiválasztott mappában. Próbálja újra.</string>
     <string name="use_routing_fallback_description">Offline útvonaltervezés használata, ha az online útvonaltervezés nem áll rendelkezésre.</string>
     <string name="use_routing_fallback">Tartalék offline útvonaltervezés</string>
@@ -3642,7 +3642,7 @@
     <string name="shared_string_unsynced">Szinkronizálatlan</string>
     <string name="check_for_updates">Frissítések keresése</string>
     <string name="choose_what_to_sync">Szinkronizálandók kiválasztása</string>
-    <string name="changes">Változások %1$s</string>
+    <string name="changes">Módosítások %1$s</string>
     <string name="modified_file">Módosított fájl</string>
     <string name="cloud_version_will_be_removed">Az OsmAnd Cloudban lévő verzió el lesz távolítva</string>
     <string name="cloud_changes_will_be_dismissed">Az OsmAnd Cloudban lévő módosítások el lesznek vetve</string>
@@ -3650,27 +3650,27 @@
     <string name="cloud_conflicts">Konfliktusok</string>
     <string name="cloud_conflict">Konfliktus</string>
     <string name="upload_all">Összes feltöltése</string>
-    <string name="cloud_recent_changes">Változások</string>
-    <string name="cloud_all_changes_uploaded">Minden változás feltöltve</string>
-    <string name="cloud_all_changes_downloaded">Minden változás letöltve</string>
+    <string name="cloud_recent_changes">Módosítások</string>
+    <string name="cloud_all_changes_uploaded">Minden módosítás feltöltve</string>
+    <string name="cloud_all_changes_downloaded">Minden módosítás letöltve</string>
     <string name="cloud_no_conflicts">Nincs konfliktus.</string>
     <string name="download_cloud_version">Felhőben lévő letöltése</string>
     <string name="shared_string_do_not_exist">Nem létezik</string>
     <string name="import_export">Importálás/exportálás</string>
     <string name="export_to_file">Exportálás fájlba</string>
     <string name="last_sync">Utolsó szinkronizálás</string>
-    <string name="cloud_changes">Felhőbeli változások</string>
+    <string name="cloud_changes">Felhőbeli módosítások</string>
     <string name="shared_string_uploaded">Feltöltve</string>
     <string name="backup_error_failed_to_fetch_remote_items">Nem sikerült lekérni a fájllistát a kiszolgálóról.</string>
     <string name="checking_progress">Ellenőrzés…</string>
     <string name="shared_string_cloud">Felhő</string>
     <string name="deleted_file">Törölt fájl</string>
-    <string name="local_changes">Helyi változások</string>
+    <string name="local_changes">Helyi módosítások</string>
     <string name="shared_string_modified">Módosítva</string>
     <string name="res_unknown">Ismeretlen</string>
     <string name="new_file">Új fájl</string>
     <string name="sync_now">Szinkronizálás most</string>
-    <string name="local_changes_will_be_dismissed">A helyi változások el lesznek vetve</string>
+    <string name="local_changes_will_be_dismissed">A helyi módosítások el lesznek vetve</string>
     <string name="cloud_all_changes_uploaded_descr">Az eszközön végrehajtott összes módosítás szinkronizálva van az OsmAnd Clouddal.</string>
     <string name="cloud_sync_progress">Szinkronizálás… %1$s</string>
     <string name="si_nm_ft">Tengeri mérföld/láb</string>
@@ -4085,7 +4085,7 @@
     <string name="download_to_device">Letöltés az eszközre</string>
     <string name="remove_widget_first">Előbb távolítsa el a modult</string>
     <string name="add_row">Sor hozzáadása</string>
-    <string name="discard_changes_prompt">Változtatások elvetése?</string>
+    <string name="discard_changes_prompt">Biztosan elveti a módosításokat?</string>
     <string name="row_number">%1$s. sor</string>
     <string name="tripltek_promo">%1$s hónapos Tripltek-promóció</string>
     <string name="tripltek_promo_description">Ingyenes hozzáférés az olyan funkciókhoz, mint például a korlátlan térképletöltés, 3D domborzat stb. %1$s hónapig</string>
@@ -4486,7 +4486,7 @@
     <string name="obd_fuel_pressure">Üzemanyagnyomás</string>
     <string name="bt_start_pair_failed">Nem lehet kezdeményezni a párosítást az eszközzel</string>
     <string name="obd_not_connected_to_device">Kapcsolat bontva ezzel: %s</string>
-    <string name="dynamic_icon_type_summary">Az ikon a műveleti állapot alapján változik.</string>
+    <string name="dynamic_icon_type_summary">Az ikon a műveleti állapot alapján módosul.</string>
     <string name="shared_string_dynamic">Dinamikus</string>
     <string name="obd_connected_to_device">Kapcsolódva ehhez: %s</string>
     <string name="obd_connecting_to_device">Kapcsolódás a következőhöz: %s</string>
@@ -4567,7 +4567,7 @@
     <string name="shared_string_road_exit">Kijárat</string>
     <string name="hmd_promo">%1$s hónapos HMD-promóció</string>
     <string name="original_color_description">Minden pont megtartja a saját színét.</string>
-    <string name="save_favorite_default_appearance">Alkalmazza a változtatásokat a mappában már meglévő pontokra is, vagy csak az újakra?</string>
+    <string name="save_favorite_default_appearance">Alkalmazza a módosításokat a mappában már meglévő pontokra is, vagy csak az újakra?</string>
     <string name="original_icon_description">Minden pont megtartja a saját ikonját.</string>
     <string name="original_shape_description">Minden pont megtartja a saját alakját.</string>
     <string name="apply_to_all_points">Alkalmazza az összes pontra</string>
@@ -5300,7 +5300,7 @@
     <string name="panoramax_menu_filter_description_new">Képek szűrése közreműködő, dátum vagy típus szerint.</string>
     <string name="plugin_panoramax_descr">Utcaszintű képek megjelenítése a Panoramaxról, egy nyílt licencű, föderált fotótérképezési platformról, térképrétegként. Hasznos a meglévő lefedettség ellenőrzésére és a még rögzítendő területek megtervezésére.</string>
     <string name="ais_my_vessel_footer">Állítsa be a saját hajója MMSI-számát, hogy elkerülje a téves ütközésriasztásokat, valamint (nem kötelezően) az AIS-jelölő megjelenítését a térképen.</string>
-    <string name="ais_mark_as_outdated_off_desc">A hajó szimbóluma nem változik. A tárgyak továbbra is el lesznek távolítva %1$s után.</string>
+    <string name="ais_mark_as_outdated_off_desc">A hajó szimbóluma nem módosul. A tárgyak továbbra is el lesznek távolítva %1$s után.</string>
     <string name="ais_mark_as_outdated_desc">Hajó szimbólumának áthúzása %1$s után, ha nem érkezik jel.</string>
     <string name="ais_hide_after_desc">Hajó szimbólumának eltávolítása %1$s után, ha nem érkezik jel.</string>
     <string name="ais_cpa_warning_time_desc">Hajók piros színnel való kiemelése a legközelebbi megközelítés előtt ennyi idővel: %1$s.</string>

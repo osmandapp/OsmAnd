@@ -5431,4 +5431,7 @@
     <string name="gpx_line_style_desc_unavailable_for_3d">Les styles de lignes tirets et pointillés ne sont pas disponibles pour une trace 3D.</string>
     <string name="shared_string_new">Nouveau</string>
     <string name="sun_light_live">En direct</string>
+    <string name="free_region_maps_deactivated">Les cartes de %2$s sont désactivées. %1$s n\'a pas été téléchargé.</string>
+    <string name="free_region_activate_title">Modifier votre région gratuite ?</string>
+    <string name="free_region_activate_descr">La version gratuite inclut toutes les cartes d\'une région. %1$s va devenir votre région gratuite et les cartes de %2$s seront désactivées.</string>
 </resources>

@@ -276,7 +276,7 @@
     <string name="invalid_locations">Coordenadas inválidas</string>
     <string name="shared_string_close">Cerrar</string>
     <string name="loading_data">Cargando datos…</string>
-    <string name="previous_run_crashed">La última vez, OsmAnd falló. El archivo de registro está en {0}. Envíenos el problema adjuntando el archivo.</string>
+    <string name="previous_run_crashed">OsmAnd se cerró anómalamente la última vez. El archivo de registro está en {0}. Informe del problema y adjunte el registro.</string>
     <string name="saving_gpx_tracks">Guardando archivo GPX…</string>
     <string name="finished_task">Terminado</string>
     <string name="data_settings">Datos</string>
@@ -1827,7 +1827,7 @@
     <string name="wikivoyage_travel_guide_descr">Las guías de los sitios más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
     <string name="wikivoyage_travel_guide">Guías turísticas</string>
     <string name="monthly_map_updates">Actualizaciones mensuales del mapa</string>
-    <string name="daily_map_updates">Actualizaciones horarias del mapa</string>
+    <string name="daily_map_updates">Actualizaciones del mapa cada hora</string>
     <string name="in_app_purchase_desc">Único pago</string>
     <string name="popular_destinations">Destinos populares</string>
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
@@ -2032,9 +2032,9 @@
     <string name="app_mode_scooter">Escúter (motoneta)</string>
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
-    <string name="rate_dialog_descr">Por favor, comparte tus comentarios y califica nuestro trabajo en Google Play.</string>
-    <string name="shared_string_privacy_policy">Política de privacidad</string>
-    <string name="help_us_make_osmand_better">Ayúdanos a mejorar OsmAnd</string>
+    <string name="rate_dialog_descr">Comparta su retroalimentación y califique nuestra labor en Google Play.</string>
+    <string name="shared_string_privacy_policy">Normativa de privacidad</string>
+    <string name="help_us_make_osmand_better">Ayúdenos a mejorar OsmAnd</string>
     <string name="make_osmand_better_descr">Permite que OsmAnd recopile y procese datos de uso anónimos de la aplicación. No recopilamos datos sobre las ubicaciones que ves en el mapa.
 \n
 \nPuedes cambiar esto en cualquier momento en «Ajustes → Privacidad y seguridad».</string>
@@ -2042,10 +2042,10 @@
     <string name="downloaded_maps">Mapas descargados</string>
     <string name="visited_screens">Pantallas visitadas</string>
     <string name="downloaded_maps_collect_descr">Nos ayuda a entender la popularidad de los mapas de regiones y países.</string>
-    <string name="visited_screens_collect_descr">Nos ayuda a entender la popularidad de las características de OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Pulsa en «Permitir», si aceptas nuestras %1$s</string>
+    <string name="visited_screens_collect_descr">Nos ayuda a entender la popularidad de las funcionalidades de OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Pulse en «Permitir» si acepta nuestra %1$s</string>
     <string name="settings_privacy_and_security">Privacidad y seguridad</string>
-    <string name="settings_privacy_and_security_desc">Elige los datos a compartir</string>
+    <string name="settings_privacy_and_security_desc">Elija qué datos nos compartirá</string>
     <string name="shared_string_no_thank_you">No, gracias</string>
     <string name="shared_string_allow">Permitir</string>
     <string name="nav_type_hint">Tipo de navegación</string>
@@ -2067,7 +2067,7 @@
     <string name="default_speed_setting_title">Velocidad predefinida</string>
     <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
     <string name="new_profile">Nuevo perfil</string>
-    <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
+    <string name="last_launch_crashed">OsmAnd se cerró anómalamente la última vez. Ayúdenos a mejorarlo compartiendo el mensaje de error.</string>
     <string name="select_icon_profile_dialog_title">Elegir icono</string>
     <string name="routing_profile_ski">Esquí</string>
     <string name="profile_type_descr_string">Tipo: %s</string>
@@ -2116,7 +2116,7 @@
     <string name="routing_attr_freeride_policy_name">Fuera de pista</string>
     <string name="routing_attr_freeride_policy_description">Los senderos libres y fuera de pista son rutas y pasajes no oficiales. Típicamente descuidados, no mantenidos y no controlados por la noche. Entrar bajo su propio riesgo.</string>
     <string name="routing_profile_geocoding">Geocodificación</string>
-    <string name="shared_string_crash">Error</string>
+    <string name="shared_string_crash">Cierre anómalo</string>
     <string name="app_mode_offroad">Todo terreno</string>
     <string name="edit_profile_screen_options_subtitle">Elige las opciones de pantalla para el perfil</string>
     <string name="routing_attr_max_num_changes_description">Indica el límite superior de trasbordos</string>
@@ -3074,7 +3074,7 @@
     <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, sombreados en tonos grises e indicaciones de pendientes en colores, mostrando picos y tierras bajas.</string>
     <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
     <string name="send_logcat_log">Enviar informe de logcat</string>
-    <string name="send_crash_log">Enviar informe de errores</string>
+    <string name="send_crash_log">Enviar registros de cierres anómalos de la aplicación</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
     <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios para los tipos de datos obsoletos en OsmAnd Cloud?</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
@@ -3548,12 +3548,12 @@
     <string name="speak_gps_signal_status">Anunciar la pérdida o recuperación de la señal GPS</string>
     <string name="speak_route_recalculation">Anunciar el recálculo de la ruta</string>
     <string name="rendering_engine_failed_descr">OsmAnd ha vuelto a la representación cartográfica «versión 1». Puede tratar de volver al motor de representación «versión 2 (OpenGL)» en Configuración. \n \nPor favor, ayude con las mejoras enviando el registro de errores.</string>
-    <string name="rendering_engine_failed">El renderizado de mapas de OsmAnd ha fallado recientemente.</string>
+    <string name="rendering_engine_failed">La representación de mapas de OsmAnd se cerró anómalamente hace poco.</string>
     <string name="show_map_symbols_desc">Texto, señales de tránsito y otros.</string>
     <string name="map_rendering_engine">Motor de renderizado del mapa</string>
     <string name="show_borders_of_downloaded_maps">Colorear mapas descargados</string>
     <string name="show_map_symbols">Mostrar símbolos del mapa</string>
-    <string name="share_crash_log">Compartir registro de fallos</string>
+    <string name="share_crash_log">Compartir registro de cierre anómalo</string>
     <string name="dismiss_changes_descr">Se descartarán todos los cambios.</string>
     <string name="restart_now">Reiniciar ahora</string>
     <string name="map_rendering_engine_v1">Versión 1</string>
@@ -3969,7 +3969,7 @@
     <string name="help_article_start_with_name">Comenzar con OsmAnd</string>
     <string name="help_article_start_with_first_steps_name">Primeros pasos</string>
     <string name="help_article_start_with_main_menu_name">Menú principal</string>
-    <string name="help_article_troubleshooting_crash_logs_name">Registro de errores</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Registros de cierres anómalos</string>
     <string name="help_article_troubleshooting_general_name">General</string>
     <string name="help_article_troubleshooting_maps_data_name">Mapas y datos</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Grabación de trazas</string>
@@ -3993,7 +3993,7 @@
     <string name="help_article_widgets_radius_ruler_name">Regla radial y brújula</string>
     <string name="free_versions">Versiones gratuitas</string>
     <string name="about_osmand">Sobre OsmAnd</string>
-    <string name="send_crash_log_descr">Contiene sólo datos sobre los cuelgues de la aplicación</string>
+    <string name="send_crash_log_descr">Solo contiene información sobre cierres anómalos</string>
     <string name="open_issue_on_github_descr">Haz preguntas, propone características</string>
     <string name="most_viewed">Más visto</string>
     <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
@@ -5245,4 +5245,17 @@
     <string name="aidl_permissions_request_descr">%1$s\nPuede cambiarlo más tarde en Complementos.</string>
     <string name="osmand_api_permission_missing">%1$s: permita «%2$s» en Menú ▸ Complementos</string>
     <string name="aidl_group_system_descr">Archivos, registros, ubicación falsa</string>
+    <string name="free_region_activate_descr">La versión gratuita incluye mapas de una región. %1$s se volverá su región gratuita, y se desactivarán los mapas de %2$s.</string>
+    <string name="free_region_activate_title">¿Quiere cambiar su región gratuita?</string>
+    <string name="free_region_maps_deactivated">Los mapas de %2$s se mantienen desactivados. No se descargó %1$s.</string>
+    <string name="shared_string_new">Nuevo</string>
+    <string name="free_region_banner_descr">Todos los mapas de %1$s son gratuitos.</string>
+    <string name="aidl_group_tracks_edit">Trayectos: editar</string>
+    <string name="ais_mark_as_outdated">Marcar como desactualizado</string>
+    <string name="aidl_group_settings_descr">Cambiar configuración y perfiles</string>
+    <string name="aidl_group_search_descr">Encontrar lugares y direcciones</string>
+    <string name="ais_use_nmea_location">Usar como fuente de ubicación</string>
+    <string name="aidl_permissions_request_title">¿Quiere permitir a %1$s usar OsmAnd?</string>
+    <string name="gallery_seek_forward_seconds">+ %1$d s</string>
+    <string name="free_region_other_regions_need_maps_plus">Otras regiones necesitan Maps+: %1$s</string>
 </resources>

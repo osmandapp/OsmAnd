@@ -5363,4 +5363,7 @@
     <string name="shadows_off_description">「陰影」功能關閉：建築物將以無陰影的樣式繪製。</string>
     <string name="shared_string_new">新</string>
     <string name="sun_light_live">即時</string>
+    <string name="free_region_maps_deactivated">%2$s 的地圖目前處於停用狀態。%1$s 尚未下載。</string>
+    <string name="free_region_activate_title">變更您的免費區域？</string>
+    <string name="free_region_activate_descr">免費版本包含一個區域的地圖。%1$s 將成為您的免費區域，而 %2$s 的地圖將被停用。</string>
 </resources>
