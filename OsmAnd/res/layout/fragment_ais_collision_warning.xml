@@ -46,24 +46,34 @@
 
 				<include layout="@layout/ais_mmsi_banner" />
 
-				<include
-					android:id="@+id/tcpa_card"
+				<LinearLayout
+					android:id="@+id/tcpa_rows"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/ui_group_gap"
-					layout="@layout/ui_slider_card" />
+					android:orientation="vertical">
+
+					<include
+						android:id="@+id/tcpa_row"
+						layout="@layout/item_ui_slider_list_item" />
+				</LinearLayout>
 
 				<net.osmand.plus.widgets.ui.GroupFooterView
 					android:id="@+id/tcpa_footer"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content" />
 
-				<include
-					android:id="@+id/cpa_card"
+				<LinearLayout
+					android:id="@+id/cpa_rows"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/ui_group_gap"
-					layout="@layout/ui_slider_card" />
+					android:orientation="vertical">
+
+					<include
+						android:id="@+id/cpa_row"
+						layout="@layout/item_ui_slider_list_item" />
+				</LinearLayout>
 
 				<net.osmand.plus.widgets.ui.GroupFooterView
 					android:id="@+id/cpa_footer"

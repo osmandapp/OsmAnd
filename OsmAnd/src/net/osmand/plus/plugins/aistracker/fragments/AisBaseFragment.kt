@@ -104,7 +104,7 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 
 		val waterColor = MapButtonCard.getMapWaterColor(osmandApp, nightMode)
 		if (waterColor != null) {
-			val background = ContextCompat.getDrawable(container.context, R.drawable.bg_ui_card_16)
+			val background = ContextCompat.getDrawable(container.context, R.drawable.bg_ui_card)
 			if (background is GradientDrawable) {
 				background.mutate()
 				background.setColor(waterColor)
