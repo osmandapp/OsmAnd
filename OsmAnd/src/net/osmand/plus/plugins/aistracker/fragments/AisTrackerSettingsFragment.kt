@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.aistracker.fragments
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -37,6 +35,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	private lateinit var connectionIcon: View
 	private lateinit var connectionProgress: CircularProgressIndicator
 	private lateinit var connectionAction: MaterialButton
+	private lateinit var connectionActionOutlined: MaterialButton
 	private lateinit var nmeaLocationRow: SettingRow
 	private lateinit var backgroundRow: SettingRow
 	private lateinit var objectsVisibilityRow: SettingRow
@@ -81,6 +80,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		connectionIcon = connectionRow.findViewById(R.id.icon)
 		connectionProgress = connectionRow.findViewById(R.id.progress)
 		connectionAction = connectionRow.findViewById(R.id.connection_action)
+		connectionActionOutlined = connectionRow.findViewById(R.id.connection_action_outlined)
 		connectionRow.findViewById<View>(R.id.connection_content).setOnClickListener {
 			showFragment(AisConnectionFragment())
 		}
@@ -219,13 +219,15 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 				AndroidUtils.getColorFromAttr(context, state.iconColorAttr))
 		}
 
-		connectionAction.setText(state.actionId)
-		applyButtonStyle(connectionAction, state.filledTonalAction)
-		connectionAction.setOnClickListener { onConnectionAction(state) }
 		/* only the active profile has a socket: for another profile there is nothing to connect
 		 * or disconnect, only a connection to set up */
 		val actionShown = plugin.isActiveMode(appMode) || state == AisConnectionState.NOT_SET_UP
-		connectionAction.visibility = if (actionShown) View.VISIBLE else View.GONE
+		val action = if (state.filledTonalAction) connectionAction else connectionActionOutlined
+		val unusedAction = if (state.filledTonalAction) connectionActionOutlined else connectionAction
+		action.setText(state.actionId)
+		action.setOnClickListener { onConnectionAction(state) }
+		action.visibility = if (actionShown) View.VISIBLE else View.GONE
+		unusedAction.visibility = View.GONE
 		/* the bottom padding of the row belongs to the button */
 		connectionRow.setPaddingRelative(connectionRow.paddingStart, connectionRow.paddingTop,
 			connectionRow.paddingEnd, if (actionShown) dp(16) else 0)
@@ -259,21 +261,6 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 			else -> plugin.connect(appMode)
 		}
 		updateConnectionCard()
-	}
-
-	private fun applyButtonStyle(button: MaterialButton, filledTonal: Boolean) {
-		val context = button.context
-		if (filledTonal) {
-			button.setBackgroundColor(
-				AndroidUtils.getColorFromAttr(context, R.attr.colorPrimaryContainer))
-			button.strokeWidth = 0
-		} else {
-			button.setBackgroundColor(ContextCompat.getColor(context, R.color.color_transparent))
-			button.strokeWidth = dp(1)
-			button.strokeColor = ColorStateList.valueOf(
-				AndroidUtils.getColorFromAttr(context, R.attr.colorOutline))
-		}
-		button.setTextColor(AndroidUtils.getColorFromAttr(context, R.attr.colorPrimary))
 	}
 
 	private fun subtitleColorAttr(state: AisConnectionState): Int = when (state) {

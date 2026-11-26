@@ -75,7 +75,7 @@
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/secondary_action"
-			style="@style/Widget.Material3.Button.OutlinedButton"
+			style="?attr/materialButtonOutlinedStyle"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginEnd="@dimen/content_padding_small"
@@ -84,7 +84,7 @@
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/main_action"
-			style="@style/Widget.Material3.Button.TonalButton"
+			style="?attr/materialButtonTonalStyle"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"

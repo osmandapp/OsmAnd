@@ -116,7 +116,7 @@
 
 			<com.google.android.material.button.MaterialButton
 				android:id="@+id/state_button"
-				style="@style/Widget.Material3.Button.TonalButton"
+				style="?attr/materialButtonTonalStyle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/content_padding"

@@ -497,6 +497,73 @@
 		<item name="cornerSize">6dp</item>
 	</style>
 
+	<!-- Buttons of the Material 3 screens: the native M3 Expressive buttons with the colours of the
+	     UI Library. Pressed and disabled states are opaque theme colours instead of an overlay, the
+	     corners do not change with the state. A screen only picks the type through the theme: no
+	     style = Filled, ?attr/materialButtonTonalStyle, ?attr/materialButtonOutlinedStyle,
+	     ?attr/borderlessButtonStyle (Text) - and sets no colour, corner or style on a button. -->
+	<style name="ShapeAppearance.OsmAnd.Button" parent="">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">@dimen/ui_corner_radius_button</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button" parent="Widget.Material3Expressive.Button">
+		<item name="backgroundTint">@color/ui_button_filled_background</item>
+		<item name="android:textColor">@color/ui_button_filled_content</item>
+		<item name="iconTint">@color/ui_button_filled_content</item>
+		<item name="rippleColor">@android:color/transparent</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TonalButton" parent="Widget.Material3Expressive.Button.TonalButton">
+		<item name="backgroundTint">@color/ui_button_tonal_background</item>
+		<item name="android:textColor">@color/ui_button_tonal_content</item>
+		<item name="iconTint">@color/ui_button_tonal_content</item>
+		<item name="rippleColor">@android:color/transparent</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.OutlinedButton" parent="Widget.Material3Expressive.Button.OutlinedButton">
+		<item name="backgroundTint">@color/ui_button_outlined_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="strokeColor">@color/ui_button_outline</item>
+		<item name="rippleColor">@android:color/transparent</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton" parent="Widget.Material3Expressive.Button.TextButton">
+		<item name="backgroundTint">@color/ui_button_text_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="rippleColor">@android:color/transparent</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog" parent="Widget.Material3Expressive.Button.TextButton.Dialog">
+		<item name="backgroundTint">@color/ui_button_text_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="rippleColor">@android:color/transparent</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog.Flush" parent="Widget.Material3Expressive.Button.TextButton.Dialog.Flush">
+		<item name="backgroundTint">@color/ui_button_text_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="rippleColor">@android:color/transparent</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+	</style>
+
+	<!-- Dialog buttons are the Text type -->
+	<style name="ThemeOverlay.OsmAnd.Material3Expressive.MaterialAlertDialog" parent="ThemeOverlay.Material3Expressive.MaterialAlertDialog">
+		<item name="buttonBarButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
+		<item name="buttonBarPositiveButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
+		<item name="buttonBarNegativeButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
+		<item name="buttonBarNeutralButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog.Flush</item>
+	</style>
+
 	<style name="Widget.App.Material.Switch"
 		parent="Widget.Material3.CompoundButton.MaterialSwitch">
 		<item name="thumbTint">@color/switch_thumb_tint</item>
