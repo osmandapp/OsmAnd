@@ -29,6 +29,7 @@ import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
@@ -381,6 +382,12 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 				closeDialog.dismiss();
 			}
 		}
+	}
+
+	public static boolean isSharedStorageMigrationShowing(@NonNull MapFragmentsHelper fragments) {
+		StorageMigrationFragment progress = fragments.getFragment(TAG);
+		return fragments.getFragment(SharedStorageWarningFragment.TAG) != null
+				|| (progress != null && progress.sharedStorageMigration);
 	}
 
 	public static StorageMigrationListener showInstance(@NonNull FragmentManager fragmentManager,

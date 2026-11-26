@@ -4,7 +4,9 @@ package net.osmand.plus.settings.datastorage;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
@@ -360,9 +362,21 @@ public class SharedStorageWarningFragment extends BaseFullScreenFragment impleme
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		File dir = settings.getExternalStorageDirectory();
-		return app.getUnavailableStorageDirectoryAtStartup() == null
-				&& !settings.SHARED_STORAGE_MIGRATION_FINISHED.get() && !FileUtils.isWritable(dir);
+		return !settings.SHARED_STORAGE_MIGRATION_FINISHED.get()
+				&& dialogShowRequired(app.getUnavailableStorageDirectoryAtStartup(),
+						settings.getExternalStorageDirectory(), settings.getDefaultInternalStorage());
+	}
+
+	static boolean dialogShowRequired(@Nullable File unavailableAtStartup, @NonNull File dir, @NonNull File sharedStorage) {
+		if (unavailableAtStartup != null) {
+			// Scoped storage can keep the legacy OsmAnd folder unwritable across restarts.
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R || !Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+					|| !DataStorageHelper.isSharedStorageDirectory(unavailableAtStartup, sharedStorage)
+					|| !DataStorageHelper.isSharedStorageDirectory(dir, sharedStorage)) {
+				return false;
+			}
+		}
+		return !FileUtils.isWritable(dir);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap) {

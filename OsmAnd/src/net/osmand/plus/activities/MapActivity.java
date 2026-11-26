@@ -106,6 +106,7 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.settings.datastorage.StorageMigrationFragment;
 import net.osmand.plus.settings.datastorage.StorageUnavailableBottomSheet;
 import net.osmand.plus.settings.enums.PanelBackgroundMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
@@ -728,9 +729,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		dashboardOnMap.updateLocation(true, true, false);
 
 		boolean storageUnavailable = app.getUnavailableStorageDirectoryAtStartup() != null;
+		boolean migrationVisible = StorageMigrationFragment.isSharedStorageMigrationShowing(fragmentsHelper);
+		boolean migrationRequired = !migrationVisible && SharedStorageWarningFragment.dialogShowRequired(app);
 		if (storageUnavailable) {
 			SecondSplashScreenFragment.SHOW = false;
-			if (fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null
+			if (!migrationRequired && !migrationVisible
+					&& fragmentManager.findFragmentByTag(SettingsScreenType.DATA_STORAGE.fragmentName) == null
 					&& (MapPermissionsResultCallback.permissionDone || !permissionsResultCallback.permissionAsked)
 					&& !permissionsResultCallback.requestStoragePermissionIfNeeded()) {
 				StorageUnavailableBottomSheet.showIfNeeded(fragmentManager);
@@ -757,9 +761,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 
-		boolean showStorageMigrationScreen = false;
+		boolean showStorageMigrationScreen = migrationVisible;
 		if (fragmentsHelper.getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
-			if (fragmentsHelper.getFragment(SharedStorageWarningFragment.TAG) == null && SharedStorageWarningFragment.dialogShowRequired(app)) {
+			if (migrationRequired) {
 				showStorageMigrationScreen = true;
 				SecondSplashScreenFragment.SHOW = false;
 				SharedStorageWarningFragment.showInstance(getSupportFragmentManager(), true);

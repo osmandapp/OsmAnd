@@ -18,6 +18,7 @@ import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -159,10 +160,34 @@ public class DataStorageHelper {
 	}
 
 	private void addItem(StorageItem item) {
-		if (currentStorageType == item.getType() && currentStoragePath.equals(item.getDirectory())) {
+		if (currentStorageType == item.getType() && (SHARED_STORAGE.equals(item.getKey())
+				? isSharedStorageDirectory(new File(currentStoragePath), new File(item.getDirectory()))
+				: currentStoragePath.equals(item.getDirectory()))) {
 			currentDataStorage = item;
 		}
 		storageItems.add(item);
+	}
+
+	public static boolean isSharedStorageDirectory(@NonNull File directory, @NonNull File sharedStorage) {
+		if (isSameDirectory(directory, sharedStorage)) {
+			return true;
+		}
+		// The primary shared volume also accepts case variants of the legacy folder name.
+		File parent = directory.getParentFile();
+		File sharedParent = sharedStorage.getParentFile();
+		return parent != null && sharedParent != null && directory.getName().equalsIgnoreCase(sharedStorage.getName())
+				&& isSameDirectory(parent, sharedParent);
+	}
+
+	private static boolean isSameDirectory(@NonNull File first, @NonNull File second) {
+		if (first.equals(second)) {
+			return true;
+		}
+		try {
+			return first.getCanonicalFile().equals(second.getCanonicalFile());
+		} catch (IOException e) {
+			return false;
+		}
 	}
 
 	public StorageItem getManuallySpecified() {

@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.download.ui.OutdatedMapsWarning;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.settings.datastorage.StorageMigrationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -64,7 +65,7 @@ public class WhatsNewDialogFragment extends BaseAlertDialogFragment {
 	private void showSharedStorageWarningIfRequired() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (mapActivity.getFragmentsHelper().getFragment(SharedStorageWarningFragment.TAG) == null
+			if (!StorageMigrationFragment.isSharedStorageMigrationShowing(mapActivity.getFragmentsHelper())
 					&& SharedStorageWarningFragment.dialogShowRequired(app)) {
 				SharedStorageWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
 			} else {
