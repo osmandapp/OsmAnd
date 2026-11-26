@@ -20,6 +20,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.data.BackgroundType;
+import net.osmand.data.FavouritePoint;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController;
@@ -149,6 +150,30 @@ public class EditorIconOriginalCategoryTest {
 		FavoriteAppearanceController controller = onMainThread(() ->
 				new FavoriteAppearanceController(app, group, createFavoriteListener(null)));
 		assertEquals(ORIGINAL_KEY, controller.getIconController().getSelectedCategory().getKey());
+	}
+
+	@Test
+	public void defaultAppearanceDistinguishesMixedIconsFromSelectingOriginal() {
+		for (boolean mixedIcons : new boolean[] {false, true}) {
+			FavouritePoint first = new FavouritePoint(0, 0, "First", "QA Mixed");
+			first.setIconIdFromName("special_heart");
+			FavouritePoint second = new FavouritePoint(0, 0, "Second", "QA Mixed");
+			second.setIconIdFromName(mixedIcons ? DEFAULT_ICON_NAME : "special_heart");
+			FavoriteGroup group = new FavoriteGroup("QA Mixed", List.of(first, second), 0, true, false);
+			group.setIconName("special_heart");
+			FavoriteAppearanceController controller = onMainThread(() ->
+					new FavoriteAppearanceController(app, group, createFavoriteListener("special_heart")));
+
+			assertEquals(!mixedIcons, controller.hasIconSelection());
+			assertEquals(mixedIcons ? null : "special_heart", controller.getIcon());
+			runOnMainSync(() -> controller.setColor(0xff123456));
+			assertEquals("Changing color must not select an icon", !mixedIcons, controller.hasIconSelection());
+
+			EditorIconController picker = controller.getIconController();
+			runOnMainSync(() -> picker.setSelectedCategory(findCategory(picker, ORIGINAL_KEY)));
+			assertTrue("Explicit Original must be saved and checked on exit", controller.hasIconSelection());
+			assertNull(controller.getIcon());
+		}
 	}
 
 	@NonNull
