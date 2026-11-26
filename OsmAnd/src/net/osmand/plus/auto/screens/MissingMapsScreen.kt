@@ -5,6 +5,7 @@ import androidx.car.app.CarContext
 import androidx.car.app.model.Action
 import androidx.car.app.model.Header
 import androidx.car.app.model.MessageTemplate
+import androidx.car.app.model.ParkedOnlyOnClickListener
 import androidx.car.app.model.Template
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -50,7 +51,8 @@ class MissingMapsScreen(carContext: CarContext, screenType: MissingMapsScreenTyp
 			.addAction(
 				Action.Builder()
 					.setTitle(app.getString(R.string.view_on_phone))
-					.setOnClickListener {
+					// Opens the phone UI, so it must be blocked while driving (Auto app quality guidelines)
+					.setOnClickListener(ParkedOnlyOnClickListener.create {
 						val app = carContext.applicationContext as OsmandApplication
 						val params = Bundle()
 						params.putBoolean(RequiredMapsFragment.OPEN_FRAGMENT_KEY, true)
@@ -59,7 +61,7 @@ class MissingMapsScreen(carContext: CarContext, screenType: MissingMapsScreenTyp
 						app.getSettings().setStopOnMissingMaps(true)
 						app.carNavigationSession?.stopNavigation()
 						finish()
-					}
+					})
 					.build()
 			)
 			.build()
