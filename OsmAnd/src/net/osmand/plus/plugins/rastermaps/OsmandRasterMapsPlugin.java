@@ -632,10 +632,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
+		// The setting may point to a source that no longer exists (renamed, or the data folder moved):
+		// the layer then has no map, but the item is shown as on, so turn it off by the setting too
+		boolean enabled = map != null || mapTypePreference.get() != null;
 		LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type == RasterMapType.OVERLAY
 				? LayerTransparencySeekbarMode.OVERLAY
 				: LayerTransparencySeekbarMode.UNDERLAY;
-		if (map != null) {
+		if (enabled) {
 			mapTypePreference.set(null);
 			updateMapLayers(mapActivity, mapActivity, null);
 			if (callback != null) {

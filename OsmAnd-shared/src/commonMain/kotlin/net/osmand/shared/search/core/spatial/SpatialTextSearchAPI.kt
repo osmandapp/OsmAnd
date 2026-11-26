@@ -228,6 +228,10 @@ open class SpatialTextSearchAPI(
 		settings.LANG_DEDUPLICATE = phrase.getSettings()!!.getLang()
 		settings.SEARCH_POI = settings.SEARCH_POI and phrase.isSearchTypeAllowed(ObjectType.POI)
 		settings.SEARCH_POI_CATEGORIES = settings.SEARCH_POI_CATEGORIES and phrase.isSearchTypeAllowed(ObjectType.POI_TYPE)
+		val increased = getIncreasedRadiusKm(phrase.getRadiusLevel())
+		if (increased > 0) {
+			settings.SUGGESTED_SEARCH_RADIUS_KM = maxOf(settings.SUGGESTED_SEARCH_RADIUS_KM, increased)
+		}
 		return settings
 	}
 
@@ -242,7 +246,20 @@ open class SpatialTextSearchAPI(
 	}
 
 	override fun isSearchMoreAvailable(phrase: SearchPhrase): Boolean {
-		return false
+		return phrase.getRadiusLevel() <= INCREASED_SEARCH_RADIUS_KM.size
+	}
+
+	override fun getMinimalSearchRadius(phrase: SearchPhrase): Int =
+		createSpatialSettings(phrase).SUGGESTED_SEARCH_RADIUS_KM * 1000
+
+	override fun getNextSearchRadius(phrase: SearchPhrase): Int {
+		val increased = getIncreasedRadiusKm(phrase.getRadiusLevel() + 1)
+		return if (increased > 0) increased * 1000 else getMinimalSearchRadius(phrase)
+	}
+
+	private fun getIncreasedRadiusKm(radiusLevel: Int): Int {
+		val index = minOf(radiusLevel, INCREASED_SEARCH_RADIUS_KM.size + 1) - 2
+		return if (index >= 0) INCREASED_SEARCH_RADIUS_KM[index] else 0
 	}
 
 	private fun convertResult(phrase: SearchPhrase, context: SpatialSearchContext, ssr: SpatialSearchResult): SearchResult? {
@@ -364,7 +381,7 @@ open class SpatialTextSearchAPI(
 			localeName = PoiAdditionalLabels.getSearchName(poiType)
 		} else if (poiSubType != null) {
 			obj = TopIndexFilter(poiSubType, poiTypes, spatialPoiType.poiAdditional!!)
-			localeName = spatialPoiType.names[0]
+			localeName = spatialPoiType.poiAdditional!!
 		} else {
 			return null
 		}
@@ -402,6 +419,8 @@ open class SpatialTextSearchAPI(
 
 	companion object {
 		private val LOG = LoggerFactory.getLogger("SpatialTextSearch")
+
+		private val INCREASED_SEARCH_RADIUS_KM = intArrayOf(500, 700)
 
 		private const val SEARCH_PRIORITY = SEARCH_ADDRESS_BY_NAME_PRIORITY
 		private const val POI_TYPES_IN_NAME_INDEX_EDITION = 1782864000000L // 2026-07-01 UTC

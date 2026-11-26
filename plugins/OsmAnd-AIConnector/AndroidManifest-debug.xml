@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<application>
+		<!-- adb only: the shell holds DUMP, other apps on the phone do not -->
+		<receiver
+			android:name=".AssistantProbe"
+			android:exported="true"
+			android:permission="android.permission.DUMP" />
+	</application>
+</manifest>

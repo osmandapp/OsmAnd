@@ -480,7 +480,7 @@
     <string name="poi_bench_yes">Benk: ja</string>
     <string name="poi_internet_access_type_wired">Kablet</string>
     <string name="poi_backcountry_yes">Utmark: ja</string>
-    <string name="poi_backcountry_no">Nei</string>
+    <string name="poi_backcountry_no">Utmark: nei</string>
     <string name="poi_washing_machine_yes">Vaskemaskin: ja</string>
     <string name="poi_shower_filter_yes">Dusjfilter: ja</string>
     <string name="poi_caravans_yes">Campingvogner: ja</string>
@@ -1930,10 +1930,10 @@
     <string name="poi_distance">Distanse</string>
     <string name="poi_ascent">Stigning</string>
     <string name="poi_impromptu_no">Nei</string>
-    <string name="poi_parking_fee_yes">Ja</string>
+    <string name="poi_parking_fee_yes">Parkeringsavgift: ja</string>
     <string name="poi_parking_fee">Parkeringsavgift</string>
     <string name="poi_charge">Gebyr</string>
-    <string name="poi_parking_fee_no">Nei</string>
+    <string name="poi_parking_fee_no">Parkeringsavgift: nei</string>
     <string name="poi_level">Nivå</string>
     <string name="poi_internet_access_fee_customers">Internettilgang: kunder</string>
     <string name="poi_access_yes">Allmenn adgang: ja</string>
@@ -1950,7 +1950,7 @@
     <string name="poi_osmand_bicycle_prohibited_tunnel">Tunnel forbudt for syklister</string>
     <string name="poi_route_activity_type_e_mountain_bike">El-terrengsykkel</string>
     <string name="poi_route_activity_type_gravel_biking">Grusveisykling</string>
-    <string name="poi_cafe_yes">Ja</string>
+    <string name="poi_cafe_yes">Kafé: ja</string>
     <string name="poi_route_activity_type_e_biking">El-sykling</string>
     <string name="poi_cafe_filter">Kafé</string>
     <string name="poi_us_maps_recreation_area_activity_mountain_biking">Terrengsykling</string>

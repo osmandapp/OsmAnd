@@ -5,6 +5,7 @@ import net.osmand.shared.binary.NameIndexReader.PrefixNameValue
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KSearchAlgorithms
 import net.osmand.shared.util.KUnicode
+import net.osmand.shared.util.lowercaseWithDefaultLocale
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -64,6 +65,9 @@ internal class SpatialTypoSuggestions(private val ctx: SpatialSearchContext) {
 			val query = "typo-key " + t.word
 			var bytes = 0L
 			for (fileInd in filesNearestFirst()) {
+				if (ctx.isCancelled()) {
+					return
+				}
 				if (bytes > KEY_MAX_BYTES) {
 					break
 				}
@@ -223,7 +227,7 @@ internal class SpatialTypoSuggestions(private val ctx: SpatialSearchContext) {
 			val w = stripIncompleteDot(word)
 			var i = text.indexOf(w)
 			if (i < 0) {
-				i = text.lowercase().indexOf(w.lowercase())
+				i = lowercaseWithDefaultLocale(text).indexOf(lowercaseWithDefaultLocale(w))
 			}
 			if (i < 0) {
 				return null

@@ -831,8 +831,8 @@
     <string name="poi_scooter_yes">קטנוע: יש</string>
     <string name="poi_scooter_no">קטנוע: אין</string>
     <string name="poi_truck_no">משאית: אין</string>
-    <string name="poi_parking_fee_yes">כן</string>
-    <string name="poi_parking_fee_no">לא</string>
+    <string name="poi_parking_fee_yes">עמלת חנייה: כן</string>
+    <string name="poi_parking_fee_no">עמלת חנייה: לא</string>
     <string name="poi_parking_fee">עמלת חנייה</string>
     <string name="poi_amperage">זרם חשמלי</string>
     <string name="poi_charging_station_output">פלט תחנת הטעינה</string>
@@ -4713,8 +4713,8 @@
     <string name="poi_healthcare_speciality_venereology">מחלות מין</string>
     <string name="poi_fire_hydrant_pressure_pressurized">בלחץ</string>
     <string name="poi_fire_hydrant_pressure_suction">יניקה</string>
-    <string name="poi_climbing_bolts_yes">כן</string>
-    <string name="poi_climbing_bolts_no">לא</string>
+    <string name="poi_climbing_bolts_yes">ברגי טיפוס: כן</string>
+    <string name="poi_climbing_bolts_no">ברגי טיפוס: לא</string>
     <string name="poi_not_pt_shelter_yes">מחסה (לא לתחבורה ציבורית)</string>
     <string name="poi_from">מ־</string>
     <string name="poi_to">עד</string>

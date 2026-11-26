@@ -69,6 +69,8 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.OsmRouteType;
@@ -339,6 +341,10 @@ public class AndroidUtils {
 
 	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
 		return activity != null && !activity.isFinishing() && !activity.isDestroyed();
+	}
+
+	public static boolean isStateAtLeast(@Nullable LifecycleOwner owner, @NonNull Lifecycle.State state) {
+		return owner != null && owner.getLifecycle().getCurrentState().isAtLeast(state);
 	}
 
 	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {

@@ -54,7 +54,6 @@ kotlin {
 			defFile(project.file("src/nativeInterop/cinterop/sqlite3.def"))
 			packageName("sqlite3")
 		}
-		// sqlite3.def carries no linkerOpts, so the test binaries link sqlite themselves
 		iosTarget.binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.TestExecutable::class.java).configureEach {
 			linkerOpts("-lsqlite3")
 		}

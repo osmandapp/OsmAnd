@@ -853,7 +853,7 @@
     <string name="poi_motorcycle_parts_yes">Varaosat</string>
     <string name="poi_motorcycle_tyres_yes">Renkaat</string>
     <string name="poi_motorcycle_clothes_yes">Moottoripyörävaatteet</string>
-    <string name="poi_parking_fee_yes">Kyllä</string>
+    <string name="poi_parking_fee_yes">Pysäköintimaksu: kyllä</string>
     <string name="poi_socket_chademo_yes">CHAdeMO</string>
     <string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
     <string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
@@ -1580,7 +1580,7 @@
     <string name="poi_seasonal_dry_season">Kuivakausi</string>
     <string name="poi_seasonal_no">Kausittainen: ei</string>
     <string name="poi_supervised_no">Valvomaton</string>
-    <string name="poi_drinking_water_no">Ei</string>
+    <string name="poi_drinking_water_no">Juomavesi: ei</string>
     <string name="poi_wheelchair_limited">Pyörätuolisaavutettavuus: rajoitettu</string>
     <string name="poi_wheelchair_no">Pyörätuolisaavutettavuus: ei</string>
     <string name="poi_wheelchair_accessibility">Pyörätuolisaavutettavuus</string>
@@ -1670,7 +1670,7 @@
     <string name="poi_us_maps_recreation_area_activity_lake_and_pond_fishing">Järvi ja lampi kalastus</string>
     <string name="poi_us_maps_recreation_area_activity_river_and_stream_fishing">Joki- ja purokalastus</string>
     <string name="poi_us_maps_recreation_area_activity_salt_water_fishing">Kalastus suolavedessä</string>
-    <string name="poi_parking_fee_no">Ei</string>
+    <string name="poi_parking_fee_no">Pysäköintimaksu: ei</string>
     <string name="poi_recreation_center">Virkistyskeskus</string>
     <string name="poi_counselling_type_rehabilitation_no">Neuvonta (kuntoutus): ei</string>
     <string name="poi_counselling_type_marriage_no">Neuvonta (avioliitto): ei</string>
@@ -1913,7 +1913,7 @@
     <string name="poi_bicycle_yes">Polkupyörä: kyllä</string>
     <string name="poi_bicycle_no">Polkupyörä: ei</string>
     <string name="poi_surface_artificial_turf">Tekonurmi</string>
-    <string name="poi_backcountry_no">Ei</string>
+    <string name="poi_backcountry_no">Syrjäseutu: ei</string>
     <string name="poi_training_computer">Koulutus: tietokone</string>
     <string name="poi_animal_training_horse">Hevonen</string>
     <string name="poi_free_flying_site_training">Koulutus</string>

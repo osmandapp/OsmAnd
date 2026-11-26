@@ -511,6 +511,10 @@ class Amenity : MapObject() {
 		if (!KAlgorithms.isEmpty(gpxFileName)) {
 			return KAlgorithms.sanitizeFileName(gpxFileName)
 		}
+		val ref = getRef()
+		if (!ref.isNullOrEmpty()) {
+			return KAlgorithms.sanitizeFileName(ref)
+		}
 		if (!KAlgorithms.isEmpty(getRouteId())) {
 			return getRouteId()
 		}
@@ -725,7 +729,7 @@ class Amenity : MapObject() {
 				}
 			}
 			// save all other values to separate lines
-			if (key.endsWith(OPENING_HOURS)) {
+			if (key.endsWith(OPENING_HOURS) && CHECK_DATE_OPENING_HOURS != key && XMAS_OPENING_HOURS != key) {
 				continue
 			}
 			if (!HIDING_EXTENSIONS_AMENITY_TAGS.contains(key) && addPrefixes) {
@@ -939,6 +943,9 @@ class Amenity : MapObject() {
 		const val SHORT_DESCRIPTION: String = "short_description"
 		const val ROUTE: String = "route"
 		const val OPENING_HOURS: String = "opening_hours"
+		const val CHECK_DATE_OPENING_HOURS: String = "check_date_opening_hours"
+		const val XMAS_OPENING_HOURS: String = "xmas_opening_hours"
+		const val XMAS_DAY_DATE: String = "xmas_day_date"
 		const val NOTE: String = "note"
 		const val POPULATION: String = "population"
 		const val WIDTH: String = "width"

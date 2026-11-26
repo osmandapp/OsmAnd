@@ -3314,8 +3314,8 @@
     <string name="poi_scooter_yes">Tõukeratas: jah</string>
     <string name="poi_scooter_no">Tõukeratas: ei</string>
     <string name="poi_truck_no">Veouauto: ei</string>
-    <string name="poi_parking_fee_yes">Jah</string>
-    <string name="poi_parking_fee_no">Ei</string>
+    <string name="poi_parking_fee_yes">Parkimistasu: jah</string>
+    <string name="poi_parking_fee_no">Parkimistasu: ei</string>
     <string name="poi_parking_fee">Parkimistasu</string>
     <string name="poi_amperage">Voolutugevus</string>
     <string name="poi_charging_station_output">Laadimisjaama väljund</string>
@@ -4523,7 +4523,7 @@
     <string name="poi_from">Sihtpunkt</string>
     <string name="poi_ascent">Tõus</string>
     <string name="poi_not_pt_shelter_yes">Varjualune (muu, kui ühistranspordi jaoks)</string>
-    <string name="poi_climbing_bolts_no">Ei</string>
+    <string name="poi_climbing_bolts_no">Ronimispoldid: ei</string>
     <string name="poi_roundtrip_no">Edasi-tagasi reis: ei</string>
     <string name="poi_roundtrip_yes">Edasi-tagasi reis: jah</string>
     <string name="poi_direction">Suund</string>
@@ -4551,7 +4551,7 @@
     <string name="poi_recycling_polystyrene_foam">Vahtpolüstüreen</string>
     <string name="poi_recycling_pmd">Isiklik liikumisvahend</string>
     <string name="poi_socket_typee_yes">Tüüp E</string>
-    <string name="poi_climbing_bolts_yes">Jah</string>
+    <string name="poi_climbing_bolts_yes">Ronimispoldid: jah</string>
     <string name="poi_climbing_quality_medium">Keskmine</string>
     <string name="poi_reservation">Broneerimine</string>
     <string name="poi_us_maps_recreation_area_facility">Puhkeala teenus</string>

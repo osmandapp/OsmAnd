@@ -284,6 +284,24 @@ public class TrackDrawInfo {
 		this.lineStyleType = lineStyleType;
 	}
 
+	// The map draws the track solid while the line style is unavailable, the stored style is kept for later
+	@NonNull
+	public GpxLineStyleType getDrawnLineStyleType() {
+		return isLineStyleAvailable() ? getLineStyleType() : GpxLineStyleType.SOLID;
+	}
+
+	public boolean isLineStyleAvailable() {
+		return isColorSolid() && !is3dTrack();
+	}
+
+	public boolean isColorSolid() {
+		return getColoringType().isTrackSolid();
+	}
+
+	public boolean is3dTrack() {
+		return trackVisualizationType != null && trackVisualizationType.is3dType();
+	}
+
 	public Gpx3DVisualizationType getTrackVisualizationType() {
 		return trackVisualizationType;
 	}

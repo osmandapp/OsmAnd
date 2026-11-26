@@ -15,7 +15,12 @@ import net.osmand.plus.card.color.palette.solid.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.shared.palette.domain.PaletteItem;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class GridColorController extends MapColorPaletteController {
 
@@ -77,6 +82,13 @@ public class GridColorController extends MapColorPaletteController {
 	public void onApplyChanges() {
 		applyChanges = true;
 		loadSavedColors();
+	}
+
+	@NonNull
+	@Override
+	public List<OsmandPreference<?>> getPreviewPreferences() {
+		OsmandSettings settings = app.getSettings();
+		return Arrays.asList(settings.COORDINATES_GRID_COLOR_DAY, settings.COORDINATES_GRID_COLOR_NIGHT);
 	}
 
 	private void loadSavedColors() {

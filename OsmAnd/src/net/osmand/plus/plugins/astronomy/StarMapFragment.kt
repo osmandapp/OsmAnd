@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -17,7 +18,9 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -336,6 +339,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_X = "starview_active_camera_pan_x"
 		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y = "starview_active_camera_pan_y"
 		private const val STATE_STARVIEW_ACTIVE_CAMERA_ROLL = "starview_active_camera_roll"
+
+		/**
+		 * A dialog has its own window, so the bars hidden for the activity come back while it is shown.
+		 * Sheets opened over the star map call this for their window too.
+		 */
+		@JvmStatic
+		fun setSystemBarsHidden(window: Window?, hidden: Boolean) {
+			window ?: return
+			val controller = WindowCompat.getInsetsController(window, window.decorView)
+			if (hidden) {
+				controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+				controller.hide(WindowInsetsCompat.Type.systemBars())
+			} else {
+				controller.show(WindowInsetsCompat.Type.systemBars())
+			}
+		}
 
 		@JvmStatic
 		fun applyRedFilterToViews(enabled: Boolean, vararg views: View?) {
@@ -876,6 +895,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val mapActivity = requireMapActivity()
 		mapActivity.disableDrawer()
 		updateWidgetsVisibility(mapActivity, View.GONE)
+		updateSystemBars()
 		if (regularMapVisible) updateRegularMapVisibility(true)
 		mapActivity.refreshMap()
 		updateBackPressedCallback()
@@ -945,6 +965,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.resetMapViewPaddings()
 		eclipseRestoreState?.let { restoreEclipseMapDisplayRatio(it) }
 		mapActivity.enableDrawer()
+		setSystemBarsHidden(false)
 		updateWidgetsVisibility(mapActivity, View.VISIBLE)
 		mapActivity.refreshMap()
 	}
@@ -2458,6 +2479,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			?.applyRedFilter(enabled)
 		(childFragmentManager.findFragmentByTag(StarMapSearchDialogFragment.TAG) as? StarMapSearchDialogFragment)
 			?.applyRedFilter(enabled)
+		updateSystemBars()
+	}
+
+	// The red filter only recolours our own views: the status bar and the navigation bar stay white,
+	// so hide them while it is on. A swipe from the edge shows them for a moment (transient bars).
+	private fun updateSystemBars() {
+		if (isResumed && ::starView.isInitialized) {
+			setSystemBarsHidden(starView.showRedFilter)
+		}
+	}
+
+	private fun setSystemBarsHidden(hidden: Boolean) {
+		setSystemBarsHidden(activity?.window, hidden)
 	}
 
 	override fun getAnalyticsScreen() = "star_map"

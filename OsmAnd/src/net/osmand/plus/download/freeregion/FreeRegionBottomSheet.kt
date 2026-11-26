@@ -18,8 +18,6 @@ import com.google.android.material.progressindicator.IndeterminateDrawable
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import net.osmand.map.WorldRegion
-import net.osmand.plus.OsmAndTaskManager
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialModalBottomSheetDialogFragment
 import net.osmand.plus.chooseplan.ChoosePlanFragment
@@ -27,13 +25,12 @@ import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.download.DownloadValidationManager
 import net.osmand.plus.download.IndexItem
 import net.osmand.plus.download.local.LocalItem
-import net.osmand.plus.download.local.LocalOperationTask
-import net.osmand.plus.download.local.OperationType
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
+import java.io.File
 
 /**
  * Free version: a map of another region. One sheet goes through the steps - replace, then what the
@@ -45,9 +42,6 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 
 	private var step = Step.REPLACE
 	private var loading = false
-
-	/** Continues the download that opened the sheet; lost when the sheet is recreated. */
-	private var onReplaced: Runnable? = null
 
 	private lateinit var freeRegion: WorldRegion
 	private lateinit var region: WorldRegion
@@ -244,37 +238,17 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		}
 	}
 
+	/** The download that opened the sheet is found by the file names, also after the sheet is recreated. */
 	private fun applyReplace() {
 		val app = osmandApp
 		val activity = requireActivity()
-		val continueDownload = onReplaced ?: Runnable { restartDownload(activity) }
+		val indexes = app.downloadThread.indexes
+		val items = requireArguments().getStringArrayList(ITEMS_KEY).orEmpty().mapNotNull { indexes.getIndexItem(it) }
+		val filesToDelete = requireArguments().getStringArrayList(FILES_TO_DELETE_KEY).orEmpty().map { File(it) }
 		// the server may answer after the app went to the background
 		dismissAllowingStateLoss()
-		freeVersionMapDownloads.replaceFreeRegion(region)
-		val items = mapsToDelete.values.flatten()
-		if (items.isEmpty()) {
-			continueDownload.run()
-			return
-		}
-		val listener = object : LocalOperationTask.OperationListener {
-			override fun onOperationFinished(type: OperationType, result: String) {
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					continueDownload.run()
-				}
-			}
-		}
-		OsmAndTaskManager.executeTask(
-			LocalOperationTask(app, OperationType.DELETE_OPERATION, listener), *items.toTypedArray())
-	}
-
-	/** The sheet was recreated and lost the pending download: start it again by the file names. */
-	private fun restartDownload(activity: FragmentActivity) {
-		val app = activity.application as OsmandApplication
-		val indexes = app.downloadThread.indexes
-		val fileNames = requireArguments().getStringArrayList(ITEMS_KEY).orEmpty()
-		val items = fileNames.mapNotNull { indexes.getIndexItem(it) }
-		if (items.isNotEmpty() && AndroidUtils.isActivityNotDestroyed(activity)) {
-			DownloadValidationManager(app).startDownload(activity, *items.toTypedArray())
+		if (items.isNotEmpty()) {
+			DownloadValidationManager(app).startFreeRegionReplace(activity, region, filesToDelete, *items.toTypedArray())
 		}
 	}
 
@@ -309,15 +283,16 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 		private const val FREE_REGION_KEY = "free_region"
 		private const val REGION_KEY = "region"
 		private const val ITEMS_KEY = "items"
+		private const val FILES_TO_DELETE_KEY = "files_to_delete"
 		private const val STEP_KEY = "step"
 
 		/**
-		 * @param items the download that opened the sheet, to start it again after the sheet is recreated
-		 * @param onReplaced continues the download after the replace
+		 * @param items the download that opened the sheet, started after the replace
+		 * @param filesToDelete deleted once that download is installed (the duplicate map warning)
 		 */
 		@JvmStatic
 		fun showInstance(activity: FragmentActivity, freeRegion: WorldRegion, region: WorldRegion,
-		                 items: Array<IndexItem>, onReplaced: Runnable) {
+		                 items: Array<IndexItem>, filesToDelete: List<File>) {
 			val manager = activity.supportFragmentManager
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 				val fragment = FreeRegionBottomSheet()
@@ -325,8 +300,8 @@ class FreeRegionBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
 					putString(FREE_REGION_KEY, freeRegion.regionId)
 					putString(REGION_KEY, region.regionId)
 					putStringArrayList(ITEMS_KEY, ArrayList(items.map { it.fileName }))
+					putStringArrayList(FILES_TO_DELETE_KEY, ArrayList(filesToDelete.map { it.absolutePath }))
 				}
-				fragment.onReplaced = onReplaced
 				fragment.show(manager, TAG)
 			}
 		}

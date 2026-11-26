@@ -23,8 +23,8 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 
 	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-	private final IconPixelsCache<Long> bigIconsCache = new IconPixelsCache<>();
-	private final IconPixelsCache<Long> smallIconsCache = new IconPixelsCache<>();
+	private final IconPixelsCache<IconKey> bigIconsCache = new IconPixelsCache<>();
+	private final IconPixelsCache<IconKey> smallIconsCache = new IconPixelsCache<>();
 	private final Context ctx;
 	private final int baseOrder;
 	private final boolean textVisible;
@@ -104,7 +104,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
-		long key = data.getKey();
+		IconKey key = data.key;
 		if (isFullSize) {
 			return bigIconsCache.getImage(key, k -> {
 				PointImageDrawable drawable;
@@ -194,6 +194,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		BackgroundType backgroundType;
 		boolean hasMarker;
 		float textScale;
+		IconKey key;
 
 		MapLayerData(@NonNull FavouritePoint favorite, int color,
 		             boolean withShadow, int overlayIconId, @NonNull BackgroundType backgroundType,
@@ -205,11 +206,28 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			this.backgroundType = backgroundType;
 			this.hasMarker = hasMarker;
 			this.textScale = textScale;
+			this.key = new IconKey(color, withShadow, overlayIconId, backgroundType, hasMarker, textScale);
+		}
+	}
+
+	// D8 turns the generated equals() and hashCode() of a record into code that boxes every field into a new
+	// array on each call, and the core asks for an icon per point and tile, so both are written out.
+	private record IconKey(int color, boolean withShadow, int overlayIconId, BackgroundType backgroundType,
+	                       boolean hasMarker, float textScale) {
+
+		@Override
+		public boolean equals(Object o) {
+			return o instanceof IconKey key && color == key.color && withShadow == key.withShadow
+					&& overlayIconId == key.overlayIconId && backgroundType == key.backgroundType
+					&& hasMarker == key.hasMarker && Float.compare(textScale, key.textScale) == 0;
 		}
 
-		long getKey() {
-			return ((long) color << 6) + ((long) overlayIconId << 4) + ((withShadow ? 1 : 0) << 3)
-					+ ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (backgroundType != null ? backgroundType.ordinal() : 0);
+		@Override
+		public int hashCode() {
+			int result = 31 * color + overlayIconId;
+			result = 31 * result + (backgroundType != null ? backgroundType.ordinal() : 0);
+			result = 31 * result + Float.floatToIntBits(textScale);
+			return 4 * result + (withShadow ? 2 : 0) + (hasMarker ? 1 : 0);
 		}
 	}
 }

@@ -83,6 +83,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.RelativeDirectionStyle;
 import net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode;
@@ -905,7 +906,19 @@ public class OsmandSettings {
 
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
-	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "").makeGlobal().makeShared();
+	private final OsmandPreference<String> PLUGINS = new StringPreference(this, "enabled_plugins", "") {
+		@Override
+		public boolean writeToJson(@NonNull JSONObject json, @Nullable ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				return super.writeToJson(json, appMode);
+			}
+			// iOS interprets missing IDs as disabled, so defaults must be exported too.
+			Set<String> plugins = getPlugins();
+			plugins.addAll(PluginsHelper.getDefaultEnabledPluginIds(plugins));
+			json.put(getId(), TextUtils.join(",", plugins));
+			return true;
+		}
+	}.makeGlobal().makeShared();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();
@@ -1519,6 +1532,8 @@ public class OsmandSettings {
 			Version.isGooglePlayEnabled() ? GOOGLE_PLAY_SERVICES : ANDROID_API, LocationSource.values()).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference(this, "map_empty_state_allowed", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> FULLSCREEN_HIDE_STATUS_BAR = new BooleanPreference(this, "fullscreen_hide_status_bar", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> FULLSCREEN_HIDE_NAVIGATION_BAR = new BooleanPreference(this, "fullscreen_hide_navigation_bar", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> FIXED_NORTH_MAP = new BooleanPreference(this, "fix_north_map", false).makeProfile().cache();
 
@@ -1538,7 +1553,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal();
 	public final OsmandPreference<Boolean> EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED = new BooleanPreference(this, "explore_nearby_items_menu_collapsed", true).makeGlobal();
-	public final OsmandPreference<Boolean> EXPLORE_HISTORY_ROW_COLLAPSED = new BooleanPreference(this, "explore_history_menu_collapsed", true).makeGlobal();
+	public final OsmandPreference<Boolean> EXPLORE_HISTORY_ROW_COLLAPSED = new BooleanPreference(this, "explore_history_menu_collapsed", false).makeGlobal();
 	public final OsmandPreference<Boolean> ATTACHED_MEDIA_ROW_COLLAPSED = new BooleanPreference(this, "attached_media_menu_collapsed", true).makeGlobal();
 	public final OsmandPreference<Boolean> WEBGL_SUPPORTED = new BooleanPreference(this, "webgl_supported", true).makeGlobal();
 
@@ -2352,13 +2367,18 @@ public class OsmandSettings {
 		return getTileSourceEntries(true);
 	}
 
-	// Map source, overlay and underlay lists: A-Z by title, equal titles by key
+	// Map source, overlay and underlay lists: A-Z by title, equal titles by full title, then by key.
+	// Most server sources start with an emoji, so a leading emoji is ignored when comparing:
+	// otherwise all of them come first, grouped by emoji, before the titles that start with a letter.
 	@NonNull
 	public Map<String, String> getTileSourceEntriesSortedByTitle() {
 		List<Map.Entry<String, String>> entries = new ArrayList<>(getTileSourceEntries().entrySet());
 		Collator collator = OsmAndCollator.primaryCollator();
 		entries.sort((e1, e2) -> {
-			int result = collator.compare(e1.getValue(), e2.getValue());
+			int result = collator.compare(skipLeadingEmoji(e1.getValue()), skipLeadingEmoji(e2.getValue()));
+			if (result == 0) {
+				result = collator.compare(e1.getValue(), e2.getValue());
+			}
 			return result != 0 ? result : e1.getKey().compareTo(e2.getKey());
 		});
 		Map<String, String> sorted = new LinkedHashMap<>();
@@ -2366,6 +2386,27 @@ public class OsmandSettings {
 			sorted.put(entry.getKey(), entry.getValue());
 		}
 		return sorted;
+	}
+
+	// Skips leading emoji (flags, variation selectors, ZWJ sequences) and the spaces after them.
+	// ASCII prefixes such as "=" stay: users put them in front of their own maps to keep them on top.
+	// Character types are used because UProperty.EMOJI needs API 28. Unassigned code points count too:
+	// newer emoji are unassigned on older Android versions.
+	@NonNull
+	private static String skipLeadingEmoji(@NonNull String title) {
+		int start = 0;
+		while (start < title.length()) {
+			int codePoint = title.codePointAt(start);
+			int type = Character.getType(codePoint);
+			boolean emoji = codePoint > 0x7F && (type == Character.OTHER_SYMBOL || type == Character.MODIFIER_SYMBOL
+					|| type == Character.NON_SPACING_MARK || type == Character.ENCLOSING_MARK
+					|| type == Character.FORMAT || type == Character.UNASSIGNED);
+			if (!emoji && !(start > 0 && Character.isWhitespace(codePoint))) {
+				break;
+			}
+			start += Character.charCount(codePoint);
+		}
+		return title.substring(start);
 	}
 
 	public Map<String, String> getTileSourceEntries(boolean sqlite) {

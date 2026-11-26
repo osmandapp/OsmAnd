@@ -460,8 +460,8 @@
     <string name="voice_stream_notification">صوت الاشعارات</string>
     <string name="voice_stream_music">صوت الوسائط</string>
     <string name="warning_tile_layer_not_downloadable">تعذر تحميل طبقة الخريطة %1$s، الرجاء إعادة تثبيتها.</string>
-    <string name="overlay_transparency">شفافية الخريطة</string>
-    <string name="map_transparency">شفافية الخريطة</string>
+    <string name="overlay_transparency">طبقة درجة الوضوح</string>
+    <string name="map_transparency">درجة وضوح الخريطة الأساسية</string>
     <string name="layer_underlay">الخريطة السفلية…</string>
     <string name="map_underlay">الخريطة السفلية</string>
     <string name="layer_overlay">الخريطة العلوية…</string>
@@ -1077,7 +1077,7 @@
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
     <string name="select_map_marker">حدد توجيه مباشر</string>
-    <string name="show_transparency_seekbar">عرض شريط الشفافية</string>
+    <string name="show_transparency_seekbar">عرض شريط درجة الوضوح</string>
     <string name="download_files_error_not_enough_space">لا توجد مساحة كافية! 
 \n {3} MB مطلوب مؤقتا ، {1} ميجا بايت بشكل دائم. 
 \n (فقط {2} ميغابايت المتاحة.)</string>
@@ -2404,7 +2404,7 @@
     <string name="live_monitoring_time_buffer">عازل الوقت</string>
     <string name="live_monitoring_tracking_interval">تتبع الفاصل الزمني</string>
     <string name="live_monitoring_adress">عنوان صفحة انترنت</string>
-    <string name="monitoring_notification">إشعار</string>
+    <string name="monitoring_notification">إظهار زر \'تسجيل\' في الإشعارات</string>
     <string name="monitoring_min_speed">الحد الأدنى للسرعة</string>
     <string name="monitoring_min_accuracy">دقة الحد الأدنى</string>
     <string name="monitoring_min_distance">الحد الأدنى للإزاحة</string>
@@ -2996,7 +2996,7 @@
     <string name="osmand_cloud_help_descr">هل تحتاج إلى مساعدة؟ يرجى الاتصال بنا على %1$s</string>
     <string name="osmand_cloud_create_account_descr">الرجاء إدخال عنوان بريدك الإلكتروني ، سيتم ربط جميع بياناتك به.
 \nسنرسل لك رمز التحقق إلى عنوان البريد الإلكتروني هذا.</string>
-    <string name="osmand_cloud_login_descr">الرجاء إدخال عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سنرسل لك كلمة مرور لمرة واحدة .</string>
+    <string name="osmand_cloud_login_descr">الرجاء إدخال عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سنرسل لك كلمة مرور لمرة واحدة.</string>
     <string name="verify_email_address">التحقق من عنوان البريد الإلكتروني</string>
     <string name="verify_email_address_descr">أرسلنا رمز التحقق إلى %1$s ، يرجى إدخاله في الحقل أدناه.</string>
     <string name="cloud_email_not_registered">هذا البريد الإلكتروني غير مسجل في سحابة أوسماند</string>
@@ -3039,8 +3039,8 @@
     <string name="delete_version_history">حذف سجل الإصدار</string>
     <string name="routing_attr_avoid_tunnels_description">تجنب الأنفاق</string>
     <string name="routing_attr_avoid_tunnels_name">تجنب الأنفاق</string>
-    <string name="send_crash_log">إرسال سجل الأعطال</string>
-    <string name="send_logcat_log">إرسال سجل السجلات</string>
+    <string name="send_crash_log">إرسال سجلات الأعطال</string>
+    <string name="send_logcat_log">إرسال سجلات الجلسة الحالية</string>
     <string name="backup_promocode">الرمز الترويجي</string>
     <string name="purchases_feature_desc_nautical">الحصول على معلومات العمق البحري</string>
     <string name="purchases_feature_desc_terrain">خطوط كنتورية، التضاريس، خريطة التلال الكاملة، خرائط المنحدرات، القمم والأراضي المنخفضة وإظهارها بألوان مختلفة .</string>
@@ -3366,7 +3366,7 @@
     <string name="bottom_widgets_panel">الشريط السفلي</string>
     <string name="shared_string_item">غرض</string>
     <string name="shared_string_buttons">أزرار</string>
-    <string name="configure_screen_widgets_descr">حدد جانب الشاشة لإضافة أدوات واجهة المستخدم أو إعادة ترتيبها.</string>
+    <string name="configure_screen_widgets_descr">حدد جانب الشاشة لإضافة الأدوات المصغّرة أو إعادة ترتيبها.</string>
     <string name="simulation_real_mode_title">محاكاة واقعية</string>
     <string name="simulation_constant_mode_desc">سيتم إجراء المحاكاة بسرعة محددة ثابتة.</string>
     <string name="simulation_constant_mode_title">سرعة ثابتة</string>
@@ -4000,8 +4000,8 @@
     <string name="glide_ratio_to_target">نسبة الانحدار إلى الهدف</string>
     <string name="map_widget_group_glide_ratio">نسبة الانحدار</string>
     <string name="map_widget_group_glide_desc">ودجت عرض نسبة الانحدار أو متوسطه إلى الهدف للرحلة الحالية.</string>
-    <string name="map_widget_glide_average_desc">يعرض متوسط معدل الانحدار للفترة المحددة.</string>
-    <string name="map_widget_glide_target_desc">يعرض نسبة الانحدار المطلوبة للوصول إلى النقطة المستهدفة.</string>
+    <string name="map_widget_glide_average_desc">يعرض متوسط نسبة الانزلاق أو متوسط السرعة الرأسية خلال الفاصل الزمني المحدد.</string>
+    <string name="map_widget_glide_target_desc">يعرض نسبة الانزلاق المطلوبة للوصول إلى نقطة الهدف أو ارتفاع نقطة الهدف.</string>
     <string name="average_glide_time_interval_desc">حدد الفاصل الزمني لحساب متوسط الانحدار.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">متوسط نسبة الانحدار</string>
@@ -4611,7 +4611,7 @@
     <string name="av_audio_sample_rate_descr">حدد معدل عينة الصوت.</string>
     <string name="connect_new_scanner">جهاز مسح جديد</string>
     <string name="preview_next_turn">معاينة المنعطف التالي</string>
-    <string name="obd_engine_runtime_desc">يعرض مدة تشغيل المحرك.</string>
+    <string name="obd_engine_runtime_desc">يعرض مدة تشغيل المحرك منذ بدء تشغيله.</string>
     <string name="obd_fuel_pressure_desc">يعرض الضغط داخل نظام الوقود</string>
     <string name="obd_throttle_position">موضع الخانق</string>
     <string name="obd_throttle_position_desc">يعرض زاوية لوحة الخانق في جسم الخانق.</string>
@@ -4655,7 +4655,7 @@
     <string name="shared_string_interpolation">الاستيفاء</string>
     <string name="default_buttons_corners_original_description">يحتفظ كل زر بحواف شاشتك.</string>
     <string name="display_distance_to_first_intermediate">إظهار تفاصيل المسار للمحطة التالية</string>
-    <string name="plugin_ais_tracker_name">جهاز تعقب السفن AIS</string>
+    <string name="plugin_ais_tracker_name">متتبع السفن (AIS)</string>
     <string name="map_widget_route_information_desc">يعرض وقت الوصول المقدر، ووقت السفر المتبقي، والمسافة لمسار الملاحة النشط.</string>
     <string name="map_widget_route_information">معلومات المسار</string>
     <string name="shared_string_default_view">العرض الافتراضي</string>
@@ -4777,7 +4777,7 @@
     <string name="routing_attr_weightrating_name">أقصى وزن عند التحميل الكامل</string>
     <string name="routing_attr_maxaxleload_name">أقصى حمولة للمحور</string>
     <string name="deleted_maps_warning">أنت على وشك حذف %d \nعنصر هل تريد المتابعة؟</string>
-    <string name="deleted_maps_prompt">هذه الخرائط غيرمدعومة، وقد تم استبدالها بخرائط لمناطق أصغر. يرجى إزالتها وتنزيل الإصدارات الجديدة.</string>
+    <string name="deleted_maps_prompt">هذه الخرائط لم تعد مدعومة. يرجى إزالتها وتنزيل الإصدارات الجديدة.</string>
     <string name="unsupported_maps">خرائط غير مدعومة</string>
     <string name="quick_action_weather_layers">مفتاح تبديل لإظهار أو إخفاء طبقات الطقس على الخريطة.</string>
     <string name="quick_action_wind_animation_layer">مفتاح تبديل لإظهار أو إخفاء طبقة الرسوم المتحركة للرياح على الخريطة.</string>
@@ -4898,7 +4898,7 @@
     <string name="lang_crh">التتارية القرمية (لاتينية)</string>
     <string name="lang_en_barebones">الإنجليزية (بشكل أساسي)</string>
     <string name="access_pinch_zoom_magnification">تكبير/تصغير بإصبعين</string>
-    <string name="access_pinch_zoom_magnification_descr">استخدم تغيير حجم نافذة العرض بدلاً من مستويات التكبير المنفصلة أثناء إيماءات التكبير.</string>
+    <string name="access_pinch_zoom_magnification_descr">استخدام تكبير نافذة العرض (التكبير التدريجي) بدلاً من مستويات التقريب المتقطعة أثناء إيماءة التقريب.</string>
     <string name="rendering_attr_pisteRoutes_name">منحدرات ومسارات التزلج</string>
     <string name="download_wikipedia_label">تحميل ويكيبيديا</string>
     <string name="rendering_attr_spotSize_description">حجم قياس البقعة</string>
@@ -5512,4 +5512,37 @@
     <string name="flyover_recording">تسجيل فيديو للخريطة: %1$s</string>
     <string name="flyovers">الجسور العلوية</string>
     <string name="storage_directory_visible_external">وحدة تخزين خارجية مرئية</string>
+    <string name="attach_to_track">إرفاق بالمسار</string>
+    <string name="visualization">عرض مرئي</string>
+    <string name="terrain_shadows">ظلال التضاريس</string>
+    <string name="terrain_shadows_description">تظليل ديناميكي فوري للتضاريس ثلاثية الأبعاد، يبرز معالم سطح الأرض بأقل استهلاك لموارد الجهاز.</string>
+    <string name="terrain_shadows_relief_3d_footer">تُفعَّل التضاريس ثلاثية الأبعاد تلقائياً لأنها ضرورية لظهور ظلال التضاريس.</string>
+    <string name="update_maps_to_use_new_search">تحديث الخرائط لاستخدام البحث الجديد (%1$s)</string>
+    <string name="free_region_not_chosen_descr">تصبح منطقة خريطتك الأولى المنزلة هي منطقتك المجانية.</string>
+    <string name="free_region_banner_descr">كل خرائط %1$s مجانية.</string>
+    <string name="free_region_other_title">%1$s ليس منطقتك المجانية</string>
+    <string name="free_region_other_descr">تتضمن النسخة المجانية خرائط لمنطقة واحدة. لتنزيل %1$s، ستُحذف خرائط المناطق الأخرى.</string>
+    <string name="free_region_will_be_deleted">ستُحذف</string>
+    <string name="free_region_maps_stay">ستبقى الخريطة العامة للعالم وخطوط الكنتور وخرائط الإضافات الأخرى دون تغيير.</string>
+    <string name="free_region_delete_and_download">حذف وتنزيل</string>
+    <string name="free_region_replace_used_title">استُخدِم الاستبدال المجاني مسبقًا</string>
+    <string name="free_region_not_eligible_email_descr">أدخل بريدك الإلكتروني لاستبدال منطقتك المجانية مرة أخرى، أو احصل على تنزيلات غير محدودة للخرائط.</string>
+    <string name="free_region_email_helper">سنرسل إليك أخبار OsmAnd، ويمكنك إلغاء الاشتراك في أي وقت.</string>
+    <string name="free_region_email_maps_deleted">ستُحذف خرائط %1$s (%2$s).</string>
+    <string name="free_region_send_and_replace">إرسال واستبدال</string>
+    <string name="free_region_not_eligible_buy_descr">منطقتك المجانية هي %1$s. لتنزيل %2$s مع الاحتفاظ بخرائطك الحالية، احصل على تنزيلات غير محدودة للخرائط.</string>
+    <string name="outdated_maps_warning_title">حدِّث خرائطك</string>
+    <string name="outdated_maps_warning_descr">يتطلب البحث الجديد خرائط هذا الإصدار. حدّث جميع خرائطك — التحديث مجاني.</string>
+    <string name="free_region_other_regions_need_maps_plus">المناطق الأخرى تحتاج Maps+: %1$s</string>
+    <string name="cast_shadows">الظلال</string>
+    <string name="build_update_size">تحديث %1$s</string>
+    <string name="build_update_size_estimated">تحديث ~%1$s</string>
+    <string name="astro_ar_mode">وضع الواقع المعزز</string>
+    <string name="astro_camera_view">منظور الكاميرا</string>
+    <string name="astro_reset_field_of_view">إعادة ضبط مجال الرؤية</string>
+    <string name="cloud_file_name_too_long">اسم الملف طويل جدًا بالنسبة لهذا الجهاز، يرجى إعادة تسميته في سحابة OsmAnd</string>
+    <string name="average_vertical_speed">متوسط السرعة الرأسية</string>
+    <string name="select_tracks">اختيار مسارات</string>
+    <string name="public_transport_route_out_of_memory">مسار النقل العام طويل جدًا بحيث يتعذر حسابه على هذا الجهاز. يُرجى اختيار وجهة أقرب.</string>
+    <string name="release_5_5">• تفعيل البحث المكاني افتراضياً: ابحث حول موقع محدد مع ترتيب أدق للنتائج، ودعم للمترادفات، وتصحيح الأخطاء الإملائية\n\n • ظلال للمباني ثلاثية الأبعاد، مع إمكانية ضبط اتجاه الشمس\n\n • إضافة Panoramax: عرض صور على مستوى الشارع مباشرة على الخريطة\n\n • مكتبة الوسائط: جميع الصور ومقاطع الفيديو والملاحظات الصوتية في مكان واحد\n\n • خطوط مسارات متقطعة ومنقّطة، وتعيين مظهر افتراضي لكل مجلد مسارات\n\n • إعدادات سرعة التنقل لحساب المسار ووقت الوصول المتوقع\n\n • Android Auto: الوجهات الأخيرة، وتفعيل وضع «القيادة الحرة» تلقائياً، ودعم مساعد جوجل وجيميناي\n\n • توجيه تسميات خطوط الكنتور نحو الأعلى (باتجاه الصعود)</string>
 </resources>

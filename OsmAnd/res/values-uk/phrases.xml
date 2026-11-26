@@ -163,7 +163,7 @@
     <string name="poi_model">Іграшкові моделі</string>
     <string name="poi_trophy">Нагороди, призи</string>
     <string name="poi_video_games">Комп’ютерні ігри;комп\'ютерні ігри;магазин відеоігор</string>
-    <string name="poi_pyrotechnics">Піротехніка; феєрверки</string>
+    <string name="poi_pyrotechnics">Піротехніка;феєрверки</string>
     <string name="poi_weapons">Магазин зброї;вогнепальна зброя;боєприпаси</string>
     <string name="poi_traffic_calming_cushion">Штучна дорожня нерівність «берлінська подушка»</string>
     <string name="poi_traffic_calming_rumble_strip">Шумові полоси</string>
@@ -612,7 +612,7 @@
     <string name="poi_weir">Невелика гребля</string>
     <string name="poi_recycling_hardcore">Будівельне сміття</string>
     <string name="poi_waste_disposal">Утилізація сміття;сміттєвий контейнер</string>
-    <string name="poi_commercial">Землі комерційного використання</string>
+    <string name="poi_commercial">Комерційний простір</string>
     <string name="poi_retail">Роздрібна торгівля (землекористування)</string>
     <string name="poi_forest">Ліс (обслуговується)</string>
     <string name="poi_farmyard">Фермерське господарство</string>
@@ -1312,8 +1312,8 @@
     <string name="poi_trees_date">Фініки</string>
     <string name="poi_trees_coffea">Кава</string>
     <string name="poi_trees_pomegranate">Гранат</string>
-    <string name="poi_urban">Міського типу</string>
-    <string name="poi_rural">Сільського типу</string>
+    <string name="poi_urban">Житлова зона міського типу</string>
+    <string name="poi_rural">Житлова зона сільського типу</string>
     <string name="poi_enforcement_traffic_signals">Контроль: проїзд на червоний сигнал світлофора</string>
     <string name="poi_enforcement_maxspeed">Контроль: максимальна швидкість</string>
     <string name="poi_enforcement_maxheight">Контроль: максимальна висота</string>
@@ -3286,8 +3286,8 @@
     <string name="poi_scooter_yes">Скутер: так</string>
     <string name="poi_scooter_no">Скутер: ні</string>
     <string name="poi_truck_no">Вантажівка: ні</string>
-    <string name="poi_parking_fee_yes">Так</string>
-    <string name="poi_parking_fee_no">Ні</string>
+    <string name="poi_parking_fee_yes">Плата за паркування: так</string>
+    <string name="poi_parking_fee_no">Плата за паркування: ні</string>
     <string name="poi_parking_fee">Оплата за парковку</string>
     <string name="poi_amperage">Сила струму</string>
     <string name="poi_charging_station_output">Потужність зарядної станції</string>
@@ -4401,8 +4401,8 @@
     <string name="poi_climbing_grade_intermediate">Середній рівень</string>
     <string name="poi_climbing_grade_novice">Рівень для новачків</string>
     <string name="poi_climbing_grade_beginner">Рівень для початківців</string>
-    <string name="poi_climbing_bolts_yes">Так</string>
-    <string name="poi_climbing_bolts_no">Ні</string>
+    <string name="poi_climbing_bolts_yes">Шлямбури: так</string>
+    <string name="poi_climbing_bolts_no">Шлямбури: ні</string>
     <string name="poi_trampoline_park">Батутний парк</string>
     <string name="poi_socket_type3a_output_filter">Type 3a, потужність роз\'єму</string>
     <string name="poi_socket_type2_cable_current">Роз\'єм: кабель Type 2: струм</string>
@@ -4936,7 +4936,7 @@
     <string name="poi_route_activity_type_swimming_outdoor">Плавання на відкритому повітрі</string>
     <string name="poi_cafe_filter">Кафе</string>
     <string name="poi_climbing_area">Зона скелелазіння</string>
-    <string name="poi_cafe_yes">Так</string>
+    <string name="poi_cafe_yes">Кафе: так</string>
     <string name="poi_climbing_route">Маршрут сходження</string>
     <string name="poi_climbing_route_bottom">Нижня частина маршруту сходження</string>
     <string name="poi_sled_yes">Сани: так</string>

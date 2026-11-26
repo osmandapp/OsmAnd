@@ -1,5 +1,6 @@
 package net.osmand.shared.search.core
 
+import net.osmand.shared.util.searchWordSeparators
 import net.osmand.shared.api.KStringMatcherMode
 import net.osmand.shared.binary.Abbreviations
 import net.osmand.shared.binary.BinaryMapIndexReader
@@ -761,7 +762,9 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 		const val DELIMITER = " "
 		const val ALLDELIMITERS = "\\s|,"
 		const val ALLDELIMITERS_WITH_HYPHEN = "\\s|,|-"
-		private val reg = Regex(ALLDELIMITERS)
+		// Android Pattern's whitespace class includes the Unicode separator categories and NEL.
+		private val reg = searchWordSeparators
+		private val unicodeSpaces = reg.matches("\u00A0")
 		private val DIFF_FILE_NAME = Regex("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+(\\.live)?\\.obf")
 
 		private val commonWordsComparator: Comparator<String> = object : Comparator<String> {
@@ -818,9 +821,11 @@ class SearchPhrase private constructor(private val settings: SearchSettings?, pr
 			}
 		}
 
-		// `\s` is [ \t\n\x0B\f\r]
+		// Keep the allocation-free word scanner consistent with reg.
 		private fun isDelimiter(c: Char, hyphen: Boolean): Boolean =
-			c == ' ' || c == ',' || c in '\t'..'\r' || (hyphen && c == '-')
+			c == ' ' || c == ',' || c in '\t'..'\r' || (hyphen && c == '-') ||
+				(unicodeSpaces && c >= '\u0085' && (c == '\u0085' || c.category == CharCategory.SPACE_SEPARATOR ||
+					c.category == CharCategory.LINE_SEPARATOR || c.category == CharCategory.PARAGRAPH_SEPARATOR))
 
 		/** The part of [w] from [start] to [end], trimmed as java trims, when anything is left of it. */
 		private fun addWord(w: String, start: Int, end: Int, ws: MutableList<String>) {

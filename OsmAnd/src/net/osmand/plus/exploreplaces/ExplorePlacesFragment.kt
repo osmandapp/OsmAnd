@@ -32,6 +32,7 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.search.listitems.QuickSearchListItem
@@ -115,16 +116,31 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 
 	fun onBackPress(): Boolean {
 		if (bottomSheetBehavior?.state == STATE_HIDDEN || (!isPortrait && !isLandScapeVisible())) {
-			return if (mapActivity?.contextMenu?.isVisible == true) {
-				mapActivity?.contextMenu?.hideMenus()
-				true
-			} else {
-				false
-			}
+			return onContextMenuBackPressed()
 		} else {
 			hideList()
 			return true
 		}
+	}
+
+	private fun onContextMenuBackPressed(): Boolean {
+		val contextMenu = mapActivity?.contextMenu ?: return false
+		if (contextMenu.isVisible) {
+			if (!contextMenu.isClosable) {
+				contextMenu.hide()
+			} else if (contextMenu.currentMenuState != MenuState.HEADER_ONLY && !contextMenu.isLandscapeLayout) {
+				contextMenu.openMenuHeaderOnly()
+			} else {
+				contextMenu.close()
+			}
+			return true
+		}
+		val multiSelectionMenu = contextMenu.multiSelectionMenu
+		if (multiSelectionMenu != null && multiSelectionMenu.isVisible) {
+			multiSelectionMenu.hide()
+			return true
+		}
+		return false
 	}
 
 	override fun onCreateView(
@@ -197,6 +213,20 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 		recyclerView?.adapter = adapter
 		recyclerView?.setEmptyView(view.findViewById(R.id.empty_view))
 		searchItems?.let { adapter?.setItems(it) }
+	}
+
+	fun setSearchItems(items: List<QuickSearchListItem>) {
+		stopConvertAmenitiesTask()
+		searchItems = items
+		if (view != null) {
+			showItems(items)
+		}
+	}
+
+	private fun showItems(items: List<QuickSearchListItem>) {
+		adapter?.setItems(items)
+		updateBottomSheetHeight()
+		updateMapControls()
 	}
 
 	private fun buildZoomButtons(view: View) {
@@ -283,9 +313,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 
 			val callback = CallbackWithObject<List<QuickSearchListItem>> { result ->
 				if (isAdded) {
-					adapter?.setItems(result)
-					updateBottomSheetHeight()
-					updateMapControls()
+					showItems(result)
 				}
 				true
 			}

@@ -98,7 +98,7 @@
     <string name="poi_kitchen">Mobiliário de cozinha;loja de cozinha</string>
     <string name="poi_medical_supply">Suprimentos médicos</string>
     <string name="poi_mobile_phone">Loja de celulares</string>
-    <string name="poi_motorcycle">Loja de motos</string>
+    <string name="poi_motorcycle">Loja de motocicletas; motocicletas; loja de motocicletas</string>
     <string name="poi_musical_instrument">Loja de instrumentos musicais</string>
     <string name="poi_newsagent">Banca de jornal;banca de jornais</string>
     <string name="poi_optician">Ótica;oculista</string>
@@ -194,7 +194,7 @@
     <string name="poi_vehicle_ramp">Rampa de veículo</string>
     <string name="poi_compressed_air">Ar comprimido</string>
     <string name="poi_parking">Estacionamento</string>
-    <string name="poi_motorcycle_parking">Estacionamento de moto;estacionamento de motos</string>
+    <string name="poi_motorcycle_parking">Estacionamento de motos</string>
     <string name="poi_parking_entrance">Entrada do estacionamento</string>
     <string name="poi_garages">Garagens</string>
     <string name="poi_public_transport_platform">Parada de transporte público</string>
@@ -1485,7 +1485,7 @@
     <string name="poi_service_repair">Retífica</string>
     <string name="poi_service_repair_no">Sem retífica</string>
     <string name="poi_service_electrical">Retífica de veículos elétricos</string>
-    <string name="poi_motorcycle_repair">Retífica de motos;oficina de motos</string>
+    <string name="poi_motorcycle_repair">Oficina de motos</string>
     <string name="poi_self_service_yes">Auto-Serviço: sim</string>
     <string name="poi_self_service_no">Sem auto-serviço: não</string>
     <string name="poi_automated_yes">Automatizado: sim</string>
@@ -1929,7 +1929,7 @@
     <string name="poi_openfire_yes">Fogueira permitida</string>
     <string name="poi_openfire_no">Fogueira proibida</string>
     <string name="poi_scout_yes">Escoteiro: sim</string>
-    <string name="poi_scout_no">Não</string>
+    <string name="poi_scout_no">Escoteiro: não</string>
     <string name="poi_group_only_yes">Apenas grupos: sim</string>
     <string name="poi_group_only_no">Apenas grupos: não</string>
     <string name="poi_washing_machine_yes">Máquina de lavar: sim</string>
@@ -2866,8 +2866,8 @@
     <string name="poi_scooter_yes">Scooter: sim</string>
     <string name="poi_scooter_no">Scooter: não</string>
     <string name="poi_truck_no">Caminhão: não</string>
-    <string name="poi_parking_fee_yes">Sim</string>
-    <string name="poi_parking_fee_no">Não</string>
+    <string name="poi_parking_fee_yes">Estacionamento pago: sim</string>
+    <string name="poi_parking_fee_no">Estacionamento pago: não</string>
     <string name="poi_parking_fee">Taxa de estacionamento</string>
     <string name="poi_amperage">Amperagem</string>
     <string name="poi_charging_station_output">Saída do eletroposto</string>
@@ -4381,8 +4381,8 @@
     <string name="poi_climbing_grade_aliens">Extraterrestre</string>
     <string name="poi_climbing_bolt_abseil">Rapel</string>
     <string name="poi_climbing_bolt_anchor">Âncora</string>
-    <string name="poi_climbing_bolts_yes">Sim</string>
-    <string name="poi_climbing_bolts_no">Não</string>
+    <string name="poi_climbing_bolts_yes">Parafusos de escalada: sim</string>
+    <string name="poi_climbing_bolts_no">Parafusos de escalada: não</string>
     <string name="poi_climbing_bolts">Parafusos de escalada</string>
     <string name="poi_climbing_quality_medium">Média</string>
     <string name="poi_climbing_grade_french_mean">Rota média (grau francês)</string>
@@ -4947,7 +4947,7 @@
     <string name="poi_camp_site_deluxe">De luxo</string>
     <string name="poi_climbing_area">Área de escalada</string>
     <string name="poi_climbing_route">Rota de escalada</string>
-    <string name="poi_cafe_yes">Sim</string>
+    <string name="poi_cafe_yes">Cafeteria: sim</string>
     <string name="poi_piste_type">Trilha típica</string>
     <string name="poi_piste_oneway">Pista só de ida</string>
     <string name="poi_network_rwn">Rotas regionais de caminhada (RWN)</string>

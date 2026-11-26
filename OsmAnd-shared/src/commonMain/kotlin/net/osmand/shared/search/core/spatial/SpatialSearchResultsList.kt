@@ -132,19 +132,13 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 		}
 		val lst = lstMap.keys()
 		lst.sort() // sort is not correct for file ind last bits >>> 12
-		val wanted = KTLongHashSet(lst.size)
-		var i = 0
-		while (type == SpatialSearchToken.POI_TYPE && i < lst.size) {
-			wanted.add(SpatialSearchContext.poiObjectId(lst[i]))
-			i++
-		}
 		for (id in lst) {
 			if (ctx.isCancelled()) {
 				return
 			}
 			// java puts null for an object that could not be read: the same as no object in the cache
 			val obj = if (type == SpatialSearchToken.POI_TYPE) {
-				ctx.readPoiObject(id, cache, wanted)
+				ctx.readPoiObject(id, cache)
 			} else {
 				ctx.readAddrObject(id, lstMap[id]!!, cache)
 			}
@@ -480,6 +474,7 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 		var partial2: Building? = null
 		var distPartial1 = 0.0
 		var partial1: Building? = null
+		var partial1First = false
 		var distExact = 0.0
 		var exact: Building? = null
 		val query = KSearchAlgorithms.getBuildingCompareSet(bld, tempBuildNames1)
@@ -493,6 +488,7 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 				}
 			} else {
 				val bldSet = KSearchAlgorithms.getBuildingCompareSet(b.getName(), tempBuildNames2)
+				val first = tempBuildNames1.isNotEmpty() && tempBuildNames2.isNotEmpty() && tempBuildNames1[0] == tempBuildNames2[0]
 				if (bldSet == query) {
 					// exact match but could be duplicates 8-8
 					// duplicate could be in query or in house number
@@ -501,9 +497,10 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 					) {
 						val d = if (ctx.location == null) 0.0 else KMapUtils.getDistance(ctx.location, b.getLocation()!!)
 						// just for tests makes sense
-						if (distPartial1 == 0.0 || d < distPartial1) {
+						if (if (first != partial1First) first else (distPartial1 == 0.0 || d < distPartial1)) {
 							partial1 = b
 							distPartial1 = d
+							partial1First = first
 						}
 					} else {
 						// just for tests makes sense
@@ -519,9 +516,10 @@ class SpatialSearchResultsList : Comparable<SpatialSearchResultsList> {
 					if (bldSet.containsAll(query)) {
 						val d = if (ctx.location == null) 0.0 else KMapUtils.getDistance(ctx.location, b.getLocation()!!)
 						// just for tests makes sense
-						if (distPartial1 == 0.0 || d < distPartial1) {
+						if (if (first != partial1First) first else (distPartial1 == 0.0 || d < distPartial1)) {
 							partial1 = b
 							distPartial1 = d
+							partial1First = first
 						}
 					}
 				} else if (bldSet.size + 1 == query.size) {

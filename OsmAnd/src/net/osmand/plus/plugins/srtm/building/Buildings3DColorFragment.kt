@@ -65,9 +65,8 @@ class Buildings3DColorFragment : MultiStateColorPaletteFragment() {
 		}
 	}
 
-	override fun getScreenController(): MultiStateColorPaletteController {
-		return Buildings3DColorScreenController.getExistedInstance(app) ?:
-		throw IllegalStateException("Buildings3DColorScreenController is missing from DialogManager")
+	override fun getScreenController(): MultiStateColorPaletteController? {
+		return Buildings3DColorScreenController.getExistedInstance(app)
 	}
 
 	override fun getAnalyticsScreen() = "buildings_3d_color"

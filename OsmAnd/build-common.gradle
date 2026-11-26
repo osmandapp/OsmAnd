@@ -144,12 +144,40 @@ tasks.register('validateTranslations') {
 
 	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
 
+	// The app formats a string with String.format when its source has % specifiers and with
+	// MessageFormat when it has {n}, so each translation must survive the same call
+	def formatArgs = [:]
+	def messageFormatKeys = [] as Set
+
+	// An argument of the type of each % specifier of a source string, by position (%2$s) or in order (%s)
+	def sampleArgs = { String text ->
+		def sampleArg = [d: 1, f: 1.0d, t: 1L]
+		def args = []
+		int next = 0
+		text.eachMatch(/%(?:(\d+)\$)?[\d.]*([a-zA-Z%])/) { spec, position, type ->
+			if (type != '%') {
+				int index = position ? position.toInteger() - 1 : next++
+				args[index] = sampleArg[type] ?: ""
+			}
+		}
+		return args.toArray()
+	}
+
+	// Throws what the app would throw when it formats this translation
+	def formatLikeApp = { String name, String translation ->
+		if (formatArgs[name]) String.format(translation, formatArgs[name])
+		if (name in messageFormatKeys) new java.text.MessageFormat(translation)
+	}
+
 	files.each { fileName ->
 		def file = new File(file("res/values"), fileName)
 		if (file.exists()) {
 			parser.parse(file).string.each { node ->
 				def placeholders = (node.text() ?: "").findAll(pattern)
 				defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
+				def args = sampleArgs(node.text() ?: "")
+				if (args) formatArgs[node.@name] = args
+				if (node.text() =~ /\{\d+\}/) messageFormatKeys << node.@name
 			}
 		} else {
 			println "Skipping missing default file: ${file.path}"
@@ -169,6 +197,11 @@ tasks.register('validateTranslations') {
 				parser.parse(file).string.each { node ->
 					def translationPlaceholders = (node.text() ?: "").findAll(pattern)
 					placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+					try {
+						formatLikeApp(node.@name, node.text())
+					} catch (Exception e) {
+						issues << "Format error in ${file.path}: '${node.@name}' -> ${e}"
+					}
 				}
 
 				defaultPlaceholders.each { key, defaultValues ->

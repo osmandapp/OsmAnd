@@ -12,6 +12,11 @@ import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class GridZoomLevelsController extends ZoomLevelsController {
 
@@ -44,6 +49,13 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	public void onApplyChanges() {
 		applyChanges = true;
 		selectedLimits = getSavedZoomLimits();
+	}
+
+	@NonNull
+	@Override
+	public List<OsmandPreference<?>> getPreviewPreferences() {
+		OsmandSettings settings = app.getSettings();
+		return Arrays.asList(settings.COORDINATE_GRID_MIN_ZOOM, settings.COORDINATE_GRID_MAX_ZOOM);
 	}
 
 	protected void setSavedZoomLimits(@NonNull Limits<Integer> limits) {

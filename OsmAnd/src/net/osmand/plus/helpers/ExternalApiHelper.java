@@ -23,6 +23,7 @@ import android.os.ParcelFileDescriptor;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -794,7 +795,9 @@ public class ExternalApiHelper {
 			ProgressDialog dlg = new ProgressDialog(mapActivity);
 			dlg.setTitle("");
 			dlg.setMessage(mapActivity.getString(R.string.searching_address));
-			dlg.show();
+			if (AndroidUtils.isStateAtLeast(mapActivity, Lifecycle.State.STARTED)) {
+				dlg.show();
+			}
 			WeakReference<ProgressDialog> dlgRef = new WeakReference<>(dlg);
 			runSearch(app, searchQuery, SearchParams.SEARCH_TYPE_ALL,
 					searchLocation.getLatitude(), searchLocation.getLongitude(),

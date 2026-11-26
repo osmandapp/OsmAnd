@@ -1372,8 +1372,8 @@
     <string name="poi_government_transportation">Institución de transporte</string>
     <string name="poi_government_legislative">Institución lexislativa</string>
     <string name="poi_location_underground">Localización: subterráneo</string>
-    <string name="poi_parking_fee_yes">Si</string>
-    <string name="poi_parking_fee_no">Non</string>
+    <string name="poi_parking_fee_yes">Aparcadoiro tarifado: si</string>
+    <string name="poi_parking_fee_no">Aparcadoiro tarifado: non</string>
     <string name="poi_parking_fee">Aparcadoiro tarifado</string>
     <string name="poi_outdoor_seating">Mesas ao ar libre</string>
     <string name="poi_takeaway">Comida para levar</string>
@@ -4064,7 +4064,7 @@
     <string name="poi_climbing_grade_super_elite">Elite superior</string>
     <string name="poi_climbing_bolt_abseil">Rápel</string>
     <string name="poi_climbing_bolt_anchor">Ancoraxe</string>
-    <string name="poi_climbing_bolts_no">Non</string>
+    <string name="poi_climbing_bolts_no">Ancoraxes de escalada: non</string>
     <string name="poi_climbing_bolts">Ancoraxes de escalada</string>
     <string name="poi_recycling_coffee_capsules">Cápsulas de café</string>
     <string name="poi_horse_designated">Destinado a cabalos</string>
@@ -4116,7 +4116,7 @@
     <string name="poi_healthcare_speciality_autism">Autismo</string>
     <string name="poi_healthcare_speciality_venereology">Venereoloxía</string>
     <string name="poi_climbing_grade_super_expert">Moi experto</string>
-    <string name="poi_climbing_bolts_yes">Si</string>
+    <string name="poi_climbing_bolts_yes">Ancoraxes de escalada: si</string>
     <string name="poi_toilets_handwashing_yes">Lavado de mans: si</string>
     <string name="poi_payment_parco_yes">Parco</string>
     <string name="poi_payment_parkster_no">Parkster: non</string>
@@ -4944,7 +4944,7 @@
     <string name="poi_climbing_area">Ascendendo área</string>
     <string name="poi_climbing_route">Ascendendo ruta</string>
     <string name="poi_climbing_route_bottom">Ascendendo fondo de ruta</string>
-    <string name="poi_cafe_yes">Si</string>
+    <string name="poi_cafe_yes">Cafetaría: si</string>
     <string name="poi_sled_yes">Sled: Si</string>
     <string name="poi_sled_no">Sled: Non</string>
     <string name="poi_dog_sled_yes">Can sled: si</string>

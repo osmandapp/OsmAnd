@@ -531,6 +531,17 @@ public class MapMarkersHelper {
 		return null;
 	}
 
+	@NonNull
+	public Map<WptPt, MapMarker> getWptPtMarkers() {
+		Map<WptPt, MapMarker> markers = new IdentityHashMap<>();
+		for (MapMarker marker : getAllMarkers()) {
+			if (marker.wptPt != null) {
+				markers.putIfAbsent(marker.wptPt, marker);
+			}
+		}
+		return markers;
+	}
+
 	@Nullable
 	public MapMarker getMapMarker(FavouritePoint favouritePoint) {
 		for (MapMarker marker : getAllMarkers()) {

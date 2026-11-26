@@ -326,7 +326,7 @@ public class MapMultiSelectionMenuFragment extends BaseNestedFragment
 			} else {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
 				if (!manager.isStateSaved()) {
-					manager.popBackStack();
+					manager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 				}
 			}
 		});

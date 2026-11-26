@@ -3276,7 +3276,7 @@
     <string name="poi_water_place_durability_emergency">Obstojnost vodne površine: v sili</string>
     <string name="poi_water_supply_borehole">Vrtina</string>
     <string name="poi_socket_tesla_supercharger_current">Vtičnica: Tesla Supercharger: tok</string>
-    <string name="poi_parking_fee_no">Ne</string>
+    <string name="poi_parking_fee_no">Parkirnina: ne</string>
     <string name="poi_socket_cee_red_16a_current">Vtičnica: CEE rdeča 16A: tok</string>
     <string name="poi_socket_nema_5_20_current">Vtičnica: NEMA 5-20: tok</string>
     <string name="poi_socket_nema_14_50_output">Vtičnica: NEMA 14-50: izhod</string>
@@ -3473,7 +3473,7 @@
     <string name="poi_scooter_yes">Skuter: da</string>
     <string name="poi_scooter_no">Skuter: ne</string>
     <string name="poi_truck_no">Tovornjak: ne</string>
-    <string name="poi_parking_fee_yes">Da</string>
+    <string name="poi_parking_fee_yes">Parkirnina: da</string>
     <string name="poi_parking_fee">Parkirnina</string>
     <string name="poi_amperage">Amperaža</string>
     <string name="poi_charging_station_output">Izhod polnilne postaje</string>
@@ -4393,8 +4393,8 @@
     <string name="poi_climbing_grade_aliens">Za nezemljane</string>
     <string name="poi_climbing_bolt_abseil">Spust po vrvi</string>
     <string name="poi_climbing_bolt_anchor">Sidrišče</string>
-    <string name="poi_climbing_bolts_yes">Da</string>
-    <string name="poi_climbing_bolts_no">Ne</string>
+    <string name="poi_climbing_bolts_yes">Plezalni svedrovci: da</string>
+    <string name="poi_climbing_bolts_no">Plezalni svedrovci: ne</string>
     <string name="poi_climbing_quality_medium">srednja</string>
     <string name="poi_climbing_bolts">Plezalni svedrovci</string>
     <string name="poi_climbing_quality">Kakovost podlage plezališča</string>

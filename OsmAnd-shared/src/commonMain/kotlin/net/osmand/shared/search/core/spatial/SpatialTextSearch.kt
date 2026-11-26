@@ -617,6 +617,13 @@ class SpatialTextSearch(searchRulesDir: String) {
 		ctx.setTokens(tokens)
 		ctx.processPoiCategories()
 		ctx.readAtoms()
+		if (ctx.isCancelled()) {
+			// the atoms are not complete, no combinations are computed for a cancelled search
+			ctx.stats.step1Atoms.finish()
+			ctx.stats.requestTime.finish()
+			res.combinations = emptyList()
+			return res
+		}
 		res.typoSuggestion = ctx.typos.suggestion(input, tokens)
 		ctx.stats.step1Atoms.finish()
 

@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -247,7 +248,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public void onCreate() {
-		if (RestartActivity.isRestartProcess(this)) {
+		// An isolated process (e.g. a WebView renderer) may not call getRunningAppProcesses() and must not init the app
+		boolean isolatedProcess = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && Process.isIsolated();
+		if (isolatedProcess || RestartActivity.isRestartProcess(this)) {
 			return;
 		}
 		long timeToStart = System.currentTimeMillis();
@@ -595,8 +598,17 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
+		Locale preferredLocale = localeHelper.getPreferredLocale();
+		boolean applyPreferredLocale = preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage());
+
+		// newConfig carries the system language: when OsmAnd applies its own, getResources() has to keep it
+		Configuration config = newConfig;
+		if (applyPreferredLocale) {
+			config = new Configuration(newConfig);
+			config.setLocale(preferredLocale);
+		}
 		Resources resources = getResources();
-		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+		resources.updateConfiguration(config, resources.getDisplayMetrics());
 
 		resources = getBaseContext().getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
@@ -615,8 +627,7 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 
-		Locale preferredLocale = localeHelper.getPreferredLocale();
-		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
+		if (applyPreferredLocale) {
 			super.onConfigurationChanged(newConfig);
 			Locale.setDefault(preferredLocale);
 			localeHelper.checkPreferredLocale();
@@ -852,10 +863,16 @@ public class OsmandApplication extends MultiDexApplication {
 	public void onCarNavigationSessionStart(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = true;
 		routingHelper.onCarNavigationStart();
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
+			plugin.onCarNavigationSessionStart();
+		}
 	}
 
 	public void onCarNavigationSessionStop(@NonNull NavigationSession carNavigationSession) {
 		androidAutoInForeground = false;
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
+			plugin.onCarNavigationSessionStop();
+		}
 	}
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {

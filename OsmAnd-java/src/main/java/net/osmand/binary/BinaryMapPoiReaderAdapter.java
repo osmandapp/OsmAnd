@@ -999,7 +999,7 @@ public class BinaryMapPoiReaderAdapter {
 				if (--index == -1) {
 					// index initially could be -1
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-					return read;
+					return am != null;
 				}
 				break;
 			default:

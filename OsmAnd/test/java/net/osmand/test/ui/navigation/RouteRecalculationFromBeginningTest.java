@@ -86,6 +86,8 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 			unregisterIdlingResources(idlingResource);
 		}
 		app.stopNavigation();
+		// left set, it makes the app ignore any other location for 5 minutes, also in the tests that follow
+		app.getLocationProvider().setCustomLocation(null, 0);
 	}
 
 	@Test

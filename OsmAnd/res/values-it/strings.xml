@@ -4434,7 +4434,7 @@
     <string name="auto_25_chars_route_tr">Gira a destra</string>
     <string name="auto_25_chars_route_tsll">Gira leggermente a sinistra</string>
     <string name="driving_region_india">India</string>
-    <string name="hugerock_promo_description">Accesso gratuito a funzionalità tra cui download illimitati di mappe, rilievi 3D ecc. per %1$s mensili</string>
+    <string name="hugerock_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti illimitati delle mappe, rilievi 3D ecc., per %1$s mesi</string>
     <string name="driving_region_uk">UK e simili</string>
     <string name="hugerock_promo">Promozione prodotti Hugerock per %1$s mesi</string>
     <string name="shared_string_automatically">Automaticamente</string>
@@ -4739,7 +4739,7 @@
     <string name="suggest_activate_map_msg">La mappa %1$s è disattivata,\nattivala per visualizzare quest\'area.</string>
     <string name="unit_of_temperature_description">Scegli l\'unità di misura che verrà utilizzata per tutte le temperature nel profilo attuale.</string>
     <string name="hmd_promo_years">HMD Promo per %1$s anni</string>
-    <string name="hmd_promo_description_years">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s anni</string>
+    <string name="hmd_promo_description_years">Accesso gratuito alle funzionalità, inclusi scaricamenti illimitati delle mappe, rilievi 3D ecc., per %1$s anni</string>
     <string name="shared_string_flat">Pianeggiante</string>
     <string name="uphill_downhill_split">Salita/Discesa</string>
     <string name="osm_live_payment_renews_3_years">Si rinnova ogni tre anni</string>
@@ -5326,7 +5326,7 @@
     <string name="duplicate_map_replace_with_road">Sostitutisci con Solo-strade</string>
     <string name="rendering_attr_surface_clay_name">Argilla</string>
     <string name="rendering_attr_surface_laterite_name">Laterite</string>
-    <string name="share_favorites_media_preparation_failed">Impossibile includere i file multimediali allegati. Condivisi solo i punti.</string>
+    <string name="share_favorites_media_preparation_failed">Impossibile includere i contenuti multimediali allegati. Condivisi solo i punti.</string>
     <plurals name="files_count">
         <item quantity="one">%d file</item>
         <item quantity="many">%d file</item>
@@ -5370,7 +5370,7 @@
     <string name="heap_dump_share_descr">Invia l\'ultimo rapporto al server.</string>
     <string name="heap_dump_auto">Raccogli in caso di utilizzo elevato</string>
     <string name="heap_dump_auto_descr">Quando la memoria heap è quasi piena, una volta ogni 30 minuti.</string>
-    <string name="visualizing_button_grid_descr">Celle, slot, frame e log.</string>
+    <string name="visualizing_button_grid_descr">Celle, intervalli di tempo, trame e registri.</string>
     <string name="contour_labels">Etichette</string>
     <string name="contour_label_direction_descr">In salita: la parte superiore di ogni numero indicante l\'altitudine guarda verso il terreno più elevato, come sulle mappe topografiche cartacee. Le brevi spunte sulle linee indicano la discesa.</string>
     <string name="rendering_attr_contourLabelDirection_name">Direzione dell\'etichetta</string>
@@ -5406,12 +5406,12 @@
     <string name="attach_to_favorite">Allega a un preferito</string>
     <string name="map_source_saved_as">Fonte della mappa salvata come \'%1$s\'.</string>
     <string name="map_source_folder_not_created">Impossibile creare una cartella per la fonte della mappa. Prova un nome diverso.</string>
-    <string name="delete_media_title">Cancello il contenuto multimediale?</string>
+    <string name="delete_media_title">Vuoi eliminare il contenuto multimediale?</string>
     <string name="delete_media_descr">Questo file sarà eliminato definitivamente dal tuo dispositivo. Scomparirà da tutti i preferiti a cui è associato.</string>
-    <string name="delete_media_title_plural">Cancello %1$d contenuti multimediali?</string>
+    <string name="delete_media_title_plural">Vuoi eliminare %1$d contenuti multimediali?</string>
     <string name="delete_media_descr_plural">Questi file saranno eliminati definitivamente dal tuo dispositivo. Scompariranno da tutti i preferiti a cui sono associati.</string>
-    <string name="detach_media_title">Scollego i contenuti multimediali?</string>
-    <string name="detach_media_title_plural">Scollego %1$d contenuti multimediali?</string>
+    <string name="detach_media_title">Vuoi scollegare il contenuto multimediale?</string>
+    <string name="detach_media_title_plural">Vuoi scollegare %1$d contenuti multimediali?</string>
     <string name="detach_media_descr">Il file non sarà più visualizzato in questo preferito. Rimane sul tuo dispositivo e nella libreria multimediale.</string>
     <string name="detach_media_descr_plural">I file non saranno più visualizzati in questo preferito. Rimangono sul tuo dispositivo e nella libreria multimediale.</string>
     <string name="shared_string_detach">Scollega</string>
@@ -5433,9 +5433,14 @@
     <string name="eta_adapt_to_my_speed_off_descr">L\'orario di arrivo è calcolato in funzione della velocità prevista su ogni strada del percorso. Attiva per calcolarlo in base alla tua velocità effettiva.</string>
     <string name="flyover_recording">Registrazione del video della mappa: %1$s</string>
     <string name="flyovers">Sorvoli</string>
-    <string name="select_tracks">Selezione tracce</string>
+    <string name="select_tracks">Seleziona tracce</string>
     <string name="storage_directory_visible_external">Archivio esterno visibile</string>
     <string name="update_maps_to_use_new_search">Aggiorna le mappe per usare la nuova ricerca (%1$s)</string>
     <string name="free_region_not_chosen_descr">La regione della prima mappa scaricata diventa la tua regione gratuita.</string>
     <string name="free_region_banner_descr">Tutte le mappe di %1$s sono gratuite.</string>
+    <string name="attach_to_track">Collega al percorso</string>
+    <string name="visualization">Visualizzazione</string>
+    <string name="terrain_shadows">Ombre del terreno</string>
+    <string name="free_region_other_title">%1$s non è la tua regione gratuita</string>
+    <string name="free_region_other_descr">La versione gratuita include le mappe di una sola regione. Scaricando %1$s, le mappe delle altre regioni verranno eliminate.</string>
 </resources>

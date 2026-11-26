@@ -469,6 +469,12 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		}
 	}
 
+	public boolean isCarTiltApplied() {
+		OsmandMapTileView mapView = this.mapView;
+		AtlasMapRendererView rendererView = offscreenMapRendererView;
+		return rendererView != null && mapView != null && mapView.getMapRenderer() == rendererView;
+	}
+
 	public synchronized void stopOffscreenRenderer() {
 		Log.i(TAG, "stopOffscreenRenderer");
 		if (offscreenMapRendererView != null) {

@@ -5365,4 +5365,7 @@
     <string name="outdated_maps_warning_title">Déan do léarscáileanna a nuashonrú</string>
     <string name="outdated_maps_warning_descr">Teastaíonn léarscáileanna den leagan seo ón gcuardach nua. Déan do chuid léarscáileanna go léir a nuashonrú – tá sé saor in aisce.</string>
     <string name="free_region_other_regions_need_maps_plus">Tá Léarscáileanna+ ag teastáil ó réigiúin eile: %1$s</string>
+    <string name="visualization">Amharcléiriú</string>
+    <string name="terrain_shadows">Scáthanna an tírdhreacha</string>
+    <string name="attach_to_track">Ceangail leis an rian</string>
 </resources>

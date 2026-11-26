@@ -8,8 +8,13 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class SunParametersController extends BaseDialogController {
 
@@ -21,30 +26,43 @@ public class SunParametersController extends BaseDialogController {
 	private static final int MAX_ALTITUDE = 90;
 
 	private final SRTMPlugin plugin;
+	/* the screen the panel was opened from: 3D Relief or 3D buildings */
+	private final DashboardType returnTo;
 	private final int initialAzimuth;
 	private final int initialAltitude;
-	private final boolean initialShadowsEnabled;
+	private final SunLightMode initialMode;
+	private final long initialTime;
 
 	private int azimuth;
 	private int altitude;
-	private boolean shadowsEnabled;
+	private SunLightMode mode;
+	private long time;
 	private boolean applyChanges = false;
 
-	public SunParametersController(@NonNull OsmandApplication app, @NonNull SRTMPlugin plugin) {
+	public SunParametersController(@NonNull OsmandApplication app, @NonNull SRTMPlugin plugin,
+	                               @NonNull DashboardType returnTo) {
 		super(app);
 		this.plugin = plugin;
+		this.returnTo = returnTo;
 		this.initialAzimuth = plugin.HILLSHADE_SUN_AZIMUTH.get();
 		this.initialAltitude = plugin.HILLSHADE_SUN_ANGLE.get();
-		this.initialShadowsEnabled = app.getSettings().CAST_SHADOWS.get();
 		this.azimuth = initialAzimuth;
 		this.altitude = initialAltitude;
-		this.shadowsEnabled = initialShadowsEnabled;
+		this.initialMode = plugin.SUN_LIGHT_MODE.get();
+		this.initialTime = plugin.SUN_LIGHT_TIME.get();
+		this.mode = initialMode;
+		this.time = initialTime;
 	}
 
 	@NonNull
 	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
+	}
+
+	@NonNull
+	public DashboardType getReturnTo() {
+		return returnTo;
 	}
 
 	public void setAzimuth(int value) {
@@ -57,17 +75,39 @@ public class SunParametersController extends BaseDialogController {
 		plugin.HILLSHADE_SUN_ANGLE.set(value);
 	}
 
-	public boolean isShadowsEnabled() {
-		return shadowsEnabled;
+	@NonNull
+	public SunLightMode getMode() {
+		return mode;
 	}
 
-	public void setShadowsEnabled(boolean enabled) {
-		shadowsEnabled = enabled;
-		app.getSettings().CAST_SHADOWS.set(enabled);
+	public void setMode(@NonNull SunLightMode mode) {
+		this.mode = mode;
+		plugin.SUN_LIGHT_MODE.set(mode);
+	}
+
+	/** Date and time of {@link SunLightMode#DATE}, now until one is chosen. */
+	public long getTime() {
+		return plugin.getSunLight().getDateTime();
+	}
+
+	public void setTime(long time) {
+		this.time = time;
+		plugin.SUN_LIGHT_TIME.set(time);
+	}
+
+	@NonNull
+	public SunLight.Angles getSunAngles() {
+		return plugin.getSunLight().getAngles();
 	}
 
 	public void onApplyChanges() {
 		applyChanges = true;
+	}
+
+	@NonNull
+	public List<OsmandPreference<?>> getPreviewPreferences() {
+		return Arrays.asList(plugin.HILLSHADE_SUN_AZIMUTH, plugin.HILLSHADE_SUN_ANGLE,
+				plugin.SUN_LIGHT_MODE, plugin.SUN_LIGHT_TIME);
 	}
 
 	@Override
@@ -75,7 +115,8 @@ public class SunParametersController extends BaseDialogController {
 		if (super.finishProcessIfNeeded(activity)) {
 			setAzimuth(applyChanges ? azimuth : initialAzimuth);
 			setAltitude(applyChanges ? altitude : initialAltitude);
-			setShadowsEnabled(applyChanges ? shadowsEnabled : initialShadowsEnabled);
+			setTime(applyChanges ? time : initialTime);
+			setMode(applyChanges ? mode : initialMode);
 			return true;
 		}
 		return false;
@@ -99,14 +140,15 @@ public class SunParametersController extends BaseDialogController {
 
 	protected boolean hasChanges() {
 		return initialAzimuth != azimuth || initialAltitude != altitude
-				|| initialShadowsEnabled != shadowsEnabled;
+				|| initialMode != mode || initialTime != time;
 	}
 
-	public static void showDialog(@NonNull OsmandApplication app, @NonNull FragmentManager manager) {
+	public static void showDialog(@NonNull OsmandApplication app, @NonNull FragmentManager manager,
+	                              @NonNull DashboardType returnTo) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
 			DialogManager dialogManager = app.getDialogManager();
-			dialogManager.register(PROCESS_ID, new SunParametersController(app, plugin));
+			dialogManager.register(PROCESS_ID, new SunParametersController(app, plugin, returnTo));
 
 			if (!SunParametersFragment.showInstance(manager)) {
 				dialogManager.unregister(PROCESS_ID);

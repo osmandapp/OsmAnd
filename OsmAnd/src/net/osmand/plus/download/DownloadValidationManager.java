@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.freeregion.FreeRegionBottomSheet;
 import net.osmand.plus.download.freeregion.FreeRegionCheck;
+import net.osmand.plus.download.freeregion.FreeVersionMapDownloads;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.io.File;
@@ -83,15 +84,45 @@ public class DownloadValidationManager {
 		if (isAllAssets(items)) {
 			copyVoiceAssetsWithoutInternet(context, items);
 		} else {
-			downloadFilesWithAllChecks(context, items, downloadThread::runDownloadFiles);
+			downloadFilesWithAllChecks(context, items, Collections.emptyList(), downloadThread::runDownloadFiles);
 		}
 	}
 
 	public void startReplacementDownload(@NonNull FragmentActivity context, @NonNull IndexItem item,
 	                                     @NonNull File fileToDelete) {
-		downloadFilesWithAllChecks(context, new IndexItem[] {item}, validatedItems ->
-				downloadThread.runDownloadFileWithPendingCleanup(
-						validatedItems[0], Collections.singletonList(fileToDelete)));
+		List<File> filesToDelete = Collections.singletonList(fileToDelete);
+		downloadFilesWithAllChecks(context, new IndexItem[] {item}, filesToDelete, validatedItems ->
+				downloadThread.runDownloadFilesWithPendingCleanup(filesToDelete, validatedItems[0]));
+	}
+
+	/**
+	 * The server allowed replacing the free region with the region of the items. Nothing changes until
+	 * the download passes the internet and space checks: only then the region becomes free and the maps
+	 * of other regions are deactivated, to be deleted once a new map is installed.
+	 *
+	 * @param filesToDelete deleted after the install too, e.g. the copy the duplicate map warning replaces
+	 */
+	public void startFreeRegionReplace(@NonNull FragmentActivity activity, @NonNull WorldRegion region,
+	                                   @NonNull List<File> filesToDelete, @NonNull IndexItem... items) {
+		FreeVersionMapDownloads freeMaps = downloadThread.getFreeVersionMapDownloads();
+		FreeRegionCheck check = freeMaps.check(items, region);
+		IndexItem[] regionItems = check.isAllFree() ? items : skipOtherRegions(check);
+		if (regionItems != null) {
+			downloadFilesCheck_2_Internet(activity, regionItems, validatedItems -> {
+				if (freeMaps.isFreeVersion()) {
+					// the download could not be queued: keep the free region and the maps
+					if (!downloadThread.checkReloadRunning()) {
+						freeMaps.replaceFreeRegion(region, deactivatedFiles -> {
+							List<File> files = new ArrayList<>(deactivatedFiles);
+							files.addAll(filesToDelete);
+							downloadThread.runDownloadFilesWithPendingCleanup(files, validatedItems);
+						});
+					}
+				} else {
+					downloadThread.runDownloadFilesWithPendingCleanup(filesToDelete, validatedItems);
+				}
+			});
+		}
 	}
 
 	private void copyVoiceAssetsWithoutInternet(@NonNull FragmentActivity activity, IndexItem... items) {
@@ -108,8 +139,8 @@ public class DownloadValidationManager {
 	}
 
 	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
-	                                        @NonNull DownloadValidatedCallback callback) {
-		IndexItem[] freeItems = downloadFilesCheck_1_FreeRegion(activity, items, callback);
+	                                        @NonNull List<File> filesToDelete, @NonNull DownloadValidatedCallback callback) {
+		IndexItem[] freeItems = downloadFilesCheck_1_FreeRegion(activity, items, filesToDelete);
 		if (freeItems != null) {
 			downloadFilesCheck_2_Internet(activity, freeItems, callback);
 		}
@@ -117,24 +148,30 @@ public class DownloadValidationManager {
 
 	/**
 	 * Free version: new maps of one region only, updates of maps on the device always go through.
-	 * A single map of another region opens the replace of the free region, which restarts the download
-	 * itself; maps of other regions requested together with free ones are skipped with a toast.
+	 * A single map of another region opens the replace of the free region, which starts the download
+	 * itself, see {@link #startFreeRegionReplace}; maps of other regions requested together with free
+	 * ones are skipped with a toast.
 	 *
 	 * @return the items to download now, or null when nothing is left or the replace sheet takes over
 	 */
 	@Nullable
 	private IndexItem[] downloadFilesCheck_1_FreeRegion(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
-	                                                    @NonNull DownloadValidatedCallback callback) {
+	                                                    @NonNull List<File> filesToDelete) {
 		FreeRegionCheck check = downloadThread.getFreeVersionMapDownloads().check(items);
 		if (check.isAllFree()) {
 			return items;
 		}
 		if (check.getFreeItems().isEmpty() && check.getFreeRegion() != null) {
 			WorldRegion region = check.getOtherRegions().iterator().next();
-			FreeRegionBottomSheet.showInstance(activity, check.getFreeRegion(), region, items,
-					() -> downloadFilesWithAllChecks(activity, items, callback));
+			FreeRegionBottomSheet.showInstance(activity, check.getFreeRegion(), region, items, filesToDelete);
 			return null;
 		}
+		return skipOtherRegions(check);
+	}
+
+	/** @return the free items, or null when none is left */
+	@Nullable
+	private IndexItem[] skipOtherRegions(@NonNull FreeRegionCheck check) {
 		List<String> names = new ArrayList<>();
 		for (WorldRegion region : check.getOtherRegions()) {
 			names.add(region.getLocaleName());

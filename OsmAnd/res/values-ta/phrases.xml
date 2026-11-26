@@ -576,7 +576,7 @@
     <string name="poi_socket_type2_voltage_high">உயர்ந்த</string>
     <string name="poi_socket_type2_cable_voltage_medium">சராசரி</string>
     <string name="poi_socket_schuko_voltage_high">உயர்ந்த</string>
-    <string name="poi_parking_fee_no">இல்லை</string>
+    <string name="poi_parking_fee_no">பார்க்கிங் கட்டணம்: இல்லை</string>
     <string name="poi_depot">டிப்போ</string>
     <string name="poi_climbing_sport_no">விளையாட்டு: இல்லை</string>
     <string name="poi_climbing_mixed_yes">கலப்பு: ஆம்</string>
@@ -821,7 +821,7 @@
     <string name="poi_climbing_boulder">ஏறும் கற்பாறை</string>
     <string name="poi_camp_site_basic">அடிப்படை</string>
     <string name="poi_camp_site_standard">தரநிலை</string>
-    <string name="poi_cafe_yes">ஆம்</string>
+    <string name="poi_cafe_yes">கஃபே: ஆம்</string>
     <string name="poi_fuel_type">எரிபொருள் வகை</string>
     <string name="poi_fuel_avia_type">எரிபொருள் வகை (அவியா)</string>
     <string name="poi_payment_type">கட்டண வகை</string>
@@ -3788,7 +3788,7 @@
     <string name="poi_scooter_yes">ச்கூட்டர்: ஆம்</string>
     <string name="poi_scooter_no">ச்கூட்டர்: இல்லை</string>
     <string name="poi_truck_no">டிரக்: இல்லை</string>
-    <string name="poi_parking_fee_yes">ஆம்</string>
+    <string name="poi_parking_fee_yes">பார்க்கிங் கட்டணம்: ஆம்</string>
     <string name="poi_parking_fee">பார்க்கிங் கட்டணம்</string>
     <string name="poi_amperage">ஆம்பரேச்</string>
     <string name="poi_charging_station_output">ச்டேசன் வெளியீடு</string>
@@ -4592,8 +4592,8 @@
     <string name="poi_climbing_grade_aliens">வேற்றுகிரகவாசிகள்</string>
     <string name="poi_climbing_bolt_abseil">அப்சைலிங்</string>
     <string name="poi_climbing_bolt_anchor">நங்கூரம்</string>
-    <string name="poi_climbing_bolts_yes">ஆம்</string>
-    <string name="poi_climbing_bolts_no">இல்லை</string>
+    <string name="poi_climbing_bolts_yes">ஏறும் போல்ட்: ஆம்</string>
+    <string name="poi_climbing_bolts_no">ஏறும் போல்ட்: இல்லை</string>
     <string name="poi_climbing_bolts">ஏறும் போல்ட்</string>
     <string name="poi_climbing_quality_medium">சராசரி</string>
     <string name="poi_trampoline_park">டிராம்போலைன் பார்க்</string>

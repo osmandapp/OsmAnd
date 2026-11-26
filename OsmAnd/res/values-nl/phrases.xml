@@ -1906,7 +1906,7 @@
     <string name="poi_openfire_yes">Open vuur toegestaan</string>
     <string name="poi_openfire_no">Open vuur niet toegestaan</string>
     <string name="poi_backcountry_yes">Afgelegen plaats: ja</string>
-    <string name="poi_backcountry_no">Nee</string>
+    <string name="poi_backcountry_no">Afgelegen plaats: nee</string>
     <string name="poi_scout_yes">Padvinderskamp: ja</string>
     <string name="poi_scout_no">Padvinderskamp: nee</string>
     <string name="poi_group_only_yes">Alleen groepen: ja</string>
@@ -3428,8 +3428,8 @@
     <string name="poi_charging_station_output">Vermogen van het laadstation</string>
     <string name="poi_amperage">Stroomsterkte</string>
     <string name="poi_parking_fee">Parkeergeld</string>
-    <string name="poi_parking_fee_no">Nee</string>
-    <string name="poi_parking_fee_yes">Ja</string>
+    <string name="poi_parking_fee_no">Parkeertarief: nee</string>
+    <string name="poi_parking_fee_yes">Parkeertarief: ja</string>
     <string name="poi_scooter_no">Scooter: nee</string>
     <string name="poi_scooter_yes">Scooter: ja</string>
     <string name="poi_socket_as3112_output">Stopcontact: AS/NZS 3112: vermogen</string>
@@ -4798,8 +4798,8 @@
     <string name="poi_vehicle_designated">Aangewezen voor voertuigen</string>
     <string name="poi_climbing_bolt_abseil">Abseilen</string>
     <string name="poi_climbing_bolt_anchor">Anker</string>
-    <string name="poi_climbing_bolts_yes">Ja</string>
-    <string name="poi_climbing_bolts_no">Nee</string>
+    <string name="poi_climbing_bolts_yes">Klimbouten: ja</string>
+    <string name="poi_climbing_bolts_no">Klimbouten: nee</string>
     <string name="poi_climbing_bolts">Klimbouten</string>
     <string name="poi_climbing_quality_medium">Gemiddeld</string>
     <string name="poi_hazard_yes">Gevaar</string>

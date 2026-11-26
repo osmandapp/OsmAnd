@@ -275,7 +275,9 @@ public class WidgetsSettingsHelper {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, MATCHING_PANELS_MODE, panels);
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			if (WidgetType.isOriginalWidget(widgetInfo.key) && WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetInfo.key, appMode)) {
+			// "null" for a widget whose default depends on the orientation: "true" would show it in the other orientation too
+			if (WidgetType.isOriginalWidget(widgetInfo.key) && WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetInfo.key, appMode)
+					&& !WidgetsAvailabilityHelper.isVisibleByDefaultDependsOnOrientation(widgetInfo.key)) {
 				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, true, layoutMode, false);
 			} else {
 				// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel

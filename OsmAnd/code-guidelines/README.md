@@ -25,3 +25,8 @@ Rules for new Java and Kotlin code in `:OsmAnd`. Existing code moves to them whe
 ## One-time actions after an update
 
 - Something done once on the update from an older version (a migration, a one-time dialog) is tied to a version in `AppVersionUpgradeOnInit`: add a `VERSION_x_y_zz` constant, raise `LAST_APP_VERSION`, and check `prevAppVersion < VERSION_x_y_zz`. Do not check a flag on every start of an activity.
+
+## No Compose views in `ListView` rows
+
+- `ListView`, `GridView` and `ExpandableListView` drop surplus rows without detaching them, and a Compose view (`ComposeView`, `AbstractComposeView`) that is never detached keeps its window and activity alive (#26403).
+- Put Compose views into a `RecyclerView`, a fragment or dialog layout, or a `PopupWindow`.

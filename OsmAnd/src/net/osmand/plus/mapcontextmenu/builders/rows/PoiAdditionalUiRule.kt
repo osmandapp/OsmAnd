@@ -6,6 +6,7 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.DefaultPoiAdditionalRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.IPoiAdditionalRowBehavior
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.PoiRowParams
+import net.osmand.shared.data.AdditionalInfoBundle
 import net.osmand.shared.data.AmenityTagEntry.Builder
 import net.osmand.shared.osm.PoiType
 
@@ -28,6 +29,7 @@ class PoiAdditionalUiRule(
         context: Context,
         entryBuilder: Builder,
         menuBuilder: MenuBuilder,
+        additionalInfo: AdditionalInfoBundle,
         poiType: PoiType?,
         key: String,
         value: String,
@@ -38,6 +40,7 @@ class PoiAdditionalUiRule(
             context = context,
             builder = entryBuilder,
             menuBuilder = menuBuilder,
+            additionalInfo = additionalInfo,
             poiType = poiType,
             rule = this,
             key = key,

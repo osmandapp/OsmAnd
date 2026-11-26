@@ -432,11 +432,24 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (gpsFilterFragment != null) {
 				selectedGpxFile = gpsFilterFragment.getSelectedGpxFile();
 			}
-			if (selectedGpxFile != null && !selectedGpxFiles.contains(selectedGpxFile)) {
+			if (selectedGpxFile != null && !containsTrack(selectedGpxFiles, selectedGpxFile)) {
 				return selectedGpxFile;
 			}
 		}
 		return null;
+	}
+
+	// Another copy of a track already drawn, such as the one Android Auto's TracksScreen loads, is not drawn again:
+	// the rendered segments are kept per path, so two copies would remove each other's line on every frame
+	private static boolean containsTrack(@NonNull List<SelectedGpxFile> selectedGpxFiles,
+	                                     @NonNull SelectedGpxFile selectedGpxFile) {
+		String path = selectedGpxFile.getGpxFile().getPath();
+		for (SelectedGpxFile file : selectedGpxFiles) {
+			if (file == selectedGpxFile || !Algorithms.isEmpty(path) && path.equals(file.getGpxFile().getPath())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void showManyPointsVisibleWarningIfNeeded(long total) {
@@ -562,7 +575,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (!Algorithms.isEmpty(groups)) {
 					GpxFile gpxFile = selectedGpxFile.getGpxFile();
 					TrackDbItems trackItems = getTrackDbItems(gpxFile);
-					boolean selected = trackItems.selected();
+					boolean selected = isGpxFileSelected(gpxFile);
 					GpxDataItem gpxItem = trackItems.gpxItem();
 					GpxDirItem dirItem = trackItems.dirItem();
 
@@ -592,7 +605,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				String path = gpxFile.getPath();
 				TrackDbItems trackItems = getTrackDbItems(gpxFile);
-				boolean selected = trackItems.selected();
+				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = trackItems.gpxItem();
 				GpxDirItem dirItem = trackItems.dirItem();
 
@@ -654,7 +667,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				TrackDbItems trackItems = getTrackDbItems(gpxFile);
-				boolean selected = trackItems.selected();
+				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = trackItems.gpxItem();
 				GpxDirItem dirItem = trackItems.dirItem();
 
@@ -862,7 +875,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				TrackDbItems trackItems = getTrackDbItems(gpxFile);
-				boolean selected = trackItems.selected();
+				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = trackItems.gpxItem();
 				GpxDirItem dirItem = trackItems.dirItem();
 
@@ -906,7 +919,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				TrackDbItems trackItems = getTrackDbItems(gpxFile);
-				boolean selected = trackItems.selected();
+				boolean selected = isGpxFileSelected(gpxFile);
 				GpxDataItem gpxItem = trackItems.gpxItem();
 				GpxDirItem dirItem = trackItems.dirItem();
 
@@ -964,6 +977,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
 			List<LatLon> smallObjectsLatLon = new ArrayList<>();
 			Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
+			Map<WptPt, MapMarker> wptMarkers = null;
 			// request to load
 			QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (SelectedGpxFile g : selectedGPXFiles) {
@@ -978,7 +992,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
 						if (synced) {
-							marker = mapMarkersHelper.getMapMarker(wpt);
+							if (wptMarkers == null) {
+								wptMarkers = mapMarkersHelper.getWptPtMarkers();
+							}
+							marker = wptMarkers.get(wpt);
 							if (marker == null || marker.history && !settings.KEEP_PASSED_MARKERS_ON_MAP.get()) {
 								continue;
 							}
@@ -1070,6 +1087,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			float textScale = getTextScale();
 			Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
+			Map<WptPt, MapMarker> wptMarkers = null;
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				int fileColor = getFileColor(g);
 				boolean synced = isSynced(g.getGpxFile());
@@ -1079,7 +1097,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						pointFileMap.put(wpt, g);
 						MapMarker marker = null;
 						if (synced) {
-							marker = mapMarkersHelper.getMapMarker(wpt);
+							if (wptMarkers == null) {
+								wptMarkers = mapMarkersHelper.getWptPtMarkers();
+							}
+							marker = wptMarkers.get(wpt);
 							if (marker == null || marker.history && !settings.KEEP_PASSED_MARKERS_ON_MAP.get()) {
 								continue;
 							}
@@ -1305,7 +1326,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return;
 		}
 		TrackDbItems trackItems = getTrackDbItems(gpxFile);
-		boolean selected = trackItems.selected();
+		boolean selected = isGpxFileSelected(gpxFile);
 		GpxDataItem gpxItem = trackItems.gpxItem();
 		GpxDirItem dirItem = trackItems.dirItem();
 
@@ -1413,7 +1434,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
-				GpxLineStyleType lineStyleType = selected && coloringType.isTrackSolid()
+				boolean lineStyleAvailable = selected && coloringType.isTrackSolid()
+						&& !track3DStyle.getVisualizationType().is3dType();
+				GpxLineStyleType lineStyleType = lineStyleAvailable
 						? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
 						: GpxLineStyleType.SOLID;
 				boolean showArrows = appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);
@@ -1489,7 +1512,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	/**
-	 * Database items and selection state of a track, kept until the database items or the selection change:
+	 * Database items and normal selection state of a track, kept until the database items or the selection change:
 	 * {@link GpxDbHelper#getItem} touches the file system, and every visible track is looked up several times a frame.
 	 */
 	@NonNull
@@ -1508,7 +1531,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			KFile dir = file.getParentFile();
 			GpxDataItem gpxItem = gpxDbHelper.getItem(file);
 			GpxDirItem dirItem = dir != null ? gpxDbHelper.getGpxDirItem(dir) : null;
-			items = new TrackDbItems(gpxItem, dirItem, isGpxFileSelected(gpxFile));
+			items = new TrackDbItems(gpxItem, dirItem, GpxSelectionHelper.isGpxFileSelected(app, gpxFile));
 			trackDbItems.put(path, items);
 		}
 		return items;
@@ -1518,7 +1541,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isGpxFileSelected(@NonNull GpxFile gpxFile) {
-		return customObjectsDelegate != null || GpxSelectionHelper.isGpxFileSelected(app, gpxFile);
+		return customObjectsDelegate != null || getTrackDbItems(gpxFile).selected();
 	}
 
 	@NonNull

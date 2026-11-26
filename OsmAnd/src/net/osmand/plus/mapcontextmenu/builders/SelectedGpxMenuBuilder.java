@@ -180,6 +180,10 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 	}
 
 	private GpxDisplayItem findDisplayItem() {
+		GpxDisplayItem splitItem = selectedGpxPoint.getSplitItem();
+		if (splitItem != null) {
+			return splitItem;
+		}
 		TrackDisplayGroup trackGroup = getTrackGroup();
 		SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
 		if (trackGroup == null || selectedGpxFile == null) return null;

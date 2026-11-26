@@ -26,8 +26,15 @@ android {
 		applicationId "net.osmand.aiconnector"
 		minSdkVersion Math.max(osmand_minSdk, 26)
 		targetSdkVersion osmand_targetSdk
-		versionCode 2
-		versionName "0.4"
+		versionCode 3
+		versionName "0.5"
+	}
+
+	packaging {
+		jniLibs {
+			// native libraries extracted to nativeLibraryDir: LiteRT-LM was tested on phones only this way
+			useLegacyPackaging = true
+		}
 	}
 
 	compileOptions {
@@ -37,6 +44,8 @@ android {
 
 	kotlinOptions {
 		jvmTarget = "17"
+		// LiteRT-LM is built with Kotlin 2.4, the project compiles with 2.1
+		freeCompilerArgs += ["-Xskip-metadata-version-check"]
 	}
 
 	buildFeatures {
@@ -56,6 +65,8 @@ android {
 		}
 		debug {
 			res.srcDirs = ["res-debug"]
+			java.srcDirs = ["src-debug"]
+			manifest.srcFile "AndroidManifest-debug.xml"
 		}
 	}
 
@@ -80,4 +91,9 @@ dependencies {
 	implementation 'androidx.appcompat:appcompat:1.7.1'
 	implementation 'com.google.android.material:material:1.14.0'
 	implementation 'org.nanohttpd:nanohttpd:2.3.1'
+	implementation 'androidx.recyclerview:recyclerview:1.4.0'
+	// Gemini Nano through Android AICore; beta2 is the last one built with a Kotlin this project can read
+	implementation 'com.google.mlkit:genai-prompt:1.0.0-beta2'
+	// LiteRT-LM runs .litertlm models on the GPU; 0.19+ is needed by the current model files; 0.20 is Java 25 bytecode, too new for this build
+	implementation 'com.google.ai.edge.litertlm:litertlm-android:0.19.1'
 }

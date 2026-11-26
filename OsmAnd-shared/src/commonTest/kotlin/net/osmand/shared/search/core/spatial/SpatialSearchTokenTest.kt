@@ -249,7 +249,7 @@ class SpatialSearchTokenTest {
 		return sb.toString()
 	}
 
-	private fun matcher(m: net.osmand.shared.util.KCollatorStringMatcher): String = dumpHex(m.part.text) + ":" + m.mode
+	private fun matcher(m: net.osmand.shared.util.KCollatorStringMatcher): String = dumpHex(m.part) + ":" + m.mode
 
 	private fun matchKeys(locale: Int, broad: Boolean): String {
 		val t = if (broad) broadToken!! else token!!

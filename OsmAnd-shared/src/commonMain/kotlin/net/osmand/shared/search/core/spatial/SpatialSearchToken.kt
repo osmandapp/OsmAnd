@@ -21,7 +21,6 @@ import net.osmand.shared.search.rules.SearchModRules
 import net.osmand.shared.search.rules.SearchModRules.SearchModRuleOwner
 import net.osmand.shared.util.JavaFormat
 import net.osmand.shared.util.KAlgorithms
-import net.osmand.shared.util.KCollationKey
 import net.osmand.shared.util.KCollatorStringMatcher
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.KSearchAlgorithms
@@ -227,7 +226,7 @@ class SpatialSearchToken(
 				val prefixMatch = lf.prefixMatch
 				if (!matched && prefixMatch != null) {
 					for (o in prefixMatch) {
-						matched = matched or KCollatorStringMatcher.cmatches(o.part.text, alignedKey,
+						matched = matched or KCollatorStringMatcher.cmatches(o.part, alignedKey,
 							KStringMatcherMode.CHECK_ONLY_STARTS_WITH)
 						// o.matches(alignedKey) could be needed for matching data with non-processed abbrevations
 					}
@@ -449,7 +448,7 @@ class SpatialSearchToken(
 		val cutName = name.substring(0, wordAligned.length)
 		val fastEquals = wordAligned == cutName
 		val isTopIndex = cutName.startsWith(TOP_INDEX_CATEGORY) || wordAligned.startsWith(TOP_INDEX_CATEGORY)
-		val collatorEquals = !fastEquals && !isTopIndex && KCollationKey.primaryEquals(cutName, wordAligned)
+		val collatorEquals = !fastEquals && !isTopIndex && collatorMain.collator.equals(KSearchAlgorithms.lowercaseAndAlignChars(cutName), KSearchAlgorithms.lowercaseAndAlignChars(wordAligned))
 		if (fastEquals || collatorEquals) {
 			// don't split numbers
 			if (name[wordAligned.length].isDigit() && name[wordAligned.length - 1].isDigit()) {

@@ -377,16 +377,24 @@ public class OsmandAidlApi {
 							zoom = Math.max(zoom, mapView.getMinZoom());
 							zoomFloatPart = 0;
 						}
-						if (!Float.isNaN(rotation)) {
-							mapView.setRotate(rotation, false);
-						}
 						// as a pan by hand: a map linked to my location would go back to it at the next fix
 						app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+						OsmandSettings settings = app.getSettings();
+						if (!settings.MAP_ACTIVITY_ENABLED) {
+							// the map is paused: MapActivity.onResume restores the last known location over this move
+							settings.setLastKnownMapLocation(new LatLon(lat, lon));
+							settings.setLastKnownMapZoom(zoom);
+							settings.setLastKnownMapZoomFloatPart(zoomFloatPart);
+						}
 						if (animated) {
 							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart);
 						} else {
 							mapView.setLatLon(lat, lon);
 							mapView.setZoomWithFloatPart(zoom, zoomFloatPart);
+						}
+						// after the move: moving or zooming the map stops a rotation animation started before it
+						if (!Float.isNaN(rotation)) {
+							mapView.setRotate(rotation, false);
 						}
 					}
 					mapActivity.refreshMap();
@@ -918,7 +926,7 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				int actionNumber = intent.getIntExtra(AIDL_QUICK_ACTION_NUMBER, -1);
 				MapActivity mapActivity = mapActivityRef.get();
-				if (actionNumber != -1 && mapActivity != null) {
+				if (actionNumber >= 0 && mapActivity != null) {
 					List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 					if (actionNumber < actionsList.size()) {
 						MapButtonsHelper.produceAction(actionsList.get(actionNumber)).onActionSelected(mapActivity, null);
@@ -1856,9 +1864,6 @@ public class OsmandAidlApi {
 		}
 		app.runInUIThread(() -> {
 			OsmandMapTileView mapView = mapActivity.getMapView();
-			if (!Float.isNaN(rotation)) {
-				mapView.setRotate(rotation, false);
-			}
 			if (!Float.isNaN(elevationAngle)) {
 				mapView.setElevationAngle(elevationAngle);
 			}
@@ -1878,6 +1883,10 @@ public class OsmandAidlApi {
 					mapView.setLatLon(latitude, longitude);
 					mapView.setZoomWithFloatPart(baseZoom, zoomFloatPart);
 				}
+			}
+			// after the move: moving or zooming the map stops a rotation animation started before it
+			if (!Float.isNaN(rotation)) {
+				mapView.setRotate(rotation, false);
 			}
 			mapActivity.refreshMap();
 		});

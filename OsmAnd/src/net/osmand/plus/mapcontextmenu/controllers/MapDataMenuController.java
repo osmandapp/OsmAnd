@@ -25,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.freeregion.FreeRegionActivationDialog;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
@@ -528,7 +529,15 @@ public class MapDataMenuController extends MenuController {
 				restoreFromBackupTask = new RestoreFromBackupTask(mapActivity, indexItem);
 			}
 			if (restoreFromBackupTask != null) {
-				OsmAndTaskManager.executeTask(restoreFromBackupTask);
+				RestoreFromBackupTask task = restoreFromBackupTask;
+				LocalItem item = localItem != null ? localItem : indexItem.toLocalItem(app);
+				if (item != null) {
+					// the free version asks first when the map makes another region free
+					new FreeRegionActivationDialog(app).activate(mapActivity, new LocalItem[] {item},
+							activated -> OsmAndTaskManager.executeTask(task));
+				} else {
+					OsmAndTaskManager.executeTask(task);
+				}
 			}
 		}
 	}

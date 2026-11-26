@@ -129,6 +129,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	private volatile AisConnectionState connectionState = AisConnectionState.NOT_CONNECTED;
 	private final List<AisConnectionStateListener> connectionStateListeners = new CopyOnWriteArrayList<>();
 	private Location fakeOwnPosition = null; // used for test purposes to fake own position
+	private boolean notificationPermissionRequested;
 	@Nullable
 	private volatile Location nmeaLocation = null;
 	/* touched by the network thread only: */
@@ -621,7 +622,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			}
 		}
 		updateAisBackgroundService();
-		if (AIS_RECEIVE_IN_BACKGROUND.get()) {
+		if (AIS_RECEIVE_IN_BACKGROUND.get() && !notificationPermissionRequested) {
+			notificationPermissionRequested = true;
 			AndroidUtils.requestNotificationPermissionIfNeeded(activity);
 		}
 	}

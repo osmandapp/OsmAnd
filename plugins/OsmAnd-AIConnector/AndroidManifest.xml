@@ -14,19 +14,37 @@
 	</queries>
 
 	<application
+		android:name=".AssistantApplication"
 		android:allowBackup="false"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme">
 
+		<!-- the GPU of LiteRT-LM goes through the vendor's OpenCL library -->
+		<uses-native-library
+			android:name="libOpenCL.so"
+			android:required="false" />
+		<uses-native-library
+			android:name="libOpenCL-pixel.so"
+			android:required="false" />
+		<uses-native-library
+			android:name="libvndksupport.so"
+			android:required="false" />
+
 		<activity
 			android:name=".MainActivity"
-			android:exported="true">
+			android:exported="true"
+			android:windowSoftInputMode="adjustResize">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
+		<!-- the models to download and choose -->
+		<activity
+			android:name=".ModelsActivity"
+			android:exported="false" />
 
 		<service
 			android:name=".ConnectorService"

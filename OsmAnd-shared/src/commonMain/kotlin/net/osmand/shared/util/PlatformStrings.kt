@@ -7,3 +7,5 @@ package net.osmand.shared.util
  * one copy per tag instead of one per region.
  */
 expect fun internString(value: String): String
+
+internal expect fun lowercaseWithDefaultLocale(value: String): String

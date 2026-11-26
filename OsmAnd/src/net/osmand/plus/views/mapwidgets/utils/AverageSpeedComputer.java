@@ -20,6 +20,7 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.router.MovingSpeedWindow;
 import net.osmand.shared.settings.enums.SpeedConstants;
 
 import java.util.ArrayList;
@@ -93,6 +94,15 @@ public class AverageSpeedComputer extends AverageValueComputer {
 
 	public float getAverageSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
 		return calculateUniformSpeed(startTimestamp, measuredInterval, skipLowSpeed);
+	}
+
+	/**
+	 * The speed while moving after {@code startTimestamp}, averaged over the last
+	 * {@code movingInterval} of movement.
+	 */
+	@NonNull
+	public MovingSpeedWindow getMovingSpeedWindow(long startTimestamp, long movingInterval) {
+		return new MovingSpeedWindow(locations, startTimestamp, movingInterval);
 	}
 
 	private float calculateUniformSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {

@@ -12,10 +12,14 @@ import android.graphics.Canvas;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -29,7 +33,6 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.MapHudLayout;
@@ -218,7 +221,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			AndroidUtils.showNavBar(activity);
+			showSystemBars(activity);
 		}
 	}
 
@@ -300,12 +303,38 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (isMapControlsVisible()) {
 			hideMapControls();
 			if (switchNavBarVisibility) {
-				AndroidUtils.hideNavBar(mapActivity);
+				hideSystemBars(mapActivity);
 			}
 		} else {
 			showMapControls();
 		}
 		mapActivity.updateStatusBarColor();
+	}
+
+	// Fullscreen mode hides the system bars chosen in the profile; a swipe from the edge shows them for a moment
+	private void hideSystemBars(@NonNull MapActivity activity) {
+		int types = 0;
+		if (settings.FULLSCREEN_HIDE_STATUS_BAR.get()) {
+			types |= WindowInsetsCompat.Type.statusBars();
+		}
+		if (settings.FULLSCREEN_HIDE_NAVIGATION_BAR.get()) {
+			types |= WindowInsetsCompat.Type.navigationBars();
+		}
+		if (types != 0) {
+			WindowInsetsControllerCompat controller = getInsetsController(activity);
+			controller.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+			controller.hide(types);
+		}
+	}
+
+	private void showSystemBars(@NonNull MapActivity activity) {
+		getInsetsController(activity).show(WindowInsetsCompat.Type.systemBars());
+	}
+
+	@NonNull
+	private WindowInsetsControllerCompat getInsetsController(@NonNull MapActivity activity) {
+		Window window = activity.getWindow();
+		return WindowCompat.getInsetsController(window, window.getDecorView());
 	}
 
 	@Override

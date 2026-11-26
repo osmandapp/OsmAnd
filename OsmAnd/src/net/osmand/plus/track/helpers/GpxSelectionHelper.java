@@ -413,7 +413,6 @@ public class GpxSelectionHelper {
 					}
 				}
 			} catch (Exception e) {
-				app.getSettings().SELECTED_GPX.set("");
 				synchronized (pendingSelections) {
 					pendingSelections.clear();
 				}
@@ -442,14 +441,14 @@ public class GpxSelectionHelper {
 			pendingRestoreRunning.set(false);
 			log.info("Restored selected GPX geometry in "
 					+ (System.currentTimeMillis() - pendingRestoreStartTime) + " ms");
-			app.getGpxDbHelper().startFilesystemReconciliation();
+			app.getGpxDbHelper().startFilesystemReconciliation(!app.isExternalStorageDirectoryReadOnly());
 			return;
 		}
 
+		// The restore does not save the selection: a write of the shared preference marks Global Settings as changed.
 		File file = new File(selection.path);
 		if (!file.isFile()) {
 			removePendingSelection(selection);
-			saveCurrentSelections();
 			app.runInUIThread(() -> loadNextPendingSelection(generation));
 			return;
 		}
@@ -481,12 +480,10 @@ public class GpxSelectionHelper {
 					} else {
 						markPendingSelectionForRetry(selection);
 					}
-					saveCurrentSelections();
 				}
 			} catch (RuntimeException error) {
 				log.error("Failed to restore selected GPX " + selection.path, error);
 				// Keep the pending preference for a retry on the next process start.
-				saveCurrentSelections();
 			} finally {
 				loadNextPendingSelection(generation);
 			}

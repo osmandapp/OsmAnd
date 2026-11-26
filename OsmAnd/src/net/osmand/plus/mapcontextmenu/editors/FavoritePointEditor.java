@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.OSM_URL_EXTENSION;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,9 @@ import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.OsmandApplication;
@@ -26,6 +30,8 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
+
+import java.util.Map;
 
 public class FavoritePointEditor extends PointEditor {
 
@@ -127,6 +133,29 @@ public class FavoritePointEditor extends PointEditor {
 				favorite.getAmenityExtensions().put(OSM_URL_EXTENSION, url);
 			}
 		}
+	}
+
+	/**
+	 * The icon of the POI a saved favorite was created from, found by the POI type stored with it.
+	 */
+	@Nullable
+	public String getPoiIconName(@NonNull FavouritePoint favorite) {
+		Map<String, String> extensions = favorite.getAmenityExtensions();
+		String subtype = extensions.get(AMENITY_PREFIX + Amenity.SUBTYPE);
+		String[] subtypes = subtype != null ? subtype.split(";") : new String[0];
+		if (subtypes.length == 0 || Algorithms.isEmpty(subtypes[0])) {
+			return null;
+		}
+		String firstSubtype = subtypes[0];
+		String type = extensions.get(AMENITY_PREFIX + Amenity.TYPE);
+		MapPoiTypes poiTypes = app.getPoiTypes();
+		PoiCategory category = Algorithms.isEmpty(type) ? null : poiTypes.getPoiCategoryByName(type);
+		PoiType poiType = category != null ? category.getPoiTypeByKeyName(firstSubtype) : null;
+		if (poiType == null) {
+			poiType = poiTypes.getPoiTypeByKey(firstSubtype);
+		}
+		String iconName = poiType != null ? RenderingIcons.getIconNameForPoiType(poiType) : null;
+		return iconName != null && RenderingIcons.getBigIconResourceId(iconName) != 0 ? iconName : null;
 	}
 
 	public void add(LatLon latLon, String title, String categoryName, int categoryColor, boolean autoFill) {
