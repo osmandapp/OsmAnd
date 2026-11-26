@@ -256,6 +256,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateElevationConfiguration();
+			mapContext.updateShadows();
 			if (mapContext.isHeightmapsActive() != is3DMapsEnabled()) {
 				mapContext.recreateHeightmapProvider();
 				// 3D tracks take their heights from the heightmaps, as on an ENABLE_3D_MAPS change in MapLayers
@@ -341,6 +342,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		}
 		NativeCoreContext.updateContourLinesDirectory(app, true);
+		app.getResourceManager().updateContourLinesIndexes();
 		// Turned on while a map is on screen: no resume or car session start will follow
 		if (activity instanceof MapActivity mapActivity
 				&& AndroidUtils.isStateAtLeast(mapActivity, Lifecycle.State.RESUMED)) {
@@ -356,6 +358,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		super.disable(app);
 		sunLight.stopLiveUpdates();
 		NativeCoreContext.updateContourLinesDirectory(app, false);
+		app.getResourceManager().updateContourLinesIndexes();
 	}
 
 	@Override

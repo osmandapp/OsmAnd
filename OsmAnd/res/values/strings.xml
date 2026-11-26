@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="shadows_hillshade_description">Shadows are off while Terrain shows Hillshade: Hillshade already shades the relief.</string>
+	<string name="sun_light_manual">Manual</string>
 	<string name="fullscreen_mode_also_hide">Also hide</string>
 	<string name="fullscreen_mode_status_bar">Status bar</string>
 	<string name="fullscreen_mode_status_bar_descr">Clock, notifications, battery</string>
