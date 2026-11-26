@@ -207,7 +207,8 @@ public class ItemViewHolder {
 		}
 		String text;
 		if (showRegionInDescription) {
-			text = !Algorithms.isEmpty(cityName) ? cityName : name;
+			// the search results name the map, the city it was found by is shown above it
+			text = name;
 		} else {
 			text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		}

@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -245,22 +246,38 @@ public class DownloadSearchUIModel {
 		return row instanceof DownloadResourceGroup;
 	}
 
-	/** @return name shown in the first line of the row. */
+	/**
+	 * @return name shown in the first line of the row. A city row is named after the map that covers
+	 * it, the name the user finds in the region list; the city itself is in {@link #getOverline}.
+	 */
 	@NonNull
 	public String getTitle(@NonNull Object row) {
 		if (row instanceof DownloadResourceGroup group) {
 			return group.getName(ctx);
 		}
 		if (row instanceof CityItem city) {
-			return city.getName();
+			IndexItem item = city.getIndexItem();
+			return item != null ? getTitle(item) : city.getName();
 		}
 		return ((DownloadItem) row).getVisibleName(ctx, osmandRegions, false);
 	}
 
 	/**
-	 * @return name of the region the row belongs to, shown in the second line: the country for
-	 * regions and maps and the covering map for cities, or {@code null} when the first line
-	 * already says it.
+	 * @return places matched by the request, shown above the title of a city row, or {@code null}
+	 * when the title already says it.
+	 */
+	@Nullable
+	public String getOverline(@NonNull Object row) {
+		if (row instanceof CityItem city && city.getIndexItem() != null) {
+			String places = city.getName();
+			return Algorithms.isEmpty(places) || places.equals(getTitle(row)) ? null : places;
+		}
+		return null;
+	}
+
+	/**
+	 * @return name of the country the row belongs to, shown in the second line, or {@code null} when
+	 * the first line already says it.
 	 */
 	@Nullable
 	public String getSubtitle(@NonNull Object row) {
@@ -268,14 +285,8 @@ public class DownloadSearchUIModel {
 		if (row instanceof DownloadResourceGroup group) {
 			subtitle = getCountryName(group.getRegion());
 		} else if (row instanceof CityItem city) {
-			IndexItem indexItem = city.getIndexItem();
-			if (indexItem != null) {
-				subtitle = indexItem.getVisibleName(ctx, osmandRegions, false);
-				if (Algorithms.isEmpty(subtitle) || subtitle.equals(city.getName())) {
-					// the map is named after the city itself, the country says more
-					subtitle = getCountryName(getItemRegion(indexItem));
-				}
-			}
+			IndexItem item = city.getIndexItem();
+			return item != null ? getSubtitle(item) : null;
 		} else if (row instanceof DownloadItem item) {
 			subtitle = getCountryName(getItemRegion(item));
 		}
@@ -296,8 +307,8 @@ public class DownloadSearchUIModel {
 
 	/**
 	 * A city is shown as a shortcut to the map that covers it, so it is dropped when that map is
-	 * already listed - otherwise the same file is offered twice - and when another city already
-	 * points to the same map.
+	 * already listed - otherwise the same file is offered twice. A second city in the same map joins
+	 * the row of the first one, so up to two places are named above the map; the rest are dropped.
 	 */
 	@NonNull
 	private List<CityItem> filterDuplicateCities(@NonNull DownloadResources indexes,
@@ -309,13 +320,25 @@ public class DownloadSearchUIModel {
 			}
 		}
 		List<CityItem> result = new ArrayList<>();
+		Map<IndexItem, Integer> singlePlaceRows = new HashMap<>();
 		for (CityItem city : cities) {
 			if (city.getIndexItem() == null) {
 				city.setIndexItem(resolveCityMap(indexes, city));
 			}
 			IndexItem item = city.getIndexItem();
 			if (item == null || shownMaps.add(item)) {
+				if (item != null) {
+					singlePlaceRows.put(item, result.size());
+				}
 				result.add(city);
+			} else {
+				Integer index = singlePlaceRows.get(item);
+				CityItem first = index != null ? result.get(index) : null;
+				if (first != null && !first.getName().equals(city.getName())) {
+					String places = ctx.getString(R.string.ltr_or_rtl_combine_via_comma, first.getName(), city.getName());
+					result.set(index, new CityItem(places, first.getAmenity(), item));
+					singlePlaceRows.remove(item);
+				}
 			}
 		}
 		return result;

@@ -5,6 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -51,6 +55,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class SearchDialogFragment extends BaseFullScreenDialogFragment implements DownloadEvents,
 		OnItemClickListener {
@@ -289,6 +294,8 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		private final DownloadSearchUIModel searchModel;
 
 		private final List<Object> items = new LinkedList<>();
+		/** Request the shown items were found by, the text field may be ahead of it while typing. */
+		private String query = "";
 		private final DownloadActivity ctx;
 
 		public SearchListAdapter(DownloadActivity ctx) {
@@ -376,6 +383,10 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				} else {
 					viewHolder.bindDownloadItem((CityItem) obj);
 				}
+				TextView overline = convertView.findViewById(R.id.overline);
+				String places = searchModel.getOverline(obj);
+				overline.setText(places != null ? highlightQuery(places) : null);
+				AndroidUiHelper.updateVisibility(overline, places != null);
 			} else {
 				DownloadResourceGroup group = (DownloadResourceGroup) obj;
 				DownloadGroupViewHolder viewHolder;
@@ -392,6 +403,27 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 			return convertView;
 		}
 
+		/** Colours the words of the request that the places start with. */
+		@NonNull
+		private CharSequence highlightQuery(@NonNull String places) {
+			SpannableString spannable = new SpannableString(places);
+			String text = places.toLowerCase(Locale.US);
+			if (text.length() != places.length()) {
+				return places;
+			}
+			int color = ColorUtilities.getActiveColor(ctx, nightMode);
+			for (List<String> terms : DownloadSearchUIModel.parseConditions(query)) {
+				for (String term : terms) {
+					for (int i = text.indexOf(term); i >= 0; i = text.indexOf(term, i + term.length())) {
+						if (i == 0 || !Character.isLetterOrDigit(text.charAt(i - 1))) {
+							spannable.setSpan(new ForegroundColorSpan(color), i, i + term.length(),
+									Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						}
+					}
+				}
+			}
+			return spannable;
+		}
 
 		@Override
 		public boolean hasStableIds() {
@@ -446,6 +478,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 			@SuppressWarnings("unchecked")
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
+				query = constraint == null ? "" : constraint.toString();
 				items.clear();
 				List<Object> values = (List<Object>) results.values;
 				if (values != null && !values.isEmpty()) {

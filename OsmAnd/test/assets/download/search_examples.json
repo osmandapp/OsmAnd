@@ -5,7 +5,7 @@
     "searched in World_basemap_mini.obf, both shipped with the app, so these are the rows a user sees.",
     "The first examples are the rules of the screen, the ones after them are the corner cases that broke it.",
     "Every 'screen' entry is one row of the list: '[Header]' for a section header,",
-    "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line.",
+    "'Title' for a row without a second line, 'Title | Subtitle' for a row with the country shown in the second line and 'Places > Title | Subtitle' for a city row, which shows the places found by the request above the map that covers them.",
     "Update the file when the shipped data changes: the cities come from World_basemap_mini.obf, which is downloaded at build time and rebuilt on the builder every so often, so a rebuild moves the rows of a broad query with no commit behind it. The test then fails on every screen that moved at once and writes search_examples.actual.json next to its HTML report, in this format - paste the screens from there, and read the diff first: a row appearing is what a bigger basemap does, a row disappearing is not."
   ],
   "examples": [
@@ -17,7 +17,7 @@
         "Berlin | Germany",
         "Brandenburg, Berlin | Germany",
         "[Maps]",
-        "Berlin | New Hampshire",
+        "Berlin > New Hampshire | United States",
         "Berlin | Germany",
         "Brandenburg, Berlin | Germany"
       ]
@@ -72,8 +72,8 @@
         "Greater London | United Kingdom",
         "London | Canada",
         "[Maps]",
-        "Derry/Londonderry | Northern Ireland",
-        "New London | Connecticut",
+        "Derry/Londonderry > Northern Ireland | United Kingdom",
+        "New London > Connecticut | United States",
         "Greater London | United Kingdom",
         "London | Canada"
       ]
@@ -107,24 +107,24 @@
         "Nouvelle-Aquitaine | France",
         "Papua New Guinea",
         "[Maps]",
-        "New Castle | Pennsylvania",
-        "New Delhi | Delhi",
-        "New Haven | Connecticut",
-        "New Town | West Bengal",
-        "Newark | Ohio",
-        "Newark | Delaware",
-        "Newburgh | Albany and surroundings",
-        "Newburyport | Massachusetts",
-        "Newcastle | KwaZulu-Natal",
-        "Newcastle upon Tyne | North East England",
-        "Newmarket | Toronto",
-        "Newport | Rhode Island",
-        "Newport | Wales",
-        "Newport News | Virginia",
-        "Newry | Northern Ireland",
-        "Невинномысск | Stavropol Krai",
-        "兰州新区 | Gansu Province",
-        "新北市 | Taiwan",
+        "New Castle > Pennsylvania | United States",
+        "New Delhi > Delhi | India",
+        "New Haven, New London > Connecticut | United States",
+        "New Town > West Bengal | India",
+        "Newark > Ohio | United States",
+        "Newark > Delaware | United States",
+        "Newburgh > Albany and surroundings | United States",
+        "Newburyport, Newton > Massachusetts | United States",
+        "Newcastle > KwaZulu-Natal | South Africa",
+        "Newcastle upon Tyne > North East England | United Kingdom",
+        "Newmarket > Toronto | Canada",
+        "Newport > Rhode Island | United States",
+        "Newport > Wales | United Kingdom",
+        "Newport News > Virginia | United States",
+        "Newry > Northern Ireland | United Kingdom",
+        "Невинномысск > Stavropol Krai | Russia",
+        "兰州新区 > Gansu Province | China",
+        "新北市 > Taiwan",
         "Geneva | Switzerland",
         "New Brunswick | Canada",
         "New Hampshire | United States",
@@ -145,8 +145,8 @@
         "Central African Republic",
         "San Francisco | United States",
         "[Maps]",
-        "San Francisco | Venezuela",
-        "San Francisco de Macorís | Dominican Republic",
+        "San Francisco > Venezuela",
+        "San Francisco de Macorís > Dominican Republic",
         "Central African Republic",
         "San Francisco | United States"
       ]
@@ -162,20 +162,20 @@
       "showGroup": false,
       "screen": [
         "[Maps]",
-        "Berlin | New Hampshire",
+        "Berlin > New Hampshire | United States",
         "Berlin | Germany",
         "Brandenburg, Berlin | Germany"
       ]
     },
     {
-      "name": "Three rows named Washington - two cities and a state - are told apart only by the second line",
+      "name": "Two cities and a state, all named Washington, are told apart by the map that covers each city",
       "query": "washington",
       "screen": [
         "[Regions]",
         "Washington | United States",
         "[Maps]",
-        "Washington | Pennsylvania",
-        "Washington | District of Columbia",
+        "Washington > Pennsylvania | United States",
+        "Washington > District of Columbia | United States",
         "Washington | United States"
       ]
     },
@@ -186,11 +186,11 @@
         "[Regions]",
         "San Juan | Argentina",
         "[Maps]",
-        "San Juan | Metro Manila",
-        "San Juan | Puerto Rico",
-        "San Juan | Venezuela",
-        "San Juan del Río | Querétaro",
-        "St. John's | Newfoundland and Labrador",
+        "San Juan > Metro Manila | Philippines",
+        "San Juan > Puerto Rico",
+        "San Juan > Venezuela",
+        "San Juan del Río > Querétaro | Mexico",
+        "St. John's > Newfoundland and Labrador | Canada",
         "San Juan | Argentina"
       ]
     },
@@ -199,8 +199,8 @@
       "query": "santo domingo",
       "screen": [
         "[Maps]",
-        "Santo Domingo de los Tsáchilas | Ecuador",
-        "Santo Domingo Oeste | Dominican Republic"
+        "Santo Domingo de los Tsáchilas > Ecuador",
+        "Santo Domingo Oeste, Santo Domingo > Dominican Republic"
       ]
     },
     {
@@ -208,7 +208,7 @@
       "query": "sanhe",
       "screen": [
         "[Maps]",
-        "三河市 | Hebei Province"
+        "三河市 > Hebei Province | China"
       ]
     },
     {
@@ -221,7 +221,7 @@
         "North Holland | Netherlands",
         "South Holland | Netherlands",
         "[Maps]",
-        "Holland | Michigan",
+        "Holland > Michigan | United States",
         "Netherlands Antilles",
         "North Holland | Netherlands",
         "South Holland | Netherlands"
@@ -234,7 +234,7 @@
         "[Regions]",
         "Hamburg | Germany",
         "[Maps]",
-        "Novo Hamburgo | Rio Grande do Sul",
+        "Novo Hamburgo > Rio Grande do Sul | Brazil",
         "Hamburg | Germany"
       ]
     },

@@ -405,9 +405,11 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		if (row instanceof SectionHeader header) {
 			return "[" + header.getTitle(app) + "]";
 		}
+		String overline = model.getOverline(row);
 		String title = model.getTitle(row);
 		String subtitle = model.getSubtitle(row);
-		return subtitle == null ? title : title + " | " + subtitle;
+		String text = subtitle == null ? title : title + " | " + subtitle;
+		return overline == null ? text : overline + " > " + text;
 	}
 
 	@Nullable
@@ -426,9 +428,9 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		List<ReportRow> reportRows = new ArrayList<>();
 		for (Object row : rows) {
 			if (row instanceof SectionHeader header) {
-				reportRows.add(new ReportRow(header.getTitle(app), null, null));
+				reportRows.add(new ReportRow(header.getTitle(app), null, null, null));
 			} else {
-				reportRows.add(new ReportRow(null, model.getTitle(row), model.getSubtitle(row)));
+				reportRows.add(new ReportRow(null, model.getOverline(row), model.getTitle(row), model.getSubtitle(row)));
 			}
 		}
 		return reportRows;
@@ -530,11 +532,14 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 	static class ReportRow {
 
 		final String header;
+		final String overline;
 		final String title;
 		final String subtitle;
 
-		ReportRow(@Nullable String header, @Nullable String title, @Nullable String subtitle) {
+		ReportRow(@Nullable String header, @Nullable String overline, @Nullable String title,
+		          @Nullable String subtitle) {
 			this.header = header;
+			this.overline = overline;
 			this.title = title;
 			this.subtitle = subtitle;
 		}
