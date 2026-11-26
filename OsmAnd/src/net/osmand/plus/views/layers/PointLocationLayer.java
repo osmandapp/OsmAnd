@@ -71,7 +71,6 @@ public class PointLocationLayer extends OsmandMapLayer
 		implements OsmAndLocationListener, OsmAndCompassListener, IContextMenuProvider {
 
 	private static final int MODEL_3D_MAX_SIZE_DP = 6;
-	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
 	protected static final int RADIUS = 7;
 
@@ -126,6 +125,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	private Float lastBearingCached;
 	private Float lastHeadingCached;
 	private MarkerState currentMarkerState = STAY;
+	private final MovementStateFilter movementStateFilter = new MovementStateFilter();
 	private LatLon lastMarkerLocation;
 	private boolean markerMoved = true;
 
@@ -603,7 +603,8 @@ public class PointLocationLayer extends OsmandMapLayer
 			// Issue 5538: Some devices return positives for hasBearing() at rest, hence add 0.0 check:
 			boolean hasBearing = location.hasBearing() && location.getBearing() != 0.0f;
 			boolean bearingValid = hasBearing || isUseRouting() && lastBearingCached != null;
-			boolean speedValid = !location.hasSpeed() || location.getSpeed() > BEARING_SPEED_THRESHOLD;
+			boolean speedValid = !location.hasSpeed()
+					|| movementStateFilter.update(location.getTime(), location.getSpeed());
 
 			if (bearingValid && (speedValid || isLocationSnappedToRoad())) {
 				return hasBearing ? location.getBearing() : lastBearingCached;
