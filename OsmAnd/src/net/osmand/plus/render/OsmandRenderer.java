@@ -675,47 +675,56 @@ public class OsmandRenderer {
 		RenderingRuleProperty rStrokeW;
 		RenderingRuleProperty rCap;
 		RenderingRuleProperty rPathEff;
+		RenderingRuleProperty rPathEffPhase;
 		
 		if (ind == 0) {
 			rColor = req.ALL.R_COLOR;
 			rStrokeW = req.ALL.R_STROKE_WIDTH;
 			rCap = req.ALL.R_CAP;
 			rPathEff = req.ALL.R_PATH_EFFECT;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE;
 		} else if(ind == 1){
 			rColor = req.ALL.R_COLOR_2;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_2;
 			rCap = req.ALL.R_CAP_2;
 			rPathEff = req.ALL.R_PATH_EFFECT_2;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE_2;
 		} else if(ind == -1){
 			rColor = req.ALL.R_COLOR_0;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_0;
 			rCap = req.ALL.R_CAP_0;
 			rPathEff = req.ALL.R_PATH_EFFECT_0;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE_0;
 		} else if(ind == -2){
 			rColor = req.ALL.R_COLOR__1;
 			rStrokeW = req.ALL.R_STROKE_WIDTH__1;
 			rCap = req.ALL.R_CAP__1;
 			rPathEff = req.ALL.R_PATH_EFFECT__1;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE__1;
 		} else if(ind == 2){
 			rColor = req.ALL.R_COLOR_3;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_3;
 			rCap = req.ALL.R_CAP_3;
 			rPathEff = req.ALL.R_PATH_EFFECT_3;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE_3;
 		} else if(ind == -3){
 			rColor = req.ALL.R_COLOR__2;
 			rStrokeW = req.ALL.R_STROKE_WIDTH__2;
 			rCap = req.ALL.R_CAP__2;
 			rPathEff = req.ALL.R_PATH_EFFECT__2;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE__2;
 		} else if(ind == 3){
 			rColor = req.ALL.R_COLOR_4;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_4;
 			rCap = req.ALL.R_CAP_4;
 			rPathEff = req.ALL.R_PATH_EFFECT_4;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE_4;
 		} else {
 			rColor = req.ALL.R_COLOR_5;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_5;
 			rCap = req.ALL.R_CAP_5;
 			rPathEff = req.ALL.R_PATH_EFFECT_5;
+			rPathEffPhase = req.ALL.R_PATH_EFFECT_PHASE_5;
 		}
 		if(area){
 			if(!req.isSpecified(rColor) && !req.isSpecified(req.ALL.R_SHADER)){
@@ -765,7 +774,7 @@ public class OsmandRenderer {
 				}
 				float[] cachedValues = parsedDashEffects.get(pathEffect);
 				
-				p.setPathEffect(getDashEffect(rc, cachedValues, 0));
+				p.setPathEffect(getDashEffect(rc, cachedValues, rc.getComplexValue(req, rPathEffPhase)));
 			} else {
 				p.setPathEffect(null);
 			}
