@@ -376,7 +376,9 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					viewHolder.setShowRegionInDescription(true);
 					convertView.setTag(viewHolder);
 				}
-				viewHolder.setShowTypeInDesc(true);
+				IndexItem indexItem = obj instanceof CityItem city ? city.getIndexItem() : (IndexItem) obj;
+				// standard maps are what the search is for, other types are named
+				viewHolder.setShowTypeInDesc(indexItem != null && indexItem.getType() != DownloadActivityType.NORMAL_FILE);
 				viewHolder.setRegionName(searchModel.getSubtitle(obj));
 				if (obj instanceof IndexItem item) {
 					viewHolder.bindDownloadItem(item);
