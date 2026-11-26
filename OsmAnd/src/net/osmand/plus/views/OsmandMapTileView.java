@@ -743,8 +743,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void applyDisplayScaleSettings() {
-		if (!hasMapRenderer()) {
-			// v1 rendering keeps rasterized tiles of the previous magnifier
+		if (!app.useOpenGlRenderer()) {
+			// v1 rendering keeps rasterized tiles of the previous magnifier; not hasMapRenderer(): a recreated
+			// activity calls setView() before it attaches its OpenGL renderer, and clearCache() would wait for loadMap()
 			app.getResourceManager().getRenderer().clearCache();
 		}
 		setComplexZoom(getZoom(), getSettingsMapDensity());
