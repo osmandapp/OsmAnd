@@ -7,7 +7,9 @@ import static net.osmand.test.common.OsmAndDialogInteractions.skipSpeedCamerasBo
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
@@ -643,6 +645,19 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		assertFalse("The screen did not turn to landscape", isPortrait());
 	}
 
+	private void rotateQuarterTurn(int rotation) {
+		MapActivity[] activityBefore = new MapActivity[1];
+		scenarioRule.getScenario().onActivity(activity -> activityBefore[0] = activity);
+		boolean portrait = isPortrait();
+		setRotation((rotation + 1) % 4);
+		for (int i = 0; i < 50 && isPortrait() == portrait; i++) {
+			SystemClock.sleep(100);
+		}
+		assertNotEquals("The screen did not turn", portrait, isPortrait());
+		scenarioRule.getScenario().onActivity(activity ->
+				assertNotSame("The rotation did not recreate the activity", activityBefore[0], activity));
+	}
+
 	private static void setRotation(int rotation) {
 		InstrumentationRegistry.getInstrumentation().getUiAutomation().setRotation(rotation);
 	}
@@ -808,7 +823,7 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 					activity.getFragmentsHelper().getMeasurementToolFragment().gpsFilterOnClick());
 			awaitTrackMenuSettled();
 
-			turnToLandscape(rotation);
+			rotateQuarterTurn(rotation);
 			awaitTrackMenuSettled();
 			scenarioRule.getScenario().onActivity(activity -> assertNotNull("Plan route is gone after the rotation, fragments "
 					+ activity.getSupportFragmentManager().getFragments(), activity.getFragmentsHelper().getMeasurementToolFragment()));
