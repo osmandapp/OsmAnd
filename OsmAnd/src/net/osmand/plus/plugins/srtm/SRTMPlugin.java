@@ -193,10 +193,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		};
 		settings.ENABLE_3D_MAP_OBJECTS.addListener(map3DObjectsListener);
 
-		hillshadeSunAngleListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		hillshadeSunAngleListener = change -> app.runInUIThread(this::updateSunPosition);
 		HILLSHADE_SUN_ANGLE.addListener(hillshadeSunAngleListener);
 
-		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		hillshadeSunAzimuthListener = change -> app.runInUIThread(this::updateSunPosition);
 		HILLSHADE_SUN_AZIMUTH.addListener(hillshadeSunAzimuthListener);
 
 		castShadowsListener = change -> app.runInUIThread(() -> {
@@ -212,11 +212,11 @@ public class SRTMPlugin extends OsmandPlugin {
 			if (isEnabled()) {
 				sunLight.updateLiveUpdates();
 			}
-			updateElevationConfiguration();
+			updateSunPosition();
 		});
 		SUN_LIGHT_MODE.addListener(sunLightModeListener);
 
-		sunLightTimeListener = change -> app.runInUIThread(this::updateElevationConfiguration);
+		sunLightTimeListener = change -> app.runInUIThread(this::updateSunPosition);
 		SUN_LIGHT_TIME.addListener(sunLightTimeListener);
 	}
 
@@ -249,6 +249,13 @@ public class SRTMPlugin extends OsmandPlugin {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateElevationConfiguration();
+		}
+	}
+
+	public void updateSunPosition() {
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateSunPosition();
 		}
 	}
 
@@ -335,6 +342,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		settings.getCustomRenderProperty(CONTOUR_LINES_ATTR).setDefaultValue("13");
 		MapRendererContext ctx = net.osmand.plus.views.corenative.NativeCoreContext.getMapRendererContext();
 		if (ctx != null) {
+			ctx.updateSunPosition();
 			if (Boolean.TRUE.equals(settings.ENABLE_3D_MAP_OBJECTS.get())) {
 				ctx.recreate3DObjectsProvider();
 			} else {

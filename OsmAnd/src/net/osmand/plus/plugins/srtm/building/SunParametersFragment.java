@@ -360,14 +360,15 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		return DateFormat.getTimeFormat(requireContext()).format(Date.from(time.toInstant()));
 	}
 
+	/* no angles without the OpenGL renderer that computes them */
 	@NonNull
-	private String formatSunAzimuth(@NonNull SunLight.Angles angles) {
-		return formatAzimuth((int) Math.round(angles.getAzimuth()) % 360);
+	private String formatSunAzimuth(@Nullable SunLight.Angles angles) {
+		return angles != null ? formatAzimuth((int) Math.round(angles.getAzimuth()) % 360) : getString(R.string.n_a);
 	}
 
 	@NonNull
-	private String formatSunAltitude(@NonNull SunLight.Angles angles) {
-		return formatAltitude((int) Math.round(angles.getAltitude()));
+	private String formatSunAltitude(@Nullable SunLight.Angles angles) {
+		return angles != null ? formatAltitude((int) Math.round(angles.getAltitude())) : getString(R.string.n_a);
 	}
 
 	@NonNull
