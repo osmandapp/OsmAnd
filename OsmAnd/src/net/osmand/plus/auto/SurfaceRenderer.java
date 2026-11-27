@@ -62,6 +62,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	@Nullable
 	private AtlasMapRendererView offscreenMapRendererView;
+	private float offscreenRendererDensity;
 	@Nullable
 	private Surface surface;
 	@Nullable
@@ -415,6 +416,16 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						offscreenMapRendererView = null;
 					}
 				}
+				// The offscreen pixel buffer keeps the size it was created with, so a new surface
+				// of another size or density needs a new view, which takes the renderer over
+				AtlasMapRendererView resizedRendererView = null;
+				if (offscreenMapRendererView != null && isOffscreenRendererSizeChanged()) {
+					Log.i(TAG, "Offscreen renderer " + offscreenMapRendererView.getWindowWidth() + "x"
+							+ offscreenMapRendererView.getWindowHeight() + " is recreated for " + getWidth() + "x" + getHeight());
+					resizedRendererView = offscreenMapRendererView;
+					resizedRendererView.removeListener(this);
+					offscreenMapRendererView = null;
+				}
 				if (offscreenMapRendererView == null) {
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 					if (mapRendererContext != null) {
@@ -434,6 +445,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							}
 
 							offscreenMapRendererView = new AtlasMapRendererView(carContext);
+							offscreenRendererDensity = surfaceView.getDensity();
 
 							boolean enableMSAA = getApp().getSettings().ENABLE_MSAA.get();
 
@@ -465,8 +477,19 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						}
 					}
 				}
+				if (resizedRendererView != null) {
+					// Does nothing when the renderer was handed over to the new view
+					resizedRendererView.stopRenderer();
+				}
 			}
 		}
+	}
+
+	private boolean isOffscreenRendererSizeChanged() {
+		AtlasMapRendererView rendererView = offscreenMapRendererView;
+		return rendererView != null && (rendererView.getWindowWidth() != getWidth()
+				|| rendererView.getWindowHeight() != getHeight()
+				|| offscreenRendererDensity != surfaceView.getDensity());
 	}
 
 	public boolean isCarTiltApplied() {
