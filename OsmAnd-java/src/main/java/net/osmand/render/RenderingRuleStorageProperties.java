@@ -58,6 +58,14 @@ public class RenderingRuleStorageProperties {
 	public static final String PATH_EFFECT_0 = "pathEffect_0";
 	public static final String PATH_EFFECT__1 = "pathEffect__1";
 	public static final String PATH_EFFECT__2 = "pathEffect__2";
+	public static final String PATH_EFFECT_PHASE_5 = "pathEffectPhase_5";
+	public static final String PATH_EFFECT_PHASE_4 = "pathEffectPhase_4";
+	public static final String PATH_EFFECT_PHASE_3 = "pathEffectPhase_3";
+	public static final String PATH_EFFECT_PHASE_2 = "pathEffectPhase_2";
+	public static final String PATH_EFFECT_PHASE = "pathEffectPhase";
+	public static final String PATH_EFFECT_PHASE_0 = "pathEffectPhase_0";
+	public static final String PATH_EFFECT_PHASE__1 = "pathEffectPhase__1";
+	public static final String PATH_EFFECT_PHASE__2 = "pathEffectPhase__2";
 	public static final String STROKE_WIDTH_5 = "strokeWidth_5";
 	public static final String STROKE_WIDTH_4 = "strokeWidth_4";
 	public static final String STROKE_WIDTH_3 = "strokeWidth_3";
@@ -138,6 +146,14 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_PATH_EFFECT_0;
 	public RenderingRuleProperty R_PATH_EFFECT__1;
 	public RenderingRuleProperty R_PATH_EFFECT__2;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE_5;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE_4;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE_3;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE_2;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE_0;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE__1;
+	public RenderingRuleProperty R_PATH_EFFECT_PHASE__2;
 	public RenderingRuleProperty R_STROKE_WIDTH_5;
 	public RenderingRuleProperty R_STROKE_WIDTH_4;
 	public RenderingRuleProperty R_STROKE_WIDTH_3;
@@ -305,6 +321,14 @@ public class RenderingRuleStorageProperties {
 		R_PATH_EFFECT_0 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT_0));
 		R_PATH_EFFECT__1 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT__1));
 		R_PATH_EFFECT__2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT__2));
+		R_PATH_EFFECT_PHASE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE));
+		R_PATH_EFFECT_PHASE_2 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE_2));
+		R_PATH_EFFECT_PHASE_3 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE_3));
+		R_PATH_EFFECT_PHASE_4 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE_4));
+		R_PATH_EFFECT_PHASE_5 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE_5));
+		R_PATH_EFFECT_PHASE_0 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE_0));
+		R_PATH_EFFECT_PHASE__1 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE__1));
+		R_PATH_EFFECT_PHASE__2 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(PATH_EFFECT_PHASE__2));
 		
 		R_CAP = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(CAP));
 		R_CAP_2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(CAP_2));
