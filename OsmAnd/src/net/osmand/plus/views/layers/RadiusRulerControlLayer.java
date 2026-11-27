@@ -67,6 +67,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private static final double MAX_VISIBLE_GLOBE_DISTANCE = MAX_GLOBE_DISTANCE / 2;
 	private static final float PROJECTED_STEP_SLACK = 4;
 	private static final float MIN_PROJECTED_STEP_DP = 24;
+	private static final int HEADING_ARC_HALF_ANGLE = 45;
+	private static final int HEADING_ARC_SAMPLES_COUNT = (int) (2 * HEADING_ARC_HALF_ANGLE / CIRCLE_ANGLE_STEP) + 1;
 	private static final double MAX_GLOBE_MERCATOR_ANGLE = 2 * Math.PI - 1e-7;
 	private static final long POINT31_FULL_RANGE = 1L << 31;
 
@@ -128,6 +130,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private boolean heightmapsActive;
 	private final RulerTerrainShifts terrainShifts = new RulerTerrainShifts(CIRCLE_SAMPLES_COUNT);
 	private final LatLon[] circleLatLons = new LatLon[CIRCLE_SAMPLES_COUNT];
+	private final PointF[] circlePixels = new PointF[CIRCLE_SAMPLES_COUNT + 1];
+	private final PointF[] headingArcPixels = new PointF[HEADING_ARC_SAMPLES_COUNT];
+	private final RulerProjectedSteps projectedSteps = new RulerProjectedSteps(CIRCLE_SAMPLES_COUNT + 1);
+	private final RulerGlobeDistance globeDistance = new RulerGlobeDistance(MAX_GLOBE_DISTANCE, MAX_VISIBLE_GLOBE_DISTANCE);
 
 	private ApplicationMode savedWidgetsAppMode;
 	private ScreenLayoutMode savedWidgetsLayoutMode;
@@ -570,22 +576,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private double getGlobeDistanceForPixelRadius(@NonNull RotatedTileBox tb, int pixelRadius) {
 		// RotatedTileBox density follows Web Mercator, so calibrate it against the active globe projection.
 		double distance = pixelRadius / tb.getPixDensity();
-		if (!isValidGlobeDistance(distance)) {
-			return Double.NaN;
-		}
 		QuadPoint center = tb.getCenterPixelPoint();
-		for (int i = 0; i < 2; i++) {
-			double projectedRadius = getGlobePixelRadius(tb, currentCenterLatLon, center, distance);
-			if (!Double.isFinite(projectedRadius) || projectedRadius < 1) {
-				return Double.NaN;
-			}
-			double correctedDistance = distance * pixelRadius / projectedRadius;
-			if (!isValidGlobeDistance(correctedDistance)) {
-				return Double.NaN;
-			}
-			distance = correctedDistance;
-		}
-		return distance;
+		return globeDistance.find(pixelRadius, distance,
+				d -> getGlobePixelRadius(tb, currentCenterLatLon, center, d));
 	}
 
 	private double getGlobePixelRadius(@NonNull RotatedTileBox tb, @NonNull LatLon centerLatLon,
@@ -651,15 +644,18 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		}
 		sampleCircle(distance);
 		for (int i = 0; i <= CIRCLE_SAMPLES_COUNT; i++) {
-			double bearing = getSampleBearing(i);
 			LatLon latLon = circleLatLons[i % CIRCLE_SAMPLES_COUNT];
-			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon, bearing);
+			circlePixels[i] = getRulerPixelFromLatLon(tb, latLon, getSampleBearing(i));
+		}
+		float maxStep = getMaxProjectedStep(circlePixels, circlePixels.length, circleRadius);
+		for (int i = 0; i <= CIRCLE_SAMPLES_COUNT; i++) {
+			PointF screenPoint = circlePixels[i];
 			if (screenPoint == null) {
 				drawCircleLines(canvas, attrs);
 				previousPoint = null;
 				continue;
 			}
-			if (previousPoint != null && isProjectionDiscontinuity(previousPoint, screenPoint, circleRadius)) {
+			if (previousPoint != null && isProjectionDiscontinuity(previousPoint, screenPoint, maxStep)) {
 				// Do not connect points across a globe projection discontinuity.
 				drawCircleLines(canvas, attrs);
 				previousPoint = null;
@@ -851,24 +847,27 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		blueLinesPaint.setStrokeWidth(attrs.paint.getStrokeWidth() * (isCarView ? mapView.getDensity() : 1));
 
 		arrowArc.reset();
-		int startArcAngle = (int) angle - 45;
-		int endArcAngle = (int) angle + 45;
+		int startArcAngle = (int) angle - HEADING_ARC_HALF_ANGLE;
 		double distance = getDistanceForPixelRadius(radius, tb);
 		if (sphericalMap && !isVisibleGlobeDistance(distance)) {
 			return;
 		}
 		QuadPoint canvasOffset = getCachedAACanvasOffset();
+		for (int i = 0; i < HEADING_ARC_SAMPLES_COUNT; i++) {
+			int bearing = startArcAngle + i * (int) CIRCLE_ANGLE_STEP;
+			LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, bearing, sphericalMap);
+			headingArcPixels[i] = getRulerPixelFromLatLon(tb, latLon, bearing);
+		}
+		float maxStep = getMaxProjectedStep(headingArcPixels, headingArcPixels.length, radius);
 		PointF previousPoint = null;
-		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
-			LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, a, sphericalMap);
-			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon, a);
+		for (PointF screenPoint : headingArcPixels) {
 			if (screenPoint == null) {
 				drawArrowArcPath(canvas);
 				arrowArc.reset();
 				previousPoint = null;
 				continue;
 			}
-			if (previousPoint != null && isProjectionDiscontinuity(previousPoint, screenPoint, radius)) {
+			if (previousPoint != null && isProjectionDiscontinuity(previousPoint, screenPoint, maxStep)) {
 				drawArrowArcPath(canvas);
 				arrowArc.reset();
 			}
@@ -980,13 +979,15 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		return getRulerPixelFromLatLon(tb, latLon, bearing, true);
 	}
 
-	private boolean isProjectionDiscontinuity(@NonNull PointF previousPoint, @NonNull PointF currentPoint,
-	                                          double pixelRadius) {
-		double expectedStep = 2 * Math.abs(pixelRadius) * Math.sin(CIRCLE_ANGLE_STEP_RADIANS / 2);
-		double maxProjectedStep = Math.max(MIN_PROJECTED_STEP_DP * density,
-				expectedStep * PROJECTED_STEP_SLACK);
-		return MapUtils.getSqrtDistance(previousPoint.x, previousPoint.y, currentPoint.x, currentPoint.y)
-				> maxProjectedStep;
+	private float getMaxProjectedStep(@NonNull PointF[] points, int count, double pixelRadius) {
+		float flatStep = (float) (2 * Math.abs(pixelRadius) * Math.sin(CIRCLE_ANGLE_STEP_RADIANS / 2));
+		return projectedSteps.maxStep(points, count, MIN_PROJECTED_STEP_DP * density, flatStep,
+				PROJECTED_STEP_SLACK);
+	}
+
+	private static boolean isProjectionDiscontinuity(@NonNull PointF previousPoint, @NonNull PointF currentPoint,
+	                                                 float maxStep) {
+		return MapUtils.getSqrtDistance(previousPoint.x, previousPoint.y, currentPoint.x, currentPoint.y) > maxStep;
 	}
 
 	private static boolean isValidGlobeDistance(double distance) {
