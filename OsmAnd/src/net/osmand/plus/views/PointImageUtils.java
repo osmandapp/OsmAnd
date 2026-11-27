@@ -5,6 +5,7 @@ import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -22,6 +23,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PointImageUtils {
 
 	private static final Map<String, PointImageDrawable> DRAWABLE_CACHE = new ConcurrentHashMap<>();
+	// A background depends only on its type, layer and density (the colour is a filter applied when it is drawn),
+	// so all drawables share one bitmap of each. A bitmap is kept under the density it was decoded at, so one
+	// decoded before a density change and put here after clearCache() is never reused at the new density.
+	private static final Map<String, Bitmap> BACKGROUND_CACHE = new ConcurrentHashMap<>();
 
 	@NonNull
 	private static PointImageDrawable getOrCreate(@NonNull Context context, @NonNull PointImageInfo info) {
@@ -125,8 +130,22 @@ public class PointImageUtils {
 		return BackgroundType.getByTypeName(bgTypeName, DEFAULT_BACKGROUND_TYPE);
 	}
 
+	static Bitmap getMapBackground(@NonNull Context context, @NonNull BackgroundType type,
+	                               @NonNull String layer, boolean isSmall) {
+		String key = type.name() + layer + isSmall;
+		Bitmap bitmap = BACKGROUND_CACHE.get(key + context.getResources().getDisplayMetrics().densityDpi);
+		if (bitmap == null) {
+			bitmap = type.getMapBackgroundIconId(context, layer, isSmall);
+			if (bitmap != null) {
+				BACKGROUND_CACHE.put(key + bitmap.getDensity(), bitmap);
+			}
+		}
+		return bitmap;
+	}
+
 	public static void clearCache() {
 		DRAWABLE_CACHE.clear();
+		BACKGROUND_CACHE.clear();
 	}
 
 	public static class PointImageInfo {
