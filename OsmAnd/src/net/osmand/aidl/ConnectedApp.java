@@ -369,7 +369,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				intent.setAction(AIDL_ADD_MAP_WIDGET);
 				intent.putExtra(AIDL_OBJECT_ID, widget.getId());
 				intent.putExtra(AIDL_PACKAGE_NAME, pack);
-				app.sendBroadcast(intent);
+				app.getAidlApi().sendInternalBroadcast(intent);
 			}
 			app.getAidlApi().reloadMap();
 			return true;
@@ -384,7 +384,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			intent.setAction(AIDL_REMOVE_MAP_WIDGET);
 			intent.putExtra(AIDL_OBJECT_ID, widgetId);
 			intent.putExtra(AIDL_PACKAGE_NAME, pack);
-			app.sendBroadcast(intent);
+			app.getAidlApi().sendInternalBroadcast(intent);
 			return true;
 		}
 		return false;
@@ -451,7 +451,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				intent.setAction(AIDL_ADD_MAP_LAYER);
 				intent.putExtra(AIDL_OBJECT_ID, layer.getId());
 				intent.putExtra(AIDL_PACKAGE_NAME, pack);
-				app.sendBroadcast(intent);
+				app.getAidlApi().sendInternalBroadcast(intent);
 			}
 			app.getAidlApi().reloadMap();
 			return true;
@@ -466,7 +466,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			intent.setAction(AIDL_REMOVE_MAP_LAYER);
 			intent.putExtra(AIDL_OBJECT_ID, layerId);
 			intent.putExtra(AIDL_PACKAGE_NAME, pack);
-			app.sendBroadcast(intent);
+			app.getAidlApi().sendInternalBroadcast(intent);
 			return true;
 		}
 		return false;
