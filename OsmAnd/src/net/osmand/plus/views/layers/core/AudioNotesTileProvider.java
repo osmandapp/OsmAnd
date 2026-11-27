@@ -1,7 +1,6 @@
 package net.osmand.plus.views.layers.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -20,23 +19,20 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.audionotes.Recording;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider {
 
     private final QListPointI points31 = new QListPointI();
     private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-    private final Map<TypeNotes, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
+    private final IconPixelsCache<TypeNotes> bigIconsCache = new IconPixelsCache<>();
+    private final IconPixelsCache<TypeNotes> smallIconsCache = new IconPixelsCache<>();
 
-    private Bitmap smallBitmap;
     private MapTiledCollectionProvider providerInstance;
     private final int baseOrder;
     private final Context ctx;
@@ -118,14 +114,12 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
         if (data == null) {
             return SwigUtilities.nullSkImage();
         }
-        Bitmap bitmap;
         if (isFullSize) {
-            bitmap = bigBitmapCache.get(data.type);
-            if (bitmap == null) {
+            return bigIconsCache.getImage(data.type, type -> {
                 int iconId;
-                if (data.type == TypeNotes.PHOTO) {
+                if (type == TypeNotes.PHOTO) {
                     iconId = R.drawable.mx_special_photo_camera;
-                } else if (data.type == TypeNotes.AUDIO) {
+                } else if (type == TypeNotes.AUDIO) {
                     iconId = R.drawable.mx_special_microphone;
                 } else {
                     iconId = R.drawable.mx_special_video_camera;
@@ -133,19 +127,16 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
                 PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
                         ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true, iconId);
                 pointImageDrawable.setAlpha(0.8f);
-                bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, false);
-                bigBitmapCache.put(data.type, bitmap);
-            }
+                return pointImageDrawable.getBigMergedBitmap(data.textScale, false);
+            });
         } else {
-            if (smallBitmap == null) {
+            return smallIconsCache.getImage(data.type, type -> {
                 PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
                         ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true);
                 pointImageDrawable.setAlpha(0.8f);
-                smallBitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
-            }
-            bitmap = smallBitmap;
+                return pointImageDrawable.getSmallMergedBitmap(data.textScale);
+            });
         }
-        return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
     }
 
     @Override
