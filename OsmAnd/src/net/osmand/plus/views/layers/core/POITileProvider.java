@@ -56,6 +56,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 	private final float textScale;
 	private final float density;
 	private final PointI offset;
+	private final boolean customObjects;
 
 	private final MapLayerData<List<Amenity>> layerData;
 	private final IconPixelsCache<PointImageDrawable> bigIconsCache = new IconPixelsCache<>();
@@ -70,13 +71,16 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		private final IconPixelsCache<PointImageDrawable> bigIconsCache;
 		private final IconPixelsCache<PointImageDrawable> smallIconsCache;
 		private final PointI point31;
+		private final boolean customObject;
 
 		public POICollectionPoint(@NonNull Context ctx, @NonNull Amenity amenity, float textScale,
 		                          @NonNull IconPixelsCache<PointImageDrawable> bigIconsCache,
-		                          @NonNull IconPixelsCache<PointImageDrawable> smallIconsCache) {
+		                          @NonNull IconPixelsCache<PointImageDrawable> smallIconsCache,
+		                          boolean customObject) {
 			this.ctx = ctx;
 			this.amenity = amenity;
 			this.textScale = textScale;
+			this.customObject = customObject;
 			this.bigIconsCache = bigIconsCache;
 			this.smallIconsCache = smallIconsCache;
 			LatLon latLon = amenity.getLocation();
@@ -100,14 +104,22 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			return point31;
 		}
 
+		private boolean hasFullSizeIcon() {
+			if (!customObject || amenity.getGpxIcon() != null) {
+				return true;
+			}
+			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+			return !app.getPoiTypes().isOtherCategory(amenity.getType());
+		}
+
 		@Override
 		public SingleSkImage getImageBitmap(boolean isFullSize) {
-			if (isFullSize) {
+			if (isFullSize && hasFullSizeIcon()) {
 				String id = amenity.getGpxIcon();
 				if (id == null) {
 					id = RenderingIcons.getIconNameForAmenity(ctx, amenity);
 				}
-				if (id != null) {
+				if (id != null || customObject) {
 					int iconId = RenderingIcons.getResIdOrDefault(ctx, id, R.drawable.mx_special_marker);
 					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(),
 							true, iconId);
@@ -142,7 +154,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	public POITileProvider(@NonNull Context context, MapLayerData<List<Amenity>> layerData,
 	                       int baseOrder, boolean textVisible, @Nullable TextRasterizer.Style textStyle,
-	                       float textScale, float density) {
+	                       float textScale, float density, boolean customObjects) {
 		this.ctx = context;
 		this.layerData = layerData;
 		this.baseOrder = baseOrder;
@@ -151,6 +163,11 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		this.textScale = textScale;
 		this.density = density;
 		this.offset = new PointI(0, 0);
+		this.customObjects = customObjects;
+	}
+
+	public boolean isCustomObjects() {
+		return customObjects;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -260,7 +277,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			LatLon latLon = amenity.getLocation();
 			if (latLonBounds.contains(latLon.getLongitude(), latLon.getLatitude(),
 					latLon.getLongitude(), latLon.getLatitude())) {
-				POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale, bigIconsCache, smallIconsCache);
+				POICollectionPoint point = new POICollectionPoint(ctx, amenity, textScale, bigIconsCache, smallIconsCache, customObjects);
 				res.add(point.instantiateProxy(true));
 				point.swigReleaseOwnership();
 			}
