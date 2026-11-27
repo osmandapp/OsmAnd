@@ -5502,4 +5502,10 @@
     <string name="free_region_maps_deactivated">Мапе за %2$s су деактивиране. %1$s није преузето.</string>
     <string name="free_region_activate_title">Да ли желите да промените свој бесплатни регион?</string>
     <string name="free_region_activate_descr">Бесплатна верзија укључује мапе једног региона. %1$s ће постати ваш бесплатни регион, а мапе %2$s ће бити деактивиране.</string>
+    <string name="fullscreen_mode_also_hide">Такође сакриј</string>
+    <string name="fullscreen_mode_status_bar">Статусна трака</string>
+    <string name="fullscreen_mode_status_bar_descr">Сат, обавештења, батерија</string>
+    <string name="fullscreen_mode_navigation_bar">Навигациона трака</string>
+    <string name="fullscreen_mode_navigation_bar_descr">Назад, Почетна, Недавно</string>
+    <string name="fullscreen_mode_bars_footer">Превуците прстом од ивице екрана да бисте на тренутак приказали скривене траке. Додир на мапи враћа све.</string>
 </resources>
