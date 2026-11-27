@@ -513,6 +513,14 @@
 		<item name="trackDecorationTint">@color/ui_switch_track_decoration</item>
 	</style>
 
+	<!-- Default slider of the Material 3 themes: the native M3 Expressive slider with the colours
+	     of the UI Library on the inactive track - Surface Container Highest track, On Surface
+	     Variant stops -->
+	<style name="Widget.OsmAnd.Material3Expressive.Slider" parent="Widget.Material3Expressive.Slider.Xsmall">
+		<item name="trackColorInactive">@color/ui_slider_track_inactive</item>
+		<item name="tickColorInactive">@color/ui_slider_tick_inactive</item>
+	</style>
+
 
     <!--******************************** Basic text styles ********************************-->
 

@@ -129,6 +129,7 @@
 		<item name="bottomSheetStyle">@style/Widget.App.Material.BottomSheet</item>
 
 		<item name="materialSwitchStyle">@style/Widget.OsmAnd.Material3.Switch</item>
+		<item name="sliderStyle">@style/Widget.OsmAnd.Material3Expressive.Slider</item>
 		<item name="materialCardViewStyle">@style/Widget.App.Material.SectionCard</item>
 
 		<item name="android:windowAnimationStyle">@style/Animation.Material3.BottomSheetDialog
