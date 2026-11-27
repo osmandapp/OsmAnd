@@ -2450,6 +2450,76 @@ public class TrackMenuMapCenterTest extends AndroidTest {
 		TrackAppearanceFragment.showInstance(activity, selectedGpxFile, menu);
 	}
 
+	@Test
+	public void testBackAfterAnalyzeOnMapClosedReturnsToSearch() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		String path = selectedGpxFile.getGpxFile().getPath();
+		scenarioRule.getScenario().onActivity(activity -> TrackMenuFragment.showInstance(activity, path, false, false,
+				null, QuickSearchDialogFragment.TAG, null));
+		awaitTrackMenuSettled();
+		try {
+			openAnalyzeOnMapFromOptions();
+			boolean[] portrait = new boolean[1];
+			scenarioRule.getScenario().onActivity(activity ->
+					portrait[0] = AndroidUiHelper.isOrientationPortrait(activity));
+			clickViewWithId(portrait[0] ? R.id.widget_top_bar_close_button : R.id.top_bar_close_button);
+			awaitTrackMenuSettled();
+			onTrackMenu(fragment -> assertTrue("Closing Analyze on map showed the hidden track menu", fragment.isHidden()));
+			pressBackUntilTrackMenuClosed();
+			scenarioRule.getScenario().onActivity(activity -> {
+				QuickSearchDialogFragment search = activity.getFragmentsHelper().getQuickSearchDialogFragment();
+				assertTrue("Back did not return to the search, fragments "
+						+ activity.getSupportFragmentManager().getFragments(), search != null && !search.isSearchHidden());
+			});
+		} finally {
+			scenarioRule.getScenario().onActivity(activity -> activity.getFragmentsHelper().closeQuickSearch());
+		}
+	}
+
+	@Test
+	public void testBackAfterRotationReturnsFromAnalyzeOnMapToTrackMenu() throws Throwable {
+		skipAppStartDialogs(app);
+		assertNotNull(selectedGpxFile);
+		int rotation = getRotation();
+		try {
+			scenarioRule.getScenario().onActivity(activity ->
+					TrackMenuFragment.showInstance(activity, selectedGpxFile, null));
+			awaitTrackMenuSettled();
+			openAnalyzeOnMapFromOptions();
+			rotateQuarterTurn(rotation);
+			awaitTrackMenuSettled();
+			Espresso.pressBackUnconditionally();
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity -> assertNull("Back did not close Analyze on map",
+					activity.getSupportFragmentManager().findFragmentByTag(TrackDetailsMenuFragment.TAG)));
+			onTrackMenu(fragment -> assertFalse("Analyze on map closed without showing the track menu", fragment.isHidden()));
+		} finally {
+			setRotation(rotation);
+		}
+	}
+
+	private void openAnalyzeOnMapFromOptions() throws Throwable {
+		clickViewWithId(R.id.action_options);
+		awaitTrackMenuSettled();
+		Espresso.onView(ViewMatchers.withText(R.string.analyze_on_map)).perform(ViewActions.scrollTo(), ViewActions.click());
+		awaitTrackMenuSettled();
+		scenarioRule.getScenario().onActivity(activity -> assertNotNull("Analyze on map is not open",
+				activity.getSupportFragmentManager().findFragmentByTag(TrackDetailsMenuFragment.TAG)));
+		onTrackMenu(fragment -> assertTrue("The track menu is not hidden under Analyze on map", fragment.isHidden()));
+	}
+
+	private void pressBackUntilTrackMenuClosed() throws Throwable {
+		boolean[] trackMenuOpen = {true};
+		for (int i = 0; i < 2 && trackMenuOpen[0]; i++) {
+			Espresso.pressBackUnconditionally();
+			awaitTrackMenuSettled();
+			scenarioRule.getScenario().onActivity(activity -> trackMenuOpen[0] =
+					activity.getSupportFragmentManager().findFragmentByTag(TrackMenuFragment.TAG) != null);
+		}
+		assertFalse("Back did not close the track menu", trackMenuOpen[0]);
+	}
+
 	private void openPlanRoute(@NonNull MapActivity activity) {
 		activity.getFragmentsHelper().getTrackMenuFragment().dismiss();
 		MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(),
