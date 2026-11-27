@@ -62,7 +62,7 @@ object KUnicode {
 		return false
 	}
 
-	private fun isAscii(input: String): Boolean {
+	fun isAscii(input: String): Boolean {
 		for (ch in input) {
 			if (ch.code > 0x7F) {
 				return false

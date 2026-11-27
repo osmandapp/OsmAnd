@@ -80,7 +80,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.size() + deletedRemoteFiles.size());
 		remoteFiles.addAll(uniqueRemoteFiles.values());
 		remoteFiles.addAll(deletedRemoteFiles.values());
-		Map<String, LocalFile> normalizedLocalFiles = getNormalizedLocalFiles();
+		Map<String, LocalFile> normalizedLocalFiles = BackupUtils.getNormalizedLocalFiles(localFiles);
 		Map<String, RemoteFile> normalizedRemoteFiles = getNormalizedRemoteFiles(remoteFiles);
 		Map<String, UploadedFileInfo> uploadedFileInfos = backupHelper.getDbHelper().getUploadedFileInfoMap();
 		for (Map.Entry<String, RemoteFile> entry : normalizedRemoteFiles.entrySet()) {
@@ -177,20 +177,6 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		}
 		operationLog.log("=== filesToMerge ===");
 		return info;
-	}
-
-	@NonNull
-	private Map<String, LocalFile> getNormalizedLocalFiles() {
-		Map<String, LocalFile> result = new HashMap<>(localFiles.size());
-		for (Map.Entry<String, LocalFile> entry : localFiles.entrySet()) {
-			String key = KUnicode.INSTANCE.normalizeNFC(entry.getKey());
-			LocalFile localFile = entry.getValue();
-			LocalFile existing = result.get(key);
-			if (existing == null || localFile.localModifiedTime > existing.localModifiedTime) {
-				result.put(key, localFile);
-			}
-		}
-		return result;
 	}
 
 	@NonNull

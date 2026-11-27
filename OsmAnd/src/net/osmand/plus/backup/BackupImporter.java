@@ -50,6 +50,7 @@ class BackupImporter {
 
 	private boolean cancelled;
 
+	private final LocalFileForms localFileForms = new LocalFileForms();
 	private final AtomicInteger dataProgress = new AtomicInteger(0);
 	private final AtomicInteger itemsProgress = new AtomicInteger(0);
 
@@ -173,7 +174,7 @@ class BackupImporter {
 				}
 				if (!error) {
 					if (item instanceof FileSettingsItem fileItem) {
-						fileItem.useExistingFileForm();
+						fileItem.useExistingFileForm(localFileForms);
 					}
 					is = new FileInputStream(tempFile);
 					File file = reader.readFromStream(is, tempFile, remoteFile.getName());

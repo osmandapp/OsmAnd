@@ -177,7 +177,8 @@ final class FavoritesBackupMerger {
 		if (!new File(fileName).getName().equals(fileName)) {
 			return null;
 		}
-		return new File(new File(app.getNoBackupFilesDir(), SNAPSHOT_DIR), KUnicode.INSTANCE.normalizeNFC(fileName));
+		File snapshotDir = new File(app.getNoBackupFilesDir(), SNAPSHOT_DIR);
+		return new LocalFileForms().fileToWrite(new File(snapshotDir, KUnicode.INSTANCE.normalizeNFC(fileName)));
 	}
 
 	@Nullable

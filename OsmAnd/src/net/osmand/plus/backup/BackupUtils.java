@@ -28,6 +28,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.util.KUnicode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -139,6 +140,20 @@ public class BackupUtils {
 			}
 		}
 		return res;
+	}
+
+	@NonNull
+	public static Map<String, LocalFile> getNormalizedLocalFiles(@NonNull Map<String, LocalFile> localFiles) {
+		Map<String, LocalFile> result = new HashMap<>(localFiles.size());
+		for (Map.Entry<String, LocalFile> entry : localFiles.entrySet()) {
+			String key = KUnicode.INSTANCE.normalizeNFC(entry.getKey());
+			LocalFile localFile = entry.getValue();
+			LocalFile existing = result.get(key);
+			if (existing == null || localFile.localModifiedTime > existing.localModifiedTime) {
+				result.put(key, localFile);
+			}
+		}
+		return result;
 	}
 
 	@NonNull

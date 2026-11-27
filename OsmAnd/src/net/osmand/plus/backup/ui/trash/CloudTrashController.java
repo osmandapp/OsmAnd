@@ -17,6 +17,7 @@ import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
@@ -27,6 +28,7 @@ import net.osmand.plus.importfiles.ui.FileExistBottomSheet;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.util.KUnicode;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -135,7 +137,12 @@ public class CloudTrashController {
 			log.error("Failed to download item: " + item.oldFile.getName() + ", SettingsItem is null");
 			return;
 		}
-		LocalFile localFile = backupHelper.getBackup().getLocalFiles().get(item.oldFile.getTypeNamePath());
+		Map<String, LocalFile> localFiles = backupHelper.getBackup().getLocalFiles();
+		String typeNamePath = item.oldFile.getTypeNamePath();
+		LocalFile localFile = localFiles.get(typeNamePath);
+		if (localFile == null) {
+			localFile = BackupUtils.getNormalizedLocalFiles(localFiles).get(KUnicode.INSTANCE.normalizeNFC(typeNamePath));
+		}
 		if (localFile != null) {
 			FragmentManager manager = fragment.getFragmentManager();
 			if (manager != null) {
