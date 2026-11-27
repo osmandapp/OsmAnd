@@ -95,7 +95,7 @@ public class SunParametersController extends BaseDialogController {
 		plugin.SUN_LIGHT_TIME.set(time);
 	}
 
-	@NonNull
+	@Nullable
 	public SunLight.Angles getSunAngles() {
 		return plugin.getSunLight().getAngles();
 	}
