@@ -16,13 +16,9 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.shared.util.KUnicode;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
@@ -35,23 +31,19 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 	private final OsmandApplication app;
 	private final BackupHelper backupHelper;
 
-	private final Map<String, LocalFile> localFiles;
-	private final Map<String, RemoteFile> uniqueRemoteFiles;
-	private final Map<String, RemoteFile> deletedRemoteFiles;
+	private final Map<String, LocalFile> normalizedLocalFiles;
+	private final Map<String, RemoteFile> normalizedRemoteFiles;
 	private final OnGenerateBackupInfoListener listener;
 	private final boolean autoSync;
 
 	protected GenerateBackupInfoTask(@NonNull OsmandApplication app,
-			@NonNull Map<String, LocalFile> localFiles,
-			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
-			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
+			@NonNull PrepareBackupResult backup,
 			@NonNull boolean autoSync,
 			@Nullable OnGenerateBackupInfoListener listener) {
 		this.app = app;
 		this.backupHelper = app.getBackupHelper();
-		this.localFiles = localFiles;
-		this.uniqueRemoteFiles = uniqueRemoteFiles;
-		this.deletedRemoteFiles = deletedRemoteFiles;
+		this.normalizedLocalFiles = backup.getNormalizedLocalFiles();
+		this.normalizedRemoteFiles = backup.getNormalizedRemoteFiles();
 		this.listener = listener;
 		this.autoSync = autoSync;
 		operationLog.startOperation();
@@ -77,12 +69,8 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 				}
 				operationLog.log("=== deletedRemoteFiles ===");
 				*/
-		List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.size() + deletedRemoteFiles.size());
-		remoteFiles.addAll(uniqueRemoteFiles.values());
-		remoteFiles.addAll(deletedRemoteFiles.values());
-		Map<String, LocalFile> normalizedLocalFiles = BackupUtils.getNormalizedLocalFiles(localFiles);
-		Map<String, RemoteFile> normalizedRemoteFiles = getNormalizedRemoteFiles(remoteFiles);
-		Map<String, UploadedFileInfo> uploadedFileInfos = backupHelper.getDbHelper().getUploadedFileInfoMap();
+		BackupDbHelper dbHelper = backupHelper.getDbHelper();
+		Map<String, UploadedFileInfo> uploadedFileInfos = dbHelper.getUploadedFileInfoMap();
 		for (Map.Entry<String, RemoteFile> entry : normalizedRemoteFiles.entrySet()) {
 			RemoteFile remoteFile = entry.getValue();
 			ExportType exportType = ExportType.findBy(remoteFile);
@@ -118,7 +106,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 					}
 				}
 			} else if (!remoteFile.isDeleted()) {
-				UploadedFileInfo fileInfo = uploadedFileInfos.get(BackupDbHelper.getUploadedFileInfoKey(remoteFile.getType(), remoteFile.getName()));
+				UploadedFileInfo fileInfo = uploadedFileInfos.get(dbHelper.getUploadedFileInfoKey(remoteFile.getType(), remoteFile.getName()));
 				// suggest to remove only if file exists in db
 				if (fileInfo != null && fileInfo.getUploadTime() >= remoteFile.getUpdatetimems()) {
 					// conflicts not supported yet
@@ -129,12 +117,12 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 				}
 			}
 		}
-		for (LocalFile localFile : localFiles.values()) {
+		for (LocalFile localFile : normalizedLocalFiles.values()) {
 			ExportType exportType = ExportType.findBy(localFile.item);
 			if (exportType == null || !exportType.isAvailable()) {
 				continue;
 			}
-			boolean hasRemoteFile = normalizedRemoteFiles.containsKey(KUnicode.INSTANCE.normalizeNFC(localFile.getTypeFileName()));
+			boolean hasRemoteFile = normalizedRemoteFiles.containsKey(localFile.getNormalizedTypeFileName());
 			boolean toDelete = info.localFilesToDelete.contains(localFile);
 			if (!hasRemoteFile && !toDelete) {
 				boolean shouldSkip = shouldSkip(localFile);
@@ -153,7 +141,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		operationLog.log("=== filesToUpload ===");
 		operationLog.log("=== filesToDownload ===");
 		for (RemoteFile remoteFile : info.filesToDownload) {
-			LocalFile localFile = normalizedLocalFiles.get(getNormalizedTypeNamePath(remoteFile));
+			LocalFile localFile = normalizedLocalFiles.get(remoteFile.getNormalizedTypeNamePath());
 			if (localFile != null) {
 				operationLog.log(remoteFile + " localUploadTime=" + localFile.uploadTime);
 			} else {
@@ -177,31 +165,6 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 		}
 		operationLog.log("=== filesToMerge ===");
 		return info;
-	}
-
-	@NonNull
-	private Map<String, RemoteFile> getNormalizedRemoteFiles(@NonNull List<RemoteFile> remoteFiles) {
-		Map<String, RemoteFile> result = new HashMap<>(remoteFiles.size());
-		for (RemoteFile remoteFile : remoteFiles) {
-			String key = getNormalizedTypeNamePath(remoteFile);
-			RemoteFile existing = result.get(key);
-			if (existing == null || isPreferredRemoteFile(remoteFile, existing)) {
-				result.put(key, remoteFile);
-			}
-		}
-		return result;
-	}
-
-	private static boolean isPreferredRemoteFile(@NonNull RemoteFile remoteFile, @NonNull RemoteFile other) {
-		if (remoteFile.isDeleted() != other.isDeleted()) {
-			return other.isDeleted();
-		}
-		return remoteFile.getUpdatetimems() > other.getUpdatetimems();
-	}
-
-	@NonNull
-	private String getNormalizedTypeNamePath(@NonNull RemoteFile remoteFile) {
-		return KUnicode.INSTANCE.normalizeNFC(remoteFile.getTypeNamePath());
 	}
 
 	private boolean shouldSkip(@NonNull LocalFile localFile) {

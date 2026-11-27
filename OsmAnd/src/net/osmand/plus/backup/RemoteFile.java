@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.IndexConstants;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.shared.util.KUnicode;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -98,6 +99,11 @@ public class RemoteFile {
 		} else {
 			return type;
 		}
+	}
+
+	@NonNull
+	public String getNormalizedTypeNamePath() {
+		return KUnicode.INSTANCE.normalizeNFC(getTypeNamePath());
 	}
 
 	public long getUpdatetimems() {

@@ -233,7 +233,7 @@ public class BackupDbHelper {
 	}
 
 	@NonNull
-	public static String getUploadedFileInfoKey(@NonNull String type, @NonNull String name) {
+	public String getUploadedFileInfoKey(@NonNull String type, @NonNull String name) {
 		return type + "___" + KUnicode.INSTANCE.normalizeNFC(name);
 	}
 

@@ -338,7 +338,8 @@ class BackupImporter {
 	                                      @NonNull List<RemoteFile> remoteInfoFiles,
 	                                      boolean readItems) {
 		File tempDir = FileUtils.getTempDir(backupHelper.getApp());
-		Map<String, UploadedFileInfo> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
+		BackupDbHelper dbHelper = backupHelper.getDbHelper();
+		Map<String, UploadedFileInfo> infoMap = dbHelper.getUploadedFileInfoMap();
 		BackupInfo backupInfo = backupHelper.getBackup().getBackupInfo();
 		List<RemoteFile> filesToDelete = backupInfo != null ? backupInfo.filesToDelete : Collections.emptyList();
 		for (RemoteFile remoteFile : uniqueRemoteFiles) {
@@ -352,7 +353,7 @@ class BackupImporter {
 						break;
 					}
 				}
-				UploadedFileInfo fileInfo = infoMap.get(BackupDbHelper.getUploadedFileInfoKey(remoteFile.getType(), origFileName));
+				UploadedFileInfo fileInfo = infoMap.get(dbHelper.getUploadedFileInfoKey(remoteFile.getType(), origFileName));
 				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
 				if (shouldDownloadOnCollecting(remoteFile, readItems)
 						&& (uploadTime != remoteFile.getUpdatetimems() || delete)) {

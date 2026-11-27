@@ -137,7 +137,7 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 			localFile.localModifiedTime = lastModifiedTime;
 		}
 		if (infos != null) {
-			UploadedFileInfo fileInfo = infos.get(BackupDbHelper.getUploadedFileInfoKey(item.getType().name(), fileName));
+			UploadedFileInfo fileInfo = infos.get(dbHelper.getUploadedFileInfoKey(item.getType().name(), fileName));
 			if (fileInfo != null) {
 				localFile.uploadTime = fileInfo.getUploadTime();
 				checkM5Digest(localFile, fileInfo, lastModifiedTime, infoModifiedTime);

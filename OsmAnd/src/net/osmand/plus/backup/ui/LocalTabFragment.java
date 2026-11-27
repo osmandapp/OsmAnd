@@ -41,14 +41,14 @@ public class LocalTabFragment extends ChangesTabFragment {
 		Map<String, FileInfo> filesByName = new HashMap<>();
 		List<LocalFile> localFiles = info.filteredFilesToUpload;
 		for (LocalFile localFile : localFiles) {
-			String key = localFile.getTypeFileName();
+			String key = localFile.getNormalizedTypeFileName();
 			FileInfo fileInfo = new FileInfo();
 			fileInfo.localFile = localFile;
 			filesByName.put(key, fileInfo);
 		}
 		List<RemoteFile> deletedFiles = info.filteredFilesToDelete;
 		for (RemoteFile deletedFile : deletedFiles) {
-			String key = deletedFile.getTypeNamePath();
+			String key = deletedFile.getNormalizedTypeNamePath();
 			FileInfo fileInfo = new FileInfo();
 			fileInfo.remoteFile = deletedFile;
 			fileInfo.deleted = true;
@@ -58,7 +58,7 @@ public class LocalTabFragment extends ChangesTabFragment {
 			Map<RemoteFile, SettingsItem> downloadItems = BackupUtils.getItemsMapForRestore(info, backup.getSettingsItems());
 			for (Map.Entry<RemoteFile, SettingsItem> entry : downloadItems.entrySet()) {
 				RemoteFile remoteFile = entry.getKey();
-				String key = remoteFile.getTypeNamePath();
+				String key = remoteFile.getNormalizedTypeNamePath();
 				FileInfo fileInfo = filesByName.get(key);
 				if (fileInfo != null && fileInfo.remoteFile == null) {
 					fileInfo.remoteFile = remoteFile;
@@ -68,7 +68,7 @@ public class LocalTabFragment extends ChangesTabFragment {
 				String key = entry.getKey();
 				FileInfo fileInfo = entry.getValue();
 				if (fileInfo.remoteFile == null) {
-					RemoteFile remoteFile = backup.getRemoteFiles().get(key);
+					RemoteFile remoteFile = backup.getNormalizedRemoteFiles().get(key);
 					if (remoteFile != null) {
 						fileInfo.remoteFile = remoteFile;
 					}

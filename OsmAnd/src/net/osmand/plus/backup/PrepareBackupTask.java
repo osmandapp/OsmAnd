@@ -11,7 +11,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
-import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -184,15 +183,14 @@ public class PrepareBackupTask {
 			onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
 			return;
 		}
-		backupHelper.generateBackupInfo(backup.getLocalFiles(), backup.getRemoteFiles(RemoteFilesType.UNIQUE),
-				backup.getRemoteFiles(RemoteFilesType.DELETED), autoSync, (backupInfo, error) -> {
-					if (Algorithms.isEmpty(error)) {
-						backup.setBackupInfo(backupInfo);
-					} else {
-						onError(error);
-					}
-					onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
-				});
+		backupHelper.generateBackupInfo(backup, autoSync, (backupInfo, error) -> {
+			if (Algorithms.isEmpty(error)) {
+				backup.setBackupInfo(backupInfo);
+			} else {
+				onError(error);
+			}
+			onTaskFinished(TaskType.GENERATE_BACKUP_INFO);
+		});
 	}
 
 	private void onError(@NonNull String message) {

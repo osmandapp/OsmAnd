@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.LocalFileForms;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -97,16 +98,24 @@ public class GpxDirSettingsItem extends SettingsItem {
 
 	@Override
 	public void apply() {
-		KFile file = dirItem.getFile();
-		File dir = app.getAppPath(file.path());
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		if (gpxDbHelper.hasGpxDirItem(file)) {
+		dirItem = getExistingFormDirItem();
+		if (gpxDbHelper.hasGpxDirItem(dirItem.getFile())) {
 			gpxDbHelper.updateDataItem(dirItem);
 		} else {
 			gpxDbHelper.add(dirItem);
 		}
+	}
+
+	@NonNull
+	private GpxDirItem getExistingFormDirItem() {
+		File dir = new LocalFileForms().fileToWrite(SharedUtil.jFile(dirItem.getFile()));
+		KFile file = SharedUtil.kFile(dir);
+		if (file.path().equals(dirItem.getFile().path())) {
+			return dirItem;
+		}
+		GpxDirItem item = new GpxDirItem(file);
+		new GpxAppearanceInfo(app, dirItem).setParameters(item);
+		return item;
 	}
 
 	@Override
