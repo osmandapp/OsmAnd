@@ -213,7 +213,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private void addRegionsFile(List<BinaryMapIndexReader> files, SearchPhrase phrase) {
 		OsmandRegions regions = phrase.getSettings().getRegions();
 		if (regions != null) {
-			addFile(files, regions.getReader());
+			addFile(files, regions.getSearchReader());
 		}
 	}
 
