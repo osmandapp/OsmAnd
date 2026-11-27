@@ -498,9 +498,10 @@
 	</style>
 
 	<!-- Buttons of the Material 3 screens: the native M3 Expressive buttons with the colours of the
-	     UI Library. Pressed and disabled states are opaque theme colours instead of an overlay, the
-	     corners do not change with the state. Side padding, icon size, the icon-to-label gap and the
-	     minimum width are those of the UI Library. A screen only picks the type through the theme: no
+	     UI Library. Pressed and disabled states are theme colours of their own, the native ripple
+	     (press wave, hover, focus) is drawn over them. The corners do not change with the state.
+	     Side padding, icon size, the icon-to-label gap and the minimum width are those of the UI
+	     Library. A screen only picks the type through the theme: no
 	     style = Filled, ?attr/materialButtonTonalStyle, ?attr/materialButtonOutlinedStyle,
 	     ?attr/borderlessButtonStyle (Text) - and sets no colour, corner or style on a button. -->
 	<style name="ShapeAppearance.OsmAnd.Button" parent="">
@@ -512,7 +513,6 @@
 		<item name="backgroundTint">@color/ui_button_filled_background</item>
 		<item name="android:textColor">@color/ui_button_filled_content</item>
 		<item name="iconTint">@color/ui_button_filled_content</item>
-		<item name="rippleColor">@android:color/transparent</item>
 		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
 		<item name="android:minWidth">@dimen/ui_button_min_width</item>
 		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
@@ -525,7 +525,6 @@
 		<item name="backgroundTint">@color/ui_button_tonal_background</item>
 		<item name="android:textColor">@color/ui_button_tonal_content</item>
 		<item name="iconTint">@color/ui_button_tonal_content</item>
-		<item name="rippleColor">@android:color/transparent</item>
 		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
 		<item name="android:minWidth">@dimen/ui_button_min_width</item>
 		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
@@ -539,7 +538,6 @@
 		<item name="android:textColor">@color/ui_button_plain_content</item>
 		<item name="iconTint">@color/ui_button_plain_content</item>
 		<item name="strokeColor">@color/ui_button_outline</item>
-		<item name="rippleColor">@android:color/transparent</item>
 		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
 		<item name="android:minWidth">@dimen/ui_button_min_width</item>
 		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
@@ -552,7 +550,6 @@
 		<item name="backgroundTint">@color/ui_button_text_background</item>
 		<item name="android:textColor">@color/ui_button_plain_content</item>
 		<item name="iconTint">@color/ui_button_plain_content</item>
-		<item name="rippleColor">@android:color/transparent</item>
 		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
 		<item name="android:minWidth">@dimen/ui_button_min_width</item>
 		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
@@ -568,7 +565,6 @@
 		<item name="backgroundTint">@color/ui_toggle_button_background</item>
 		<item name="android:textColor">@color/ui_toggle_button_text</item>
 		<item name="iconTint">@color/ui_toggle_button_text</item>
-		<item name="rippleColor">@android:color/transparent</item>
 	</style>
 
 	<style name="ThemeOverlay.OsmAnd.Material3Expressive.MaterialButtonToggleGroup" parent="">
