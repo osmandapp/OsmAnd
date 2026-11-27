@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.text.Layout;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -34,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -102,7 +104,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
-import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -997,12 +998,9 @@ public class MenuBuilder {
 	}
 
 	public View buildDescriptionRow(View view, String description, @Nullable View.OnClickListener onClickListener, @Nullable String buttonText) {
-		return buildDescriptionRow(view, description, onClickListener, buttonText, null);
-	}
-
-	public View buildDescriptionRow(View view, String description, @Nullable View.OnClickListener onClickListener,
-			@Nullable String buttonText, @Nullable View.OnClickListener wikipediaClickListener) {
 		String descriptionLabel = app.getString(R.string.shared_string_description);
+		// the dialog shows a plain text description as it is in the row
+		boolean hideReadFullIfFits = onClickListener == null && !Algorithms.isHtmlText(description);
 		if (onClickListener == null) {
 			onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
 		}
@@ -1080,24 +1078,9 @@ public class MenuBuilder {
 		if (buttonText == null) {
 			buttonText = app.getString(R.string.context_menu_read_full);
 		}
-		if (wikipediaClickListener != null) {
-			// the Wikipedia button moves to the next line when both buttons do not fit,
-			// FlowLayout can't be measured with the unspecified width used for baseline alignment
-			ll.setBaselineAligned(false);
-			int spacing = dpToPx(8f);
-			FlowLayout buttonsContainer = new FlowLayout(view.getContext());
-			LinearLayout.LayoutParams containerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			AndroidUtils.setMargins(containerParams, dpToPx(16f), 0, 0, dpToPx(16f) - spacing);
-			buttonsContainer.setLayoutParams(containerParams);
-			buildReadFullButton(buttonsContainer, new FlowLayout.LayoutParams(spacing, spacing),
-					buttonText, R.drawable.ic_action_read_text, onClickListener);
-			buildReadFullButton(buttonsContainer, new FlowLayout.LayoutParams(spacing, spacing),
-					app.getString(R.string.shared_string_wikipedia), R.drawable.ic_plugin_wikipedia, wikipediaClickListener);
-			llText.addView(buttonsContainer);
-		} else {
-			LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
-			AndroidUtils.setMargins(buttonParams, dpToPx(16f), 0, 0, dpToPx(16f));
-			buildReadFullButton(llText, buttonParams, buttonText, R.drawable.ic_action_read_text, onClickListener);
+		View readFullButton = buildReadFullButton(llText, buttonText, onClickListener);
+		if (hideReadFullIfFits) {
+			hideIfTextFits(textView, readFullButton);
 		}
 
 		if (onClickListener != null) {
@@ -1269,14 +1252,29 @@ public class MenuBuilder {
 		return child != null && DIVIDER_ROW_KEY.equals(child.getTag());
 	}
 
-	protected void buildReadFullButton(@NonNull ViewGroup container, @NonNull ViewGroup.LayoutParams params,
-			String btnText, @DrawableRes int iconId, View.OnClickListener onClickListener) {
+	private static void hideIfTextFits(@NonNull TextView textView, @NonNull View viewToHide) {
+		textView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+			@Override
+			public boolean onPreDraw() {
+				textView.getViewTreeObserver().removeOnPreDrawListener(this);
+				Layout layout = textView.getLayout();
+				if (layout != null && layout.getEllipsisCount(layout.getLineCount() - 1) == 0) {
+					viewToHide.setVisibility(View.GONE);
+					return false;
+				}
+				return true;
+			}
+		});
+	}
+
+	protected View buildReadFullButton(LinearLayout container, String btnText, View.OnClickListener onClickListener) {
 		Context ctx = container.getContext();
 		boolean light = isLightContent();
 
 		TextViewEx button = new TextViewEx(new ContextThemeWrapper(ctx, light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-		button.setLayoutParams(params);
-		button.setMinimumHeight(dpToPx(36f));
+		LinearLayout.LayoutParams llButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dpToPx(36f));
+		AndroidUtils.setMargins(llButtonParams, dpToPx(16f), 0, 0, dpToPx(16f));
+		button.setLayoutParams(llButtonParams);
 		button.setTypeface(FontCache.getMediumFont());
 		button.setBackgroundResource(light ? R.drawable.context_menu_controller_bg_light : R.drawable.context_menu_controller_bg_dark);
 		button.setTextSize(14);
@@ -1292,15 +1290,16 @@ public class MenuBuilder {
 		button.setOnClickListener(onClickListener);
 		button.setAllCaps(true);
 		button.setText(btnText);
-		Drawable normal = app.getUIUtilities().getIcon(iconId,
+		Drawable normal = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
 				light ? R.color.ctx_menu_controller_button_text_color_light_n : R.color.ctx_menu_controller_button_text_color_dark_n);
-		Drawable pressed = app.getUIUtilities().getIcon(iconId,
+		Drawable pressed = app.getUIUtilities().getIcon(R.drawable.ic_action_read_text,
 				light ? R.color.ctx_menu_controller_button_text_color_light_p : R.color.ctx_menu_controller_button_text_color_dark_p);
 
 		Drawable drawable = AndroidUtils.createPressedStateListDrawable(normal, pressed);
 		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, drawable, null, null, null);
 		button.setCompoundDrawablePadding(dpToPx(8f));
 		container.addView(button);
+		return button;
 	}
 
 	protected void buildDateRow(@NonNull View view, @NonNull String textPrefix, long timestamp) {

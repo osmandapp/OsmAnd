@@ -492,7 +492,7 @@ public class OsmandAidlApi {
 	}
 
 	// the AIDL service checks the caller, then hands the call to MapActivity: no other app may send or read these
-	private void sendInternalBroadcast(@NonNull Intent intent) {
+	void sendInternalBroadcast(@NonNull Intent intent) {
 		intent.setPackage(app.getPackageName());
 		app.sendBroadcast(intent);
 	}
