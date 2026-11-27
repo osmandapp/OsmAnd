@@ -136,6 +136,7 @@ import net.osmand.aidlapi.tiles.ASqliteDbFile;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -218,7 +219,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 	@Override
 	public long addAidlCallback(IOsmAndAidlCallback callback, int key) {
 		long id = getAndIncrementCallbackId();
-		callbacks.put(id, new AidlCallbackParams(callback, key));
+		// callbacks are called from OsmAnd's own threads, so the app that registers one is remembered here
+		callbacks.put(id, new AidlCallbackParams(callback, key, getCallingAppPackName()));
 		return id;
 	}
 
@@ -1084,9 +1086,10 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				mHandler.postDelayed(() -> {
 					try {
-						if (callbacks.containsKey(callbackId)) {
-							OsmandAidlApi api = getApi("isUpdateAllowed");
-							if (api != null && api.isUpdateAllowed()) {
+						AidlCallbackParams params = callbacks.get(callbackId);
+						if (params != null) {
+							OsmandAidlApi api = getApp().getAidlApi();
+							if (api.isUpdateAllowed() && api.isCallbackAllowed(params.getPack(), null)) {
 								callback.onUpdate();
 							}
 							startRemoteUpdates(updateTimeMS, callbackId, callback);
@@ -1439,12 +1442,24 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean importProfile(ProfileSettingsParams params) {
 			try {
 				OsmandAidlApi api = getApi("importProfile");
-				return api != null && api.importProfileV2(params.getProfileSettingsUri(), params.getSettingsTypeKeys(),
+				return api != null && isImportAllowed(api, params.getSettingsTypeKeys())
+						&& api.importProfileV2(params.getProfileSettingsUri(), params.getSettingsTypeKeys(),
 						params.isReplace(), params.isSilent(), params.getLatestChanges(), params.getVersion());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
 			}
+		}
+
+		// importProfile needs Settings, and each type of the imported items needs its own group
+		private boolean isImportAllowed(@NonNull OsmandAidlApi api, @NonNull List<String> settingsTypeKeys) {
+			String packName = getCallingAppPackName();
+			for (ExportType type : ExportType.valuesOf(settingsTypeKeys)) {
+				if (!api.isGroupAllowed(packName, AidlPermissionGroup.getByImportType(type))) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override
@@ -1797,11 +1812,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 	public static class AidlCallbackParams {
 		private IOsmAndAidlCallback callback;
 		private long key;
+		private final String pack;
 
-		AidlCallbackParams(IOsmAndAidlCallback callback, long key) {
+		AidlCallbackParams(IOsmAndAidlCallback callback, long key, String pack) {
 			this.callback = callback;
 
 			this.key = key;
+			this.pack = pack;
+		}
+
+		public String getPack() {
+			return pack;
 		}
 
 		public IOsmAndAidlCallback getCallback() {

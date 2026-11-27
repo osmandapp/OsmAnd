@@ -181,7 +181,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	@Override
 	public long addAidlCallback(IOsmAndAidlCallback callback, int key) {
 		long id = getAndIncrementCallbackId();
-		callbacks.put(id, new AidlCallbackParams(callback, key));
+		// callbacks are called from OsmAnd's own threads, so the app that registers one is remembered here
+		callbacks.put(id, new AidlCallbackParams(callback, key, getCallingAppPackName()));
 		return id;
 	}
 
@@ -949,9 +950,10 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				mHandler.postDelayed(() -> {
 					try {
-						if (callbacks.containsKey(callbackId)) {
-							OsmandAidlApi api = getApi("isUpdateAllowed");
-							if (api != null && api.isUpdateAllowed()) {
+						AidlCallbackParams params = callbacks.get(callbackId);
+						if (params != null) {
+							OsmandAidlApi api = getApp().getAidlApi();
+							if (api.isUpdateAllowed() && api.isCallbackAllowed(params.getPack(), null)) {
 								callback.onUpdate();
 							}
 							startRemoteUpdates(updateTimeMS, callbackId, callback);
@@ -1415,11 +1417,17 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	public static class AidlCallbackParams {
 		private IOsmAndAidlCallback callback;
 		private long key;
+		private final String pack;
 
-		AidlCallbackParams(IOsmAndAidlCallback callback, long key) {
+		AidlCallbackParams(IOsmAndAidlCallback callback, long key, String pack) {
 			this.callback = callback;
 
 			this.key = key;
+			this.pack = pack;
+		}
+
+		public String getPack() {
+			return pack;
 		}
 
 		public IOsmAndAidlCallback getCallback() {
