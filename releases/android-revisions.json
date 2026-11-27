@@ -1,0 +1,119 @@
+{
+ "_note": "Android release builds with the revisions from their repo manifests. core = OsmAndCore AAR snapshot: the last successful core snapshot build (release snapshot 5.4/5.5, or master-snapshot) that finished before the app build started; the app build log names the snapshot ('Using remote OsmAndCore snapshot (X)'). Times UTC.",
+ "releases": [
+  {
+   "version": "5.4.11",
+   "code": 5411,
+   "branch": "r5.4",
+   "builds": [
+    {
+     "job": 410,
+     "flavor": "gplayFull",
+     "start": "2026-10-17 16:04"
+    },
+    {
+     "job": 411,
+     "flavor": "gplayFree",
+     "start": "2026-10-17 16:12"
+    }
+   ],
+   "android": "13934d83aabde68e29dc35ede0575db00e2e5d77",
+   "core-legacy": "5a74b81f9c6f6421d9640dccd7cd7a1f3e0061a5",
+   "resources": "7ee9bf7012b48427766afd59c5142b544f9f3214",
+   "core": "a6a8631756afa19601525a625166fef631c6e92d",
+   "core_snapshot": "5.4 \u2014 core release snapshot build #112, 2026-10-17 15:56 +5m"
+  },
+  {
+   "version": "5.4.11-huawei",
+   "code": 5411,
+   "branch": "r5.4",
+   "builds": [
+    {
+     "job": 414,
+     "flavor": "huawei",
+     "start": "2026-10-27 12:32"
+    }
+   ],
+   "android": "1114cea246a07c79aab56794684cccb026abdc38",
+   "core-legacy": "5a74b81f9c6f6421d9640dccd7cd7a1f3e0061a5",
+   "resources": "7ee9bf7012b48427766afd59c5142b544f9f3214",
+   "core": "a6a8631756afa19601525a625166fef631c6e92d",
+   "core_snapshot": "5.4 \u2014 core release snapshot build #112 (next 5.4 snapshot #113 only on 2026-11-02)"
+  },
+  {
+   "version": "5.5.0",
+   "code": 5500,
+   "branch": "master",
+   "builds": [
+    {
+     "job": 416,
+     "flavor": "gplayFull",
+     "start": "2026-11-05 14:39"
+    },
+    {
+     "job": 417,
+     "flavor": "gplayFree",
+     "start": "2026-11-05 14:44"
+    }
+   ],
+   "android": "28d919ef7922b06266f6ecddc67754e3acc9235c",
+   "core-legacy": "608dbd7145f2373f0e609c134a61a83e864754a1",
+   "resources": "d0ed5113a2a7b9eaebffa4d4f293e42f9819fba3",
+   "core": "370eae654b41ef1441c7a5dad3d5ec3281dca945",
+   "core_snapshot": "master-snapshot \u2014 core master snapshot build #482, 2026-11-05 13:46 +8m",
+   "superseded": [
+    {
+     "job": 415,
+     "flavor": "gplayFree",
+     "start": "2026-11-05 13:41",
+     "android": "2d76fb58efd895dab4a0683baffe6e31259ee792",
+     "core": "4095eac9de5e3a3aec6615b3fa27589f003db8e6 (core master snapshot build #481)"
+    }
+   ]
+  },
+  {
+   "version": "5.5.1",
+   "code": 5501,
+   "branch": "r5.5",
+   "builds": [
+    {
+     "job": 418,
+     "flavor": "gplayFull",
+     "start": "2026-11-19 14:41"
+    },
+    {
+     "job": 419,
+     "flavor": "gplayFree",
+     "start": "2026-11-19 14:52"
+    }
+   ],
+   "android": "cbd212b1236382d6c3d2ebad3d1bfd6477c02c42",
+   "core-legacy": "33179611b2f4e12e57c0f8968605f67c1f68230b",
+   "resources": "16ae3a3ab79659642a40e435a4be3b3ffba71310",
+   "core": "a51b5b3600f8dc62e5bd8d036cea791e519d3502",
+   "core_snapshot": "5.5 \u2014 core release snapshot build #115, 2026-11-19 14:20 +13m"
+  },
+  {
+   "version": "5.5.2",
+   "code": 5502,
+   "branch": "r5.5",
+   "builds": [
+    {
+     "job": 421,
+     "flavor": "gplayFree",
+     "start": "2026-11-25 16:51"
+    },
+    {
+     "job": 422,
+     "flavor": "gplayFull",
+     "start": "2026-11-25 16:58"
+    }
+   ],
+   "android": "948314e915e35c2acf84ba99d573d642037aaf32",
+   "core-legacy": "1136ebc1ce72faf280c8b43e220c604b23b4b8ff",
+   "resources": "16ae3a3ab79659642a40e435a4be3b3ffba71310",
+   "core": "b467ef307e5054befb17de5486fc187a5d88cd30",
+   "core_snapshot": "5.5 \u2014 core release snapshot build #118, 2026-11-24 21:20 +8m"
+  }
+ ]
+}
