@@ -2,7 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:color="?attr/colorSurfaceContainerHighest" android:state_enabled="false" />
 	<item android:color="?attr/colorPrimaryPressed" android:state_checked="true" android:state_pressed="true" />
+	<item android:color="?attr/colorPrimaryPressed" android:state_checked="true" android:state_hovered="true" />
 	<item android:color="?attr/colorPrimary" android:state_checked="true" />
 	<item android:color="?attr/colorPrimaryContainerPressed" android:state_pressed="true" />
+	<item android:color="?attr/colorPrimaryContainerPressed" android:state_hovered="true" />
 	<item android:color="?attr/colorPrimaryContainer" />
 </selector>
