@@ -1060,6 +1060,7 @@ public class RouteResultPreparation {
 						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
 						merged = true;
 						replaceConfusingKeepTurnsWithLaneTurn(currentSegment, leftside);
+						mergeOppositeKeeps(currentSegment, nextSegment, leftside);
 					}
 				}
 				if (!merged) {
@@ -1069,6 +1070,20 @@ public class RouteResultPreparation {
 				nextSegment = currentSegment;
 				dist = 0;
 			}
+		}
+	}
+
+	// KR + KL (KL + KR) on the same straight lanes = C
+	private void mergeOppositeKeeps(RouteSegmentResult currentSegment, RouteSegmentResult nextSegment, boolean leftSide) {
+		TurnType ct = currentSegment.getTurnType();
+		TurnType nt = nextSegment.getTurnType();
+		if ((ct.keepLeft() && nt.keepRight() || ct.keepRight() && nt.keepLeft())
+				&& ct.getActiveCommonLaneTurn() == TurnType.C && nt.getActiveCommonLaneTurn() == TurnType.C
+				&& !currentSegment.isLinkRoad()) {
+			TurnType turn = TurnType.valueOf(TurnType.C, leftSide);
+			turn.setLanes(ct.getLanes());
+			currentSegment.setTurnType(turn);
+			nextSegment.setTurnType(null);
 		}
 	}
 
@@ -2468,12 +2483,13 @@ public class RouteResultPreparation {
 		int[] prevCntLanes = parseLanes(prevSegm.getObject(), Math.toRadians(prevSegm.getBearingBegin()));
 		int[] curCntLanes = parseLanes(currentSegm.getObject(), Math.toRadians(currentSegm.getBearingBegin()));
 		int attachedLanesCount = getAttachedLanesCount(rs);
+		int routeLanes = prevCntLanes == null ? 0 : prevCntLanes.length - attachedLanesCount;
 		if (prevCntLanes != null && curCntLanes != null
 				&& prevCntLanes.length > curCntLanes.length
-				&& prevCntLanes.length == curCntLanes.length + attachedLanesCount) {
+				&& routeLanes > 0 && routeLanes <= curCntLanes.length) {
 			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
 				pair[0] = 0;
-				pair[1] = curCntLanes.length - 1;
+				pair[1] = routeLanes - 1;
 				pair[2] = directions[0];
 				int secondary = TurnType.getSecondaryTurn(rawLanes[0]);
 				if (pair[2] == TurnType.TU && secondary != 0) {
@@ -2481,7 +2497,7 @@ public class RouteResultPreparation {
 				}
 				return true;
 			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
-				pair[0] = rawLanes.length - curCntLanes.length;
+				pair[0] = rawLanes.length - routeLanes;
 				pair[1] = rawLanes.length - 1;
 				pair[2] = directions[rs.roadsOnLeft];
 				return true;

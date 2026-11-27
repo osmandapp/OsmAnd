@@ -1183,13 +1183,14 @@ object TurnLanes {
 		val prevCntLanes = parseLanes(prevSegm.getObject(), prevSegm.getBearingBegin() * PI / 180)
 		val curCntLanes = parseLanes(currentSegm.getObject(), currentSegm.getBearingBegin() * PI / 180)
 		val attachedLanesCount = getAttachedLanesCount(rs)
+		val routeLanes = if (prevCntLanes == null) 0 else prevCntLanes.size - attachedLanesCount
 		if (prevCntLanes != null && curCntLanes != null &&
 			prevCntLanes.size > curCntLanes.size &&
-			prevCntLanes.size == curCntLanes.size + attachedLanesCount
+			routeLanes > 0 && routeLanes <= curCntLanes.size
 		) {
 			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
 				pair[0] = 0
-				pair[1] = curCntLanes.size - 1
+				pair[1] = routeLanes - 1
 				pair[2] = directions[0]
 				val secondary = TurnType.getSecondaryTurn(rawLanes[0])
 				if (pair[2] == TurnType.TU && secondary != 0) {
@@ -1197,7 +1198,7 @@ object TurnLanes {
 				}
 				return true
 			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
-				pair[0] = rawLanes.size - curCntLanes.size
+				pair[0] = rawLanes.size - routeLanes
 				pair[1] = rawLanes.size - 1
 				pair[2] = directions[rs.roadsOnLeft]
 				return true
