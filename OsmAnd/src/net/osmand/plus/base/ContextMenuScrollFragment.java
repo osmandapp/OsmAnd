@@ -104,6 +104,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 			mapControlsLayer.removeCustomMapButtons(mapButtons);
+			mapButtons = new ArrayList<>();
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();

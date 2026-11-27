@@ -445,7 +445,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		for (String tag : themeInfoProviderTags) {
 			Fragment fragment = manager.findFragmentByTag(tag);
-			if (fragment instanceof MapControlsThemeProvider) {
+			if (fragment instanceof MapControlsThemeProvider && !fragment.isHidden()) {
 				return (MapControlsThemeProvider) fragment;
 			}
 		}

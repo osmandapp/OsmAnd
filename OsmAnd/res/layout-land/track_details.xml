@@ -70,6 +70,14 @@
             </LinearLayout>
 
             <ImageButton
+                android:id="@+id/map_center_on_track"
+                android:layout_width="@dimen/route_info_toolbar_button_size"
+                android:layout_height="@dimen/route_info_toolbar_button_size"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_circle"
+                android:contentDescription="@string/track_map_sync" />
+
+            <ImageButton
                 android:id="@+id/top_bar_close_button"
                 style="@style/Widget.AppCompat.ActionButton"
                 android:layout_width="56dp"

@@ -69,6 +69,7 @@ public class MapScrollHelper {
 	};
 
 	public void startScrolling(@NonNull ScrollDirection direction) {
+		mapView.notifyManualMapMove();
 		addDirection(direction);
 		if (!isContinuousScrolling) {
 			suspendSymbolsUpdate();
@@ -143,6 +144,7 @@ public class MapScrollHelper {
 	}
 
 	public void scrollMapAction(@NonNull ScrollDirection direction){
+		mapView.notifyManualMapMove();
 		scrollMap(Collections.singleton(direction));
 		stopScroll();
 	}

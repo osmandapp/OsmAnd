@@ -53,6 +53,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -87,6 +88,8 @@ import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.SelectTrackTabsFragment;
+import net.osmand.plus.track.TrackMapSync;
+import net.osmand.plus.track.TrackMapSyncOwner;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;
@@ -112,9 +115,11 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListen
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.router.GpxRouteApproximation;
+import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
@@ -137,7 +142,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
 		SaveAsNewTrackFragmentListener, MapControlsThemeProvider, GpsFilterFragmentLister,
 		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider,
-		ICoveredScreenRectProvider, CallbackWithObject<String> {
+		ICoveredScreenRectProvider, CallbackWithObject<String>, TrackMapSyncOwner {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -184,6 +189,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	private ImageView redoBtn;
 	private ImageView mainIcon;
 	private View measurementButtons;
+	private TrackMapSync mapSync;
+	private ImageButton mapSyncButton;
+	private boolean mapInSync;
 	private ImageButton snapToRoadButton;
 	private View profileConfigButton;
 	private MapHudLayout mapHudLayout;
@@ -360,7 +368,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 		mainView = view.findViewById(R.id.main_view);
 		mainContentView = view.findViewById(R.id.main_content);
-		detailsMenu = new GraphDetailsMenu(mainView);
+		detailsMenu = new GraphDetailsMenu(mainView, this::isMapInSync);
 		LinearLayout infoButtonsContainer = mainView.findViewById(R.id.custom_radio_buttons);
 		if (portrait) {
 			cardsContainer = mainView.findViewById(R.id.cards_container);
@@ -410,6 +418,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		upDownRow.setOnClickListener(v -> {
 			if (infoExpanded) {
 				collapseInfoView();
+				fitTrackAfterLayoutIfInSync();
 			} else if (setInfoType(InfoType.POINTS)) {
 				infoTypeBtn.setSelectedItem(pointsBtn);
 			}
@@ -498,6 +507,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		});
 
 		measurementLayer.setOnEnterMovePointModeListener(() -> {
+			setMapInSync(false);
 			collapseInfoViewIfExpanded();
 			switchMovePointMode(true);
 		});
@@ -547,6 +557,10 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		measurementButtons = inflate(R.layout.measurement_buttons, mapHudLayout, false);
 		snapToRoadButton = measurementButtons.findViewById(R.id.snap_to_road_image_button);
 		profileConfigButton = measurementButtons.findViewById(R.id.profile_with_config_btn);
+		mapSyncButton = measurementButtons.findViewById(R.id.map_center_on_track);
+		mapSync = new TrackMapSync(app, this::fitTrackOnMap, mapInSync, () -> editingCtx.getPointsCount() > 0);
+		mapSync.attach(mapSyncButton, nightMode);
+		AndroidUiHelper.updateVisibility(mapSyncButton, !isFollowTrackMode() && !isHidden());
 
 		snapToRoadButton.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 		snapToRoadButton.setOnClickListener(v -> startSnapToRoad(false));
@@ -623,6 +637,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		return (radioItem, view) -> {
 			if (isCurrentInfoType(type)) {
 				collapseInfoView();
+				fitTrackAfterLayoutIfInSync();
 				return false;
 			}
 			return setInfoType(type);
@@ -658,6 +673,17 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		updateMapDisplayPosition();
 		AndroidUiHelper.updateVisibility(cardsContainer, true);
 		updateUpDownBtn();
+		fitTrackAfterLayoutIfInSync();
+	}
+
+	private void fitTrackAfterLayoutIfInSync() {
+		if (mapSync != null && mapSync.isInSync() && mainView != null) {
+			ScrollUtils.addOnGlobalLayoutListener(mainView, () -> {
+				if (mapSync != null) {
+					mapSync.fitIfInSync();
+				}
+			});
+		}
 	}
 
 	private void collapseInfoViewIfExpanded() {
@@ -680,6 +706,9 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	private void collapseInfoIfNotEnoughPoints() {
 		int pointsCount = editingCtx.getPointsCount();
+		if (pointsCount < 1) {
+			setMapInSync(false);
+		}
 		if (isCurrentInfoType(InfoType.GRAPH) && pointsCount < 2) {
 			collapseInfoView();
 		} else if (pointsCount < 1) {
@@ -832,6 +861,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 	public void onHiddenChanged(boolean hidden) {
 		super.onHiddenChanged(hidden);
 		onBackPressedCallback.setEnabled(!hidden);
+		AndroidUiHelper.updateVisibility(mapSyncButton, !isFollowTrackMode() && !hidden);
 	}
 
 	@Override
@@ -845,6 +875,12 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		layer.setOnSingleTapListener(null);
 		layer.setOnEnterMovePointModeListener(null);
 		mainContentView = null;
+		if (mapSync != null) {
+			mapInSync = mapSync.isInSync();
+			mapSync.detach();
+			mapSync = null;
+		}
+		mapSyncButton = null;
 	}
 
 	@Override
@@ -1141,6 +1177,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer, ALL));
 		editingCtx.cancelSnapToRoad();
+		setMapInSync(false);
 		collapseInfoViewIfExpanded();
 		updateUndoRedoButton(false, redoBtn);
 		disable(upDownBtn);
@@ -1234,6 +1271,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void onMovePoint() {
+		setMapInSync(false);
 		getMeasurementLayer().enterMovingPointMode();
 		switchMovePointMode(true);
 	}
@@ -1246,6 +1284,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void onAddPointAfter() {
+		setMapInSync(false);
 		getMeasurementLayer().moveMapToPoint(editingCtx.getSelectedPointPosition());
 		editingCtx.setInAddPointMode(true, false);
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
@@ -1257,6 +1296,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 
 	@Override
 	public void onAddPointBefore() {
+		setMapInSync(false);
 		getMeasurementLayer().moveMapToPoint(editingCtx.getSelectedPointPosition());
 		editingCtx.setInAddPointMode(true, true);
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
@@ -1455,6 +1495,53 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		adjustMapPosition = true;
 	}
 
+	@Override
+	public boolean isMapInSync() {
+		if (isFollowTrackMode()) {
+			return true;
+		}
+		return mapSync != null ? mapSync.isInSync() : mapInSync;
+	}
+
+	@Override
+	public void setMapInSync(boolean inSync) {
+		mapInSync = inSync;
+		if (mapSync != null) {
+			mapSync.setInSync(inSync);
+		}
+	}
+
+	private void fitTrackOnMap() {
+		MapActivity mapActivity = getMapActivity();
+		KQuadRect rect = getTrackRect();
+		if (mapActivity != null && rect.getLeft() != 0 && rect.getRight() != 0) {
+			RotatedTileBox tileBox = mapActivity.getMapView().getRotatedTileBox();
+			Rect box = new Rect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
+			View topBar = mapActivity.findViewById(R.id.widget_top_bar);
+			if (topBar != null && topBar.getVisibility() == View.VISIBLE) {
+				View mapView = mapActivity.getMapView().getView();
+				int mapTop = mapView != null ? AndroidUtils.getLocationOnScreen(mapView)[1] : 0;
+				box.top = Math.max(0, AndroidUtils.getViewBoundOnScreen(topBar).bottom - mapTop);
+			}
+			if (mainContentView != null) {
+				box.bottom -= mainContentView.getHeight();
+			}
+			if (!portrait && infoExpanded && cardsContainer != null) {
+				AndroidUtils.cutStartSide(mapActivity, box, cardsContainer.getWidth());
+			}
+			if (box.width() > 0 && box.height() > 0) {
+				mapActivity.getMapView().fitRectToBox(rect.getLeft(), rect.getRight(), rect.getTop(), rect.getBottom(), box);
+			}
+		}
+	}
+
+	@NonNull
+	private KQuadRect getTrackRect() {
+		List<TrkSegment> segments = new ArrayList<>(editingCtx.getBeforeTrkSegmentLine());
+		segments.addAll(editingCtx.getAfterTrkSegmentLine());
+		return GpxUtilities.INSTANCE.calculateTrackBounds(segments);
+	}
+
 	@Nullable
 	private GpxData setupGpxData(@Nullable GpxFile gpxFile) {
 		GpxData gpxData = null;
@@ -1499,6 +1586,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 			@Override
 			public void onItemClick(int position) {
 				if (mapActivity != null) {
+					setMapInSync(false);
 					collapseInfoViewIfExpanded();
 					updateMapDisplayPosition();
 					measurementLayer.moveMapToPoint(position);
@@ -2156,6 +2244,7 @@ public class MeasurementToolFragment extends BaseFullScreenFragment implements R
 		callMapActivity(mapActivity -> {
 			if (infoExpanded && hideInfoViewFirst) {
 				collapseInfoView();
+				fitTrackAfterLayoutIfInSync();
 				return;
 			}
 			if (!editingCtx.hasChanges()) {

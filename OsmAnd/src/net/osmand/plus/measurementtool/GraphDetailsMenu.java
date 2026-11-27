@@ -6,12 +6,21 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 
+import java.util.function.BooleanSupplier;
+
 class GraphDetailsMenu extends TrackDetailsMenu {
 
 	private final View view;
+	private final BooleanSupplier mapSyncState;
 
-	public GraphDetailsMenu(@NonNull View view) {
+	public GraphDetailsMenu(@NonNull View view, @NonNull BooleanSupplier mapSyncState) {
 		this.view = view;
+		this.mapSyncState = mapSyncState;
+	}
+
+	@Override
+	protected boolean isMapSyncActive() {
+		return mapSyncState.getAsBoolean();
 	}
 
 	@Override

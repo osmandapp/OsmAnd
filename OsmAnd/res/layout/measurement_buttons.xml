@@ -8,24 +8,49 @@
 	android:paddingHorizontal="@dimen/map_button_margin"
 	android:paddingBottom="@dimen/map_button_margin">
 
-	<ImageButton
-		android:id="@+id/snap_to_road_image_button"
-		android:layout_width="@dimen/map_button_size"
-		android:layout_height="@dimen/map_button_size"
-		android:layout_gravity="bottom"
-		android:background="@drawable/btn_circle"
-		android:contentDescription="@string/snap_to_road"
-		android:visibility="gone"
-		tools:src="@drawable/ic_action_remove_dark"
-		tools:visibility="visible" />
-
-	<include
-		android:id="@+id/profile_with_config_btn"
-		layout="@layout/profile_with_config_btn_layout"
+	<LinearLayout
 		android:layout_width="wrap_content"
-		android:layout_height="@dimen/map_button_size"
+		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:visibility="gone"
-		tools:visibility="visible" />
+		android:orientation="horizontal">
+
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom">
+
+			<ImageButton
+				android:id="@+id/snap_to_road_image_button"
+				android:layout_width="@dimen/map_button_size"
+				android:layout_height="@dimen/map_button_size"
+				android:layout_gravity="bottom"
+				android:background="@drawable/btn_circle"
+				android:contentDescription="@string/snap_to_road"
+				android:visibility="gone"
+				tools:src="@drawable/ic_action_remove_dark"
+				tools:visibility="visible" />
+
+			<include
+				android:id="@+id/profile_with_config_btn"
+				layout="@layout/profile_with_config_btn_layout"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/map_button_size"
+				android:layout_gravity="bottom"
+				android:visibility="gone"
+				tools:visibility="visible" />
+
+		</FrameLayout>
+
+		<ImageButton
+			android:id="@+id/map_center_on_track"
+			android:layout_width="@dimen/map_button_size"
+			android:layout_height="@dimen/map_button_size"
+			android:layout_gravity="bottom"
+			android:layout_marginStart="@dimen/map_button_spacing"
+			android:background="@drawable/btn_circle"
+			android:contentDescription="@string/track_map_sync"
+			android:visibility="gone" />
+
+	</LinearLayout>
 
 </net.osmand.plus.widgets.FrameLayoutEx>

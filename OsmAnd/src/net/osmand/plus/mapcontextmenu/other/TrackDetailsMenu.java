@@ -9,6 +9,7 @@ import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.MotionEvent;
@@ -104,6 +105,7 @@ public class TrackDetailsMenu {
 	private Location myLocation;
 
 	private boolean fitTrackOnMapForbidden;
+	private Boolean mapSyncState;
 
 	@Nullable
 	public MapActivity getMapActivity() {
@@ -125,6 +127,9 @@ public class TrackDetailsMenu {
 	}
 
 	public void setGpxItem(@NonNull GpxDisplayItem gpxItem) {
+		if (this.gpxItem != gpxItem) {
+			mapSyncState = null;
+		}
 		this.gpxItem = gpxItem;
 	}
 
@@ -443,22 +448,54 @@ public class TrackDetailsMenu {
 		return new QuadRect(left, top, right, bottom);
 	}
 
+	protected boolean isMapSyncActive() {
+		TrackDetailsMenuFragment fragment = getMenuFragment();
+		return fragment == null || fragment.isMapInSync();
+	}
+
+	public void fitTrackOnMap() {
+		MapActivity mapActivity = getMapActivity();
+		GpxDisplayItem gpxItem = getGpxItem();
+		GpxTrackAnalysis analysis = gpxItem != null ? gpxItem.analysis : null;
+		if (mapActivity != null && analysis != null && analysis.isBoundsCalculated()) {
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
+			int[] tileBoxSizePx = getTileBoxSizePx(mapActivity);
+			Rect box = new Rect(0, 0, tb.getPixWidth(), tb.getPixHeight());
+			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
+				box.top = topMarginPx;
+				box.bottom = tileBoxSizePx[1];
+			} else {
+				AndroidUtils.cutStartSide(mapActivity, box, tb.getPixWidth() - tileBoxSizePx[0]);
+			}
+			if (box.width() > 0 && box.height() > 0) {
+				mapActivity.getMapView().fitRectToBox(analysis.getLeft(), analysis.getRight(), analysis.getTop(),
+						analysis.getBottom(), box);
+			}
+		}
+	}
+
+	@NonNull
+	private int[] getTileBoxSizePx(@NonNull MapActivity mapActivity) {
+		RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
+		int tileBoxWidthPx = 0;
+		int tileBoxHeightPx = 0;
+		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
+			int width = getFragmentWidth();
+			tileBoxWidthPx = width != -1 ? tb.getPixWidth() - width : 0;
+		} else {
+			int height = getFragmentHeight();
+			tileBoxHeightPx = height != -1 ? tb.getPixHeight() - height : 0;
+		}
+		return new int[] {tileBoxWidthPx, tileBoxHeightPx};
+	}
+
 	private void fitTrackOnMap(LineChart chart, LatLon location, boolean forceFit) {
 		QuadRect rect = getRect(chart, chart.getLowestVisibleX(), chart.getHighestVisibleX());
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && rect.left != 0 && rect.right != 0) {
-			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
-			int tileBoxWidthPx = 0;
-			int tileBoxHeightPx = 0;
-
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			if (!portrait) {
-				int width = getFragmentWidth();
-				tileBoxWidthPx = width != -1 ? tb.getPixWidth() - width : 0;
-			} else {
-				int height = getFragmentHeight();
-				tileBoxHeightPx = height != -1 ? tb.getPixHeight() - height : 0;
-			}
+			int[] tileBoxSizePx = getTileBoxSizePx(mapActivity);
+			int tileBoxWidthPx = tileBoxSizePx[0];
+			int tileBoxHeightPx = tileBoxSizePx[1];
 			if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
 				if (forceFit) {
 					mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
@@ -582,7 +619,7 @@ public class TrackDetailsMenu {
 		if (location != null) {
 			mapActivity.refreshMap();
 		}
-		if (!fitTrackOnMapForbidden && fitTrackOnMap) {
+		if (!fitTrackOnMapForbidden && fitTrackOnMap && isMapSyncActive()) {
 			fitTrackOnMap(chart, location, forceFit);
 		}
 	}
@@ -594,6 +631,16 @@ public class TrackDetailsMenu {
 	public void reset() {
 		segment = null;
 		trackChartPoints = null;
+		mapSyncState = null;
+	}
+
+	@Nullable
+	public Boolean getMapSyncState() {
+		return mapSyncState;
+	}
+
+	public void setMapSyncState(boolean inSync) {
+		mapSyncState = inSync;
 	}
 
 	private List<LatLon> getXAxisPoints(LineChart chart) {
@@ -630,9 +677,8 @@ public class TrackDetailsMenu {
 		GpxTrackAnalysis analysis = gpxItem.analysis;
 		if (analysis == null || gpxItem.chartTypes == null) {
 			parentView.setVisibility(View.GONE);
-			if (analysis != null && analysis.isBoundsCalculated()) {
-				mapActivity.getMapView()
-						.fitRectToMap(analysis.getLeft(), analysis.getRight(), analysis.getTop(), analysis.getBottom(), 0, 0, 0);
+			if (forceFitTrackOnMap && isMapSyncActive()) {
+				fitTrackOnMap();
 			}
 			return;
 		}

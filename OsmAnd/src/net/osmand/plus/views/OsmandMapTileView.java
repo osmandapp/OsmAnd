@@ -169,6 +169,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		void onMapZoomChanged(boolean manual);
 	}
 
+	public interface ManualMapMoveListener {
+		void onManualMapMove();
+	}
+
 	public interface ViewportListener {
 		void onViewportChanged();
 	}
@@ -184,6 +188,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 	private List<ElevationListener> elevationListeners = new ArrayList<>();
 	private List<MapZoomChangeListener> manualZoomListeners = new ArrayList<>();
+	private List<ManualMapMoveListener> manualMoveListeners = new ArrayList<>();
 	private List<ViewportListener> viewportListeners = new ArrayList<>();
 	private List<TouchListener> touchListeners = new ArrayList<>();
 
@@ -683,8 +688,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
 
+		notifyManualZoomChanged();
+	}
+
+	private void notifyManualZoomChanged() {
 		for (MapZoomChangeListener listener : manualZoomListeners) {
 			listener.onMapZoomChanged(true);
+		}
+	}
+
+	public void notifyManualMapMove() {
+		for (ManualMapMoveListener listener : manualMoveListeners) {
+			listener.onManualMapMove();
 		}
 	}
 
@@ -966,6 +981,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void removeMapZoomChangeListener(@NonNull MapZoomChangeListener listener) {
 		manualZoomListeners = CollectionUtils.removeFromList(manualZoomListeners, listener);
+	}
+
+	public void addManualMapMoveListener(@NonNull ManualMapMoveListener listener) {
+		if (!manualMoveListeners.contains(listener)) {
+			manualMoveListeners = CollectionUtils.addToList(manualMoveListeners, listener);
+		}
+	}
+
+	public void removeManualMapMoveListener(@NonNull ManualMapMoveListener listener) {
+		manualMoveListeners = CollectionUtils.removeFromList(manualMoveListeners, listener);
 	}
 
 	public void addElevationListener(@NonNull ElevationListener listener) {
@@ -1844,7 +1869,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	                         int tileBoxHeightPx, int marginTopPx, @Nullable List<LatLon> points) {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
-				marginTopPx, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, false, points);
+				marginTopPx, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, false, points, false);
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
@@ -1852,6 +1877,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
 				marginTopPx, marginLeftPx, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
+	}
+
+	public void fitRectToBox(double left, double right, double top, double bottom, @NonNull Rect box) {
+		RotatedTileBox tb = currentViewport.copy();
+		float centerX = tb.getCenterPixelX();
+		float centerY = tb.getCenterPixelY();
+		if (view != null) {
+			PointF ratio = mapViewTrackingUtilities.getMapDisplayPositionManager().getMapRatio();
+			centerX = ratio.x * view.getWidth();
+			centerY = ratio.y * view.getHeight();
+		}
+		int dx = box.centerX() - (int) centerX;
+		int dy = box.centerY() - (int) centerY;
+		fitRectToMap(tb, left, right, top, bottom, box.width(), box.height(),
+				dy, isLayoutRtl() ? -dx : dx, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, false, null, true);
 	}
 
 	/**
@@ -1863,18 +1903,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	                               int tileBoxWidthPx, int tileBoxHeightPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
-				0, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, true, null);
+				0, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false, true, null, true);
 	}
 
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border, boolean rotate) {
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
-				marginTopPx, marginLeftPx, rtl, border, rotate, false, null);
+				marginTopPx, marginLeftPx, rtl, border, rotate, false, null, false);
 	}
 
 	private void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border,
-			boolean rotate, boolean toMapCenter, @Nullable List<LatLon> points) {
+			boolean rotate, boolean toMapCenter, @Nullable List<LatLon> points, boolean trackFit) {
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
@@ -1882,7 +1922,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (rtl) {
 			dx = -dx;
 		}
-		boolean routeMenu = mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible();
+		boolean routeMenu = !trackFit && mapActivity != null && mapActivity.getMapRouteInfoMenu().isVisible();
 		if (routeMenu) {
 			dx += (rtl ? tbw / 2 : tb.getPixWidth() - tbw / 2) - tb.getCenterPixelX();
 			dy += tbh / 2 - tb.getCenterPixelY();
@@ -1897,7 +1937,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			float areaHeight = tbh - statusBarPx;
 			float boxTop = areaTop + areaHeight * (1 - border) / 2;
 			if (fitRectToTiltedMap(renderer, left, right, top, bottom, points, centerX - tbw * border / 2, boxTop,
-					centerX + tbw * border / 2, boxTop + areaHeight * border)) {
+					centerX + tbw * border / 2, boxTop + areaHeight * border, trackFit)) {
 				return;
 			}
 		}
@@ -1932,7 +1972,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			animateToState(clat, clon,
 					zoom, 0f, 90f, ANIMATION_PREVIEW_TIME, false);
 		} else {
-			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
+			moveMapToFit(clat, clon, zoom, trackFit);
 		}
 	}
 
@@ -1945,7 +1985,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	 */
 	private boolean fitRectToTiltedMap(@NonNull MapRendererView renderer, double left, double right,
 	                                   double top, double bottom, @Nullable List<LatLon> points,
-	                                   float boxLeft, float boxTop, float boxRight, float boxBottom) {
+	                                   float boxLeft, float boxTop, float boxRight, float boxBottom, boolean trackFit) {
 		// The renderer has to show the map as startMoving() will move it, not in the middle of an animation
 		animatedDraggingThread.stopAnimatingSync();
 		if (Algorithms.isEmpty(points)) {
@@ -1967,9 +2007,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return false;
 		}
 		double[] fitTarget = fit.getTarget();
-		animatedDraggingThread.startMoving(MapUtils.get31LatitudeY((int) fitTarget[1]),
-				MapUtils.get31LongitudeX((int) fitTarget[0]), zoom.getBaseZoom(), zoom.getZoomFloatPart());
+		moveMapToFit(MapUtils.get31LatitudeY((int) fitTarget[1]), MapUtils.get31LongitudeX((int) fitTarget[0]),
+				zoom, trackFit);
 		return true;
+	}
+
+	private void moveMapToFit(double lat, double lon, @NonNull Zoom zoom, boolean trackFit) {
+		if (trackFit) {
+			animatedDraggingThread.startFitting(lat, lon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
+		} else {
+			animatedDraggingThread.startMoving(lat, lon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
+		}
 	}
 
 	/**
@@ -2148,6 +2196,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			} else {
 				getAnimatedDraggingThread().startMoving(latlon.getLatitude(), latlon.getLongitude(), endZoom, zoomFloatPart);
 			}
+			notifyManualZoomChanged();
 			return true;
 		}
 		return false;

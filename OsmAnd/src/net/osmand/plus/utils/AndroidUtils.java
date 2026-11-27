@@ -1130,6 +1130,14 @@ public class AndroidUtils {
 		return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
 	}
 
+	public static void cutStartSide(@NonNull Context ctx, @NonNull Rect rect, int width) {
+		if (isLayoutRtl(ctx)) {
+			rect.right -= width;
+		} else {
+			rect.left += width;
+		}
+	}
+
 	public static List<View> getChildrenViews(ViewGroup vg) {
 		List<View> result = new ArrayList<>();
 		for (int i = 0; i < vg.getChildCount(); i++) {

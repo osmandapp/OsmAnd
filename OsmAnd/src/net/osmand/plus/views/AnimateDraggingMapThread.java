@@ -27,6 +27,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.EnumSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Thread for animated dragging.
@@ -75,6 +76,8 @@ public class AnimateDraggingMapThread implements TouchListener {
 	private boolean animatingMapRotation;
 	private boolean animatingMapTilt;
 	private boolean userAnimationsActive;
+	private final AtomicInteger fitCounter = new AtomicInteger();
+	private volatile int activeFit;
 	private volatile boolean following;
 	private volatile double followLatitude;
 	private volatile double followLongitude;
@@ -499,6 +502,22 @@ public class AnimateDraggingMapThread implements TouchListener {
 				false, startAnimationCallback, null);
 	}
 
+	public void startFitting(double finalLat, double finalLon, int endZoom, float endZoomFloatPart) {
+		if (animationsDisabled) {
+			return;
+		}
+		int fit = fitCounter.incrementAndGet();
+		activeFit = fit;
+		Runnable startAnimationCallback = () -> app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+		Runnable finishAnimationCallback = () -> app.runInUIThread(() -> {
+			if (activeFit == fit) {
+				activeFit = 0;
+			}
+		});
+		startMoving(finalLat, finalLon, endZoom, endZoomFloatPart, true,
+				false, startAnimationCallback, finishAnimationCallback);
+	}
+
 	public void startMoving(double finalLat, double finalLon, int endZoom, float endZoomFloatPart,
 							boolean notifyListener, boolean allowAnimationJoin,
 							@Nullable Runnable startAnimationCallback, @Nullable Runnable finishAnimationCallback) {
@@ -837,6 +856,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 			resetInterpolation();
 			animatingMapZoom = false;
 		}
+	}
+
+	public boolean isFitting() {
+		return activeFit != 0;
 	}
 
 	public boolean isAnimatingMapZoom() {

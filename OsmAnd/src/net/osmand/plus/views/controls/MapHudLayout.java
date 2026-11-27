@@ -412,7 +412,7 @@ public class MapHudLayout extends FrameLayout {
 			return 0;
 		} else if (R.id.map_alarm_warning == id) {
 			return 1;
-		} else if (R.id.measurement_buttons == id) {
+		} else if (R.id.measurement_buttons == id || R.id.track_map_sync_button == id) {
 			return 2;
 		} else if (R.id.map_ruler_layout == id) {
 			return 3;
@@ -470,7 +470,7 @@ public class MapHudLayout extends FrameLayout {
 			position.setMoveVertical();
 			position.setPositionVertical(POS_TOP);
 			position.setPositionHorizontal(POS_LEFT);
-		} else if (id == R.id.measurement_buttons) {
+		} else if (id == R.id.measurement_buttons || id == R.id.track_map_sync_button) {
 			position.setPositionVertical(POS_BOTTOM);
 			position.setPositionHorizontal(POS_LEFT);
 		} else if (id == R.id.layer_param_layout || id == R.id.map_transparency_layout) {
@@ -497,7 +497,7 @@ public class MapHudLayout extends FrameLayout {
 				calcGridPositionFromPixel(view, position);
 			}
 			position.setMarginY(0);
-		} else if (view instanceof RulerWidget || id == R.id.measurement_buttons) {
+		} else if (view instanceof RulerWidget || id == R.id.measurement_buttons || id == R.id.track_map_sync_button) {
 			position.setMarginX(0);
 			position.setMarginY(0);
 		} else if (view instanceof SideWidgetsPanel panel) {

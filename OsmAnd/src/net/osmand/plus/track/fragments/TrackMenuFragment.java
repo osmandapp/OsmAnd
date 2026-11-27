@@ -105,6 +105,8 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.TrackMapSync;
+import net.osmand.plus.track.TrackMapSyncOwner;
 import net.osmand.plus.track.cards.AuthorCard;
 import net.osmand.plus.track.cards.CopyrightCard;
 import net.osmand.plus.track.cards.DescriptionCard;
@@ -171,7 +173,7 @@ import java.util.List;
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister,
-		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback, MapDisplayPositionManager.ICoveredScreenRectProvider, MapDisplayPositionManager.IMapDisplayPositionProvider {
+		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback, MapDisplayPositionManager.ICoveredScreenRectProvider, MapDisplayPositionManager.IMapDisplayPositionProvider, TrackMapSyncOwner {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 
@@ -183,6 +185,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String TEMPORARY_SELECTED = "temporary_selected";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
 	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
+	private static final String MAP_IN_SYNC = "map_in_sync";
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 
 	private TrackDisplayHelper displayHelper;
@@ -237,7 +240,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuTitleHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
-	private boolean menuTypeChanged;
+	private TrackMapSync mapSync;
+	private boolean restoredOutOfSync;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
 	private MapDisplayPositionManager mapDisplayPositionManager;
@@ -336,6 +340,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
+		restoredOutOfSync = savedInstanceState != null && !savedInstanceState.getBoolean(MAP_IN_SYNC, true);
 		if (selectedGpxFile == null && savedInstanceState != null) {
 			String path = savedInstanceState.getString(TRACK_FILE_NAME);
 			boolean showCurrentTrack = savedInstanceState.getBoolean(CURRENT_RECORDING);
@@ -948,7 +953,37 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public boolean shouldShowMapControls(int menuState) {
-		return menuState == MenuState.HEADER_ONLY || menuState == MenuState.HALF_SCREEN;
+		return menuState == MenuState.HEADER_ONLY || menuState == MenuState.HALF_SCREEN || !isPortrait();
+	}
+
+	@Override
+	protected void setupControlButtons(@NonNull View view) {
+		super.setupControlButtons(view);
+		if (mapSync == null) {
+			boolean trackLoaded = displayHelper.getGpxFileToDisplay() != null;
+			boolean syncOnStart = !restoredOutOfSync && adjustMapPosition && !app.getMapViewTrackingUtilities().isMapLinkedToLocation()
+					&& (!trackLoaded || hasTrackToFit());
+			mapSync = new TrackMapSync(app, this::fitTrackOnMap, syncOnStart, this::hasTrackToFit);
+		}
+		mapSync.attach(view.findViewById(R.id.map_center_on_track), isNightMode());
+	}
+
+	@Override
+	public void setMapInSync(boolean inSync) {
+		restoredOutOfSync = !inSync;
+		if (mapSync != null) {
+			mapSync.setInSync(inSync);
+		}
+	}
+
+	@Override
+	protected boolean hasMapControlsBesideMenuInLandscape() {
+		return true;
+	}
+
+	@Override
+	public boolean isMapInSync() {
+		return mapSync != null ? mapSync.isInSync() : !restoredOutOfSync;
 	}
 
 	@Override
@@ -959,12 +994,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (menuStateChanged) {
 			updateControlsVisibility(true);
 		}
-		if ((!isPortrait() || currentMenuState != MenuState.FULL_SCREEN)
-				&& (menuStateChanged || adjustMapPosition) && !menuTypeChanged) {
-			fitTrackOnMap();
-		}
-		if (menuStateChanged) {
-			menuTypeChanged = false;
+		if (!isHidden() && (!isPortrait() || currentMenuState != MenuState.FULL_SCREEN)
+				&& (menuStateChanged || adjustMapPosition)) {
+			fitTrackOnMapIfInSync();
 		}
 	}
 
@@ -983,6 +1015,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.onDestroyView();
 		updateStatusBarColor();
 		mainContentView = null;
+		adjustMapPosition = true;
+		overviewInitialPosY = 0;
+		overviewInitialHeight = true;
+		if (mapSync != null) {
+			mapSync.detach();
+		}
 	}
 
 	@Override
@@ -1002,6 +1040,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.onHiddenChanged(hidden);
 		if (isResumed()) {
 			updateTrackMenuVisibilityState(hidden);
+			if (!hidden && (!isPortrait() || getCurrentMenuState() != MenuState.FULL_SCREEN)) {
+				fitTrackOnMapIfInSync();
+			}
 		}
 	}
 
@@ -1171,6 +1212,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().getPath());
 			outState.putBoolean(CURRENT_RECORDING, selectedGpxFile.isShowCurrentTrack());
 		}
+		outState.putBoolean(MAP_IN_SYNC, isMapInSync());
 		if (latLon != null) {
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());
 			outState.putDouble(KEY_LONGITUDE, latLon.getLongitude());
@@ -1345,6 +1387,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (pointsCard != null) {
 					LatLon latLon = pointsCard.getSelectedWptLatLon();
 					if (latLon != null) {
+						setMapInSync(false);
 						OsmandMapTileView mapView = requireMapActivity().getMapView();
 						mapDisplayPositionManager.updateMapDisplayPosition();
 						mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(),
@@ -1361,12 +1404,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			GpxDisplayGroup group = groupsCard.getSelectedGroup();
 			if (pointsCard != null) {
 				pointsCard.setSelectedGroup(group);
-				if (group != null) {
-					fitSelectedPointsGroupOnMap(group);
-				} else {
-					fitTrackOnMap();
+				if (isMapInSync()) {
+					if (group != null) {
+						fitSelectedPointsGroupOnMap(group);
+					} else {
+						fitTrackOnMap();
+					}
 				}
 			}
+		}
+	}
+
+	private void fitTrackOnMapIfInSync() {
+		if (isMapInSync()) {
+			fitTrackOnMap();
 		}
 	}
 
@@ -1376,6 +1427,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			KQuadRect rect = gpxFile.getRect();
 			adjustMapPosition(rect);
 		}
+	}
+
+	private boolean hasTrackToFit() {
+		GpxFile gpxFile = displayHelper.getGpxFileToDisplay();
+		return gpxFile != null && !gpxFile.isEmpty();
 	}
 
 	private void fitSelectedPointsGroupOnMap(GpxDisplayGroup group) {
@@ -1434,7 +1490,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void adjustMapPosition(KQuadRect r) {
-		int y = getMenuStatePosY(getCurrentMenuState());
+		int y = isOverviewAtInitialHeight() ? getOverviewInitialPosY() : getMenuStatePosY(getCurrentMenuState());
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandMapTileView tileView = mapActivity.getMapView();
@@ -1449,8 +1505,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
 
-			boolean contains = tileView.fullyContains(tb, r.getLeft(), r.getTop(), r.getRight(), r.getBottom());
-			if (!contains && r.getLeft() != 0 && r.getRight() != 0) {
+			if (r.getLeft() != 0 && r.getRight() != 0) {
 				tileView.fitRectToMapCenter(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
 						tileBoxWidthPx, tileBoxHeightPx);
 			}
@@ -1469,14 +1524,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				if (type.menuItemId == item.getItemId()) {
 					TrackMenuTab prevMenuType = menuType;
 					menuType = type;
-					menuTypeChanged = prevMenuType != type;
 					setupCards(true);
 					updateHeader();
 					updateHeadersBottomShadow();
 					updateControlsVisibility(isVisible());
 					updateCardsLayout();
-					if (type == TrackMenuTab.OVERVIEW && isPortrait() && overviewInitialHeight
-							&& getCurrentMenuState() != MenuState.FULL_SCREEN) {
+					if (isOverviewAtInitialHeight()) {
 						calculateLayoutAndShowOverview();
 					} else {
 						calculateLayoutAndUpdateMenuState(prevMenuType);
@@ -1501,16 +1554,30 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void calculateLayoutAndShowOverview() {
 		runLayoutListener(() -> {
-			if (overviewInitialPosY == 0) {
-				int overviewCardHeight = overviewCard != null ? overviewCard.getViewHeight() : 0;
-				overviewInitialPosY = getViewHeight() - overviewCardHeight - menuTitleHeight - getShadowHeight();
+			int posY = getOverviewInitialPosY();
+			if (posY < getViewY()) {
+				updateMainViewLayout(posY);
 			}
-			if (overviewInitialPosY < getViewY()) {
-				updateMainViewLayout(overviewInitialPosY);
-			}
-			animateMainView(overviewInitialPosY, false, getCurrentMenuState(), getCurrentMenuState());
-			updateMapControlsPos(this, overviewInitialPosY, true);
+			animateMainView(posY, false, getCurrentMenuState(), getCurrentMenuState());
+			updateMapControlsPos(this, posY, true);
 		});
+	}
+
+	private boolean isOverviewAtInitialHeight() {
+		return menuType == TrackMenuTab.OVERVIEW && isPortrait() && overviewInitialHeight
+				&& getCurrentMenuState() != MenuState.FULL_SCREEN;
+	}
+
+	private int getOverviewInitialPosY() {
+		if (overviewInitialPosY == 0) {
+			int overviewCardHeight = overviewCard != null ? overviewCard.getViewHeight() : 0;
+			int posY = getViewHeight() - overviewCardHeight - menuTitleHeight - getShadowHeight();
+			if (overviewCardHeight == 0) {
+				return posY;
+			}
+			overviewInitialPosY = posY;
+		}
+		return overviewInitialPosY;
 	}
 
 	private void updateMenuState() {
@@ -1596,7 +1663,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onChartPointSelected(TrkSegment segment, double lat, double lon) {
 		onPointSelected(segment, lat, lon);
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && (!isPortrait() || getCurrentMenuState() != MenuState.FULL_SCREEN)) {
+		if (mapActivity != null && isMapInSync() && (!isPortrait() || getCurrentMenuState() != MenuState.FULL_SCREEN)) {
 			showPointInVisibleMap(mapActivity.getMapView(), lat, lon);
 		}
 	}
