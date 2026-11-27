@@ -13,8 +13,9 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractMapExportType extends LocalResourcesExportType {
 
@@ -46,17 +47,13 @@ public abstract class AbstractMapExportType extends LocalResourcesExportType {
 	}
 
 	private void sortLocalFiles(@NonNull OsmandApplication app, @NonNull List<File> files) {
+		// The name of a .sqlitedb map source is read from its database: read each name once
+		Map<File, String> names = new HashMap<>();
+		for (File file : files) {
+			names.put(file, FileNameTranslationHelper.getFileNameWithRegion(app, file.getName()));
+		}
 		Collator collator = OsmAndCollator.primaryCollator();
-		Collections.sort(files, new Comparator<File>() {
-			@Override
-			public int compare(File lhs, File rhs) {
-				return collator.compare(getNameToDisplay(lhs), getNameToDisplay(rhs));
-			}
-
-			private String getNameToDisplay(File item) {
-				return FileNameTranslationHelper.getFileNameWithRegion(app, item.getName());
-			}
-		});
+		files.sort((lhs, rhs) -> collator.compare(names.get(lhs), names.get(rhs)));
 	}
 
 	@NonNull
