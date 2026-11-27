@@ -2,12 +2,15 @@ package net.osmand.plus.routing;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
@@ -22,6 +25,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -416,6 +420,25 @@ class RouteRecalculationHelper {
 			return routingHelper.getSettings();
 		}
 
+		private void showMixedMapsWarning(@NonNull OsmandApplication app, @Nullable RouteCalculationResult prev,
+		                                  @NonNull RouteCalculationResult res) {
+			List<WorldRegion> maps = getMapsToUpdate(res);
+			if (res.isCalculated() && params.calculationProgress.getFastRoutingStatus() == FastRoutingState.Status.SUCCESS
+					&& !Algorithms.isEmpty(maps) && !maps.equals(getMapsToUpdate(prev))) {
+				List<String> names = new ArrayList<>();
+				for (WorldRegion region : maps) {
+					names.add(region.getLocaleName());
+				}
+				app.showToastMessage(R.string.route_calculation_fast_mixed_maps_warning, TextUtils.join(", ", names));
+			}
+		}
+
+		@Nullable
+		private List<WorldRegion> getMapsToUpdate(@Nullable RouteCalculationResult route) {
+			MissingMapsCalculationResult result = route != null ? route.getMissingMapsCalculationResult() : null;
+			return result != null ? result.getMapsToUpdate() : null;
+		}
+
 		@Override
 		public void run() {
 			if (!updateProgress) {
@@ -445,6 +468,7 @@ class RouteRecalculationHelper {
 						return; // stopped while waiting for a location update, e.g. one that reached the destination
 					}
 					routingThreadHelper.setNewRoute(prev, res, params.start);
+					showMixedMapsWarning(app, prev, res);
 				}
 			} else {
 				if (params.alternateResultListener == null) { // only the navigation route is recalculated on location updates
