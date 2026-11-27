@@ -5528,4 +5528,7 @@
     <string name="shadows_off_description">Skygger slået fra: Bygninger tegnes uden skygger.</string>
     <string name="shared_string_new">Ny</string>
     <string name="sun_light_live">Live</string>
+    <string name="free_region_maps_deactivated">Kort over %2$s forbliver deaktiverede. %1$s blev ikke downloadet.</string>
+    <string name="free_region_activate_title">Vil du skifte din gratis region?</string>
+    <string name="free_region_activate_descr">Den gratis version indeholder kort over én region. %1$s bliver din gratis region, og kortene over %2$s vil blive deaktiveret.</string>
 </resources>

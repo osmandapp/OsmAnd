@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import net.osmand.plus.R
 import net.osmand.plus.plugins.aistracker.AisFormatter
 import net.osmand.plus.widgets.ui.GroupFooterView
+import net.osmand.plus.widgets.ui.SegmentedList
+import net.osmand.plus.widgets.ui.SliderListItem
 
 /**
  * Objects visibility screen: when a vessel without a signal is crossed out and when it is removed
@@ -14,8 +16,10 @@ import net.osmand.plus.widgets.ui.GroupFooterView
  */
 class AisObjectsVisibilityFragment : AisBaseFragment() {
 
-	private lateinit var outdatedCard: AisSliderCard<Int>
-	private lateinit var hideAfterCard: AisSliderCard<Int>
+	private lateinit var outdatedRow: SliderListItem
+	private lateinit var hideAfterRow: SliderListItem
+	private lateinit var outdatedFooter: GroupFooterView
+	private lateinit var hideAfterFooter: GroupFooterView
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -23,55 +27,67 @@ class AisObjectsVisibilityFragment : AisBaseFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_objects_visibility, container, false)
-		setupToolbar(view, R.string.ais_objects_visibility, R.string.reset_to_default) {
+		setupToolbar(view, R.string.ais_objects_visibility)
+		addResetAction(view) {
 			plugin.AIS_SHIP_LOST_TIMEOUT.resetModeToDefault(appMode)
 			plugin.AIS_OBJ_LOST_TIMEOUT.resetModeToDefault(appMode)
-			outdatedCard.setValue(plugin.AIS_SHIP_LOST_TIMEOUT.getModeValue(appMode))
-			hideAfterCard.setValue(plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode))
+			bindSliders()
 		}
 
 		setupHeroImage(view, R.drawable.img_ais_object_visibility_day,
 			R.drawable.img_ais_object_visibility_night)
 
-		val hideAfterFooter: GroupFooterView = view.findViewById(R.id.hide_after_footer)
-		hideAfterCard = AisSliderCard(
-			view.findViewById(R.id.hide_after_card),
-			hideAfterFooter,
-			HIDE_AFTER_VALUES,
-			{ AisFormatter.formatMinutes(osmandApp, it) },
-			{ getString(R.string.ais_hide_after_desc, AisFormatter.formatMinutes(osmandApp, it)) },
-			{
-				plugin.AIS_OBJ_LOST_TIMEOUT.setModeValue(appMode, it)
-				outdatedCard.refreshFooter()
-			})
-		hideAfterCard.setTitle(R.string.ais_hide_after)
+		outdatedRow = SliderListItem(view.findViewById(R.id.outdated_row))
+		outdatedRow.setTitle(R.string.ais_mark_as_outdated)
+		outdatedRow.setTickVisible(true)
+		outdatedFooter = view.findViewById(R.id.outdated_footer)
+		SegmentedList.apply(view.findViewById(R.id.outdated_rows))
 
-		outdatedCard = AisSliderCard(
-			view.findViewById(R.id.outdated_card),
-			view.findViewById(R.id.outdated_footer),
-			MARK_AS_OUTDATED_VALUES,
-			{ if (it == OUTDATED_OFF) getString(R.string.shared_string_off) else AisFormatter.formatMinutes(osmandApp, it) },
-			{ outdatedFooterText(it) },
-			{ plugin.AIS_SHIP_LOST_TIMEOUT.setModeValue(appMode, it) })
-		outdatedCard.setTitle(R.string.ais_mark_as_outdated)
+		hideAfterRow = SliderListItem(view.findViewById(R.id.hide_after_row))
+		hideAfterRow.setTitle(R.string.ais_hide_after)
+		hideAfterRow.setTickVisible(true)
+		hideAfterFooter = view.findViewById(R.id.hide_after_footer)
+		SegmentedList.apply(view.findViewById(R.id.hide_after_rows))
 
-		outdatedCard.setValue(plugin.AIS_SHIP_LOST_TIMEOUT.getModeValue(appMode))
-		hideAfterCard.setValue(plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode))
+		bindSliders()
 		return view
 	}
 
+	/** Puts the stored values on the sliders - also after a reset. */
+	private fun bindSliders() {
+		outdatedRow.setStops(MARK_AS_OUTDATED_VALUES,
+			plugin.AIS_SHIP_LOST_TIMEOUT.getModeValue(appMode), ::formatOutdated) {
+			plugin.AIS_SHIP_LOST_TIMEOUT.setModeValue(appMode, it)
+			updateFooters()
+		}
+		hideAfterRow.setStops(HIDE_AFTER_VALUES,
+			plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode),
+			{ AisFormatter.formatMinutes(osmandApp, it) }) {
+			plugin.AIS_OBJ_LOST_TIMEOUT.setModeValue(appMode, it)
+			updateFooters()
+		}
+		updateFooters()
+	}
+
+	private fun formatOutdated(value: Int): String =
+		if (value == OUTDATED_OFF) getString(R.string.shared_string_off)
+		else AisFormatter.formatMinutes(osmandApp, value)
+
 	/**
-	 * With "Mark as outdated" off the vessel symbol never changes, so the footer has to name the
+	 * With "Mark as outdated" off the vessel symbol never changes, so its footer has to name the
 	 * only timeout left - the one from the other slider.
 	 */
-	private fun outdatedFooterText(value: Int): CharSequence {
+	private fun updateFooters() {
+		val outdated = plugin.AIS_SHIP_LOST_TIMEOUT.getModeValue(appMode)
 		val hideAfter = AisFormatter.formatMinutes(osmandApp, plugin.AIS_OBJ_LOST_TIMEOUT.getModeValue(appMode))
-		return if (value == OUTDATED_OFF) {
-			getString(R.string.ais_mark_as_outdated_off_desc, hideAfter)
-		} else {
-			getString(R.string.ais_mark_as_outdated_desc,
-				AisFormatter.formatMinutes(osmandApp, value))
-		}
+		outdatedFooter.setText(
+			if (outdated == OUTDATED_OFF) {
+				getString(R.string.ais_mark_as_outdated_off_desc, hideAfter)
+			} else {
+				getString(R.string.ais_mark_as_outdated_desc,
+					AisFormatter.formatMinutes(osmandApp, outdated))
+			})
+		hideAfterFooter.setText(getString(R.string.ais_hide_after_desc, hideAfter))
 	}
 
 	companion object {

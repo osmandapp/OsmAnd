@@ -613,7 +613,10 @@ public class MapRendererContext {
 	public void updateShadows() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
-			mapRendererView.castShadows(app.getSettings().CAST_SHADOWS.get());
+			// as Terrain shadows, sun shadows are off while the Hillshade layer shades the relief
+			SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+			boolean shadedByHillshade = plugin != null && plugin.isReliefShadedByHillshade();
+			mapRendererView.castShadows(app.getSettings().CAST_SHADOWS.get() && !shadedByHillshade);
 		}
 	}
 

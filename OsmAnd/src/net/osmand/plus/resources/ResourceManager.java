@@ -163,6 +163,8 @@ public class ResourceManager {
 	private ReloadIndexesTask reloadIndexesTask;
 
 	private boolean depthContours;
+	private volatile boolean contourLinesIndexed;
+	private boolean contourLinesReloadPending;
 	private boolean indexesLoadedOnStart;
 
 	private final AmenitySearcher amenitySearcher;
@@ -303,7 +305,9 @@ public class ResourceManager {
 
 	@NonNull
 	public DateFormat getDateFormat() {
-		return new SimpleDateFormat(DATE_TIME_PATTERN, Locale.US);
+		SimpleDateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN, Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return format;
 	}
 
 	@NonNull
@@ -422,6 +426,23 @@ public class ResourceManager {
 		OsmAndTaskManager.executeTask(reloadIndexesTask, reloadIndexesSingleThreadExecutor);
 	}
 
+	public void updateContourLinesIndexes() {
+		// Defer even on the UI thread: PluginsHelper updates the state after init()/disable() return.
+		app.runInUIThread(() -> updateContourLinesIndexesInternal());
+	}
+
+	private void updateContourLinesIndexesInternal() {
+		boolean enabled = PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseUtils.isContourLinesAvailable(app);
+		if (indexesLoadedOnStart && !contourLinesReloadPending && enabled != contourLinesIndexed) {
+			contourLinesReloadPending = true;
+			reloadIndexesAsync(IProgress.EMPTY_PROGRESS, warnings -> {
+				contourLinesReloadPending = false;
+				app.getOsmandMap().refreshMap(true);
+				updateContourLinesIndexes();
+			});
+		}
+	}
+
 	public List<String> reloadIndexes(@Nullable IProgress progress,
 			@NonNull List<String> warnings) {
 		reloadIndexesTask = new ReloadIndexesTask(app, progress, null);
@@ -536,7 +557,8 @@ public class ResourceManager {
 			FileUtils.collectFiles(app.getAppPath(WIKI_INDEX_DIR), BINARY_MAP_INDEX_EXT, files);
 			FileUtils.collectFiles(app.getAppPath(WIKIVOYAGE_INDEX_DIR), BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, files);
 		}
-		if (PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseUtils.isContourLinesAvailable(app)) {
+		boolean contourLinesEnabled = PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseUtils.isContourLinesAvailable(app);
+		if (contourLinesEnabled) {
 			FileUtils.collectFiles(app.getAppPath(SRTM_INDEX_DIR), BINARY_MAP_INDEX_EXT, files);
 		}
 		if (PluginsHelper.isActive(NauticalMapsPlugin.class) || InAppPurchaseUtils.isDepthContoursAvailable(app)) {
@@ -722,6 +744,7 @@ public class ResourceManager {
 		for (ResourceListener l : resourceListeners) {
 			l.onMapsIndexed();
 		}
+		contourLinesIndexed = contourLinesEnabled;
 		return warnings;
 	}
 

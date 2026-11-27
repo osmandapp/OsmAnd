@@ -4,14 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.FileProvider
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import net.osmand.plus.R
@@ -68,7 +65,10 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_builds, container, false)
-		setupToolbar(view)
+		setupToolbar(view, R.string.version_settings)
+		addToolbarAction(view, R.string.shared_string_refresh, R.drawable.ic_action_update) {
+			manager.loadBuilds(true)
+		}
 
 		scrollView = view.findViewById(R.id.scroll_view)
 		stateContainer = view.findViewById(R.id.state_container)
@@ -96,22 +96,6 @@ class BuildsFragment : BaseMaterialFragment(), BuildsManager.Listener {
 		archiveRow.setOnClickListener { showArchive() }
 		SegmentedList.apply(archiveGroup as ViewGroup)
 		return view
-	}
-
-	private fun setupToolbar(view: View) {
-		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
-		toolbar.setTitle(R.string.version_settings)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
-		toolbar.menu.add(R.string.shared_string_refresh).apply {
-			val icon = AppCompatResources.getDrawable(view.context, R.drawable.ic_action_update)?.mutate()
-			icon?.setTint(AndroidUtils.getColorFromAttr(view.context, R.attr.colorOnSurfaceVariant))
-			setIcon(icon)
-			setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-			setOnMenuItemClickListener {
-				manager.loadBuilds(true)
-				true
-			}
-		}
 	}
 
 	override fun onResume() {

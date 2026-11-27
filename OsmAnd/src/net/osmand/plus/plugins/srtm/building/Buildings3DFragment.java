@@ -36,6 +36,7 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 	public static final String TAG = Buildings3DFragment.class.getSimpleName();
 	/* the NEW badge on Shadows is shown only in this release */
 	private static final String SHADOWS_ADDED_IN_VERSION = "5.5";
+	private static final float DISABLED_ALPHA = 0.5f;
 
 	private final SRTMPlugin plugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 
@@ -217,7 +218,11 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 		LinearLayout container = shadowsContainer.findViewById(R.id.custom_radio_buttons);
 		shadowsToggleButton = new IconToggleButton(app, container, nightMode);
 		shadowsToggleButton.setItems(off, on);
-		shadowsToggleButton.setSelectedItem(settings.CAST_SHADOWS.get() ? on : off);
+		/* the Hillshade layer already shades the relief: Shadows show Off and cannot be changed, as Terrain shadows on 3D Relief */
+		boolean shadedByHillshade = plugin.isReliefShadedByHillshade();
+		shadowsToggleButton.setSelectedItem(settings.CAST_SHADOWS.get() && !shadedByHillshade ? on : off);
+		shadowsToggleButton.setItemsEnabled(!shadedByHillshade);
+		shadowsContainer.setAlpha(shadedByHillshade ? DISABLED_ALPHA : 1f);
 	}
 
 	private void onShadowsChanged(@NonNull IconToggleButton.IconRadioItem selectItem, boolean enable) {
@@ -229,7 +234,11 @@ public class Buildings3DFragment extends BaseFullScreenFragment {
 
 	/* both states have a line, so the rows below keep their place when the toggle changes */
 	private void updateShadowsDescription() {
-		shadowsDescription.setText(settings.CAST_SHADOWS.get() ? R.string.shadows_on_description : R.string.shadows_off_description);
+		if (plugin.isReliefShadedByHillshade()) {
+			shadowsDescription.setText(R.string.shadows_hillshade_description);
+		} else {
+			shadowsDescription.setText(settings.CAST_SHADOWS.get() ? R.string.shadows_on_description : R.string.shadows_off_description);
+		}
 	}
 
 	private void setupDetailsLevelToggleButtons(@NonNull View view) {

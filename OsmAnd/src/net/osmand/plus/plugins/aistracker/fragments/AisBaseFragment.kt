@@ -2,18 +2,14 @@ package net.osmand.plus.plugins.aistracker.fragments
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.appbar.MaterialToolbar
 import net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialFragment
@@ -37,32 +33,6 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 	/* the screens are full screen on colorSurface, so the status bar takes the same colour */
 	override fun getStatusBarColorId(): Int =
 		if (nightMode) R.color.surface_dark else R.color.surface_light
-
-	/**
-	 * @param resetActionId title of the trailing app bar action, used for its content description.
-	 */
-	protected fun setupToolbar(
-		view: View,
-		@StringRes titleId: Int,
-		@StringRes resetActionId: Int,
-		@DrawableRes resetIconId: Int = R.drawable.ic_action_reset,
-		onReset: () -> Unit
-	) {
-		val toolbar: MaterialToolbar = view.findViewById(R.id.toolbar)
-		toolbar.setTitle(titleId)
-		toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
-		toolbar.menu.clear()
-		toolbar.menu.add(resetActionId).apply {
-			val icon = AppCompatResources.getDrawable(view.context, resetIconId)?.mutate()
-			icon?.setTint(themedColor(view, R.attr.colorOnSurfaceVariant))
-			setIcon(icon)
-			setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-			setOnMenuItemClickListener {
-				onReset()
-				true
-			}
-		}
-	}
 
 	protected fun showFragment(fragment: Fragment) {
 		val manager = requireActivity().supportFragmentManager
@@ -104,7 +74,7 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 
 		val waterColor = MapButtonCard.getMapWaterColor(osmandApp, nightMode)
 		if (waterColor != null) {
-			val background = ContextCompat.getDrawable(container.context, R.drawable.bg_ui_card_16)
+			val background = ContextCompat.getDrawable(container.context, R.drawable.bg_ui_card)
 			if (background is GradientDrawable) {
 				background.mutate()
 				background.setColor(waterColor)

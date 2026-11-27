@@ -9,6 +9,8 @@ import net.osmand.plus.R
 import net.osmand.plus.plugins.aistracker.AisFormatter
 import net.osmand.plus.widgets.ui.GroupFooterView
 import net.osmand.plus.widgets.ui.MainSwitchView
+import net.osmand.plus.widgets.ui.SegmentedList
+import net.osmand.plus.widgets.ui.SliderListItem
 
 /**
  * Collision warning (CPA) screen.
@@ -22,8 +24,11 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 	private lateinit var mainSwitchFooter: GroupFooterView
 	private lateinit var enabledContent: View
 	private lateinit var mmsiBanner: View
-	private lateinit var tcpaCard: AisSliderCard<Int>
-	private lateinit var cpaCard: AisSliderCard<Float>
+	private lateinit var tcpaRows: View
+	private lateinit var tcpaRow: SliderListItem
+	private lateinit var cpaRow: SliderListItem
+	private lateinit var tcpaFooter: GroupFooterView
+	private lateinit var cpaFooter: GroupFooterView
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -31,11 +36,11 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val view = inflater.inflate(R.layout.fragment_ais_collision_warning, container, false)
-		setupToolbar(view, R.string.ais_collision_warning, R.string.reset_to_default) {
+		setupToolbar(view, R.string.ais_collision_warning)
+		addResetAction(view) {
 			plugin.AIS_CPA_WARNING_TIME.resetModeToDefault(appMode)
 			plugin.AIS_CPA_WARNING_DISTANCE.resetModeToDefault(appMode)
-			tcpaCard.setValue(plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode))
-			cpaCard.setValue(plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode))
+			bindSliders()
 			updateState()
 		}
 
@@ -57,32 +62,20 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 			AisMmsiDialog.show(this) { updateState() }
 		}
 
-		tcpaCard = AisSliderCard(
-			view.findViewById(R.id.tcpa_card),
-			view.findViewById(R.id.tcpa_footer),
-			WARNING_TIME_VALUES,
-			{ AisFormatter.formatMinutes(osmandApp, it) },
-			{ getString(R.string.ais_cpa_warning_time_desc, AisFormatter.formatMinutes(osmandApp, it)) },
-			{
-				plugin.AIS_CPA_WARNING_TIME.setModeValue(appMode, it)
-				updateMainSwitchFooter()
-			})
-		tcpaCard.setTitle(R.string.ais_cpa_warning_time_title)
+		tcpaRows = view.findViewById(R.id.tcpa_rows)
+		tcpaRow = SliderListItem(view.findViewById(R.id.tcpa_row))
+		tcpaRow.setTitle(R.string.ais_cpa_warning_time_title)
+		tcpaRow.setTickVisible(true)
+		tcpaFooter = view.findViewById(R.id.tcpa_footer)
+		SegmentedList.apply(tcpaRows as ViewGroup)
 
-		cpaCard = AisSliderCard(
-			view.findViewById(R.id.cpa_card),
-			view.findViewById(R.id.cpa_footer),
-			SAFE_DISTANCE_VALUES,
-			{ AisFormatter.formatNauticalMiles(osmandApp, it, appMode) },
-			{ getString(R.string.ais_cpa_safe_distance_desc, AisFormatter.formatNauticalMiles(osmandApp, it, appMode)) },
-			{
-				plugin.AIS_CPA_WARNING_DISTANCE.setModeValue(appMode, it)
-				updateMainSwitchFooter()
-			})
-		cpaCard.setTitle(R.string.ais_cpa_safe_distance)
+		cpaRow = SliderListItem(view.findViewById(R.id.cpa_row))
+		cpaRow.setTitle(R.string.ais_cpa_safe_distance)
+		cpaRow.setTickVisible(true)
+		cpaFooter = view.findViewById(R.id.cpa_footer)
+		SegmentedList.apply(view.findViewById(R.id.cpa_rows))
 
-		tcpaCard.setValue(plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode))
-		cpaCard.setValue(plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode))
+		bindSliders()
 		updateState()
 		return view
 	}
@@ -94,18 +87,34 @@ class AisCollisionWarningFragment : AisBaseFragment() {
 		mmsiBanner.visibility = if (bannerShown) View.VISIBLE else View.GONE
 		/* the footer of the main switch already keeps 16dp to the next card; the gap of the
 		 * first card is only needed below the banner */
-		(tcpaCard.view.layoutParams as ViewGroup.MarginLayoutParams).topMargin =
+		(tcpaRows.layoutParams as ViewGroup.MarginLayoutParams).topMargin =
 			if (bannerShown) resources.getDimensionPixelSize(R.dimen.ui_group_gap) else 0
-		tcpaCard.view.requestLayout()
-		updateMainSwitchFooter()
+		tcpaRows.requestLayout()
+		updateFooters()
 	}
 
-	private fun updateMainSwitchFooter() {
+	/** Puts the stored values on the sliders - also after a reset. */
+	private fun bindSliders() {
+		tcpaRow.setStops(WARNING_TIME_VALUES, plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode),
+			{ AisFormatter.formatMinutes(osmandApp, it) }) {
+			plugin.AIS_CPA_WARNING_TIME.setModeValue(appMode, it)
+			updateFooters()
+		}
+		cpaRow.setStops(SAFE_DISTANCE_VALUES, plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode),
+			{ AisFormatter.formatNauticalMiles(osmandApp, it, appMode) }) {
+			plugin.AIS_CPA_WARNING_DISTANCE.setModeValue(appMode, it)
+			updateFooters()
+		}
+	}
+
+	private fun updateFooters() {
+		val time = AisFormatter.formatMinutes(osmandApp, plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode))
+		val distance = AisFormatter.formatNauticalMiles(osmandApp, plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode), appMode)
+		tcpaFooter.setText(getString(R.string.ais_cpa_warning_time_desc, time))
+		cpaFooter.setText(getString(R.string.ais_cpa_safe_distance_desc, distance))
 		mainSwitchFooter.setText(
 			if (plugin.AIS_CPA_ENABLED.getModeValue(appMode)) {
-				getString(R.string.ais_cpa_on_desc,
-					AisFormatter.formatNauticalMiles(osmandApp, plugin.AIS_CPA_WARNING_DISTANCE.getModeValue(appMode), appMode),
-					AisFormatter.formatMinutes(osmandApp, plugin.AIS_CPA_WARNING_TIME.getModeValue(appMode)))
+				getString(R.string.ais_cpa_on_desc, distance, time)
 			} else {
 				getString(R.string.ais_cpa_off_desc)
 			})
