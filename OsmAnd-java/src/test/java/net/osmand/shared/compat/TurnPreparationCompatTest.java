@@ -220,6 +220,9 @@ public class TurnPreparationCompatTest {
 					Same.close(s + " speed", j.getSegmentSpeed(), k.getSegmentSpeed());
 					Same.close(s + " routingTime", j.getRoutingTime(), k.getRoutingTime());
 					assertTurn(s, j.getTurnType(), k.getTurnType());
+					if (j.getTurnType() != null) {
+						assertEquals(s + " streetName", j.getStreetName("", false, java, i), k.getStreetName("", false, copy, i));
+					}
 				}
 			}
 		} finally {

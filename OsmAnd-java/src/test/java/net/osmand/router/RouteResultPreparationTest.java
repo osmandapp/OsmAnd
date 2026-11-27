@@ -144,6 +144,7 @@ public class RouteResultPreparationTest {
         Set<String> reachedSegmentsWithStartPoint = new TreeSet<>();
         Map<Long, RouteSegmentResult> reachedSegments = new HashMap<>();
         Set<Long> checkedSegments = new TreeSet<>();
+        Set<String> checkedStreetNames = new TreeSet<>();
         Assert.assertNotNull(routeSegments);
         int prevSegment = -1;
         for (int i = 0; i <= routeSegments.size(); i++) {
@@ -180,7 +181,16 @@ public class RouteResultPreparationTest {
                         }
                     }
                     
-                    System.out.println("segmentId: " + segmentId + " description: " + name);
+                    if (te.getExpectedStreetNames() != null
+                            && te.getExpectedStreetNames().containsKey(String.valueOf(segmentId))) {
+                        String streetName = segment.getStreetName("", false, routeSegments, prevSegment);
+                        Assert.assertEquals("Street name of turn at segment " + segmentId,
+                                te.getExpectedStreetNames().get(String.valueOf(segmentId)), streetName);
+                        checkedStreetNames.add(String.valueOf(segmentId));
+                    }
+
+                    System.out.println("segmentId: " + segmentId + " description: " + name
+                            + " street: " + segment.getStreetName("", false, routeSegments, prevSegment));
                 }
                 prevSegment = i;
                 if (i < routeSegments.size()) {
@@ -208,6 +218,11 @@ public class RouteResultPreparationTest {
                 if (!Algorithms.isEmpty(expectedResult)) {
                     Assert.assertEquals("Segment " + id, expectedResult, "NULL");
                 }
+            }
+        }
+        if (te.getExpectedStreetNames() != null) {
+            for (String id : te.getExpectedStreetNames().keySet()) {
+                Assert.assertTrue("Segment " + id + " has no turn in " + checkedSegments, checkedStreetNames.contains(id));
             }
         }
         if (te.getExpectedExits() != null) {
