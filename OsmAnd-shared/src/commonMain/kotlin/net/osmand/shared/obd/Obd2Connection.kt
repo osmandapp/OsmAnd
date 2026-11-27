@@ -43,15 +43,84 @@ class Obd2Connection(
 	private suspend fun runInitCommands(): Boolean {
 		log.debug("runInitCommands")
 		for (command in initCommands) {
-			var responseString = runImpl(command)
-			responseString = normalizeResponseString(command, responseString, null)
-			val systemResponse = getSystemResponse(responseString)
-			if (systemResponse == OBDResponse.STOPPED || systemResponse == OBDResponse.ERROR) {
-				log.error("error while init obd $systemResponse")
+			if (!runInitCommand(command)) {
 				return false
 			}
 		}
+		log.info("Adapter: ${runImpl(ADAPTER_VERSION_COMMAND)}")
+		if (!selectProtocol()) {
+			return false
+		}
+		log.info("Protocol: ${runImpl(PROTOCOL_NUMBER_COMMAND)}")
+		logSupportedPids()
 		return true
+	}
+
+	private suspend fun runInitCommand(command: String): Boolean {
+		var responseString = runImpl(command)
+		responseString = normalizeResponseString(command, responseString, null)
+		val systemResponse = getSystemResponse(responseString)
+		if (systemResponse == OBDResponse.STOPPED || systemResponse == OBDResponse.ERROR) {
+			log.error("error while init obd $command: $systemResponse")
+			return false
+		}
+		return true
+	}
+
+	/**
+	 * "AT SP 0" only arms the auto search; it answers OK even if no protocol works.
+	 * The protocol is known only after the car answers "41 00" to "0100", so check that and,
+	 * if the auto search finds nothing, try the protocols one by one.
+	 */
+	private suspend fun selectProtocol(): Boolean {
+		for (protocol in PROTOCOLS) {
+			if (finished) {
+				return false
+			}
+			if (!runInitCommand("$SET_PROTOCOL_COMMAND $protocol")) {
+				return false
+			}
+			if (querySupportedPids(0) != null) {
+				log.info("Protocol $protocol answers 0100")
+				return true
+			}
+			if (protocol == PROTOCOLS[0]) {
+				log.info("Auto search picked protocol ${runImpl(PROTOCOL_NUMBER_COMMAND)}")
+			}
+			log.info("No answer to 0100 with protocol $protocol")
+		}
+		log.error("No OBD protocol answers 0100, the car does not respond to this adapter")
+		runInitCommand("$SET_PROTOCOL_COMMAND ${PROTOCOLS[0]}")
+		return false
+	}
+
+	private suspend fun logSupportedPids() {
+		var pid = 0
+		while (pid < 0xE0 && !finished) {
+			val bits = querySupportedPids(pid) ?: break
+			log.info("Supported PIDs %02X: %02X%02X%02X%02X".format(pid, bits[0], bits[1], bits[2], bits[3]))
+			if (bits[3] and 1 == 0) {
+				break
+			}
+			pid += 0x20
+		}
+	}
+
+	/** Bitmask of supported PIDs from "01xx" (xx = 00, 20, 40, ...), or null if there is no valid answer. */
+	private suspend fun querySupportedPids(pid: Int): IntArray? {
+		val fullCommand = "01%02X".format(pid)
+		val response = normalizeResponseString(fullCommand, runImpl(fullCommand), COMMAND_TYPE.LIVE)
+		val hexValues = try {
+			toHexValues(response)
+		} catch (e: IllegalArgumentException) {
+			null
+		}
+		if (hexValues == null || hexValues.size < 6 ||
+			hexValues[0] != COMMAND_TYPE.LIVE.code || hexValues[1] != pid) {
+			log("No supported PIDs answer to $fullCommand: '$response'")
+			return null
+		}
+		return hexValues.copyOfRange(2, 6)
 	}
 
 	private suspend fun runImpl(command: String): String {
@@ -70,7 +139,7 @@ class Obd2Connection(
 					return response.toString()
 				}
 			}
-			log("runImpl($command) returned $responseRead")
+			log("runImpl($command) returned ${escapeControlChars(responseRead)}")
 			if(responseRead.contains("0:")) {
 				responseRead = responseRead.substring(responseRead.indexOf("0:"))
 			}
@@ -250,10 +319,32 @@ class Obd2Connection(
 
 	companion object {
 		private val initCommands =
-			arrayOf("ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
+			arrayOf("ATZ", "AT E0", "AT L0", "AT S0", "AT H0")
+
+		private const val SET_PROTOCOL_COMMAND = "AT SP"
+		private const val ADAPTER_VERSION_COMMAND = "ATI"
+		private const val PROTOCOL_NUMBER_COMMAND = "AT DPN"
+
+		// auto search first, then CAN (most cars since 2008), KWP fast/slow init, ISO 9141, J1850
+		private val PROTOCOLS = charArrayOf('0', '6', '8', '7', '9', '5', '4', '3', '1', '2')
 
 		fun isInitCommand(command: String): Boolean {
-			return initCommands.contains(command)
+			return initCommands.contains(command) || command.startsWith(SET_PROTOCOL_COMMAND)
+					|| command == ADAPTER_VERSION_COMMAND || command == PROTOCOL_NUMBER_COMMAND
+		}
+
+		/** Makes \r, \n and other invisible bytes of an adapter answer visible in the log. */
+		fun escapeControlChars(value: String): String {
+			val sb = StringBuilder()
+			for (c in value) {
+				when {
+					c == '\r' -> sb.append("\\r")
+					c == '\n' -> sb.append("\\n")
+					c < ' ' || c.code == 0x7F -> sb.append("\\x%02X".format(c.code))
+					else -> sb.append(c)
+				}
+			}
+			return sb.toString()
 		}
 
 		fun toHexValues(buffer: String): IntArray {

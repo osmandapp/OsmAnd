@@ -56,6 +56,10 @@ class OBDSimulationSource {
 				}
 			}
 			val command = splitCommand[1]
+			if (commandCode == "01" && command == "00") {
+				bufferToRead = "4100BE3EB811>" // supported PIDs, answered during init
+				return@runBlocking
+			}
 			val obdCommand = OBDCommand.getByCode(commandCode.toInt(16), command.toInt(16))
 			if (obdCommand?.ordinal == OBDCommand.entries.size - 1) {
 				delay(NEW_DATA_PACK_DELAY)
