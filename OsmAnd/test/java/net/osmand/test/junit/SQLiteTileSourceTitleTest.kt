@@ -5,10 +5,12 @@ import android.os.FileObserver
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.IndexConstants
+import net.osmand.map.ITileSource
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -98,19 +100,44 @@ class SQLiteTileSourceTitleTest {
 		assertTrue("opens of $SOURCES map sources: ${opens.get()}", opens.get() <= 2 * SOURCES)
 	}
 
-	private fun createSource(source: File, title: String) {
+	/**
+	 * The export of map sources (export screen, OsmAnd Cloud backup) creates a `SQLiteTileSource`
+	 * for every `.sqlitedb` and reads its URL template from the database. Nothing closed it.
+	 */
+	@Test
+	fun mapSourcesExportClosesDatabases() {
+		val online = File(file.parentFile, "test_export_online.sqlitedb")
+		SQLiteDatabase.deleteDatabase(online)
+		sources.add(online)
+		createSource(online, "Online title", URL)
+		createSource(file, "Offline title")
+
+		val exported = ExportType.MAP_SOURCES.fetchExportData(app, false)
+		val openFiles = openFiles(online) + openFiles(file)
+
+		// The exported sources are still referenced here, so GC cannot have closed their databases
+		val source = exported.map { it as ITileSource }.firstOrNull { it.name == "test_export_online" }
+		assertNotNull("exported", source)
+		assertEquals("open files", 0, openFiles)
+		// The export writes the info kept in fields, reading it does not open the database again
+		assertEquals(URL, source!!.urlTemplate)
+		assertEquals("open files after reading the info", 0, openFiles(online))
+	}
+
+	private fun createSource(source: File, title: String, url: String? = null) {
 		SQLiteDatabase.openOrCreateDatabase(source, null).use { db ->
 			db.execSQL("CREATE TABLE tiles (x int, y int, z int, s int, image blob, PRIMARY KEY (x, y, z, s))")
-			db.execSQL("CREATE TABLE info (title TEXT)")
-			db.execSQL("INSERT INTO info VALUES ('$title')")
+			db.execSQL("CREATE TABLE info (title TEXT, url TEXT)")
+			db.execSQL("INSERT INTO info VALUES (?, ?)", arrayOf(title, url))
 		}
 	}
 
-	private fun openFiles(): Int = File("/proc/self/fd").listFiles()!!.count { fd ->
-		runCatching { fd.canonicalPath.contains(file.name) }.getOrDefault(false)
+	private fun openFiles(source: File = file): Int = File("/proc/self/fd").listFiles()!!.count { fd ->
+		runCatching { fd.canonicalPath.contains(source.name) }.getOrDefault(false)
 	}
 
 	companion object {
 		private const val SOURCES = 20
+		private const val URL = "https://tile.example.com/{0}/{1}/{2}.png"
 	}
 }

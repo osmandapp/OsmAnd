@@ -56,6 +56,10 @@ public class MapSourcesExportType extends AbstractExportType {
 			if (!shouldSkipMapSource(template)) {
 				iTileSources.add(template);
 			}
+			if (template instanceof SQLiteTileSource) {
+				// The check above opened its database to read the source info, nothing else closes it
+				((SQLiteTileSource) template).closeConnection();
+			}
 		}
 		return iTileSources;
 	}
