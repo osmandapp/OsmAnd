@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
@@ -83,7 +84,9 @@ public class WarningStatusCard extends BaseCard {
 
 	private void setupButton(@NonNull BackupStatus status) {
 		DialogButton actionButton = view.findViewById(R.id.action_button);
-		if (status == BackupStatus.ERROR) {
+		if (status == BackupStatus.STORAGE_UNAVAILABLE) {
+			actionButton.setOnClickListener(v -> RestartActivity.doRestartSilent(activity));
+		} else if (status == BackupStatus.ERROR) {
 			actionButton.setOnClickListener(v -> onSupportPressed());
 		} else if (status == BackupStatus.SUBSCRIPTION_EXPIRED) {
 			actionButton.setOnClickListener(v -> onSubscriptionExpired());

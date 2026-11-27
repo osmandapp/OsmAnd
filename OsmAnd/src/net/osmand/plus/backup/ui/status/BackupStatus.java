@@ -19,6 +19,8 @@ import net.osmand.util.CollectionUtils;
 import java.net.HttpURLConnection;
 
 public enum BackupStatus {
+	STORAGE_UNAVAILABLE(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, R.drawable.ic_action_alert,
+			R.string.storage_unavailable_title, R.string.storage_unavailable_cloud_description, R.string.restart_now),
 	BACKUP_COMPLETE(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, -1, -1, -1, R.string.sync_now),
 	MAKE_BACKUP(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, -1, -1, -1, R.string.sync_now),
 	CONFLICTS(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, R.drawable.ic_action_alert, -1, -1, R.string.backup_view_conflicts),
@@ -52,6 +54,9 @@ public enum BackupStatus {
 	@NonNull
 	public static BackupStatus getBackupStatus(@NonNull OsmandApplication app,
 			@NonNull PrepareBackupResult backupResult) {
+		if (app.getUnavailableStorageDirectoryAtStartup() != null) {
+			return STORAGE_UNAVAILABLE;
+		}
 		BackupInfo info = backupResult.getBackupInfo();
 
 		if (!Algorithms.isEmpty(backupResult.getError())) {

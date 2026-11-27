@@ -241,6 +241,8 @@ public class OsmandApplication extends MultiDexApplication {
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
+	// A directory selected later in this process does not rehydrate the GPX cache.
+	@Nullable private File unavailableStorageDirectoryAtStartup;
 	private boolean appInForeground;
 	private boolean androidAutoInForeground;
 	private float density = 0f;
@@ -286,6 +288,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		externalStorageDirectory = settings.getExternalStorageDirectory();
 		if (!FileUtils.isWritable(externalStorageDirectory)) {
+			unavailableStorageDirectoryAtStartup = externalStorageDirectory;
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = settings.getInternalAppPath();
 		}
@@ -341,6 +344,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean isPlusVersionInApp() {
 		return true;
+	}
+
+	@Nullable
+	public File getUnavailableStorageDirectoryAtStartup() {
+		return unavailableStorageDirectoryAtStartup;
 	}
 
 	public boolean isExternalStorageDirectoryReadOnly() {

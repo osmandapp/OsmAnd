@@ -101,6 +101,7 @@ import net.osmand.plus.settings.backend.preferences.*;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
+import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -2521,7 +2522,8 @@ public class OsmandSettings {
 		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
 		File location = getDefaultLocationV19();
 		if (type == -1) {
-			if (FileUtils.isWritable(location)) {
+			if (!DataStorageHelper.isSharedStorageDirectory(location, getDefaultInternalStorage())
+					|| FileUtils.isWritable(location)) {
 				if (tp != null) {
 					tp.value = settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR_V19) ?
 							EXTERNAL_STORAGE_TYPE_SPECIFIED :

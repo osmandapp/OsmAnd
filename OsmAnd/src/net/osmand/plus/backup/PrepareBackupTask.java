@@ -74,6 +74,10 @@ public class PrepareBackupTask {
 			listener.onBackupPreparing();
 		}
 		initTasks();
+		if (app.getUnavailableStorageDirectoryAtStartup() != null) {
+			onError(app.getString(R.string.storage_unavailable_cloud_description));
+			return false;
+		}
 		return runTasks();
 	}
 

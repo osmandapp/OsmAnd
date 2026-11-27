@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
@@ -91,6 +92,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			return;
 		}
 		startSyncPending = false;
+		if (app.getUnavailableStorageDirectoryAtStartup() != null) {
+			app.runInUIThread(() -> onSyncFinished(app.getString(R.string.storage_unavailable_cloud_description)));
+			return;
+		}
 
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();

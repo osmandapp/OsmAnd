@@ -113,7 +113,8 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 	}
 
 	private boolean isAutoBackupConfigured() {
-		return InAppPurchaseUtils.isBackupAvailable(app) && isAutoBackupEnabled() && backupHelper.isRegistered();
+		return app.getUnavailableStorageDirectoryAtStartup() == null && InAppPurchaseUtils.isBackupAvailable(app)
+				&& isAutoBackupEnabled() && backupHelper.isRegistered();
 	}
 
 	public boolean isAutoBackupEnabled() {
