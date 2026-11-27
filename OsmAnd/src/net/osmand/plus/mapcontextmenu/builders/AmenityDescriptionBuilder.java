@@ -72,14 +72,12 @@ final class AmenityDescriptionBuilder {
 	boolean buildDescription(@NonNull View view) {
 		Map<String, Object> filteredInfo = infoBundle.getFilteredLocalizedInfo();
 
-		if (buildShortWikiDescription(view, filteredInfo, true)) {
-			return true;
-		}
+		boolean hasShortDescription = buildShortWikiDescription(view, filteredInfo, true);
 
 		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(
 				app, amenity, DESCRIPTION, filteredInfo);
 		if (pair == null) {
-			return false;
+			return hasShortDescription;
 		}
 
 		menuBuilder.buildDescriptionRow(view, pair.first);

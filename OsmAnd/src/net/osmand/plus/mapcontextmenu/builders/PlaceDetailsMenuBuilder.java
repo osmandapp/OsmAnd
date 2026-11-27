@@ -54,7 +54,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	@Override
 	protected void buildDescription(View view) {
 		List<Amenity> wikiAmenities = getWikiAmenities();
-		boolean hasDescription = buildDescription(view, wikiAmenities, false);
+		boolean hasDescription = buildDescription(view, wikiAmenities, true);
 
 		if (!hasDescription) {
 			Map<String, Object> filteredInfo = infoBundle.getFilteredLocalizedInfo();
@@ -89,10 +89,10 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getKPoiTypes(), extensions);
 		Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
 
-		if (buildShortWikiDescription(view, filteredInfo, allowOnlineWiki)) {
-			return true;
-		}
 		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, DESCRIPTION, filteredInfo);
+		// the Wikipedia row goes above the description; without a description
+		// the online Wikipedia row is built after all descriptions were tried
+		boolean hasShortDescription = buildShortWikiDescription(view, filteredInfo, allowOnlineWiki && pair != null);
 		if (pair != null) {
 			String routeId = amenity.getRouteId();
 			if (!Algorithms.isEmpty(routeId) && app.getResourceManager().hasTravelRepositories()) {
@@ -108,7 +108,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 			}
 			return true;
 		}
-		return false;
+		return hasShortDescription;
 	}
 
 	@Override

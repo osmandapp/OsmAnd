@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.text.Layout;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -34,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -997,6 +999,8 @@ public class MenuBuilder {
 
 	public View buildDescriptionRow(View view, String description, @Nullable View.OnClickListener onClickListener, @Nullable String buttonText) {
 		String descriptionLabel = app.getString(R.string.shared_string_description);
+		// the dialog shows a plain text description as it is in the row
+		boolean hideReadFullIfFits = onClickListener == null && !Algorithms.isHtmlText(description);
 		if (onClickListener == null) {
 			onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
 		}
@@ -1074,7 +1078,10 @@ public class MenuBuilder {
 		if (buttonText == null) {
 			buttonText = app.getString(R.string.context_menu_read_full);
 		}
-		buildReadFullButton(llText, buttonText, onClickListener);
+		View readFullButton = buildReadFullButton(llText, buttonText, onClickListener);
+		if (hideReadFullIfFits) {
+			hideIfTextFits(textView, readFullButton);
+		}
 
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
@@ -1245,7 +1252,22 @@ public class MenuBuilder {
 		return child != null && DIVIDER_ROW_KEY.equals(child.getTag());
 	}
 
-	protected void buildReadFullButton(LinearLayout container, String btnText, View.OnClickListener onClickListener) {
+	private static void hideIfTextFits(@NonNull TextView textView, @NonNull View viewToHide) {
+		textView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+			@Override
+			public boolean onPreDraw() {
+				textView.getViewTreeObserver().removeOnPreDrawListener(this);
+				Layout layout = textView.getLayout();
+				if (layout != null && layout.getEllipsisCount(layout.getLineCount() - 1) == 0) {
+					viewToHide.setVisibility(View.GONE);
+					return false;
+				}
+				return true;
+			}
+		});
+	}
+
+	protected View buildReadFullButton(LinearLayout container, String btnText, View.OnClickListener onClickListener) {
 		Context ctx = container.getContext();
 		boolean light = isLightContent();
 
@@ -1277,6 +1299,7 @@ public class MenuBuilder {
 		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(button, drawable, null, null, null);
 		button.setCompoundDrawablePadding(dpToPx(8f));
 		container.addView(button);
+		return button;
 	}
 
 	protected void buildDateRow(@NonNull View view, @NonNull String textPrefix, long timestamp) {
