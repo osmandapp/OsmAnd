@@ -221,11 +221,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				trackDrawInfo = new TrackDrawInfo(app, gpxFile, gpxDataItem);
 			}
 		}
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			public void handleOnBackPressed() {
-				dismiss();
-			}
-		});
 	}
 
 	private void restoreSelectedGpxFile(String gpxFilePath, boolean isCurrentRecording) {
@@ -330,6 +325,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (!(fragment instanceof TrackMenuFragment)) {
 			adjustMapPosition(getHeight());
 		}
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				dismiss();
+			}
+		});
 	}
 
 	@Override

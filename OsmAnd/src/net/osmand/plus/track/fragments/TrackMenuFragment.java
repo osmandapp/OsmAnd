@@ -57,6 +57,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -355,31 +356,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (selectedGpxFile != null) {
 			onSelectedGpxFileAvailable();
 		}
-
-		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			public void handleOnBackPressed() {
-				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
-					openMenuHeaderOnly();
-				} else {
-					dismiss();
-					hideSelectedGpx();
-
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						MapContextMenu contextMenu = mapActivity.getContextMenu();
-						PointDescription pointDescription = contextMenu.getPointDescription();
-						if (pointDescription != null && pointDescription.isGpxPoint()) {
-							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
-							contextMenu.show();
-						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
-							mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-						} else {
-							mapActivity.launchPrevActivityIntent();
-						}
-					}
-				}
-			}
-		});
 	}
 
 	private void onSelectedGpxFileAvailable() {
@@ -460,6 +436,52 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void setAnalysis(@Nullable GpxTrackAnalysis analysis) {
 		this.analysis = analysis;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		OnBackPressedCallback backPressedCallback = new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				if (isHidden() && isOtherFragmentVisible()) {
+					setEnabled(false);
+					requireMyActivity().getOnBackPressedDispatcher().onBackPressed();
+					setEnabled(true);
+					return;
+				}
+				if (getCurrentMenuState() != MenuState.HEADER_ONLY && isPortrait()) {
+					openMenuHeaderOnly();
+				} else {
+					dismiss();
+					hideSelectedGpx();
+
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						MapContextMenu contextMenu = mapActivity.getContextMenu();
+						PointDescription pointDescription = contextMenu.getPointDescription();
+						if (pointDescription != null && pointDescription.isGpxPoint()) {
+							contextMenu.init(contextMenu.getLatLon(), pointDescription, contextMenu.getObject());
+							contextMenu.show();
+						} else if (Algorithms.objectEquals(callingFragmentTag, QuickSearchDialogFragment.TAG)) {
+							mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+						} else {
+							mapActivity.launchPrevActivityIntent();
+						}
+					}
+				}
+			}
+		};
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
+	}
+
+	private boolean isOtherFragmentVisible() {
+		for (Fragment fragment : getParentFragmentManager().getFragments()) {
+			View view = fragment.getView();
+			if (fragment != this && fragment.isVisible() && view != null && view.isShown()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

@@ -136,12 +136,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 				savedGpxFilePath = savedInstanceState.getString(KEY_SAVED_GPX_FILE_PATH);
 			}
 		}
-
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			public void handleOnBackPressed() {
-				dismiss(false);
-			}
-		});
 	}
 
 	private void restoreSelectedGpxFile(String gpxFilePath) {
@@ -275,6 +269,11 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		adjustMapPosition(getHeight());
+		requireMyActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				dismiss(false);
+			}
+		});
 	}
 
 	@Override
