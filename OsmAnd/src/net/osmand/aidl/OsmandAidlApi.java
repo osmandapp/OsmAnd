@@ -112,7 +112,9 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.NextDirectionInfo;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -2820,9 +2822,20 @@ public class OsmandAidlApi {
 				} else {
 					NextDirectionInfo ndi = rh.getNextRouteDirectionInfo(baseNdi, true);
 					if (ndi != null && ndi.distanceTo > 0 && ndi.directionInfo != null) {
+						RouteDirectionInfo info = ndi.directionInfo;
+						TurnType tt = info.getTurnType();
 						directionInfo.setDistanceTo(ndi.distanceTo);
-						directionInfo.setTurnType(ndi.directionInfo.getTurnType().getValue());
+						directionInfo.setTurnType(tt.getValue());
+						directionInfo.setExitNumber(tt.isRoundAbout() ? tt.getExitOut() : 0);
+						directionInfo.setTurnAngle(tt.getTurnAngle());
+						directionInfo.setLanes(tt.getLanes());
+						String streetName = RoutingHelperUtils.formatStreetName(info.getStreetName(), info.getRef(), info.getDestinationName(), "");
+						directionInfo.setStreetName(Algorithms.isEmpty(streetName) ? null : streetName);
 					}
+				}
+				if (rh.isRouteCalculated()) {
+					directionInfo.setLeftTime(rh.getLeftTime());
+					directionInfo.setLeftDistance(rh.getLeftDistance());
 				}
 				for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
 					if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_NAV_DATA_UPDATE) > 0) {
