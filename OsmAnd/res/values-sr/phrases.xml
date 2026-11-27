@@ -2263,7 +2263,7 @@
     <string name="poi_animal_training_dog">Пас</string>
     <string name="poi_animal_training_horse">Коњ</string>
     <string name="poi_horse_yes">Погодно за јахање: да</string>
-    <string name="poi_horse_no">Недозвољено коњима</string>
+    <string name="poi_horse_no">Коњ: не</string>
     <string name="poi_animal_yes">Животиње: да</string>
     <string name="poi_animal_no">Животиње: не</string>
     <string name="poi_historic_period_nuragic">Историјски период: нурагски</string>
@@ -3286,7 +3286,7 @@
     <string name="poi_shoe_repair">Поправка обуће</string>
     <string name="poi_hill">Брдо</string>
     <string name="poi_license_classes">Лиценцни часови</string>
-    <string name="poi_ruins">Рушевине</string>
+    <string name="poi_ruins">Рушевине: да</string>
     <string name="poi_hazard_minefield">Минско поље</string>
     <string name="poi_hazard_flood">Опасност од поплаве</string>
     <string name="poi_hazard_slippery_road">Клизав пут</string>
@@ -3326,7 +3326,7 @@
     <string name="poi_cable_number">Број кабла</string>
     <string name="poi_via_ferrata">Заштићена рута</string>
     <string name="poi_climbing_adventure">Авантура пењања</string>
-    <string name="poi_aerialway_zip_line">Зип лајн</string>
+    <string name="poi_aerialway_zip_line">Зип лајн;зиплајн</string>
     <string name="poi_service_vehicle_tyres_yes">Гуме; Гума</string>
     <string name="poi_service_vehicle_insurance_yes">Осигурање</string>
     <string name="poi_service_vehicle_motor_yes">Мотор</string>
@@ -3609,7 +3609,7 @@
     <string name="poi_park_ride_yes">Вожња парком: да</string>
     <string name="poi_denotation_landmark">Ознака земље</string>
     <string name="poi_denotation_natural_monument">Природни споменик</string>
-    <string name="poi_childcare">Брига о деци</string>
+    <string name="poi_childcare">Чување деце;играоница</string>
     <string name="poi_toll_gantry">Путарина</string>
     <string name="poi_volcano_type_shield">Штит</string>
     <string name="poi_volcano_type_stratovolcano">Стратовулкан</string>
@@ -4066,7 +4066,7 @@
     <string name="poi_ice_cream_yes">Сладолед: да</string>
     <string name="poi_origin">Порекло</string>
     <string name="poi_tool_hire">Изнајмљивање алата</string>
-    <string name="poi_escape_game">Игра бекства</string>
+    <string name="poi_escape_game">Игра бекства;соба за бекство</string>
     <string name="poi_agrarian_fertilizer">Ђубриво</string>
     <string name="poi_generator_method_run_of_the_river">Генераторски метод: речни проток</string>
     <string name="poi_agrarian_yes">Пољопривредан: да</string>
@@ -4098,8 +4098,8 @@
     <string name="poi_medical_supply_home_care">Кућна нега</string>
     <string name="poi_lgbtq_primary">LGBTQ: osnovно</string>
     <string name="poi_lgbtq_yes">LGBTQ дозвољено</string>
-    <string name="poi_lgbtq_only">LGBTQ само</string>
-    <string name="poi_lgbtq_no">LGBTQ недозвољено</string>
+    <string name="poi_lgbtq_only">LGBTQ: само</string>
+    <string name="poi_lgbtq_no">LGBTQ: не</string>
     <string name="poi_beauty_salon_tanning">Соларијум</string>
     <string name="poi_beauty_salon_cosmetics">Козметика</string>
     <string name="poi_beauty_salon_spa">Спа</string>
@@ -4268,7 +4268,7 @@
     <string name="poi_books_adults">Одрасли</string>
     <string name="poi_collector">Колектор</string>
     <string name="poi_hospice">Уточиште</string>
-    <string name="poi_telecommunication">Телекомуникације</string>
+    <string name="poi_telecommunication">Телекомуникације;телекомуникациона продавница</string>
     <string name="poi_avalanche_transceiver">Детектор жртава лавине;AVD;Примопредајник лавине</string>
     <string name="poi_avalanche_transceiver_checkpoint">Контролни пункт примопредајника лавине</string>
     <string name="poi_avalanche_transceiver_training">Обука за примопредајник лавине</string>
@@ -4621,11 +4621,11 @@
     <string name="poi_surface_acrylic">Површина: акрилна</string>
     <string name="poi_surface_plastic">Површина: пластика</string>
     <string name="poi_surface_rubber">Површина: гума</string>
-    <string name="poi_bicycle_designated">Намењено за бицикле</string>
-    <string name="poi_horse_designated">Намењено за коње</string>
+    <string name="poi_bicycle_designated">Бицикл: намењено</string>
+    <string name="poi_horse_designated">Коњ: намењено</string>
     <string name="poi_cemt_0">0</string>
     <string name="poi_cemt_via">VIа</string>
-    <string name="poi_assembly_point">Место окупљања</string>
+    <string name="poi_assembly_point">Место окупљања;место окупљања у случају нужде</string>
     <string name="poi_ship_no">Приступ бродом: не</string>
     <string name="poi_surface_carpet">Површина: тепих</string>
     <string name="poi_checkpoint_cycling">Бициклистичко место провере</string>
@@ -5244,4 +5244,5 @@
     <string name="poi_socket_type2_cable_yes">Кабл типа 2</string>
     <string name="poi_zone">Зона</string>
     <string name="poi_check_date">Пријемни датум</string>
+    <string name="poi_whatsapp">Воцап</string>
 </resources>
