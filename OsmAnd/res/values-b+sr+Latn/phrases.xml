@@ -5244,4 +5244,5 @@
     <string name="poi_socket_type2_cable_yes">Kabl tipa 2</string>
     <string name="poi_zone">Zona</string>
     <string name="poi_check_date">Prijemni datum</string>
+    <string name="poi_whatsapp">Vocap</string>
 </resources>
