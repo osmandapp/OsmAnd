@@ -528,4 +528,8 @@
 	<dimen name="ui_switch_height">32dp</dimen>
 	<dimen name="ui_main_switch_height">56dp</dimen>
 	<dimen name="ui_corner_radius_button">6dp</dimen>
+	<dimen name="ui_button_padding_horizontal">12dp</dimen>
+	<dimen name="ui_button_icon_size">24dp</dimen>
+	<dimen name="ui_button_icon_gap">3dp</dimen>
+	<dimen name="ui_button_min_width">48dp</dimen>
 </resources>
