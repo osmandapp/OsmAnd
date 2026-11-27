@@ -170,7 +170,7 @@ public class CustomAlert {
 
 	private static AlertDialog.Builder createIconDialogBuilder(@NonNull Context ctx, boolean nightMode, @NonNull Drawable icon) {
 		Context materialCtx = UiUtilities.getThemedContext(ctx, nightMode, R.style.OsmandMaterialLightTheme, R.style.OsmandMaterialDarkTheme);
-		return new MaterialAlertDialogBuilder(materialCtx, com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered)
+		return new MaterialAlertDialogBuilder(materialCtx, R.style.ThemeOverlay_OsmAnd_Material3Expressive_MaterialAlertDialog_Centered)
 				.setIcon(icon);
 	}
 
