@@ -17,6 +17,7 @@ computer (the video does not pass through the assistant).
 Needs only Python 3 and dns-sd (macOS) or avahi-browse (Linux).
 """
 import argparse
+import hashlib
 import http.client
 import json
 import os
@@ -96,7 +97,7 @@ def browse_avahi():
     return found
 
 
-def discover(name_filter):
+def discover(name_filter, token):
     if shutil.which("dns-sd"):
         services = browse_dns_sd()
     elif shutil.which("avahi-browse"):
@@ -108,6 +109,13 @@ def discover(name_filter):
     if not services:
         raise RuntimeError("no OsmAnd AI Connector found on this network; is the phone on the same Wi-Fi "
                            "and the connector on in Wi-Fi mode?")
+    # any device on the Wi-Fi can announce this service: the key goes only to one that announces its fingerprint
+    key_id = hashlib.sha256(token.encode()).hexdigest()[:8]
+    announced = services
+    services = [s for s in services if s[3].get("key") == key_id]
+    if not services:
+        raise RuntimeError("no OsmAnd AI Connector with this access key on this network (an older connector? "
+                           "update it, or pass --url): " + ", ".join(s[0] for s in announced))
     # an old announcement or an address this computer cannot reach is skipped
     for name, host, port, txt in services:
         try:
@@ -142,7 +150,7 @@ class Bridge:
         if self.args.url:
             return self.args.url
         if rediscover or not self.url:
-            self.url = discover(self.args.name)
+            self.url = discover(self.args.name, self.args.token)
         return self.url
 
     def post(self, url, body):
