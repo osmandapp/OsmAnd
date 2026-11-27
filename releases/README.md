@@ -1,16 +1,5 @@
 # Android release revisions
 
-What each Android release was built from, so a fix can be checked against the release itself
-instead of comparing merge dates.
-
-```sh
-python3 releases/fixed_in.py <sha> [android|core|core-legacy|resources]
-```
-
-The script runs `git merge-base --is-ancestor` against every release in
-[android-revisions.json](android-revisions.json). core, core-legacy and resources are expected as
-checkouts next to this repository (`core`/`OsmAnd-core`, …; override the parent folder with
-`OSMAND_REPOS`).
 
 | Version | Release builds | Build start (UTC) | android | core-legacy | resources | core (OsmAndCore AAR snapshot) |
 |---|---|---|---|---|---|---|
