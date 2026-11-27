@@ -790,7 +790,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return object.getJunctionRef() != null || object.getJunctionName() != null;
 	}
 
-	private boolean isLinkRoad() {
+	boolean isLinkRoad() {
 		String highway = object.getHighway();
 		return highway != null && highway.endsWith("_link");
 	}

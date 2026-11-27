@@ -737,7 +737,7 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 		return routeObject.getJunctionRef() != null || routeObject.getJunctionName() != null
 	}
 
-	private fun isLinkRoad(): Boolean {
+	fun isLinkRoad(): Boolean {
 		val highway = routeObject.getHighway()
 		return highway != null && highway.endsWith("_link")
 	}

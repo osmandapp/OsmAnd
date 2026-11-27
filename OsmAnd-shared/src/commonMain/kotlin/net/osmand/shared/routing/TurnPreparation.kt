@@ -179,6 +179,7 @@ object TurnPreparation {
 						TurnLanes.inferCommonActiveLane(currentSegment.getTurnType()!!, nextSegment.getTurnType()!!)
 						merged = true
 						TurnLanes.replaceConfusingKeepTurnsWithLaneTurn(currentSegment, leftside)
+						mergeOppositeKeeps(currentSegment, nextSegment, leftside)
 					}
 				}
 				if (!merged) {
@@ -400,6 +401,20 @@ object TurnPreparation {
 	private fun isMotorway(s: RouteSegmentResult): Boolean {
 		val h = s.getObject().getHighway()
 		return "motorway" == h || "motorway_link" == h || "trunk" == h || "trunk_link" == h
+	}
+
+	// KR + KL (KL + KR) on the same straight lanes = C
+	private fun mergeOppositeKeeps(currentSegment: RouteSegmentResult, nextSegment: RouteSegmentResult, leftSide: Boolean) {
+		val ct = currentSegment.getTurnType() ?: return
+		val nt = nextSegment.getTurnType() ?: return
+		if ((ct.keepLeft() && nt.keepRight() || ct.keepRight() && nt.keepLeft())
+			&& ct.getActiveCommonLaneTurn() == TurnType.C && nt.getActiveCommonLaneTurn() == TurnType.C
+			&& !currentSegment.isLinkRoad()) {
+			val turn = TurnType.valueOf(TurnType.C, leftSide)
+			turn.lanes = ct.lanes
+			currentSegment.setTurnType(turn)
+			nextSegment.setTurnType(null)
+		}
 	}
 
 	private fun isKeepTurn(t: TurnType): Boolean = t.keepRight() || t.keepLeft()
