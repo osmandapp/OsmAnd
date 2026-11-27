@@ -540,30 +540,6 @@
 		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
 	</style>
 
-	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog" parent="Widget.Material3Expressive.Button.TextButton.Dialog">
-		<item name="backgroundTint">@color/ui_button_text_background</item>
-		<item name="android:textColor">@color/ui_button_plain_content</item>
-		<item name="iconTint">@color/ui_button_plain_content</item>
-		<item name="rippleColor">@android:color/transparent</item>
-		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
-	</style>
-
-	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog.Flush" parent="Widget.Material3Expressive.Button.TextButton.Dialog.Flush">
-		<item name="backgroundTint">@color/ui_button_text_background</item>
-		<item name="android:textColor">@color/ui_button_plain_content</item>
-		<item name="iconTint">@color/ui_button_plain_content</item>
-		<item name="rippleColor">@android:color/transparent</item>
-		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
-	</style>
-
-	<!-- Dialog buttons are the Text type -->
-	<style name="ThemeOverlay.OsmAnd.Material3Expressive.MaterialAlertDialog" parent="ThemeOverlay.Material3Expressive.MaterialAlertDialog">
-		<item name="buttonBarButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
-		<item name="buttonBarPositiveButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
-		<item name="buttonBarNegativeButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
-		<item name="buttonBarNeutralButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog.Flush</item>
-	</style>
-
 	<!-- Connected button group: selected colorPrimary, unselected colorPrimaryContainer - an
 	     intentional deviation from native M3 (neutral unselected container), kept in one place. The
 	     group hands the style to its buttons, a screen sets nothing on them. -->
