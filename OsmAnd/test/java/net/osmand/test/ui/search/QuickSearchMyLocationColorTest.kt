@@ -7,6 +7,9 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -30,6 +33,7 @@ import net.osmand.plus.settings.enums.HistorySource
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.search.core.SearchPhrase
 import net.osmand.test.common.AndroidTest
+import net.osmand.test.common.ComposePopupMenu
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -54,6 +58,7 @@ class QuickSearchMyLocationColorTest : AndroidTest() {
 		private const val MY_LAT = 50.4501
 		private const val MY_LON = 30.5234
 		private const val MAP_SHIFT_DEG = 0.05 // about 5.5 km, far beyond "map centre at my location"
+		private const val FAR_MAP_SHIFT_DEG = 1.0 // about 111 km, enough for the Search around chip (70 km)
 		private const val HISTORY_SHIFT_DEG = 0.002
 		private const val SEARCH_TIMEOUT_MS = 60_000L
 		private const val HISTORY_NAME = "25765-test-history"
@@ -64,6 +69,9 @@ class QuickSearchMyLocationColorTest : AndroidTest() {
 	@get:Rule
 	val locationPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
 		Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+
+	@get:Rule
+	val composeRule: ComposeTestRule = ComposePopupMenu.rule()
 
 	private val instrumentation = InstrumentationRegistry.getInstrumentation()
 	private val historyPoint = PointDescription(PointDescription.POINT_TYPE_LOCATION, HISTORY_NAME)
@@ -173,19 +181,32 @@ class QuickSearchMyLocationColorTest : AndroidTest() {
 			returnFromMap(scenario, dialog, MY_LAT + MAP_SHIFT_DEG)
 			assertTrue("Precondition: search moved to the map centre", onMain { dialog.isUseMapCenter })
 
-			val mapCentreColor = ContextCompat.getColor(app, R.color.color_distance)
-			val searchOrigin = app.searchUICore.core.searchSettings.originalLocation
-			val fromMapCentre = formattedDistanceToHistoryPoint(searchOrigin.latitude, searchOrigin.longitude)
-			val fromMyLocation = formattedDistanceToHistoryPoint(MY_LAT, MY_LON)
-			val historyDistances = onMain {
-				visibleDistances(dialog, QuickSearchHistoryListFragment::class.java, HISTORY_NAME)
-			}
-			assertTrue("The history row of the test is not shown", historyDistances.isNotEmpty())
-			for ((color, text) in historyDistances) {
-				val expected = if (color == mapCentreColor) fromMapCentre else fromMyLocation
-				assertEquals("A history distance is not measured from the place its colour stands for "
-						+ String.format("(#%08X)", color), expected, text)
-			}
+			assertHistoryDistancesMatchTheirColour(dialog)
+		}
+	}
+
+	@Test
+	fun historyDistancesMatchTheirColourAfterSearchAroundMapCenter() {
+		ActivityScenario.launch(MapActivity::class.java).use { scenario ->
+			val dialog = openSearch(scenario, MY_LAT + FAR_MAP_SHIFT_DEG)
+			onMain { dialog.requireView().findViewById<View>(R.id.clearButton).performClick() }
+			instrumentation.waitForIdleSync()
+			assertFalse("Precondition: the my-location button moves the search to my location",
+				onMain { dialog.isUseMapCenter })
+			// History is loaded while search runs from my location, as selecting a category does
+			onMain { dialog.reloadHistory() }
+
+			onMain { searchEditText(dialog).setText(COORDINATES_QUERY) }
+			waitForSearchToFinish(dialog)
+			composeRule.onNodeWithText(app.getString(R.string.search_around_my_location)).performClick()
+			ComposePopupMenu.clickItem(composeRule, app.getString(R.string.shared_string_map_center))
+			assertTrue("Precondition: the Search around chip moved the search to the map centre",
+				onMain { dialog.isUseMapCenter })
+			waitForSearchToFinish(dialog)
+			onMain { searchEditText(dialog).setText("") }
+			instrumentation.waitForIdleSync()
+
+			assertHistoryDistancesMatchTheirColour(dialog, ContextCompat.getColor(app, R.color.color_distance))
 		}
 	}
 
@@ -262,6 +283,26 @@ class QuickSearchMyLocationColorTest : AndroidTest() {
 
 	private fun describe(distances: List<Pair<Int, String>>): String =
 		distances.joinToString { (color, text) -> String.format("%s #%08X", text, color) }
+
+	private fun assertHistoryDistancesMatchTheirColour(dialog: QuickSearchDialogFragment, expectedColor: Int? = null) {
+		val mapCentreColor = ContextCompat.getColor(app, R.color.color_distance)
+		val searchOrigin = app.searchUICore.core.searchSettings.originalLocation
+		val fromMapCentre = formattedDistanceToHistoryPoint(searchOrigin.latitude, searchOrigin.longitude)
+		val fromMyLocation = formattedDistanceToHistoryPoint(MY_LAT, MY_LON)
+		val historyDistances = onMain {
+			visibleDistances(dialog, QuickSearchHistoryListFragment::class.java, HISTORY_NAME)
+		}
+		assertTrue("The history row of the test is not shown", historyDistances.isNotEmpty())
+		for ((color, text) in historyDistances) {
+			if (expectedColor != null) {
+				assertEquals("Precondition: the history distance colour", String.format("#%08X", expectedColor),
+					String.format("#%08X", color))
+			}
+			val expected = if (color == mapCentreColor) fromMapCentre else fromMyLocation
+			assertEquals("A history distance is not measured from the place its colour stands for "
+					+ String.format("(#%08X)", color), expected, text)
+		}
+	}
 
 	private fun formattedDistanceToHistoryPoint(fromLat: Double, fromLon: Double): String {
 		val distance = FloatArray(2)

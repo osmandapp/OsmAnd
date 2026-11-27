@@ -1573,6 +1573,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		useMapCenter = true;
 		useSpatialSearchLocation = false;
 		updateSearchAroundLocation(mapCenter);
+		// history rows measure from the search location they were loaded with
+		reloadHistory();
 		updateUseMapCenterUI();
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
@@ -2809,6 +2811,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		if (searchLatLon != null) {
 			updateSearchAroundLocation(searchLatLon);
+			// history rows measure from the search location they were loaded with
+			reloadHistory();
 		}
 		updateUseMapCenterUI();
 	}
