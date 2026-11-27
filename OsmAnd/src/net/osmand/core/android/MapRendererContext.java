@@ -623,7 +623,7 @@ public class MapRendererContext {
 
 	/**
 	 * The sun of the hillshade, the Terrain shadows and the sun shadows. In Live and Date the renderer
-	 * computes it for a moment and follows the map; Manual (and a date before 1970) gives it the angles.
+	 * computes it for a moment and follows the map; Manual gives it the angles.
 	 */
 	public void updateSunPosition() {
 		MapRendererView mapRendererView = this.mapRendererView;
@@ -632,9 +632,8 @@ public class MapRendererContext {
 			return;
 		}
 		SunLight sunLight = plugin.getSunLight();
-		long sunTime = sunLight.getSunTime();
-		if (plugin.SUN_LIGHT_MODE.get() != SunLightMode.MANUAL && sunTime > 0) {
-			mapRendererView.setSunTime(sunTime);
+		if (plugin.SUN_LIGHT_MODE.get() != SunLightMode.MANUAL) {
+			mapRendererView.setSunTime(sunLight.getSunTime());
 		} else {
 			SunLight.Angles angles = sunLight.getAngles();
 			if (angles != null) {

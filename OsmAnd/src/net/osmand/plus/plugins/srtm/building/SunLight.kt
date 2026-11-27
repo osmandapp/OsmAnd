@@ -3,20 +3,11 @@ package net.osmand.plus.plugins.srtm.building
 import android.os.Handler
 import android.text.format.DateFormat
 import android.os.Looper
-import io.github.cosinekitty.astronomy.Aberration
-import io.github.cosinekitty.astronomy.Body
-import io.github.cosinekitty.astronomy.EquatorEpoch
-import io.github.cosinekitty.astronomy.Observer
-import io.github.cosinekitty.astronomy.Refraction
-import io.github.cosinekitty.astronomy.Time
-import io.github.cosinekitty.astronomy.equator
-import io.github.cosinekitty.astronomy.horizon
 import net.osmand.core.jni.Utilities
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.plugins.srtm.SRTMPlugin
 import net.osmand.plus.utils.OsmAndFormatter
-import net.osmand.util.MapUtils
 import java.util.Date
 
 /**
@@ -54,10 +45,13 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 	/** The moment the renderer computes the sun for: now in Live, the stored date and time in Date. */
 	fun getSunTime(): Long = if (plugin.SUN_LIGHT_MODE.get() == SunLightMode.LIVE) System.currentTimeMillis() else getDateTime()
 
-	/** Date and time of [SunLightMode.DATE]; until one is chosen, now. */
+	/**
+	 * Date and time of [SunLightMode.DATE]; until one is chosen, now. A time before 1970, which
+	 * earlier builds kept, counts as not chosen: the renderer computes the sun only after it.
+	 */
 	fun getDateTime(): Long {
 		val time = plugin.SUN_LIGHT_TIME.get()
-		return if (time != 0L) time else System.currentTimeMillis()
+		return if (time > 0) time else System.currentTimeMillis()
 	}
 
 	/** Short state for the Sun position rows: the mode, the date and time, or the manual angles. */
@@ -76,22 +70,8 @@ class SunLight(private val app: OsmandApplication, private val plugin: SRTMPlugi
 	/** The sun above the target of the map, with the formula of the renderer. */
 	fun getSunAtMapTarget(timeMillis: Long): Angles? {
 		val target31 = app.osmandMap.mapView.mapRenderer?.state?.target31 ?: return null
-		if (timeMillis <= 0) {
-			// The renderer takes a time before 1970 for "keep the angles": they come from here
-			val latitude = MapUtils.get31LatitudeY(target31.y)
-			val longitude = MapUtils.get31LongitudeX(target31.x)
-			return getSun(latitude, longitude, timeMillis)
-		}
 		val sun = Utilities.getSunAnglesFromTarget31(target31, timeMillis)
 		return Angles(azimuth = sun.y, altitude = sun.x)
-	}
-
-	private fun getSun(latitude: Double, longitude: Double, timeMillis: Long): Angles {
-		val time = Time.fromMillisecondsSince1970(timeMillis)
-		val observer = Observer(latitude, longitude, 0.0)
-		val equatorial = equator(Body.Sun, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
-		val horizontal = horizon(time, observer, equatorial.ra, equatorial.dec, Refraction.Normal)
-		return Angles(horizontal.azimuth, horizontal.altitude)
 	}
 
 	/** The map of MapActivity is on the phone screen. */
