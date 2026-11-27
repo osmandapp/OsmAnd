@@ -70,12 +70,12 @@ public class PointImageDrawable extends Drawable {
 
 		BackgroundType type = pointInfo.type;
 		uiBackgroundIcon = utilities.getPaintedIcon(type.getIconId(), color);
-		mapIconBackgroundTop = type.getMapBackgroundIconId(context, "top", false);
-		mapIconBackgroundCenter = type.getMapBackgroundIconId(context, "center", false);
-		mapIconBackgroundBottom = type.getMapBackgroundIconId(context, "bottom", false);
-		mapIconBackgroundTopSmall = type.getMapBackgroundIconId(context, "top", true);
-		mapIconBackgroundCenterSmall = type.getMapBackgroundIconId(context, "center", true);
-		mapIconBackgroundBottomSmall = type.getMapBackgroundIconId(context, "bottom", true);
+		mapIconBackgroundTop = PointImageUtils.getMapBackground(context, type, "top", false);
+		mapIconBackgroundCenter = PointImageUtils.getMapBackground(context, type, "center", false);
+		mapIconBackgroundBottom = PointImageUtils.getMapBackground(context, type, "bottom", false);
+		mapIconBackgroundTopSmall = PointImageUtils.getMapBackground(context, type, "top", true);
+		mapIconBackgroundCenterSmall = PointImageUtils.getMapBackground(context, type, "center", true);
+		mapIconBackgroundBottomSmall = PointImageUtils.getMapBackground(context, type, "bottom", true);
 		backgroundType = type;
 
 		colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
