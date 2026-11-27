@@ -47,6 +47,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TravelRendererHelper implements RendererEventListener {
 
@@ -68,7 +69,7 @@ public class TravelRendererHelper implements RendererEventListener {
 	private final Map<String, CommonPreference<Boolean>> filesVisibilityProperties = new LinkedHashMap<>();
 	private StateChangedListener<Boolean> fileVisibilityPropertiesListener;
 	private final List<OnFileVisibilityChangeListener> fileVisibilityListeners = new ArrayList<>();
-	private final Map<String, CommonPreference<Boolean>> routeTypesProps = new LinkedHashMap<>();
+	private final Map<String, CommonPreference<Boolean>> routeTypesProps = new ConcurrentHashMap<>();
 	private final Map<String, CommonPreference<Boolean>> routePointCategoriesProps = new LinkedHashMap<>();
 
 	private PoiUIFilter routeArticleFilter;
@@ -195,6 +196,17 @@ public class TravelRendererHelper implements RendererEventListener {
 		CommonPreference<Boolean> pref = settings.registerBooleanPreference(prefId, true).makeProfile();
 		routeTypesProps.put(routeType, pref);
 		return pref;
+	}
+
+	@NonNull
+	public Set<String> getHiddenRouteTypes() {
+		Set<String> hiddenTypes = new HashSet<>();
+		for (Map.Entry<String, CommonPreference<Boolean>> entry : routeTypesProps.entrySet()) {
+			if (!entry.getValue().get()) {
+				hiddenTypes.add(entry.getKey());
+			}
+		}
+		return hiddenTypes;
 	}
 
 	public CommonPreference<Boolean> getRoutePointCategoryProperty(@NonNull String pointCategory) {
