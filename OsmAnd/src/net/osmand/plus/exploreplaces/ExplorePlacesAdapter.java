@@ -38,12 +38,17 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private static final int CITY_TYPE = 2;
 	private static final int MAP_OBJECT_TYPE = 3;
 
+	private static final Object LOCATION_UPDATE_PAYLOAD = new Object();
+	private static final Object TIME_UPDATE_PAYLOAD = new Object();
+	private static final long TIME_UPDATE_INTERVAL_MS = 60_000;
+
 	private final UpdateLocationViewCache locationViewCache;
 	private final ExploreItemClickListener itemClickListener;
 	@NonNull
 	private final Calendar calendar = Calendar.getInstance();
 	private final boolean nightMode;
 	private List<QuickSearchListItem> items = new ArrayList<>();
+	private long lastTimeUpdate;
 
 	@Nullable
 	private PoiUIFilter poiUIFilter;
@@ -59,6 +64,17 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void setItems(@NonNull List<QuickSearchListItem> items) {
 		this.items = items;
 		notifyDataSetChanged();
+	}
+
+	public void updateLocationAllItems() {
+		Object payload = LOCATION_UPDATE_PAYLOAD;
+		long now = System.currentTimeMillis();
+		if (now - lastTimeUpdate >= TIME_UPDATE_INTERVAL_MS) {
+			// opening hours depend on the current time, so bind the rows in full once a minute
+			lastTimeUpdate = now;
+			payload = TIME_UPDATE_PAYLOAD;
+		}
+		notifyItemRangeChanged(0, getItemCount(), payload);
 	}
 
 	@NonNull
@@ -101,6 +117,16 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			SearchResultViewHolder.bindPOISearchResult(holder.itemView, item, nightMode, calendar);
 		}
 		QuickSearchListAdapter.updateCompass(holder.itemView, item, locationViewCache, false);
+	}
+
+	@Override
+	public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
+		if (payloads.contains(LOCATION_UPDATE_PAYLOAD) && !payloads.contains(TIME_UPDATE_PAYLOAD)) {
+			QuickSearchListItem item = items.get(position);
+			QuickSearchListAdapter.updateCompass(holder.itemView, item, locationViewCache, false);
+		} else {
+			super.onBindViewHolder(holder, position, payloads);
+		}
 	}
 
 	public void setPoiUIFilter(@Nullable PoiUIFilter filter) {

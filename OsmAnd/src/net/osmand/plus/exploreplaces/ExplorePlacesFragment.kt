@@ -390,7 +390,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 
 	private fun updateAdapter() {
 		app.runInUIThreadAndCancelPrevious(REFRESH_UI_ID, {
-			adapter?.notifyDataSetChanged()
+			adapter?.updateLocationAllItems()
 		}, 0)
 	}
 
