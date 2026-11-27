@@ -54,7 +54,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	@Override
 	protected void buildDescription(View view) {
 		List<Amenity> wikiAmenities = getWikiAmenities();
-		boolean hasDescription = buildDescription(view, wikiAmenities, false);
+		boolean hasDescription = buildDescription(view, wikiAmenities, true);
 
 		if (!hasDescription) {
 			Map<String, Object> filteredInfo = infoBundle.getFilteredLocalizedInfo();
@@ -90,29 +90,25 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 		Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
 
 		Pair<String, Locale> pair = AmenityUIHelper.getDescriptionWithPreferredLang(app, amenity, DESCRIPTION, filteredInfo);
-		String routeId = amenity.getRouteId();
-		boolean travelArticle = !Algorithms.isEmpty(routeId) && app.getResourceManager().hasTravelRepositories();
-		if (pair != null && !travelArticle) {
-			buildDescriptionRow(view, pair.first, null, null, getWikipediaClickListener(filteredInfo));
-			return true;
-		}
-		if (buildShortWikiDescription(view, filteredInfo, allowOnlineWiki)) {
-			return true;
-		}
+		// the Wikipedia row goes above the description; without a description
+		// the online Wikipedia row is built after all descriptions were tried
+		boolean hasShortDescription = buildShortWikiDescription(view, filteredInfo, allowOnlineWiki && pair != null);
 		if (pair != null) {
-			// the online Wikipedia row is built only after the place itself has no description
-			boolean placeItself = amenity == this.amenity;
-			View.OnClickListener wikipediaClickListener = placeItself ? getWikipediaClickListener(filteredInfo) : null;
-			buildDescriptionRow(view, pair.first, v -> {
-				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				TravelArticleIdentifier identifier = new TravelArticleIdentifier(null,
-						amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
-						null, routeId, null);
-				WikivoyageArticleDialogFragment.showInstance(app, manager, identifier, null);
-			}, app.getString(R.string.context_menu_read_article), wikipediaClickListener);
+			String routeId = amenity.getRouteId();
+			if (!Algorithms.isEmpty(routeId) && app.getResourceManager().hasTravelRepositories()) {
+				buildDescriptionRow(view, pair.first, v -> {
+					FragmentManager manager = mapActivity.getSupportFragmentManager();
+					TravelArticleIdentifier identifier = new TravelArticleIdentifier(null,
+							amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
+							null, routeId, null);
+					WikivoyageArticleDialogFragment.showInstance(app, manager, identifier, null);
+				}, app.getString(R.string.context_menu_read_article));
+			} else {
+				buildDescriptionRow(view, pair.first);
+			}
 			return true;
 		}
-		return false;
+		return hasShortDescription;
 	}
 
 	@Override
