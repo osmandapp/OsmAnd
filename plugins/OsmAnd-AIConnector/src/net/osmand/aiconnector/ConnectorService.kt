@@ -83,7 +83,7 @@ class ConnectorService : Service() {
 			runningUrl = ConnectorSettings.url(this)
 			Log.i(TAG, "MCP server on $runningUrl")
 			if (ConnectorSettings.access(this) == ConnectorSettings.Access.WIFI) {
-				discovery = ConnectorDiscovery(this).also { it.register(ConnectorSettings.PORT) }
+				discovery = ConnectorDiscovery(this).also { it.register(ConnectorSettings.PORT, ConnectorSettings.token(this)) }
 			}
 		} catch (e: Exception) {
 			runningUrl = null
