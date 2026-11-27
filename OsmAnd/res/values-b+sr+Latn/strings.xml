@@ -5503,4 +5503,10 @@
     <string name="free_region_maps_deactivated">Mape za %2$s su deaktivirane. %1$s nije preuzeto.</string>
     <string name="free_region_activate_title">Da li želite da promenite svoj besplatni region?</string>
     <string name="free_region_activate_descr">Besplatna verzija uključuje mape jednog regiona. %1$s će postati vaš besplatni region, a mape %2$s će biti deaktivirane.</string>
+    <string name="fullscreen_mode_also_hide">Takođe sakrij</string>
+    <string name="fullscreen_mode_status_bar">Statusna traka</string>
+    <string name="fullscreen_mode_status_bar_descr">Sat, obaveštenja, baterija</string>
+    <string name="fullscreen_mode_navigation_bar">Navigaciona traka</string>
+    <string name="fullscreen_mode_navigation_bar_descr">Nazad, Početna, Nedavno</string>
+    <string name="fullscreen_mode_bars_footer">Prevucite prstom od ivice ekrana da biste na trenutak prikazali skrivene trake. Dodir na mapi vraća sve.</string>
 </resources>

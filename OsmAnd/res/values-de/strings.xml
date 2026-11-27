@@ -5392,4 +5392,12 @@
     <string name="gallery_sort_duration_short_long">Kürzeste Dauer zuerst</string>
     <string name="crash_report_send_failed">Der Bericht konnte nicht gesendet werden. Versuchen Sie es später noch einmal.</string>
     <string name="media_delete_failed">Datei konnte nicht gelöscht werden.</string>
+    <string name="sun_light_live">Live</string>
+    <string name="fullscreen_mode_also_hide">Auch ausblenden</string>
+    <string name="fullscreen_mode_status_bar">Statusleiste</string>
+    <string name="fullscreen_mode_status_bar_descr">Uhr, Benachrichtigungen, Akku</string>
+    <string name="fullscreen_mode_navigation_bar">Navigationsleiste</string>
+    <string name="shared_string_new">Neu</string>
+    <string name="shadows_on_description">Schatten ein: Gebäude werfen Schatten, wenn die Sonne darauf scheint.</string>
+    <string name="shadows_off_description">Schatten aus: Gebäude werden ohne Schatten dargestellt.</string>
 </resources>

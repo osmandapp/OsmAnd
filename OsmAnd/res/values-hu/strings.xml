@@ -5425,4 +5425,10 @@
     <string name="free_region_maps_deactivated">%2$s térképei inaktívak maradnak és %1$s nem lett letöltve.</string>
     <string name="free_region_activate_title">Módosítja az ingyenes régiót?</string>
     <string name="free_region_activate_descr">Az ingyenes verzió egyetlen régió térképeit tartalmazza. %1$s lesz az Ön ingyenes régiója, %2$s térképei pedig inaktiválva lesznek.</string>
+    <string name="fullscreen_mode_status_bar">Állapotsor</string>
+    <string name="fullscreen_mode_status_bar_descr">Óra, értesítések, akkumulátor</string>
+    <string name="fullscreen_mode_navigation_bar">Navigációs sáv</string>
+    <string name="fullscreen_mode_navigation_bar_descr">Vissza, kezdőlap, legutóbbiak</string>
+    <string name="fullscreen_mode_bars_footer">Húzza az ujját a képernyő szélétől a rejtett sávok pillanatnyi megjelenítéséhez. A térképre való koppintással minden visszatér az eredeti állapotba.</string>
+    <string name="fullscreen_mode_also_hide">Ez is legyen rejtett</string>
 </resources>

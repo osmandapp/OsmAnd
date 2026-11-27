@@ -5377,4 +5377,10 @@
     <string name="shared_string_new">Nua</string>
     <string name="sun_light_live">Beo</string>
     <string name="gpx_line_style_desc_unavailable_for_3d">Níl stíleanna línte briste ná poncacha ar fáil do rian 3T.</string>
+    <string name="fullscreen_mode_also_hide">Folaigh freisin</string>
+    <string name="fullscreen_mode_status_bar">Barra stádais</string>
+    <string name="fullscreen_mode_status_bar_descr">Clog, fógraí, ceallraí</string>
+    <string name="fullscreen_mode_navigation_bar">Barra nascleanúna</string>
+    <string name="fullscreen_mode_navigation_bar_descr">Ar Ais, Baile, Na cinn is déanaí</string>
+    <string name="fullscreen_mode_bars_footer">Svaidhpeáil ó imeall an scáileáin chun barraí atá i bhfolach a thaispeáint go sealadach. Má dhéanann tú sconna ar an léarscáil, tiocfaidh gach rud ar ais.</string>
 </resources>

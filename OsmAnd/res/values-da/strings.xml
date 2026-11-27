@@ -5531,4 +5531,10 @@
     <string name="free_region_maps_deactivated">Kort over %2$s forbliver deaktiverede. %1$s blev ikke downloadet.</string>
     <string name="free_region_activate_title">Vil du skifte din gratis region?</string>
     <string name="free_region_activate_descr">Den gratis version indeholder kort over én region. %1$s bliver din gratis region, og kortene over %2$s vil blive deaktiveret.</string>
+    <string name="fullscreen_mode_also_hide">Skjul også</string>
+    <string name="fullscreen_mode_status_bar">Statusbjælke</string>
+    <string name="fullscreen_mode_status_bar_descr">Ur, notifikationer, batteri</string>
+    <string name="fullscreen_mode_navigation_bar">Navigationsbjælke</string>
+    <string name="fullscreen_mode_navigation_bar_descr">Tilbage, Hjem, Seneste</string>
+    <string name="fullscreen_mode_bars_footer">Stryg fra skærmkanten for kortvarigt at vise de skjulte bjælker. Et tryk på kortet får det hele tilbage.</string>
 </resources>

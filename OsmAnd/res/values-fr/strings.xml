@@ -5428,10 +5428,16 @@
     <string name="terrain_shadows">Ombrage du relief</string>
     <string name="visualization">Visualisation</string>
     <string name="attach_to_track">Déplacer sur la trace</string>
-    <string name="gpx_line_style_desc_unavailable_for_3d">Les styles de lignes tirets et pointillés ne sont pas disponibles pour une trace 3D.</string>
+    <string name="gpx_line_style_desc_unavailable_for_3d">Les styles de lignes tirets et en pointillés ne sont pas disponibles pour une trace 3D.</string>
     <string name="shared_string_new">Nouveau</string>
     <string name="sun_light_live">En direct</string>
     <string name="free_region_maps_deactivated">Les cartes de %2$s sont désactivées. %1$s n\'a pas été téléchargé.</string>
     <string name="free_region_activate_title">Modifier votre région gratuite ?</string>
     <string name="free_region_activate_descr">La version gratuite inclut toutes les cartes d\'une région. %1$s va devenir votre région gratuite et les cartes de %2$s seront désactivées.</string>
+    <string name="fullscreen_mode_also_hide">Masquer aussi</string>
+    <string name="fullscreen_mode_status_bar">Barre d\'état</string>
+    <string name="fullscreen_mode_status_bar_descr">Horloge, notifications, batterie</string>
+    <string name="fullscreen_mode_navigation_bar">Barre de navigation</string>
+    <string name="fullscreen_mode_navigation_bar_descr">Retour, Accueil, Récents</string>
+    <string name="fullscreen_mode_bars_footer">Balayez depuis le bord de l\'écran pour afficher les barres masquées. Un appui sur la carte les masque à nouveau.</string>
 </resources>
