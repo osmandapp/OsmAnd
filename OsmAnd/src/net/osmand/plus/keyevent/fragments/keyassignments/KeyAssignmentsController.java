@@ -39,10 +39,10 @@ public class KeyAssignmentsController extends BaseDialogController {
 
 	private final ApplicationMode appMode;
 	private final InputDevicesHelper deviceHelper;
-	private final InputDeviceProfile inputDevice;
 	private final DialogManager dialogManager;
 	private EditingBundle initialBundle;
 	private EditingBundle editBundle;
+	private String editedDeviceId;
 	private FragmentActivity activity;
 	private final boolean usedOnMap;
 
@@ -53,8 +53,20 @@ public class KeyAssignmentsController extends BaseDialogController {
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.deviceHelper = app.getInputDeviceHelper();
-		this.inputDevice = deviceHelper.getSelectedDevice(appMode);
 		this.dialogManager = app.getDialogManager();
+	}
+
+	@NonNull
+	private InputDeviceProfile getInputDevice() {
+		return deviceHelper.getSelectedDevice(appMode);
+	}
+
+	@Nullable
+	public InputDeviceProfile getDeviceOpenedForEditing() {
+		if (editedDeviceId != null) {
+			return deviceHelper.getDeviceById(appMode, editedDeviceId);
+		}
+		return getInputDevice();
 	}
 
 	@NonNull
@@ -65,13 +77,10 @@ public class KeyAssignmentsController extends BaseDialogController {
 
 	@NonNull
 	public List<ScreenItem> populateScreenItems() {
-		if (inputDevice == null) {
-			return new ArrayList<>();
-		}
 		boolean editMode = isInEditMode();
 		List<ScreenItem> screenItems = new ArrayList<>();
 		int itemType = editMode ? EDIT_KEY_ASSIGNMENT_ITEM : KEY_ASSIGNMENT_ITEM;
-		List<KeyAssignment> assignments = editMode ? editBundle.getFilledAssignments() : inputDevice.getFilledAssignments();
+		List<KeyAssignment> assignments = editMode ? editBundle.getFilledAssignments() : getInputDevice().getFilledAssignments();
 		if (!Algorithms.isEmpty(assignments)) {
 			screenItems.add(new ScreenItem(CARD_TOP_DIVIDER));
 			screenItems.add(new ScreenItem(HEADER));
@@ -90,8 +99,9 @@ public class KeyAssignmentsController extends BaseDialogController {
 	}
 
 	public void enterEditMode() {
+		editedDeviceId = getInputDevice().getId();
 		editBundle = new EditingBundle();
-		editBundle.assignments = inputDevice.getAssignmentsCopy();
+		editBundle.assignments = getInputDevice().getAssignmentsCopy();
 		initialBundle = new EditingBundle();
 		initialBundle.assignments = new ArrayList<>(editBundle.assignments);
 		askRefreshDialog();
@@ -112,6 +122,7 @@ public class KeyAssignmentsController extends BaseDialogController {
 	public void exitEditMode() {
 		editBundle = null;
 		initialBundle = null;
+		editedDeviceId = null;
 		askRefreshDialog();
 	}
 
@@ -129,7 +140,8 @@ public class KeyAssignmentsController extends BaseDialogController {
 	}
 
 	public void askRemoveAllAssignments() {
-		if (!inputDevice.hasActiveAssignments()) {
+		InputDeviceProfile device = getDeviceOpenedForEditing();
+		if (device == null || !device.hasActiveAssignments()) {
 			app.showShortToastMessage(R.string.key_assignments_already_cleared_message);
 			return;
 		}
@@ -141,28 +153,31 @@ public class KeyAssignmentsController extends BaseDialogController {
 	}
 
 	private void removeAllAssignments() {
-		deviceHelper.clearAllAssignments(appMode, inputDevice.getId());
+		InputDeviceProfile device = getDeviceOpenedForEditing();
+		if (device != null) {
+			deviceHelper.clearAllAssignments(appMode, device.getId());
+		}
 		exitEditMode();
 	}
 
 	public boolean isDeviceTypeEditable() {
-		return inputDevice != null && inputDevice.isCustom();
+		if (editedDeviceId != null) {
+			InputDeviceProfile device = getDeviceOpenedForEditing();
+			return device != null && device.isCustom();
+		}
+		return getInputDevice().isCustom();
 	}
 
 	public boolean hasAssignments() {
-		return inputDevice.hasActiveAssignments();
+		return getInputDevice().hasActiveAssignments();
 	}
 
 	public void askAddAssignment(@Nullable View sharedElement) {
-		if (inputDevice != null) {
-			EditKeyAssignmentController.showAddAssignmentDialog(activity, appMode, inputDevice.getId(), sharedElement);
-		}
+		EditKeyAssignmentController.showAddAssignmentDialog(activity, appMode, getInputDevice().getId(), sharedElement);
 	}
 
 	public void askEditAssignment(@NonNull KeyAssignment assignment, @NonNull View anchorView) {
-		if (inputDevice != null) {
-			EditKeyAssignmentController.showEditAssignmentDialog(activity, appMode, inputDevice.getId(), assignment.getId(), anchorView);
-		}
+		EditKeyAssignmentController.showEditAssignmentDialog(activity, appMode, getInputDevice().getId(), assignment.getId(), anchorView);
 	}
 
 	public boolean hasChanges() {
@@ -170,7 +185,7 @@ public class KeyAssignmentsController extends BaseDialogController {
 	}
 
 	public void askSaveChanges() {
-		deviceHelper.saveUpdatedAssignmentsList(appMode, inputDevice.getId(), editBundle.assignments);
+		deviceHelper.saveUpdatedAssignmentsList(appMode, editedDeviceId, editBundle.assignments);
 		exitEditMode();
 	}
 

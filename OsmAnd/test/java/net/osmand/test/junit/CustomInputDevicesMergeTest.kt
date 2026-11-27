@@ -1,18 +1,40 @@
 package net.osmand.test.junit
 
+import android.os.Looper
 import android.view.KeyEvent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import net.osmand.StateChangedListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.keyevent.InputDevicesHelper
+import net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsController
+import net.osmand.plus.keyevent.assignment.KeyAssignment
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile
+import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile
+import net.osmand.plus.keyevent.listener.EventType
+import net.osmand.plus.keyevent.listener.InputDevicesEventListener
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmandSettings
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener
+import net.osmand.plus.settings.backend.backup.OsmandSettingsItemReader
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener
+import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem
+import net.osmand.plus.settings.backend.backup.items.SettingsItem
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.zip.ZipFile
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,6 +47,9 @@ class CustomInputDevicesMergeTest {
 	private lateinit var helper: InputDevicesHelper
 
 	private var savedGlobalDevices: String? = null
+	private var savedMergedDevices: String? = null
+	private var savedCarEditTime = 0L
+	private var savedGlobalEditTime = 0L
 	private val savedLegacyDevices = mutableMapOf<ApplicationMode, String>()
 	private val savedSelectedDevices = mutableMapOf<ApplicationMode, String>()
 
@@ -34,6 +59,8 @@ class CustomInputDevicesMergeTest {
 		settings = app.settings
 		helper = app.inputDeviceHelper
 
+		savedCarEditTime = settings.getLastModePreferencesEditTime(ApplicationMode.CAR)
+		savedGlobalEditTime = settings.lastGlobalPreferencesEditTime
 		if (settings.CUSTOM_EXTERNAL_INPUT_DEVICES.isSet) {
 			savedGlobalDevices = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get()
 		}
@@ -44,10 +71,11 @@ class CustomInputDevicesMergeTest {
 			if (settings.EXTERNAL_INPUT_DEVICE.isSetForMode(appMode)) {
 				savedSelectedDevices[appMode] = settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode)
 			}
-			settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.resetModeToDefault(appMode)
 		}
-		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.resetToDefault()
-		helper.releaseCustomizationCollection()
+		if (settings.MERGED_LEGACY_INPUT_DEVICES.isSet) {
+			savedMergedDevices = settings.MERGED_LEGACY_INPUT_DEVICES.get()
+		}
+		resetMergeState()
 	}
 
 	@After
@@ -57,6 +85,12 @@ class CustomInputDevicesMergeTest {
 			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalDevices)
 		} else {
 			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.resetToDefault()
+		}
+		val mergedDevices = savedMergedDevices
+		if (mergedDevices != null) {
+			settings.MERGED_LEGACY_INPUT_DEVICES.set(mergedDevices)
+		} else {
+			settings.MERGED_LEGACY_INPUT_DEVICES.resetToDefault()
 		}
 		for (appMode in ApplicationMode.allPossibleValues()) {
 			val legacyDevices = savedLegacyDevices[appMode]
@@ -72,34 +106,34 @@ class CustomInputDevicesMergeTest {
 				settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode)
 			}
 		}
+		settings.setLastModePreferencesEditTime(ApplicationMode.CAR, savedCarEditTime)
+		settings.lastGlobalPreferencesEditTime = savedGlobalEditTime
 		helper.releaseCustomizationCollection()
 	}
 
 	@Test
 	fun duplicateIsKeptWhenAnotherProfileHasOneCopy() {
-		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
-		setLegacyDevices(ApplicationMode.BICYCLE,
-			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
-			device("custom_2", "Keyboard X (1)", KeyEvent.KEYCODE_A))
-		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_2")
-
-		assertEquals(listOf("custom_1", "custom_2"), customDeviceIds(ApplicationMode.CAR))
-		assertEquals("custom_2", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.BICYCLE))
+		assertMergeIgnoresOrder(
+			legacy = mapOf(
+				ApplicationMode.CAR to listOf(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)),
+				ApplicationMode.BICYCLE to listOf(
+					device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+					device("custom_2", "Keyboard X (1)", KeyEvent.KEYCODE_A))),
+			selected = mapOf(ApplicationMode.BICYCLE to "custom_2"),
+			expectedIds = listOf("custom_1", "custom_2"),
+			expectedSelection = mapOf(ApplicationMode.BICYCLE to "custom_2"))
 	}
 
 	@Test
 	fun identicalCopiesFromProfilesBecomeOneDeviceAndKeepSelection() {
-		val devices = arrayOf(
+		val devices = listOf(
 			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
 			device("custom_2", "Keyboard X (1)", KeyEvent.KEYCODE_A))
-		setLegacyDevices(ApplicationMode.CAR, *devices)
-		setLegacyDevices(ApplicationMode.BICYCLE, *devices)
-		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_2")
-
-		assertEquals(listOf("custom_1", "custom_2"), customDeviceIds(ApplicationMode.BICYCLE))
-		assertEquals("custom_2", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.BICYCLE))
-		assertFalse(settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.isSetForMode(ApplicationMode.CAR))
-		assertFalse(settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.isSetForMode(ApplicationMode.BICYCLE))
+		assertMergeIgnoresOrder(
+			legacy = mapOf(ApplicationMode.CAR to devices, ApplicationMode.BICYCLE to devices),
+			selected = mapOf(ApplicationMode.BICYCLE to "custom_2"),
+			expectedIds = listOf("custom_1", "custom_2"),
+			expectedSelection = mapOf(ApplicationMode.BICYCLE to "custom_2"))
 	}
 
 	@Test
@@ -150,9 +184,980 @@ class CustomInputDevicesMergeTest {
 		assertFalse(settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.isSetForMode(ApplicationMode.CAR))
 	}
 
+	@Test
+	fun legacyDeviceWithIdOfGlobalListAndOtherKeysIsKeptAsCopy() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+
+		val devices = customDevices(ApplicationMode.CAR)
+
+		assertEquals(listOf("custom_1", "custom_1_" + ApplicationMode.CAR.stringKey), devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_B), selectedDeviceKeyCodes(devices, ApplicationMode.CAR))
+	}
+
+	@Test
+	fun sameLegacyDeviceImportedAgainIsIgnored() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		val firstIds = customDeviceIds(ApplicationMode.CAR)
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+		val devices = customDevices(ApplicationMode.CAR)
+
+		assertEquals(firstIds, devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_B), selectedDeviceKeyCodes(devices, ApplicationMode.CAR))
+	}
+
+	@Test
+	fun divergedCopiesImportedOneAfterAnotherStaySeparate() {
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_1")
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+
+		setLegacyDevices(ApplicationMode.BICYCLE, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		helper.releaseCustomizationCollection()
+		val devices = customDevices(ApplicationMode.CAR)
+
+		assertEquals(2, devices.size)
+		assertEquals(listOf(KeyEvent.KEYCODE_A), selectedDeviceKeyCodes(devices, ApplicationMode.CAR))
+		assertEquals(listOf(KeyEvent.KEYCODE_B), selectedDeviceKeyCodes(devices, ApplicationMode.BICYCLE))
+	}
+
+	@Test
+	fun legacyDeviceEditedOnOlderClientArrivesAsCopy() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(2, customDeviceIds(ApplicationMode.CAR).size)
+	}
+
+	@Test
+	fun divergedCopyGetsDeterministicId() {
+		val first = mergeDivergedCopyAndReturnIds()
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.resetToDefault()
+		helper.releaseCustomizationCollection()
+		val second = mergeDivergedCopyAndReturnIds()
+
+		assertEquals(listOf("custom_1", "custom_1_" + ApplicationMode.CAR.stringKey), first)
+		assertEquals(first, second)
+	}
+
+	@Test
+	fun selectedCustomDeviceJsonContainsOnlySelectedDevice() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_2")
+
+		val items = JSONObject(helper.getSelectedCustomDeviceJson(ApplicationMode.CAR)!!).getJSONArray("items")
+		assertEquals(1, items.length())
+		assertEquals("custom_2", items.getJSONObject(0).getString("id"))
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, KeyboardDeviceProfile.ID)
+		assertNull(helper.getSelectedCustomDeviceJson(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removeCustomDeviceResetsSelectionInOtherProfiles() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_1")
+
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.BICYCLE))
+		assertTrue(settings.EXTERNAL_INPUT_DEVICE.isSetForMode(ApplicationMode.CAR))
+		assertTrue(settings.EXTERNAL_INPUT_DEVICE.isSetForMode(ApplicationMode.BICYCLE))
+	}
+
+	@Test
+	fun writeToGlobalPreferenceOutsideHelperRefreshesDevices() {
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		}
+		instrumentation.waitForIdleSync()
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+
+		assertNotNull(helper.getDeviceById(ApplicationMode.CAR, "custom_1"))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		assertNotNull(helper.getFunctionalityDevice(ApplicationMode.CAR)!!.findAction(KeyEvent.KEYCODE_A))
+	}
+
+	@Test
+	fun remergeAfterSplitRepointsSelectionToMatchingContent() {
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_1")
+		mergeDivergedCopyAndReturnIds()
+		val splitId = "custom_1_" + ApplicationMode.CAR.stringKey
+		assertEquals(splitId, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+
+		customDevices(ApplicationMode.CAR)
+
+		assertEquals(splitId, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun remergeAfterSplitFollowsEditedSplitDevice() {
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		mergeDivergedCopyAndReturnIds()
+		val splitId = "custom_1_" + ApplicationMode.CAR.stringKey
+		helper.addAssignment(ApplicationMode.CAR, splitId, KeyAssignment("zoom_in", KeyEvent.KEYCODE_Z))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1", splitId), customDeviceIds(ApplicationMode.CAR))
+		assertEquals(splitId, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun globalListIsSavedBeforeLegacyListIsCleared() {
+		val events = mutableListOf<String>()
+		val globalListener = StateChangedListener<String> { events.add("global") }
+		val legacyListener = StateChangedListener<String> { events.add("legacy") }
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.addListener(globalListener)
+		settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.addListener(legacyListener)
+
+		customDeviceIds(ApplicationMode.CAR)
+
+		assertEquals(listOf("global", "legacy"), events)
+	}
+
+	@Test
+	fun divergedCopyKeepsOwnIdWhenOnlyNameIsTaken() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_2", "Keyboard X", KeyEvent.KEYCODE_B))
+
+		val devices = customDevices(ApplicationMode.CAR)
+
+		assertEquals(listOf("custom_1", "custom_2"), devices.map { it.id })
+		assertEquals(2, devices.map { it.toHumanString(app) }.toSet().size)
+	}
+
+	@Test
+	fun editsKeepSeeingTheSameDeviceInstance() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.waitForIdleSync()
+		val selected = helper.getSelectedDevice(ApplicationMode.CAR)
+		val before = selected.assignmentsCopy.size
+
+		helper.addAssignment(ApplicationMode.CAR, "custom_1", KeyAssignment("back_to_location", KeyEvent.KEYCODE_C))
+		instrumentation.waitForIdleSync()
+		helper.addAssignment(ApplicationMode.CAR, "custom_1", KeyAssignment("back_to_location", KeyEvent.KEYCODE_D))
+		instrumentation.waitForIdleSync()
+
+		assertEquals(before + 2, selected.assignmentsCopy.size)
+	}
+
+	@Test
+	fun staleLegacyCopyDoesNotDuplicateEditedDevice() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.addAssignment(ApplicationMode.CAR, "custom_1", KeyAssignment("zoom_in", KeyEvent.KEYCODE_Z))
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		assertEquals("custom_1", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedDeviceDoesNotComeBackFromSameLegacyList() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedDeviceStaysAwayWhenLegacyListGetsNewDevice() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+				assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+				helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B))),
+			expectedIds = listOf("custom_2"))
+	}
+
+	@Test
+	fun fileImportRestoresRemovedDevice() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		helper.forgetRemovedMergedDevices(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedDeviceStaysAwayAfterImportWithoutInputDevices() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		val file = exportProfileFile(false)
+		try {
+			importProfileFile(file)
+		} finally {
+			file.delete()
+		}
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun importOfProfileCarryingDeviceRestoresRemovedDevice() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+
+		val file = exportProfileFile(true)
+		try {
+			helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+			importProfileFile(file)
+		} finally {
+			file.delete()
+		}
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun globalImportRestoresRemovedDeviceAndKeepsItsMark() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		val file = exportProfileFile(false, true)
+		try {
+			helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+			assertEquals(1, removedMarkCount())
+			importProfileFile(file)
+		} finally {
+			file.delete()
+		}
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		assertEquals(1, removedMarkCount())
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun globalImportWithoutDeviceKeepsRemovedMark() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		val file = exportProfileFile(false, true)
+		try {
+			importProfileFile(file)
+		} finally {
+			file.delete()
+		}
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(1, removedMarkCount())
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedMarkDoesNotSwitchSelectionWhileDeviceExists() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		val devices = customDevices(ApplicationMode.CAR)
+		assertEquals(listOf("custom_1"), devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_B), devices.first().assignmentsCopy.flatMap { it.keyCodes })
+		assertEquals("custom_1", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedDeviceStaysAwayAfterCloudLikeRead() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		val json = JSONObject().put(
+			settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.id,
+			globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		val item = ProfileSettingsItem(app, ApplicationMode.CAR)
+		(item.reader as OsmandSettingsItemReader<*>).readPreferencesFromJson(json)
+		InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+		helper.releaseCustomizationCollection()
+
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun selectionOfRemovedDeviceFallsBackToKeyboardOnLegacyImport() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedSplitCopyDoesNotHandItsProfileToDeviceWithSameId() {
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		setLegacyDevices(ApplicationMode.BICYCLE, device("custom_1", "Pad", KeyEvent.KEYCODE_A))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Pad", KeyEvent.KEYCODE_B))
+		assertEquals(listOf("custom_1", "custom_1_car"), customDeviceIds(ApplicationMode.CAR))
+		assertEquals("custom_1_car", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1_car")
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Pad", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+
+		val devices = customDevices(ApplicationMode.CAR)
+		assertEquals(listOf("custom_1"), devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_A), devices.first().assignmentsCopy.flatMap { it.keyCodes })
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun removedDeviceIdIsNotRecreatedForAnotherProfileInSameMerge() {
+		prepareRemovedDevice()
+		setLegacyDevices(ApplicationMode.BICYCLE, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_1")
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1_bicycle"), customDeviceIds(ApplicationMode.CAR))
+		assertEquals("custom_1_bicycle", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.BICYCLE))
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+		assertEquals(1, removedMarkCount())
+	}
+
+	@Test
+	fun removedDeviceIdIsNotRecreatedWhenProfilesAreSwapped() {
+		prepareRemovedDevice()
+		setLegacyDevices(ApplicationMode.BICYCLE, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.BICYCLE, "custom_1")
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1_car"), customDeviceIds(ApplicationMode.CAR))
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.BICYCLE))
+		assertEquals("custom_1_car", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+		assertEquals(1, removedMarkCount())
+	}
+
+	@Test
+	fun removedSplitCopyIsNotReplacedByNewCopyOfAnotherProfile() {
+		setLegacyDevices(ApplicationMode.BICYCLE, device("custom_1", "Pad", KeyEvent.KEYCODE_A))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Pad", KeyEvent.KEYCODE_B))
+		setLegacyDevices(ApplicationMode.PEDESTRIAN, device("custom_1", "Pad", KeyEvent.KEYCODE_B))
+		assertEquals(listOf("custom_1", "custom_1_car"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1_car")
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Pad", KeyEvent.KEYCODE_C))
+		setLegacyDevices(ApplicationMode.PEDESTRIAN, device("custom_1", "Pad", KeyEvent.KEYCODE_B))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.PEDESTRIAN, "custom_1")
+		helper.releaseCustomizationCollection()
+
+		val devices = customDevices(ApplicationMode.CAR)
+		assertEquals(listOf("custom_1", "custom_1_car_2"), devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_C), devices.last().assignmentsCopy.flatMap { it.keyCodes })
+		assertEquals(KeyboardDeviceProfile.ID, settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.PEDESTRIAN))
+		assertEquals(1, removedMarkCount())
+	}
+
+	@Test
+	fun restoredDeviceTakesBackItsStaleLegacyCopy() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+		assertEquals(1, removedMarkCount())
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		val devices = customDevices(ApplicationMode.CAR)
+		assertEquals(listOf("custom_1"), devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_B), devices.first().assignmentsCopy.flatMap { it.keyCodes })
+		assertEquals("custom_1", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+		assertEquals(0, removedMarkCount())
+		val remembered = JSONObject(settings.MERGED_LEGACY_INPUT_DEVICES.get())
+		assertEquals(listOf("custom_1"), remembered.keys().asSequence().map { remembered.getString(it) }.toList())
+	}
+
+	@Test
+	fun importOfLastOwnWrittenListIsAppliedAfterForeignList() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.addAssignment(ApplicationMode.CAR, "custom_1", KeyAssignment("zoom_in", KeyEvent.KEYCODE_Z))
+		val ownJson = settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get()
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B)))
+		}
+		instrumentation.waitForIdleSync()
+		assertEquals(listOf("custom_2"), customDeviceIds(ApplicationMode.CAR))
+
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(ownJson)
+		}
+		instrumentation.waitForIdleSync()
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun legacyListWrittenOutsideHelperRefreshesDevices() {
+		assertEquals(emptyList<String>(), customDeviceIds(ApplicationMode.CAR))
+
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		}
+		instrumentation.waitForIdleSync()
+
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun duplicateWithSameKeysDoesNotSwitchEditedDevice() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_2", "Keyboard X 1", KeyEvent.KEYCODE_A)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+		customDeviceIds(ApplicationMode.CAR)
+		helper.addAssignment(ApplicationMode.CAR, "custom_1", KeyAssignment("zoom_in", KeyEvent.KEYCODE_Z))
+
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		helper.releaseCustomizationCollection()
+
+		assertEquals(listOf("custom_1", "custom_2"), customDeviceIds(ApplicationMode.CAR))
+		assertEquals("custom_1", settings.EXTERNAL_INPUT_DEVICE.getModeValue(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun externalChangeOfGlobalListNotifiesListeners() {
+		val events = java.util.Collections.synchronizedList(mutableListOf<EventType>())
+		val latch = CountDownLatch(1)
+		val listener = InputDevicesEventListener { _, event ->
+			events.add(event)
+			latch.countDown()
+		}
+		helper.addListener(listener)
+		try {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+			assertTrue(latch.await(5, TimeUnit.SECONDS))
+		} finally {
+			helper.removeListener(listener)
+		}
+		assertTrue(events.contains(EventType.CUSTOM_DEVICES_CHANGED))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+	}
+
+	@Test
+	fun ownChangeOfGlobalListDoesNotRaiseExternalChangeEvent() {
+		val events = java.util.Collections.synchronizedList(mutableListOf<EventType>())
+		val listener = InputDevicesEventListener { _, event -> events.add(event) }
+		helper.addListener(listener)
+		try {
+			helper.createAndSaveCustomDevice(ApplicationMode.CAR, "Keyboard Z")
+			InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+		} finally {
+			helper.removeListener(listener)
+		}
+		assertTrue(events.contains(EventType.ADD_NEW_DEVICE))
+		assertFalse(events.contains(EventType.CUSTOM_DEVICES_CHANGED))
+	}
+
+	@Test
+	fun onlyUserFacingExportCarriesSelectedDevice() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		val key = settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.id
+
+		assertTrue(exportProfileFileText(true).contains(key))
+		assertFalse(exportProfileFileText(false).contains(key))
+	}
+
+	@Test
+	fun profileExportWritesSelectedDeviceOnlyWhenRequested() {
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+			device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+			device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B)))
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_2")
+		val key = settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.id
+
+		val cloud = exportProfileJson(false)
+		assertFalse(cloud.has(key))
+
+		val file = exportProfileJson(true)
+		val items = JSONObject(file.getString(key)).getJSONArray("items")
+		assertEquals(1, items.length())
+		assertEquals("custom_2", items.getJSONObject(0).getString("id"))
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, KeyboardDeviceProfile.ID)
+		assertFalse(exportProfileJson(true).has(key))
+	}
+
+	@Test
+	fun sameContentCopyIsMatchedWhenEarlierCandidateIsRejected() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+					device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+					device("custom_3", "Keyboard Z", KeyEvent.KEYCODE_B),
+					device("custom_1_car", "Keyboard Y", KeyEvent.KEYCODE_B)))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B),
+				device("custom_5", "Keyboard W", KeyEvent.KEYCODE_C))),
+			selected = mapOf(ApplicationMode.CAR to "custom_1"),
+			expectedIds = listOf("custom_1", "custom_3", "custom_1_car", "custom_5"),
+			expectedSelection = mapOf(ApplicationMode.CAR to "custom_1_car"))
+	}
+
+	@Test
+	fun knownMergedDeviceIsNotReusedForItsDuplicateInSameList() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+				assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_A))),
+			expectedIds = listOf("custom_1", "custom_2"))
+	}
+
+	@Test
+	fun duplicateIsKeptWhenItsMemoryTargetIsTaken() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+				setLegacyDevices(ApplicationMode.BICYCLE, device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_A))
+				assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.BICYCLE))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_A))),
+			expectedIds = listOf("custom_1", "custom_2"))
+	}
+
+	@Test
+	fun exactMatchIsNotTakenByEarlierIdWithSameKeys() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_2", "Keyboard X", KeyEvent.KEYCODE_A)))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard Y", KeyEvent.KEYCODE_A),
+				device("custom_2", "Keyboard X", KeyEvent.KEYCODE_A))),
+			selected = mapOf(ApplicationMode.CAR to "custom_2"),
+			expectedIds = listOf("custom_2", "custom_1"),
+			expectedSelection = mapOf(ApplicationMode.CAR to "custom_2"))
+	}
+
+	@Test
+	fun exactMatchWinsOverKnownMappingOfAnotherId() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+				setLegacyDevices(ApplicationMode.BICYCLE, device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_A))
+				assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.BICYCLE))
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+					device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+					device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_A)))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_A))),
+			expectedIds = listOf("custom_1", "custom_2"))
+	}
+
+	@Test
+	fun ownSplitCopyIsNotTakenByEarlierIdWithSameKeys() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+					device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+					device("custom_1_car", "Keyboard Y", KeyEvent.KEYCODE_B)))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_0", "Keyboard Z", KeyEvent.KEYCODE_B),
+				device("custom_1", "Keyboard W", KeyEvent.KEYCODE_B))),
+			selected = mapOf(ApplicationMode.CAR to "custom_1"),
+			expectedIds = listOf("custom_1", "custom_1_car", "custom_0"),
+			expectedSelection = mapOf(ApplicationMode.CAR to "custom_1_car"))
+	}
+
+	@Test
+	fun equalIdsInLegacyListAreMergedTheSameWayInAnyOrder() {
+		assertMergeIgnoresOrder(
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("custom_1", "Keyboard Y", KeyEvent.KEYCODE_B))),
+			selected = mapOf(ApplicationMode.CAR to "custom_1"),
+			expectedIds = listOf("custom_1", "custom_1_car"),
+			expectedSelection = mapOf(ApplicationMode.CAR to "custom_1_car"))
+	}
+
+	@Test
+	fun equalIdsWithSameKeysAreMergedTheSameWayInAnyOrder() {
+		assertMergeIgnoresOrder(
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("custom_1", "Keyboard Y", KeyEvent.KEYCODE_A))),
+			expectedIds = listOf("custom_1", "custom_1_car"))
+	}
+
+	@Test
+	fun twoAmbiguousPairsAreMatchedTheSameWayInAnyOrder() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+					device("z", "Keyboard Z", KeyEvent.KEYCODE_A),
+					device("w", "Keyboard W", KeyEvent.KEYCODE_A)))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("x", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("y", "Keyboard Y", KeyEvent.KEYCODE_A))),
+			expectedIds = listOf("z", "w"))
+	}
+
+	@Test
+	fun ambiguousLegacyDevicesAreMatchedInOrderOfTheirIds() {
+		assertMergeIgnoresOrder(
+			prepare = {
+				settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("z", "Keyboard Z", KeyEvent.KEYCODE_A)))
+			},
+			legacy = mapOf(ApplicationMode.CAR to listOf(
+				device("x", "Keyboard X", KeyEvent.KEYCODE_A),
+				device("y", "Keyboard Y", KeyEvent.KEYCODE_A))),
+			expectedIds = listOf("z", "y"))
+	}
+
+	@Test
+	fun saveKeepsEditsOnTheDeviceOpenedForEditing() {
+		val keyboardX = device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A, "assignment_a")
+		keyboardX.getJSONArray("assignments").put(JSONObject()
+			.put("id", "assignment_c")
+			.put("commandId", "zoom_in")
+			.put("keycodes", JSONArray().put(JSONObject().put("keycode", KeyEvent.KEYCODE_C))))
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(
+				keyboardX,
+				device("custom_2", "Keyboard Y", KeyEvent.KEYCODE_B, "assignment_b")))
+			settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		}
+		instrumentation.waitForIdleSync()
+
+		val controller = KeyAssignmentsController(app, ApplicationMode.CAR, false)
+		instrumentation.runOnMainSync {
+			controller.enterEditMode()
+			val assignmentC = helper.getDeviceById(ApplicationMode.CAR, "custom_1")!!
+				.assignmentsCopy.first { it.keyCodes.contains(KeyEvent.KEYCODE_C) }
+			controller.askRemoveAssignment(assignmentC)
+			settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_2")
+			controller.askSaveChanges()
+		}
+		instrumentation.waitForIdleSync()
+
+		val devices = customDevices(ApplicationMode.CAR)
+		assertEquals(listOf("custom_1", "custom_2"), devices.map { it.id })
+		assertEquals(listOf(KeyEvent.KEYCODE_A),
+			devices.first { it.id == "custom_1" }.assignmentsCopy.flatMap { it.keyCodes })
+		assertEquals(listOf(KeyEvent.KEYCODE_B),
+			devices.first { it.id == "custom_2" }.assignmentsCopy.flatMap { it.keyCodes })
+	}
+
+	@Test
+	fun isDeviceTypeEditableFollowsTheDeviceOpenedForEditing() {
+		val instrumentation = InstrumentationRegistry.getInstrumentation()
+		instrumentation.runOnMainSync {
+			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(globalJson(device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A)))
+			settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, "custom_1")
+		}
+		instrumentation.waitForIdleSync()
+		val controller = KeyAssignmentsController(app, ApplicationMode.CAR, false)
+		instrumentation.runOnMainSync { controller.enterEditMode() }
+		assertTrue(controller.isDeviceTypeEditable)
+
+		settings.EXTERNAL_INPUT_DEVICE.setModeValue(ApplicationMode.CAR, KeyboardDeviceProfile.ID)
+		assertTrue(controller.isDeviceTypeEditable)
+		assertNotNull(controller.deviceOpenedForEditing)
+
+		instrumentation.runOnMainSync { helper.removeCustomDevice(ApplicationMode.CAR, "custom_1") }
+		assertNull(controller.deviceOpenedForEditing)
+		assertFalse(controller.isDeviceTypeEditable)
+	}
+
+	private fun resetMergeState() {
+		for (appMode in ApplicationMode.allPossibleValues()) {
+			settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.resetModeToDefault(appMode)
+		}
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.resetToDefault()
+		settings.MERGED_LEGACY_INPUT_DEVICES.resetToDefault()
+		InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+		helper.releaseCustomizationCollection()
+	}
+
+	private fun assertMergeIgnoresOrder(prepare: () -> Unit = {},
+	                                    legacy: Map<ApplicationMode, List<JSONObject>>,
+	                                    selected: Map<ApplicationMode, String> = emptyMap(),
+	                                    expectedIds: List<String>,
+	                                    expectedSelection: Map<ApplicationMode, String> = emptyMap()) {
+		val appModes = legacy.keys.toList()
+		var combinations = listOf(emptyList<List<JSONObject>>())
+		for (appMode in appModes) {
+			combinations = combinations.flatMap { prefix ->
+				permutations(legacy.getValue(appMode)).map { prefix + listOf(it) }
+			}
+		}
+		var baseline: MergeOutcome? = null
+		for (combination in combinations) {
+			val label = appModes.indices.joinToString("; ") { index ->
+				appModes[index].stringKey + "=" + combination[index].map { it.getString("id") }
+			}
+			resetMergeState()
+			for (appMode in ApplicationMode.allPossibleValues()) {
+				settings.EXTERNAL_INPUT_DEVICE.resetModeToDefault(appMode)
+			}
+			prepare()
+			for (index in appModes.indices) {
+				setLegacyDevices(appModes[index], *combination[index].toTypedArray())
+			}
+			for ((appMode, deviceId) in selected) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, deviceId)
+			}
+			helper.releaseCustomizationCollection()
+
+			val devices = customDevices(ApplicationMode.CAR)
+			val outcome = MergeOutcome(
+				devices.map { it.id },
+				devices.associate { device -> device.id to device.assignmentsCopy.flatMap { it.keyCodes } },
+				devices.associate { device -> device.id to device.toHumanString(app) },
+				(appModes + selected.keys).distinct().associateWith {
+					settings.EXTERNAL_INPUT_DEVICE.getModeValue(it)
+				},
+				readMergedDevices())
+			for (appMode in appModes) {
+				assertFalse(label, settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.isSetForMode(appMode))
+			}
+			assertEquals("Legacy order $label", expectedIds, outcome.ids)
+			assertEquals("Legacy order $label", expectedSelection,
+				outcome.selection.filterKeys { expectedSelection.containsKey(it) })
+			if (baseline == null) {
+				baseline = outcome
+			}
+			assertEquals("Legacy order $label", baseline, outcome)
+		}
+	}
+
+	private fun <T> permutations(items: List<T>): List<List<T>> {
+		if (items.size <= 1) {
+			return listOf(items)
+		}
+		return items.flatMapIndexed { index, item ->
+			permutations(items.filterIndexed { other, _ -> other != index }).map { listOf(item) + it }
+		}
+	}
+
+	private data class MergeOutcome(
+		val ids: List<String>,
+		val keys: Map<String, List<Int>>,
+		val names: Map<String, String>,
+		val selection: Map<ApplicationMode, String>,
+		val merged: Map<String, String>)
+
+	private fun readMergedDevices(): Map<String, String> {
+		val value = settings.MERGED_LEGACY_INPUT_DEVICES.get()
+		if (value.isNullOrEmpty()) {
+			return emptyMap()
+		}
+		val json = JSONObject(value)
+		return json.keys().asSequence().associateWith { json.getString(it) }
+	}
+
+	private fun exportProfileFile(shared: Boolean, global: Boolean = false): File {
+		val dir = app.cacheDir
+		val name = "input_devices_import_" + shared + "_" + System.currentTimeMillis()
+		val file = File(dir, name + ".osf")
+		file.delete()
+		val latch = CountDownLatch(1)
+		var succeed = false
+		val listener = SettingsExportListener { _, result ->
+			succeed = result
+			latch.countDown()
+		}
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val item = if (global) {
+				GlobalSettingsItem(settings)
+			} else {
+				ProfileSettingsItem(app, ApplicationMode.CAR)
+			}
+			val items = mutableListOf<SettingsItem>(item)
+			if (shared) {
+				app.fileSettingsHelper.exportSharedSettings(dir, name, listener, items)
+			} else {
+				app.fileSettingsHelper.exportSettings(dir, name, listener, items, true)
+			}
+		}
+		assertTrue(latch.await(30, TimeUnit.SECONDS))
+		assertTrue(succeed)
+		return file
+	}
+
+	private fun importProfileFile(file: File) {
+		val collectLatch = CountDownLatch(1)
+		val collectedItems = mutableListOf<SettingsItem>()
+		var collected = false
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			app.fileSettingsHelper.collectSettings(file, "", 1, CollectListener { succeed, _, items ->
+				collected = succeed
+				collectedItems.addAll(items)
+				collectLatch.countDown()
+			})
+		}
+		assertTrue(collectLatch.await(30, TimeUnit.SECONDS))
+		assertTrue(collected)
+		for (item in collectedItems) {
+			item.setShouldReplace(true)
+		}
+		val importLatch = CountDownLatch(1)
+		var imported = false
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			app.fileSettingsHelper.importSettings(file, collectedItems, "", 1, object : ImportListener {
+				override fun onImportFinished(succeed: Boolean, needRestart: Boolean, items: List<SettingsItem>) {
+					imported = succeed
+					importLatch.countDown()
+				}
+			})
+		}
+		assertTrue(importLatch.await(30, TimeUnit.SECONDS))
+		assertTrue(imported)
+		InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+	}
+
+	private fun exportProfileFileText(shared: Boolean): String {
+		val file = exportProfileFile(shared)
+		try {
+			ZipFile(file).use { zip ->
+				return zip.entries().toList().joinToString("\n") { entry ->
+					zip.getInputStream(entry).bufferedReader().readText()
+				}
+			}
+		} finally {
+			file.delete()
+		}
+	}
+
+	private fun exportProfileJson(writeSelectedDevice: Boolean): JSONObject {
+		val item = ProfileSettingsItem(app, ApplicationMode.CAR)
+		if (writeSelectedDevice) {
+			item.enableSelectedInputDeviceExport()
+		}
+		val out = ByteArrayOutputStream()
+		item.writer!!.writeToStream(out, null)
+		return JSONObject(out.toString("UTF-8"))
+	}
+
+	private fun mergeDivergedCopyAndReturnIds(): List<String> {
+		setLegacyDevices(ApplicationMode.BICYCLE, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_B))
+		return customDeviceIds(ApplicationMode.CAR)
+	}
+
+	private fun prepareRemovedDevice() {
+		setLegacyDevices(ApplicationMode.CAR, device("custom_1", "Keyboard X", KeyEvent.KEYCODE_A))
+		assertEquals(listOf("custom_1"), customDeviceIds(ApplicationMode.CAR))
+		helper.removeCustomDevice(ApplicationMode.CAR, "custom_1")
+		assertEquals(1, removedMarkCount())
+	}
+
+	private fun removedMarkCount(): Int {
+		val value = settings.MERGED_LEGACY_INPUT_DEVICES.get()
+		if (value.isNullOrEmpty()) {
+			return 0
+		}
+		val json = JSONObject(value)
+		return json.keys().asSequence().count { json.getString(it).startsWith("removed:") }
+	}
+
+	private fun globalJson(vararg devices: JSONObject): String {
+		return JSONObject().put("items", JSONArray(devices.toList())).toString()
+	}
+
 	private fun setLegacyDevices(appMode: ApplicationMode, vararg devices: JSONObject) {
 		val json = JSONObject().put("items", JSONArray(devices.toList()))
 		settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, json.toString())
+		if (Looper.myLooper() != Looper.getMainLooper()) {
+			InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+		}
 	}
 
 	private fun device(id: String, name: String, keyCode: Int,

@@ -14,6 +14,8 @@ public abstract class OsmandSettingsItem extends SettingsItem {
 
 	protected static final int APPROXIMATE_PREFERENCE_SIZE_BYTES = 60;
 
+	private boolean readFromFileImport;
+
 	protected OsmandSettingsItem(@NonNull OsmandSettings settings) {
 		super(settings.getContext());
 	}
@@ -34,5 +36,13 @@ public abstract class OsmandSettingsItem extends SettingsItem {
 	@NonNull
 	public OsmandSettings getSettings() {
 		return app.getSettings();
+	}
+
+	public void markReadFromFileImport() {
+		readFromFileImport = true;
+	}
+
+	public boolean isReadFromFileImport() {
+		return readFromFileImport;
 	}
 }

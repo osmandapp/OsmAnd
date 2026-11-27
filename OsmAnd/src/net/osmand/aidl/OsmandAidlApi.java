@@ -3131,7 +3131,7 @@ public class OsmandAidlApi {
 			String fileName = appMode.toHumanString();
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
 			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(acceptedExportTypes, true, false, true));
-			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
+			settingsHelper.exportSharedSettings(exportDir, fileName, null, settingsItems);
 			return true;
 		}
 		return false;

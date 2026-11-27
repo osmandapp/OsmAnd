@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.devices.DefaultInputDevices;
 import net.osmand.plus.keyevent.listener.EventType;
@@ -27,12 +28,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class InputDevicesHelper {
 
@@ -41,17 +53,49 @@ public class InputDevicesHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(InputDevicesHelper.class);
 	private static final String CUSTOM_DEVICE_PREFIX = "custom_";
+	private static final String REMOVED_MERGED_DEVICE_PREFIX = "removed:";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
 	private final List<InputDevicesEventListener> listeners = new ArrayList<>();
 	private final Map<Integer, InputDevicesCollection> cachedDevicesCollections = new HashMap<>();
+	private volatile String selfWrittenJson;
+	private final StateChangedListener<String> customDevicesChangedListener = this::onCustomDevicesChanged;
+	private final StateChangedListener<String> legacyDevicesChangedListener = this::onLegacyDevicesChanged;
+
+	private static class MergePlan {
+		final Map<ApplicationMode, String> selections = new LinkedHashMap<>();
+		final List<ApplicationMode> legacyClears = new ArrayList<>();
+		final Map<String, String> mergedFingerprints = new LinkedHashMap<>();
+	}
 
 	public InputDevicesHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		DefaultInputDevices.initialize(app);
+		settings.CUSTOM_EXTERNAL_INPUT_DEVICES.addListener(customDevicesChangedListener);
+		settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.addListener(legacyDevicesChangedListener);
+	}
+
+	private void onCustomDevicesChanged(@Nullable String value) {
+		if (!Objects.equals(value, selfWrittenJson)) {
+			selfWrittenJson = null;
+			reloadCachedDevices();
+		}
+	}
+
+	private void onLegacyDevicesChanged(@Nullable String value) {
+		if (!Algorithms.isEmpty(value)) {
+			reloadCachedDevices();
+		}
+	}
+
+	private void reloadCachedDevices() {
+		app.runInUIThread(() -> {
+			cachedDevicesCollections.clear();
+			notifyListeners(settings.getApplicationMode(), EventType.CUSTOM_DEVICES_CHANGED);
+		});
 	}
 
 	public void addListener(@NonNull InputDevicesEventListener listener) {
@@ -136,7 +180,54 @@ public class InputDevicesHelper {
 	public void removeCustomDevice(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		devicesCollection.removeCustomDevice(deviceId);
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (Objects.equals(settings.EXTERNAL_INPUT_DEVICE.getModeValue(mode), deviceId)) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(mode, KEYBOARD.getId());
+			}
+		}
+		markMergedDeviceRemoved(deviceId, devicesCollection.getCustomDevices());
 		syncSettings(devicesCollection, EventType.DELETE_DEVICE);
+	}
+
+	public void forgetRemovedMergedDevices(@NonNull String deviceListJson) {
+		Set<String> importedFingerprints = new HashSet<>();
+		for (InputDeviceProfile device : readCustomDevices(deviceListJson)) {
+			String fingerprint = getFingerprint(device);
+			if (fingerprint != null) {
+				importedFingerprints.add(fingerprint);
+			}
+		}
+		if (importedFingerprints.isEmpty()) {
+			return;
+		}
+		Map<String, String> fingerprints = readMergedFingerprints();
+		boolean changed = false;
+		Iterator<Map.Entry<String, String>> iterator = fingerprints.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, String> entry = iterator.next();
+			if (isRemovedMark(entry.getValue()) && importedFingerprints.contains(entry.getKey())) {
+				iterator.remove();
+				changed = true;
+			}
+		}
+		if (changed) {
+			writeMergedFingerprints(fingerprints, readCustomDevices(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get()));
+		}
+	}
+
+	private void markMergedDeviceRemoved(@NonNull String deviceId,
+	                                     @NonNull List<InputDeviceProfile> remainingDevices) {
+		Map<String, String> fingerprints = readMergedFingerprints();
+		boolean changed = false;
+		for (Map.Entry<String, String> entry : fingerprints.entrySet()) {
+			if (Objects.equals(entry.getValue(), deviceId)) {
+				entry.setValue(REMOVED_MERGED_DEVICE_PREFIX + deviceId);
+				changed = true;
+			}
+		}
+		if (changed) {
+			writeMergedFingerprints(fingerprints, remainingDevices);
+		}
 	}
 
 	public boolean hasDeviceNameDuplicate(@NonNull Context context,
@@ -313,11 +404,109 @@ public class InputDevicesHelper {
 	@NonNull
 	private List<InputDeviceProfile> loadCustomDevices() {
 		List<InputDeviceProfile> devices = readCustomDevices(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get());
-		if (mergeLegacyCustomDevices(devices)) {
-			saveCustomDevices(devices);
-			cachedDevicesCollections.clear();
+		MergePlan plan = new MergePlan();
+		boolean changed = mergeLegacyCustomDevices(devices, plan);
+		boolean saved = !changed || saveCustomDevices(devices);
+		if (saved) {
+			applyMergePlan(plan, devices);
+			if (changed) {
+				cachedDevicesCollections.clear();
+			}
 		}
 		return devices;
+	}
+
+	private void applyMergePlan(@NonNull MergePlan plan, @NonNull List<InputDeviceProfile> devices) {
+		saveMergedFingerprints(plan, devices);
+		for (ApplicationMode appMode : plan.legacyClears) {
+			String selectedId = plan.selections.get(appMode);
+			if (selectedId != null) {
+				settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, selectedId);
+			}
+			settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES.resetModeToDefault(appMode);
+		}
+	}
+
+	@NonNull
+	private Map<String, String> readMergedFingerprints() {
+		Map<String, String> fingerprints = new LinkedHashMap<>();
+		String value = settings.MERGED_LEGACY_INPUT_DEVICES.get();
+		if (!Algorithms.isEmpty(value)) {
+			try {
+				JSONObject json = new JSONObject(value);
+				for (Iterator<String> keys = json.keys(); keys.hasNext(); ) {
+					String key = keys.next();
+					fingerprints.put(key, json.getString(key));
+				}
+			} catch (JSONException e) {
+				LOG.debug("Error while reading merged legacy devices from JSON ", e);
+			}
+		}
+		return fingerprints;
+	}
+
+	private void saveMergedFingerprints(@NonNull MergePlan plan, @NonNull List<InputDeviceProfile> devices) {
+		if (plan.mergedFingerprints.isEmpty()) {
+			return;
+		}
+		Map<String, String> fingerprints = readMergedFingerprints();
+		fingerprints.putAll(plan.mergedFingerprints);
+		writeMergedFingerprints(fingerprints, devices);
+	}
+
+	private void writeMergedFingerprints(@NonNull Map<String, String> fingerprints,
+	                                     @NonNull List<InputDeviceProfile> devices) {
+		JSONObject json = new JSONObject();
+		try {
+			for (Map.Entry<String, String> entry : fingerprints.entrySet()) {
+				String deviceId = entry.getValue();
+				if (isRemovedMark(deviceId) || hasDeviceId(devices, deviceId)) {
+					json.put(entry.getKey(), deviceId);
+				}
+			}
+			settings.MERGED_LEGACY_INPUT_DEVICES.set(json.toString());
+		} catch (JSONException e) {
+			LOG.debug("Error while writing merged legacy devices to JSON ", e);
+		}
+	}
+
+	@Nullable
+	private String getFingerprint(@NonNull InputDeviceProfile device) {
+		String content = getDeviceContent(device);
+		if (content == null) {
+			return null;
+		}
+		try {
+			byte[] hash = MessageDigest.getInstance("SHA-256")
+					.digest((device.getId() + "\n" + content).getBytes(StandardCharsets.UTF_8));
+			StringBuilder builder = new StringBuilder();
+			for (byte b : hash) {
+				builder.append(String.format("%02x", b));
+			}
+			return builder.toString();
+		} catch (NoSuchAlgorithmException e) {
+			return null;
+		}
+	}
+
+	@Nullable
+	public String getSelectedCustomDeviceJson(@NonNull ApplicationMode appMode) {
+		String id = getSelectedDeviceId(appMode);
+		if (id == null) {
+			return null;
+		}
+		for (InputDeviceProfile device : readCustomDevices(settings.CUSTOM_EXTERNAL_INPUT_DEVICES.get())) {
+			if (device instanceof CustomInputDeviceProfile && Objects.equals(device.getId(), id)) {
+				try {
+					JSONObject json = new JSONObject();
+					writeToJson(app, json, Collections.singletonList(device));
+					return json.toString();
+				} catch (JSONException e) {
+					LOG.debug("Error while writing selected custom device to JSON ", e);
+				}
+			}
+		}
+		return null;
 	}
 
 	@NonNull
@@ -332,14 +521,17 @@ public class InputDevicesHelper {
 		return new ArrayList<>();
 	}
 
-	private void saveCustomDevices(@NonNull List<InputDeviceProfile> devices) {
+	private boolean saveCustomDevices(@NonNull List<InputDeviceProfile> devices) {
 		JSONObject json = new JSONObject();
 		try {
 			writeToJson(app, json, devices);
-			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(json.toString());
+			String value = json.toString();
+			selfWrittenJson = value;
+			return settings.CUSTOM_EXTERNAL_INPUT_DEVICES.set(value);
 		} catch (JSONException e) {
 			LOG.debug("Error while writing custom devices to JSON ", e);
 		}
+		return false;
 	}
 
 	/**
@@ -347,56 +539,201 @@ public class InputDevicesHelper {
 	 * Such per-profile lists still come from the app upgrade, from imported profiles
 	 * and from Cloud data of older clients, so they are merged into the global list.
 	 */
-	private boolean mergeLegacyCustomDevices(@NonNull List<InputDeviceProfile> devices) {
+	private boolean mergeLegacyCustomDevices(@NonNull List<InputDeviceProfile> devices,
+	                                         @NonNull MergePlan plan) {
 		CommonPreference<String> legacyPreference = settings.LEGACY_CUSTOM_EXTERNAL_INPUT_DEVICES;
-		int initialSize = devices.size();
+		boolean hasLegacyDevices = false;
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			if (legacyPreference.isSetForMode(appMode)) {
+				hasLegacyDevices = true;
+				break;
+			}
+		}
+		if (!hasLegacyDevices) {
+			return false;
+		}
+		int initialSize = devices.size();
+		Set<String> globalIds = new HashSet<>();
+		for (InputDeviceProfile device : devices) {
+			globalIds.add(device.getId());
+		}
+		Map<String, String> mergedFingerprints = readMergedFingerprints();
+		Set<String> removedTargetIds = new HashSet<>();
+		for (String storedId : mergedFingerprints.values()) {
+			if (isRemovedMark(storedId)) {
+				removedTargetIds.add(getMergedTargetId(storedId));
+			}
+		}
+		List<ApplicationMode> appModes = new ArrayList<>(ApplicationMode.allPossibleValues());
+		Collections.sort(appModes, (first, second) -> first.getStringKey().compareTo(second.getStringKey()));
+		for (ApplicationMode appMode : appModes) {
 			if (!legacyPreference.isSetForMode(appMode)) {
 				continue;
 			}
 			String selectedId = settings.EXTERNAL_INPUT_DEVICE.getModeValue(appMode);
 			List<InputDeviceProfile> mergeCandidates = new ArrayList<>(devices);
-			for (InputDeviceProfile device : readCustomDevices(legacyPreference.getModeValue(appMode))) {
-				String mergedId = mergeLegacyDevice(devices, mergeCandidates, device);
-				if (Objects.equals(device.getId(), selectedId) && !Objects.equals(device.getId(), mergedId)) {
-					settings.EXTERNAL_INPUT_DEVICE.setModeValue(appMode, mergedId);
+			List<InputDeviceProfile> pending = readCustomDevices(legacyPreference.getModeValue(appMode));
+			Collections.sort(pending, (first, second) -> {
+				int byId = first.getId().compareTo(second.getId());
+				if (byId != 0) {
+					return byId;
+				}
+				int byContent = Objects.toString(getDeviceContent(first), "")
+						.compareTo(Objects.toString(getDeviceContent(second), ""));
+				if (byContent != 0) {
+					return byContent;
+				}
+				return first.toHumanString(app).compareTo(second.toHumanString(app));
+			});
+			boolean selectedDeviceRemoved = false;
+			boolean selectedDeviceKept = false;
+			for (Iterator<InputDeviceProfile> iterator = pending.iterator(); iterator.hasNext(); ) {
+				InputDeviceProfile device = iterator.next();
+				String storedId = getKnownMergedId(mergedFingerprints, device);
+				String targetId = getMergedTargetId(storedId);
+				boolean removed = isRemovedMark(storedId) && (targetId == null || !globalIds.contains(targetId));
+				if (Objects.equals(device.getId(), selectedId)) {
+					if (removed) {
+						selectedDeviceRemoved = true;
+					} else {
+						selectedDeviceKept = true;
+					}
+				}
+				if (removed) {
+					iterator.remove();
 				}
 			}
-			legacyPreference.resetModeToDefault(appMode);
+			BiConsumer<InputDeviceProfile, String> recorder = (device, mergedId) -> {
+				String fingerprint = getFingerprint(device);
+				if (fingerprint != null) {
+					plan.mergedFingerprints.put(fingerprint, mergedId);
+				}
+				if (Objects.equals(device.getId(), selectedId) && !Objects.equals(device.getId(), mergedId)) {
+					plan.selections.put(appMode, mergedId);
+				}
+			};
+			mergeTier(pending, recorder, device -> takeFreeCandidate(mergeCandidates, device,
+					candidate -> Objects.equals(candidate.getId(), device.getId())));
+			mergeTier(pending, recorder, device ->
+					takeKnownCandidate(mergeCandidates, mergedFingerprints, device, true));
+			mergeTier(pending, recorder, device ->
+					takeKnownCandidate(mergeCandidates, mergedFingerprints, device, false));
+			mergeTier(pending, recorder, device -> takeFreeCandidate(mergeCandidates, device,
+					candidate -> candidate.getId().startsWith(device.getId() + "_")));
+			mergeTier(pending, recorder, device ->
+					mergeLegacyDevice(appMode, devices, mergeCandidates, globalIds, removedTargetIds, device));
+			if (selectedDeviceRemoved && !selectedDeviceKept) {
+				plan.selections.put(appMode, KEYBOARD.getId());
+			}
+			plan.legacyClears.add(appMode);
 		}
 		return devices.size() > initialSize;
+	}
+
+	private boolean isRemovedMark(@Nullable String storedId) {
+		return storedId != null && storedId.startsWith(REMOVED_MERGED_DEVICE_PREFIX);
+	}
+
+	@Nullable
+	private String getMergedTargetId(@Nullable String storedId) {
+		if (storedId == null) {
+			return null;
+		}
+		if (storedId.startsWith(REMOVED_MERGED_DEVICE_PREFIX)) {
+			return storedId.substring(REMOVED_MERGED_DEVICE_PREFIX.length());
+		}
+		return storedId;
+	}
+
+	@Nullable
+	private String getKnownMergedId(@NonNull Map<String, String> mergedFingerprints,
+	                                @NonNull InputDeviceProfile device) {
+		String fingerprint = getFingerprint(device);
+		return fingerprint != null ? mergedFingerprints.get(fingerprint) : null;
+	}
+
+	@Nullable
+	private String takeKnownCandidate(@NonNull List<InputDeviceProfile> mergeCandidates,
+	                                  @NonNull Map<String, String> mergedFingerprints,
+	                                  @NonNull InputDeviceProfile device, boolean ownIdOnly) {
+		String knownId = getMergedTargetId(getKnownMergedId(mergedFingerprints, device));
+		if (knownId == null || ownIdOnly && !knownId.equals(device.getId())) {
+			return null;
+		}
+		for (InputDeviceProfile candidate : mergeCandidates) {
+			if (Objects.equals(candidate.getId(), knownId)) {
+				mergeCandidates.remove(candidate);
+				return knownId;
+			}
+		}
+		return null;
+	}
+
+	private void mergeTier(@NonNull List<InputDeviceProfile> pending,
+	                       @NonNull BiConsumer<InputDeviceProfile, String> recorder,
+	                       @NonNull Function<InputDeviceProfile, String> matcher) {
+		for (Iterator<InputDeviceProfile> iterator = pending.iterator(); iterator.hasNext(); ) {
+			InputDeviceProfile device = iterator.next();
+			String mergedId = matcher.apply(device);
+			if (mergedId != null) {
+				recorder.accept(device, mergedId);
+				iterator.remove();
+			}
+		}
+	}
+
+	@Nullable
+	private String takeFreeCandidate(@NonNull List<InputDeviceProfile> mergeCandidates,
+	                                 @NonNull InputDeviceProfile device,
+	                                 @NonNull Predicate<InputDeviceProfile> idMatches) {
+		String content = getDeviceContent(device);
+		if (content == null) {
+			return null;
+		}
+		for (InputDeviceProfile candidate : mergeCandidates) {
+			if (idMatches.test(candidate) && content.equals(getDeviceContent(candidate))) {
+				mergeCandidates.remove(candidate);
+				return candidate.getId();
+			}
+		}
+		return null;
 	}
 
 	/**
 	 * @return id of the device in the global list that now holds this legacy device
 	 */
 	@NonNull
-	private String mergeLegacyDevice(@NonNull List<InputDeviceProfile> devices,
+	private String mergeLegacyDevice(@NonNull ApplicationMode appMode,
+	                                 @NonNull List<InputDeviceProfile> devices,
 	                                 @NonNull List<InputDeviceProfile> mergeCandidates,
+	                                 @NonNull Set<String> globalIds,
+	                                 @NonNull Set<String> reservedIds,
 	                                 @NonNull InputDeviceProfile device) {
 		String content = getDeviceContent(device);
-		InputDeviceProfile sameContentDevice = null;
+		InputDeviceProfile acceptedDevice = null;
 		for (InputDeviceProfile existing : mergeCandidates) {
-			if (content != null && content.equals(getDeviceContent(existing))) {
+			if (content != null && content.equals(getDeviceContent(existing))
+					&& isContentMatchAccepted(device, existing, globalIds)) {
 				if (Objects.equals(existing.getId(), device.getId())) {
-					sameContentDevice = existing;
+					acceptedDevice = existing;
 					break;
 				}
-				if (sameContentDevice == null) {
-					sameContentDevice = existing;
+				if (acceptedDevice == null) {
+					acceptedDevice = existing;
 				}
 			}
 		}
-		if (sameContentDevice != null) {
-			mergeCandidates.remove(sameContentDevice);
-			return sameContentDevice.getId();
+		if (acceptedDevice != null) {
+			mergeCandidates.remove(acceptedDevice);
+			return acceptedDevice.getId();
 		}
-		boolean idTaken = hasDeviceId(devices, device.getId());
+		boolean idTaken = hasDeviceId(devices, device.getId()) || reservedIds.contains(device.getId());
 		String name = device.toHumanString(app);
 		boolean nameTaken = hasDeviceName(devices, name);
 		if (idTaken || nameTaken) {
 			String uniqueName = nameTaken ? Algorithms.makeUniqueName(name, newName -> !hasDeviceName(devices, newName)) : name;
-			device = makeCustomDevice(makeUniqueId(devices), uniqueName, device);
+			String newId = idTaken ? makeStableId(devices, reservedIds, device.getId(), appMode) : device.getId();
+			device = makeCustomDevice(newId, uniqueName, device);
 		}
 		devices.add(device);
 		return device.getId();
@@ -430,13 +767,24 @@ public class InputDevicesHelper {
 		return InputDevicesCollection.hasDeviceNameDuplicate(app, allDevices, name);
 	}
 
+	private boolean isContentMatchAccepted(@NonNull InputDeviceProfile legacyDevice,
+	                                       @NonNull InputDeviceProfile matchedDevice,
+	                                       @NonNull Set<String> globalIds) {
+		String legacyId = legacyDevice.getId();
+		return Objects.equals(matchedDevice.getId(), legacyId)
+				|| !globalIds.contains(legacyId)
+				|| matchedDevice.getId().startsWith(legacyId + "_");
+	}
+
 	@NonNull
-	private String makeUniqueId(@NonNull List<InputDeviceProfile> devices) {
-		long time = System.currentTimeMillis();
-		while (hasDeviceId(devices, CUSTOM_DEVICE_PREFIX + time)) {
-			time++;
+	private String makeStableId(@NonNull List<InputDeviceProfile> devices, @NonNull Set<String> reservedIds,
+	                            @NonNull String oldId, @NonNull ApplicationMode appMode) {
+		String baseId = oldId + "_" + appMode.getStringKey();
+		String id = baseId;
+		for (int i = 2; hasDeviceId(devices, id) || reservedIds.contains(id); i++) {
+			id = baseId + "_" + i;
 		}
-		return CUSTOM_DEVICE_PREFIX + time;
+		return id;
 	}
 
 	private boolean hasDeviceId(@NonNull List<InputDeviceProfile> devices, @NonNull String id) {
