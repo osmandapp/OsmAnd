@@ -245,8 +245,14 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         Bundle savedInstanceState) {
+		// A restored or re-added fragment gets a null container when its container view is gone;
+		// without a view onResume() dismisses the menu.
+		if (container == null) {
+			view = null;
+			return null;
+		}
 		updateNightMode();
 		MapActivity mapActivity = requireMapActivity();
 		this.container = container;
@@ -611,6 +617,9 @@ public abstract class ContextMenuFragment extends BaseFullScreenFragment impleme
 			if (tag != null) {
 				mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(tag);
 			}
+		}
+		if (view == null) {
+			dismiss();
 		}
 	}
 

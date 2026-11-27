@@ -127,6 +127,10 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 				if (!MapSourcesExportType.shouldSkipMapSource(template)) {
 					sources.add(template);
 				}
+				if (template instanceof SQLiteTileSource) {
+					// The check above opened its database to read the source info, nothing else closes it
+					((SQLiteTileSource) template).closeConnection();
+				}
 			}
 		}
 		return sources;

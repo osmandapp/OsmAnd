@@ -14,9 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.slider.Slider;
 
+import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
@@ -47,11 +50,14 @@ import java.util.Map;
  * A panel like Terrain - Visibility: the map shows the light while it is changed, Apply keeps it,
  * leaving the panel without Apply brings the previous light back.
  */
-public class SunParametersFragment extends ConfigureMapOptionFragment {
+public class SunParametersFragment extends ConfigureMapOptionFragment implements IMapLocationListener {
 
 	private static final String DATE_PICKER_TAG = "sun_date_picker";
 	private static final long LIVE_REFRESH_INTERVAL_MS = 60_000L;
+	private static final long MAP_MOVE_REFRESH_DELAY_MS = 100L;
 	private static final int MINUTES_PER_DAY = 24 * 60;
+	/* the renderer computes the sun only after the start of 1970; all of this day is after it in any time zone */
+	private static final LocalDate FIRST_DAY = LocalDate.of(1970, 1, 2);
 
 	private SunParametersController controller;
 
@@ -84,6 +90,18 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 			if (content != null && isAdded() && controller.getMode() == SunLightMode.LIVE) {
 				updateLiveRows();
 				content.postDelayed(this, LIVE_REFRESH_INTERVAL_MS - System.currentTimeMillis() % LIVE_REFRESH_INTERVAL_MS);
+			}
+		}
+	};
+
+	/* the sun of Live and Date is the sun at the map centre: its angles follow the map when it stops moving */
+	private final Runnable mapMoveRefresh = () -> {
+		if (content != null && isAdded()) {
+			SunLightMode mode = controller.getMode();
+			if (mode == SunLightMode.LIVE) {
+				updateLiveRows();
+			} else if (mode == SunLightMode.DATE) {
+				updateDateAngles();
 			}
 		}
 	};
@@ -284,11 +302,17 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		}
 		/* the picker works with midnight UTC of the selected day */
 		LocalDate day = getZonedTime(controller.getTime()).toLocalDate();
+		long firstDay = FIRST_DAY.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
+		CalendarConstraints constraints = new CalendarConstraints.Builder()
+				.setStart(firstDay)
+				.setValidator(DateValidatorPointForward.from(firstDay))
+				.build();
 		MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker()
 				.setTheme(nightMode
 						? R.style.ThemeOverlay_App_Material_DatePicker_Dark
 						: R.style.ThemeOverlay_App_Material_DatePicker_Light)
 				.setSelection(day.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli())
+				.setCalendarConstraints(constraints)
 				.build();
 		addDateListener(picker);
 		picker.show(manager, DATE_PICKER_TAG);
@@ -333,9 +357,31 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		app.getOsmandMap().getMapView().addMapLocationListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getOsmandMap().getMapView().removeMapLocationListener(this);
+	}
+
+	@Override
+	public void locationChanged(double newLatitude, double newLongitude, Object source) {
+		View view = content;
+		if (view != null) {
+			view.removeCallbacks(mapMoveRefresh);
+			view.postDelayed(mapMoveRefresh, MAP_MOVE_REFRESH_DELAY_MS);
+		}
+	}
+
+	@Override
 	public void onDestroyView() {
 		if (content != null) {
 			content.removeCallbacks(liveRefresh);
+			content.removeCallbacks(mapMoveRefresh);
 		}
 		super.onDestroyView();
 	}
@@ -360,14 +406,15 @@ public class SunParametersFragment extends ConfigureMapOptionFragment {
 		return DateFormat.getTimeFormat(requireContext()).format(Date.from(time.toInstant()));
 	}
 
+	/* no angles without the OpenGL renderer that computes them */
 	@NonNull
-	private String formatSunAzimuth(@NonNull SunLight.Angles angles) {
-		return formatAzimuth((int) Math.round(angles.getAzimuth()) % 360);
+	private String formatSunAzimuth(@Nullable SunLight.Angles angles) {
+		return angles != null ? formatAzimuth((int) Math.round(angles.getAzimuth()) % 360) : getString(R.string.n_a);
 	}
 
 	@NonNull
-	private String formatSunAltitude(@NonNull SunLight.Angles angles) {
-		return formatAltitude((int) Math.round(angles.getAltitude()));
+	private String formatSunAltitude(@Nullable SunLight.Angles angles) {
+		return angles != null ? formatAltitude((int) Math.round(angles.getAltitude())) : getString(R.string.n_a);
 	}
 
 	@NonNull
