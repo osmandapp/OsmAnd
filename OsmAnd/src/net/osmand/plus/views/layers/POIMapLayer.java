@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.core.android.MapRendererContext.SELECTED_POI_SECTION;
 import static net.osmand.core.android.MapRendererContext.TOP_PLACES_POI_SECTION;
+import static net.osmand.data.Amenity.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.data.PointDescription.POINT_TYPE_POI;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
@@ -118,6 +119,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private PoiUIFilter routeArticlePointsFilter;
 	private Set<PoiUIFilter> routeTrackFilters;
 	private String routeArticlePointsFilterByName;
+	private Set<String> hiddenRouteTypes = Collections.emptySet();
 	private boolean fileVisibilityChanged;
 	public CustomMapObjects<Amenity> customObjectsDelegate;
 	private int topPlacesLimit = TOP_PLACES_LIMIT;
@@ -676,6 +678,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			if (routeArticle) {
 				return zoom >= START_ZOOM;
 			} else if (routeTrack) {
+				if (isRouteTypeHidden(amenity)) {
+					return false;
+				}
 				if (travelRendererHelper.getRouteTracksProperty().get()) {
 					return zoom >= START_ZOOM && zoom <= END_ZOOM_ROUTE_TRACK;
 				} else {
@@ -685,6 +690,22 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				return zoom >= START_ZOOM;
 			}
 		}
+	}
+
+	private boolean isRouteTypeHidden(@NonNull Amenity amenity) {
+		if (hiddenRouteTypes.isEmpty()) {
+			return false;
+		}
+		boolean hasType = false;
+		for (String key : amenity.getAdditionalInfoKeys()) {
+			if (key.startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
+				if (!hiddenRouteTypes.contains(key)) {
+					return false;
+				}
+				hasType = true;
+			}
+		}
+		return hasType;
 	}
 
 	@Override
@@ -705,6 +726,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		PoiUIFilter routeArticlePointsFilter = travelRendererHelper.getRouteArticlePointsFilter();
 		Set<PoiUIFilter> routeTrackFilters = travelRendererHelper.getRouteTrackFilters();
 		String routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
+		Set<String> hiddenRouteTypes = travelRendererHelper.getHiddenRouteTypes();
 		DataSourceType wikiDataSource = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
 		boolean customObjectsChanged = customObjectsDelegate != null && customObjectsDelegate.isChanged();
 		boolean dataChanged = false;
@@ -718,6 +740,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				|| this.routeArticleFilter != routeArticleFilter
 				|| this.routeArticlePointsFilter != routeArticlePointsFilter
 				|| this.routeTrackFilters != routeTrackFilters
+				|| !this.hiddenRouteTypes.equals(hiddenRouteTypes)
 				|| this.fileVisibilityChanged
 				|| customObjectsChanged
 				|| !Algorithms.stringsEqual(this.routeArticlePointsFilterByName, routeArticlePointsFilterByName)) {
@@ -732,6 +755,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			this.routeArticlePointsFilter = routeArticlePointsFilter;
 			this.routeTrackFilters = routeTrackFilters;
 			this.routeArticlePointsFilterByName = routeArticlePointsFilterByName;
+			this.hiddenRouteTypes = hiddenRouteTypes;
 			this.fileVisibilityChanged = false;
 			data.clearCache();
 			if (customObjectsDelegate != null) {
