@@ -13,6 +13,7 @@ public class QuickSearchMainListFragment extends QuickSearchListFragment {
 			getDialogFragment().onMainListChanged();
 		}
 	};
+	private QuickSearchListAdapter observedAdapter;
 
 	@Override
 	@NonNull
@@ -23,14 +24,17 @@ public class QuickSearchMainListFragment extends QuickSearchListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListAdapter().registerDataSetObserver(listObserver);
+		observedAdapter = getListAdapter();
+		observedAdapter.registerDataSetObserver(listObserver);
 	}
 
 	@Override
 	public void onDestroyView() {
-		QuickSearchListAdapter adapter = getListAdapter();
-		if (adapter != null) {
-			adapter.unregisterDataSetObserver(listObserver);
+		// a view created again without onActivityCreated, as when the search dialog is
+		// refreshed after a uiMode change, has no observer registered
+		if (observedAdapter != null) {
+			observedAdapter.unregisterDataSetObserver(listObserver);
+			observedAdapter = null;
 		}
 		super.onDestroyView();
 	}
