@@ -28,6 +28,8 @@ public class RouteDataObject {
 	public int[] pointsY;
 	public long[] restrictions;
 	public long[] restrictionsVia;
+	// all via ways of a restriction whose via is a chain of ways (#12537), null for other restrictions
+	public long[][] restrictionsViaWays;
 	public int[][] pointTypes;
 	public String[][] pointNames;
 	public int[][] pointNameTypes;
@@ -66,6 +68,7 @@ public class RouteDataObject {
 		this.nameIds = copy.nameIds;
 		this.restrictions = copy.restrictions;
 		this.restrictionsVia = copy.restrictionsVia;
+		this.restrictionsViaWays = copy.restrictionsViaWays;
 		this.pointTypes = copy.pointTypes;
 		this.pointNames = copy.pointNames;
 		this.pointNameTypes = copy.pointNameTypes;
@@ -414,7 +417,19 @@ public class RouteDataObject {
 		if (restrictionsVia != null && k < restrictionsVia.length) {
 			ri.viaWay = restrictionsVia[k];
 		}
+		ri.viaWays = getRestrictionViaWays(k);
 		return ri;
+	}
+
+	public long[] getRestrictionViaWays(int i) {
+		return restrictionsViaWays != null && i < restrictionsViaWays.length ? restrictionsViaWays[i] : null;
+	}
+
+	public void setRestrictionViaWays(int k, long[] viaWays) {
+		if (restrictionsViaWays == null) {
+			restrictionsViaWays = new long[restrictions.length][];
+		}
+		restrictionsViaWays[k] = viaWays;
 	}
 
 	public long getRestrictionVia(int i) {
@@ -987,6 +1002,7 @@ public class RouteDataObject {
 		public int type;
 		public long toWay;
 		public long viaWay;
+		public long[] viaWays; // all via ways if there are more than one, viaWay is the first of them
 
 		public RestrictionInfo next; // optional to simulate linked list
 

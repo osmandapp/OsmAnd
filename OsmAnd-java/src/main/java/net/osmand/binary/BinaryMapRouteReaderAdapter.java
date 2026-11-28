@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -887,6 +888,13 @@ public class BinaryMapRouteReaderAdapter {
 								via = idTables.get((int) val.viaWay);
 							}
 							fromr.setRestriction(k, idTables.get((int) val.toWay), val.type, via);
+							if (val.viaWays != null) {
+								long[] viaWays = new long[val.viaWays.length];
+								for (int i = 0; i < viaWays.length; i++) {
+									viaWays[i] = idTables.get((int) val.viaWays[i]);
+								}
+								fromr.setRestrictionViaWays(k, viaWays);
+							}
 						}
 						val = val.next;
 					}
@@ -967,7 +975,15 @@ public class BinaryMapRouteReaderAdapter {
 						ri.type = codedIS.readInt32();
 						break;
 					case RestrictionData.VIA_FIELD_NUMBER:
-						ri.viaWay = codedIS.readInt32();
+						// repeated for a chain of via ways (#12537)
+						long viaWay = codedIS.readInt32();
+						if (ri.viaWay == 0) {
+							ri.viaWay = viaWay;
+						} else {
+							long[] viaWays = ri.viaWays == null ? new long[] {ri.viaWay} : ri.viaWays;
+							ri.viaWays = Arrays.copyOf(viaWays, viaWays.length + 1);
+							ri.viaWays[viaWays.length] = viaWay;
+						}
 						break;
 					default:
 						skipUnknownField(ts);
