@@ -61,7 +61,11 @@ class DownloadSearchScreenReport {
 			if (row.header != null) {
 				html.append("<li class=\"head\">").append(escape(row.header)).append("</li>\n");
 			} else {
-				html.append("<li><span class=\"title\">").append(escape(row.title)).append("</span>");
+				html.append("<li>");
+				if (row.overline != null) {
+					html.append("<span class=\"over\">").append(escape(row.overline)).append("</span>");
+				}
+				html.append("<span class=\"title\">").append(escape(row.title)).append("</span>");
 				if (row.subtitle != null) {
 					html.append("<span class=\"sub\">").append(escape(row.subtitle)).append("</span>");
 				}
@@ -97,6 +101,7 @@ class DownloadSearchScreenReport {
 				+ "li.head{background:var(--sunken);color:var(--muted);font-size:11.5px;font-weight:600;"
 				+ "letter-spacing:.13em;text-transform:uppercase;padding:6px 16px}\n"
 				+ "li.empty{color:var(--muted);font-style:italic;font-size:14.5px}\n"
+				+ ".over{font-size:12px;color:var(--muted)}\n"
 				+ ".title{font-size:15.5px}\n"
 				+ ".sub{font-size:13.5px;color:var(--muted)}\n";
 	}
