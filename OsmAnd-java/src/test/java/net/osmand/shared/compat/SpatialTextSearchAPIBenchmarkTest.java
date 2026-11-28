@@ -133,7 +133,7 @@ public class SpatialTextSearchAPIBenchmarkTest {
 			for (BinaryMapIndexReader r : readers) {
 				r.close();
 			}
-			regions.getReader().close();
+			regions.close();
 			// the names of the poi types were this test's
 			MapPoiTypes.setDefault(new MapPoiTypes("src/test/resources/poi_types.xml"));
 			net.osmand.shared.osm.MapPoiTypes.Companion.setDefault(

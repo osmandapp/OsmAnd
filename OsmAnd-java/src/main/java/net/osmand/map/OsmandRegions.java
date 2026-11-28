@@ -64,6 +64,8 @@ public class OsmandRegions {
 	public static final String LOCALE_NAME_REVERSED_FORMAT = "%2$s, %1$s";
 
 	private BinaryMapIndexReader reader;
+	// the search reads the file on its own thread, without the lock that guards the reads of reader
+	private BinaryMapIndexReader searchReader;
 	private String locale = "en";
 	// locale including region
 	private String locale2 = null;
@@ -138,6 +140,12 @@ public class OsmandRegions {
 
 	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
+		try {
+			// opened together with reader: moving the app data deletes the file while reader keeps it open
+			searchReader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), reader);
+		} catch (IOException e) {
+			LOG.error("Fail to open the regions file for search", e);
+		}
 //		final Collator clt = OsmAndCollator.primaryCollator();
 		final Map<String, String> parentRelations = new LinkedHashMap<>();
 		final Map<String, List<BinaryMapDataObject>> unattachedBoundaryMapObjectsByRegions = new HashMap<>();
@@ -314,6 +322,10 @@ public class OsmandRegions {
 
 	public BinaryMapIndexReader getReader() {
 		return reader;
+	}
+
+	public BinaryMapIndexReader getSearchReader() {
+		return searchReader;
 	}
 
 	public static boolean contain(BinaryMapDataObject bo, int tx, int ty) {
@@ -1071,6 +1083,9 @@ public class OsmandRegions {
 	public void close() throws IOException {
 		if (reader != null) {
 			reader.close();
+		}
+		if (searchReader != null) {
+			searchReader.close();
 		}
 	}
 

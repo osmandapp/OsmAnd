@@ -2,6 +2,12 @@ package net.osmand.map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -120,6 +126,20 @@ public class OsmandRegionsTest {
 
         // Additional subregion query must return the main region name (Lienz, Tirol, Austria)
         testIncludedExcluded(46.82987, 12.76812, "austria_tyrol_europe", "");
+    }
+
+    @Test
+    public void testSpatialSearchReadsOwnRegionsReader() {
+        // the search reads its files on the search thread, without the lock the region lookups read the reader under
+        SearchSettings settings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
+        settings.setRegions(osmandRegions);
+        settings = settings.setOriginalLocation(new LatLon(50.087463, 14.421259));
+        List<BinaryMapIndexReader> files = new SpatialTextSearchAPI(MapPoiTypes.getDefault())
+                .getSpatialSearchFiles(SearchPhrase.emptyPhrase(settings));
+
+        Assert.assertEquals(1, files.size());
+        Assert.assertEquals(osmandRegions.getReader().getFile(), files.get(0).getFile());
+        Assert.assertNotSame(osmandRegions.getReader(), files.get(0));
     }
 
     private void testIncludedExcluded(double lat, double lon, String included, String excluded) {
