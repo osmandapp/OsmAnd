@@ -14,6 +14,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -47,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class TravelDbHelper implements TravelHelper {
 
@@ -748,7 +750,8 @@ public class TravelDbHelper implements TravelHelper {
 
 	@NonNull
 	@Override
-	public List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull NetworkRouteSelectorFilter filter) {
+	public List<TravelGpx> searchTravelGpx(@NonNull LatLon location, @NonNull NetworkRouteSelectorFilter filter,
+	                                       @NonNull Predicate<BinaryMapDataObject> isRouteDrawn) {
 		return new ArrayList<>();
 	}
 
