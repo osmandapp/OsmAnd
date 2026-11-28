@@ -12,7 +12,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_row_min_height"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/card_row_min_height"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingEnd="@dimen/content_padding">
@@ -51,6 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/TextAppearance.ListItemTitle"
+            android:paddingTop="@dimen/content_padding_half"
+            android:paddingBottom="@dimen/content_padding_half"
             android:visibility="gone"
             tools:text="Live updates"/>
 
@@ -60,6 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/TextAppearance.ListItemCategoryTitle"
+            android:paddingTop="@dimen/content_padding_half"
+            android:paddingBottom="@dimen/content_padding_half"
             android:textSize="@dimen/default_desc_text_size"
             android:visibility="gone"
             tools:text="Live updates"/>
@@ -85,8 +90,10 @@
             android:background="@drawable/bg_poi_filter_count"
             android:gravity="center"
             android:minWidth="24dp"
-            android:paddingHorizontal="@dimen/text_margin_small"
-            android:paddingVertical="2dp"
+            android:paddingStart="@dimen/text_margin_small"
+            android:paddingEnd="@dimen/text_margin_small"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
             android:visibility="gone"

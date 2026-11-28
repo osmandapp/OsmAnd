@@ -18,6 +18,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.data.Amenity;
 import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
@@ -38,6 +39,7 @@ import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchSettings.SortType;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -132,7 +134,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		isStandardFilter = true;
 		standardIconId = topIndexFilter.getIconResource();
 		filterId = topIndexFilter.getFilterId();
-		this.name = topIndexFilter.getName();
+		// the brand itself (e.g. "McDonald's"), not its type "Brand": Filters title, query, map toolbar
+		this.name = topIndexFilter.getValue();
 		poiTypes = app.getPoiTypes();
 		additionalFilter = topIndexFilter;
 
@@ -194,6 +197,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		poiAdditionals = filter.getPoiAdditionals();
 		filterByName = filter.filterByName;
 		savedFilterByName = filter.savedFilterByName;
+		additionalFilter = filter.additionalFilter;
 		updateAcceptedTypeOrigins();
 	}
 
@@ -470,6 +474,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public PoiFilterUtils.AmenityNameFilter getNameFilter() {
+		return getNameFilter(filterByName);
+	}
+
+	@NonNull
+	public PoiFilterUtils.AmenityNameFilter getNameFilter(@Nullable String filterByName) {
 		if (Algorithms.isEmpty(filterByName)) {
 			return a -> true;
 		}
@@ -505,6 +514,34 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			}
 		}
 		return getNameFilterInternal(unknownFilters, allTime, open, poiAdditionalsFilter);
+	}
+
+	/**
+	 * Matches the typed name as the category search does (SearchAmenityByTypeAPI): the name,
+	 * other names or ref, a word starting with the text. Tag values do not count: "on" must not
+	 * match takeaway=only.
+	 */
+	@NonNull
+	public PoiFilterUtils.AmenityNameFilter getNameTextFilter(@Nullable String text) {
+		if (Algorithms.isBlank(text)) {
+			return a -> true;
+		}
+		NameStringMatcher matcher = new NameStringMatcher(text.trim(), CHECK_STARTS_FROM_SPACE);
+		OsmandSettings settings = app.getSettings();
+		String lang = settings.MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
+		return amenity -> {
+			String name = amenity.getName(lang, transliterate);
+			if (Algorithms.isEmpty(name)) {
+				AbstractPoiType type = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
+				name = type != null ? type.getTranslation() : amenity.getSubType();
+			}
+			if (matcher.matches(name) || matcher.matches(amenity.getOtherNames(true, name))) {
+				return true;
+			}
+			String ref = amenity.getTagContent(Amenity.REF, null);
+			return ref != null && matcher.matches(ref);
+		};
 	}
 
 	@NonNull
@@ -585,6 +622,24 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	@Nullable
 	public SearchPoiAdditionalFilter getAdditionalFilter() {
 		return additionalFilter;
+	}
+
+	@Nullable
+	public TopIndexFilter getTopIndexFilter() {
+		return additionalFilter instanceof TopIndexFilter topIndexFilter ? topIndexFilter : null;
+	}
+
+	/**
+	 * Restores the brand / operator of a saved filter, e.g. tag "brand" and value "McDonald's".
+	 */
+	public void setTopIndexFilter(@Nullable String tag, @Nullable String value) {
+		if (Algorithms.isEmpty(tag) || Algorithms.isEmpty(value)) {
+			additionalFilter = null;
+			return;
+		}
+		PoiSubType subType = new PoiSubType();
+		subType.name = MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX + tag;
+		additionalFilter = new TopIndexFilter(subType, poiTypes, value);
 	}
 
 	@NonNull
@@ -700,6 +755,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		Set<String> distinctAmenities = new TreeSet<>();
 
 		PoiFilterUtils.AmenityNameFilter nm = getNameFilter();
+		// the category search reads only the types, so a brand / operator filter is checked here
+		TopIndexFilter topIndexFilter = getTopIndexFilter();
 
 		return new PoiUIFilterResultMatcher<Amenity>() {
 
@@ -712,7 +769,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 			@Override
 			public boolean publish(Amenity a) {
-				if (nm.accept(a)) {
+				if (nm.accept(a) && (topIndexFilter == null || topIndexFilter.getValue().equalsIgnoreCase(
+						a.getAdditionalInfo(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX + topIndexFilter.getTag())))) {
 					if (matcher == null || matcher.publish(a)) {
 						String amenityDistinctId = a.getType().getKeyName() + a.getId();
 						if (!distinctAmenities.add(amenityDistinctId)) {

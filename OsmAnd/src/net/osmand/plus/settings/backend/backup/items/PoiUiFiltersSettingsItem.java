@@ -18,6 +18,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.search.core.TopIndexFilter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -160,6 +161,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					String filterByName = object.getString("filterByName");
 					filter.setFilterByName(filterByName);
 				}
+				filter.setTopIndexFilter(object.optString("topIndexTag", null), object.optString("topIndexValue", null));
 				items.add(filter);
 			}
 		} catch (JSONException e) {
@@ -182,6 +184,11 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 					jsonObject.put("name", filter.getName());
 					jsonObject.put("filterId", filter.getFilterId());
 					jsonObject.put("filterByName", filter.getFilterByName());
+					TopIndexFilter topIndexFilter = filter.getTopIndexFilter();
+					if (topIndexFilter != null) {
+						jsonObject.put("topIndexTag", topIndexFilter.getTag());
+						jsonObject.put("topIndexValue", topIndexFilter.getValue());
+					}
 
 					Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
 					Map<String, LinkedHashSet<String>> serializedAcceptedTypes = new LinkedHashMap<>();

@@ -513,6 +513,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				}
 				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 					resetSpatialSearchScope();
+					// as currentCategoryFilterParams below, or the list stays filtered by what the chip no longer shows
+					resetAppliedPoiFilter();
 					categorySearchByFilter = false;
 					currentSearchFilterId = null;
 					currentCategoryFilterParams = null;
@@ -1427,8 +1429,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			} else if (object instanceof TopIndexFilter topIndexFilter) {
 				PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.FILTER);
 				if (poiUIFilter != null) {
+					// Show on map leaves the brand as a key / name filter on this cached filter
+					poiUIFilter.setFilterByKey(null);
+					poiUIFilter.setFilterByName(null);
 					filterId = poiUIFilter.getFilterId();
-					filterByName = topIndexFilter.getValue();
 				}
 			}
 		}
@@ -2866,6 +2870,21 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			updateTopFilterChips();
 			applySelectedSortSetting();
 			runCoreSearch(txt, false, false);
+		}
+	}
+
+	/**
+	 * The name and values applied in Filters live in the category's PoiUIFilter: editing or clearing
+	 * the query drops them too, or the category stays filtered with nothing visible in the query.
+	 */
+	private void resetAppliedPoiFilter() {
+		if (Algorithms.isBlank(currentCategoryFilterParams)) {
+			return;
+		}
+		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
+		PoiUIFilter filter = getAppliedFiltersSource(word);
+		if (filter != null) {
+			filter.removeUnsavedFilterByName();
 		}
 	}
 
