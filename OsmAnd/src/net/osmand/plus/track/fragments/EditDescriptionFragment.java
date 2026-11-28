@@ -25,10 +25,32 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 
 	public static final String TAG = EditDescriptionFragment.class.getSimpleName();
 
-	private static final String CONTENT_KEY = "content_key";
+	private static final String ORIGINAL_TEXT_KEY = "edit_description_original";
+	private static final String EDITED_TEXT_KEY = "edit_description_edited";
+	private static final String SELECTION_START_KEY = "selection_start";
+	private static final String SELECTION_END_KEY = "selection_end";
+
+	private DescriptionStateStorage originalTextStorage;
+	private DescriptionStateStorage editedTextStorage;
 
 	private EditTextEx etText;
 	private String mText;
+	@Nullable
+	private String restoredText;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		originalTextStorage = new DescriptionStateStorage(app, ORIGINAL_TEXT_KEY);
+		editedTextStorage = new DescriptionStateStorage(app, EDITED_TEXT_KEY);
+		if (savedInstanceState != null) {
+			mText = originalTextStorage.restore(savedInstanceState);
+			restoredText = editedTextStorage.restore(savedInstanceState);
+			if (mText == null || restoredText == null) {
+				dismiss();
+			}
+		}
+	}
 
 	@Nullable
 	@Override
@@ -37,6 +59,8 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 		View view = inflate(R.layout.dialog_edit_gpx_description, container, false);
 
 		etText = view.findViewById(R.id.description);
+		// the text is saved by the fragment, see onSaveInstanceState()
+		etText.setSaveEnabled(false);
 		etText.requestFocus();
 
 		view.findViewById(R.id.btn_close).setOnClickListener(v -> {
@@ -49,15 +73,48 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 
 		setupSaveButton(view);
 
-		Bundle args = getArguments();
-		if (args != null) {
-			mText = args.getString(CONTENT_KEY);
-			if (mText != null) {
-				etText.append(mText);
-			}
+		String text = restoredText != null ? restoredText : mText;
+		if (text != null) {
+			etText.append(text);
 		}
-
+		if (savedInstanceState != null) {
+			restoreSelection(savedInstanceState);
+		}
 		return view;
+	}
+
+	private void restoreSelection(@NonNull Bundle savedInstanceState) {
+		int length = etText.length();
+		int start = savedInstanceState.getInt(SELECTION_START_KEY, length);
+		int end = savedInstanceState.getInt(SELECTION_END_KEY, length);
+		if (start >= 0 && end >= 0) {
+			etText.setSelection(Math.min(start, length), Math.min(end, length));
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (mText == null) {
+			return;
+		}
+		originalTextStorage.save(outState, mText);
+
+		Editable editable = etText != null ? etText.getText() : null;
+		if (editable != null) {
+			outState.putInt(SELECTION_START_KEY, etText.getSelectionStart());
+			outState.putInt(SELECTION_END_KEY, etText.getSelectionEnd());
+			editedTextStorage.save(outState, editable.toString());
+		} else {
+			editedTextStorage.save(outState, restoredText != null ? restoredText : mText);
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		originalTextStorage.clearIfClosed(this);
+		editedTextStorage.clearIfClosed(this);
 	}
 
 	@Override
@@ -120,9 +177,7 @@ public class EditDescriptionFragment extends BaseFullScreenDialogFragment {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			EditDescriptionFragment fragment = new EditDescriptionFragment();
-			Bundle args = new Bundle();
-			args.putString(CONTENT_KEY, description);
-			fragment.setArguments(args);
+			fragment.mText = description;
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fm, TAG);
 		}

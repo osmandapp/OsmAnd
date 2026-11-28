@@ -31,13 +31,15 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 
 	public static final String TAG = ReadDescriptionFragment.class.getSimpleName();
 
-	protected static final String CONTENT_KEY = "content_key";
+	private static final String CONTENT_KEY = "read_description_content";
 
 	protected String mContent;
 	protected ContentType mContentType;
 
 	protected WebViewEx mWebView;
 	protected TextView mPlainTextView;
+
+	private DescriptionStateStorage contentStorage;
 
 	protected enum ContentType {
 		PLAIN,
@@ -57,11 +59,21 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		contentStorage = new DescriptionStateStorage(app, CONTENT_KEY);
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
+			restoreContent(savedInstanceState);
 			readBundle(savedInstanceState);
 		} else if (args != null) {
 			readBundle(args);
+		}
+	}
+
+	private void restoreContent(@NonNull Bundle savedInstanceState) {
+		String content = contentStorage.restore(savedInstanceState);
+		setContent(content != null ? content : "");
+		if (content == null) {
+			dismiss();
 		}
 	}
 
@@ -139,7 +151,7 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 		updateContentView();
 	}
 
-	private void setContent(@NonNull String content) {
+	protected void setContent(@NonNull String content) {
 		mContent = content;
 		mContentType = Algorithms.isHtmlText(mContent) ? ContentType.HTML : ContentType.PLAIN;
 	}
@@ -219,11 +231,18 @@ public abstract class ReadDescriptionFragment extends BaseFullScreenDialogFragme
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString(CONTENT_KEY, mContent);
+		if (mContent != null) {
+			contentStorage.save(outState, mContent);
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		contentStorage.clearIfClosed(this);
 	}
 
 	protected void readBundle(@NonNull Bundle bundle) {
-		setContent(bundle.getString(CONTENT_KEY));
 	}
 
 	@NonNull

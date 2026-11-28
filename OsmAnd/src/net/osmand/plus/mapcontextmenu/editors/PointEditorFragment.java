@@ -47,6 +47,7 @@ import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
 import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.PointBitmapDrawer;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.track.fragments.DescriptionStateStorage;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -61,6 +62,9 @@ import java.util.Map;
 public abstract class PointEditorFragment extends EditorFragment {
 
 	private static final String SELECTED_GROUP_KEY = "editor_selected_group";
+	private static final String DESCRIPTION_KEY = "point_editor_description";
+	private static final String DESCRIPTION_SELECTION_START_KEY = "point_editor_description_selection_start";
+	private static final String DESCRIPTION_SELECTION_END_KEY = "point_editor_description_selection_end";
 
 	private TextView addDelDescription;
 	private TextView addAddressBtn;
@@ -79,9 +83,26 @@ public abstract class PointEditorFragment extends EditorFragment {
 	protected PointBitmapDrawer pointDrawer;
 	protected boolean skipConfirmationDialog;
 
+	private DescriptionStateStorage descriptionStorage;
+	@Nullable
+	private String savedDescription;
+	private int savedSelectionStart = -1;
+	private int savedSelectionEnd = -1;
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.point_editor_fragment;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		descriptionStorage = new DescriptionStateStorage(app, DESCRIPTION_KEY);
+		if (savedInstanceState != null) {
+			savedDescription = descriptionStorage.restore(savedInstanceState);
+			savedSelectionStart = savedInstanceState.getInt(DESCRIPTION_SELECTION_START_KEY, -1);
+			savedSelectionEnd = savedInstanceState.getInt(DESCRIPTION_SELECTION_END_KEY, -1);
+		}
 	}
 
 	@Override
@@ -90,6 +111,20 @@ public abstract class PointEditorFragment extends EditorFragment {
 		if (selectedGroup != null) {
 			outState.putString(SELECTED_GROUP_KEY, selectedGroup.getName());
 		}
+		if (getView() != null) {
+			rememberDescription();
+		}
+		if (savedDescription != null) {
+			descriptionStorage.save(outState, savedDescription);
+			outState.putInt(DESCRIPTION_SELECTION_START_KEY, savedSelectionStart);
+			outState.putInt(DESCRIPTION_SELECTION_END_KEY, savedSelectionEnd);
+		}
+	}
+
+	private void rememberDescription() {
+		savedDescription = descriptionEdit.getText().toString();
+		savedSelectionStart = descriptionEdit.getSelectionStart();
+		savedSelectionEnd = descriptionEdit.getSelectionEnd();
 	}
 
 	@Override
@@ -140,8 +175,15 @@ public abstract class PointEditorFragment extends EditorFragment {
 		AndroidUtils.setTextPrimaryColor(view.getContext(), addressEdit, nightMode);
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), descriptionEdit, nightMode);
 		AndroidUtils.setHintTextSecondaryColor(view.getContext(), addressEdit, nightMode);
-		if (getDescriptionInitValue() != null) {
-			descriptionEdit.setText(getDescriptionInitValue());
+		// the text is saved by the fragment, see onSaveInstanceState()
+		descriptionEdit.setSaveEnabled(false);
+		String description = savedDescription != null ? savedDescription : getDescriptionInitValue();
+		if (description != null) {
+			descriptionEdit.setText(description);
+		}
+		if (savedDescription != null && savedSelectionStart >= 0 && savedSelectionEnd >= 0) {
+			int length = descriptionEdit.length();
+			descriptionEdit.setSelection(Math.min(savedSelectionStart, length), Math.min(savedSelectionEnd, length));
 		}
 
 		descriptionCaption = view.findViewById(R.id.description);
@@ -369,7 +411,14 @@ public abstract class PointEditorFragment extends EditorFragment {
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		descriptionStorage.clearIfClosed(this);
+	}
+
+	@Override
 	public void onDestroyView() {
+		rememberDescription();
 		PointEditor editor = getEditor();
 		if (!wasSaved() && editor != null && !editor.isNew() && !cancelled) {
 			save(false);
