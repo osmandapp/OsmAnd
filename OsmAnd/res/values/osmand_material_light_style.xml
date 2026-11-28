@@ -131,6 +131,14 @@
 		<item name="materialSwitchStyle">@style/Widget.OsmAnd.Material3.Switch</item>
 		<item name="materialCardViewStyle">@style/Widget.App.Material.SectionCard</item>
 
+		<item name="materialButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button</item>
+		<item name="materialButtonTonalStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TonalButton</item>
+		<item name="materialButtonOutlinedStyle">@style/Widget.OsmAnd.Material3Expressive.Button.OutlinedButton</item>
+		<item name="borderlessButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton</item>
+		<item name="materialButtonToggleGroupStyle">@style/Widget.OsmAnd.Material3Expressive.MaterialButtonToggleGroup</item>
+		<item name="materialAlertDialogTheme">@style/ThemeOverlay.OsmAnd.Material3Expressive.MaterialAlertDialog</item>
+		<item name="focusRingsEnabled">true</item>
+
 		<item name="android:windowAnimationStyle">@style/Animation.Material3.BottomSheetDialog
 		</item>
 		<item name="android:navigationBarColor">@android:color/transparent</item>

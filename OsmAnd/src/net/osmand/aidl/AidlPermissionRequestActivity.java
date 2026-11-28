@@ -105,8 +105,11 @@ public class AidlPermissionRequestActivity extends AppCompatActivity {
 		description.setText(getString(R.string.aidl_permissions_request_descr, pack));
 		ViewGroup groupsView = view.findViewById(R.id.groups);
 		int iconColor = AndroidUtils.getColorFromAttr(context, R.attr.colorOnSurfaceVariant);
+		// the dialog is Surface Container itself, so its rows step down to Surface
+		LayoutInflater rowInflater = LayoutInflater.from(
+				new ContextThemeWrapper(context, R.style.ThemeOverlay_OsmAnd_Material3_DialogRows));
 		for (AidlPermissionGroup group : requested) {
-			View rowView = LayoutInflater.from(context).inflate(R.layout.item_ui_setting_row, groupsView, false);
+			View rowView = rowInflater.inflate(R.layout.item_ui_setting_row, groupsView, false);
 			SettingRow row = new SettingRow(rowView);
 			row.setIcon(group.getIconId(), iconColor);
 			row.setTitle(group.getTitleId());

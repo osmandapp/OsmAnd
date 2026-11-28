@@ -76,13 +76,23 @@
 		</LinearLayout>
 	</LinearLayout>
 
+	<!-- a button can't change its type, so the row holds one of each and shows one -->
 	<com.google.android.material.button.MaterialButton
 		android:id="@+id/connection_action"
-		style="@style/Widget.Material3.Button.TonalButton"
+		style="?attr/materialButtonTonalStyle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/content_padding"
-		app:cornerRadius="@dimen/ui_corner_radius_button"
 		tools:text="@string/external_device_details_connect" />
+
+	<com.google.android.material.button.MaterialButton
+		android:id="@+id/connection_action_outlined"
+		style="?attr/materialButtonOutlinedStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:visibility="gone"
+		tools:text="@string/external_device_details_disconnect" />
 </LinearLayout>

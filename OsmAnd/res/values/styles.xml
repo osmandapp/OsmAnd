@@ -497,6 +497,130 @@
 		<item name="cornerSize">6dp</item>
 	</style>
 
+	<!-- Buttons of the Material 3 screens: the native M3 Expressive buttons with the colours of the
+	     UI Library. Pressed and disabled states are theme colours of their own, the native ripple
+	     (press wave, hover, focus) is drawn over them. The corners do not change with the state.
+	     Side padding, icon size, the icon-to-label gap and the minimum width are those of the UI
+	     Library. A screen only picks the type through the theme: no
+	     style = Filled, ?attr/materialButtonTonalStyle, ?attr/materialButtonOutlinedStyle,
+	     ?attr/borderlessButtonStyle (Text) - and sets no colour, corner or style on a button. -->
+	<style name="ShapeAppearance.OsmAnd.Button" parent="">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">@dimen/ui_corner_radius_button</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button" parent="Widget.Material3Expressive.Button">
+		<item name="backgroundTint">@color/ui_button_filled_background</item>
+		<item name="android:textColor">@color/ui_button_filled_content</item>
+		<item name="iconTint">@color/ui_button_filled_content</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+		<item name="android:minWidth">@dimen/ui_button_min_width</item>
+		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
+		<item name="android:paddingEnd">@dimen/ui_button_padding_horizontal</item>
+		<item name="iconSize">@dimen/ui_button_icon_size</item>
+		<item name="iconPadding">@dimen/ui_button_icon_gap</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TonalButton" parent="Widget.Material3Expressive.Button.TonalButton">
+		<item name="backgroundTint">@color/ui_button_tonal_background</item>
+		<item name="android:textColor">@color/ui_button_tonal_content</item>
+		<item name="iconTint">@color/ui_button_tonal_content</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+		<item name="android:minWidth">@dimen/ui_button_min_width</item>
+		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
+		<item name="android:paddingEnd">@dimen/ui_button_padding_horizontal</item>
+		<item name="iconSize">@dimen/ui_button_icon_size</item>
+		<item name="iconPadding">@dimen/ui_button_icon_gap</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.OutlinedButton" parent="Widget.Material3Expressive.Button.OutlinedButton">
+		<item name="backgroundTint">@color/ui_button_outlined_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="strokeColor">@color/ui_button_outline</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+		<item name="android:minWidth">@dimen/ui_button_min_width</item>
+		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
+		<item name="android:paddingEnd">@dimen/ui_button_padding_horizontal</item>
+		<item name="iconSize">@dimen/ui_button_icon_size</item>
+		<item name="iconPadding">@dimen/ui_button_icon_gap</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton" parent="Widget.Material3Expressive.Button.TextButton">
+		<item name="backgroundTint">@color/ui_button_text_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+		<item name="android:minWidth">@dimen/ui_button_min_width</item>
+		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
+		<item name="android:paddingEnd">@dimen/ui_button_padding_horizontal</item>
+		<item name="iconSize">@dimen/ui_button_icon_size</item>
+		<item name="iconPadding">@dimen/ui_button_icon_gap</item>
+	</style>
+
+	<!-- Dialogs of the Material 3 screens: the native M3 Expressive dialog on Surface Container, as
+	     in the UI Library (native: Surface Container High); its buttons are the Text type. A screen
+	     builds a dialog with MaterialAlertDialogBuilder(context) and sets no colour on it. -->
+	<style name="MaterialAlertDialog.OsmAnd.Material3Expressive" parent="MaterialAlertDialog.Material3Expressive">
+		<item name="backgroundTint">?attr/colorSurfaceContainer</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog" parent="Widget.Material3Expressive.Button.TextButton.Dialog">
+		<item name="backgroundTint">@color/ui_button_text_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
+		<item name="android:paddingEnd">@dimen/ui_button_padding_horizontal</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog.Flush" parent="Widget.Material3Expressive.Button.TextButton.Dialog.Flush">
+		<item name="backgroundTint">@color/ui_button_text_background</item>
+		<item name="android:textColor">@color/ui_button_plain_content</item>
+		<item name="iconTint">@color/ui_button_plain_content</item>
+		<item name="shapeAppearance">@style/ShapeAppearance.OsmAnd.Button</item>
+		<item name="android:paddingStart">@dimen/ui_button_padding_horizontal</item>
+		<item name="android:paddingEnd">@dimen/ui_button_padding_horizontal</item>
+	</style>
+
+	<style name="ThemeOverlay.OsmAnd.Material3Expressive.MaterialAlertDialog" parent="ThemeOverlay.Material3Expressive.MaterialAlertDialog">
+		<item name="alertDialogStyle">@style/MaterialAlertDialog.OsmAnd.Material3Expressive</item>
+		<item name="buttonBarButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
+		<item name="buttonBarPositiveButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
+		<item name="buttonBarNegativeButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog</item>
+		<item name="buttonBarNeutralButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.TextButton.Dialog.Flush</item>
+	</style>
+
+	<!-- The same dialog with a centered icon and title -->
+	<style name="ThemeOverlay.OsmAnd.Material3Expressive.MaterialAlertDialog.Centered">
+		<item name="materialAlertDialogTitlePanelStyle">@style/MaterialAlertDialog.Material3Expressive.Title.Panel.CenterStacked</item>
+		<item name="materialAlertDialogTitleIconStyle">@style/MaterialAlertDialog.Material3.Title.Icon.CenterStacked</item>
+		<item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.Material3Expressive.Title.Text.CenterStacked</item>
+	</style>
+
+	<!-- Rows inside a dialog: the dialog is Surface Container itself, so its rows step down to
+	     Surface and stay separate surfaces -->
+	<style name="ThemeOverlay.OsmAnd.Material3.DialogRows" parent="">
+		<item name="colorSurfaceContainer">?attr/colorSurface</item>
+	</style>
+
+	<!-- Connected button group: selected colorPrimary, unselected colorPrimaryContainer - an
+	     intentional deviation from native M3 (neutral unselected container), kept in one place. The
+	     group hands the style to its buttons, a screen sets nothing on them. -->
+	<style name="Widget.OsmAnd.Material3Expressive.Button.Toggle" parent="Widget.Material3Expressive.Button">
+		<item name="backgroundTint">@color/ui_toggle_button_background</item>
+		<item name="android:textColor">@color/ui_toggle_button_text</item>
+		<item name="iconTint">@color/ui_toggle_button_text</item>
+	</style>
+
+	<style name="ThemeOverlay.OsmAnd.Material3Expressive.MaterialButtonToggleGroup" parent="">
+		<item name="materialButtonStyle">@style/Widget.OsmAnd.Material3Expressive.Button.Toggle</item>
+	</style>
+
+	<style name="Widget.OsmAnd.Material3Expressive.MaterialButtonToggleGroup" parent="Widget.Material3Expressive.MaterialButtonToggleGroup">
+		<item name="materialThemeOverlay">@style/ThemeOverlay.OsmAnd.Material3Expressive.MaterialButtonToggleGroup</item>
+	</style>
+
 	<style name="Widget.App.Material.Switch"
 		parent="Widget.Material3.CompoundButton.MaterialSwitch">
 		<item name="thumbTint">@color/switch_thumb_tint</item>
