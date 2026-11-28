@@ -5509,4 +5509,6 @@
     <string name="fullscreen_mode_navigation_bar">Navigaciona traka</string>
     <string name="fullscreen_mode_navigation_bar_descr">Nazad, Početna, Nedavno</string>
     <string name="fullscreen_mode_bars_footer">Prevucite prstom od ivice ekrana da biste na trenutak prikazali skrivene trake. Dodir na mapi vraća sve.</string>
+    <string name="shadows_hillshade_description">Senke su isključene dok teren prikazuje senku brda: Senka brda već osenčava reljef.</string>
+    <string name="sun_light_manual">Ručno</string>
 </resources>
