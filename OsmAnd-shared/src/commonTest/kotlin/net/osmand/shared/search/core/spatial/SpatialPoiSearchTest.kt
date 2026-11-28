@@ -66,7 +66,8 @@ class SpatialPoiSearchTest {
 				SearchSettings(emptyList()))
 			val result = SearchResult(phrase)
 			val api = SpatialTextSearchAPI(types, rulesDir.toString())
-			assertNotNull(api.convertSpatialSearchResult(spatial, result, poiSearch, null, "en", false))
+			val ctx = SpatialSearchContext(SpatialTextSearchSettings.defaultSettings(), emptyList(), poiSearch, KLatLon(0.0, 0.0))
+			assertNotNull(api.convertSpatialSearchResult(spatial, result, ctx, null, "en", false))
 			assertEquals(value, result.localeName)
 			assertEquals(value, (result.`object` as TopIndexFilter).getValue())
 		}

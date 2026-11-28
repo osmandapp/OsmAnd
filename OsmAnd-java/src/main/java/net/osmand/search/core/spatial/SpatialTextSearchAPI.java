@@ -29,6 +29,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
@@ -289,7 +290,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		String lang = phrase.getSettings().getLang();
 		boolean transliterate = phrase.getSettings().isTransliterate();
 
-		if (convertSpatialSearchResult(ssr, result, context.poiSearch, location, lang, transliterate) == null) {
+		if (convertSpatialSearchResult(ssr, result, context, location, lang, transliterate) == null) {
 			return null;
 		}
 
@@ -298,7 +299,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	}
 
 	public SearchResult convertSpatialSearchResult(SpatialSearchResult ssr, SearchResult result,
-	                                               SpatialPoiSearch poiTypeSearch, LatLon location,
+	                                               SpatialSearchContext context, LatLon location,
 	                                               String lang, boolean transliterate) {
 		List<MapObject> objs = ssr.getObjects();
 
@@ -307,7 +308,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		result.spatialSearchVisibleLevel = ssr.visibleLevel();
 
 		if (ssr.isPoiCategory()) {
-			return convertPoiType(ssr, result, poiTypeSearch);
+			return convertPoiType(ssr, result, context);
 		} else if (Algorithms.isNotEmpty(objs)) {
 			return convertMapObjects(ssr, objs, result, lang, transliterate);
 		}
@@ -407,8 +408,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return null;
 	}
 
-	private SearchResult convertPoiType(SpatialSearchResult ssr, SearchResult result, SpatialPoiSearch poiTypeSearch) {
-		SpatialPoiSearch.SpatialPoiType spatialPoiType = ssr.getPoiCategory(poiTypeSearch);
+	private SearchResult convertPoiType(SpatialSearchResult ssr, SearchResult result, SpatialSearchContext context) {
+		SpatialPoiSearch.SpatialPoiType spatialPoiType = ssr.getPoiCategory(context.poiSearch);
 		if (spatialPoiType == null) {
 			return null;
 		}
@@ -419,9 +420,13 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			object = poiType;
 			localeName = PoiAdditionalLabels.getSearchName(poiType);
 		} else if (spatialPoiType.poiSubType != null) {
-			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			// the value itself: the names list starts with the alternative names of the map (Lidl -> its name:fa)
-			localeName = spatialPoiType.poiAdditional;
+			SpatialPoiSearch.SpatialPoiType local = spatialPoiType.getLocalType(context);
+			object = new TopIndexFilter(local.poiSubType, poiTypes, local.poiAdditional);
+			localeName = local.poiAdditional;
+			SearchSettings settings = result.requiredSearchPhrase.getSettings();
+			String lang = settings == null ? null
+					: Algorithms.isEmpty(settings.getLang()) ? settings.getAppLang() : settings.getLang();
+			result.alternateName = spatialPoiType.getAltName(context, lang);
 		} else {
 			return null;
 		}

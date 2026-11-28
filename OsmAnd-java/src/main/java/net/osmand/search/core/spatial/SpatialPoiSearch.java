@@ -103,6 +103,68 @@ public class SpatialPoiSearch {
 			return parentTypes;
 		}
 
+		/**
+		 * The value of the same brand under the plain tag (brand for brand:en): a brand row shows and filters it.
+		 */
+		public SpatialPoiType getLocalType(SpatialSearchContext ctx) {
+			SpatialPoiType local = poiSubType == null ? null : getSameBrandType(ctx, getPlainTag());
+			return local != null ? local : this;
+		}
+
+		/**
+		 * The name in brackets of a brand row: the value the query matched, else the value in lang.
+		 */
+		public String getAltName(SpatialSearchContext ctx, String lang) {
+			if (poiSubType == null) {
+				return null;
+			}
+			String local = getLocalType(ctx).poiAdditional;
+			String alt = poiAdditional;
+			if ((alt == null || alt.equalsIgnoreCase(local)) && !Algorithms.isEmpty(lang)) {
+				SpatialPoiType inLang = getSameBrandType(ctx, getPlainTag() + ":" + lang);
+				alt = inLang != null ? inLang.poiAdditional : null;
+			}
+			return alt == null || alt.equalsIgnoreCase(local) ? null : alt;
+		}
+
+		private String getPlainTag() {
+			int colon = poiSubType.name.indexOf(':');
+			return colon == -1 ? poiSubType.name : poiSubType.name.substring(0, colon);
+		}
+
+		private SpatialPoiType getSameBrandType(SpatialSearchContext ctx, String tag) {
+			if (tag.equals(poiSubType.name)) {
+				return this;
+			}
+			List<SpatialPoiType> sameBrand = Algorithms.isEmpty(wikidataId) ? null : ctx.poiSearch.byWikidataKey.get(wikidataId);
+			List<SpatialPoiType> candidates = new ArrayList<>();
+			if (sameBrand != null) {
+				for (SpatialPoiType other : sameBrand) {
+					if (other.poiSubType != null && tag.equals(other.poiSubType.name)
+							&& !Algorithms.isEmpty(other.poiAdditional)) {
+						candidates.add(other);
+					}
+				}
+			}
+			// byWikidataKey keeps the values of every map read in the session: the most frequent value of the nearest
+			// map with the brand wins
+			for (SpatialSearchFileCache fc : ctx.internalFile) {
+				SpatialPoiType best = null;
+				int bestFreq = 0;
+				for (SpatialPoiType c : candidates) {
+					Integer freq = fc.poiFrequencies == null ? null : fc.poiFrequencies.get(c.key);
+					if (freq != null && freq > bestFreq) {
+						best = c;
+						bestFreq = freq;
+					}
+				}
+				if (best != null) {
+					return best;
+				}
+			}
+			return candidates.isEmpty() ? null : candidates.get(0);
+		}
+
 		public boolean accept(Amenity a) {
 			if (key.equals(a.getType().getKeyName())) {
 				return true;
