@@ -50,6 +50,5 @@
 		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginTop="@dimen/content_padding_half"
 		android:layout_marginEnd="@dimen/content_padding_half"
-		app:labelBehavior="gone"
-		app:trackColorInactive="?attr/colorSurfaceContainerHighest" />
+		app:labelBehavior="gone" />
 </LinearLayout>
