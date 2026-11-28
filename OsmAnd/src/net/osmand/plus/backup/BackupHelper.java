@@ -736,10 +736,8 @@ public class BackupHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	void generateBackupInfo(@NonNull Map<String, LocalFile> localFiles,
-			@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
-			@NonNull Map<String, RemoteFile> deletedRemoteFiles,
+	void generateBackupInfo(@NonNull PrepareBackupResult backup,
 			boolean autoSync, @Nullable OnGenerateBackupInfoListener listener) {
-		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, localFiles, uniqueRemoteFiles, deletedRemoteFiles, autoSync, listener), executor);
+		OsmAndTaskManager.executeTask(new GenerateBackupInfoTask(app, backup, autoSync, listener), executor);
 	}
 }

@@ -10,6 +10,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupUtils;
+import net.osmand.plus.backup.LocalFileForms;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -387,6 +388,10 @@ public class FileSettingsItem extends StreamSettingsItem {
 				return newFile;
 			}
 		}
+	}
+
+	public void useExistingFileForm(@NonNull LocalFileForms localFileForms) {
+		file = localFileForms.fileToWrite(file);
 	}
 
 	@Override

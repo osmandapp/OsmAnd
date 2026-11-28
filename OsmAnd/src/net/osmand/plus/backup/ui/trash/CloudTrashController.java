@@ -135,7 +135,8 @@ public class CloudTrashController {
 			log.error("Failed to download item: " + item.oldFile.getName() + ", SettingsItem is null");
 			return;
 		}
-		LocalFile localFile = backupHelper.getBackup().getLocalFiles().get(item.oldFile.getTypeNamePath());
+		Map<String, LocalFile> localFiles = backupHelper.getBackup().getNormalizedLocalFiles();
+		LocalFile localFile = localFiles.get(item.oldFile.getNormalizedTypeNamePath());
 		if (localFile != null) {
 			FragmentManager manager = fragment.getFragmentManager();
 			if (manager != null) {

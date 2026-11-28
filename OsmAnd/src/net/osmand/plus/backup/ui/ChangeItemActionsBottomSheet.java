@@ -23,6 +23,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupDbHelper;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.UploadedFileInfo;
 import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ImportBackupTask;
@@ -228,7 +230,12 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 
 	@Nullable
 	private String getDescriptionForItemType(SettingsItemType type, String fileName, String summary) {
-		UploadedFileInfo info = app.getBackupHelper().getUploadedFileInfo(type.name(), fileName);
+		BackupHelper backupHelper = app.getBackupHelper();
+		UploadedFileInfo info = backupHelper.getUploadedFileInfo(type.name(), fileName);
+		if (info == null) {
+			BackupDbHelper dbHelper = backupHelper.getDbHelper();
+			info = dbHelper.getUploadedFileInfoMap().get(dbHelper.getUploadedFileInfoKey(type.name(), fileName));
+		}
 		return info != null ? generateTimeString(app, summary, info.getUploadTime()) : null;
 	}
 

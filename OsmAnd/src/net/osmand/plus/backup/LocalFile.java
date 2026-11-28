@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.shared.util.KUnicode;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -74,6 +75,11 @@ public class LocalFile {
 		} else {
 			return type;
 		}
+	}
+
+	@NonNull
+	public String getNormalizedTypeFileName() {
+		return KUnicode.INSTANCE.normalizeNFC(getTypeFileName());
 	}
 
 	@NonNull

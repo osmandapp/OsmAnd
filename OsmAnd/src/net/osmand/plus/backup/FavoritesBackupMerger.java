@@ -18,6 +18,7 @@ import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.util.KUnicode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -176,7 +177,8 @@ final class FavoritesBackupMerger {
 		if (!new File(fileName).getName().equals(fileName)) {
 			return null;
 		}
-		return new File(new File(app.getNoBackupFilesDir(), SNAPSHOT_DIR), fileName);
+		File snapshotDir = new File(app.getNoBackupFilesDir(), SNAPSHOT_DIR);
+		return new LocalFileForms().fileToWrite(new File(snapshotDir, KUnicode.INSTANCE.normalizeNFC(fileName)));
 	}
 
 	@Nullable

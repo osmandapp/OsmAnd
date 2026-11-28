@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.shared.util.KUnicode;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +20,12 @@ public class PrepareBackupResult {
 	private List<SettingsItem> settingsItems;
 	private Map<String, RemoteFile> remoteFiles;
 	private Map<String, RemoteFile> uniqueRemoteFiles;
+	private Map<String, RemoteFile> normalizedRemoteFiles;
 	private Map<String, RemoteFile> uniqueInfoRemoteFiles;
 	private Map<String, RemoteFile> deletedRemoteFiles;
 	private Map<String, RemoteFile> oldRemoteFiles;
 	private Map<String, LocalFile> localFiles;
+	private Map<String, LocalFile> normalizedLocalFiles;
 	private String error;
 	private boolean autoSync;
 
@@ -71,13 +75,24 @@ public class PrepareBackupResult {
 
 	@Nullable
 	public RemoteFile getRemoteFile(@NonNull String type, @NonNull String fileName) {
-		String typeWithName;
+		return remoteFiles.get(getTypeWithName(type, fileName));
+	}
+
+	@Nullable
+	public RemoteFile getNormalizedRemoteFile(@NonNull String type, @NonNull String fileName) {
+		return normalizedRemoteFiles.get(KUnicode.INSTANCE.normalizeNFC(getTypeWithName(type, fileName)));
+	}
+
+	public Map<String, RemoteFile> getNormalizedRemoteFiles() {
+		return normalizedRemoteFiles;
+	}
+
+	@NonNull
+	private String getTypeWithName(@NonNull String type, @NonNull String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
-			typeWithName = type + (fileName.charAt(0) == '/' ? fileName : "/" + fileName);
-		} else {
-			typeWithName = type;
+			return type + (fileName.charAt(0) == '/' ? fileName : "/" + fileName);
 		}
-		return remoteFiles.get(typeWithName);
+		return type;
 	}
 
 	@Nullable
@@ -122,14 +137,42 @@ public class PrepareBackupResult {
 			}
 		}
 		this.uniqueRemoteFiles = uniqueRemoteFiles;
+		this.normalizedRemoteFiles = normalizeRemoteFiles(uniqueRemoteFiles, deletedRemoteFiles);
 		this.uniqueInfoRemoteFiles = uniqueInfoRemoteFiles;
 		this.deletedRemoteFiles = deletedRemoteFiles;
 		this.oldRemoteFiles = oldRemoteFiles;
 		this.remoteFiles = remoteFilesMap;
 	}
 
+	@NonNull
+	private Map<String, RemoteFile> normalizeRemoteFiles(@NonNull Map<String, RemoteFile> uniqueRemoteFiles,
+			@NonNull Map<String, RemoteFile> deletedRemoteFiles) {
+		List<RemoteFile> files = new ArrayList<>(uniqueRemoteFiles.values());
+		files.addAll(deletedRemoteFiles.values());
+		Map<String, RemoteFile> result = new HashMap<>(files.size());
+		for (RemoteFile remoteFile : files) {
+			String key = remoteFile.getNormalizedTypeNamePath();
+			RemoteFile existing = result.get(key);
+			if (existing == null || isPreferredRemoteFile(remoteFile, existing)) {
+				result.put(key, remoteFile);
+			}
+		}
+		return result;
+	}
+
+	private boolean isPreferredRemoteFile(@NonNull RemoteFile remoteFile, @NonNull RemoteFile other) {
+		if (remoteFile.isDeleted() != other.isDeleted()) {
+			return other.isDeleted();
+		}
+		return remoteFile.getUpdatetimems() > other.getUpdatetimems();
+	}
+
 	public Map<String, LocalFile> getLocalFiles() {
 		return localFiles;
+	}
+
+	public Map<String, LocalFile> getNormalizedLocalFiles() {
+		return normalizedLocalFiles;
 	}
 
 	void setLocalFiles(@NonNull List<LocalFile> localFiles) {
@@ -138,6 +181,20 @@ public class PrepareBackupResult {
 			localFileMap.put(localFile.getTypeFileName(), localFile);
 		}
 		this.localFiles = localFileMap;
+		this.normalizedLocalFiles = normalizeLocalFiles(localFiles);
+	}
+
+	@NonNull
+	private Map<String, LocalFile> normalizeLocalFiles(@NonNull List<LocalFile> localFiles) {
+		Map<String, LocalFile> result = new HashMap<>(localFiles.size());
+		for (LocalFile localFile : localFiles) {
+			String key = localFile.getNormalizedTypeFileName();
+			LocalFile existing = result.get(key);
+			if (existing == null || localFile.localModifiedTime > existing.localModifiedTime) {
+				result.put(key, localFile);
+			}
+		}
+		return result;
 	}
 
 	public void setError(@Nullable String error) {

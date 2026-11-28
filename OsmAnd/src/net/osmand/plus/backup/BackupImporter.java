@@ -50,6 +50,7 @@ class BackupImporter {
 
 	private boolean cancelled;
 
+	private final LocalFileForms localFileForms = new LocalFileForms();
 	private final AtomicInteger dataProgress = new AtomicInteger(0);
 	private final AtomicInteger itemsProgress = new AtomicInteger(0);
 
@@ -172,6 +173,9 @@ class BackupImporter {
 					LOG.debug("Temp file downloaded " + errorStr + " " + tempFile.getAbsolutePath());
 				}
 				if (!error) {
+					if (item instanceof FileSettingsItem fileItem) {
+						fileItem.useExistingFileForm(localFileForms);
+					}
 					is = new FileInputStream(tempFile);
 					File file = reader.readFromStream(is, tempFile, remoteFile.getName());
 					boolean applied = true;
@@ -334,7 +338,8 @@ class BackupImporter {
 	                                      @NonNull List<RemoteFile> remoteInfoFiles,
 	                                      boolean readItems) {
 		File tempDir = FileUtils.getTempDir(backupHelper.getApp());
-		Map<String, UploadedFileInfo> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
+		BackupDbHelper dbHelper = backupHelper.getDbHelper();
+		Map<String, UploadedFileInfo> infoMap = dbHelper.getUploadedFileInfoMap();
 		BackupInfo backupInfo = backupHelper.getBackup().getBackupInfo();
 		List<RemoteFile> filesToDelete = backupInfo != null ? backupInfo.filesToDelete : Collections.emptyList();
 		for (RemoteFile remoteFile : uniqueRemoteFiles) {
@@ -348,7 +353,7 @@ class BackupImporter {
 						break;
 					}
 				}
-				UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
+				UploadedFileInfo fileInfo = infoMap.get(dbHelper.getUploadedFileInfoKey(remoteFile.getType(), origFileName));
 				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
 				if (shouldDownloadOnCollecting(remoteFile, readItems)
 						&& (uploadTime != remoteFile.getUpdatetimems() || delete)) {

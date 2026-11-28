@@ -280,7 +280,11 @@ public class BackupExporter extends Exporter {
 		String type = item.getType().name();
 		ExportType exportType = ExportType.findBy(item);
 		if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
-			RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
+			PrepareBackupResult backup = backupHelper.getBackup();
+			RemoteFile remoteFile = backup.getRemoteFile(type, fileName);
+			if (remoteFile == null) {
+				remoteFile = backup.getNormalizedRemoteFile(type, fileName);
+			}
 			if (remoteFile != null) {
 				oldFilesToDelete = CollectionUtils.addToList(oldFilesToDelete, remoteFile);
 			}
