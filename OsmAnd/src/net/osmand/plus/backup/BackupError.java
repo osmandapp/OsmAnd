@@ -49,6 +49,12 @@ public class BackupError {
 		return code;
 	}
 
+	public boolean isRejection() {
+		return code == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
+				|| code == SERVER_ERROR_CODE_GZIP_ONLY_SUPPORTED_UPLOAD
+				|| code == SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED;
+	}
+
 	private void parseError(@NonNull String error) {
 		if (!Algorithms.isEmpty(error)) {
 			try {
