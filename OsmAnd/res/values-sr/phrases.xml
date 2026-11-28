@@ -4577,7 +4577,7 @@
     <string name="poi_ship_designated">Приступ бродом: намењено</string>
     <string name="poi_cemt_vb">Vб</string>
     <string name="poi_cemt_vib">VIб</string>
-    <string name="poi_motor_vehicle_designated">Намењено за моторна возила</string>
+    <string name="poi_motor_vehicle_designated">Моторно возило: намењено</string>
     <string name="poi_healthcare_speciality_allergology">Алергологија</string>
     <string name="poi_healthcare_speciality_cardiac_surgery">Кардио хирургија</string>
     <string name="poi_healthcare_speciality_endodontics">Ендодонтика</string>
@@ -4596,9 +4596,9 @@
     <string name="poi_cemt_vii">VII</string>
     <string name="poi_sac_scale">SAC скала</string>
     <string name="poi_cai_scale">CAI скала</string>
-    <string name="poi_foot_designated">Намењено за пешаке</string>
+    <string name="poi_foot_designated">Пешаци: намењено</string>
     <string name="poi_motorcar_designated">Аутомобил: одређено</string>
-    <string name="poi_vehicle_designated">Намењено за возила</string>
+    <string name="poi_vehicle_designated">Возило: намењено</string>
     <string name="poi_healthcare_speciality_paediatric_surgery">Педијатријска хирургија</string>
     <string name="poi_healthcare_speciality_geriatrics">Геријатрика</string>
     <string name="poi_healthcare_speciality_periodontics">Пародонтологија</string>
@@ -5038,12 +5038,12 @@
     <string name="poi_spiritist_church">Спиритистичка црква</string>
     <string name="poi_christian_church">Хришћанска црква</string>
     <string name="poi_financial_advisor">Финансијски саветник</string>
-    <string name="poi_moving_company">Селидбена компанија</string>
-    <string name="poi_surveyor">Канцеларија геодетског стручњака</string>
+    <string name="poi_moving_company">Селидбена компанија;селидбени сервиси</string>
+    <string name="poi_surveyor">Канцеларија геодетског стручњака;геодетска снимања</string>
     <string name="poi_office_university">Универзитетска канцеларија</string>
     <string name="poi_transport">Канцеларија за транспорт</string>
     <string name="poi_harbour_master">Лучки капетан</string>
-    <string name="poi_bail_bond_agent">Агент за кауцију</string>
+    <string name="poi_bail_bond_agent">Агент за кауцију;кауција</string>
     <string name="poi_visa">Виза</string>
     <string name="poi_chamber">Комора</string>
     <string name="poi_tutoring">Подучавање</string>
@@ -5159,7 +5159,7 @@
     <string name="poi_sample_collection_yes">Прикупљање узорака: да</string>
     <string name="poi_sample_collection_covid19">Ковид19</string>
     <string name="poi_sample_collection_blood">Крв</string>
-    <string name="poi_yoga">Јога</string>
+    <string name="poi_yoga">Јога;јога студио</string>
     <string name="poi_memorial_type">Тип споменика</string>
     <string name="poi_covered_booth_filter">Кабина</string>
     <string name="poi_rapids_filter">Нивои брзака</string>
@@ -5194,7 +5194,7 @@
     <string name="poi_craft_signmaker">Израђивач знака</string>
     <string name="poi_funeral_hall">Сала за погреб</string>
     <string name="poi_post_depot">Поштански депо</string>
-    <string name="poi_indoor_play">Затворено игралиште</string>
+    <string name="poi_indoor_play">Затворено игралиште;игралиште</string>
     <string name="poi_traffic_park">Саобраћајни полигон</string>
     <string name="poi_animal_breeding">Узгој животиња</string>
     <string name="poi_stables">Штале</string>
