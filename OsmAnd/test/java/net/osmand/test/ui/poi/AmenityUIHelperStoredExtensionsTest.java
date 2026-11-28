@@ -3,6 +3,7 @@ package net.osmand.test.ui.poi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import net.osmand.data.Amenity;
@@ -23,7 +25,9 @@ import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.data.AdditionalInfoBundle;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.util.Algorithms;
@@ -33,8 +37,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,7 +52,6 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 	private static final String CUSTOM_KEY = "test:country";
 	private static final String COLLIDING_CUSTOM_KEY = "phone:custom";
 	private static final String CUSTOM_REFERENCE_KEY = "test:reference";
-	private static final String CUSTOM_ROUTE_KEY = "test:route_id";
 	private static final String UNKNOWN_UNPREFIXED_KEY = "unknown_point_field";
 	private static final String HIDDEN_KEY = "hidden";
 	private static final String VISITED_DATE_KEY = "visited_date";
@@ -216,18 +222,43 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		assertEquals("air_conditioning_yes", rows.get("test:status").text);
 	}
 
-	/**
-	 * A custom field whose key contains "route", "content" or "wikipedia" is still dropped by the
-	 * amenity-only substring filters, which run before the fallback. Known gap of #25226.
-	 */
 	@Test
-	public void customFieldMatchingAmenityFilterIsStillNotShown() {
-		Map<String, String> extensions = Collections.singletonMap(CUSTOM_ROUTE_KEY, "1234");
+	public void namespacedDescriptionAndWikiLanguageShowAsCustomFields() {
+		Map<String, String> expected = Map.of(
+				"vendor:short_description", "Trail note",
+				"vendor:wiki_lang", "uk");
+		Map<String, String> stored = new HashMap<>(expected);
+		stored.put("short_description", "POI summary");
+		stored.put("wiki_lang", "en");
+		stored.put("wiki_lang:en", "yes");
 
-		Map<String, AmenityInfoRow> rows = buildRows(extensions,
-				AdditionalInfoBundle.getGenericRowKeys(extensions));
+		assertCustomRows(stored, expected);
+	}
 
-		assertFalse(rows.containsKey(CUSTOM_ROUTE_KEY));
+	@Test
+	public void importedWaypointsShowCustomFields() throws IOException {
+		GpxFile file;
+		try (InputStream input = InstrumentationRegistry.getInstrumentation().getContext()
+				.getAssets().open("25226_custom-tags.gpx")) {
+			file = SharedUtil.loadGpxFile(input);
+		}
+		assertNull(file.getError());
+		List<WptPt> points = file.getPointsList();
+		assertEquals(3, points.size());
+		assertPointRows(points, "Test", Map.of(
+				"test:country", "United States",
+				"test:state", "Virginia",
+				"test:telephone", "(804) 828-0100",
+				"test:postcode", "23284",
+				"test:start_date", "Thursday, June 8, 2023"));
+		assertPointRows(points, "Test all tags", Map.of(
+				"my_note", "yes",
+				"test:status", "air_conditioning_yes",
+				"test:color", "red"));
+		assertPointRows(points, "Test filtered keys", Map.of(
+				"test:route_id", "1234",
+				"test:content", "abc",
+				"test:wikipedia", "en:Richmond, Virginia"));
 	}
 
 	@Test
@@ -314,6 +345,27 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 		assertNotNull(cafe);
 		assertTrue(cafe.accept(sustenance, "cafe"));
 		assertFalse(cafe.accept(sustenance, "restaurant"));
+	}
+
+	private void assertPointRows(@NonNull List<WptPt> points, @NonNull String name,
+	                             @NonNull Map<String, String> expected) {
+		WptPt point = points.stream().filter(item -> name.equals(item.getName())).findFirst().orElse(null);
+		assertNotNull(name, point);
+		assertCustomRows(point.getExtensionsToRead(), expected);
+	}
+
+	private void assertCustomRows(@NonNull Map<String, String> stored, @NonNull Map<String, String> expected) {
+		Map<String, String> merged = new AmenityExtensionsHelper(app).getUpdatedAmenityExtensions(stored, null);
+		Map<String, AmenityInfoRow> rows = buildRows(merged, AdditionalInfoBundle.getGenericRowKeys(stored));
+
+		assertEquals(expected.keySet(), rows.keySet());
+		for (Map.Entry<String, AmenityInfoRow> entry : rows.entrySet()) {
+			String key = entry.getKey();
+			AmenityInfoRow row = entry.getValue();
+			assertEquals(key, expected.get(key), row.text);
+			assertFalse(key, row.isWiki);
+			assertEquals(key, R.drawable.ic_action_info_dark, row.iconId);
+		}
 	}
 
 	@NonNull

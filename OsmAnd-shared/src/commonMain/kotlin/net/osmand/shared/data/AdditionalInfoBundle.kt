@@ -96,7 +96,7 @@ class AdditionalInfoBundle(
 		var cuisineEntry: AmenityTagEntry? = null
 
 		for ((key, value) in getFilteredLocalizedInfo()) {
-			if (isKeyToSkip(key) || !shouldDisplayKey(key)) {
+			if (isHiddenInfoKey(key) || !shouldDisplayKey(key)) {
 				continue
 			}
 			if (!allowNoteTag && NOTE == key && value is String) {
@@ -106,17 +106,31 @@ class AdditionalInfoBundle(
 				continue
 			}
 			val strValue = value as? String
+			val isStoredKey = key in genericRowKeys
+			val matchesReservedKey = RESERVED_POI_KEYS.any { it in key }
+			if (matchesReservedKey && (!isStoredKey || !hasCustomNamespace(key))) {
+				continue
+			}
 
 			val resolvedType = resolvePoiType(category, key, strValue)
 			val additionalType = resolvedType.additionalType
 			val categoryType = resolvedType.categoryType
+			val hasPoiType = additionalType != null || categoryType != null
+			if (matchesReservedKey && hasPoiType) {
+				continue
+			}
+			val useGenericFallback = !hasPoiType && isStoredKey
+			val isDescription = !matchesReservedKey && key.contains(Amenity.DESCRIPTION)
+			if (isDescription && MapPoiTypes.ROUTE_ARTICLE == get(SUBTYPE)) {
+				continue
+			}
 			if (socketGroup.add(additionalType, strValue)) {
 				continue
 			}
 			if (isFilterOnlyOrGrouped(additionalType)) {
 				continue
 			}
-			if (additionalType == null && categoryType == null && !showDefaultTags && !genericRowKeys.contains(key)) {
+			if (!hasPoiType && !showDefaultTags && !useGenericFallback) {
 				continue
 			}
 
@@ -126,7 +140,7 @@ class AdditionalInfoBundle(
 						.setValue(strValue)
 						.setOrder(additionalType.getOrder())
 						.setResolvedType(resolvedType)
-						.setIsDescription(key.contains(Amenity.DESCRIPTION))
+						.setIsDescription(isDescription)
 						.build()
 					if (Amenity.CUISINE == key) {
 						cuisineEntry = tagEntry
@@ -144,7 +158,7 @@ class AdditionalInfoBundle(
 							.setValue(strValue)
 							.setOrder(PoiType.DEFAULT_ORDER)
 							.setResolvedType(resolvedType)
-							.setIsDescription(key.contains(Amenity.DESCRIPTION))
+							.setIsDescription(isDescription)
 							.build()
 					)
 				}
@@ -278,21 +292,8 @@ class AdditionalInfoBundle(
 		return filtered.ifEmpty { null }
 	}
 
-	private fun shouldDisplayKey(key: String): Boolean {
-		if (key.contains(Amenity.WIKIPEDIA) || key.contains(Amenity.CONTENT)
-			|| key.contains(Amenity.SHORT_DESCRIPTION) || key.contains(MapPoiTypes.WIKI_LANG)
-		) {
-			return false
-		}
-		if (MapPoiTypes.ROUTE_ARTICLE == get(SUBTYPE) && key.contains(Amenity.DESCRIPTION)) {
-			return false
-		}
-		val t = poiTypes.getAnyPoiAdditionalTypeByKey(key)
-		if (t is PoiType && t.isHidden()) {
-			return false
-		}
-		return Amenity.NAME != key
-	}
+	private fun shouldDisplayKey(key: String): Boolean =
+		key != Amenity.NAME && getPoiAdditionalType(key, null)?.isHidden() != true
 
 	fun getCategory(): PoiCategory? {
 		if (additionalInfo == null) {
@@ -345,14 +346,24 @@ class AdditionalInfoBundle(
 		return ResolvedPoiType(additionalType, categoryType)
 	}
 
-	fun isKeyToSkip(key: String): Boolean =
+	fun isKeyToSkip(key: String): Boolean = isHiddenInfoKey(key) || key.contains(ROUTE)
+
+	private fun isHiddenInfoKey(key: String): Boolean =
 		KCollectionUtils.startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
 				|| KCollectionUtils.equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", MAPILLARY, PANORAMAX, "subway_region")
 				|| MapObject.isNameLangTag(key)
-				|| key.contains(ROUTE)
+
+	private fun hasCustomNamespace(key: String): Boolean {
+		val prefix = key.substringBefore(':', "")
+		return prefix.isNotEmpty() && RESERVED_POI_KEYS.none { it in prefix } && getPoiAdditionalType(prefix, null) == null
+	}
 
 	companion object {
 		const val LOCALIZATIONS = "localizations"
+
+		private val RESERVED_POI_KEYS = setOf(
+			ROUTE, Amenity.CONTENT, Amenity.WIKIPEDIA, Amenity.SHORT_DESCRIPTION, MapPoiTypes.WIKI_LANG
+		)
 
 		private val HIDDEN_EXTENSIONS = setOf(
 			GpxUtilities.COLOR_NAME_EXTENSION, GpxUtilities.ICON_NAME_EXTENSION,

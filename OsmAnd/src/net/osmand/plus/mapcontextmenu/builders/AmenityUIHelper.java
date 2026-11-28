@@ -191,17 +191,18 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityTagEntry.Builder getEntryDataBuilder(@NonNull Context context, @NonNull String key,
 	                                                    @NonNull String value, boolean isDescription,
 	                                                    @NonNull AdditionalInfoBundle.ResolvedPoiType resolvedType) {
-		if (resolvedType.getAdditionalType() == null && resolvedType.getCategoryType() != null) {
+		PoiType additionalType = resolvedType.getAdditionalType();
+		if (additionalType == null && resolvedType.getCategoryType() != null) {
 			return null;
 		}
 		AmenityTagEntry.Builder entryBuilder =
 				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
-		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-		if (resolvedType.getAdditionalType() != null) {
+		boolean useGenericFallback = additionalType == null && genericRowKeys.contains(key);
+		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key, useGenericFallback);
+		if (additionalType != null) {
 			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, additionalInfo,
-					resolvedType.getAdditionalType(), key, value, subtype);
+					additionalType, key, value, subtype);
 		} else {
-			boolean useGenericFallback = genericRowKeys.contains(key);
 			String displayKey = useGenericFallback ? getGenericFallbackDisplayKey(key) : key;
 			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, displayKey, poiCategory.getIconKeyName());
 			fallbackType.setText(true);
