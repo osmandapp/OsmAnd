@@ -5537,4 +5537,6 @@
     <string name="fullscreen_mode_navigation_bar">Navigationsbjælke</string>
     <string name="fullscreen_mode_navigation_bar_descr">Tilbage, Hjem, Seneste</string>
     <string name="fullscreen_mode_bars_footer">Stryg fra skærmkanten for kortvarigt at vise de skjulte bjælker. Et tryk på kortet får det hele tilbage.</string>
+    <string name="shadows_hillshade_description">Skygger er slået fra, mens terræn viser reliefskygge: Reliefskygge fremhæver allerede reliefet.</string>
+    <string name="sun_light_manual">Manuelt</string>
 </resources>

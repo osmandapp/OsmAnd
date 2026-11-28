@@ -5400,4 +5400,8 @@
     <string name="shared_string_new">Neu</string>
     <string name="shadows_on_description">Schatten ein: Gebäude werfen Schatten, wenn die Sonne darauf scheint.</string>
     <string name="shadows_off_description">Schatten aus: Gebäude werden ohne Schatten dargestellt.</string>
+    <string name="sun_light_manual">Manuell</string>
+    <string name="free_region_maps_deactivated">Die Karten von %2$s bleiben deaktiviert. %1$s wurde nicht heruntergeladen.</string>
+    <string name="free_region_activate_title">Ihre kostenlose Region ändern?</string>
+    <string name="free_region_activate_descr">Die kostenlose Version enthält Karten einer Region. %1$s wird zu Ihrer kostenlosen Region, und die Karten von %2$s werden deaktiviert.</string>
 </resources>

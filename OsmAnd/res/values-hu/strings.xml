@@ -5431,4 +5431,6 @@
     <string name="fullscreen_mode_navigation_bar_descr">Vissza, kezdőlap, legutóbbiak</string>
     <string name="fullscreen_mode_bars_footer">Húzza az ujját a képernyő szélétől a rejtett sávok pillanatnyi megjelenítéséhez. A térképre való koppintással minden visszatér az eredeti állapotba.</string>
     <string name="fullscreen_mode_also_hide">Ez is legyen rejtett</string>
+    <string name="shadows_hillshade_description">Az árnyékok ki vannak kapcsolva, miközben a „Domborzat” beállítás a lejtésárnyékolást jeleníti meg: a lejtésárnyékolás már kiemeli a domborzatot.</string>
+    <string name="sun_light_manual">Kézi</string>
 </resources>
