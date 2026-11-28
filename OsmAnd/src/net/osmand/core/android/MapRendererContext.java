@@ -219,8 +219,10 @@ public class MapRendererContext {
 			rendName = "default";
 		}
 		int tryCount = 0;
+		ResolvedMapStyle mapStyle;
 		while (true) {
-			if (mapStyles.containsKey(rendName)) {
+			mapStyle = mapStyles.get(rendName);
+			if (mapStyle != null) {
 				break;
 			} else {
 				Log.d(TAG, "Style '" + rendName + "' not in cache");
@@ -228,8 +230,10 @@ public class MapRendererContext {
 					Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
 					loadRenderer(rendName);
 				}
-				ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
+				mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
 				if (mapStyle != null) {
+					// keep only the style in use: each resolved style holds tens of MB of native memory
+					mapStyles.clear();
 					mapStyles.put(rendName, mapStyle);
 					break;
 				} else {
@@ -245,7 +249,6 @@ public class MapRendererContext {
 				}
 			}
 		}
-		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
 		// must match getRasterTileSize(): the raster tile size and the style scale factor
 		// are two halves of the same magnifier, mixing the phone and the Android Auto values
 		// stretches the rendered tiles
