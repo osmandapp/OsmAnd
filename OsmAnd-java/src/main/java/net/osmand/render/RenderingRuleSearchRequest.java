@@ -203,7 +203,54 @@ public class RenderingRuleSearchRequest {
 		return match;
 	}
 
+	private boolean isChildRuleEnabled(RenderingRule childRule, String parentRClassValue) {
+		String additional = childRule.getStringPropertyValue(RenderingRuleStorageProperties.ADDITIONAL);
+		if (!Algorithms.isEmpty(additional) && parentRClassValue != null) {
+			int equalPos = additional.indexOf('=');
+			if (equalPos >= 0) {
+				String additionalKey = additional.substring(0, equalPos);
+				String additionalValue = additional.substring(equalPos + 1);
+
+				if (parentRClassValue.contains("$" + additionalKey)) {
+					int dollarPos = parentRClassValue.lastIndexOf('$');
+					String specificClass = parentRClassValue.substring(0, dollarPos) + additionalValue;
+
+					String value = classProperties.get(specificClass);
+					if (value != null) {
+						return value.equals("true") || value.equals("1") || value.equals("yes");
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean isClassEnabled(String rClassValue) {
+		if (Algorithms.isEmpty(rClassValue)) {
+			return true;
+		}
+		String value = classProperties.get(rClassValue);
+		if (value != null) {
+			return value.equals("true") || value.equals("1") || value.equals("yes");
+		}
+
+		String parentClass = rClassValue;
+		int lastDot;
+		while ((lastDot = parentClass.lastIndexOf('.')) >= 0) {
+			parentClass = parentClass.substring(0, lastDot);
+			value = classProperties.get(parentClass);
+			if (value != null && (value.equals("false") || value.equals("0") || value.equals("no"))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private boolean visitRule(RenderingRule rule, boolean loadOutput) {
+		String rClassValue = rule.getStringPropertyValue(RenderingRuleStorageProperties.R_CLASS);
+		if (!isClassEnabled(rClassValue)) {
+			return false;
+		}
 		boolean input = checkInputProperties(rule);
 		if (!input) {
 			return false;
@@ -217,6 +264,9 @@ public class RenderingRuleSearchRequest {
 		}
 		boolean match = false;
 		for (RenderingRule rr : rule.getIfElseChildren()) {
+			if (!isChildRuleEnabled(rr, rClassValue)) {
+				continue;
+			}
 			match = visitRule(rr, loadOutput);
 			if (match) {
 				break;
@@ -229,6 +279,9 @@ public class RenderingRuleSearchRequest {
 			}
 
 			for (RenderingRule rr : rule.getIfChildren()) {
+				if (!isChildRuleEnabled(rr, rClassValue)) {
+					continue;
+				}
 				visitRule(rr, loadOutput);
 			}
 		}
